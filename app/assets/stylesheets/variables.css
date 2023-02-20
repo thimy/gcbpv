@@ -1,0 +1,32 @@
+:root {
+  --global-padding: 2rem;
+  --brand: #ae9d7c;
+  --content-width: 180ch;
+  --gap: var(--spacing-6);
+
+  --text-font-family: "Inter";
+  --text-font-weight: 300;
+
+  --title-font-family: "Crimson Pro";
+  --title-font-weight: 300;
+
+  --border-radius-small: var(--spacing-1);
+  --border-radius: var(--spacing-4);
+  --border-radius-large: var(--spacing-6);
+
+  --info-bg-color: var(--blue-10-a);
+  --info-border-color: var(--blue-20-a);
+  --info-text-color: var(--blue-60);
+
+  --success-bg-color: var(--green-10-a);
+  --success-border-color: var(--green-20-a);
+  --success-text-color: var(--green-60);
+
+  --warning-bg-color: var(--yellow-10-a);
+  --warning-border-color: var(--yellow-20-a);
+  --warning-text-color: var(--yellow-60);
+
+  --error-bg-color: var(--red-10-a);
+  --error-border-color: var(--red-20-a);
+  --error-text-color: var(--red-60);
+}

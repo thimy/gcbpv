@@ -1,0 +1,10 @@
+.footer {
+  background-color: var(--brand);
+}
+
+.footer__container,
+.footer__copyright {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--global-padding);
+}

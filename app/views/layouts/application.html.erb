@@ -6,11 +6,14 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "main" %>
   </head>
 
   <body>
+    <%= render(Global::HeaderComponent.new(title: "GCBPV", current_user: current_user)) %>
+    <p class="banner notice"><%= notice %></p> 
+    <p class="banner alert"><%= alert %></p> 
     <%= yield %>
+    <%= render(Global::FooterComponent.new) %>
   </body>
 </html>

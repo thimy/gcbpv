@@ -1,0 +1,32 @@
+.post-list {
+  align-items: stretch;
+  display: flex;
+  gap: var(--gap);
+  flex-direction: column;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.post-list__item {
+  border-radius: var(--border-radius);
+  box-shadow: 0 0 5em 0 var(--gray-30);
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.post__img {
+  background-image: linear-gradient(to right, var(--purple-60), var(--green-30));
+  flex: 0 0 25%; 
+}
+
+.post__content {
+  background: var(--white);
+  flex-grow: 1;
+  padding: var(--global-padding);
+}
+
+.post__description {
+  font-size: 1.25em;
+}

@@ -1,0 +1,77 @@
+.hero.full-bleed {
+  align-items: stretch;
+  display: grid;
+  gap: var(--gap);
+  grid-template-areas:
+    "main events"
+    "main emt"
+    "main resources";
+  grid-template-columns: 2fr 1fr;
+  min-height: 30rem;
+}
+
+.hero__column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--global-padding);
+}
+
+.hero__column:first-child {
+  align-items: center;
+  display: flex;
+  flex-grow: 1;
+  grid-row: 1 / -1;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero__title {
+  font-size: 4rem;
+}
+
+.hero__column:not(:first-child) {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  color: var(--white);
+  flex-basis: var(--spacing-40);
+  flex-shrink: 0;
+  justify-content: end;
+  padding: var(--global-padding);
+  overflow: hidden;
+  position: relative;
+}
+
+.hero__column-title {
+  font-family: var(--title-font-family);
+  font-weight: 300;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hero__column:not(:first-child)::after {
+  background-image: linear-gradient(transparent, var(--gray-90));
+  bottom: 0;
+  content: "";
+  display: block;
+  left: 0;
+  opacity: 0.8;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.hero__column--events {
+  background: url("images/events.jpg") center center no-repeat;
+  grid-area: "events";
+}
+
+.hero__column--emt {
+  background: url("images/emt.jpg") center center no-repeat;
+  grid-area: "emt";
+}
+
+.hero__column--resources {
+  background: url("images/resources.jpg") center center no-repeat;
+  grid-area: "resources";
+}

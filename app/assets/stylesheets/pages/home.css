@@ -1,0 +1,10 @@
+.section__header {
+  align-items: end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.event__link {
+  color: var(--white);
+}

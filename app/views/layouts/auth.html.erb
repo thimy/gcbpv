@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EmtRails</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "main" %>
+  </head>
+
+  <body>
+    <%= render(Global::HeaderComponent.new(title: "GCBPV", current_user: current_user)) %>
+    <main class="main wrapper wrapper--text">
+      <div class="auth__form">
+        <%= yield %>
+      </div>
+    </main>
+    <%= render(Global::FooterComponent.new) %>
+  </body>
+</html>

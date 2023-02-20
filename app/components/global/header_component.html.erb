@@ -1,0 +1,20 @@
+<header class="main-header">
+  <div class="main-header__title"><%= title %></div>
+  <nav class="nav">
+    <ul class="nav__links">
+      <li class="nav__item">École de musique traditionnelle</li>
+      <li class="nav__item">La Bogue d’Or</li>
+      <li class="nav__item">Événements</li>
+    </ul>
+    <ul class="nav__actions">
+      <li class="nav__item">
+        <% if user_signed_in? %> 
+          <div>Bienvenue <%= current_user.email %></div> 
+          <%= link_to "Se déconnecter", destroy_user_session_path, method: :delete, class: "button" %> 
+        <% else %>
+          <%= link_to "Se connecter", new_user_session_path, class: "button" %> 
+        <% end %>
+      </li>
+    </ul>
+  </nav>
+</header>
