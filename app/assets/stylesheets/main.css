@@ -30,11 +30,8 @@ body {
 }
 
 main {
+  background-color: var(--gray-20-a);
   flex-grow: 1;
-}
-
-.main-content {
-  padding-block: var(--side-padding);
 }
 
 h1,

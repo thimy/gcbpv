@@ -1,6 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, @event.name) %>
 
-<%= render @event %>
+<%= render Global::HeroComponent.new(title: @event.name) do |component| %>
+  <% component.extra do %>
+    <p class="hero__extra">
+      <% if @event.end_date.present? %>
+        <%= "Du #{@event.start_date.strftime("%d %B %Y")} au #{@event.end_date.strftime("%d %B %Y")}" %>
+      <% else %>
+        <%= "Le #{@event.start_date.strftime("%d %B %Y")}" %>
+      <% end %>
+    </p>
+  <% end %>
+<% end %>
+
+<section class="section">
+  <div class="wrapper wrapper--text">
+    <%= render @event %>
+  </div>
+</section>
 
 <div>
   <%= link_to "Edit this event", edit_event_path(@event) %> |

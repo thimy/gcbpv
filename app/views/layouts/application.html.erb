@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EmtRails</title>
+    <title><%= content_for(:page_title) || "Groupement Culturel Breton des Pays de Vilaine" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,11 +9,13 @@
     <%= stylesheet_link_tag "main" %>
   </head>
 
-  <body>
+  <body class="<%= content_for(:page_class) || "" %>">
     <%= render(Global::HeaderComponent.new(title: "GCBPV", current_user: current_user)) %>
     <p class="banner notice"><%= notice %></p> 
     <p class="banner alert"><%= alert %></p> 
-    <%= yield %>
+    <main class="main-content">
+      <%= yield %>
+    </main>
     <%= render(Global::FooterComponent.new) %>
   </body>
 </html>

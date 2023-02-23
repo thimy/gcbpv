@@ -1,14 +1,10 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_title, "Événements") %>
+<% content_for(:page_class, "events") %>
 
-<h1>Events</h1>
+<%= render Global::HeroComponent.new(title: "Événements") %>
 
-<div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New event", new_event_path %>
+<section class="section">
+  <div class="wrapper">
+    <%= render Events::EventListComponent.new(events: @events) %>
+  </div>
+</section>

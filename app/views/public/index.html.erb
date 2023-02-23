@@ -1,36 +1,37 @@
 <%= stylesheet_link_tag "pages/home" %>
+<% content_for(:page_class, "home") %>
 
-<main class="main-content wrapper">
-  <section class="section hero full-bleed">
-    <div class="hero__column">
-      <h1 class="hero__title">Bienvenue sur le site du<br />Groupement Culturel Breton<br /> des Pays de Vilaine</h1>
+<section class="hero">
+  <div class="hero__column">
+    <h1 class="hero__title">Bienvenue sur le site du<br />Groupement Culturel Breton<br /> des Pays de Vilaine</h1>
+  </div>
+  <a class="hero__column hero__column--events">
+    <h2 class="hero__column-title">La Bogue d’Or et les événements</h2>
+  </a>
+  <a class="hero__column hero__column--emt">
+    <h2 class="hero__column-title">L'école de musique traditionnelle</h2>
+  </a>
+  <a class="hero__column hero__column--resources">
+    <h2 class="hero__column-title">Le centre de ressources</h2>
+  </a>
+</section>
+
+<section class="section events" data-scheme="dark">
+  <div class="wrapper">
+    <div class="section__header">
+      <h3 class="h3">Les prochains événements à venir</h3>
+      <%= link_to "Voir tous les événements", events_path, class: "event__link" %>
     </div>
-    <a class="hero__column hero__column--events">
-      <h2 class="hero__column-title">La Bogue d’Or et les événements</h2>
-    </a>
-    <a class="hero__column hero__column--emt">
-      <h2 class="hero__column-title">L'école de musique traditionnelle</h2>
-    </a>
-    <a class="hero__column hero__column--resources">
-      <h2 class="hero__column-title">Le centre de ressources</h2>
-    </a>
-  </section>
+    <%= render Events::EventListComponent.new(events: @events) %>
+  </div>
+</section>
 
-  <section class="section events full-bleed" data-scheme="dark">
-    <div class="wrapper">
-      <div class="section__header">
-        <h3 class="h3">Les prochains événements à venir</h3>
-        <%= link_to "Voir tous les événements", events_path, class: "event__link" %>
-      </div>
-      <%= render Events::EventListComponent.new(events: @events) %>
-    </div>
-  </section>
-
-  <section class="section posts">
+<section class="section posts">
+  <div class="wrapper">
     <div class="section__header">
       <h3 class="h3">Dernières actualités</h3>
       <%= link_to "Voir tous les articles", posts_path, class: "post__link" %>
     </div>
     <%= render Posts::PostListComponent.new(posts: @posts) %>
-  </section>
-</main>
+  </div>
+</section>
