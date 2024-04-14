@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope :secretariat do
+    resources :instruments
     get "", to: "secretariat#index", as: "/"
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
