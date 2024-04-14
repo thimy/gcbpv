@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyString
+  city: one
+  day_of_week: 1
+  frequency: 1
+  start_time: MyString
+  end_time: MyString
+
+two:
+  name: MyString
+  description: MyString
+  city: two
+  day_of_week: 1
+  frequency: 1
+  start_time: MyString
+  end_time: MyString
