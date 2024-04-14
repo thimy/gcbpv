@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope :secretariat do
+    resources :subscriptions
     resources :workshops
     resources :students
     resources :courses

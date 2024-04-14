@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  year: 1
+  student: one
+  course: one
+  workshop: one
+  paid_amount: 1
+  payor: one
+
+two:
+  year: 1
+  student: two
+  course: two
+  workshop: two
+  paid_amount: 1
+  payor: two

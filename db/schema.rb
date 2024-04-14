@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_121134) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_121428) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -70,6 +70,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_121134) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer "year"
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.bigint "workshop_id", null: false
+    t.integer "paid_amount"
+    t.bigint "payor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_subscriptions_on_course_id"
+    t.index ["payor_id"], name: "index_subscriptions_on_payor_id"
+    t.index ["student_id"], name: "index_subscriptions_on_student_id"
+    t.index ["workshop_id"], name: "index_subscriptions_on_workshop_id"
+  end
+
   create_table "teachers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -100,6 +115,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_121134) do
   add_foreign_key "courses", "slots"
   add_foreign_key "slots", "cities"
   add_foreign_key "slots", "teachers"
+  add_foreign_key "subscriptions", "courses"
+  add_foreign_key "subscriptions", "payors"
+  add_foreign_key "subscriptions", "students"
+  add_foreign_key "subscriptions", "workshops"
   add_foreign_key "teachers", "instruments"
   add_foreign_key "workshops", "cities"
 end
