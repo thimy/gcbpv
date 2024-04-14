@@ -1,4 +1,4 @@
-class TeachersController < ApplicationController
+class TeachersController < SecretariatController
   before_action :set_teacher, only: %i[ show edit update destroy ]
 
   # GET /teachers or /teachers.json

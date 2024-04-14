@@ -1,4 +1,4 @@
-class SubscriptionsController < ApplicationController
+class SubscriptionsController < SecretariatController
   before_action :set_subscription, only: %i[ show edit update destroy ]
 
   # GET /subscriptions or /subscriptions.json

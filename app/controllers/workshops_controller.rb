@@ -1,4 +1,4 @@
-class WorkshopsController < ApplicationController
+class WorkshopsController < SecretariatController
   before_action :set_workshop, only: %i[ show edit update destroy ]
 
   # GET /workshops or /workshops.json

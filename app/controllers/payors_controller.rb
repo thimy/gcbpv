@@ -1,4 +1,4 @@
-class PayorsController < ApplicationController
+class PayorsController < SecretariatController
   before_action :set_payor, only: %i[ show edit update destroy ]
 
   # GET /payors or /payors.json

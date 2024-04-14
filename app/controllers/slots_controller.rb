@@ -1,4 +1,4 @@
-class SlotsController < ApplicationController
+class SlotsController < SecretariatController
   before_action :set_slot, only: %i[ show edit update destroy ]
 
   # GET /slots or /slots.json

@@ -1,4 +1,4 @@
-class CitiesController < ApplicationController
+class CitiesController < SecretariatController
   before_action :set_city, only: %i[ show edit update destroy ]
 
   # GET /cities or /cities.json

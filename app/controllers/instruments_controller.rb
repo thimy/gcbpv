@@ -1,4 +1,4 @@
-class InstrumentsController < ApplicationController
+class InstrumentsController < SecretariatController
   before_action :set_instrument, only: %i[ show edit update destroy ]
 
   # GET /instruments or /instruments.json

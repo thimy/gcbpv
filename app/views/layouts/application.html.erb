@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gcbpv3</title>
+    <title><%= content_for(:page_title) || "Groupement Culturel Breton des Pays de Vilaine" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,7 +10,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="<%= content_for(:page_class) || "" %>">
+    <%= content_for?(:content) ? yield(:content) : yield %>
   </body>
 </html>
