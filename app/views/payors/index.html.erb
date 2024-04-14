@@ -1,14 +1,26 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Payors</h1>
-
-<div id="payors">
-  <% @payors.each do |payor| %>
-    <%= render payor %>
-    <p>
-      <%= link_to "Show this payor", payor %>
-    </p>
-  <% end %>
+<div class="content-header">
+  <h1>Payeur</h1>
+  <%= link_to "Créer un nouveau payeur", new_payor_path %>
 </div>
-
-<%= link_to "New payor", new_payor_path %>
+<p style="color: green"><%= notice %></p>
+<%= render Shared::Table::Component.new do |table| %>
+  <% table.with_header do |header| %>
+    <% header.with_column(name: "name") do %>Créneau<% end %>
+    <% header.with_column(name: "email") do %>Email<% end %>
+    <% header.with_column(name: "phone") do %>Téléphone<% end %>
+    <% header.with_column(name: "options", show_label: false) %>
+  <% end %>
+  <% @payors.each do |payor| %>
+    <% table.with_row(link_url: payor) do |row| %>
+      <% row.with_cell(name: "name") do %><%= link_to "#{payor.first_name} #{payor.last_name}" %><% end %>
+      <% row.with_cell(name: "email") do %><%= link_to payor.email %><% end %>
+      <% row.with_cell(name: "phone") do %><%= link_to payor.phone %><% end %>
+      <% row.with_cell(name: "options") do %>
+        <%= link_to edit_payor_path(payor) do %>
+          Editer ce payeur
+          <%= inline_svg "icons/chevron-right", { class: "caret" } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

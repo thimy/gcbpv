@@ -1,14 +1,28 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Courses</h1>
-
-<div id="courses">
-  <% @courses.each do |course| %>
-    <%= render course %>
-    <p>
-      <%= link_to "Show this course", course %>
-    </p>
-  <% end %>
+<div class="content-header">
+  <h1>Cours</h1>
+  <%= link_to "Créer un nouveau cours", new_course_path %>
 </div>
-
-<%= link_to "New course", new_course_path %>
+<p style="color: green"><%= notice %></p>
+<%= render Shared::Table::Component.new do |table| %>
+  <% table.with_header do |header| %>
+    <% header.with_column(name: "slot") do %>Créneau<% end %>
+    <% header.with_column(name: "instrument") do %>Instrument<% end %>
+    <% header.with_column(name: "start_time") do %>Heure de début<% end %>
+    <% header.with_column(name: "end_time") do %>Heure de fin<% end %>
+    <% header.with_column(name: "options", show_label: false) %>
+  <% end %>
+  <% @courses.each do |course| %>
+    <% table.with_row(link_url: course) do |row| %>
+      <% row.with_cell(name: "slot") do %><%= link_to course.slot %><% end %>
+      <% row.with_cell(name: "instrument") do %><%= link_to course.instrument %><% end %>
+      <% row.with_cell(name: "start_time") do %><%= link_to course.start_time %><% end %>
+      <% row.with_cell(name: "end_time") do %><%= link_to course.end_time %><% end %>
+      <% row.with_cell(name: "options") do %>
+        <%= link_to edit_course_path(course) do %>
+          Editer ce cours
+          <%= inline_svg "icons/chevron-right", { class: "caret" } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,14 +1,32 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Slots</h1>
-
-<div id="slots">
-  <% @slots.each do |slot| %>
-    <%= render slot %>
-    <p>
-      <%= link_to "Show this slot", slot %>
-    </p>
-  <% end %>
+<div class="content-header">
+  <h1>Créneaux</h1>
+  <%= link_to "Créer un nouveau créneau", new_slot_path %>
 </div>
-
-<%= link_to "New slot", new_slot_path %>
+<p style="color: green"><%= notice %></p>
+<%= render Shared::Table::Component.new do |table| %>
+  <% table.with_header do |header| %>
+    <% header.with_column(name: "teacher") do %>Professeur<% end %>
+    <% header.with_column(name: "city") do %>Ville<% end %>
+    <% header.with_column(name: "day_of_week") do %>Jour<% end %>
+    <% header.with_column(name: "start_time") do %>Heure de début<% end %>
+    <% header.with_column(name: "end_time") do %>Heure de fin<% end %>
+    <% header.with_column(name: "frequency") do %>Fréquence<% end %>
+    <% header.with_column(name: "options", show_label: false) %>
+  <% end %>
+  <% @slots.each do |slot| %>
+    <% table.with_row(link_url: slot) do |row| %>
+      <% row.with_cell(name: "teacher") do %><%= link_to slot.teacher %><% end %>
+      <% row.with_cell(name: "city") do %><%= link_to slot.city %><% end %>
+      <% row.with_cell(name: "day_of_week") do %><%= link_to slot.day_of_week %><% end %>
+      <% row.with_cell(name: "start_time") do %><%= link_to slot.start_time %><% end %>
+      <% row.with_cell(name: "end_time") do %><%= link_to slot.end_time %><% end %>
+      <% row.with_cell(name: "frequency") do %><%= link_to slot.frequency %><% end %>
+      <% row.with_cell(name: "options") do %>
+        <%= link_to edit_slot_path(slot) do %>
+          Editer ce cours
+          <%= inline_svg "icons/chevron-right", { class: "caret" } %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
