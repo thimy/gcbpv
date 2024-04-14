@@ -65,3 +65,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "view_component", "~> 3.12"
+
+gem "simple_form", "~> 5.3"
+
+gem "rails-i18n", "~> 7.0"
