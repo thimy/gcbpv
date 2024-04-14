@@ -1,0 +1,12 @@
+<% content_for(:page_class, "home ") %>
+
+<div class="hero full">
+  <div class="content">
+    <h1 class="feature">Bienvenue sur le site du<br>Groupement Culturel Breton<br>des Pays de Vilaine</h1>
+    <div class="categories">
+      <%= render Shared::Card::Component.new(title: "La Bogue", url: "", css_classes: "bogue") %>
+      <%= render Shared::Card::Component.new(title: "L'école de musique traditionnelle", url: "", css_classes: "ecole") %>
+      <%= render Shared::Card::Component.new(title: "Archives", url: "", css_classes: "archives") %>
+    </div>
+  </div>
+</div>

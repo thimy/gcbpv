@@ -1,0 +1,22 @@
+.website {
+  header {
+    align-items: center;
+    border: var(--border-size-3) solid var(--cyan-12);
+    border-radius: var(--radius-5);
+    box-shadow: var(--shadow);
+    display: flex;
+    height: var(--size-9);
+    justify-content: center;
+    margin-top: var(--size-4);
+
+    nav {
+      display: flex;
+      gap: var(--size-4);
+      justify-content: center;
+      
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+}

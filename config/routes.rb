@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "", to: "website#index", as: "/"
   scope :secretariat do
     resources :subscriptions
     resources :workshops
