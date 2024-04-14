@@ -1,0 +1,8 @@
+<table <%= "class=#{css_classes}" if css_classes.present? %>>
+  <%= header %>
+  <tbody>
+    <% rows.each do |row| %>
+      <%= row %>
+    <% end %>
+  </tbody>
+</table>
