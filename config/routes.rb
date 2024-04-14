@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope :secretariat do
+    resources :cities
     resources :payors
     resources :instruments
     get "", to: "secretariat#index", as: "/"
