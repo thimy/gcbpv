@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slot: one
+  instrument: one
+  start_time: MyString
+  end_time: MyString
+
+two:
+  slot: two
+  instrument: two
+  start_time: MyString
+  end_time: MyString
