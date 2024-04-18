@@ -1,0 +1,23 @@
+.home {
+  .hero {
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: space-between;
+    min-height: 15rem;
+    padding: var(--size-8);
+    padding-right: 0;
+
+    h1 {
+      align-self: end;
+      font-family: "Garden Grown";
+      font-size: var(--font-size-fluid-4);
+    }
+
+    .categories {
+      display: flex;
+      flex-basis: 30%;
+      flex-direction: column;
+      gap: var(--size-3);
+    }
+  }
+}
