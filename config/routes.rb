@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :cities
+      resources :courses
+      resources :instruments
+      resources :payors
+      resources :slots
+      resources :students
+      resources :subscriptions
+      resources :teachers
+      resources :workshops
+
+      root to: "cities#index"
+    end
   get "", to: "website#index", as: "/"
   scope :secretariat do
     resources :subscriptions

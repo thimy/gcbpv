@@ -73,3 +73,10 @@ gem "simple_form", "~> 5.3"
 gem "rails-i18n", "~> 7.0"
 
 gem "cssbundling-rails", "~> 1.4"
+
+gem "administrate"
+gem "administrate-field-image"
+gem "administrate-field-active_storage"
+gem "administrate-field-nested_has_many"
+gem "administrate-field-belongs_to_search"
+gem "administrate-rich-text"
