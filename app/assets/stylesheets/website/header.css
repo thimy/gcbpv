@@ -1,13 +1,17 @@
 .website {
   header {
     align-items: center;
-    border: var(--border-size-3) solid var(--cyan-12);
+    background-color: var(--gray-10);;
     border-radius: var(--radius-5);
-    box-shadow: var(--shadow);
+    box-shadow: var(--size-2) var(--size-2) color-mix(in srgb, var(--lime-4), transparent 30%);
+    color: var(--white);
     display: flex;
     height: var(--size-9);
     justify-content: center;
     margin-top: var(--size-4);
+    position: sticky;
+    top: var(--size-4);
+    z-index: 10;
 
     nav {
       display: flex;

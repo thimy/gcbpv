@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: var(--radius-3) 0 0 var(--radius-3);
+  box-shadow: var(--size-3) var(--size-2) color-mix(in srgb, var(--lime-4), transparent 30%);
   color: var(--white);
   display: flex;
   filter: grayscale(0.2);
@@ -25,7 +26,7 @@
 
   &::after {
     backdrop-filter: blur(50px);
-    background-image: linear-gradient(transparent, var(--gray-9));
+    background-image: linear-gradient(transparent, var(--gray-12));
     background-size: cover;
     bottom: 0;
     content: "";

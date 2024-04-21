@@ -1,7 +1,10 @@
 <% content_for(:page_class, "home ") %>
 
 <section class="hero full">
-  <h1 class="feature">Bienvenue sur le site du<br>Groupement Culturel Breton<br>des Pays de Vilaine</h1>
+  <h1 class="feature">
+    <span data-text="Groupement Culturel Breton">Groupement Culturel Breton</span>
+    <span data-text="des Pays de Vilaine">des Pays de Vilaine</span>
+  </h1>
   <div class="categories">
     <%= render Website::HeroCard::Component.new(title: "La Bogue", url: "", css_classes: "bogue") %>
     <%= render Website::HeroCard::Component.new(title: "L'école de musique traditionnelle", url: "", css_classes: "ecole") %>

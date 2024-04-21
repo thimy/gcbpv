@@ -24,5 +24,4 @@
   --radius-conditional-6: clamp(0px, calc(100vw - 100%) * 1e5, var(--radius-6));
 
   --border-default: var(--border-size-1) solid var(--gray-2);
-  --shadow: var(--size-2) var(--size-2) color-mix(in srgb, var(--cyan-9), transparent 50%);
 }

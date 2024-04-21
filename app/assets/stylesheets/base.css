@@ -1,3 +1,7 @@
+html {
+  --color-primary: var(--orange-4);
+}
+
 h1, h2,
 h3, h4 {
   &:first-child {
