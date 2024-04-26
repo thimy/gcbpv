@@ -10,10 +10,10 @@ class WorkshopDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     city: Field::BelongsTo,
-    day_of_week: Field::Number,
-    description: Field::String,
+    day_of_week: Field::Select.with_options(collection: WithTime::DAYS_ORDERED),
+    frequency: Field::Select.with_options(collection: WithTime::FREQUENCIES),
+    description: Field::Text,
     end_time: Field::String,
-    frequency: Field::Number,
     name: Field::String,
     start_time: Field::String,
     created_at: Field::DateTime,
@@ -27,22 +27,24 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    city
+    name
     day_of_week
+    frequency
+    city
     description
   ].freeze
-
+  
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    city
-    day_of_week
-    description
-    end_time
-    frequency
     name
+    day_of_week
+    frequency
+    description
+    city
     start_time
+    end_time
     created_at
     updated_at
   ].freeze
@@ -51,13 +53,13 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    city
-    day_of_week
-    description
-    end_time
-    frequency
     name
+    day_of_week
+    frequency
+    description
+    city
     start_time
+    end_time
   ].freeze
 
   # COLLECTION_FILTERS
@@ -75,7 +77,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how workshops are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(workshop)
-  #   "Workshop ##{workshop.id}"
-  # end
+  def display_resource(workshop)
+    workshop.name
+  end
 end

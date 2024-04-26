@@ -10,9 +10,9 @@ class SlotDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     city: Field::BelongsTo,
-    day_of_week: Field::Number,
+    day_of_week: Field::Select.with_options(collection: WithTime::DAYS_ORDERED),
     end_time: Field::String,
-    frequency: Field::Number,
+    frequency: Field::Select.with_options(collection: WithTime::FREQUENCIES),
     start_time: Field::String,
     teacher: Field::BelongsTo,
     created_at: Field::DateTime,
@@ -49,12 +49,12 @@ class SlotDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    teacher
     city
     day_of_week
+    start_time
     end_time
     frequency
-    start_time
-    teacher
   ].freeze
 
   # COLLECTION_FILTERS
@@ -72,7 +72,7 @@ class SlotDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how slots are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(slot)
-  #   "Slot ##{slot.id}"
-  # end
+  def display_resource(slot)
+    "#{slot.teacher.name} à #{slot.ville.name}"
+  end
 end

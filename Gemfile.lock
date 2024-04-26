@@ -98,9 +98,6 @@ GEM
     administrate-field-nested_has_many (2.1.0)
       administrate (>= 0.19, < 1)
       cocoon (~> 1.2, >= 1.2.11)
-    administrate-rich-text (0.0.2)
-      administrate (< 1.0.0)
-      rails (>= 7.0.0)
     base64 (0.2.0)
     bigdecimal (3.1.7)
     bindex (0.8.1)
@@ -308,7 +305,6 @@ DEPENDENCIES
   administrate-field-belongs_to_search
   administrate-field-image
   administrate-field-nested_has_many
-  administrate-rich-text
   bootsnap
   capybara
   cssbundling-rails (~> 1.4)

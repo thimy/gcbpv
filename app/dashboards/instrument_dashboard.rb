@@ -11,6 +11,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     id: Field::Number,
     description: Field::Text,
     name: Field::String,
+    teachers: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -22,8 +23,9 @@ class InstrumentDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    description
     name
+    description
+    teachers
     created_at
   ].freeze
 
@@ -31,8 +33,9 @@ class InstrumentDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    description
     name
+    description
+    teachers
     created_at
     updated_at
   ].freeze
@@ -41,8 +44,9 @@ class InstrumentDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    description
     name
+    description
+    teachers
   ].freeze
 
   # COLLECTION_FILTERS
@@ -60,7 +64,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how instruments are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(instrument)
-  #   "Instrument ##{instrument.id}"
-  # end
+  def display_resource(instrument)
+    instrument.name
+  end
 end

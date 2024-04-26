@@ -12,10 +12,11 @@ class TeacherDashboard < Administrate::BaseDashboard
     description: Field::Text,
     email: Field::String,
     first_name: Field::String,
-    instrument: Field::BelongsTo,
+    instruments: Field::HasMany,
     last_name: Field::String,
+    name: Field::String,
     phone: Field::String,
-    photo: Field::String,
+    photo: Field::Image,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,20 +28,21 @@ class TeacherDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    name
     description
+    instruments
     email
-    first_name
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    description
-    email
     first_name
-    instrument
     last_name
+    description
+    instruments
+    email
     phone
     photo
     created_at
@@ -51,11 +53,11 @@ class TeacherDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    first_name
+    last_name
     description
     email
-    first_name
-    instrument
-    last_name
+    instruments
     phone
     photo
   ].freeze
@@ -75,7 +77,7 @@ class TeacherDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how teachers are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(teacher)
-  #   "Teacher ##{teacher.id}"
-  # end
+  def display_resource(teacher)
+    teacher.name
+  end
 end

@@ -11,7 +11,7 @@ class CourseDashboard < Administrate::BaseDashboard
     id: Field::Number,
     end_time: Field::String,
     instrument: Field::BelongsTo,
-    slot: Field::BelongsTo,
+    slots: Field::HasMany,
     start_time: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -26,7 +26,7 @@ class CourseDashboard < Administrate::BaseDashboard
     id
     end_time
     instrument
-    slot
+    slots
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,7 +35,7 @@ class CourseDashboard < Administrate::BaseDashboard
     id
     end_time
     instrument
-    slot
+    slots
     start_time
     created_at
     updated_at
@@ -47,7 +47,7 @@ class CourseDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     end_time
     instrument
-    slot
+    slots
     start_time
   ].freeze
 
@@ -66,7 +66,7 @@ class CourseDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how courses are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(course)
-  #   "Course ##{course.id}"
-  # end
+  def display_resource(course)
+    "#{course.instrument.name} avec #{course.teacher.name}"
+  end
 end

@@ -9,11 +9,11 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    course: Field::BelongsTo,
+    courses: Field::HasMany,
     paid_amount: Field::Number,
     payor: Field::BelongsTo,
     student: Field::BelongsTo,
-    workshop: Field::BelongsTo,
+    workshops: Field::HasMany,
     year: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -26,7 +26,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    course
+    courses
     paid_amount
     payor
   ].freeze
@@ -35,11 +35,11 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    course
+    courses
     paid_amount
     payor
     student
-    workshop
+    workshops
     year
     created_at
     updated_at
@@ -49,11 +49,11 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    course
+    courses
     paid_amount
     payor
     student
-    workshop
+    workshops
     year
   ].freeze
 
@@ -72,7 +72,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how subscriptions are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(subscription)
-  #   "Subscription ##{subscription.id}"
-  # end
+  def display_resource(subscription)
+    subscription.student.name
+  end
 end

@@ -3,7 +3,7 @@
     align-items: center;
     background-color: var(--gray-10);;
     border-radius: var(--radius-5);
-    box-shadow: var(--size-2) var(--size-2) color-mix(in srgb, var(--lime-4), transparent 30%);
+    box-shadow: var(--size-2) var(--size-2) color-mix(in srgb, var(--pink-5), transparent 30%);
     color: var(--white);
     display: flex;
     height: var(--size-9);
@@ -19,7 +19,16 @@
       justify-content: center;
       
       a {
+        background-image: url("icons/underline.svg");
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        background-size: 0 0;
         text-decoration: none;
+        transition: all ease-in 0.4s;
+
+        &:hover {
+          background-size: 100%;
+        }
       }
     }
   }

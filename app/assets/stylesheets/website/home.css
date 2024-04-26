@@ -13,7 +13,7 @@
       background-clip: text;
       font-family: "Garden Grown";
       font-size: var(--font-size-fluid-6);
-      background-image: linear-gradient(90deg, var(--yellow-7) 0%, var(--green-2) 56%, var(--lime-9) 100%);
+      background-image: linear-gradient(90deg, var(--indigo-7) 0%, var(--green-2) 56%, var(--purple-9) 100%);
       color: transparent;
       margin-bottom: calc(var(--size-8) * -1);
       padding-block: var(--size-3);

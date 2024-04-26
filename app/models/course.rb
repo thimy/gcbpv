@@ -1,4 +1,6 @@
 class Course < ApplicationRecord
-  belongs_to :slot
-  belongs_to :instrument
+  has_one :instrument
+  has_many :slots
+  has_many :teachers, through: :slots
 end
+
