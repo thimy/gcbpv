@@ -16,4 +16,8 @@ module WithTime
   def time(time)
     time.strftime("%kh%M")
   end
+
+  def format_date(date)
+    date.strftime("%d/%m/%Y")
+  end
 end

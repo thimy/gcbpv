@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     resources :cities
     resources :plans
     resources :seasons
+    resources :events
     resources :configurations, only: [:index, :show, :edit, :update]
     
     root to: "cities#index"

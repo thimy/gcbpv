@@ -169,7 +169,7 @@ fr:
       event:
         name: "Nom"
         content: "Description"
-        address: "Adresse"
+        location: "Lieu"
         city: "Ville"
         start_date: "Jour et heure de début"
         end_date: "Jour et heure de fin"
