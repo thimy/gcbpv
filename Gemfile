@@ -79,3 +79,5 @@ gem "administrate-field-image"
 gem "administrate-field-active_storage"
 gem "administrate-field-nested_has_many"
 gem "administrate-field-belongs_to_search"
+
+gem "devise", "~> 4.9"
