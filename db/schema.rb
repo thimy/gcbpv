@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_144549) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_150553) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_144549) do
     t.integer "outbounds_markup"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "image"
+    t.string "status"
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_posts_on_event_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -179,6 +190,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_144549) do
   add_foreign_key "configurations", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
+  add_foreign_key "posts", "events"
   add_foreign_key "seasons", "plans"
   add_foreign_key "slots", "cities"
   add_foreign_key "slots", "teachers"

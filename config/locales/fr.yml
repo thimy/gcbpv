@@ -227,6 +227,7 @@ fr:
         category_id: "Catégorie"
         content: "Contenu"
         event: "Événement lié"
+        event_id: "Événement lié"
         status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
