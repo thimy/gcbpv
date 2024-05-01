@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_150553) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_152124) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories_posts", force: :cascade do |t|
+    t.bigint "categories_id"
+    t.bigint "posts_id"
+    t.index ["categories_id"], name: "index_categories_posts_on_categories_id"
+    t.index ["posts_id"], name: "index_categories_posts_on_posts_id"
+  end
 
   create_table "cities", force: :cascade do |t|
     t.string "name"
