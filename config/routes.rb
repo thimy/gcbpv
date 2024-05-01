@@ -1,18 +1,20 @@
 Rails.application.routes.draw do
   devise_for :users
   namespace :admin do
-      resources :subscriptions
-      resources :students
-      resources :payors
-      # resources :courses
-      resources :workshops
-      resources :instruments
-      resources :teachers
-      resources :slots
-      resources :cities
-
-      root to: "cities#index"
-    end
+    resources :subscriptions
+    resources :students
+    resources :payors
+    resources :workshops
+    resources :instruments
+    resources :teachers
+    resources :slots
+    resources :cities
+    resources :plans
+    resources :seasons
+    resources :configurations, only: [:index, :show, :edit, :update]
+    
+    root to: "cities#index"
+  end
   get "", to: "website#index", as: "/"
   scope :secretariat do
     resources :subscriptions

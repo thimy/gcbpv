@@ -215,7 +215,7 @@ fr:
         class_price: "Prix du cours"
         workshop_price: "Prix de l’atelier"
         awakening_price: "Prix de l’éveil musical"
-        kids_discovery_price: "Prix de l’atelier découverte enfants"
+        kids_class_price: "Prix de l’atelier découverte enfants"
         discovery_price: "Prix de l’atelier découverte adultes"
         obc_markup: "Majoration OBC"
         outbounds_markup: "Majoration hors-agglo"

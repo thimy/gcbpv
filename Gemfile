@@ -82,3 +82,5 @@ gem "administrate-field-nested_has_many"
 gem "administrate-field-belongs_to_search"
 
 gem "devise", "~> 4.9"
+
+gem "factory_bot_rails", "~> 6.4"

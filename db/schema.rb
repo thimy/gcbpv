@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_100428) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_136816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_100428) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "configurations", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_configurations_on_season_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -45,6 +52,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_100428) do
     t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.decimal "class_price"
+    t.decimal "kids_class_price"
+    t.decimal "workshop_price"
+    t.integer "obc_markup"
+    t.integer "outbounds_markup"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seasons", force: :cascade do |t|
+    t.integer "start_year"
+    t.bigint "plan_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_seasons_on_plan_id"
   end
 
   create_table "slots", force: :cascade do |t|
@@ -140,8 +165,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_100428) do
     t.index ["city_id"], name: "index_workshops_on_city_id"
   end
 
+  add_foreign_key "configurations", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
+  add_foreign_key "seasons", "plans"
   add_foreign_key "slots", "cities"
   add_foreign_key "slots", "teachers"
   add_foreign_key "specialties", "instruments"
