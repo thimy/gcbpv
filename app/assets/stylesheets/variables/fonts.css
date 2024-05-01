@@ -1,5 +1,5 @@
 :where(html) {
-  --font-sans: "Mohr", system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+  --font-sans: "Trebuchet MS", system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
   --font-serif: "Garden Grown", ui-serif,serif;
   --font-mono: Dank Mono,Operator Mono,Inconsolata,Fira Mono,ui-monospace,SF Mono,Monaco,Droid Sans Mono,Source Code Pro,monospace;
   --font-weight-1: 100;

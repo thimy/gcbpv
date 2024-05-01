@@ -16,11 +16,11 @@
   <% @slots.each do |slot| %>
     <% table.with_row(link_url: slot) do |row| %>
       <% row.with_cell(name: "teacher") do %><%= link_to slot.teacher %><% end %>
-      <% row.with_cell(name: "city") do %><%= link_to slot.city %><% end %>
-      <% row.with_cell(name: "day_of_week") do %><%= link_to slot.day_of_week %><% end %>
-      <% row.with_cell(name: "start_time") do %><%= link_to slot.start_time %><% end %>
-      <% row.with_cell(name: "end_time") do %><%= link_to slot.end_time %><% end %>
-      <% row.with_cell(name: "frequency") do %><%= link_to slot.frequency %><% end %>
+      <% row.with_cell(name: "city") do %><%= slot.city %><% end %>
+      <% row.with_cell(name: "day_of_week") do %><%= slot.day_of_week %><% end %>
+      <% row.with_cell(name: "start_time") do %><%= slot.start_time %><% end %>
+      <% row.with_cell(name: "end_time") do %><%= slot.end_time %><% end %>
+      <% row.with_cell(name: "frequency") do %><%= slot.frequency %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_slot_path(slot) do %>
           Editer ce cours

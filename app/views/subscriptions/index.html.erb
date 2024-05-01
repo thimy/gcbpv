@@ -16,11 +16,11 @@
   <% @subscriptions.each do |subscription| %>
     <% table.with_row(link_url: subscription) do |row| %>
       <% row.with_cell(name: "year") do %><%= link_to subscription.year %><% end %>
-      <% row.with_cell(name: "student") do %><%= link_to subscription.student %><% end %>
-      <% row.with_cell(name: "course") do %><%= link_to subsscription.course %><% end %>
-      <% row.with_cell(name: "workshop") do %><%= link_to subscription.workshop %><% end %>
-      <% row.with_cell(name: "paid_amount") do %><%= link_to subscription.paid_amount %><% end %>
-      <% row.with_cell(name: "payor") do %><%= link_to subscription.payor %><% end %>
+      <% row.with_cell(name: "student") do %><%= subscription.student %><% end %>
+      <% row.with_cell(name: "course") do %><%= subsscription.course %><% end %>
+      <% row.with_cell(name: "workshop") do %><%= subscription.workshop %><% end %>
+      <% row.with_cell(name: "paid_amount") do %><%= subscription.paid_amount %><% end %>
+      <% row.with_cell(name: "payor") do %><%= subscription.payor %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_subscription_path(subscription) do %>
           Editer cette inscription

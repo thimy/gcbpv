@@ -13,8 +13,8 @@
   <% @payors.each do |payor| %>
     <% table.with_row(link_url: payor) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to "#{payor.first_name} #{payor.last_name}" %><% end %>
-      <% row.with_cell(name: "email") do %><%= link_to payor.email %><% end %>
-      <% row.with_cell(name: "phone") do %><%= link_to payor.phone %><% end %>
+      <% row.with_cell(name: "email") do %><%= payor.email %><% end %>
+      <% row.with_cell(name: "phone") do %><%= payor.phone %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_payor_path(payor) do %>
           Editer ce payeur

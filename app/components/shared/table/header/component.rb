@@ -1,23 +1,27 @@
 # frozen_string_literal: true
 
 class Shared::Table::Header::Component < ViewComponent::Base
-  renders_many :columns, "ColumnComponent"
+  renders_many :columns, ->(name:, **options) do
+    Shared::Table::Column::Component.new(name: name, **options_with_sortable(name, options))
+  end
 
-  class ColumnComponent < ViewComponent::Base
-    def initialize(name:, id: nil, show_label: true, **options)
-      @name = name
-      @id = id
-      @show_label = show_label
-      @options = options || {}
+  def initialize(sort: nil, direction: nil, base_request_params: {})
+    @sort = sort
+    @direction = direction
+    @base_request_params = base_request_params
+  end
+
+  private
+
+  def options_with_sortable(name, options)
+    if @sort == name
+      options[:sort_direction] = @direction
     end
 
-    def displayed_content
-      return unless @show_label
-      content.present? ? content : @name.humanize.titleize
+    if @base_request_params.present?
+      options[:base_request_params] = @base_request_params
     end
 
-    def call
-      content_tag "th", displayed_content, {class: "cell-#{@name}", **@options}
-    end
+    options
   end
 end

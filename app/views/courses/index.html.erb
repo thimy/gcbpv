@@ -14,9 +14,9 @@
   <% @courses.each do |course| %>
     <% table.with_row(link_url: course) do |row| %>
       <% row.with_cell(name: "slot") do %><%= link_to course.slot %><% end %>
-      <% row.with_cell(name: "instrument") do %><%= link_to course.instrument %><% end %>
-      <% row.with_cell(name: "start_time") do %><%= link_to course.start_time %><% end %>
-      <% row.with_cell(name: "end_time") do %><%= link_to course.end_time %><% end %>
+      <% row.with_cell(name: "instrument") do %><%= course.instrument %><% end %>
+      <% row.with_cell(name: "start_time") do %><%= course.start_time %><% end %>
+      <% row.with_cell(name: "end_time") do %><%= course.end_time %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_course_path(course) do %>
           Editer ce cours

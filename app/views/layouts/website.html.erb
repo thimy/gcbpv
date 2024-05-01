@@ -1,6 +1,8 @@
 <% content_for(:page_class, "website") %>
 
 <% content_for :content do %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
   <div class="content">
     <%= render Website::Header::Component.new %>
       <%= yield %>

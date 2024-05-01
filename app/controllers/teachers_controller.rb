@@ -13,6 +13,7 @@ class TeachersController < SecretariatController
   # GET /teachers/new
   def new
     @teacher = Teacher.new
+    @instruments = Instrument.all
   end
 
   # GET /teachers/1/edit

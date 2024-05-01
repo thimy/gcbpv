@@ -1,0 +1,24 @@
+<% if @pagy.count > 0 %>
+  <% link = pagy_link_proc(@pagy) -%>
+  <div class="pagy_nav pagination">
+    <nav role="navigation">
+      <% if @pagy.prev -%>
+        <%== link.call(@pagy.prev, "#{inline_svg('icons/arrow-up')} Previous", 'class="page prev" aria-label="previous"') %>
+      <% else -%>
+        <span class="page prev disabled">
+          <%= inline_svg "icons/arrow-up" %> Previous
+        </span>
+      <% end   -%>
+      <div class="pagination__page-count">
+        <%= @resource_name %> <%= (@pagy.page - 1) * @pagy.items + 1 %>-<%= [@pagy.page * @pagy.items, @pagy.count].min %> out of <%= @pagy.count %>
+      </div>
+      <% if @pagy.next -%>
+        <%== link.call(@pagy.next, "Next #{inline_svg('icons/arrow-up')}", 'class="page next" aria-label="next"') %>
+      <% else  -%>
+        <span class="page next disabled">
+          Next <%= inline_svg "icons/arrow-up" %>
+      </span>
+      <% end -%>
+    </nav>
+  </div>
+<% end %>

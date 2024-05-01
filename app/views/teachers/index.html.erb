@@ -16,11 +16,13 @@
   <% @teachers.each do |teacher| %>
     <% table.with_row(link_url: teacher) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}" %><% end %>
-      <% row.with_cell(name: "email") do %><%= link_to teacher.email %><% end %>
-      <% row.with_cell(name: "phone") do %><%= link_to teacher.phone %><% end %>
-      <% row.with_cell(name: "instrument") do %><%= link_to teacher.instrument %><% end %>
-      <% row.with_cell(name: "description") do %><%= link_to teacher.description %><% end %>
-      <% row.with_cell(name: "photo") do %><%= link_to teacher.photo %><% end %>
+      <% row.with_cell(name: "email") do %><%= teacher.email %><% end %>
+      <% row.with_cell(name: "phone") do %><%= teacher.phone %><% end %>
+      <% row.with_cell(name: "instrument") do %>
+        <%= teacher.specialties.map { |specialty| specialty.instrument.name }.join(", ") %>
+      <% end %>
+      <% row.with_cell(name: "description") do %><%= teacher.description %><% end %>
+      <% row.with_cell(name: "photo") do %><%= teacher.photo %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_teacher_path(teacher) do %>
           Editer ce professeur

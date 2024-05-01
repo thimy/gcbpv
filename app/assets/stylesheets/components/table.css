@@ -21,7 +21,7 @@ thead {
 
     th {
       background-color: var(--gray-1);
-      font-weight: 600px;
+      font-weight: var(--font-weight-4);
       padding: var(--size-2) var(--size-2);
     
       &:first-child {
