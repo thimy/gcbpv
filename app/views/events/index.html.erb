@@ -1,0 +1,21 @@
+<% content_for(:page_class, "events ") %>
+
+<%= render Website::Hero::Component.new(title: "Événements") %>
+
+<section>
+  <h2>Les événements à venir</h2>
+  <div class="event-list">
+    <%= render Website::Event::Card::Component.with_collection(@upcoming_events) %>
+    <%= render Website::Event::Card::Component.with_collection(@upcoming_events) %>
+    <%= render Website::Event::Card::Component.with_collection(@upcoming_events) %>
+  </div>
+</section>
+
+<section>
+  <h2>Les événements passés</h2>
+  <div class="event-list">
+    <%= render Website::Event::Card::Component.with_collection(@passed_events) %>
+    <%= render Website::Event::Card::Component.with_collection(@passed_events) %>
+    <%= render Website::Event::Card::Component.with_collection(@passed_events) %>
+  </div>
+</section>

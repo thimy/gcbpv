@@ -1,12 +1,11 @@
-<% content_for(:page_class, "website") %>
+<% content_for(:page_class, "website content") %>
 
 <% content_for :content do %>
+  <%= render Website::Header::Component.new %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-  <div class="content">
-    <%= render Website::Header::Component.new %>
-      <%= yield %>
-    </main>
-  </div>
+  <main class="full content">
+    <%= yield %>
+  </main>
 <% end %>
 <%= render template: "layouts/application" %>

@@ -173,6 +173,8 @@ fr:
         city: "Ville"
         start_date: "Jour et heure de début"
         end_date: "Jour et heure de fin"
+        organizer: "Organisateurs"
+        website: "Site internet"
         created_at: "Créé le"
         updated_at: "Modifié le"
       instrument:

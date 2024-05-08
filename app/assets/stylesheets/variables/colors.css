@@ -1,5 +1,18 @@
 :where(html) {
   --white: #ffffff;
+  --gray: #e0e0e0;
+  --dark-gray: #858586;
+  --black: #1b1b1d;
+  --red: #f0676c;
+  --green: #bceae0;
+  --blue: #8fb8cc;
+  --yellow: #eadabc;
+
+
+
+
+
+  /* --white: #ffffff;
   --gray-0: #f8f9fa;
   --gray-1: #f1f3f5;
   --gray-2: #e9ecef;
@@ -246,5 +259,5 @@
   --jungle-9: #7a9908;
   --jungle-10: #658006;
   --jungle-11: #516605;
-  --jungle-12: #3d4d04;
+  --jungle-12: #3d4d04; */
 }

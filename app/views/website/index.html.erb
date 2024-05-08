@@ -1,13 +1,33 @@
 <% content_for(:page_class, "home ") %>
 
-<section class="hero full">
+<section class="hero full content">
   <h1 class="feature">
-    <span data-text="Groupement Culturel Breton">Groupement Culturel Breton</span>
-    <span data-text="des Pays de Vilaine">des Pays de Vilaine</span>
+    <span>Groupement Culturel Breton des Pays de Vilaine</span>
   </h1>
-  <div class="categories">
-    <%= render Website::HeroCard::Component.new(title: "La Bogue", url: "", css_classes: "bogue") %>
-    <%= render Website::HeroCard::Component.new(title: "L'école de musique traditionnelle", url: "", css_classes: "ecole") %>
-    <%= render Website::HeroCard::Component.new(title: "Archives", url: "", css_classes: "archives") %>
+  <svg class="wave full" viewBox="0 25 500 100">
+    <path d="M 0 50 C 215 150 250 0 500 100 L 500 0 L 0 0" fill="#ffffff"></path>
+    <path d="M 0 50 C 150 150 300 0 500 80 L 500 0 L 0 0" fill="#e0e0e0"></path>
+  </svg>
+</section>
+
+<section class="categories full">
+  <%= render Website::HeroCard::Component.new(title: "La Bogue", url: "", css_classes: "bogue") %>
+  <%= render Website::HeroCard::Component.new(title: "L'école de musique traditionnelle", url: "", css_classes: "ecole") %>
+  <%= render Website::HeroCard::Component.new(title: "Archives", url: "", css_classes: "archives") %>
+</section>
+
+<section class="upcoming-events feature">
+  <div class="section-header">
+    <h2>Événements à venir</h2>
+    <%= link_to "↬ Voir tous les événements", events_path %>
   </div>
+  <% @events.each do |event| %>
+    <div class="event">
+      <%= image_tag event.image if event.image.present? %>
+      <div class="event-info">
+        <h3><%= event.name %></h3>
+        <p><%= event.date %></p>
+      </div>
+    </div>
+  <% end %>
 </section>

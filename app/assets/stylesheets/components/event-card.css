@@ -1,0 +1,16 @@
+.event-card {
+  background-color: var(--black);
+  color: var(--white);
+  display: flex;
+  gap: var(--size-8);
+  padding-block: var(--size-3);
+  text-decoration: none;
+
+  time {
+    width: var(--size-11);
+  }
+
+  h3 {
+    font-size: var(--font-size-5);
+  }
+}

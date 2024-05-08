@@ -1,0 +1,29 @@
+<% content_for(:page_class, "event-page ") %>
+
+<%= render Website::Hero::Component.new(title: @event.name, subtitle: @event.date) %>
+
+<section class="event-description feature">
+  <div class="left">
+    <h2>Informations pratiques</h2>
+    <dl>
+      <dt>Date</dt>
+      <dd><%= @event.date %></dd>
+      <% if @event.location.present? %>
+        <dt>Lieu</dt>
+        <dd><%= @event.location %></dd>
+      <% end %>
+      <% if @event.organizer.present? %>
+        <dt>Organisateurs</dt>
+        <dd><%= @event.organizer %></dd>
+      <% end %>
+      <% if @event.website.present? %>
+        <dt>Site internet</dt>
+        <dd><%= @event.website %></dd>
+      <% end %>
+    </dl>
+    <%= image_tag @event.image %>
+  </div>
+  <div class="description">
+    <%= simple_format(@event.description) %>
+  </div>
+</section>

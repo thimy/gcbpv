@@ -9,13 +9,15 @@ class EventDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    city: Field::String,
     description: Field::Text,
     end_date: Field::Date,
     location: Field::Text,
     name: Field::String,
     start_date: Field::Date,
     date: Field::String,
+    image: Field::Image,
+    organizer: Field::String,
+    website: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,8 +31,9 @@ class EventDashboard < Administrate::BaseDashboard
     id
     name
     location
-    city
     date
+    organizer
+    website
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,7 +44,9 @@ class EventDashboard < Administrate::BaseDashboard
     description
     date
     location
-    city
+    image
+    organizer
+    website
     created_at
     updated_at
   ].freeze
@@ -55,7 +60,9 @@ class EventDashboard < Administrate::BaseDashboard
     start_date
     end_date
     location
-    city
+    image
+    organizer
+    website
   ].freeze
 
   # COLLECTION_FILTERS

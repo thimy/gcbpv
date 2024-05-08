@@ -1,38 +1,38 @@
-
 .hero-card {
   align-items: end;
-  background-color: var(--choco-3);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  border-radius: var(--radius-3) 0 0 var(--radius-3);
   box-shadow: var(--size-3) var(--size-2) color-mix(in srgb, var(--lime-4), transparent 30%);
-  color: var(--white);
+  color: var(--black);
   display: flex;
   filter: grayscale(0.2);
+  font-family: var(--font-serif);
+  font-size: var(--font-size-3);
   flex-shrink: 0;
   height: var(--size-12);
   padding: var(--size-6);
   overflow: hidden;
   position: relative;
   text-decoration-line: none;
+  text-shadow: -3px -3px color-mix(in srgb, var(--white), transparent 10%);
   transition: all ease-out 0.2s;
   z-index: 5;
 
   &:hover {
     filter: revert;
-    margin-left: -1rem;;
   }
 
   &::after {
     backdrop-filter: blur(50px);
+    background-color: var(--card-bg-color);
     background-image: linear-gradient(transparent, var(--gray-12));
     background-size: cover;
     bottom: 0;
     content: "";
     display: block;
     left: 0;
-    opacity: 0.8;
+    opacity: 0.9;
     position: absolute;
     right: 0;
     top: 0;
@@ -49,14 +49,17 @@
   }
 
   &.bogue {
+    --card-bg-color: var(--red);
     background-image: url("home/events.jpg");
   }
 
   &.ecole {
+    --card-bg-color: var(--green);
     background-image: url("home/emt.jpg");
   }
 
   &.archives {
+    --card-bg-color: var(--blue);
     background-image: url("home/resources.jpg");
   }
 }

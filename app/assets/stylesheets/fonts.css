@@ -60,3 +60,11 @@
   font-family: "Garden Grown";
   src: url("GardenGrown-Regular.ttf");
 }
+
+@font-face {
+  font-family: "Young Serif";
+  font-weight: 800;
+  src: url("YoungSerif/YoungSerif-Regular.woff2") format("woff2"),
+       url("YoungSerif/YoungSerif-Regular.otf") format("opentype"),
+       url("YoungSerif/YoungSerif-Regular.ttf") format("truetype");
+}

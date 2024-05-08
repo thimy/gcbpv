@@ -1,9 +1,16 @@
 html {
+  --background-color: var(--gray);
   --color-primary: var(--orange-4);
+}
+
+body {
+  background-color: var(--background-color);
 }
 
 h1, h2,
 h3, h4 {
+  font-family: var(--font-serif);
+
   &:first-child {
     margin-top: 0;
   }
@@ -14,12 +21,29 @@ a {
   display: inline-flex;
 }
 
+dl {
+  margin: 0;
+}
+
+dt {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-4);
+
+  &:is(dd + *) {
+    margin-top: var(--size-3);
+  }
+}
+
+dd {
+  margin: 0;
+}
+
 .content {
   --gap: clamp(1rem, 6vw, 3rem);
   --full: minmax(var(--gap), 1fr);
-  --content: min(50ch, 100% - var(--gap) * 2);
-  --popout: minmax(0, 2rem);
-  --feature: minmax(0, 5rem);
+  --content: min(70ch, 100% - var(--gap) * 2);
+  --popout: minmax(0, 7rem);
+  --feature: minmax(0, 10rem);
 
   display: grid;
   grid-template-columns:
@@ -30,7 +54,6 @@ a {
     var(--popout) [popout-end]
     var(--feature) [feature-end]
     var(--full) [full-end];
-  gap: var(--gap);
 }
 
 .content > * {
@@ -48,4 +71,34 @@ a {
 
 .full {
   grid-column: full;
+}
+
+:empty:is(div, p) {
+  display: none;
+}
+
+main {
+  background-color: var(--black);
+}
+
+.wave {
+  background-color: var(--black);
+}
+
+section:not(.hero, .categories) {
+  background-color: var(--black);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+  padding-block: var(--size-10);
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  h2 {
+    font-size: var(--font-size-7);
+  }
 }
