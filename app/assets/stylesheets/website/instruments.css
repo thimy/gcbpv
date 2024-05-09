@@ -1,0 +1,5 @@
+.instruments {
+  .instrument-list {
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  }
+}

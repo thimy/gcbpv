@@ -1,0 +1,8 @@
+<% content_for(:page_class, "ecole instruments ") %>
+<% content_for(:page_title, "Les instruments") %>
+
+<section class="feature">
+  <div class="instrument-list grid">
+    <%= render Website::Card::Instrument::Component.with_collection(@instruments) %>
+  </div>
+</section>

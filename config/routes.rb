@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   namespace :ecole do
+    resources :instruments, only: [:index, :show]
     resources :teachers, path: :professeurs, only: [:index, :show]
   end
   get "ecole", to: "ecole#index"

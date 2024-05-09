@@ -1,0 +1,33 @@
+<% content_for(:page_class, "ecole instrument-page ") %>
+<% content_for(:page_title, @instrument.name) %>
+
+<section class="popout grid">
+  <div class="left">
+    <h2>Cet instrument est enseigné dans ces villes</h2>
+    <div class="tag-list">
+      <% @instrument.cities.each do |city| %>
+        <span class="tag" data-tag-color="red">
+          <span><%= city.name %></span>
+        </span>
+      <% end %>
+    </div>
+    <h2>Les professeurs qui enseignent cet instrument</h2>
+    <div class="tag-list">
+      <% @instrument.teachers.each do |teacher| %>
+        <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
+          <span><%= teacher.name %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="right">
+    <%= simple_format(@instrument.description) %>
+  </div>
+</section>
+<%= render Website::OtherRecords::Component.new(label: "instruments") do %>
+  <% @other_instruments.each do |instrument| %>
+    <%= link_to ecole_instrument_path(instrument), class: "tag", "data-tag-color": "blue" do %>
+      <span><%= instrument.name %></span>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,9 +1,0 @@
-<section class="other-teachers popout">
-  <div class="tag-list">
-    <% @teachers.each do |teacher| %>
-      <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "blue" do %>
-        <span><%= teacher.name %></span>
-      <% end %>
-    <% end %>
-  </div>
-</section>
