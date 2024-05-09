@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'ecole/index'
   devise_for :users
   namespace :admin do
     resources :subscriptions
