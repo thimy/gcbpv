@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_132315) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_155645) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,10 +50,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_132315) do
   end
 
   create_table "categories_posts", force: :cascade do |t|
-    t.bigint "categories_id"
-    t.bigint "posts_id"
-    t.index ["categories_id"], name: "index_categories_posts_on_categories_id"
-    t.index ["posts_id"], name: "index_categories_posts_on_posts_id"
+    t.bigint "category_id"
+    t.bigint "post_id"
+    t.index ["category_id"], name: "index_categories_posts_on_category_id"
+    t.index ["post_id"], name: "index_categories_posts_on_post_id"
   end
 
   create_table "cities", force: :cascade do |t|
@@ -125,9 +125,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_132315) do
     t.text "content"
     t.string "image"
     t.string "status"
-    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "event_id"
+    t.datetime "published_at"
     t.index ["event_id"], name: "index_posts_on_event_id"
   end
 
@@ -237,7 +238,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_132315) do
   add_foreign_key "configurations", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
-  add_foreign_key "posts", "events"
   add_foreign_key "seasons", "plans"
   add_foreign_key "slots", "cities"
   add_foreign_key "slots", "teachers"

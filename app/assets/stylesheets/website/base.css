@@ -18,6 +18,11 @@ h3, h4) {
 a {
   align-items: center;
   display: inline-flex;
+
+  &:where([class]) {
+    color: currentColor;
+    text-decoration: none;
+  }
 }
 
 dl {
@@ -78,7 +83,7 @@ section.grid {
     flex-direction: column;
     gap: var(--size-2);
   }
-  
+
   h2 {
     font-size: var(--font-size-4);
   }

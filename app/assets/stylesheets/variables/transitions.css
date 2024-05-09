@@ -1,0 +1,3 @@
+:where(html) {
+  --transition-short: all ease-in 0.2s;
+}

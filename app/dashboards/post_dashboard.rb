@@ -11,10 +11,14 @@ class PostDashboard < Administrate::BaseDashboard
     id: Field::Number,
     categories: Field::HasMany,
     content: Field::Text,
-    event: Field::BelongsTo,
-    image: Field::String,
-    status: Field::String,
+    event: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_fields: ['name'],
+    ),
+    image: Field::Image,
+    status: Field::Select.with_options(collection: Post::VALID_STATUSES, include_blank: true),
     title: Field::String,
+    published_at: Field::DateTime.with_options(format: "%d-%m-%Y %H:%M"),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -31,6 +35,7 @@ class PostDashboard < Administrate::BaseDashboard
     categories
     status
     event
+    published_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -43,6 +48,7 @@ class PostDashboard < Administrate::BaseDashboard
     event
     image
     status
+    published_at
     created_at
     updated_at
   ].freeze
@@ -57,6 +63,7 @@ class PostDashboard < Administrate::BaseDashboard
     status
     image
     event
+    published_at
   ].freeze
 
   # COLLECTION_FILTERS

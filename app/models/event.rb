@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   include WithTime
   has_one_attached :image
+  has_many :posts
 
   scope :upcoming, -> {where(end_date: Date.today...)}
   scope :passed, -> {where(end_date: ...Date.today)}

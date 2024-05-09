@@ -231,6 +231,7 @@ fr:
         event: "Événement lié"
         event_id: "Événement lié"
         status: "Statut"
+        published_at: "Publié le"
         created_at: "Créé le"
         updated_at: "Modifié le"
       project:

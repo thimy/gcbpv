@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :posts, path: :actualites, only: [:index, :show]
   namespace :ecole do
     resources :instruments, only: [:index, :show]
     resources :teachers, path: :professeurs, only: [:index, :show]

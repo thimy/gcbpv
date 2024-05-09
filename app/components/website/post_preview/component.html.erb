@@ -1,0 +1,14 @@
+<post-preview>
+  <div class="tag-list">
+    <% @post.categories.each do |category| %>
+      <%= link_to "", class: "tag" do %>
+        <span><%= category.name %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to post_path(@post), class: "post-title" do %>
+    <h2><%= @post.title %></h2>
+  <% end %>
+  <%= image_tag @post.image if @post.image.present? %>
+  <%= simple_format(@post.content) %>
+</post-preview>

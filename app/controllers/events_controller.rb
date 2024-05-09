@@ -1,5 +1,4 @@
-class EventsController < ApplicationController
-  layout "website"
+class EventsController < WebsiteController
   before_action :set_event, only: %i[ show ]
 
   def index

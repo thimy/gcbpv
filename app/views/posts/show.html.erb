@@ -1,0 +1,26 @@
+<% content_for(:page_class, "post-page ") %>
+<% content_for(:page_title, @post.title) %>
+
+<section class="grid">
+  <div class="left">
+    <div class="tag-list">
+      <% @post.categories.each do |category| %>
+        <%= link_to "", class: "tag" do %>
+          <span><%= category.name %></span>
+        <% end %>
+      <% end %>
+    </div>
+    <dl>
+      <dt>Publié le</dt>
+      <dd><%= @post.published_at || @post.created_at %></dd>
+      <% if @post.event.present? %>
+        <dt>Événement lié</dt>
+        <dd><%= link_to @post.event.name, event_path(@post.event) %></dd>
+      <% end %>
+    </dl>
+  </div>
+  <div class="right">
+    <%= simple_format(@post.content) %>
+  </div>
+  <%= image_tag @post.image if @post.image.present? %>
+</section>
