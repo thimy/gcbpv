@@ -73,12 +73,12 @@ section:not(.hero, .categories) {
   }
 }
 
-section.grid {
+:where(section.grid) {
   display: grid;
   gap: var(--size-8);
   grid-template-columns: 2fr 3fr;
 
-  > * {
+  > :where(*) {
     display: flex;
     flex-direction: column;
     gap: var(--size-2);

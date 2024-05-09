@@ -1,7 +1,8 @@
-.teacher-card {
+:is(.teacher-card) {
   align-items: stretch;
   color: var(--white);
   display: flex;
+  flex-direction: row;
   gap: var(--size-4);
   position: relative;
   text-decoration: none;
