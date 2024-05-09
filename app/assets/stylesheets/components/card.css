@@ -1,4 +1,4 @@
-.instrument-card {
+.card {
   --card-bg-color: var(--blue);
   align-items: start;
   background-color: var(--card-bg-color);

@@ -24,7 +24,7 @@
   </div>
 </section>
 <%= render Website::OtherRecords::Component.new(label: "professeurs") do %>
-  <% @teachers.each do |teacher| %>
+  <% @other_teachers.each do |teacher| %>
     <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "blue" do %>
       <span><%= teacher.name %></span>
     <% end %>

@@ -1,0 +1,2 @@
+module Ecole::WorkshopsHelper
+end

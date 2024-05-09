@@ -1,0 +1,15 @@
+<%= link_to ecole_workshop_path(@workshop), class: "card" do %>
+  <div class="card-info">
+    <div class="tag-list">
+      <% @workshop.teachers.each do |teacher| %>
+        <span class="tag">
+          <span><%= teacher.name %></span>
+        </span>
+      <% end %>
+      <span class="tag" data-tag-color="red">
+        <span><%= @workshop.city.name %></span>
+      </span>
+    </div>
+    <h3><%= @workshop.name %></h3>
+  </div>
+<% end %>

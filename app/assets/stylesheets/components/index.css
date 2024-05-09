@@ -1,9 +1,10 @@
+@import "card.css";
 @import "event-card.css";
 @import "footer.css";
 @import "header.css";
 @import "hero.css";
 @import "hero-card.css";
-@import "instrument-card.css";
+@import "other-records.css";
 @import "post-preview.css";
 @import "table.css";
 @import "tag.css";

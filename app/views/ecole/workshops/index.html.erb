@@ -1,0 +1,6 @@
+<% content_for(:page_class, "ecole workshops ") %>
+<% content_for(:page_title, "Les ateliers") %>
+
+<section class="feature grid">
+  <%= render Website::Card::Workshop::Component.with_collection(@workshops) %>
+</section>
