@@ -12,6 +12,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     description: Field::Text,
     name: Field::String,
     teachers: Field::HasMany,
+    image: Field::Image,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -36,6 +37,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     name
     description
     teachers
+    image
     created_at
     updated_at
   ].freeze
@@ -47,6 +49,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     name
     description
     teachers
+    image
   ].freeze
 
   # COLLECTION_FILTERS
