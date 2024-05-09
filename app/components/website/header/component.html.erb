@@ -1,12 +1,19 @@
 <header class="feature">
+  <%= link_to "Groupement Culturel Breton des Pays de Vilaine", "/", class: "home" %>
   <nav>
-    <%= link_to "Groupement Culturel Breton des Pays de Vilaine", "/", class: "home" %>
     <%= link_to "Le Groupement", "" %>
     <%= link_to "La Bogue", "" %>
-    <%= link_to "Ecole", ecole_path %>
+    <div class="dropdown">
+      <%= link_to "Ecole", ecole_path %>
+      <div class="dropdown-menu">
+        <%= link_to "Les instruments", ecole_instruments_path %>
+        <%= link_to "Les ateliers", ecole_workshops_path %>
+        <%= link_to "Les professeurs", ecole_teachers_path %>
+      </div>
+    </div>
     <%= link_to "Archives", "" %>
     <%= link_to "Actualités", posts_path %>
     <%= link_to "Evénements", events_path %>
+    <%= link_to "Se connecter", new_user_session_path %>
   </nav>
-  <button>Se connecter</button>
 </header>
