@@ -1,14 +1,5 @@
 <% content_for(:page_class, "home ") %>
-
-<section class="hero full content">
-  <h1 class="feature">
-    <span>Groupement Culturel Breton des Pays de Vilaine</span>
-  </h1>
-  <svg class="wave full" viewBox="0 25 500 100">
-    <path d="M 0 50 C 215 150 250 0 500 100 L 500 0 L 0 0" fill="#ffffff"></path>
-    <path d="M 0 50 C 150 150 300 0 500 80 L 500 0 L 0 0" fill="#e0e0e0"></path>
-  </svg>
-</section>
+<% content_for(:page_title, "Groupement Culturel Breton des Pays de Vilaine") %>
 
 <section class="categories full">
   <%= render Website::HeroCard::Component.new(title: "La Bogue", url: "", css_classes: "bogue") %>

@@ -7,8 +7,8 @@ body {
   background-color: var(--background-color);
 }
 
-h1, h2,
-h3, h4 {
+:where(h1, h2,
+h3, h4) {
   font-family: var(--font-serif);
 
   &:first-child {
