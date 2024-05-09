@@ -67,3 +67,9 @@ section:not(.hero, .categories) {
     font-size: var(--font-size-7);
   }
 }
+
+.grid {
+  display: grid;
+  gap: var(--size-8);
+  grid-template-columns: 1fr 1fr;
+}

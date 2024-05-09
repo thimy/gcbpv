@@ -1,0 +1,2 @@
+module Ecole::TeachersHelper
+end

@@ -73,6 +73,6 @@ class SlotDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(slot)
-    "#{slot.teacher.name} à #{slot.ville.name}"
+    "#{slot.teacher.name} à #{slot.city.name}"
   end
 end

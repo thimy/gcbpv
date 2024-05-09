@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  get 'ecole/index'
+  namespace :ecole do
+    resources :teachers, path: :professeurs, only: [:index, :show]
+  end
+  get "ecole", to: "ecole#index"
   devise_for :users
   namespace :admin do
     resources :subscriptions

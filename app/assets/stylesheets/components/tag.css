@@ -1,0 +1,41 @@
+.tag {
+  --tag-bg-color: var(--green);
+  background-color: var(--tag-bg-color);
+  border-radius: var(--radius-2);
+  font-size: var(--font-size-1);
+  padding: var(--size-1) var(--size-2);
+  text-decoration: none;
+  transition: all ease-out 0.2s;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--tag-bg-color), transparent 20%);
+  }
+
+  &:where([data-tag-color="blue"]) {
+    --tag-bg-color: var(--blue);
+  }
+
+  &:where([data-tag-color="red"]) {
+    --tag-bg-color: var(--red);
+  }
+
+  > span {
+    color: var(--tag-bg-color);
+    filter: 
+      invert(1) 
+      grayscale(1) 
+      brightness(calc(80 / 100))
+      contrast(9000)
+    ;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    mix-blend-mode: luminosity;
+  }
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2);
+}

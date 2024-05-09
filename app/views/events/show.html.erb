@@ -1,8 +1,6 @@
 <% content_for(:page_class, "event-page ") %>
 <% content_for(:page_title, @event.name) %>
 
-<%= render Website::Hero::Component.new(title: @event.name, subtitle: @event.date) %>
-
 <section class="event-description feature">
   <div class="left">
     <h2>Informations pratiques</h2>

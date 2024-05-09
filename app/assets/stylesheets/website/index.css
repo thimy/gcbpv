@@ -1,5 +1,7 @@
 @import "base.css";
 
-@import "events.css";
 @import "header.css";
 @import "home.css";
+
+@import "events.css";
+@import "teachers.css";

@@ -1,0 +1,20 @@
+<%= link_to ecole_teacher_path(@teacher), class: "teacher-card" do %>
+  <%= image_tag @teacher.photo %>
+  <div class="card-info">
+    <h3><%= @teacher.name %></h3>
+    <div class="tag-list">
+      <% @teacher.instruments.each do |instrument| %>
+        <span class="tag">
+          <span><%= instrument.name %></span>
+        </span>
+      <% end %>
+    </div>
+    <div class="tag-list">
+      <% @teacher.cities.each do |city| %>
+        <span class="tag" data-tag-color="red">
+          <span><%= city.name %></span>
+        </span>
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,26 @@
+<% content_for(:page_class, "ecole teacher-page ") %>
+<% content_for(:page_title, @teacher.name) %>
+
+<section class="popout grid">
+  <div class="left">
+    <%= image_tag @teacher.photo %>
+  </div>
+  <div class="right">
+    <div class="tag-list">
+      <% @teacher.instruments.each do |instrument| %>
+        <span class="tag">
+          <span><%= instrument.name %></span>
+        </span>
+      <% end %>
+    </div>
+    <div class="tag-list">
+      <% @teacher.cities.each do |city| %>
+        <span class="tag" data-tag-color="red">
+          <span><%= city.name %></span>
+        </span>
+      <% end %>
+    </div>
+    <%= simple_format(@teacher.description) %>
+  </div>
+</section>
+<%= render Website::OtherTeachers::Component.new(teachers: @other_teachers) %>
