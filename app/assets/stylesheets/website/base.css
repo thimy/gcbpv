@@ -20,9 +20,6 @@ h3, h4) {
 }
 
 a {
-  align-items: center;
-  display: inline-flex;
-
   &:where([class]) {
     color: currentColor;
     text-decoration: none;
@@ -62,12 +59,29 @@ main {
 :where(section) {
   color: var(--white);
   padding-block: var(--size-8);
+
+  h2 {
+    font-size: var(--font-size-6);
+    text-align: center;
+  }
+
+  h3 {
+    font-size: var(--font-size-4);
+  }
 }
 
 :where(section.grid) {
   display: grid;
   gap: var(--size-8);
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr 1fr;
+
+  &[data-grid="2-3"] {
+    grid-template-columns: 2fr 3fr;
+  }
+
+  &[data-grid="repeat"] {
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+  }
 
   > :where(*) {
     display: flex;
@@ -76,6 +90,6 @@ main {
   }
 
   h2 {
-    font-size: var(--font-size-4);
+    grid-column: 1 / -1;
   }
 }

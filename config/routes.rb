@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :posts, path: :actualites, only: [:index, :show]
   namespace :ecole do
-    resources :instruments, only: [:index, :show]
+    resources :instruments, path: :cours, only: [:index, :show]
     resources :teachers, path: :professeurs, only: [:index, :show]
     resources :workshops, path: :ateliers, only: [:index, :show]
   end

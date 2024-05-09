@@ -1,8 +1,31 @@
 <% content_for(:page_class, "ecole instruments ") %>
-<% content_for(:page_title, "Les instruments") %>
+<% content_for(:page_title, "Les cycles de cours") %>
 
-<section class="feature">
-  <div class="instrument-list grid">
-    <%= render Website::Card::Instrument::Component.with_collection(@instruments) %>
+<section>
+  <h2>Apprendre à jouer d’un instrument</h2>
+  <h3>Cycle 1 – Durée : 1 à 3 ans</h3>
+  <p>L’entrée dans ce cycle se formalise par le choix de l’élève de pratiquer un instrument défini.</p>
+  <p>L’élève va débuter l’apprentissage de l’instrument, apprendre à connaitre le répertoire, les danses et chants traditionnels, et démarrer la pratique collective avec différents projets musicaux.</p>
+  <h3>Cycle 2 – Durée : 2 à 4ans</h3>
+  <p>Ce cycle contribuera au développement artistique et musical personnel de l’élève en favorisant une bonne ouverture culturelle, l’appropriation d’un langage musical, l’acquisition des bases d’une pratique autonome, et en aidant l’élève à mieux tenir sa place dans une pratique collective.</p>
+  <p>Ce cycle vise à accompagner l’élève vers une autonomie dans sa pratique musicale, et l’aidera à développer son expression propre, son interprétation, son style.</p>
+</section>
+<section>
+  <h2>Tarifs</h2>
+  <p>L’inscription ouvre droit à un volume de 30 séances de cours individuels et à <%= link_to "un atelier de pratique d’ensemble", ecole_workshops_path %>.</p>
+  <div class="prices">
+    <dl>
+      <dt>- 18 ans</dt>
+      <dd>280€</dd>
+    </dl>
+    <dl>
+      <dt>Adultes</dt>
+      <dd>300€</dd>
+    </dl>
   </div>
+  <p>Majoration si hors <em>Redon Agglomération</em>
+</section>
+<section class="feature grid" data-grid="repeat">
+  <h2>Les instruments enseignés</h2>
+  <%= render Website::Card::Instrument::Component.with_collection(@instruments) %>
 </section>
