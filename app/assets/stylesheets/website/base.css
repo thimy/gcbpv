@@ -19,6 +19,21 @@ h3, h4) {
   }
 }
 
+h2 {
+  font-size: var(--font-size-6);
+  text-align: center;
+}
+
+h3 {
+  font-size: var(--font-size-4);
+}
+
+.subtitle {
+  font-size: var(--font-size-4);
+  margin-block: 0 var(--size-3);
+  text-align: center;
+}
+
 a {
   &:where([class]) {
     color: currentColor;
@@ -59,15 +74,6 @@ main {
 :where(section) {
   color: var(--white);
   padding-block: var(--size-8);
-
-  h2 {
-    font-size: var(--font-size-6);
-    text-align: center;
-  }
-
-  h3 {
-    font-size: var(--font-size-4);
-  }
 }
 
 :where(section.grid) {

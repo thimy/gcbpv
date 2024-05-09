@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :instruments, path: :cours, only: [:index, :show]
     resources :teachers, path: :professeurs, only: [:index, :show]
     resources :workshops, path: :ateliers, only: [:index, :show]
+    get "enfance", to: "youth#index", as: :youth
   end
   get "ecole", to: "ecole#index"
   devise_for :users

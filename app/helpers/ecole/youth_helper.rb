@@ -1,0 +1,2 @@
+module Ecole::YouthHelper
+end
