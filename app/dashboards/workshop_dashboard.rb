@@ -9,6 +9,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    teachers: Field::HasMany,
     city: Field::BelongsTo,
     day_of_week: Field::Select.with_options(collection: WithTime::DAYS_ORDERED),
     frequency: Field::Select.with_options(collection: WithTime::FREQUENCIES),
@@ -28,6 +29,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
+    teachers
     day_of_week
     frequency
     city
@@ -39,6 +41,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     name
+    teachers
     day_of_week
     frequency
     description
@@ -54,6 +57,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
+    teachers
     day_of_week
     frequency
     description

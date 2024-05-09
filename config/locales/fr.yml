@@ -339,7 +339,7 @@ fr:
       workshop:
         name: "Nom"
         location: "Lieu"
-        teacher: "Professeur"
+        teachers: "Professeurs"
         teacher_id: "Professeur"
         day_of_week: "Jour"
         start_time: "Heure de début"

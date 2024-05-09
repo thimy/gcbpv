@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_155645) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_09_161928) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -202,6 +202,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_155645) do
     t.string "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "teachers_workshops", force: :cascade do |t|
+    t.bigint "teacher_id"
+    t.bigint "workshop_id"
+    t.index ["teacher_id"], name: "index_teachers_workshops_on_teacher_id"
+    t.index ["workshop_id"], name: "index_teachers_workshops_on_workshop_id"
   end
 
   create_table "users", force: :cascade do |t|

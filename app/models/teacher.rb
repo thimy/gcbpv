@@ -3,6 +3,7 @@ class Teacher < ApplicationRecord
   has_many :instruments, through: :specialties
   has_many :slots
   has_many :cities, through: :slots
+  has_and_belongs_to_many :workshops
   has_one_attached :photo
 
   def name
