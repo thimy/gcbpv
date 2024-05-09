@@ -1,0 +1,16 @@
+footer {
+  display: flex;
+  gap: var(--size-8);
+  justify-content: space-between;
+  padding-block-end: var(--size-10);
+
+  h3 {
+    font-size: var(--font-size-4);
+    margin-block-end: var(--size-2);
+  }
+}
+
+svg.bottom {
+  grid-column: 1 / -1;
+  transform: rotate(180deg);
+}
