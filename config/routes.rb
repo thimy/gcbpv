@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     root to: "cities#index"
   end
   get "", to: "website#index", as: "/"
-  scope :secretariat do
+  namespace :secretariat do
     resources :subscriptions
     resources :workshops
     resources :students
