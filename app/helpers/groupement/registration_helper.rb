@@ -1,0 +1,2 @@
+module Groupement::RegistrationHelper
+end

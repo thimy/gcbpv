@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :training_sessions, path: "rendez-vous/seances", only: [:show]
     resources :workshops, path: :ateliers, only: [:index, :show]
     get "enfance", to: "youth#index", as: :youth
+    get "adhesion", to: "membership#index", as: :membership
   end
   get "ecole", to: "ecole#index"
   devise_for :users
