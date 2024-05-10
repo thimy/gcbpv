@@ -10,10 +10,11 @@
   padding: var(--size-4);
   position: relative;
   text-decoration: none;
-  transition: all ease-out 0.2s;
+  transition: var(--transition-short);
 
   &:hover {
     --card-border-color: var(--gray);
+    background-color: color-mix(in srgb, var(--green), transparent 80%);
   }
 
   .card-info {

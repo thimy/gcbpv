@@ -1,9 +1,7 @@
 .events {
   .event-list {
-    background-color: var(--dark-gray);
     display: flex;
     flex-direction: column;
-    gap: 1px;
   }
 }
 
