@@ -130,6 +130,12 @@ fr:
       teacher:
         one: "Professeur"
         other: "Professeurs"
+      training:
+        one: "Rendez-vous"
+        other: "Rendez-vous"
+      training_session:
+        one: "Session de rendez-vous"
+        other: "Sessions de rendez-vous"
       user:
         one: "Utilisateur"
         other: "Utilisateurs"
@@ -323,6 +329,19 @@ fr:
         hidden: "Caché"
         slots: "Disponibilités"
         phone: "Téléphone"
+      training:
+        name: "Nom"
+        price: "Prix d’une séance"
+        session_count: "Nombre de séances"
+        season: "Année"
+        season_id: "Année"
+      training_session:
+        name: "Nom"
+        guest: "Intervenants"
+        training: "Ensemble de rendez-vous"
+        training_id: "Ensemble de rendez-vous"
+        start_time: "Heure de début"
+        end_time: "Heure de fin"
       user:
         first_name: "Prénom"
         last_name: "Nom"

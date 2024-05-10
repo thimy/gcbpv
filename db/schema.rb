@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_09_161928) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_10_071347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -211,6 +211,32 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_161928) do
     t.index ["workshop_id"], name: "index_teachers_workshops_on_workshop_id"
   end
 
+  create_table "training_sessions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "guest"
+    t.bigint "training_id", null: false
+    t.date "date"
+    t.string "start_time"
+    t.string "end_time"
+    t.string "city"
+    t.text "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["training_id"], name: "index_training_sessions_on_training_id"
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "session_count"
+    t.decimal "price"
+    t.bigint "season_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_trainings_on_season_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -254,5 +280,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_09_161928) do
   add_foreign_key "subscriptions", "payors"
   add_foreign_key "subscriptions", "students"
   add_foreign_key "subscriptions", "workshops"
+  add_foreign_key "training_sessions", "trainings"
+  add_foreign_key "trainings", "seasons"
   add_foreign_key "workshops", "cities"
 end

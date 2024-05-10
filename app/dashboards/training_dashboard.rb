@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class SeasonDashboard < Administrate::BaseDashboard
+class TrainingDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,9 +9,12 @@ class SeasonDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    description: Field::Text,
     name: Field::String,
-    plan: Field::BelongsTo,
-    start_year: Field::Number,
+    price: Field::String.with_options(searchable: false),
+    session_count: Field::Number,
+    training_sessions: Field::HasMany,
+    season: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,19 +26,20 @@ class SeasonDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    description
     name
-    plan
-    start_year
-    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    description
     name
-    plan
-    start_year
+    price
+    session_count
+    training_sessions
+    season
     created_at
     updated_at
   ].freeze
@@ -44,8 +48,11 @@ class SeasonDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    plan
-    start_year
+    name
+    description
+    price
+    session_count
+    season
   ].freeze
 
   # COLLECTION_FILTERS
@@ -60,10 +67,10 @@ class SeasonDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how seasons are displayed
+  # Overwrite this method to customize how trainings are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(season)
-    season.name
+  def display_resource(training)
+    training.name
   end
 end

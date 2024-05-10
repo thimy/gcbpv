@@ -13,6 +13,8 @@ Rails.application.routes.draw do
     resources :students
     resources :payors
     resources :workshops
+    resources :trainings
+    resources :training_sessions
     resources :instruments
     resources :teachers
     resources :slots
