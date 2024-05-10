@@ -114,3 +114,20 @@ main {
     grid-column: 1 / -1;
   }
 }
+
+p {
+  &.with-image {
+    align-items: center;
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  &.with-image--left {
+    grid-template-columns: 1fr 2fr;
+  }
+  
+  &.with-image img {
+    width: 100%;
+  }
+}

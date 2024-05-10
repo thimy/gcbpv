@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "archives", to: "archives#index"
   resources :posts, path: :actualites, only: [:index, :show]
   namespace :ecole do
     resources :instruments, path: :cours, only: [:index, :show]
