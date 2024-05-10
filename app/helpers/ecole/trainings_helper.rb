@@ -1,0 +1,2 @@
+module Ecole::TrainingsHelper
+end

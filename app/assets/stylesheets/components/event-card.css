@@ -1,10 +1,16 @@
 .event-card {
+  align-items: center;
   background-color: var(--black);
   color: var(--white);
   display: flex;
   gap: var(--size-8);
   padding-block: var(--size-3);
   text-decoration: none;
+  transition: var(--transition-short);
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--green), transparent 70%);
+  }
 
   time {
     width: var(--size-11);

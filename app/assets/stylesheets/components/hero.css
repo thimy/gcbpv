@@ -4,10 +4,6 @@ hero-container {
   padding-block: var(--size-13) var(--size-3);
   text-align: center;
 
-  h1 {
-    font-size: var(--font-size-8);
-  }
-
   p {
     color: var(--black);
     font-size: var(--font-size-4);

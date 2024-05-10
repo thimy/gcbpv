@@ -19,8 +19,12 @@ h3, h4) {
   }
 }
 
+h1 {
+  font-size: var(--font-size-8);
+}
+
 h2 {
-  font-size: var(--font-size-6);
+  font-size: var(--font-size-7);
   text-align: center;
 }
 
@@ -74,6 +78,10 @@ main {
 :where(section) {
   color: var(--white);
   padding-block: var(--size-8);
+
+  h2 {
+    margin-bottom: var(--size-5);
+  }
 }
 
 :where(section.grid) {
@@ -86,7 +94,7 @@ main {
   }
 
   &[data-grid="repeat"] {
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   }
 
   > :where(*) {

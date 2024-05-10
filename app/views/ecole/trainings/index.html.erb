@@ -1,0 +1,9 @@
+<% content_for(:page_class, "ecole trainings ") %>
+<% content_for(:page_title, "Les rendez-vous") %>
+
+<section>
+  <p>Le succès de ces rendez-vous ponctuels, mais réguliers avec des figures emblématiques d’un instrument nous a donné envie d’en proposer d’autres...</p>
+</section>
+<section class="feature grid" data-grid="repeat">
+  <%= render Website::Card::Training::Component.with_collection(@trainings) %>
+</section>
