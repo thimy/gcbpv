@@ -1,0 +1,32 @@
+<% content_for(:page_class, "archives edition-page ") %>
+<% content_for(:page_title, @edition.name) %>
+
+<section class="popout grid" data-grid="1-3">
+  <div class="left">
+    <%= image_tag @edition.image %>
+  </div>
+  <div class="right">
+    <%= simple_format(@edition.description) %>
+    <dl>
+      <% if @edition.format.present? %>
+        <div>
+          <dt>Format</dt>
+          <dd><%= @edition.format %></dd>
+        </div>
+      <% end %>
+      <% if @edition.price.present? %>
+        <div>
+          <dt>Prix</dt>
+          <dd><%= number_to_currency(@edition.price, unit: "€") %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+</section>
+<%= render Website::OtherRecords::Component.new(label: "éditions") do %>
+  <% @other_editions.each do |edition| %>
+    <%= link_to archives_edition_path(edition), class: "tag", "data-tag-color": "blue" do %>
+      <span><%= edition.name %></span>
+    <% end %>
+  <% end %>
+<% end %>

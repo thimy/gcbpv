@@ -1,0 +1,16 @@
+.editions {
+  section.grid[data-grid="repeat"] {
+    --column-width: 450px;
+  }
+}
+
+.editions, .edition-page {
+  dl {
+    display: flex;
+    gap: var(--size-6);
+
+    dt {
+      font-size: var(--font-size-3);
+    }
+  }
+}

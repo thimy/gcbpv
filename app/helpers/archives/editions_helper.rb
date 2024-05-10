@@ -1,0 +1,2 @@
+module Archives::EditionsHelper
+end

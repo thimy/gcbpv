@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :archives do
+    resources :editions, only: [:index, :show]
+  end
   get "archives", to: "archives#index"
   resources :posts, path: :actualites, only: [:index, :show]
   namespace :ecole do
@@ -29,6 +32,7 @@ Rails.application.routes.draw do
     resources :seasons
     resources :events
     resources :posts
+    resources :editions
     resources :categories
     resources :configurations, only: [:index, :show, :edit, :update]
     

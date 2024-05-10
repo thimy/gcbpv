@@ -1,0 +1,20 @@
+<%= link_to archives_edition_path(@edition), class: "edition-card" do %>
+  <%= image_tag @edition.image %>
+  <div class="card-info">
+    <h3><%= @edition.name %></h3>
+    <dl>
+      <% if @edition.format.present? %>
+        <div>
+          <dt>Format</dt>
+          <dd><%= @edition.format %></dd>
+        </div>
+      <% end %>
+      <% if @edition.price.present? %>
+        <div>
+          <dt>Prix</dt>
+          <dd><%= number_to_currency(@edition.price, unit: "€") %></dd>
+        </div>
+      <% end %>
+    </dl>
+  </div>
+<% end %>

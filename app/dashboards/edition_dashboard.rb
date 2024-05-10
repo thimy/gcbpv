@@ -25,6 +25,7 @@ class EditionDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    name
     description
     format
     image
@@ -34,10 +35,10 @@ class EditionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    name
     description
     format
     image
-    name
     price
     created_at
     updated_at
@@ -47,10 +48,10 @@ class EditionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    name
     description
     format
     image
-    name
     price
   ].freeze
 

@@ -1,9 +1,7 @@
 <header class="feature">
   <%= link_to "Groupement Culturel Breton des Pays de Vilaine", "/", class: "home" %>
   <nav>
-    <div class="dropdown">
-      <%= link_to "Le Groupement", "" %>
-    </div>
+    <%= link_to "Le Groupement", "" %>
     <%= link_to "La Bogue", "" %>
     <div class="dropdown">
       <%= link_to "Ecole", ecole_path %>
@@ -17,7 +15,12 @@
         <%= link_to "Participation et financement", ecole_membership_path %>
       </div>
     </div>
-    <%= link_to "Archives", archives_path %>
+    <div class="dropdown">
+      <%= link_to "Archives", archives_path %>
+      <div class="dropdown-menu">
+        <%= link_to "Les éditions", archives_editions_path %>
+      </div>
+    </div>
     <%= link_to "Actualités", posts_path %>
     <%= link_to "Evénements", events_path %>
     <%= link_to "Se connecter", new_user_session_path %>
