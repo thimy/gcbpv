@@ -1,4 +1,4 @@
-<%= link_to ecole_workshop_path(@workshop), class: "card" do %>
+<%= link_to public_send(@path, @workshop), class: "card" do %>
   <div class="card-info">
     <div class="tag-list">
       <% @workshop.teachers.each do |teacher| %>

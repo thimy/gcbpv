@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :posts, path: :actualites, only: [:index, :show]
   namespace :ecole do
     resources :instruments, path: :cours, only: [:index, :show]
+    resources :projects, path: :projets, only: [:index, :show]
     resources :teachers, path: :professeurs, only: [:index, :show]
     resources :trainings, path: "rendez-vous", only: [:index, :show]
     resources :training_sessions, path: "rendez-vous/seances", only: [:show]
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
     resources :workshops
     resources :trainings
     resources :training_sessions
+    resources :projects
     resources :instruments
     resources :teachers
     resources :slots

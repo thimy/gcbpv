@@ -1,0 +1,14 @@
+<% content_for(:page_class, "ecole projects ") %>
+<% content_for(:page_title, "Les ateliers") %>
+
+<section>
+  <i>Focus : accompagnement à la formation / création d’ensemble</i>
+  <p>L’équipe des professeurs de l’Ecole de Musique est à l’écoute de vos projets de création d’ensemble, de vos envies de monter votre propre groupe de musique. Nous proposons un accompagnement personnalisé et sur mesure en fonction de vos besoins, profitez-en ! L’école est aussi à l’initiative de projets qui impliquent les élèves tout au long de l’année. Les professeurs vous informeront.</p>
+</section>
+<section class="feature grid" data-grid="repeat">
+  <% @projects.each do |project| %>
+    <%= render Website::Card::Component.new(record: project, path: "ecole_project_path") do %>
+      <h3><%= project.name %></h3>
+    <% end %>
+  <% end %>
+</section>

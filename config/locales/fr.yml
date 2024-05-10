@@ -242,9 +242,9 @@ fr:
         updated_at: "Modifié le"
       project:
         name: "Nom"
-        season: "Années"
-        season_id: "Années"
-        archived: "Archivé"
+        season: "Année"
+        season_id: "Année"
+        public: "Public"
       season:
         name: "Année"
         start_year: "Année de début"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_10_071347) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_10_123045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -130,6 +130,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_071347) do
     t.bigint "event_id"
     t.datetime "published_at"
     t.index ["event_id"], name: "index_posts_on_event_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "season_id", null: false
+    t.boolean "public"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_projects_on_season_id"
   end
 
   create_table "seasons", force: :cascade do |t|
@@ -271,6 +281,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_10_071347) do
   add_foreign_key "configurations", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
+  add_foreign_key "projects", "seasons"
   add_foreign_key "seasons", "plans"
   add_foreign_key "slots", "cities"
   add_foreign_key "slots", "teachers"
