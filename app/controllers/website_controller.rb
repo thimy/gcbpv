@@ -2,6 +2,7 @@ class WebsiteController < ApplicationController
   layout "website"
 
   def index
-    @events = Event.upcoming.limit(3)
+    @posts = Post.latest.limit(3) 
+    @events = Event.upcoming.limit(3).reverse
   end
 end

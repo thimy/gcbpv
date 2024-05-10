@@ -1,4 +1,4 @@
-header {
+body > header {
   align-items: center;
   background-color: var(--background-color);
   color: var(--black);

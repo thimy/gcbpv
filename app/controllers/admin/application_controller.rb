@@ -17,5 +17,13 @@ module Admin
     # def records_per_page
     #   params[:per_page] || 20
     # end
+
+    def default_sorting_attribute
+      :created_at
+    end
+
+    def default_sorting_direction
+      :desc
+    end
   end
 end

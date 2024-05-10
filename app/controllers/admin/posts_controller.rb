@@ -34,11 +34,12 @@ module Admin
     # empty values into nil values. It uses other APIs such as `resource_class`
     # and `dashboard`:
     #
-    # def resource_params
-    #   params.require(resource_class.model_name.param_key).
-    #     permit(dashboard.permitted_attributes(action_name)).
-    #     transform_values { |value| value == "" ? nil : value }
-    # end
+    def resource_params
+      if params[:post][:published_at].blank? && params[:post][:status] == "Public"
+        params[:post][:published_at] = DateTime.now
+      end
+      super
+    end
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information

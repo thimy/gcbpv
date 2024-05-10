@@ -3,6 +3,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: var(--radius-3);
   box-shadow: var(--size-3) var(--size-2) color-mix(in srgb, var(--lime-4), transparent 30%);
   color: var(--black);
   display: flex;
@@ -44,7 +45,9 @@
   }
   
   h2 {
+    font-size: var(--font-size-5);
     font-weight: var(--font-weight-4);
+    text-align: start;
     z-index: 1;
   }
 

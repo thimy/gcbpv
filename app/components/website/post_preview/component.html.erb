@@ -7,8 +7,13 @@
     <% end %>
   </div>
   <%= link_to post_path(@post), class: "post-title" do %>
-    <h2><%= @post.title %></h2>
+    <%= tag.send(@tag) do %>
+      <%= @post.title %>
+    <% end %>
+    <time>Publié le <%= @post.publication_datetime %></time>
+    <div class="image">
+      <%= image_tag @post.image if @post.image.present? %>
+    </div>
+    <%= stripped_content %>
   <% end %>
-  <%= image_tag @post.image if @post.image.present? %>
-  <%= simple_format(@post.content) %>
 </post-preview>

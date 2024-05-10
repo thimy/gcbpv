@@ -1,19 +1,58 @@
 post-preview {
+  --card-border-color: transparent;
+  border: 2px solid var(--card-border-color);
   display: flex;
   flex-direction: column;
   gap: var(--size-3);
+  padding: var(--size-5);
+  transition: var(--transition-short);
 
-  .post-title {
-    align-items: start;
-    flex-direction: column;
-    transition: var(--transition-short);
+  & + post-preview {
+    border-top-color: var(--dark-gray);
+    margin-top: -2px;
+  }
 
-    &:hover {
-      color: var(--red);
+  &:hover {
+    --card-border-color: var(--gray);
+    border-top-color: var(--card-border-color);
+    border-radius: var(--radius-3);
+    background-color: color-mix(in srgb, var(--green), transparent 80%);
+
+    & + post-preview {
+      border-top-color: transparent;
     }
-  
-    h2 {
-      margin-top: 0;
+  }
+
+  h2, h3 {
+    margin-top: 0;
+    text-align: start;
+  }
+
+  time {
+    color: var(--dark-gray);
+  }
+
+  .image {
+    position: relative;
+    margin-block-start: var(--size-3);
+    max-height: var(--size-13);
+    overflow: hidden;
+    width: 100%;
+
+    &::after {
+      background-image: linear-gradient(to top, var(--black), transparent 30%);
+      content: "";
+      display: block;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: top;
     }
   }
 }

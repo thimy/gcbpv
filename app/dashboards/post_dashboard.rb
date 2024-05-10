@@ -18,9 +18,9 @@ class PostDashboard < Administrate::BaseDashboard
     image: Field::Image,
     status: Field::Select.with_options(collection: Post::VALID_STATUSES, include_blank: true),
     title: Field::String,
-    published_at: Field::DateTime.with_options(format: "%d-%m-%Y %H:%M"),
-    created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    published_at: Field::DateTime.with_options(format: "%d/%m/%Y à %H:%M"),
+    created_at: Field::DateTime.with_options(format: "%d/%m/%Y à %H:%M"),
+    updated_at: Field::DateTime.with_options(format: "%d/%m/%Y à %H:%M"),
   }.freeze
 
   # COLLECTION_ATTRIBUTES

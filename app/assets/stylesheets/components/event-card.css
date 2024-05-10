@@ -32,4 +32,8 @@
   h3 {
     font-size: var(--font-size-5);
   }
+
+  address {
+    color: var(--dark-gray);
+  }
 }
