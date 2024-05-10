@@ -17,9 +17,7 @@
 <% if @training.training_sessions.present? %>
   <section>
     <h2>Liste des rendez-vous</h2>
-    <% @training.training_sessions.each do |session| %>
-      <%= render Website::Event::Card::Component.new(event: session) %>
-    <% end %>
+    <%= render Website::Card::TrainingSession::Component.with_collection(@training.training_sessions) %>
   </section>
 <% end %>
 <%= render Website::OtherRecords::Component.new(label: "rendez-vous") do %>

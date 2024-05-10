@@ -1,0 +1,8 @@
+<%= link_to ecole_training_session_path(@session), class: "event-card" do %>
+  <time>
+    <%= @session.date %>
+  </time>
+  <div class="event-info">
+    <h3><%= @session.name %></h3>
+  </div>
+<% end %>

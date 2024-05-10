@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :instruments, path: :cours, only: [:index, :show]
     resources :teachers, path: :professeurs, only: [:index, :show]
     resources :trainings, path: "rendez-vous", only: [:index, :show]
+    resources :training_sessions, path: "rendez-vous/seances", only: [:show]
     resources :workshops, path: :ateliers, only: [:index, :show]
     get "enfance", to: "youth#index", as: :youth
   end

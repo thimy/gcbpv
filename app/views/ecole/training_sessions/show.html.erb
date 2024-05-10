@@ -1,0 +1,28 @@
+<% content_for(:page_class, "ecole training-session-page ") %>
+<% content_for(:page_title, @training_session.name) %>
+
+<section class="feature grid">
+  <div class="left">
+    <dl>
+      <% if @training_session.guest.present? %>
+        <dt>Intervenants</dt>
+        <dd><%= @training_session.guest %></dd>
+      <% end %>
+      <dt>Lieu du rendez-vous</dt>
+      <dd><%= @training_session.city || "À définir" %></dd>
+      <dt>Heure du rendez-vous</dt>
+      <dd><%= @training_session.time_period %></dd>
+    </dl>
+  </div>
+  <div class="right">
+    <%= simple_format(@training_session.description) %>
+  </div>
+  <%= image_tag @training_session.image if @training_session.image.present? %>
+</section>
+<%= render Website::OtherRecords::Component.new(label: "rendez-vous") do %>
+  <% @other_training_sessions.each do |session| %>
+    <%= link_to ecole_training_session_path(session), class: "tag", "data-tag-color": "blue" do %>
+      <span><%= session.name %></span>
+    <% end %>
+  <% end %>
+<% end %>

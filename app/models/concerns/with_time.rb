@@ -20,4 +20,16 @@ module WithTime
   def format_date(date)
     date.strftime("%d/%m/%Y")
   end
+
+  def time_period
+    if start_time.present?
+      if end_time.present?
+        "De #{start_time} à #{end_time}"
+      else
+        "À partir de #{start_time}"
+      end
+    else
+      "À définir"
+    end
+  end
 end
