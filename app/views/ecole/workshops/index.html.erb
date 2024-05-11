@@ -6,5 +6,5 @@
   <p>Ce sont des ateliers thématiques qui permettent d’aborder du répertoire, de la danse, d’apprendre à jouer à plusieurs.</p>
 </section>
 <section class="feature grid" data-grid="repeat">
-  <%= render Website::Card::Workshop::Component.with_collection(@workshops) %>
+  <%= render Website::Card::Workshop::Component.with_collection(@workshops, path: "ecole_workshop_path") %>
 </section>

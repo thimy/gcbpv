@@ -25,13 +25,16 @@ form {
   }
 }
 
-:where(input, select):focus {
-  outline: 3px solid var(--blue);
+:where(input, select) {
+  border: 1px solid var(--black);
+  border-radius: var(--radius-2);
+
+  &:focus {
+    outline: 3px solid var(--blue);
+  }
 }
 
 :where(input:not([type=checkbox], [type=button]), select) {
-  border: 1px solid var(--black);
-  border-radius: var(--radius-2);
   padding: var(--size-2);
 }
 

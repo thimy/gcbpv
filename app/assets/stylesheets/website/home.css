@@ -1,11 +1,12 @@
 .home {
   hero-container {
     background-color: var(--gray);
-    padding-block: var(--size-11) var(--size-3);
+    padding-block-start: var(--size-11);
 
     h1 {
       font-family: "Garden Grown";
       font-size: var(--font-size-fluid-6);
+      padding-block-end: var(--size-3);
       text-shadow: -6px -6px color-mix(in srgb, var(--white), transparent 10%);
     }
   }
@@ -31,7 +32,7 @@
     display: grid;
     gap: var(--category-spacing);
     grid-template-columns: 1fr 1fr 1fr;
-    margin-block-start: -20rem;
+    margin-block-start: -15rem;
     margin-block-end: var(--size-8);
     padding-inline: var(--category-spacing);
   }

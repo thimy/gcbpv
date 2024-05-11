@@ -2,7 +2,7 @@
   .prices {
     display: grid;
     gap: var(--size-5);
-    grid-template-columns: repeat(auto-fit, minmax(350px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
 
     dl {
       border: 2px solid var(--white);

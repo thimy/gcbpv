@@ -6,7 +6,9 @@
   <p class="alert"><%= alert %></p>
   <main class="full content">
     <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
-    <%= yield %>
+    <div class="full content">
+      <%= yield %>
+    </div>
   </main>
 <% end %>
 <%= render template: "layouts/application" %>

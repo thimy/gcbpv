@@ -9,4 +9,8 @@ hero-container {
     font-size: var(--font-size-4);
     text-align: center;
   }
+
+  .full {
+    background-color: var(--black);
+  }
 }

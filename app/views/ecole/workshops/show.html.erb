@@ -3,20 +3,20 @@
 
 <section class="popout grid">
   <div class="left">
-    <h2>Cet atelier a lieu à</h2>
-    <div class="tag-list">
-      <span class="tag" data-tag-color="red">
-        <span><%= @workshop.city.name %></span>
-      </span>
-    </div>
-    <h2>Les professeurs qui animent cet atelier</h2>
-    <div class="tag-list">
-      <% @workshop.teachers.each do |teacher| %>
-        <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
-          <span><%= teacher.name %></span>
+    <dl>
+      <dt>Lieu</dt>
+      <dd><%= @workshop.city.name %></dd>
+      <dt>Horaires</dt>
+      <dd><%= @workshop.datetime %></dd>
+      <dt>Animé par</dt>
+      <dd>
+        <% @workshop.teachers.each do |teacher| %>
+          <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
+            <span><%= teacher.name %></span>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
+      </dd>
+    </dl>
   </div>
   <div class="right">
     <%= simple_format(@workshop.description) %>

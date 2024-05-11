@@ -10,9 +10,9 @@ class SlotDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     city: Field::BelongsTo,
-    day_of_week: Field::Select.with_options(collection: WithTime::DAYS_ORDERED),
+    day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     end_time: Field::String,
-    frequency: Field::Select.with_options(collection: WithTime::FREQUENCIES),
+    frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     start_time: Field::String,
     teacher: Field::BelongsTo,
     created_at: Field::DateTime,
