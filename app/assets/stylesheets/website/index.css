@@ -1,7 +1,7 @@
 @import "base.css";
 
+@import "authentication.css";
 @import "home.css";
-
 @import "editions.css";
 @import "events.css";
 @import "instruments.css";

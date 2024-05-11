@@ -1,7 +1,7 @@
 .content {
   --gap: clamp(1rem, 6vw, 3rem);
   --full: minmax(var(--gap), 1fr);
-  --content: min(70ch, 100% - var(--gap) * 2);
+  --content: min(50ch, 100% - var(--gap) * 2);
   --popout: minmax(0, 7rem);
   --feature: minmax(0, 10rem);
 

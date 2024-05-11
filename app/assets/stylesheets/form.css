@@ -1,0 +1,40 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+}
+
+.form-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-4);
+
+  .input {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-2);
+  }
+
+  .boolean {
+    display: flex;
+    gap: var(--size-2);
+  }
+
+  .hint {
+    font-size: var(--font-size-0);
+  }
+}
+
+:where(input, select):focus {
+  outline: 3px solid var(--blue);
+}
+
+:where(input:not([type=checkbox], [type=button]), select) {
+  border: 1px solid var(--black);
+  border-radius: var(--radius-2);
+  padding: var(--size-2);
+}
+
+:where(input[type=checkbox]) {
+  margin: 0;
+}

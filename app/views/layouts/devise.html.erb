@@ -1,0 +1,14 @@
+<% content_for(:page_class, "website authentication content") %>
+
+<% content_for :content do %>
+  <%= render Website::Header::Component.new %>
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <main class="full content">
+    <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
+    <section>
+      <%= yield %>
+    </section>
+  </main>
+<% end %>
+<%= render template: "layouts/application" %>
