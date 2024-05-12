@@ -6,7 +6,7 @@ class Student < ApplicationRecord
 
   enum :gender, "Ne se prononce pas" => 0, "Homme" => 1, "Femme" => 2, "Non-binaire" => 3
 
-  def full_name
+  def name
     "#{first_name} #{last_name}"
   end
 end

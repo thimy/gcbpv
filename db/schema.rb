@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_185056) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -211,21 +211,41 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_185056) do
     t.index ["payor_id"], name: "index_students_on_payor_id"
   end
 
+  create_table "subbed_courses", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.bigint "subscription_id", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_subbed_courses_on_course_id"
+    t.index ["subscription_id"], name: "index_subbed_courses_on_subscription_id"
+  end
+
+  create_table "subbed_workshops", force: :cascade do |t|
+    t.bigint "workshop_id", null: false
+    t.bigint "subscription_id", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_subbed_workshops_on_subscription_id"
+    t.index ["workshop_id"], name: "index_subbed_workshops_on_workshop_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "student_id", null: false
-    t.bigint "course_id", null: false
-    t.bigint "workshop_id", null: false
     t.integer "paid_amount"
     t.bigint "payor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "season_id"
     t.integer "status"
-    t.index ["course_id"], name: "index_subscriptions_on_course_id"
+    t.boolean "image_consent"
+    t.boolean "disability"
+    t.boolean "ars"
+    t.decimal "donation"
     t.index ["payor_id"], name: "index_subscriptions_on_payor_id"
     t.index ["season_id"], name: "index_subscriptions_on_season_id"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
-    t.index ["workshop_id"], name: "index_subscriptions_on_workshop_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -313,10 +333,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_185056) do
   add_foreign_key "slots", "teachers"
   add_foreign_key "specialties", "instruments"
   add_foreign_key "specialties", "teachers"
-  add_foreign_key "subscriptions", "courses"
+  add_foreign_key "subbed_courses", "courses"
+  add_foreign_key "subbed_courses", "subscriptions"
+  add_foreign_key "subbed_workshops", "subscriptions"
+  add_foreign_key "subbed_workshops", "workshops"
   add_foreign_key "subscriptions", "payors"
   add_foreign_key "subscriptions", "students"
-  add_foreign_key "subscriptions", "workshops"
   add_foreign_key "training_sessions", "trainings"
   add_foreign_key "trainings", "seasons"
   add_foreign_key "workshops", "cities"

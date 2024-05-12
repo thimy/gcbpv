@@ -3,6 +3,7 @@ class Workshop < ApplicationRecord
 
   belongs_to :city, optional: true
   has_and_belongs_to_many :teachers
+  has_many :subscriptions, through: :subbed_workshops
 
   validates :name, presence: true
 

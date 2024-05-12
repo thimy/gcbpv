@@ -84,6 +84,6 @@ class StudentDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(student)
-    student.full_name
+    student.name
   end
 end
