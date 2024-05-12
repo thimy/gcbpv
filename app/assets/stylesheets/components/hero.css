@@ -1,7 +1,7 @@
 hero-container {
   background-color: var(--background-color);
   background-size: 500px;
-  padding-block: var(--size-12) 0;
+  padding-block: var(--size-8) 0;
   text-align: center;
 
   p {

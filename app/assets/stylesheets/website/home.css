@@ -23,7 +23,7 @@
     }
   
     h2 {
-      font-size: var(--font-size-7);
+      font-size: var(--font-size-8);
     }
   }
   
@@ -38,7 +38,7 @@
   }
 
   .grid {
-    gap: var(--size-10);
+    gap: var(--size-12);
 
     section {
       display: flex;
@@ -112,5 +112,9 @@
         }
       }
     }
+  }
+
+  .upcoming-events {
+    margin-top: 0;
   }
 }

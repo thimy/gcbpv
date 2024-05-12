@@ -1,24 +1,28 @@
 <% content_for(:page_class, "ecole instrument-page ") %>
 <% content_for(:page_title, @instrument.name) %>
 
-<section class="popout grid">
+<section class="popout grid" data-grid="2-3">
   <div class="left">
-    <h2>Cet instrument est enseigné dans ces villes</h2>
-    <div class="tag-list">
-      <% @instrument.cities.each do |city| %>
-        <span class="tag" data-tag-color="red">
-          <span><%= city.name %></span>
-        </span>
-      <% end %>
-    </div>
-    <h2>Les professeurs qui enseignent cet instrument</h2>
-    <div class="tag-list">
-      <% @instrument.teachers.each do |teacher| %>
-        <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
-          <span><%= teacher.name %></span>
+    <% if @instrument.cities.present? %>
+      <h2>Villes</h2>
+      <div class="tag-list">
+        <% @instrument.cities.each do |city| %>
+          <span class="tag" data-tag-color="red">
+            <span><%= city.name %></span>
+          </span>
         <% end %>
-      <% end %>
-    </div>
+      </div>
+    <% end %>
+    <% if @instrument.teachers.present? %>
+      <h2>Professeurs</h2>
+      <div class="tag-list">
+        <% @instrument.teachers.each do |teacher| %>
+          <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
+            <span><%= teacher.name %></span>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="right">
     <%= simple_format(@instrument.description) %>

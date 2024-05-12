@@ -1,4 +1,10 @@
 .authentication {
+  section {
+    justify-self: center;
+    max-width: 50ch;
+    width: 100%;
+  }
+
   .authentication-links {
     margin-top: var(--size-4);
   }

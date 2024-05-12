@@ -3,10 +3,9 @@
 
 <section class="event-description feature">
   <div class="left">
-    <h2>Informations pratiques</h2>
     <dl>
       <dt>Date</dt>
-      <dd><%= @event.date %></dd>
+      <dd><%= @event.date_period %></dd>
       <% if @event.location.present? %>
         <dt>Lieu</dt>
         <dd><%= @event.location %></dd>
@@ -17,7 +16,7 @@
       <% end %>
       <% if @event.website.present? %>
         <dt>Site internet</dt>
-        <dd><%= @event.website %></dd>
+        <dd><%= link_to @event.website, @event.website %></dd>
       <% end %>
     </dl>
     <%= image_tag @event.image %>

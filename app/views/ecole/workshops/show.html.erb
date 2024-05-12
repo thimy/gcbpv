@@ -1,21 +1,23 @@
 <% content_for(:page_class, "ecole workshop-page ") %>
 <% content_for(:page_title, @workshop.name) %>
 
-<section class="popout grid">
+<section class="popout grid" data-grid="2-3">
   <div class="left">
     <dl>
       <dt>Lieu</dt>
       <dd><%= @workshop.city.name %></dd>
       <dt>Horaires</dt>
       <dd><%= @workshop.datetime %></dd>
-      <dt>Animé par</dt>
-      <dd>
-        <% @workshop.teachers.each do |teacher| %>
-          <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
-            <span><%= teacher.name %></span>
+      <% if @teachers.present? %>
+        <dt>Animé par</dt>
+        <dd>
+          <% @workshop.teachers.each do |teacher| %>
+            <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
+              <span><%= teacher.name %></span>
+            <% end %>
           <% end %>
-        <% end %>
-      </dd>
+        </dd>
+      <% end %>
     </dl>
   </div>
   <div class="right">

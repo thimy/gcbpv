@@ -1,14 +1,12 @@
 body > header {
   align-items: center;
-  background-color: var(--background-color);
+  background-image: linear-gradient(to bottom, var(--background-color),  var(--background-color), transparent 110%);
   color: var(--black);
   display: flex;
   justify-content: space-between;
-  left: 50%;
   padding: var(--size-4);
-  position: fixed;
-  transform: translateX(-50%);
-  width: 100%;
+  position: sticky;
+  top: 0;
   z-index: 10;
 
   .home {
