@@ -26,8 +26,10 @@ class PlanDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     class_price
+    workshop_price
     kids_class_price
     obc_markup
+    outbounds_markup
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,10 +37,10 @@ class PlanDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     class_price
-    kids_class_price
-    obc_markup
-    outbounds_markup
     workshop_price
+    kids_class_price
+    outbounds_markup
+    obc_markup
     created_at
     updated_at
   ].freeze

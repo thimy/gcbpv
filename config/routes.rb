@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get "adhesion", to: "membership#index", as: :membership
   end
   get "ecole", to: "ecole#index"
+  
   devise_for :administrators, path: "admin", path_names: {
     sign_in: "connexion",
     sign_out: "deconnexion",

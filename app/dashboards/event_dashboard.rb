@@ -14,7 +14,6 @@ class EventDashboard < Administrate::BaseDashboard
     location: Field::Text,
     name: Field::String,
     start_date: Field::Date,
-    date: Field::String,
     image: Field::Image,
     organizer: Field::String,
     website: Field::String,
@@ -28,21 +27,20 @@ class EventDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     name
+    start_date
+    end_date
     location
-    date
     organizer
-    website
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     name
     description
-    date
+    start_date
+    end_date
     location
     image
     organizer

@@ -1,12 +1,10 @@
 class Workshop < ApplicationRecord
   include WithTime
 
-  belongs_to :city
+  belongs_to :city, optional: true
   has_and_belongs_to_many :teachers
 
   validates :name, presence: true
-  validates :day_of_week, presence: true
-  validates :frequency, presence: true
 
   enum day_of_week: {
     "À définir": 0,
