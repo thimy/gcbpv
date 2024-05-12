@@ -46,10 +46,6 @@
       display: flex;
       justify-content: space-between;
     }
-  
-    h2 {
-      font-size: var(--font-size-8);
-    }
   }
   
   .categories {
@@ -58,8 +54,12 @@
     gap: var(--category-spacing);
     grid-template-columns: 1fr 1fr 1fr;
     margin-block-start: -15rem;
-    margin-block-end: var(--size-8);
+    margin-block-end: var(--size-12);
     padding-inline: var(--category-spacing);
+
+    h2::after {
+      content: none;
+    }
   }
 
   .grid {
@@ -71,16 +71,20 @@
       gap: var(--size-4);
 
       header {
+        display: flex;
+        flex-direction: column;
         padding-inline: var(--size-5);
 
         a {
           color: var(--dark-gray);
+
+          &:hover {
+            color: var(--green);
+          }
         }
       }
 
       h2 {
-        font-size: var(--font-size-5);
-        margin: 0;
         text-align: start;
       }
 

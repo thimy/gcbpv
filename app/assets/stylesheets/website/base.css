@@ -7,9 +7,7 @@ body {
 }
 
 :where(h1, h2,
-h3, h4) {
-  font-family: var(--font-serif);
-
+h3, h4, p) {
   &:first-child {
     margin-block-start: 0;
   }
@@ -19,17 +17,39 @@ h3, h4) {
   }
 }
 
+:where(h1, h2,
+h3, h4) {
+  font-family: var(--font-serif);
+}
+
 h1 {
   font-size: var(--font-size-8);
 }
 
 h2 {
-  font-size: var(--font-size-7);
-  text-align: center;
+  --underline-color: var(--red);
+  display: inline-block;
+  font-size: var(--font-size-6);
+  justify-self: start;
+  margin-block-end: var(--size-6);
+  position: relative;
+
+  &::after {
+    background-color: var(--underline-color);
+    content: "";
+    display: block;
+    height: 5px;
+    left: 0;
+    position: absolute;
+    top: 110%;
+    width: 2em;
+  }
 }
 
 h3 {
-  font-size: var(--font-size-5);
+  --underline-color: var(--blue);
+  font-size: var(--font-size-4);
+  position: relative;
 }
 
 .subtitle {
@@ -117,7 +137,7 @@ main {
   }
 
   &[data-grid="repeat"] {
-    --column-width: 250px;
+    --column-width: 300px;
     grid-template-columns: repeat(auto-fit, minmax(var(--column-width), 1fr));
   }
 

@@ -2,11 +2,11 @@
   <div class="card-info">
     <div class="tag-list">
       <% @workshop.teachers.each do |teacher| %>
-        <span class="tag">
+        <span class="tag" data-tag-color="light">
           <span><%= teacher.name %></span>
         </span>
       <% end %>
-      <span class="tag" data-tag-color="red">
+      <span class="tag" data-tag-color="dark">
         <span><%= @workshop.city.name %></span>
       </span>
     </div>

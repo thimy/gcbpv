@@ -1,7 +1,7 @@
 <% content_for(:page_class, "posts ") %>
 <% content_for(:page_title, "Actualités") %>
 
-<section class="popout">
+<section>
   <div class="post-list">
     <%= render Website::PostPreview::Component.with_collection(@posts) %>
   </div>

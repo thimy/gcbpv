@@ -1,10 +1,10 @@
 .tag {
-  --tag-bg-color: var(--green);
+  --tag-bg-color: var(--white);
   background-color: var(--tag-bg-color);
   border-radius: var(--radius-2);
   font-family: var(--font-sans);
-  font-size: var(--font-size-1);
-  font-weight: var(--font-weight-4);
+  font-size: var(--font-size-0);
+  font-weight: var(--font-weight-6);
   padding: var(--size-1) var(--size-2);
   text-decoration: none;
   transition: all ease-out 0.2s;
@@ -19,6 +19,14 @@
 
   &:where([data-tag-color="red"]) {
     --tag-bg-color: var(--red);
+  }
+
+  &:where([data-tag-color="green"]) {
+    --tag-bg-color: var(--green);
+  }
+
+  &:where([data-tag-color="dark"]) {
+    --tag-bg-color: var(--black);
   }
 
   > span {

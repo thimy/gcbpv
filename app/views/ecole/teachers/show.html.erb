@@ -1,25 +1,27 @@
 <% content_for(:page_class, "ecole teacher-page ") %>
 <% content_for(:page_title, @teacher.name) %>
 
-<section class="popout grid">
+<section class="popout grid" data-grid="2-3">
   <div class="left">
-    <%= image_tag @teacher.photo if @teacher.photo.present? %>
-  </div>
-  <div class="right">
     <div class="tag-list">
       <% @teacher.instruments.each do |instrument| %>
-        <span class="tag">
+        <span class="tag" data-tag-color="green">
           <span><%= instrument.name %></span>
         </span>
       <% end %>
-    </div>
-    <div class="tag-list">
       <% @teacher.cities.each do |city| %>
         <span class="tag" data-tag-color="red">
           <span><%= city.name %></span>
         </span>
       <% end %>
     </div>
+    <% if @teacher.photo.present? %>
+      <%= image_tag @teacher.photo %>
+    <% else %>
+      <%= inline_svg_tag "icons/singing.svg" %>
+    <% end %>
+  </div>
+  <div class="right">
     <%= simple_format(@teacher.description) %>
   </div>
 </section>

@@ -5,4 +5,7 @@ class WebsiteController < ApplicationController
     @posts = Post.latest.limit(3) 
     @events = Event.upcoming.limit(3).reverse
   end
+
+  def bogue
+  end
 end

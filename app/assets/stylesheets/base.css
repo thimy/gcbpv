@@ -33,6 +33,6 @@
   grid-column: full;
 }
 
-:empty:is(div, p) {
+:is(div, p):empty {
   display: none;
 }

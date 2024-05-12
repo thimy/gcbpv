@@ -6,10 +6,6 @@
 }
 
 section.event-description {
-  display: grid;
-  gap: var(--size-10);
-  grid-template-columns: 2fr 3fr;
-
   > * {
     display: flex;
     flex-direction: column;

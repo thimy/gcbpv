@@ -7,3 +7,20 @@
     }
   }
 }
+
+.teacher-page {
+  .left {
+    .tag-list {
+      justify-content: center;
+    }
+  
+    svg {
+      color: var(--black);
+      height: 20rem;
+      margin-top: var(--size-4);
+      padding: var(--size-4);
+      width: 100%;  stroke: transparent;
+      fill: white;
+    }
+  }
+}

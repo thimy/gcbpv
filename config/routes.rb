@@ -55,6 +55,7 @@ Rails.application.routes.draw do
     root to: "cities#index"
   end
   get "", to: "website#index", as: "/"
+  get "bogue", to: "website#bogue"
   namespace :secretariat do
     resources :subscriptions
     resources :workshops

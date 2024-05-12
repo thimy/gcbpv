@@ -16,7 +16,6 @@
   overflow: hidden;
   position: relative;
   text-decoration-line: none;
-  text-shadow: -3px -3px color-mix(in srgb, var(--white), transparent 10%);
   transition: all ease-out 0.2s;
   z-index: 5;
 
