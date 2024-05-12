@@ -66,7 +66,7 @@ class PayorDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how payors are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(payor)
-  #   "Payor ##{payor.id}"
-  # end
+  def display_resource(payor)
+    payor.name
+  end
 end

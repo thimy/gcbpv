@@ -6,6 +6,8 @@ class Teacher < ApplicationRecord
   has_and_belongs_to_many :workshops
   has_one_attached :photo
 
+  accepts_nested_attributes_for :slots
+
   def name
     "#{first_name} #{last_name}"
   end

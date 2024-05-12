@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_105443) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_12_185056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -140,6 +140,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_105443) do
     t.integer "outbounds_markup"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -211,7 +212,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_105443) do
   end
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer "year"
     t.bigint "student_id", null: false
     t.bigint "course_id", null: false
     t.bigint "workshop_id", null: false
@@ -219,8 +219,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_105443) do
     t.bigint "payor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "season_id"
+    t.integer "status"
     t.index ["course_id"], name: "index_subscriptions_on_course_id"
     t.index ["payor_id"], name: "index_subscriptions_on_payor_id"
+    t.index ["season_id"], name: "index_subscriptions_on_season_id"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
     t.index ["workshop_id"], name: "index_subscriptions_on_workshop_id"
   end

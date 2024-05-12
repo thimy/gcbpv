@@ -6,6 +6,15 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+ovh:
+  service: OpenStack
+  container: "gcbpv"                  # Your bucket's name
+  credentials:
+    openstack_auth_url: OVH_OPENSTACK_URL   # URL of the OVH auth url
+    openstack_username: OVH_OPENSTACK_USER              # TBD in 2.
+    openstack_api_key: OVH_OPENSTACK_PASSWORD           # TBD in 2.
+    openstack_region: OVH_OPENSTACK_REGION_NAME                             # The region acronym
+    openstack_temp_url_key: OVH_OPENSTACK_TEMP_URL_KEY
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
 # amazon:
 #   service: S3

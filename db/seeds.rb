@@ -8,6 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Configuration.destroy_all
+Season.destroy_all
+Plan.destroy_all
+
 Specialty.destroy_all
 Workshop.destroy_all
 Slot.destroy_all
@@ -17,36 +21,48 @@ City.destroy_all
 Project.destroy_all
 Category.destroy_all
 
-# Administrator.destroy_all
-# administrators = [{
-#   id: 1,
-#   email: "thimy@pm.me",
-#   password: "De6ebrey"
-# }, {
-#   id: 2,
-#   email: "coordination@gcbpv.org",
-#   password: "Changez-moi"
-# }, {
-#   id: 3,
-#   email: "secretariat@gcbpv.org",
-#   password: "Changez-moi"
-# }, {
-#   id: 4,
-#   email: "ecole@gcbpv.org",
-#   password: "Changez-moi"
-# }, {
-#   id: 5,
-#   email: "archives@gcbpv.org",
-#   password: "Changez-moi"
-# }, {
-#   id: 6,
-#   email: "dreanogoulven@gmail.com",
-#   password: "Changez-moi"
-# }]
+Administrator.destroy_all
+administrators = [{
+  id: 1,
+  email: "thimy@pm.me",
+  password: "De6ebrey"
+}, {
+  id: 2,
+  email: "coordination@gcbpv.org",
+  password: "Changez-moi"
+}, {
+  id: 3,
+  email: "secretariat@gcbpv.org",
+  password: "Changez-moi"
+}, {
+  id: 4,
+  email: "ecole@gcbpv.org",
+  password: "Changez-moi"
+}, {
+  id: 5,
+  email: "archives@gcbpv.org",
+  password: "Changez-moi"
+}, {
+  id: 6,
+  email: "dreanogoulven@gmail.com",
+  password: "Changez-moi"
+}]
 
-# administrators.each do |admin|
-#   Administrator.create!(admin)
-# end
+administrators.each do |admin|
+  Administrator.create!(admin)
+end
+
+Plan.create!({
+  name: "Formule 2024",
+  class_price: 300,
+  kids_class_price: 280,
+  workshop_price: 108,
+  obc_markup: 10,
+  outbounds_markup: 20
+})
+
+Season.create!({ start_year: 2024, plan_id: 1 })
+Configuration.create!({ season_id: 1 })
 
 teachers = [
   { id: 1, first_name: "Goulven", last_name: "Dréano", status: 0, description: "Un vrai mélomane qui joue sans fausse note au sein d’un collectif, Goulven est professeur de musique traditionnelle et coordinateur pédagogique au groupement culturel breton de Redon et Muzillac. Un vrai chef d’orchestre qui vous propose l’écriture d’une partition à plusieurs mains. Président de l’association Clakbam c’est une des nombreuses personnes qui vous font danser aux mardis de l’été.\r\n\r\nMon petit plaisir à Malansac : Les rencontres intergénérationnelles des mardis de l’été.\r\n\r\nMalansac en un mot : Associationsssss\r\n\r\nIl s’engage dans l’Avenir de Malansac." },
@@ -65,7 +81,7 @@ teachers = [
   { id: 13, first_name: "Ronan", last_name: "Robert", status: 0, description: "Ronan Robert est devenu un musicien incontournable en Bretagne. Il a promené son accordéon dans toute la France, en Europe, en Afrique, au Québec, en Asie, en Amérique du sud, lors de différentes tournées avec différentes formations.\r\n\r\nTitulaire du Diplôme d’état de professeur de musique traditionnelle, il a enseigné pendant 10 ans dans différentes écoles de musique avant de se consacrer principalement au spectacle vivant. Devenu musicien professionnel en 1988 au sein du groupe Carré Manchot, il fonde ensuite « Cocktail diatonique » avec la participation de l’accordéoniste Richard Galliano, ainsi que Vertigo, Burn’s duo, Tourmenté d’Amour, Morwenna… Sa curiosité et son ouverture vers différentes influences l’amènent au fil de ses rencontres à créer en 1993 « Les trois saisons », une rencontre entre musiciens traditionnels, de jazz et classiques, en 1996 « Ronan Robert Réunion » en 2002 « Airs », en 2008 « Voyage en Diatonie » avec la création du Noguet Robert Quartet, actuellement en création d’un projet tous publics « Fungo ou l’amour des mots ».\r\n\r\nSon goût pour toutes les formes artistiques l’a conduit vers des esthétiques très différentes : Il joue aujourd’hui avec de nombreux artistes et compagnies aussi variés que la compagnie de danse Pied en Sol, le saxophoniste/talabarder Ronan Le Gourierec et le violoniste Raphaël Chevalier dans Bivoac, les accordéonistes Yann-Fanch Perroches et Fanch Loric dans Cocktail Diatonique, le talabarder Hervé Lelu en duo, l’accordéoniste Yannig Noguet, le contrebassiste Simon Mary et le percussionniste Jérôme Kerihuel dans le Noguet Robert Quartet, le chanteur Gérad Delahayes dans le spectacle « voilà les pirates », la harpiste Murielle Shreder et le flutiste/talabarder Erwan Hamon dans le trio Hamon Robert Schreder" },
   { id: 14, first_name: "Wenceslas", last_name: "Hervieux", status: 0, description: "Originaire du Pays de Redon en Bretagne, Wenceslas Hervieux étudie le piano dès l’âge de 4 ans au Centre Culturel Ti Kendalc’h à St-Vincent-sur-Oust. Cependant il a tendance à préférer jouer d’oreille ce que son environnement lui propose : musique classique, compositeurs des années 70-80, chansons de famille.\r\n\r\nS’étant mis à l’accordéon touches piano, Wenceslas est rapidement sollicité pour jouer de la musique des Balkans, avec le groupe Topolovo notamment.\r\n\r\nWenceslas Hervieux valide en 1998 une maîtrise en création musicale à l’Université Rennes II. Puis coordonne l’école de musique traditionnelle des Pays de Vilaine jusqu’en 2006.\r\n\r\nReconnu comme compositeur et arrangeur, sa “marque de fabrique“ est l’invention de musique construite sur la fusion entre la monodie bretonne et des modèles « exotiques » d’accompagnement de musique populaire, tantôt balkanique (Savaty Orkestar, créé en 2008 au Nouveau Pavillon), tantôt cajun (Gallo Gumbo, créé en 2013 à l’occasion d’échanges culturels entre la Louisiane et la Bretagne).\r\n\r\nImprovisateur, il travaille régulièrement avec les comédiens de la Compagnie Casus Délires. On retrouve également Wenceslas à l’orgue en compagnie d’Erwan Hamon à la bombarde sur l’album Si Vous Dormez. ll développe aussi une écriture spécifique pour le piano en musique traditionnelle pour le duo Chauvel-Hervieux dont l’album « Dis-moi oui ou dis-moi non » sort à l’automne 2019.\r\n\r\nWenceslas compose pour la création « Papic » de la Drolatic Industry dont la sortie est prévue en octobre 2019." },
   { id: 15, first_name: "Mannaïg", last_name: "Le Guevel", status: 0, description: "Mannaïg Le Guevel est passionnée de chant traditionnel de Haute Bretagne. Elle suit un cursus universitaire (Pont Supérieur) sur les musiques traditionnelles à Rennes, chante dans plusieurs groupes de la nouvelle scène Fest-Noz. Elle est également lauréate de la finale Chant à la Bogue 2022." },
-  { id: 16, first_name: "Yolaine", last_name: "Delamaire", status: 0, description: "Très tôt, Yolaine est bercée par la musique, plutôt classique dans un premier temps, grâce à sa grand-mère mélomane. Elle choisit le chant comme moyen d’expression musicale.\r\n\r\nAu lycée, elle commence à apprendre le breton et est aussitôt séduite par le chant traditionnel. C’est à l’Université qu’elle pousse la porte d’un atelier de chant traditionnel et fait la rencontre d’Enora De Parscau avec laquelle naît une complicité amicale et vocale. Elle chante en fest-noz, au sein du groupe rennais Obaya, de 2002 à 2005. En 2005, elle créée le groupe Kiñkoñs avec Julien Danielo (accordéoniste) et Thomas Chapron (clarinettiste). Elle y chantera pendant 10 ans. Elle chante également en kan-ha-diskan, avec Enora De Parscau, Méva Guégan et aussi Rozenn Talec. Pendant quelques années elle forme le duo piano-chant avec Yves-Marie Denis. Leur travail se fera essentiellement autour des gwerzioù et des complaintes. \r\n\r\nYolaine se forme beaucoup sur le « terrain » par l’écoute des autres chanteurs et en allant régulièrement fouiller dans les collectages. C’est à partir de 2011 qu’elle décide de suivre des cours de technique vocale auprès de Solenn Diguet, professeure de chant et chanteuse lyrique. Depuis 2019, elle poursuit sa formation de technique vocale auprès d’Emmanuel Pesnot, « luthier des voix ».\r\n\r\nEn 2014, elle forme Silabenn trio aux côtés de Janick Martin (accordéoniste) et d’Erwan Lhermenier (clarinettiste). Leur répertoire de musique à danser ou à écouter, oscille entre la Haute et Basse Bretagne, avec des compositions originales et la volonté d’une écriture musicale fine et colorée.\r\n\r\nL’aventure musicale continue auprès d’Enora De Parscau avec laquelle elle forme Dame Angèle. Mêlant chant et poésie, elles y interprètent leurs propres chansons en breton. Toujours avec Enora, elles forment le trio Lirzhin, une formule Kan-ha-diskan joyeuse qui accueille une troisième commère, Murielle Le Guern.\r\n\r\nDepuis 2019, elle fait partie de Kreiz Breizh Akademi #8, une formation comprenant 12 musiciens dont le travail se fait autour de la musique bretonne et modale, sous la direction de Erik Marchand.\r\n\r\nEn 2022, Yolaine rejoint le collectif L’HaPpY nOiR.e, un cabaret de rue dont la musique déstabulante s’amuse du mélange de New-Orleans et des chansons de Haute-Bretagne. Toujours cette même année, elle partage une nouvelle aventure musicale, Moon Nevez, aux côtés de Paul Lucien, guitariste-chanteur et compositeur de « Folk songs » en y ajoutant sa touche « trad » de chanteuse bretonne.\r\n\r\nDepuis début 2023, Yolaine retrouve un de ses premiers compères, Julien Danielo, pour organiser des fest-deiz en école ! Leur projet s’appelle BIM BAL BOUM !!" },
+  { id: 16, first_name: "Yolaine", last_name: "Delamaire", status: 0, description: "Très tôt, Yolaine est bercée par la musique, plutôt classique dans un premier temps, grâce à sa grand-mère mélomane. Elle choisit le chant comme moyen d’expression musicale.\r\n\r\nAu lycée, elle commence à apprendre le breton et est aussitôt séduite par le chant traditionnel. C’est à l’Université qu’elle pousse la porte d’un atelier de chant traditionnel et fait la rencontre d’Enora De Parscau avec laquelle naît une complicité amicale et vocale. Elle chante en fest-noz, au sein du groupe rennais Obaya, de 2002 à 2005. En 2005, elle créée le groupe Kiñkoñs avec Julien Danielo (accordéoniste) et Thomas Chapron (clarinettiste). Elle y chantera pendant 10 ans. Elle chante également en kan-ha-diskan, avec Enora De Parscau, Méva Guégan et aussi Rozenn Talec. Pendant quelques années elle forme le duo piano-chant avec Yves-Marie Denis. Leur travail se fera essentiellement autour des gwerzioù et des complaintes. \r\n\r\nYolaine se forme beaucoup sur le « terrain » par l’écoute des autres chanteurs et en allant régulièrement fouiller dans les collectages. C’est à partir de 2011 qu’elle décide de suivre des cours de technique vocale auprès de Solenn Diguet, professeure de chant et chanteuse lyrique. Depuis 2019, elle poursuit sa formation de technique vocale auprès d’Emmanuel Pesnot, « luthier des voix ».\r\n\r\nEn 2014, elle forme Silabenn trio aux côtés de Janick Martin (accordéoniste) et d’Erwan Lhermenier (clarinettiste). Leur répertoire de musique à danser ou à écouter, oscille entre la Haute et Basse Bretagne, avec des compositions originales et la volonté d’une écriture musicale fine et colorée.\r\n\r\nL’aventure musicale continue auprès d’Enora De Parscau avec laquelle elle forme Dame Angèle. Mêlant chant et poésie, elles y interprètent leurs propres chansons en breton. Toujours avec Enora, elles forment le trio Lirzhin, une formule Kan-ha-diskan joyeuse qui accueille une troisième commère, Murielle Le Guern.\r\n\r\nDepuis 2019, elle fait partie de Kreiz Breizh Akademi #8, une formation comprenant 12 musiciens dont le travail se fait autour de la musique bretonne et modale, sous la direction de Erik Marchand.\r\n\r\nEn 2022, Yolaine rejoint le collectif L’HaPpY nOiR·e, un cabaret de rue dont la musique déstabulante s’amuse du mélange de New-Orleans et des chansons de Haute-Bretagne. Toujours cette même année, elle partage une nouvelle aventure musicale, Moon Nevez, aux côtés de Paul Lucien, guitariste-chanteur et compositeur de « Folk songs » en y ajoutant sa touche « trad » de chanteuse bretonne.\r\n\r\nDepuis début 2023, Yolaine retrouve un de ses premiers compères, Julien Danielo, pour organiser des fest-deiz en école ! Leur projet s’appelle BIM BAL BOUM !!" },
   { id: 17, first_name: "Maëlle", last_name: "Gédouin", status: 0, description: "Chanteuse et formatrice, passionnée de chant traditionnel de Bretagne, d’improvisation et de polyphonie qu’elle met au service de ces ateliers adultes depuis quelques années (Guichen, Rennes)" },
   { id: 18, first_name: "Matteo", last_name: "Bloyet", status: 0 },
   { id: 19, first_name: "Riwal", last_name: "Raude", status: 0 }

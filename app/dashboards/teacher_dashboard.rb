@@ -17,6 +17,7 @@ class TeacherDashboard < Administrate::BaseDashboard
     name: Field::String,
     phone: Field::String,
     photo: Field::Image,
+    slots: Field::NestedHasMany.with_options(skip: :teacher),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -44,6 +45,7 @@ class TeacherDashboard < Administrate::BaseDashboard
     email
     phone
     photo
+    slots
     created_at
     updated_at
   ].freeze
@@ -59,6 +61,7 @@ class TeacherDashboard < Administrate::BaseDashboard
     instruments
     phone
     photo
+    slots
   ].freeze
 
   # COLLECTION_FILTERS

@@ -9,10 +9,10 @@ class CourseDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    end_time: Field::String,
     instrument: Field::BelongsTo,
-    slots: Field::HasMany,
+    slot: Field::BelongsTo,
     start_time: Field::String,
+    end_time: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,20 +23,19 @@ class CourseDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
-    end_time
     instrument
-    slots
+    slot
+    start_time
+    end_time
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    end_time
     instrument
-    slots
+    slot
     start_time
+    end_time
     created_at
     updated_at
   ].freeze
@@ -45,10 +44,10 @@ class CourseDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    end_time
     instrument
-    slots
+    slot
     start_time
+    end_time
   ].freeze
 
   # COLLECTION_FILTERS
@@ -67,6 +66,6 @@ class CourseDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(course)
-    "#{course.instrument.name} avec #{course.teacher.name}"
+    "#{course.instrument.name} avec #{course.slot.name}"
   end
 end
