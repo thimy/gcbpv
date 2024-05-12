@@ -21,7 +21,7 @@ module WithTime
         "Le #{format_date(start_date)}"
       end
     else
-      "À définir"
+      "Jour à définir"
     end
   end
 
@@ -33,7 +33,7 @@ module WithTime
         "À partir de #{start_time}"
       end
     else
-      "À définir"
+      "Horaire à définir"
     end
   end
 end

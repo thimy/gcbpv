@@ -1,6 +1,6 @@
 <% content_for(:page_class, "ecole teachers ") %>
 <% content_for(:page_title, "Les professeurs") %>
 
-<section class="feature grid">
+<section class="feature grid" data-grid="repeat">
   <%= render Website::Card::Teacher::Component.with_collection(@teachers) %>
 </section>

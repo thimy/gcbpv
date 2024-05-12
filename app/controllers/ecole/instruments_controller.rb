@@ -7,6 +7,7 @@ class Ecole::InstrumentsController < WebsiteController
 
   def show
     @other_instruments = Instrument.where.not(id: params[:id])
+    @slots = Slot.all.order(:city_id).group_by{ |slot| [slot.city.name, slot.day_of_week, slot.teacher]}
   end
 
   private

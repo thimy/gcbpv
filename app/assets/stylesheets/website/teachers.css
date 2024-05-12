@@ -1,7 +1,9 @@
 .teachers {
   section.grid {
-    display: grid;
-    gap: var(--size-8);
-    grid-template-columns: 1fr 1fr;
+    --column-width: 350px;
+
+    .card {
+      justify-content: start;
+    }
   }
 }

@@ -1,15 +1,24 @@
 .card {
   --card-bg-color: var(--blue);
+  --card-border-color: transparent;
   align-items: start;
   background-color: var(--card-bg-color);
+  border: 3px solid var(--card-border-color);
   border-radius: var(--radius-2);
   display: flex;
   flex-direction: column;
   gap: var(--size-3);
   justify-content: end;
-  height: var(--size-12);
+  min-height: var(--size-12);
   padding: var(--size-4);
   text-decoration: none;
+  transition: var(--transition-short);
+
+  &:hover {
+    --card-bg-color: color-mix(in srgb, var(--blue), transparent 10%);
+    --card-border-color: var(--white);
+    transform: scale(1.025);
+  }
 
   .card-info {
     display: flex;

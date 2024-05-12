@@ -1,5 +1,5 @@
-<%= link_to ecole_teacher_path(@teacher), class: "teacher-card" do %>
-  <%= image_tag @teacher.photo %>
+<%= link_to ecole_teacher_path(@teacher), class: "card" do %>
+  <%= image_tag @teacher.photo if @teacher.photo.present? %>
   <div class="card-info">
     <h3><%= @teacher.name %></h3>
     <div class="tag-list">
@@ -8,9 +8,7 @@
           <span><%= instrument.name %></span>
         </span>
       <% end %>
-    </div>
-    <div class="tag-list">
-      <% @teacher.cities.each do |city| %>
+      <% @teacher.cities.uniq.each do |city| %>
         <span class="tag" data-tag-color="red">
           <span><%= city.name %></span>
         </span>

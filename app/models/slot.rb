@@ -5,23 +5,39 @@ class Slot < ApplicationRecord
   belongs_to :city
 
   enum day_of_week: {
-    "Lundi": 0,
-    "Mardi": 1,
-    "Mercredi": 2,
-    "Jeudi": 3,
-    "Vendredi": 4,
-    "Samedi": 5,
-    "Dimanche": 6,
-    "À définir": 7,
+    "Jour à définir": 0,
+    "Lundi": 1,
+    "Mardi": 2,
+    "Mercredi": 3,
+    "Jeudi": 4,
+    "Vendredi": 5,
+    "Samedi": 6,
+    "Dimanche": 7,
   }
 
   enum frequency: {
-    "Hebdomadaire": 0,
-    "Toutes les deux semaines": 1,
-    "Semaines paires": 2,
-    "Semaines impaires": 3,
-    "Tous les mois": 4,
-    "Six séances dans l'année": 5,
-    "A définir": 6
+    "Fréquence à définir": 0,
+    "Hebdomadaire": 1,
+    "Toutes les deux semaines": 2,
+    "Semaines paires": 3,
+    "Semaines impaires": 4,
+    "Tous les mois": 5,
+    "Six séances dans l'année": 6
   }
+
+  def name
+    "#{teacher.name} à #{city.name} #{datetime}"
+  end
+
+  def name_without_city
+    "#{teacher.name} #{datetime}"
+  end
+
+  def datetime
+    if day_of_week.present?
+      "le #{day_of_week} - #{time_period}".downcase
+    else
+      "jour et horaires à définir"
+    end
+  end
 end

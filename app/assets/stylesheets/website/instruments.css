@@ -16,3 +16,17 @@
     grid-template-columns: repeat(auto-fit, minmax(250px, auto));
   }
 }
+
+.instrument-page {
+  .left {
+    .slot-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-3);
+
+      h3 {
+        margin-block-end: var(--size-2);
+      }
+    }
+  }
+}

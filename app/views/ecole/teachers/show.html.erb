@@ -3,7 +3,7 @@
 
 <section class="popout grid">
   <div class="left">
-    <%= image_tag @teacher.photo %>
+    <%= image_tag @teacher.photo if @teacher.photo.present? %>
   </div>
   <div class="right">
     <div class="tag-list">

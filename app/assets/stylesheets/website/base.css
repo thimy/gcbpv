@@ -121,7 +121,7 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(var(--column-width), 1fr));
   }
 
-  > :where(*) {
+  > :where(*:not(.grid)) {
     display: flex;
     flex-direction: column;
     gap: var(--size-2);
