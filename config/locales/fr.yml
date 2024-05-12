@@ -70,6 +70,9 @@ fr:
         remove: "Supprimer"
   activerecord:
     models:
+      administrator:
+        one: "Admin"
+        other: "Admins"
       category:
         one: "Catégorie"
         other: "Catégories"
@@ -159,6 +162,11 @@ fr:
       once_per_month: "1 fois par semaine"
       six_times: "6 séances environ en période inter-vacances"
       flexible: "ajustable"
+      administrator:
+        encrypted_password: "Mot de passe chiffré"
+        remember_created_at: "Souvenir de session"
+        reset_password_sent_at: "Réinitialisation de mot de passe"
+        reset_password_token: "Jeton de réinitialisation de mot de passe"
       category:
         name: "Nom"
         created_at: "Créé le"
