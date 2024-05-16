@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_14_180511) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_233043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,8 +88,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_180511) do
     t.string "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "subscription_id"
     t.index ["instrument_id"], name: "index_courses_on_instrument_id"
     t.index ["slot_id"], name: "index_courses_on_slot_id"
+    t.index ["subscription_id"], name: "index_courses_on_subscription_id"
   end
 
   create_table "editions", force: :cascade do |t|
@@ -221,16 +223,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_180511) do
     t.index ["payor_id"], name: "index_students_on_payor_id"
   end
 
-  create_table "subbed_courses", force: :cascade do |t|
-    t.bigint "course_id", null: false
-    t.bigint "subscription_id", null: false
-    t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_subbed_courses_on_course_id"
-    t.index ["subscription_id"], name: "index_subbed_courses_on_subscription_id"
-  end
-
   create_table "subbed_workshops", force: :cascade do |t|
     t.bigint "workshop_id", null: false
     t.bigint "subscription_id", null: false
@@ -358,8 +350,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_14_180511) do
   add_foreign_key "slots", "teachers"
   add_foreign_key "specialties", "instruments"
   add_foreign_key "specialties", "teachers"
-  add_foreign_key "subbed_courses", "courses"
-  add_foreign_key "subbed_courses", "subscriptions"
   add_foreign_key "subbed_workshops", "subscriptions"
   add_foreign_key "subbed_workshops", "workshops"
   add_foreign_key "subscription_groups", "payors"
