@@ -2,11 +2,11 @@
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new %>
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
   <main class="full content">
     <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
     <div class="full content">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
   </main>
