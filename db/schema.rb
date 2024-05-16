@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_14_180511) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,6 +123,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
     t.string "image"
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.integer "payment_method"
+    t.decimal "amount"
+    t.bigint "subscription_group_id", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_group_id"], name: "index_payments_on_subscription_group_id"
+  end
+
   create_table "payors", force: :cascade do |t|
     t.string "last_name"
     t.string "first_name"
@@ -231,6 +241,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
     t.index ["workshop_id"], name: "index_subbed_workshops_on_workshop_id"
   end
 
+  create_table "subscription_groups", force: :cascade do |t|
+    t.decimal "amount_paid"
+    t.text "comment"
+    t.bigint "payor_id", null: false
+    t.bigint "season_id", null: false
+    t.decimal "donation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["payor_id"], name: "index_subscription_groups_on_payor_id"
+    t.index ["season_id"], name: "index_subscription_groups_on_season_id"
+  end
+
   create_table "subscriptions", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.integer "paid_amount"
@@ -243,9 +265,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
     t.boolean "disability"
     t.boolean "ars"
     t.decimal "donation"
+    t.bigint "subscription_group_id"
     t.index ["payor_id"], name: "index_subscriptions_on_payor_id"
     t.index ["season_id"], name: "index_subscriptions_on_season_id"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
+    t.index ["subscription_group_id"], name: "index_subscriptions_on_subscription_group_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -327,6 +351,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
   add_foreign_key "configurations", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
+  add_foreign_key "payments", "subscription_groups"
   add_foreign_key "projects", "seasons"
   add_foreign_key "seasons", "plans"
   add_foreign_key "slots", "cities"
@@ -337,6 +362,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_12_234359) do
   add_foreign_key "subbed_courses", "subscriptions"
   add_foreign_key "subbed_workshops", "subscriptions"
   add_foreign_key "subbed_workshops", "workshops"
+  add_foreign_key "subscription_groups", "payors"
+  add_foreign_key "subscription_groups", "seasons"
   add_foreign_key "subscriptions", "payors"
   add_foreign_key "subscriptions", "students"
   add_foreign_key "training_sessions", "trainings"
