@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "compte", to: "account#index", as: :account
   namespace :archives do
     resources :editions, only: [:index, :show]
   end
