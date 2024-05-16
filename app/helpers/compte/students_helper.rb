@@ -1,0 +1,2 @@
+module Compte::StudentsHelper
+end

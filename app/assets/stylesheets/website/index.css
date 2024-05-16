@@ -1,5 +1,6 @@
 @import "base.css";
 
+@import "account.css";
 @import "authentication.css";
 @import "home.css";
 @import "editions.css";

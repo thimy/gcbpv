@@ -36,3 +36,9 @@
 :is(div, p):empty {
   display: none;
 }
+
+a {
+  svg {
+    vertical-align: middle;
+  }
+}

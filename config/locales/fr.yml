@@ -130,6 +130,9 @@ fr:
       subscription:
         one: "Inscription"
         other: "Inscriptions"
+      subscription_group:
+        one: "Inscription"
+        other: "Inscriptions"
       teacher:
         one: "Professeur"
         other: "Professeurs"

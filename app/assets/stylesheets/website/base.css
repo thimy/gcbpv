@@ -99,6 +99,7 @@ address {
 }
 
 main {
+  align-self: stretch;
   background-color: var(--black);
 }
 
