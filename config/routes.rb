@@ -57,25 +57,25 @@ Rails.application.routes.draw do
     resources :editions
     resources :categories
     resources :administrators
-    resources :configurations, only: [:index, :show, :edit, :update]
+    resources :configs, only: [:index, :show, :edit, :update]
     
     root to: "cities#index"
   end
   get "", to: "website#index", as: "/"
   get "bogue", to: "website#bogue"
   namespace :secretariat do
-    resources :subscriptions
-    resources :workshops
-    resources :students
-    resources :courses
-    resources :slots
-    resources :teachers
-    resources :cities
-    resources :payors
-    resources :instruments
     get "", to: "secretariat#index", as: "/"
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  resources :subscriptions
+  resources :workshops
+  resources :students
+  resources :courses
+  resources :slots
+  resources :teachers
+  resources :cities
+  resources :payors
+  resources :instruments
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

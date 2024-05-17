@@ -1,6 +1,8 @@
 class Student < ApplicationRecord
   belongs_to :payor, optional: true
 
+  has_many :subscription_groups, through: :subscriptions
+
   validates :last_name, presence: true
   validates :first_name, presence: true
 
