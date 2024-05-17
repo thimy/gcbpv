@@ -1,11 +1,11 @@
 module Admin
-  class ConfigurationsController < Admin::ApplicationController
+  class ConfigsController < Admin::ApplicationController
     def index
-      redirect_to admin_configuration_path(find_resource)
+      redirect_to admin_config_path(find_resource)
     end
 
     def find_resource(*)
-      ::Configuration.load
+      ::Config.load
     end
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.

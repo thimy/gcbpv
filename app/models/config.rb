@@ -1,14 +1,14 @@
-class Configuration < ApplicationRecord
+class Config < ApplicationRecord
   belongs_to :season
 
   before_create :check_for_existing
   before_destroy :check_for_existing
 
   def self.load
-    config = Configuration.first
+    config = Config.first
 
     if config.nil?
-      config = Configuration.create
+      config = Config.create
     end
 
     config
@@ -17,6 +17,6 @@ class Configuration < ApplicationRecord
   private
 
   def check_for_existing
-    raise ActiveRecord::RecordInvalid if Configuration.count >= 1
+    raise ActiveRecord::RecordInvalid if Config.count >= 1
   end
 end

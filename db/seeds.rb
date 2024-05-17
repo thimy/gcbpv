@@ -8,7 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Configuration.destroy_all
+Config.destroy_all
 Season.destroy_all
 Plan.destroy_all
 
@@ -62,7 +62,7 @@ Plan.create!({
 })
 
 Season.create!({ start_year: 2024, plan_id: 1 })
-Configuration.create!({ season_id: 1 })
+Config.create!({ season_id: 1 })
 
 teachers = [
   { id: 1, first_name: "Goulven", last_name: "Dréano", status: 0, description: "Un vrai mélomane qui joue sans fausse note au sein d’un collectif, Goulven est professeur de musique traditionnelle et coordinateur pédagogique au groupement culturel breton de Redon et Muzillac. Un vrai chef d’orchestre qui vous propose l’écriture d’une partition à plusieurs mains. Président de l’association Clakbam c’est une des nombreuses personnes qui vous font danser aux mardis de l’été.\r\n\r\nMon petit plaisir à Malansac : Les rencontres intergénérationnelles des mardis de l’été.\r\n\r\nMalansac en un mot : Associationsssss\r\n\r\nIl s’engage dans l’Avenir de Malansac." },

@@ -178,7 +178,7 @@ fr:
         name: "Nom"
         created_at: "Créé le"
         updated_at: "Modifié le"
-      configuration:
+      config:
         season: "Année scolaire"
         season_id: "Année scolaire"
       edition:
