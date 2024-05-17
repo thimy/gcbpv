@@ -22,6 +22,7 @@ class Compte::SubscriptionGroupsController < CompteController
   # POST /subscription_groups or /subscription_groups.json
   def create
     @subscription_group = SubscriptionGroup.new(subscription_group_params)
+    @subscription_group.season = Config.first.season
 
     respond_to do |format|
       if @subscription_group.save

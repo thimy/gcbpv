@@ -1,7 +1,12 @@
 class Student < ApplicationRecord
   belongs_to :payor, optional: true
-
+  has_many :subscriptions
   has_many :subscription_groups, through: :subscriptions
+  has_many :courses, through: :subscriptions
+  has_many :subbed_workshops, through: :subscriptions
+  has_many :workshops, through: :subbed_workshops
+
+  accepts_nested_attributes_for :subscriptions
 
   validates :last_name, presence: true
   validates :first_name, presence: true

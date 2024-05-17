@@ -128,11 +128,11 @@ fr:
         one: "Élève"
         other: "Élèves"
       subscription:
-        one: "Inscription"
-        other: "Inscriptions"
+        one: "Inscription par élève"
+        other: "Inscriptions par élève"
       subscription_group:
-        one: "Inscription"
-        other: "Inscriptions"
+        one: "Inscription par foyer"
+        other: "Inscriptions par foyer"
       teacher:
         one: "Professeur"
         other: "Professeurs"
@@ -224,6 +224,10 @@ fr:
         meeting_day: "Jour du rendez-vous"
         name: "Nom"
         price: "Prix"
+      payment:
+        amount: "Montant"
+        comment: "Commentaires"
+        payment_method: "Moyen de paiement"
       payment_state:
         nom: "Nom"
       payor:
@@ -335,6 +339,20 @@ fr:
         created_at: "Créé le"
         updated_at: "Modifié le"
         year: "Année scolaire"
+      subscription_group:
+        amount_paid: "Montant réglé"
+        comment: "Commentaires"
+        donation: "Don"
+        payments: "Paiements"
+        payor: "Payeur"
+        payor_id: "Payeur"
+        season: "Année scolaire"
+        season_id: "Année scolaire"
+        students: "Élèves"
+        subscription: "Inscriptions"
+        subscription_id: "Inscriptions"
+        subscriptions: "Inscriptions"
+        subscriptions_id: "Inscriptions"
       teacher:
         first_name: "Prénom"
         last_name: "Nom"

@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PayorDashboard < Administrate::BaseDashboard
+class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,13 @@ class PayorDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    email: Field::String,
-    first_name: Field::String,
-    last_name: Field::String,
-    phone: Field::String,
-    subscription_groups: Field::NestedHasMany.with_options(skip: :payor),
+    amount_paid: Field::String.with_options(searchable: false),
+    comment: Field::Text,
+    donation: Field::String.with_options(searchable: false),
+    payments: Field::NestedHasMany.with_options(skip: :subscription_group),
+    payor: Field::BelongsTo,
+    season: Field::BelongsTo,
+    subscriptions: Field::NestedHasMany.with_options(skip: :subscription_group),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -24,21 +26,22 @@ class PayorDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
-    first_name
-    last_name
-    email
+    season
+    subscriptions
+    amount_paid
+    comment
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    first_name
-    last_name
-    email
-    phone
-    subscription_groups
+    amount_paid
+    comment
+    donation
+    payments
+    payor
+    season
+    subscriptions
     created_at
     updated_at
   ].freeze
@@ -47,11 +50,13 @@ class PayorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    first_name
-    last_name
-    email
-    subscription_groups
-    phone
+    payor
+    season
+    amount_paid
+    comment
+    donation
+    payments
+    subscriptions
   ].freeze
 
   # COLLECTION_FILTERS
@@ -66,10 +71,10 @@ class PayorDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how payors are displayed
+  # Overwrite this method to customize how subscription groups are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(payor)
-    payor.name
+  def display_resource(subscription_group)
+    "Foyer #{subscription_group.payor.last_name} - #{subscription_group.season.name}"
   end
 end

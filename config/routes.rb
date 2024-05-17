@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    resources :subscription_groups
     resources :subscriptions
     resources :students
     resources :payors

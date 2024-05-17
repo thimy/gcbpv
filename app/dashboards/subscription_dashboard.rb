@@ -11,7 +11,6 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     id: Field::Number,
     courses: Field::NestedHasMany.with_options(skip: :subscription),
     workshops: Field::HasMany,
-    paid_amount: Field::Number,
     payor: Field::BelongsTo,
     student: Field::BelongsTo,
     season: Field::BelongsTo,
@@ -35,7 +34,6 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     courses
     payor
     status
-    paid_amount
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -48,7 +46,6 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     payor
     season
     status
-    paid_amount
     image_consent
     disability
     ars
@@ -71,7 +68,6 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     disability
     ars
     donation
-    paid_amount
   ].freeze
 
   # COLLECTION_FILTERS

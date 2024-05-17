@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PayorDashboard < Administrate::BaseDashboard
+class PaymentDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,11 +9,10 @@ class PayorDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    email: Field::String,
-    first_name: Field::String,
-    last_name: Field::String,
-    phone: Field::String,
-    subscription_groups: Field::NestedHasMany.with_options(skip: :payor),
+    subscription_group: Field::BelongsTo,
+    amount: Field::String.with_options(searchable: false),
+    comment: Field::Text,
+    payment_method: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,20 +24,19 @@ class PayorDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    first_name
-    last_name
-    email
+    subscription_group
+    amount
+    comment
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    first_name
-    last_name
-    email
-    phone
-    subscription_groups
+    subscription_group
+    payment_method
+    amount
+    comment
     created_at
     updated_at
   ].freeze
@@ -47,11 +45,10 @@ class PayorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    first_name
-    last_name
-    email
-    subscription_groups
-    phone
+    subscription_group
+    payment_method
+    amount
+    comment
   ].freeze
 
   # COLLECTION_FILTERS
@@ -66,10 +63,10 @@ class PayorDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how payors are displayed
+  # Overwrite this method to customize how payments are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(payor)
-    payor.name
-  end
+  # def display_resource(payment)
+  #   "Payment ##{payment.id}"
+  # end
 end
