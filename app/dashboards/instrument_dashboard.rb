@@ -9,7 +9,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: Field::Text,
+    description: TrixField,
     name: Field::String,
     teachers: Field::HasMany,
     image: Field::Image,

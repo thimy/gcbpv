@@ -10,7 +10,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     amount_paid: Field::String.with_options(searchable: false),
-    comment: Field::Text,
+    comment: TrixField,
     donation: Field::String.with_options(searchable: false),
     payments: Field::NestedHasMany.with_options(skip: :subscription_group),
     payor: Field::BelongsTo,

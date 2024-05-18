@@ -86,3 +86,4 @@ gem "devise", "~> 4.9"
 gem "factory_bot_rails", "~> 6.4"
 
 gem "inline_svg", "~> 1.9"
+gem "trix"

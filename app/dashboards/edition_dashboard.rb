@@ -9,7 +9,7 @@ class EditionDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: Field::Text,
+    description: TrixField,
     format: Field::String,
     image: Field::Image,
     name: Field::String,

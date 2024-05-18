@@ -10,7 +10,7 @@ class PostDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     categories: Field::HasMany,
-    content: Field::Text,
+    content: TrixField,
     event: Field::BelongsTo.with_options(
       searchable: true,
       searchable_fields: ['name'],

@@ -13,7 +13,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     city: Field::BelongsTo,
     day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    description: Field::Text,
+    description: TrixField,
     end_time: Field::String,
     name: Field::String,
     start_time: Field::String,

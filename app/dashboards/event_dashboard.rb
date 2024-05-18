@@ -9,7 +9,7 @@ class EventDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: Field::Text,
+    description: TrixField,
     end_date: Field::Date,
     location: Field::Text,
     name: Field::String,

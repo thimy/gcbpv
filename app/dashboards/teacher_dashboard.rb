@@ -9,7 +9,7 @@ class TeacherDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: Field::Text,
+    description: TrixField,
     email: Field::String,
     first_name: Field::String,
     instruments: Field::HasMany,

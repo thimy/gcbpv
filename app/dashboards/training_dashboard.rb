@@ -9,7 +9,7 @@ class TrainingDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: Field::Text,
+    description: TrixField,
     name: Field::String,
     price: Field::String.with_options(searchable: false),
     session_count: Field::Number,

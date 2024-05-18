@@ -10,7 +10,7 @@ class TrainingSessionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     date: Field::Date,
-    description: Field::Text,
+    description: TrixField,
     end_time: Field::String,
     name: Field::String,
     start_time: Field::String,
