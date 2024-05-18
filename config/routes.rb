@@ -45,7 +45,6 @@ Rails.application.routes.draw do
     resources :payors
     resources :workshops
     resources :trainings
-    resources :training_sessions
     resources :projects
     resources :instruments
     resources :teachers

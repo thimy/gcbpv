@@ -333,7 +333,7 @@ fr:
         payment_state: "Statut du paiement"
         status: "Statut"
         image_consent: "Consentement à l’image"
-        disability: "Situation empêchéance"
+        disability: "Situation empêchée"
         ars: "ARS"
         donation: "Don"
         created_at: "Créé le"
@@ -375,6 +375,7 @@ fr:
         session_count: "Nombre de séances"
         season: "Année"
         season_id: "Année"
+        training_sessions: Séances
         created_at: "Créé le"
         updated_at: "Modifié le"
       training_session:

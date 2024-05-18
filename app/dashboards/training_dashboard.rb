@@ -13,7 +13,7 @@ class TrainingDashboard < Administrate::BaseDashboard
     name: Field::String,
     price: Field::String.with_options(searchable: false),
     session_count: Field::Number,
-    training_sessions: Field::HasMany,
+    training_sessions: Field::NestedHasMany.with_options(skip: :trainings),
     season: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -53,6 +53,7 @@ class TrainingDashboard < Administrate::BaseDashboard
     price
     session_count
     season
+    training_sessions
   ].freeze
 
   # COLLECTION_FILTERS
