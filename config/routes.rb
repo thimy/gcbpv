@@ -4,11 +4,16 @@ Rails.application.routes.draw do
   get "compte", to: "compte#index", as: :account
   namespace :compte do
     resources :students, path: "eleves"
-    resources :subscription_groups, path: "inscriptions"
+    resources :subscriptions, path: "inscriptions" do
+      post :add_course, on: :collection
+      post :add_workshop, on: :collection
+    end
   end
+
   namespace :archives do
     resources :editions, only: [:index, :show]
   end
+
   get "archives", to: "archives#index"
   resources :posts, path: :actualites, only: [:index, :show]
   namespace :ecole do

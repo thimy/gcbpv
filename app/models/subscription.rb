@@ -6,7 +6,7 @@ class Subscription < ApplicationRecord
   belongs_to :payor
   belongs_to :season
 
-  accepts_nested_attributes_for :courses, :workshops
+  accepts_nested_attributes_for :courses, :subbed_workshops, :workshops, allow_destroy: true
 
   validates :season, presence: true
   validates :student, presence: true, uniqueness: { scope: :season,
