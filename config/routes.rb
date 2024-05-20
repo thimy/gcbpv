@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     resources :instruments
     resources :teachers
     resources :slots
+    resources :kid_workshops
     resources :cities
     resources :plans
     resources :seasons

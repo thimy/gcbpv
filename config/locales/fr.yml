@@ -97,6 +97,9 @@ fr:
       group_work:
         one: "Atelier autonome"
         other: "Ateliers autonomes"
+      kid_workshop:
+        one: "Atelier enfants"
+        other: "Ateliers enfants"
       meeting:
         one: "Rendez-vous"
         other: "Rendez-vous"
@@ -218,6 +221,11 @@ fr:
         name: "Nom"
         location: "Lieu"
         price: "Prix"
+      kid_workshop:
+        name: "Nom"
+        frequency: "Fréquence"
+        status: "Statut"
+        workshop_type: "Type"
       meeting:
         amount: "Nombre de sessions"
         archived: "Archivé"
@@ -242,12 +250,21 @@ fr:
       plan:
         name: "Nom"
         class_price: "Prix du cours"
+        kids_class_price: "Prix du cours enfants"
         workshop_price: "Prix de l’atelier"
-        awakening_price: "Prix de l’éveil musical"
-        kids_class_price: "Prix de l’atelier découverte enfants"
-        discovery_price: "Prix de l’atelier découverte adultes"
+        early_learning_price: "Prix de l’éveil musical"
+        kid_discovery_price: "Prix de l’atelier découverte enfants"
+        adult_discovery_price: "Prix de l’atelier découverte adultes" 
         obc_markup: "Majoration OBC"
         outbounds_markup: "Majoration hors-agglo"
+        first_step: "1er palier de réduction"
+        first_step_discount: "Réduction 1er palier de réduction"
+        second_step: "2nd palier de réduction"
+        second_step_discount: "Réduction 2nd palier de réduction"
+        third_step: "3ème palier de réduction"
+        third_step_discount: "Réduction 3ème palier de réduction"
+        fourth_step: "4ème palier de réduction"
+        fourth_step_discount: "Réduction 4ème palier de réduction"
         created_at: "Créé le"
         updated_at: "Modifié le"
       post:
@@ -412,5 +429,6 @@ fr:
         city: "Ville"
         city_id: "Ville"
         frequency: "Fréquence"
+        kid_friendly: "Adapté aux enfants"
         created_at: "Créé le"
         updated_at: "Modifié le"

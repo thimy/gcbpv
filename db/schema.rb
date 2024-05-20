@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_17_062459) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_20_075518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -125,6 +125,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_062459) do
     t.string "image"
   end
 
+  create_table "kid_workshops", force: :cascade do |t|
+    t.string "name"
+    t.string "frequency"
+    t.text "description"
+    t.integer "workshop_type"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "payments", force: :cascade do |t|
     t.integer "payment_method"
     t.decimal "amount"
@@ -153,6 +163,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_062459) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.decimal "early_learning_price"
+    t.decimal "kid_discovery_price"
+    t.decimal "adult_discovery_price"
+    t.decimal "first_step_discount"
+    t.decimal "first_step"
+    t.decimal "second_step_discount"
+    t.decimal "second_step"
+    t.decimal "third_step_discount"
+    t.decimal "third_step"
+    t.decimal "fourth_step_discount"
+    t.decimal "fourth_step"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -335,6 +356,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_17_062459) do
     t.string "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "kid_friendly"
     t.index ["city_id"], name: "index_workshops_on_city_id"
   end
 

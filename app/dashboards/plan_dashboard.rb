@@ -11,9 +11,20 @@ class PlanDashboard < Administrate::BaseDashboard
     id: Field::Number,
     class_price: Field::String.with_options(searchable: false),
     kids_class_price: Field::String.with_options(searchable: false),
+    workshop_price: Field::String.with_options(searchable: false),
+    early_learning_price: Field::String.with_options(searchable: false),
+    kid_discovery_price: Field::String.with_options(searchable: false),
+    adult_discovery_price: Field::String.with_options(searchable: false),
+    first_step: Field::String.with_options(searchable: false),
+    first_step_discount: Field::String.with_options(searchable: false),
+    second_step: Field::String.with_options(searchable: false),
+    second_step_discount: Field::String.with_options(searchable: false),
+    third_step: Field::String.with_options(searchable: false),
+    third_step_discount: Field::String.with_options(searchable: false),
+    fourth_step: Field::String.with_options(searchable: false),
+    fourth_step_discount: Field::String.with_options(searchable: false),
     obc_markup: Field::Number,
     outbounds_markup: Field::Number,
-    workshop_price: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -39,6 +50,17 @@ class PlanDashboard < Administrate::BaseDashboard
     class_price
     workshop_price
     kids_class_price
+    early_learning_price
+    kid_discovery_price
+    adult_discovery_price
+    first_step
+    first_step_discount
+    second_step
+    second_step_discount
+    third_step
+    third_step_discount
+    fourth_step
+    fourth_step_discount
     outbounds_markup
     obc_markup
     created_at
@@ -51,9 +73,20 @@ class PlanDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     class_price
     kids_class_price
+    workshop_price
+    early_learning_price
+    kid_discovery_price
+    adult_discovery_price
+    first_step
+    first_step_discount
+    second_step
+    second_step_discount
+    third_step
+    third_step_discount
+    fourth_step
+    fourth_step_discount
     obc_markup
     outbounds_markup
-    workshop_price
   ].freeze
 
   # COLLECTION_FILTERS
