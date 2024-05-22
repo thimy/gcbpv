@@ -1,5 +1,9 @@
 html {
-  --background-color: var(--gray);
+  --background-color: var(--snuff);
+  --content-background-color: var(--snuff);
+
+  --text-color: var(--black);
+  --text-color-secondary: color-mix(in srgb, var(--text-color), transparent 30%);
 }
 
 body {
@@ -27,7 +31,7 @@ h1 {
 }
 
 h2 {
-  --underline-color: var(--red);
+  --underline-color: var(--accent-2);
   display: inline-block;
   font-size: var(--font-size-6);
   justify-self: start;
@@ -100,17 +104,19 @@ address {
 
 main {
   align-self: stretch;
-  background-color: var(--black);
+  background-color: var(--content-background-color);
+
+  > div.full.content {
+    padding-block: var(--size-10);
+  }
 }
 
 .wave {
-  background-color: var(--black);
+  background-color: var(--content-background-color);
   width: 100vw;
 }
 
 :where(section) {
-  color: var(--white);
-
   + section {
     margin-block-start: var(--size-10);
   }

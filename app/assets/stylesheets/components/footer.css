@@ -1,10 +1,15 @@
 footer {
-  display: flex;
-  gap: var(--size-8);
-  justify-content: space-between;
-  padding-block-end: var(--size-10);
+  background: var(--main-gradient);
 
+  > * {
+    display: flex;
+    gap: var(--size-8);
+    justify-content: space-between;
+    padding-block: var(--size-10);
+  }
+  
   h3 {
+    color: var(--black);
     font-size: var(--font-size-4);
     margin-block-end: var(--size-2);
   }

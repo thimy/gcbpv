@@ -13,6 +13,9 @@ class Compte::SubscriptionsController < CompteController
   # GET /subscriptions/new
   def new
     @subscription = Subscription.new
+    @instruments = Instrument.all
+    @teachers = Teacher.all
+    @slots = Slot.all
   end
 
   # GET /subscriptions/1/edit

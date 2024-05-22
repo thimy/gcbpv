@@ -1,16 +1,16 @@
 <% content_for(:page_class, "events ") %>
 <% content_for(:page_title, "Événements") %>
 
-<section class="popout">
+<section>
   <h2>Les événements à venir</h2>
-  <div class="event-list">
+  <div class="flex-column">
     <%= render Website::Card::Event::Component.with_collection(@upcoming_events) %>
   </div>
 </section>
 
-<section class="popout">
+<section>
   <h2>Les événements passés</h2>
-  <div class="event-list">
+  <div class="flex-column">
     <%= render Website::Card::Event::Component.with_collection(@passed_events) %>
   </div>
 </section>

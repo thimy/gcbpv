@@ -23,17 +23,17 @@
     <%= form.fields_for :course, Course.new do |course_form| %>
       <div>
         <%= course_form.label "Instrument", style: "display: block" %>
-        <%= course_form.collection_select :instrument_id, Instrument.all, :id, :name %>
+        <%= course_form.collection_select :instrument_id, @instruments, :id, :name %>
       </div>
 
       <div>
         <%= course_form.label "Professeur", style: "display: block" %>
-        <%= collection_select :teacher, :teacher_ids, Teacher.all, :id, :name %>
+        <%= collection_select :teacher, :teacher_ids, @teachers, :id, :name %>
       </div>
 
       <div>
         <%= course_form.label "Lieu et heure", style: "display: block" %>
-        <%= course_form.collection_select :slot_id, Slot.all, :id, :name %>
+        <%= course_form.collection_select :slot_id, @slots, :id, :name %>
       </div>
     <% end %>
   <% end %>

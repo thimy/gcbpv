@@ -7,10 +7,12 @@
   --green: #9ee6d7;
   --blue: #6d7ac6;
   --yellow: #eadabc;
-
-
-
-
+  --snuff: var(--white);
+  --cupid: #fcc2d7;
+  --bossanova: #3d1c47;
+  --accent: #047c6d;
+  --accent-2: #9ee6d7;
+  --main-gradient: linear-gradient(135deg, rgba(221,192,222,1) 0%, rgba(230,246,252,1) 30%, rgba(230,246,252,1) 70%, rgba(192,219,246,1) 100%); 
 
   /* --white: #ffffff;
   --gray-0: #f8f9fa;

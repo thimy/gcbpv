@@ -1,23 +1,19 @@
-<post-preview>
+<%= link_to post_path(@post), class: "card post-preview" do %>
   <% if @post.categories.present? %>
     <div class="tag-list">
       <% @post.categories.each do |category| %>
-        <%= link_to "", class: "tag" do %>
+        <span class="tag">
           <span><%= category.name %></span>
-        <% end %>
+        </span>
       <% end %>
     </div>
   <% end %>
-  <%= link_to post_path(@post), class: "post-title" do %>
-    <%= tag.send(@tag) do %>
-      <%= @post.title %>
-    <% end %>
-    <time>Publié le <%= @post.publication_datetime %></time>
-    <% if @post.image.present? %>
-      <div class="image">
-        <%= image_tag @post.image %>
-      </div>
-    <% end %>
-    <%= stripped_content %>
+  <h3><%= @post.title %></h3>
+  <time>Publié le <%= @post.publication_datetime %></time>
+  <% if @post.image.present? %>
+    <div class="image">
+      <%= image_tag @post.image %>
+    </div>
   <% end %>
-</post-preview>
+  <%= stripped_content %>
+<% end %>

@@ -42,3 +42,9 @@ a {
     vertical-align: middle;
   }
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-6);
+}

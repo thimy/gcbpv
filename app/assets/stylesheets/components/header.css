@@ -1,6 +1,6 @@
 body > header {
   align-items: center;
-  background-image: linear-gradient(to bottom, var(--background-color),  var(--background-color), transparent 110%);
+  background-color: var(--white);
   color: var(--black);
   display: flex;
   justify-content: space-between;

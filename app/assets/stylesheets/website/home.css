@@ -1,7 +1,8 @@
 .home {
+  container-type: inline-size;
+
   hero-container {
-    background-color: var(--gray);
-    padding-block-start: var(--size-11);
+    padding-block: var(--size-11) var(--size-12);
 
     h1 {
       --text-shadow-color: var(--white);
@@ -9,7 +10,8 @@
       font-size: var(--font-size-fluid-6);
       padding-block-end: var(--size-3);
       position: relative;
-      text-shadow: -6px -6px color-mix(in srgb, var(--text-shadow-color), transparent 10%);
+      text-shadow: -4px -4px color-mix(in srgb, var(--text-shadow-color), transparent 20%);
+      text-wrap: initial;
 
       &:hover {
         /* --text-shadow-color: var(--red); */
@@ -37,7 +39,6 @@
   }
 
   section:not(.hero, .categories) {
-    background-color: var(--black);
     display: flex;
     flex-direction: column;
     gap: var(--size-4);
@@ -50,20 +51,23 @@
   
   .categories {
     --category-spacing: var(--size-5);
-    display: grid;
-    gap: var(--category-spacing);
-    grid-template-columns: 1fr 1fr 1fr;
-    margin-block-start: -15rem;
-    margin-block-end: var(--size-12);
-    padding-inline: var(--category-spacing);
-
+    background-image: linear-gradient(to bottom, var(--background-color) 0%, var(--background-color) 50%, var(--content-background-color) 50%);
+    margin-block-start: calc(var(--size-12) * -1);
+    
+    > .feature {
+      display: grid;
+      gap: var(--category-spacing);
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    
     h2::after {
       content: none;
     }
   }
 
   .grid {
-    gap: var(--size-12);
+    gap: var(--size-10);
+    padding-block: var(--size-10);
 
     section {
       display: flex;
@@ -73,10 +77,9 @@
       header {
         display: flex;
         flex-direction: column;
-        padding-inline: var(--size-5);
 
         a {
-          color: var(--dark-gray);
+          color: var(--text-color-secondary);
 
           &:hover {
             color: var(--green);
@@ -145,5 +148,11 @@
 
   .upcoming-events {
     margin-top: 0;
+  }
+
+  @container (max-width: 700px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
   }
 }
