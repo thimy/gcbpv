@@ -1,7 +1,8 @@
 hero-container {
-  background: rgb(221,192,222);
-  background: linear-gradient(90deg, rgba(221,192,222,1) 0%, rgba(230,246,252,1) 30%, rgba(230,246,252,1) 70%, rgba(192,219,246,1) 100%);
-  color: var(--black);
+  background-image: var(--main-gradient);
+  border-radius: var(--radius-3);
+  color: var(--white);
+  margin-inline: var(--size-6);
   padding-block: var(--size-8);
   position: relative;
   overflow: hidden;

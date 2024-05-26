@@ -3,14 +3,14 @@
 
 <section>
   <h2>Les événements à venir</h2>
-  <div class="flex-column">
+  <div class="flex-column gap-4">
     <%= render Website::Card::Event::Component.with_collection(@upcoming_events) %>
   </div>
 </section>
 
 <section>
   <h2>Les événements passés</h2>
-  <div class="flex-column">
+  <div class="flex-column gap-4">
     <%= render Website::Card::Event::Component.with_collection(@passed_events) %>
   </div>
 </section>

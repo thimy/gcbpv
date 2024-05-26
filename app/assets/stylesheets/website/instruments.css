@@ -15,6 +15,10 @@
   .instrument-list {
     grid-template-columns: repeat(auto-fit, minmax(250px, auto));
   }
+
+  .card {
+    align-items: start;
+  }
 }
 
 .instrument-page {

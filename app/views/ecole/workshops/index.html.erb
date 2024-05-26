@@ -5,6 +5,8 @@
   <h2>Atelier de pratique musicale d’ensemble (108€/an)</h2>
   <p>Ce sont des ateliers thématiques qui permettent d’aborder du répertoire, de la danse, d’apprendre à jouer à plusieurs.</p>
 </section>
-<section class="feature grid" data-grid="repeat">
-  <%= render Website::Card::Workshop::Component.with_collection(@workshops, path: "ecole_workshop_path") %>
+<section class="feature content">
+  <div class="full grid" data-grid="repeat">
+    <%= render Website::Card::Workshop::Component.with_collection(@workshops, path: "ecole_workshop_path") %>
+  </div>
 </section>

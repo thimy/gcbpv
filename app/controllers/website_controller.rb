@@ -1,11 +1,8 @@
 class WebsiteController < ApplicationController
-  layout "website"
+  layout "home"
 
   def index
     @posts = Post.latest.limit(3) 
     @events = Event.upcoming.limit(3).reverse
-  end
-
-  def bogue
   end
 end

@@ -1,0 +1,10 @@
+.membership {
+  .grid {
+    align-items: start;
+    grid-template-rows: auto 1fr;
+  }
+
+  .payment {
+    grid-row: span 2;
+  }
+}

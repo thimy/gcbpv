@@ -25,4 +25,6 @@
 
   --border-color: var(--snuff)
   --border-default: var(--border-size-1) solid var(--border-color);
+
+  --card-border-default: var(--border-size-2) solid var(--black);
 }

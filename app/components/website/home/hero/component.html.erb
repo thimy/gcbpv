@@ -1,0 +1,16 @@
+<hero-container class="feature flex-column home-hero">
+  <div>
+    <h1>Groupement Culturel Breton des Pays de Vilaine</h1>
+    <p><%= @subtitle %></p>
+    <div class="ornaments">
+      <%= inline_svg_tag "icons/sprinkles.svg", class: "sprinkles" %>
+      <%= inline_svg_tag "icons/sparkles.svg", class: "sparkles" %>
+      <%= inline_svg_tag "icons/crosses.svg", class: "swirl" %>
+    </div>
+  </div>
+  <div class="categories">
+    <%= render Website::HeroCard::Component.new(title: "La Bogue", url: bogue_path, css_classes: "bogue") %>
+    <%= render Website::HeroCard::Component.new(title: "L'école de musique traditionnelle", url: ecole_path, css_classes: "ecole") %>
+    <%= render Website::HeroCard::Component.new(title: "Centre de ressources", url: archives_path, css_classes: "archives") %>
+  </div>
+</hero-container>

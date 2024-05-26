@@ -1,4 +1,4 @@
-class Ecole::InstrumentsController < WebsiteController
+class Ecole::InstrumentsController < BaseController
   before_action :set_instrument, only: %i[ show ]
 
   def index

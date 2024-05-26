@@ -1,7 +1,13 @@
+html {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 18px;
+}
+
 .content {
   --gap: clamp(1rem, 6vw, 3rem);
   --full: minmax(var(--gap), 1fr);
-  --content: min(70ch, 100% - var(--gap) * 2);
+  --content: min(60ch, 100% - var(--gap) * 2);
   --popout: minmax(0, 10rem);
   --feature: minmax(0, 15rem);
 
@@ -43,8 +49,28 @@ a {
   }
 }
 
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
+}
+
+.gap-4 {
+  gap: var(--size-4);
+}
+
+.gap-6 {
   gap: var(--size-6);
+}
+
+.gap-8 {
+  gap: var(--size-8);
+}
+
+.gap-10 {
+  gap: var(--size-10);
 }

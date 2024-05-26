@@ -1,5 +1,6 @@
 footer {
-  background: var(--main-gradient);
+  background: var(--indigo);
+  color: var(--white);
 
   > * {
     display: flex;
@@ -9,7 +10,6 @@ footer {
   }
   
   h3 {
-    color: var(--black);
     font-size: var(--font-size-4);
     margin-block-end: var(--size-2);
   }

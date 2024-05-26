@@ -1,4 +1,4 @@
-class Archives::EditionsController < WebsiteController
+class Archives::EditionsController < BaseController
   before_action :set_edition, only: %i[ show ]
 
   def index

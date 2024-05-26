@@ -1,4 +1,4 @@
-class Ecole::ProjectsController < WebsiteController
+class Ecole::ProjectsController < BaseController
   before_action :set_project, only: %i[ show ]
 
   def index

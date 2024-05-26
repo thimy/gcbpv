@@ -1,4 +1,11 @@
 .post-preview {
+  gap: var(--size-2);
+
+  time {
+    color: var(--dark-gray);
+    font-size: var(--font-size-0);
+  }
+
   .image {
     position: relative;
     margin-block-start: var(--size-3);

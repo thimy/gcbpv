@@ -15,12 +15,12 @@
     }
   
     svg {
-      color: var(--black);
+      color: var(--white);
       height: 20rem;
       margin-top: var(--size-4);
       padding: var(--size-4);
       width: 100%;  stroke: transparent;
-      fill: white;
+      fill: var(--black);
     }
   }
 }

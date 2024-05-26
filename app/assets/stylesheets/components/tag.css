@@ -1,9 +1,9 @@
 .tag {
-  --tag-bg-color: var(--white);
+  --tag-bg-color: var(--indigo);
   background-color: var(--tag-bg-color);
   border-radius: var(--radius-2);
   font-family: var(--font-sans);
-  font-size: var(--font-size-0);
+  font-size: 12px;;
   font-weight: var(--font-weight-6);
   padding: var(--size-1) var(--size-2);
   text-decoration: none;

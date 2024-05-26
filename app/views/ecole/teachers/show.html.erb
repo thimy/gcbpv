@@ -9,9 +9,9 @@
           <span><%= instrument.name %></span>
         </span>
       <% end %>
-      <% @teacher.cities.each do |city| %>
+      <% @teacher.cities.pluck(:name).uniq.each do |city| %>
         <span class="tag" data-tag-color="red">
-          <span><%= city.name %></span>
+          <span><%= city %></span>
         </span>
       <% end %>
     </div>

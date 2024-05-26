@@ -1,4 +1,4 @@
-class ArchivesController < WebsiteController
+class ArchivesController < BaseController
   def index
   end
 end

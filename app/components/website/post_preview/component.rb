@@ -9,6 +9,6 @@ class Website::PostPreview::Component < ViewComponent::Base
   end
 
   def stripped_content
-    Nokogiri::HTML.parse(simple_format(@post.content)).css('p').first.text
+    strip_tags(simple_format(@post.content)).truncate(200)
   end
 end

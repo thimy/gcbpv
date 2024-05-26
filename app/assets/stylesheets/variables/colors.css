@@ -3,17 +3,22 @@
   --gray: #e0e0e0;
   --dark-gray: #858586;
   --black: #1b1b1d;
-  --red: #f0676c;
+  --red: #f76151;
   --green: #9ee6d7;
-  --blue: #6d7ac6;
-  --yellow: #eadabc;
-  --snuff: var(--white);
-  --cupid: #fcc2d7;
-  --bossanova: #3d1c47;
-  --accent: #047c6d;
-  --accent-2: #9ee6d7;
-  --main-gradient: linear-gradient(135deg, rgba(221,192,222,1) 0%, rgba(230,246,252,1) 30%, rgba(230,246,252,1) 70%, rgba(192,219,246,1) 100%); 
-
+  --blue: #76c5d4;
+  --midnight-green: #104F55;
+  --orange: #FE5F00;
+  --fandango: #A4036F;
+  --zaffre: #3A0CA3;
+  --grape: #7209B7;
+  --rose: #F72585;
+  --electric: #51E5FF;
+  --indigo: #440381;
+  --deep-pink: #EC368D;
+  --seashell: #FFF3EF;
+  --main-gradient: linear-gradient(135deg, var(--deep-pink) 0%, var(--indigo) 50%, var(--electric) 100%);
+  --soft-gradient: linear-gradient(135deg, color-mix(in srgb, var(--deep-pink), transparent 50%),  0%, color-mix(in srgb, var(--indigo), transparent 80%) 50%, color-mix(in srgb, var(--electric), transparent 60%) 100%);
+  
   /* --white: #ffffff;
   --gray-0: #f8f9fa;
   --gray-1: #f1f3f5;

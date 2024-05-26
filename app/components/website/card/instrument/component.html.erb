@@ -1,5 +1,6 @@
 <%= link_to ecole_instrument_path(@instrument), class: "card" do %>
   <div class="card-info">
+    <h3><%= @instrument.name %></h3>
     <div class="tag-list">
       <% @instrument.cities.each do |city| %>
         <span class="tag" data-tag-color="dark">
@@ -7,6 +8,5 @@
         </span>
       <% end %>
     </div>
-    <h3><%= @instrument.name %></h3>
   </div>
 <% end %>

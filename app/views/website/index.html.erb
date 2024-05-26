@@ -1,21 +1,13 @@
 <% content_for(:page_class, "home ") %>
 <% content_for(:page_title, "Groupement Culturel Breton<wbr> des Pays de Vilaine".html_safe) %>
 
-<section class="categories full content">
-  <div class="feature">
-    <%= render Website::HeroCard::Component.new(title: "La Bogue", url: bogue_path, css_classes: "bogue") %>
-    <%= render Website::HeroCard::Component.new(title: "L'école de musique traditionnelle", url: ecole_path, css_classes: "ecole") %>
-    <%= render Website::HeroCard::Component.new(title: "Centre de ressources", url: archives_path, css_classes: "archives") %>
-  </div>
-</section>
-
-<div class="feature grid" data-grid="3-2">
+<div class="feature grid">
   <section class="latest-posts">
     <header>
       <h2>Dernières actualités</h2>
       <%= link_to "↬ Voir tous articles", posts_path %>
     </header>
-    <div class="flex-column">
+    <div class="flex-column gap-4">
       <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
     </div>
   </section>
@@ -24,7 +16,7 @@
       <h2>Événements à venir</h2>
       <%= link_to "↬ Voir tous les événements", events_path %>
     </header>
-    <div class="flex-column">
+    <div class="flex-column gap-4">
       <%= render Website::Card::Event::Component.with_collection(@events) %>
     </div>
   </section>

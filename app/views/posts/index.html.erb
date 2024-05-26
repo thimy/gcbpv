@@ -2,7 +2,7 @@
 <% content_for(:page_title, "Actualités") %>
 
 <section>
-  <div class="flex-column">
+  <div class="flex-column gap-6">
     <%= render Website::PostPreview::Component.with_collection(@posts) %>
   </div>
 </section>

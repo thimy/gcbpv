@@ -1,4 +1,4 @@
-class Ecole::MembershipController < WebsiteController
+class Ecole::MembershipController < BaseController
   def index
   end
 end

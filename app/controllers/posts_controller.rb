@@ -1,4 +1,4 @@
-class PostsController < WebsiteController
+class PostsController < BaseController
   before_action :set_post, only: %i[ show ]
 
   def index

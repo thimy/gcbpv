@@ -1,40 +1,9 @@
 .home {
   container-type: inline-size;
 
-  hero-container {
-    padding-block: var(--size-11) var(--size-12);
-
-    h1 {
-      --text-shadow-color: var(--white);
-      font-family: "Garden Grown";
-      font-size: var(--font-size-fluid-6);
-      padding-block-end: var(--size-3);
-      position: relative;
-      text-shadow: -4px -4px color-mix(in srgb, var(--text-shadow-color), transparent 20%);
-      text-wrap: initial;
-
-      &:hover {
-        /* --text-shadow-color: var(--red); */
-        animation-name:              shake;    
-        animation-duration:          0.8s;
-        animation-iteration-count:   infinite;
-        animation-timing-function:   linear;
-        transform-origin:            50% 100%;
-      }
-
-      @keyframes shake {
-        0%   { transform: translate(2px, 1px) rotate(0deg); }
-        10%  { transform: translate(-1px, -2px) rotate(-2deg); }
-        20%  { transform: translate(-3px, 0px) rotate(3deg); }
-        30%  { transform: translate(0px, 2px) rotate(0deg); }
-        40%  { transform: translate(1px, -1px) rotate(1deg); }
-        50%  { transform: translate(-1px, 2px) rotate(-1deg); }
-        60%  { transform: translate(-3px, 1px) rotate(0deg); }
-        70%  { transform: translate(2px, 1px) rotate(-2deg); }
-        80%  { transform: translate(-1px, -1px) rotate(4deg); }
-        90%  { transform: translate(2px, 2px) rotate(0deg); }
-        100% { transform: translate(1px, -2px) rotate(-1deg); }
-      }
+  main {
+    > .full.content {
+      padding-block: var(--size-6);
     }
   }
 
@@ -48,26 +17,13 @@
       justify-content: space-between;
     }
   }
-  
-  .categories {
-    --category-spacing: var(--size-5);
-    background-image: linear-gradient(to bottom, var(--background-color) 0%, var(--background-color) 50%, var(--content-background-color) 50%);
-    margin-block-start: calc(var(--size-12) * -1);
-    
-    > .feature {
-      display: grid;
-      gap: var(--category-spacing);
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-    
-    h2::after {
-      content: none;
-    }
-  }
 
   .grid {
-    gap: var(--size-10);
-    padding-block: var(--size-10);
+    align-items: start;
+    gap: var(--size-6);
+    grid-template-columns: 1fr 520px;
+    grid-template-rows: auto 1fr;
+    padding-block-end: var(--size-6);
 
     section {
       display: flex;
@@ -82,12 +38,13 @@
           color: var(--text-color-secondary);
 
           &:hover {
-            color: var(--green);
+            color: var(--deep-pink);
           }
         }
       }
 
       h2 {
+        margin: 0;
         text-align: start;
       }
 
@@ -146,8 +103,17 @@
     }
   }
 
+  .latest-posts {
+    grid-row: 1 / -1;
+  }
+
   .upcoming-events {
     margin-top: 0;
+  }
+
+  .card {
+    background: color-mix(in srgb, var(--electric), transparent 95%);
+    --card-border-color: color-mix(in srgb, var(--electric), transparent 75%);
   }
 
   @container (max-width: 700px) {
