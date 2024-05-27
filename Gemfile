@@ -75,6 +75,8 @@ gem "rails-i18n", "~> 7.0"
 
 gem "cssbundling-rails", "~> 1.4"
 
+gem "activestorage-openstack"
+
 gem "administrate"
 gem "administrate-field-image"
 gem "administrate-field-active_storage"
@@ -82,6 +84,7 @@ gem "administrate-field-nested_has_many"
 gem "administrate-field-belongs_to_search"
 
 gem "devise", "~> 4.9"
+gem "dotenv"
 
 gem "factory_bot_rails", "~> 6.4"
 
