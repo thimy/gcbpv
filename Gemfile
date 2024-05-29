@@ -67,6 +67,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
+gem "aws-sdk-s3", require: false
+
 gem "view_component", "~> 3.12"
 
 gem "simple_form", "~> 5.3"
