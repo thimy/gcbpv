@@ -1,5 +1,9 @@
 module Admin
   class TeachersController < Admin::ApplicationController
+    before_action lambda {
+      resize_before_save(params[:teacher][:photo], 500, 500)
+    }, only: [:update]
+
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -42,5 +46,21 @@ module Admin
 
     # See https://administrate-demo.herokuapp.com/customizing_controller_actions
     # for more information
+    private
+
+    def resize_before_save(image_param, width, height)
+      return unless image_param
+
+      begin
+        ImageProcessing::MiniMagick
+          .source(image_param)
+          .resize_to_fit(width, height)
+          .call(destination: image_param.tempfile.path)
+      rescue StandardError => _e
+        # Do nothing. If this is catching, it probably means the
+        # file type is incorrect, which can be caught later by
+        # model validations.
+      end
+    end
   end
 end
