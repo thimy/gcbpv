@@ -15,7 +15,7 @@ body > header {
 
     .home-button {
       font-family: var(--font-brand);
-      font-size: var(--font-size-5);
+      font-size: var(--font-size-4);
       font-weight: var(--font-weight-8);
       line-height: var(--font-lineheight-0);
       padding: 0;
