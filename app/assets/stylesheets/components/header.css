@@ -13,8 +13,7 @@ body > header {
     justify-content: space-between;
     padding: var(--size-4) var(--size-6);
 
-    .home {
-      flex-grow: 1;
+    .home-button {
       font-family: var(--font-brand);
       font-size: var(--font-size-5);
       font-weight: var(--font-weight-8);
@@ -24,6 +23,10 @@ body > header {
 
     .links {
       display: flex;
+
+      button {
+        display: none;
+      }
 
       a {
         --entry-bg-color: color-mix(in srgb, var(--electric), transparent 95%);
@@ -78,6 +81,59 @@ body > header {
           &::after {
             content: none;
           }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1000px) {
+    .links {
+      align-items: start;
+      background-color: var(--content-background-color);
+      bottom: 0;
+      box-shadow: var(--dark-elevation-high);
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: scroll;
+      padding: var(--size-8) var(--size-4);
+      position: fixed;
+      left: -100%;
+      top: 0;
+      transition: left ease-out 0.4s;
+      width: fit-content;
+
+      &:is([data-menu-active="true"] *) {
+        left: 0;
+      }
+
+      .dropdown {
+        align-items: start;
+        
+        .dropdown-menu {
+          border-radius: 0;
+          box-shadow: none;
+          display: flex;
+          margin-inline-start: var(--size-3);
+          max-width: 100%;
+          position: relative;
+          top: initial;
+
+          > * {
+            border-inline-start: var(--border-default);
+            border-radius: 0;
+          }
+        }
+      }
+
+      button {
+        align-items: center;
+        display: inline-flex;
+        gap: var(--size-2);
+        margin-block-end: var(--size-4);
+
+        svg {
+          height: 1.5em;
+          width: 1.5em;
         }
       }
     }

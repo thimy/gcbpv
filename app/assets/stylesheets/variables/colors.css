@@ -17,7 +17,7 @@
   --deep-pink: #EC368D;
   --seashell: #FFF3EF;
   --main-gradient: linear-gradient(135deg, var(--deep-pink) 0%, var(--indigo) 50%, var(--electric) 100%);
-  --soft-gradient: linear-gradient(135deg, color-mix(in srgb, var(--deep-pink), transparent 50%),  0%, color-mix(in srgb, var(--indigo), transparent 80%) 50%, color-mix(in srgb, var(--electric), transparent 60%) 100%);
+  --soft-gradient: linear-gradient(135deg, color-mix(in srgb, var(--deep-pink), transparent 70%),  0%, color-mix(in srgb, var(--indigo), transparent 90%) 50%, color-mix(in srgb, var(--electric), transparent 70%) 100%);
   
   /* --white: #ffffff;
   --gray-0: #f8f9fa;

@@ -1,0 +1,13 @@
+:where(button, .button, [type="button"], [type="submit"]) {
+  cursor: pointer;
+
+  &:where([data-button-type="naked"]) {
+    background: none;
+    border: 0;
+  }
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+}

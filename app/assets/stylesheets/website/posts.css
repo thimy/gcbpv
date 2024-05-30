@@ -5,9 +5,6 @@
   }
 
   .card {
-    background: color-mix(in srgb, var(--electric), transparent 95%);
-    --card-border-color: color-mix(in srgb, var(--electric), transparent 75%);
-    border-radius: var(--radius-3);
     padding: var(--size-6);
   }
 }

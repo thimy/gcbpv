@@ -1,0 +1,48 @@
+
+.menu-button {
+  background-color: transparent;
+  border: 1px solid var(--text-color);
+  border-radius: var(--radius-2);
+  display: none;
+
+  .icon {
+    cursor: pointer;
+    height: 30px;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 400ms;
+    user-select: none;
+    width: 30px;
+
+    &:is([data-menu-active="true"] *) {
+      transform: rotate(45deg);
+    }
+  }
+  
+  .line {
+    fill:none;
+    transition: stroke-dasharray 400ms, stroke-dashoffset 400ms;
+    stroke: currentColor;
+    stroke-width:5.5;
+    stroke-linecap:round;
+  }
+  
+  .top {
+    stroke-dasharray: 40 121;
+
+    &:is([data-menu-active="true"] *) {
+      stroke-dashoffset: -68px;
+    }
+  }
+  
+  .bottom {
+    stroke-dasharray: 40 121;
+  
+    &:is([data-menu-active="true"] *) {
+      stroke-dashoffset: -68px;
+    }
+  }
+
+  @media (max-width: 1000px) {
+    display: flex;
+  }
+}

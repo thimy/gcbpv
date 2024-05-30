@@ -74,3 +74,11 @@ a {
 .gap-10 {
   gap: var(--size-10);
 }
+
+.rotate-90 {
+  transform: rotate(-90deg);
+}
+
+.rotate90 {
+  transform: rotate(90deg);
+}

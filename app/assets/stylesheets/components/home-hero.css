@@ -1,5 +1,7 @@
 hero-container.home-hero {
   background: 0;
+  display: flex;
+  flex-direction: row;
   gap: var(--size-6);
   margin: 0;
   padding: 0;
@@ -84,9 +86,6 @@ hero-container.home-hero {
 
   .categories {
     --category-spacing: var(--size-5);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: var(--size-6);
     
     h2 {
       font-size: var(--font-size-4);
@@ -94,6 +93,14 @@ hero-container.home-hero {
       &::after {
         content: none;
       }
+    }
+  }
+
+  @media (max-width: 1000px) {
+    flex-direction: column;
+
+    .categories a {
+      height: var(--size-10);
     }
   }
 }

@@ -111,12 +111,7 @@
     margin-top: 0;
   }
 
-  .card {
-    background: color-mix(in srgb, var(--electric), transparent 95%);
-    --card-border-color: color-mix(in srgb, var(--electric), transparent 75%);
-  }
-
-  @container (max-width: 700px) {
+  @container (max-width: 1000px) {
     .grid {
       grid-template-columns: 1fr;
     }

@@ -6,7 +6,7 @@ event-card {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    gap: var(--size-6);
+    gap: var(--size-2) var(--size-6);
     min-height: auto;
     padding: var(--size-4);
     text-decoration: none;

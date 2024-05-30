@@ -5,7 +5,7 @@
   <section class="latest-posts">
     <header>
       <h2>Dernières actualités</h2>
-      <%= link_to "↬ Voir tous articles", posts_path %>
+      <%= link_to "↬ Voir tous les articles", posts_path %>
     </header>
     <div class="flex-column gap-4">
       <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
