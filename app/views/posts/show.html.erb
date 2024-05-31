@@ -1,10 +1,10 @@
 <% content_for(:page_class, "post-page ") %>
 <% content_for(:page_title, @post.title) %>
 
-<section class="popout">
+<section class="panel popout">
   <div class="tag-list">
     <% @post.categories.each do |category| %>
-      <%= link_to "", class: "tag" do %>
+      <%= link_to "", class: "tag", "data-tag-color": "dark-accent" do %>
         <span><%= category.name %></span>
       <% end %>
     <% end %>

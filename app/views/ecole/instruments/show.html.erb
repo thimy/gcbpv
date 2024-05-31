@@ -1,36 +1,39 @@
 <% content_for(:page_class, "ecole instrument-page ") %>
 <% content_for(:page_title, @instrument.name) %>
 
-<section class="popout grid" data-grid="2-3">
+<section class="feature grid gap-8">
   <div class="left">
-    <div class="slot-list">
-      <div>
-        <h2>Les créneaux de cours pour cet instrument</h2>
+    <h2><%= inline_svg "icons/clock" %>Les créneaux de cours</h2>
+    <div class="panel slot-list">
       <% @slots.each do |city_day_teacher, slots| %>
         <% city, day, teacher = city_day_teacher %>
         <% slots.each do |slot| %>
           <% courses = slot.teacher.specialties.where(instrument_id: @instrument.id) %>
           <% courses.each do |course| %>
             <% if course.teacher == slot.teacher && city != @city %>
-              </div>
-              <div>
-                <h3>
-                  <span class="tag">
-                    <span><%= city %></span>
-                  </span>
-                </h3>
+                <h3><%= city %></h3>
                 <% @city = city %>
             <% end %>
+            <% if day != @day %>
+              <h4><%= day %></h4>
+              <% @day = day %>
+            <% end %>
             <% if course.teacher == slot.teacher %>
-              <div><%= link_to "#{slot.teacher.name}", ecole_teacher_path(slot.teacher) %> : <%= "#{slot.datetime}" %></div>
+              <div class="slot flex-row gap-4">
+                <time><%= slot.time_period %></time>
+                <div class="slot-teacher">
+                  <%= link_to ecole_teacher_path(slot.teacher), class: "tag" do %>
+                    <span><%= slot.teacher.name %></span>
+                  <% end %>
+                </div>
+              </div>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
-      </div>
     </div>
   </div>
-  <div class="right">
+  <div class="right panel">
     <%= simple_format(@instrument.description) %>
   </div>
 </section>

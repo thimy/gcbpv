@@ -1,22 +1,22 @@
 <% content_for(:page_class, "home ") %>
 <% content_for(:page_title, "Groupement Culturel Breton<wbr> des Pays de Vilaine".html_safe) %>
 
-<div class="feature grid">
+<div class="feature grid gap-8">
   <section class="latest-posts">
     <header>
-      <h2>Dernières actualités</h2>
+      <h2><%= inline_svg "icons/newspaper" %>Dernières actualités</h2>
       <%= link_to "↬ Voir tous les articles", posts_path %>
     </header>
-    <div class="flex-column gap-4">
+    <div class="panel flex-column">
       <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
     </div>
   </section>
   <section class="upcoming-events">
     <header>
-      <h2>Événements à venir</h2>
+      <h2><%= inline_svg "icons/party" %>Événements à venir</h2>
       <%= link_to "↬ Voir tous les événements", events_path %>
     </header>
-    <div class="flex-column gap-4">
+    <div class="panel flex-column">
       <%= render Website::Card::Event::Component.with_collection(@events) %>
     </div>
   </section>

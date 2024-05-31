@@ -1,5 +1,7 @@
-<%= link_to archives_edition_path(@edition), class: "card edition-card" do %>
-  <%= image_tag @edition.image %>
+<%= link_to archives_edition_path(@edition), class: "card edition-card", "data-card-type": "image" do %>
+  <div class="image">
+    <%= image_tag @edition.image %>
+  </div>
   <div class="card-info">
     <h3><%= @edition.name %></h3>
     <dl>

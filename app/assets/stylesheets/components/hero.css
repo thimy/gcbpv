@@ -1,12 +1,19 @@
 hero-container {
-  background-image: var(--main-gradient);
-  border-radius: var(--radius-3);
-  color: var(--white);
-  margin-inline: var(--size-6);
-  padding-block: var(--size-8);
+  padding-block-start: var(--size-8);
   position: relative;
-  overflow: hidden;
   text-align: center;
+
+  h1 {
+    background: url("icons/underline2.svg") center 0.75em no-repeat;
+    background-size: 100%;
+    color: var(--black);
+    display: inline;
+    font-family: "Garden Grown";
+    font-size: var(--font-size-fluid-4);
+    position: relative;
+    text-wrap: initial;
+    z-index: 1;
+  }
 
   p {
     color: var(--black);

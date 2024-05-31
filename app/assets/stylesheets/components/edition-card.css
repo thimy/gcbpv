@@ -3,8 +3,6 @@
   align-items: stretch;
   border: 2px solid var(--card-border-color);
   border-radius: var(--radius-3);
-  display: flex;
-  flex-direction: row;
   gap: var(--size-4);
   justify-content: start;
   padding: var(--size-4);
@@ -24,12 +22,15 @@
     }
   }
 
+  .image {
+    aspect-ratio: 1 / 1;
+  }
+
   img {
     align-self: start;
     flex-grow: 0;
     flex-shrink: 0;
     transition: all ease-out 0.2s;
-    width: 30%;
 
     &:is(.event:hover > *) {
       transform: scale(1.05);

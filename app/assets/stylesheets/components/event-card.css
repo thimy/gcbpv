@@ -1,19 +1,16 @@
 event-card {
   container-type: inline-size;
 
-  .card {
+  .event-card {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: start;
     gap: var(--size-2) var(--size-6);
-    min-height: auto;
-    padding: var(--size-4);
-    text-decoration: none;
-    transition: var(--transition-short);
   
     time {
-      flex: 0 0 var(--size-11);
+      flex: 0 0 100px;
+      font-size: var(--font-size-0);
     }
   
     h3 {
@@ -21,8 +18,8 @@ event-card {
     }
   
     address {
-      color: var(--text-color-secondary);
-      font-size: var(--font-size-0);
+      color: var(--light-accent);
+      font-size: var(--font-size-1);
     }
 
     @container (max-width: 25em) {

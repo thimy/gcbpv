@@ -1,12 +1,6 @@
 .home {
   container-type: inline-size;
 
-  main {
-    > .full.content {
-      padding-block: var(--size-6);
-    }
-  }
-
   section:not(.hero, .categories) {
     display: flex;
     flex-direction: column;
@@ -20,7 +14,6 @@
 
   .grid {
     align-items: start;
-    gap: var(--size-6);
     grid-template-columns: 1fr 520px;
     grid-template-rows: auto 1fr;
     padding-block-end: var(--size-6);
@@ -38,7 +31,7 @@
           color: var(--text-color-secondary);
 
           &:hover {
-            color: var(--deep-pink);
+            color: var(--dark-accent);
           }
         }
       }

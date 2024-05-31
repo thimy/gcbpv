@@ -1,5 +1,5 @@
 footer {
-  background: var(--indigo);
+  background: var(--dark-shades);
   color: var(--white);
 
   > * {

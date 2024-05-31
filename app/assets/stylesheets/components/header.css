@@ -1,6 +1,5 @@
 body > header {
-  background-color: color-mix(in srgb, var(--content-background-color), transparent 30%);
-  backdrop-filter: blur(10px);
+  padding: var(--size-4);
   position: sticky;
   top: 0;
   width: 100%;
@@ -8,6 +7,10 @@ body > header {
 
   nav {
     align-items: center;
+    background-color: color-mix(in srgb, var(--main-brand), transparent 10%);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-3);
+    box-shadow: var(--dark-elevation-medium);
     color: var(--black);
     display: flex;
     justify-content: space-between;
@@ -29,8 +32,8 @@ body > header {
       }
 
       a {
-        --entry-bg-color: color-mix(in srgb, var(--electric), transparent 95%);
-        --entry-border-color: color-mix(in srgb, var(--electric), transparent 75%);
+        --entry-bg-color: color-mix(in srgb, var(--dark-accent), transparent 80%);
+        --entry-border-color: color-mix(in srgb, var(--dark-accent), transparent 75%);
         border: 1px solid transparent;
         border-radius: var(--radius-2);
         padding: var(--size-1) var(--size-3);
@@ -40,8 +43,9 @@ body > header {
         z-index: 1;
 
         &:hover {
-          background-color: color-mix(in srgb, var(--electric), transparent 80%);
+          background-color: var(--entry-bg-color);
           border: 1px solid var(--entry-border-color);
+          color: currentColor;
         }
       }
     }
@@ -53,9 +57,9 @@ body > header {
       position: relative;
 
       .dropdown-menu {
-        background-color: var(--content-background-color);
+        background-color: var(--background-color);
         border-radius: var(--radius-2);
-        box-shadow: var(--dark-elevation-medium);
+        box-shadow: var(--light-elevation-medium);
         display: none;
         flex-direction: column;
         max-width: var(--size-12);
@@ -74,8 +78,8 @@ body > header {
           padding: var(--size-1) var(--size-2);
 
           &:hover {
-            background-color: var(--indigo);
-            color: var(--white);
+            --entry-bg-color: color-mix(in srgb, var(--light-accent), transparent 70%);
+            --entry-border-color: color-mix(in srgb, var(--light-accent), transparent 75%);
           }
 
           &::after {
@@ -84,56 +88,57 @@ body > header {
         }
       }
     }
-  }
 
-  @media (max-width: 1000px) {
-    .links {
-      align-items: start;
-      background-color: var(--content-background-color);
-      bottom: 0;
-      box-shadow: var(--dark-elevation-high);
-      flex-direction: column;
-      height: 100vh;
-      overflow-y: scroll;
-      padding: var(--size-8) var(--size-4);
-      position: fixed;
-      left: -100%;
-      top: 0;
-      transition: left ease-out 0.4s;
-      width: fit-content;
-
-      &:is([data-menu-active="true"] *) {
-        left: 0;
-      }
-
-      .dropdown {
+    @media (max-width: 1000px) {
+      .links {
         align-items: start;
-        
-        .dropdown-menu {
-          border-radius: 0;
-          box-shadow: none;
-          display: flex;
-          margin-inline-start: var(--size-3);
-          max-width: 100%;
-          position: relative;
-          top: initial;
+        background-color: var(--content-background-color);
+        bottom: 0;
+        flex-direction: column;
+        height: 100vh;
+        overflow-y: scroll;
+        padding: var(--size-8) var(--size-4);
+        position: fixed;
+        right: calc(100% + var(--size-4));
+        top: calc(var(--size-4) * -1);
+        transition: transform ease-out 0.4s;
+        width: calc(100% - var(--size-8));
 
-          > * {
-            border-inline-start: var(--border-default);
+        &:is([data-menu-active="true"] *) {
+          box-shadow: var(--dark-elevation-high);
+          transform: translateX(100%);
+        }
+
+        .dropdown {
+          align-items: start;
+          width: 100%;
+
+          .dropdown-menu {
             border-radius: 0;
+            box-shadow: none;
+            display: flex;
+            margin-inline-start: var(--size-3);
+            max-width: 100%;
+            position: relative;
+            top: initial;
+
+            > * {
+              border-inline-start: var(--border-default);
+              border-radius: 0;
+            }
           }
         }
-      }
 
-      button {
-        align-items: center;
-        display: inline-flex;
-        gap: var(--size-2);
-        margin-block-end: var(--size-4);
+        button {
+          align-items: center;
+          display: inline-flex;
+          gap: var(--size-2);
+          margin-block-end: var(--size-4);
 
-        svg {
-          height: 1.5em;
-          width: 1.5em;
+          svg {
+            height: 1.5em;
+            width: 1.5em;
+          }
         }
       }
     }

@@ -2,13 +2,11 @@
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new %>
-  <main>
+  <main class="content">
     <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
-    <div class="full content gap-8">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
-    </div>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
   </main>
   <%= render Website::Footer::Component.new %>
 <% end %>

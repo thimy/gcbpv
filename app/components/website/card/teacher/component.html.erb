@@ -1,10 +1,12 @@
-<%= link_to ecole_teacher_path(@teacher), class: "card" do %>
-  <%= image_tag @teacher.photo if @teacher.photo.present? %>
+<%= link_to ecole_teacher_path(@teacher), class: "card", "data-card-type": "image" do %>
+  <div class="image">
+    <%= image_tag @teacher.photo.present? ? @teacher.photo : "icons/singing" %>
+  </div>
   <div class="card-info">
     <h3><%= @teacher.name %></h3>
     <div class="tag-list">
       <% @teacher.instruments.each do |instrument| %>
-        <span class="tag">
+        <span class="tag" data-tag-color="light-accent">
           <span><%= instrument.name %></span>
         </span>
       <% end %>

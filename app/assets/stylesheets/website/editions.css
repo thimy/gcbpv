@@ -1,6 +1,6 @@
 .editions {
   section.grid[data-grid="repeat"] {
-    --column-width: 450px;
+    --column-width: 280px;
   }
 }
 

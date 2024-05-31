@@ -1,0 +1,24 @@
+.list-element {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2);
+  justify-content: end;
+  margin-inline: calc(var(--size-6) * -1);
+  padding: var(--size-3) var(--size-6);
+  text-decoration: none;
+  transition: var(--transition-short);
+  
+  &:hover {
+    background: color-mix(in oklch, var(--main-brand), transparent 75%);
+    color: var(--black);
+  }
+  
+  h3 {
+    margin: 0;
+  }
+  
+  time {
+    font-size: var(--font-size-fluid-0);
+  }  
+}

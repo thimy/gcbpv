@@ -1,16 +1,16 @@
 <% content_for(:page_class, "ecole teacher-page ") %>
 <% content_for(:page_title, @teacher.name) %>
 
-<section class="popout grid" data-grid="2-3">
-  <div class="left">
+<section class="panel popout">
+  <div class="left flex-column gap-4">
     <div class="tag-list">
       <% @teacher.instruments.each do |instrument| %>
-        <span class="tag" data-tag-color="green">
+        <span class="tag" data-tag-color="light-accent">
           <span><%= instrument.name %></span>
         </span>
       <% end %>
       <% @teacher.cities.pluck(:name).uniq.each do |city| %>
-        <span class="tag" data-tag-color="red">
+        <span class="tag" data-tag-color="dark">
           <span><%= city %></span>
         </span>
       <% end %>

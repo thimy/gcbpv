@@ -1,8 +1,8 @@
-<%= link_to post_path(@post), class: "card post-preview" do %>
+<%= link_to post_path(@post), class: "list-element post-preview" do %>
   <% if @post.categories.present? %>
     <div class="tag-list">
       <% @post.categories.each do |category| %>
-        <span class="tag">
+        <span class="tag" data-tag-color="light-accent">
           <span><%= category.name %></span>
         </span>
       <% end %>

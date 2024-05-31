@@ -1,5 +1,5 @@
 .tag {
-  --tag-bg-color: var(--indigo);
+  --tag-bg-color: var(--main-brand);
   background-color: var(--tag-bg-color);
   border-radius: var(--radius-2);
   font-family: var(--font-sans);
@@ -13,28 +13,27 @@
     background-color: color-mix(in srgb, var(--tag-bg-color), transparent 20%);
   }
 
-  &:where([data-tag-color="blue"]) {
-    --tag-bg-color: var(--blue);
-  }
-
-  &:where([data-tag-color="red"]) {
-    --tag-bg-color: var(--red);
-  }
-
-  &:where([data-tag-color="green"]) {
-    --tag-bg-color: var(--green);
+  &:where([data-tag-color="light"]) {
+    --tag-bg-color: var(--white);
   }
 
   &:where([data-tag-color="dark"]) {
-    --tag-bg-color: var(--black);
+    --tag-bg-color: var(--dark-shades);
+  }
+
+  &:where([data-tag-color="light-accent"]) {
+    --tag-bg-color: var(--light-accent);
+  }
+
+  &:where([data-tag-color="dark-accent"]) {
+    --tag-bg-color: var(--dark-accent);
   }
 
   > span {
     color: var(--tag-bg-color);
     filter: 
-      invert(1) 
-      grayscale(1) 
-      brightness(calc(80 / 100))
+      invert(1)
+      grayscale(1)
       contrast(9000)
     ;
     -moz-osx-font-smoothing: grayscale;

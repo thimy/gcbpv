@@ -1,5 +1,5 @@
 .banner {
-  --banner-color: var(--blue);
+  --banner-color: var(--light-accent);
   background-color: color-mix(in srgb, var(--banner-color), transparent 40%);
   border: 1px solid var(--banner-color);
   border-radius: var(--radius-2);
@@ -7,10 +7,10 @@
   padding: var(--size-2) var(--size-3);
 
   &:where([data-banner-type="success"]) {
-    --banner-color: var(--green);
+    --banner-color: var(--apple);
   }
 
   &:where([data-banner-type="alert"]) {
-    --banner-color: var(--red);
+    --banner-color: var(--vermilion);
   }
 }

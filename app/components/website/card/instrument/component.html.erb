@@ -3,7 +3,7 @@
     <h3><%= @instrument.name %></h3>
     <div class="tag-list">
       <% @instrument.cities.each do |city| %>
-        <span class="tag" data-tag-color="dark">
+        <span class="tag">
           <span><%= city.name %></span>
         </span>
       <% end %>

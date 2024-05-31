@@ -11,8 +11,6 @@
   filter: grayscale(0.2);
   font-family: var(--font-serif);
   font-size: var(--font-size-3);
-  flex-shrink: 0;
-  height: var(--size-11);
   padding: var(--size-4) var(--size-6);
   overflow: hidden;
   position: relative;
@@ -21,6 +19,7 @@
   z-index: 5;
 
   &:hover {
+    color: var(--white);
     filter: revert;
   }
 
@@ -46,7 +45,7 @@
   }
   
   h2 {
-    font-size: var(--font-size-5);
+    font-size: var(--font-size-4);
     font-weight: var(--font-weight-4);
     text-align: start;
     text-shadow: 0 0 6px var(--black);
@@ -58,17 +57,17 @@
   }
 
   &.bogue {
-    --hero-card-bg-color: var(--deep-pink);
-    background-image: url("home/events.jpg");
+    --hero-card-bg-color: var(--dark-accent);
+    background-image: url("home/bogue.jpg");
   }
 
   &.ecole {
-    --hero-card-bg-color: var(--indigo);
+    --hero-card-bg-color: var(--main-brand);
     background-image: url("home/emt.jpg");
   }
 
   &.archives {
-    --hero-card-bg-color: var(--electric);
+    --hero-card-bg-color: var(--light-accent);
     background-image: url("home/resources.jpg");
   }
 }

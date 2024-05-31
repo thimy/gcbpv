@@ -1,8 +1,8 @@
 .instruments {
   .prices {
     display: grid;
-    gap: var(--size-5);
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    gap: 0 var(--size-5);
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
 
     dl {
       border: 2px solid var(--black);
@@ -13,7 +13,11 @@
   }
 
   .instrument-list {
-    grid-template-columns: repeat(auto-fit, minmax(250px, auto));
+    container-type: inline-size;
+
+    .grid {
+      --column-width: 300px;
+    }
   }
 
   .card {
@@ -26,10 +30,30 @@
     .slot-list {
       display: flex;
       flex-direction: column;
-      gap: var(--size-3);
 
       h3 {
-        margin-block-end: var(--size-2);
+        border-block-start: 1px solid var(--gray);
+        font-size: var(--font-size-5);
+        margin-block: var(--size-4) 0;
+        padding-block-start: var(--size-3);
+
+        &:first-child {
+          border: 0;
+          margin-block-start: 0;
+          padding-block-start: 0;
+        }
+      }
+
+      h4:empty {
+        display: none;
+      }
+
+      .slot {
+        margin-block-start: var(--size-1);
+      }
+
+      time {
+        width: 160px;
       }
     }
   }

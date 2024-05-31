@@ -1,6 +1,9 @@
 .teachers {
   section.grid {
     --column-width: 350px;
+    background: 0;
+    box-shadow: none;
+    padding: 0;
 
     .card {
       justify-content: start;
@@ -10,6 +13,14 @@
 
 .teacher-page {
   .left {
+    float: left;
+    padding: var(--size-2) var(--size-4) var(--size-4) 0;
+    width: 500px;
+
+    img {
+      width: 100%;
+    }
+
     .tag-list {
       justify-content: center;
     }
