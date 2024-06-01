@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "association", to: "association#index"
+  get "bogue", to: "bogue#index"
+  namespace :bogue do
+  end
   namespace :account do
   end
   get "compte", to: "compte#index", as: :account

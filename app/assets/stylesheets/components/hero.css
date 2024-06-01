@@ -17,8 +17,12 @@ hero-container {
 
   p {
     color: var(--black);
-    font-size: var(--font-size-4);
+    font-family: var(--font-serif);
+    font-size: var(--font-size-fluid-2);
+    line-height: 1.2;
+    margin: 0;
     text-align: center;
+    text-wrap: balance;
   }
 
   .ornaments svg {

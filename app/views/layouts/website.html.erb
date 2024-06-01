@@ -3,7 +3,7 @@
 <% content_for :content do %>
   <%= render Website::Header::Component.new %>
   <main class="content">
-    <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
+    <%= render Website::Hero::Component.new(title: content_for(:page_title), subtitle: content_for(:page_description)) %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>

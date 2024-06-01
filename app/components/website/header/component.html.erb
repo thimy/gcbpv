@@ -4,6 +4,8 @@
     <%= render Shared::MenuButton::Component.new %>
     <div class="links">
       <button data-action="menu-toggle#toggle" data-button-type="naked"><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button>
+      <%= link_to "L’association", association_path %>
+      <%= link_to "La Bogue d’Or", bogue_path %>
       <div class="dropdown">
         <%= link_to "École", ecole_path %>
         <div class="dropdown-menu">

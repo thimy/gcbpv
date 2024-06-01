@@ -1,4 +1,5 @@
 body > header {
+  --header-bg-color: var(--main-brand);
   padding: var(--size-4);
   position: sticky;
   top: 0;
@@ -7,8 +8,7 @@ body > header {
 
   nav {
     align-items: center;
-    background-color: color-mix(in srgb, var(--main-brand), transparent 10%);
-    backdrop-filter: blur(10px);
+    background-color: var(--header-bg-color);
     border-radius: var(--radius-3);
     box-shadow: var(--dark-elevation-medium);
     color: var(--black);
@@ -22,6 +22,7 @@ body > header {
       font-weight: var(--font-weight-8);
       line-height: var(--font-lineheight-0);
       padding: 0;
+      text-wrap: balance;
     }
 
     .links {
@@ -34,10 +35,14 @@ body > header {
       a {
         --entry-bg-color: color-mix(in srgb, var(--dark-accent), transparent 80%);
         --entry-border-color: color-mix(in srgb, var(--dark-accent), transparent 75%);
+        align-items: center;
         border: 1px solid transparent;
         border-radius: var(--radius-2);
+        display: flex;
+        margin: auto 0;
         padding: var(--size-1) var(--size-3);
         position: relative;
+        text-align: center;
         text-decoration: none;
         transition: var(--transition-short);
         z-index: 1;
@@ -52,12 +57,12 @@ body > header {
 
     .dropdown {
       align-items: center;
-      display: flex;
+      display: inline-flex;
       flex-direction: column;
       position: relative;
 
       .dropdown-menu {
-        background-color: var(--background-color);
+        background-color: var(--header-bg-color);
         border-radius: var(--radius-2);
         box-shadow: var(--light-elevation-medium);
         display: none;
@@ -76,6 +81,7 @@ body > header {
         a {
           border-radius: var(--radius-2);
           padding: var(--size-1) var(--size-2);
+          text-align: start;
 
           &:hover {
             --entry-bg-color: color-mix(in srgb, var(--light-accent), transparent 70%);
