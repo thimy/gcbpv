@@ -1,7 +1,7 @@
 <%= form_with(model: subscription, url: compte_subscriptions_path) do |form| %>
   <% if subscription.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(subscription.errors.count, "error") %> prohibited this subscription from being saved:</h2>
+      <h2><%= pluralize(subscription.errors.count, "erreur") %> dans le formulaire :</h2>
 
       <ul>
         <% subscription.errors.each do |error| %>
@@ -11,19 +11,48 @@
     </div>
   <% end %>
 
+  <%= form.fields_for :student, Student.new do |student_form| %>
+    <div>
+      <%= form.label "Prénom", style: "display: block" %>
+      <%= form.text_field :first_name %>
+    </div>
+
+    <div>
+      <%= form.label "Nom", style: "display: block" %>
+      <%= form.text_field :last_name %>
+    </div>
+
+    <div>
+      <%= form.label "Genre", style: "display: block" %>
+      <%= form.select :gender, options_for_select(Student.genders) %>
+    </div>
+
+    <div>
+      <%= form.label "Téléphone", style: "display: block" %>
+      <%= form.text_field :phone %>
+    </div>
+
+    <div>
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email %>
+    </div>
+
+  <% end %>
+
   <div>
     <%= form.button "Ajouter un cours", formmethod: "post", formaction: add_course_compte_subscriptions_path(id: form.object), data: {turbo_frame: form.field_id(:courses)} %>
-    <%= form.button "Ajouter un atelier", formmethod: "post", formaction: add_workshop_compte_subscriptions_path(id: form.object), data: {turbo_frame: form.field_id(:workshops)} %>
+    <%= form.button "Ajouter un atelier", formmethod: "post", formaction: add_workshop_compte_subscriptions_path(id: form.object), data: {turbo_frame: form.field_id(:subbed_workshops)} %>
     <%= form.submit "Ajouter un atelier d’éveil musical", name: :add_early_learning %>
     <%= form.submit "Ajouter un atelier de découverte musicale enfant", name: :add_kid_discovery %>
     <%= form.submit "Ajouter un atelier de découverte musicale adulte", name: :add_discovery %>
   </div>
   
   <%= turbo_frame_tag form.field_id(:courses) do %>
-    <%= form.fields_for :course, Course.new do |course_form| %>
+    <%= form.fields_for :courses do |course_form| %>
+      <h3>Ajouter un cours</h3>
       <div>
         <%= course_form.label "Instrument", style: "display: block" %>
-        <%= course_form.collection_select :instrument_id, @instruments, :id, :name %>
+        <%= course_form.collection_select :id, @instruments, :id, :name %>
       </div>
 
       <div>
@@ -38,18 +67,15 @@
     <% end %>
   <% end %>
   
-  <%= turbo_frame_tag form.field_id :workshops do %>
-    <%= form.fields_for :subbed_workshop, SubbedWorkshop.new do |workshop_form| %>
+  <%= turbo_frame_tag form.field_id(:subbed_workshops) do %>
+    <%= form.fields_for :subbed_workshops do |workshop_form| %>
       <div>
         <%= workshop_form.label "Atelier", style: "display: block" %>
         <%= workshop_form.collection_select :workshop_id, Workshop.all, :id, :name %>
       </div>
     <% end %>
   <% end %>
-  
-  <%= form.fields_for :student, Student.new do |student_form| %>
-    <%= render "student", form: student_form %>
-  <% end %>
+
   <div>
     <%= form.check_box :image_consent %>
     <%= form.label "Autorisation utilisation image" %>
@@ -69,6 +95,6 @@
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Créer une inscription pour cet élève" %>
   </div>
 <% end %>

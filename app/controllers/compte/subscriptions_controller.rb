@@ -1,5 +1,6 @@
 class Compte::SubscriptionsController < CompteController
   before_action :set_subscription, only: %i[ show edit update destroy ]
+  before_action :set_lists, only: %i[ new create edit add_course add_workshop ]
 
   # GET /subscriptions or /subscriptions.json
   def index
@@ -13,19 +14,16 @@ class Compte::SubscriptionsController < CompteController
   # GET /subscriptions/new
   def new
     @subscription = Subscription.new
-    @instruments = Instrument.all
-    @teachers = Teacher.all
-    @slots = Slot.all
   end
 
   # GET /subscriptions/1/edit
   def edit
+    @subscription = Subscription.new
   end
 
   # POST /subscriptions or /subscriptions.json
   def create
-    @subscription = Subscription.new(subscription_params)
-    @subscription.season = Config.first.season
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id], season_id: Config.first.season.id}))
 
     respond_to do |format|
       if params[:add_course]
@@ -47,16 +45,14 @@ class Compte::SubscriptionsController < CompteController
   end
 
   def add_course
-    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
-    @subscription.season = Config.first.season
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id], season_id: Config.first.season.id}))
     @subscription.courses.build
     render :new
   end
 
   def add_workshop
-    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
-    @subscription.season = Config.first.season
-    @subscription.workshops.build
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id], season_id: Config.first.season.id}))
+    @subscription.subbed_workshops.build
     render :new
   end
 
@@ -86,12 +82,27 @@ class Compte::SubscriptionsController < CompteController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
-      @subscription = subscription.find(params[:id])
+      @subscription = Subscription.find(params[:id])
+      @subscription.season = Config.first.season
+    end
+
+    def set_lists
+      @instruments = Instrument.all
+      @teachers = Teacher.all
+      @slots = Slot.all
     end
 
     # Only allow a list of trusted parameters through.
     def subscription_params
-      params.require(:subscription).permit(:name, :description)
+      params.require(:subscription).permit(
+        :name,
+        :description,
+        :image_consent,
+        :disability,
+        :ars,
+        :students_attributes => [:first_name, :last_name, :gender, :phone, :email],
+        :courses_attributes => [:instrument_id, :teacher_id, :slot_id],
+        :subbed_workshops_attributes => [:workshop_id, :comment])
     end
 end
 

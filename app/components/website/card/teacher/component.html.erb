@@ -1,6 +1,6 @@
 <%= link_to ecole_teacher_path(@teacher), class: "card", "data-card-type": "image" do %>
   <div class="image">
-    <%= image_tag @teacher.photo.present? ? @teacher.photo : "icons/singing" %>
+    <%= image_tag @teacher.photo.present? ? @teacher.photo : "icons/singing.svg" %>
   </div>
   <div class="card-info">
     <h3><%= @teacher.name %></h3>

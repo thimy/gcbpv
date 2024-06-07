@@ -1,9 +1,20 @@
 :where(button, .button, [type="button"], [type="submit"]) {
+  --button-bg-color: var(--main-brand);
+  background-color: var(--button-bg-color);
+  border: none;
+  border-radius: var(--radius-2);
   cursor: pointer;
+  padding: var(--size-2) var(--size-3);
+  transition: var(--transition-short);
+
+  &:hover {
+    filter: grayscale(0.3);
+  }
 
   &:where([data-button-type="naked"]) {
     background: none;
     border: 0;
+    padding: 0;
   }
 
   svg {

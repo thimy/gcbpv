@@ -1,10 +1,4 @@
 body.account {
-  background-color: var(--black);
-
-  header {
-    background: var(--background-color);
-  }
-
   main {
     align-self: stretch;
   }
