@@ -1,5 +1,5 @@
 .tag {
-  --tag-bg-color: var(--main-brand);
+  --tag-bg-color: var(--light-accent);
   background-color: var(--tag-bg-color);
   border-radius: var(--radius-2);
   display: inline-flex;

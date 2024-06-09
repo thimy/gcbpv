@@ -1,6 +1,5 @@
 body > header {
-  --header-bg-color: var(--main-brand);
-  padding: var(--size-4);
+  --header-bg-color: var(--light-shades);
   position: sticky;
   top: 0;
   width: 100%;
@@ -10,7 +9,6 @@ body > header {
     align-items: center;
     background-color: var(--header-bg-color);
     border-radius: var(--radius-3);
-    box-shadow: var(--dark-elevation-medium);
     color: var(--black);
     display: flex;
     justify-content: space-between;
@@ -33,8 +31,8 @@ body > header {
       }
 
       a {
-        --entry-bg-color: color-mix(in srgb, var(--dark-accent), transparent 80%);
-        --entry-border-color: color-mix(in srgb, var(--dark-accent), transparent 75%);
+        --entry-bg-color: color-mix(in srgb, var(--main-brand), transparent 80%);
+        --entry-border-color: color-mix(in srgb, var(--main-brand), transparent 75%);
         align-items: center;
         border: 1px solid transparent;
         border-radius: var(--radius-2);
@@ -82,11 +80,6 @@ body > header {
           border-radius: var(--radius-2);
           padding: var(--size-1) var(--size-2);
           text-align: start;
-
-          &:hover {
-            --entry-bg-color: color-mix(in srgb, var(--light-accent), transparent 70%);
-            --entry-border-color: color-mix(in srgb, var(--light-accent), transparent 75%);
-          }
 
           &::after {
             content: none;
