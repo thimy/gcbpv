@@ -3,22 +3,18 @@
 
 <section class="popout grid" data-grid="2-3">
   <div class="left">
-    <dl>
-      <dt>Lieu</dt>
-      <dd><%= @workshop.city.name %></dd>
-      <dt>Horaires</dt>
-      <dd><%= @workshop.datetime %></dd>
-      <% if @teachers.present? %>
-        <dt>Animé par</dt>
-        <dd>
-          <% @workshop.teachers.each do |teacher| %>
-            <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
-              <span><%= teacher.name %></span>
-            <% end %>
+    <% @workshop.workshop_slots.each do |slot| %>
+      <div class="dual-tag">
+        <span class="tag" data-tag-color="dark">
+          <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>
+        </span>
+        <% if slot.teacher.present? %>
+          <%= link_to ecole_teacher_path(slot.teacher), class: "tag" do %>
+            <span><%= slot.teacher.name %></span>
           <% end %>
-        </dd>
-      <% end %>
-    </dl>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="right">
     <%= simple_format(@workshop.description) %>

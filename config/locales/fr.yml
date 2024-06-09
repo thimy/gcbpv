@@ -98,8 +98,8 @@ fr:
         one: "Atelier autonome"
         other: "Ateliers autonomes"
       kid_workshop:
-        one: "Atelier enfants"
-        other: "Ateliers enfants"
+        one: "Enfance"
+        other: "Enfance"
       meeting:
         one: "Rendez-vous"
         other: "Rendez-vous"
@@ -113,7 +113,7 @@ fr:
         one: "Formule"
         other: "Formules"
       post:
-        one: "Article"
+        one: "Actualité"
         other: "Articles"
       project:
         one: "Projet"
@@ -151,6 +151,9 @@ fr:
       workshop:
         one: "Atelier"
         other: "Ateliers"
+      workshop_slot:
+        one: "Créneau"
+        other: "Créneaux"
     attributes:
       name: "Name"
       active: "Actif"
@@ -247,6 +250,7 @@ fr:
         postcode: "Code postal"
         street_address: "Adresse"
         mail: "Email"
+        subscription_groups: "Inscriptions"
       plan:
         name: "Nom"
         class_price: "Prix du cours"
@@ -432,3 +436,12 @@ fr:
         kid_friendly: "Adapté aux enfants"
         created_at: "Créé le"
         updated_at: "Modifié le"
+        workshop_slots: "Créneaux"
+      workshop_slot:
+        teacher: "Professeur"
+        teacher_id: "Professeur"
+        day_of_week: "Jour"
+        slot_time: "Horaires"
+        city: "Ville"
+        city_id: "Ville"
+

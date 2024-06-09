@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class WorkshopDashboard < Administrate::BaseDashboard
+class WorkshopSlotDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,15 +9,11 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    teachers: Field::HasMany,
+    teacher: Field::BelongsTo,
     city: Field::BelongsTo,
     day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    description: TrixField,
-    end_time: Field::String,
-    name: Field::String,
-    start_time: Field::String,
-    workshop_slots: Field::NestedHasMany.with_options(skip: :workshop),
+    slot_time: Field::String,
+    workshop: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -28,25 +24,21 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    name
-    frequency
+    id
+    teacher
     city
-    description
-    workshop_slots
+    day_of_week
   ].freeze
-  
+
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    name
-    teachers
-    day_of_week
-    frequency
-    description
+    id
+    teacher
     city
-    start_time
-    end_time
-    workshop_slots
+    day_of_week
+    slot_time
+    workshop
     created_at
     updated_at
   ].freeze
@@ -55,15 +47,11 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    name
-    teachers
-    day_of_week
-    frequency
-    description
+    teacher
     city
-    start_time
-    end_time
-    workshop_slots
+    day_of_week
+    slot_time
+    workshop
   ].freeze
 
   # COLLECTION_FILTERS
@@ -78,10 +66,10 @@ class WorkshopDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how workshops are displayed
+  # Overwrite this method to customize how workshop slots are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(workshop)
-    workshop.name
-  end
+  # def display_resource(workshop_slot)
+  #   "WorkshopSlot ##{workshop_slot.id}"
+  # end
 end
