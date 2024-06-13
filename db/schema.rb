@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_09_172636) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_172529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -362,15 +362,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_09_172636) do
   create_table "workshops", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.bigint "city_id", null: false
-    t.integer "day_of_week"
-    t.integer "frequency"
-    t.string "start_time"
-    t.string "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "kid_friendly"
-    t.index ["city_id"], name: "index_workshops_on_city_id"
+    t.integer "archived"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -396,5 +391,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_09_172636) do
   add_foreign_key "workshop_slots", "cities"
   add_foreign_key "workshop_slots", "teachers"
   add_foreign_key "workshop_slots", "workshops"
-  add_foreign_key "workshops", "cities"
 end
