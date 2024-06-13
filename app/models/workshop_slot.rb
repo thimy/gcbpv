@@ -1,7 +1,8 @@
 class WorkshopSlot < ApplicationRecord
   include WithTime
 
-  belongs_to :teacher
+  has_many :workshop_slot_teachers
+  has_many :teachers, through: :workshop_slot_teachers
   belongs_to :workshop
   belongs_to :city
 
@@ -14,5 +15,15 @@ class WorkshopSlot < ApplicationRecord
     "Vendredi": 5,
     "Samedi": 6,
     "Dimanche": 7,
+  }
+
+  enum frequency: {
+    "Toutes les semaines": 0,
+    "Toutes les deux semaines": 1,
+    "Les semaines paires": 2,
+    "Les semaines impaires": 3,
+    "Tous les mois": 4,
+    "Six séances dans l'année": 5,
+    "A définir": 6
   }
 end

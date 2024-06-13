@@ -10,6 +10,8 @@ class Workshop < ApplicationRecord
 
   validates :name, presence: true
 
+  scope :active, -> {where(archived: false)}
+
   def datetime
     sentence = []
     sentence << "le #{day_of_week}" if day_of_week.present?

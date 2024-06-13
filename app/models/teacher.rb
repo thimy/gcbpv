@@ -3,7 +3,8 @@ class Teacher < ApplicationRecord
   has_many :instruments, through: :specialties
   has_many :slots
   has_many :cities, through: :slots
-  has_and_belongs_to_many :workshops
+  has_many :workshop_slot_teachers
+  has_many :workshop_slots, through: :workshop_slot_teachers
   has_one_attached :photo
 
   accepts_nested_attributes_for :slots

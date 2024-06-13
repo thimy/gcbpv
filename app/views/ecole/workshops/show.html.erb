@@ -8,9 +8,9 @@
         <span class="tag" data-tag-color="dark">
           <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>
         </span>
-        <% if slot.teacher.present? %>
-          <%= link_to ecole_teacher_path(slot.teacher), class: "tag" do %>
-            <span><%= slot.teacher.name %></span>
+        <% slot.teachers.each do |teacher| %>
+          <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
+            <span><%= teacher.name %></span>
           <% end %>
         <% end %>
       </div>

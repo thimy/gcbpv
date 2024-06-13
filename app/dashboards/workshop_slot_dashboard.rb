@@ -9,9 +9,10 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    teacher: Field::BelongsTo,
+    teachers: Field::HasMany,
     city: Field::BelongsTo,
-    day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
+    day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
     slot_time: Field::String,
     workshop: Field::BelongsTo,
     created_at: Field::DateTime,
@@ -25,8 +26,9 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    teacher
+    teachers
     city
+    frequency
     day_of_week
   ].freeze
 
@@ -34,8 +36,9 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    teacher
+    teachers
     city
+    frequency
     day_of_week
     slot_time
     workshop
@@ -47,8 +50,9 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    teacher
+    teachers
     city
+    frequency
     day_of_week
     slot_time
     workshop

@@ -4,7 +4,7 @@
       <div class="tag-list">
         <% @workshop.workshop_slots.each do |slot| %>
           <span class="tag" data-tag-color="dark">
-            <span><%= "#{slot.city.name} : #{slot.teacher.name}" %></span>
+            <span><%= "#{slot.city.name} : #{teacher_names(slot)}" %></span>
           </span>
         <% end %>
       </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_172529) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -346,16 +346,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_172529) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "workshop_slots", force: :cascade do |t|
+  create_table "workshop_slot_teachers", force: :cascade do |t|
     t.bigint "teacher_id", null: false
+    t.bigint "workshop_slot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_workshop_slot_teachers_on_teacher_id"
+    t.index ["workshop_slot_id"], name: "index_workshop_slot_teachers_on_workshop_slot_id"
+  end
+
+  create_table "workshop_slots", force: :cascade do |t|
     t.bigint "workshop_id", null: false
     t.bigint "city_id", null: false
     t.string "slot_time"
     t.integer "day_of_week"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "frequency"
     t.index ["city_id"], name: "index_workshop_slots_on_city_id"
-    t.index ["teacher_id"], name: "index_workshop_slots_on_teacher_id"
     t.index ["workshop_id"], name: "index_workshop_slots_on_workshop_id"
   end
 
@@ -388,7 +396,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_172529) do
   add_foreign_key "subscriptions", "students"
   add_foreign_key "training_sessions", "trainings"
   add_foreign_key "trainings", "seasons"
+  add_foreign_key "workshop_slot_teachers", "teachers"
+  add_foreign_key "workshop_slot_teachers", "workshop_slots"
   add_foreign_key "workshop_slots", "cities"
-  add_foreign_key "workshop_slots", "teachers"
   add_foreign_key "workshop_slots", "workshops"
 end
