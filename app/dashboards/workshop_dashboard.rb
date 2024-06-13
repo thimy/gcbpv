@@ -9,14 +9,9 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    teachers: Field::HasMany,
-    city: Field::BelongsTo,
-    day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     description: TrixField,
-    end_time: Field::String,
     name: Field::String,
-    start_time: Field::String,
     workshop_slots: Field::NestedHasMany.with_options(skip: :workshop),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -30,7 +25,6 @@ class WorkshopDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     name
     frequency
-    city
     description
     workshop_slots
   ].freeze
@@ -39,13 +33,8 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     name
-    teachers
-    day_of_week
     frequency
     description
-    city
-    start_time
-    end_time
     workshop_slots
     created_at
     updated_at
@@ -56,13 +45,8 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
-    teachers
-    day_of_week
     frequency
     description
-    city
-    start_time
-    end_time
     workshop_slots
   ].freeze
 
