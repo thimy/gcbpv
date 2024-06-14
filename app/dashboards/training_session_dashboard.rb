@@ -14,10 +14,10 @@ class TrainingSessionDashboard < Administrate::BaseDashboard
     end_time: Field::String,
     name: Field::String,
     start_time: Field::String,
-    training: Field::BelongsTo,
     image: Field::Image,
     guest: Field::String,
     city: Field::String,
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,12 +29,10 @@ class TrainingSessionDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     name
-    training
     date
     description
     guest
     city
-    end_time
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -47,8 +45,8 @@ class TrainingSessionDashboard < Administrate::BaseDashboard
     description
     start_time
     end_time
-    training
     image
+    status
     created_at
     updated_at
   ].freeze
@@ -65,7 +63,7 @@ class TrainingSessionDashboard < Administrate::BaseDashboard
     start_time
     end_time
     image
-    training
+    status
   ].freeze
 
   # COLLECTION_FILTERS

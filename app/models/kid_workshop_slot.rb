@@ -1,10 +1,8 @@
-class WorkshopSlot < ApplicationRecord
-  include WithTime
-
-  has_many :subscriptions, through: :subbed_workshops
-  has_many :workshop_slot_teachers
-  has_many :teachers, through: :workshop_slot_teachers
-  belongs_to :workshop
+class KidWorkshopSlot < ApplicationRecord
+  has_many :subscriptions
+  has_many :kid_workshop_slot_teachers
+  has_many :teachers, through: :kid_workshop_slot_teachers
+  belongs_to :kid_workshop
   belongs_to :city
 
   enum :status, "Public" => 0, "Privé" => 1
@@ -44,6 +42,6 @@ class WorkshopSlot < ApplicationRecord
   end
 
   def name
-    "#{workshop.name} – #{teacher_names} à #{city.name}"
+    "#{kid_workshop.name} – #{teacher_names} à #{city.name}"
   end
 end

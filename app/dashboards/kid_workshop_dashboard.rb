@@ -10,8 +10,8 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     description: TrixField,
-    frequency: Field::String,
     name: Field::String,
+    kid_workshop_slots: Field::NestedHasMany.with_options(skip: :kid_workshop),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
@@ -26,7 +26,6 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
-    frequency
     description
   ].freeze
 
@@ -35,10 +34,10 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     name
-    frequency
     description
     status
     workshop_type
+    kid_workshop_slots
     created_at
     updated_at
   ].freeze
@@ -48,10 +47,10 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
-    frequency
     description
     status
     workshop_type
+    kid_workshop_slots
   ].freeze
 
   # COLLECTION_FILTERS
@@ -69,7 +68,7 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how kid workshops are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(kid_workshop)
-  #   "KidWorkshop ##{kid_workshop.id}"
-  # end
+  def display_resource(kid_workshop)
+    "Atelier Enfance"
+  end
 end

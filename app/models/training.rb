@@ -3,4 +3,6 @@ class Training < ApplicationRecord
   belongs_to :season
 
   accepts_nested_attributes_for :training_sessions
+
+  enum :status, "Public" => 0, "Privé" => 1
 end

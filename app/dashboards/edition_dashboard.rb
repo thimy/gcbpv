@@ -14,6 +14,7 @@ class EditionDashboard < Administrate::BaseDashboard
     image: Field::Image,
     name: Field::String,
     price: Field::String.with_options(searchable: false),
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,6 +30,7 @@ class EditionDashboard < Administrate::BaseDashboard
     description
     format
     image
+    status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -39,6 +41,7 @@ class EditionDashboard < Administrate::BaseDashboard
     description
     format
     image
+    status
     price
     created_at
     updated_at
@@ -52,6 +55,7 @@ class EditionDashboard < Administrate::BaseDashboard
     description
     format
     image
+    status
     price
   ].freeze
 

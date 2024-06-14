@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ProjectDashboard < Administrate::BaseDashboard
+class KidWorkshopSlotDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,9 +9,12 @@ class ProjectDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: TrixField,
-    name: Field::String,
-    season: Field::BelongsTo,
+    city: Field::BelongsTo,
+    day_of_week: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    frequency: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    kid_workshop: Field::BelongsTo,
+    teachers: Field::HasMany,
+    slot_time: Field::String,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -23,30 +26,38 @@ class ProjectDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    name
-    description
-    season
+    id
+    city
+    day_of_week
+    frequency
     status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    name
-    description
-    season
-    status
+    id
+    city
+    day_of_week
+    frequency
+    kid_workshop
+    teachers
+    slot_time
     created_at
     updated_at
+    status
   ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    name
-    description
-    season
+    city
+    day_of_week
+    frequency
+    kid_workshop
+    teachers
+    slot_time
     status
   ].freeze
 
@@ -62,10 +73,10 @@ class ProjectDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how projects are displayed
+  # Overwrite this method to customize how kid workshop slots are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(project)
-    project.name
+  def display_resource(kid_workshop_slot)
+    kid_workshop_slot.name
   end
 end

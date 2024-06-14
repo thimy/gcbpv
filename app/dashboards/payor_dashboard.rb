@@ -13,7 +13,6 @@ class PayorDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     phone: Field::String,
-    subscription_groups: Field::NestedHasMany.with_options(skip: :payor),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -38,7 +37,6 @@ class PayorDashboard < Administrate::BaseDashboard
     last_name
     email
     phone
-    subscription_groups
     created_at
     updated_at
   ].freeze
@@ -50,7 +48,6 @@ class PayorDashboard < Administrate::BaseDashboard
     first_name
     last_name
     email
-    subscription_groups
     phone
   ].freeze
 

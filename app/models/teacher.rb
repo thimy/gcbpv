@@ -9,6 +9,8 @@ class Teacher < ApplicationRecord
 
   accepts_nested_attributes_for :slots
 
+  enum :status, "Public" => 0, "Privé" => 1
+
   def name
     "#{first_name} #{last_name}"
   end

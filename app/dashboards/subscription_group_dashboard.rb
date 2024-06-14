@@ -14,7 +14,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     donation: Field::String.with_options(searchable: false),
     payments: Field::NestedHasMany.with_options(skip: :subscription_group),
     payor: Field::BelongsTo,
-    season: Field::BelongsTo,
+    season: Field::BelongsTo.with_options(include_blank: false),
     subscriptions: Field::NestedHasMany.with_options(skip: :subscription_group),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -35,13 +35,13 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
+    payor
+    season
+    subscriptions
     amount_paid
     comment
     donation
     payments
-    payor
-    season
-    subscriptions
     created_at
     updated_at
   ].freeze
@@ -52,11 +52,11 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     payor
     season
+    subscriptions
     amount_paid
     comment
     donation
     payments
-    subscriptions
   ].freeze
 
   # COLLECTION_FILTERS

@@ -17,6 +17,7 @@ class EventDashboard < Administrate::BaseDashboard
     image: Field::Image,
     organizer: Field::String,
     website: Field::String,
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -32,6 +33,7 @@ class EventDashboard < Administrate::BaseDashboard
     end_date
     location
     organizer
+    status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -44,6 +46,7 @@ class EventDashboard < Administrate::BaseDashboard
     location
     image
     organizer
+    status
     website
     created_at
     updated_at
@@ -60,6 +63,7 @@ class EventDashboard < Administrate::BaseDashboard
     location
     image
     organizer
+    status
     website
   ].freeze
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_14_080910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
   end
 
   create_table "configs", force: :cascade do |t|
@@ -102,6 +103,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
   end
 
   create_table "events", force: :cascade do |t|
@@ -115,6 +117,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.string "image"
     t.string "organizer"
     t.string "website"
+    t.integer "status"
   end
 
   create_table "instruments", force: :cascade do |t|
@@ -123,6 +126,29 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"
+    t.integer "status"
+  end
+
+  create_table "kid_workshop_slot_teachers", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.bigint "kid_workshop_slot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kid_workshop_slot_id"], name: "index_kid_workshop_slot_teachers_on_kid_workshop_slot_id"
+    t.index ["teacher_id"], name: "index_kid_workshop_slot_teachers_on_teacher_id"
+  end
+
+  create_table "kid_workshop_slots", force: :cascade do |t|
+    t.bigint "kid_workshop_id", null: false
+    t.bigint "city_id", null: false
+    t.string "slot_time"
+    t.integer "day_of_week"
+    t.integer "frequency"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status"
+    t.index ["city_id"], name: "index_kid_workshop_slots_on_city_id"
+    t.index ["kid_workshop_id"], name: "index_kid_workshop_slots_on_kid_workshop_id"
   end
 
   create_table "kid_workshops", force: :cascade do |t|
@@ -133,6 +159,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.decimal "price"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -192,9 +219,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.string "name"
     t.text "description"
     t.bigint "season_id", null: false
-    t.boolean "public"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["season_id"], name: "index_projects_on_season_id"
   end
 
@@ -245,13 +272,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
   end
 
   create_table "subbed_workshops", force: :cascade do |t|
-    t.bigint "workshop_id", null: false
     t.bigint "subscription_id", null: false
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "workshop_slot_id"
     t.index ["subscription_id"], name: "index_subbed_workshops_on_subscription_id"
-    t.index ["workshop_id"], name: "index_subbed_workshops_on_workshop_id"
+    t.index ["workshop_slot_id"], name: "index_subbed_workshops_on_workshop_slot_id"
   end
 
   create_table "subscription_groups", force: :cascade do |t|
@@ -277,8 +304,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.boolean "image_consent"
     t.boolean "disability"
     t.boolean "ars"
-    t.decimal "donation"
     t.bigint "subscription_group_id"
+    t.bigint "kid_workshop_slot_id"
+    t.index ["kid_workshop_slot_id"], name: "index_subscriptions_on_kid_workshop_slot_id"
     t.index ["payor_id"], name: "index_subscriptions_on_payor_id"
     t.index ["season_id"], name: "index_subscriptions_on_season_id"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
@@ -316,6 +344,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.text "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["training_id"], name: "index_training_sessions_on_training_id"
   end
 
@@ -327,6 +356,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.bigint "season_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status"
     t.index ["season_id"], name: "index_trainings_on_season_id"
   end
 
@@ -363,6 +393,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "frequency"
+    t.integer "status"
     t.index ["city_id"], name: "index_workshop_slots_on_city_id"
     t.index ["workshop_id"], name: "index_workshop_slots_on_workshop_id"
   end
@@ -373,7 +404,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "kid_friendly"
-    t.integer "archived"
+    t.integer "status"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -381,6 +412,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
   add_foreign_key "configs", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
+  add_foreign_key "kid_workshop_slot_teachers", "kid_workshop_slots"
+  add_foreign_key "kid_workshop_slot_teachers", "teachers"
+  add_foreign_key "kid_workshop_slots", "cities"
+  add_foreign_key "kid_workshop_slots", "kid_workshops"
   add_foreign_key "payments", "subscription_groups"
   add_foreign_key "projects", "seasons"
   add_foreign_key "seasons", "plans"
@@ -389,7 +424,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_173421) do
   add_foreign_key "specialties", "instruments"
   add_foreign_key "specialties", "teachers"
   add_foreign_key "subbed_workshops", "subscriptions"
-  add_foreign_key "subbed_workshops", "workshops"
   add_foreign_key "subscription_groups", "payors"
   add_foreign_key "subscription_groups", "seasons"
   add_foreign_key "subscriptions", "payors"

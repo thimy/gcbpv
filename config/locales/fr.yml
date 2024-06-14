@@ -118,6 +118,7 @@ fr:
         updated_at: "Modifié le"
       city:
         name: "Nom"
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
       config:
@@ -126,6 +127,7 @@ fr:
       edition:
         name: "Nom"
         price: "Prix"
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
       event:
@@ -137,12 +139,14 @@ fr:
         end_date: "Date de fin"
         organizer: "Organisateurs"
         website: "Site internet"
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
       instrument:
         name: "Nom"
         teachers: "Professeurs"
         courses: "Cours par instrument"
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
       course:
@@ -155,22 +159,27 @@ fr:
         archived: "Archivé"
         created_at: "Créé le"
         updated_at: "Modifié le"
-      group_work:
-        archived: "Archivé"
-        name: "Nom"
-        location: "Lieu"
-        price: "Prix"
       kid_workshop:
         name: "Nom"
         frequency: "Fréquence"
         status: "Statut"
         workshop_type: "Type"
+        kid_workshop_slots: "Créneaux"
+      kid_workshop_slot:
+        teachers: "Professeurs"
+        frequency: "Fréquence"
+        day_of_week: "Jour"
+        slot_time: "Horaires"
+        status: "Statut"
+        city: "Ville"
+        city_id: "Ville"
       meeting:
         amount: "Nombre de sessions"
         archived: "Archivé"
         meeting_day: "Jour du rendez-vous"
         name: "Nom"
         price: "Prix"
+        status: "Statut"
       payment:
         amount: "Montant"
         comment: "Commentaires"
@@ -222,7 +231,7 @@ fr:
         name: "Nom"
         season: "Année"
         season_id: "Année"
-        public: "Public"
+        status: "Statut"
       season:
         name: "Année"
         start_year: "Année de début"
@@ -279,7 +288,9 @@ fr:
         student_id: "Élève"
         amount: "Montant"
         paid_amount: "Montant réglé"
-        workshops: "Ateliers"
+        workshop_slots: "Ateliers"
+        kid_workshop_slot: "Enfance"
+        kid_workshop_slot_id: "Enfance"
         courses: "Cours"
         course_id: "Cours"
         payment_state_id: "Statut d’inscription"
@@ -306,8 +317,8 @@ fr:
         season: "Année scolaire"
         season_id: "Année scolaire"
         students: "Élèves"
-        subscription: "Inscriptions"
-        subscription_id: "Inscriptions"
+        subscription: "Inscription"
+        subscription_id: "Inscription"
         subscriptions: "Inscriptions"
         subscriptions_id: "Inscriptions"
       teacher:
@@ -321,9 +332,6 @@ fr:
           class_day: "Journée du cours"
         created_at: "Créé le"
         updated_at: "Modifié le"
-        active: "Actif"
-        inactive: "Inactif"
-        hidden: "Caché"
         slots: "Disponibilités"
         phone: "Téléphone"
       training:
@@ -333,6 +341,7 @@ fr:
         season: "Année"
         season_id: "Année"
         training_sessions: Séances
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
       training_session:
@@ -343,6 +352,7 @@ fr:
         start_time: "Heure de début"
         end_time: "Heure de fin"
         city: "Ville"
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
       user:
@@ -367,6 +377,7 @@ fr:
         city: "Ville"
         city_id: "Ville"
         kid_friendly: "Adapté aux enfants"
+        status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
         workshop_slots: "Créneaux"
@@ -375,6 +386,7 @@ fr:
         frequency: "Fréquence"
         day_of_week: "Jour"
         slot_time: "Horaires"
+        status: "Statut"
         city: "Ville"
         city_id: "Ville"
 

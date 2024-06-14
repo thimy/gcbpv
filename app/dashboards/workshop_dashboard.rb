@@ -12,6 +12,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     description: TrixField,
     name: Field::String,
     workshop_slots: Field::NestedHasMany.with_options(skip: :workshop),
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -32,6 +33,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     name
     description
+    status
     workshop_slots
     created_at
     updated_at
@@ -43,6 +45,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     description
+    status
     workshop_slots
   ].freeze
 

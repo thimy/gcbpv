@@ -10,15 +10,14 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     courses: Field::NestedHasMany.with_options(skip: :subscription),
-    workshops: Field::HasMany,
-    payor: Field::BelongsTo,
+    workshop_slots: Field::HasMany,
+    kid_workshop_slot: Field::BelongsTo,
     student: Field::BelongsTo,
-    season: Field::BelongsTo,
+    season: Field::BelongsTo.with_options(include_blank: false),
     status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     image_consent: Field::Boolean,
     disability: Field::Boolean,
     ars: Field::Boolean,
-    donation: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -32,7 +31,6 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     id
     student
     courses
-    payor
     status
   ].freeze
 
@@ -42,14 +40,13 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     id
     student
     courses
-    workshops
-    payor
+    workshop_slots
+    kid_workshop_slot
     season
     status
     image_consent
     disability
     ars
-    donation
     created_at
     updated_at
   ].freeze
@@ -60,14 +57,13 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     student
     courses
-    workshops
-    payor
+    workshop_slots
+    kid_workshop_slot
     season
     status
     image_consent
     disability
     ars
-    donation
   ].freeze
 
   # COLLECTION_FILTERS

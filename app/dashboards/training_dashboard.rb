@@ -15,6 +15,7 @@ class TrainingDashboard < Administrate::BaseDashboard
     session_count: Field::Number,
     training_sessions: Field::NestedHasMany.with_options(skip: :trainings),
     season: Field::BelongsTo,
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,6 +30,7 @@ class TrainingDashboard < Administrate::BaseDashboard
     description
     price
     season
+    status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -40,6 +42,7 @@ class TrainingDashboard < Administrate::BaseDashboard
     session_count
     training_sessions
     season
+    status
     created_at
     updated_at
   ].freeze
@@ -53,6 +56,7 @@ class TrainingDashboard < Administrate::BaseDashboard
     price
     session_count
     season
+    status
     training_sessions
   ].freeze
 

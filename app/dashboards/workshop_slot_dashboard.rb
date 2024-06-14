@@ -15,6 +15,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
     slot_time: Field::String,
     workshop: Field::BelongsTo,
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -42,6 +43,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     day_of_week
     slot_time
     workshop
+    status
     created_at
     updated_at
   ].freeze
@@ -56,6 +58,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     day_of_week
     slot_time
     workshop
+    status
   ].freeze
 
   # COLLECTION_FILTERS
@@ -73,7 +76,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how workshop slots are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(workshop_slot)
-  #   "WorkshopSlot ##{workshop_slot.id}"
-  # end
+  def display_resource(workshop_slot)
+    workshop_slot.name
+  end
 end

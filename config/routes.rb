@@ -48,17 +48,17 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    resources :payors
     resources :subscription_groups
     resources :subscriptions
     resources :students
-    resources :payors
     resources :workshops
+    resources :kid_workshops
     resources :trainings
     resources :projects
     resources :instruments
     resources :teachers
     resources :slots
-    resources :kid_workshops
     resources :cities
     resources :plans
     resources :seasons
@@ -69,7 +69,7 @@ Rails.application.routes.draw do
     resources :administrators
     resources :configs, only: [:index, :show, :edit, :update]
     
-    root to: "cities#index"
+    root to: "subscriptions#index"
   end
   get "", to: "website#index", as: "/"
   get "bogue", to: "website#bogue"
