@@ -13,6 +13,9 @@ class PayorDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     phone: Field::String,
+    address: Field::String,
+    postcode: Field::String,
+    city: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -37,6 +40,9 @@ class PayorDashboard < Administrate::BaseDashboard
     last_name
     email
     phone
+    address
+    postcode
+    city
     created_at
     updated_at
   ].freeze
@@ -49,6 +55,9 @@ class PayorDashboard < Administrate::BaseDashboard
     last_name
     email
     phone
+    address
+    postcode
+    city
   ].freeze
 
   # COLLECTION_FILTERS
