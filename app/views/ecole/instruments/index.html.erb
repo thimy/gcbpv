@@ -20,11 +20,11 @@
       <div class="prices">
         <dl>
           <dt>- 18 ans</dt>
-          <dd>280€</dd>
+          <dd><%= number_to_currency(@plan.kids_class_price, unit: "€", precision: 0) %></dd>
         </dl>
         <dl>
           <dt>Adultes</dt>
-          <dd>300€</dd>
+          <dd><%= number_to_currency(@plan.class_price, unit: "€", precision: 0) %></dd>
         </dl>
       </div>
       <p>Majoration si <%= link_to "hors Redon Agglomération", ecole_membership_path(anchor: "majorations") %>.</p>

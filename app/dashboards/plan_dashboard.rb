@@ -14,17 +14,17 @@ class PlanDashboard < Administrate::BaseDashboard
     workshop_price: Field::String.with_options(searchable: false),
     early_learning_price: Field::String.with_options(searchable: false),
     kid_discovery_price: Field::String.with_options(searchable: false),
-    adult_discovery_price: Field::String.with_options(searchable: false),
     first_step: Field::String.with_options(searchable: false),
     first_step_discount: Field::String.with_options(searchable: false),
     second_step: Field::String.with_options(searchable: false),
     second_step_discount: Field::String.with_options(searchable: false),
     third_step: Field::String.with_options(searchable: false),
     third_step_discount: Field::String.with_options(searchable: false),
-    fourth_step: Field::String.with_options(searchable: false),
-    fourth_step_discount: Field::String.with_options(searchable: false),
     obc_markup: Field::Number,
     outbounds_markup: Field::Number,
+    membership_price: Field::Number,
+    special_workshop_price: Field::Number,
+    pathway_price: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -36,33 +36,36 @@ class PlanDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    membership_price
+    kids_class_price
     class_price
     workshop_price
-    kids_class_price
+    special_workshop_price
     obc_markup
     outbounds_markup
+    pathway_price
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    membership_price
     class_price
-    workshop_price
     kids_class_price
+    workshop_price
+    special_workshop_price
     early_learning_price
     kid_discovery_price
-    adult_discovery_price
+    pathway_price
     first_step
     first_step_discount
     second_step
     second_step_discount
     third_step
     third_step_discount
-    fourth_step
-    fourth_step_discount
-    outbounds_markup
     obc_markup
+    outbounds_markup
     created_at
     updated_at
   ].freeze
@@ -71,20 +74,20 @@ class PlanDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    membership_price
     class_price
     kids_class_price
     workshop_price
+    special_workshop_price
     early_learning_price
     kid_discovery_price
-    adult_discovery_price
+    pathway_price
     first_step
     first_step_discount
     second_step
     second_step_discount
     third_step
     third_step_discount
-    fourth_step
-    fourth_step_discount
     obc_markup
     outbounds_markup
   ].freeze
@@ -105,6 +108,6 @@ class PlanDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(plan)
-    "Plan ##{plan.id}"
+    plan.name
   end
 end

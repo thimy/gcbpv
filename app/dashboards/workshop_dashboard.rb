@@ -13,6 +13,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name: Field::String,
     workshop_slots: Field::NestedHasMany.with_options(skip: :workshop),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -25,7 +26,8 @@ class WorkshopDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     name
     description
-    workshop_slots
+    status
+    workshop_type
   ].freeze
   
   # SHOW_PAGE_ATTRIBUTES
@@ -34,6 +36,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name
     description
     status
+    workshop_type
     workshop_slots
     created_at
     updated_at
@@ -46,6 +49,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name
     description
     status
+    workshop_type
     workshop_slots
   ].freeze
 

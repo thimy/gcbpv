@@ -34,8 +34,12 @@ class Slot < ApplicationRecord
   end
 
   def datetime
-    if day_of_week.present?
-      "le #{day_of_week} - #{time_period}".downcase
+    if day_of_week.present? && slot_time.present?
+      "le #{day_of_week} - #{slot_time}".downcase
+    elsif day_of_week.present?
+      "le #{day_of_week} - horaires à définir"
+    elsif slot_time.present?
+      "jour à définir - #{slot_time}".downcase
     else
       "jour et horaires à définir"
     end

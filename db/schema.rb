@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_15_084754) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_113049) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -178,6 +178,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_084754) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status"
+    t.text "comment"
     t.index ["city_id"], name: "index_pathway_slots_on_city_id"
     t.index ["pathway_id"], name: "index_pathway_slots_on_pathway_id"
   end
@@ -231,6 +232,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_084754) do
     t.decimal "third_step_discount"
     t.decimal "third_step"
     t.decimal "pathway_price"
+    t.integer "membership_price"
+    t.decimal "special_workshop_price"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -287,8 +290,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_084754) do
     t.bigint "teacher_id", null: false
     t.bigint "city_id", null: false
     t.integer "day_of_week"
-    t.string "start_time"
-    t.string "end_time"
+    t.string "time"
     t.integer "frequency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -458,6 +460,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_084754) do
     t.boolean "kid_friendly"
     t.integer "status"
     t.text "comment"
+    t.integer "workshop_type"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

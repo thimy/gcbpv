@@ -201,6 +201,8 @@ fr:
         class_price: "Prix du cours"
         kids_class_price: "Prix du cours enfants"
         workshop_price: "Prix de l’atelier"
+        special_workshop_price: "Prix atelier spécial"
+        membership_price: "Adhésion"
         early_learning_price: "Prix de l’éveil musical"
         kid_discovery_price: "Prix de l’atelier découverte enfants"
         adult_discovery_price: "Prix de l’atelier découverte adultes" 
@@ -212,8 +214,7 @@ fr:
         second_step_discount: "Réduction 2nd palier de réduction"
         third_step: "3ème palier de réduction"
         third_step_discount: "Réduction 3ème palier de réduction"
-        fourth_step: "4ème palier de réduction"
-        fourth_step_discount: "Réduction 4ème palier de réduction"
+        pathway_price: "Prix du parcours"
         created_at: "Créé le"
         updated_at: "Modifié le"
       post:
@@ -392,6 +393,7 @@ fr:
         created_at: "Créé le"
         updated_at: "Modifié le"
         workshop_slots: "Créneaux"
+        workshop_type: "Type de tarification"
       workshop_slot:
         teachers: "Professeurs"
         frequency: "Fréquence"

@@ -3,6 +3,7 @@ class Ecole::InstrumentsController < BaseController
 
   def index
     @instruments = Instrument.all
+    @plan = Config.first.season.plan
   end
 
   def show

@@ -10,7 +10,6 @@ class CategoryDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     name: Field::String,
-    type: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,7 +22,6 @@ class CategoryDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
-    type
     created_at
   ].freeze
 
@@ -32,7 +30,6 @@ class CategoryDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     name
-    type
     created_at
     updated_at
   ].freeze
@@ -42,7 +39,6 @@ class CategoryDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     name
-    type
   ].freeze
 
   # COLLECTION_FILTERS

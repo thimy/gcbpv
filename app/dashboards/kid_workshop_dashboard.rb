@@ -27,6 +27,7 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
     id
     name
     description
+    workshop_type
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,9 +36,9 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
     id
     name
     description
-    status
     workshop_type
     kid_workshop_slots
+    status
     created_at
     updated_at
   ].freeze
@@ -48,9 +49,9 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     description
-    status
     workshop_type
     kid_workshop_slots
+    status
   ].freeze
 
   # COLLECTION_FILTERS

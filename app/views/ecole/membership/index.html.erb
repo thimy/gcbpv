@@ -5,7 +5,7 @@
   <section class="payment">
     <h2>Adhésion</h2>
     <div class="panel">
-      <p>L’adhésion est familiale. Elle s’élève à 10 € et vous permet d’avoir accès au Centre-Ressources (archives sonores, photographiques, livres...), et vous permet de bénéficier de réductions sur l’achat de livres et CDs édités par le Groupement. Une fois inscrit à l’Ecole de Musique Traditionnelle vous devenez adhérent de l’association et êtes invité à participer de différentes manières à la vie de l’association.</p>
+      <p>L’adhésion est familiale. Elle s’élève à <%= number_to_currency(@plan.membership_price, unit: "€", precision: 0) %> et vous permet d’avoir accès au Centre-Ressources (archives sonores, photographiques, livres...), et vous permet de bénéficier de réductions sur l’achat de livres et CDs édités par le Groupement. Une fois inscrit à l’Ecole de Musique Traditionnelle vous devenez adhérent de l’association et êtes invité à participer de différentes manières à la vie de l’association.</p>
     </div>
     <h2>Mécénat</h2>
     <div class="panel">
@@ -36,16 +36,15 @@
     <div class="panel">
       <p>La remise familiale est valable au sein d’une même famille et se calcule de la façon suivante :</p>
       <ul>
-        <li>Le total des cours et ateliers est compris entre <strong>450</strong> et <strong>650€</strong>, vous ôtez <strong>5%</strong> de la somme, puis vous ajoutez le coût de l’adhésion</li>
-        <li>Le total des cours et ateliers est compris entre <strong>650</strong> et <strong>850€</strong>, vous ôtez <strong>10%</strong> de la somme, puis ajoutez le coût de l’adhésion</li>
-        <li>Le total des cours et ateliers est compris entre <strong>850</strong> et <strong>1050€</strong>, vous ôtez <strong>15%</strong> de la somme, puis ajoutez le coût de l’adhésion</li>
-        <li>Le total des cours et ateliers est compris entre <strong>1050</strong> et <strong>1250€</strong>, vous ôtez <strong>20%</strong> de la somme, puis ajoutez le coût de l’adhésion</li>
+        <li>Le total des cours et ateliers est compris entre <strong><%= number_to_currency(@plan.first_step, unit: "€", precision: 0) %></strong> et <strong><%= number_to_currency(@plan.second_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.first_step_discount, precision: 0) %></strong> de la somme, puis vous ajoutez le coût de l’adhésion</li>
+        <li>Le total des cours et ateliers est compris entre <strong><%= number_to_currency(@plan.second_step, unit: "€", precision: 0) %></strong> et <strong><%= number_to_currency(@plan.third_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.second_step_discount, precision: 0) %></strong> de la somme, puis ajoutez le coût de l’adhésion</li>
+        <li>Le total des cours et ateliers est au dessus de <strong><%= number_to_currency(@plan.third_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.third_step_discount, precision: 0) %></strong> de la somme, puis ajoutez le coût de l’adhésion</li>
       </ul>
     </div>
     <h2 id="majorations">Majoration hors Redon Agglomération</h2>
     <div class="panel">
       <p>Les activités de l’EMTPV sont soutenues par Redon Agglomération et Oust à Brocéliande Communauté à moindre échelle.</p>
-      <p>En conséquence, une <strong>majoration de 10%</strong> sur nos tarifs est demandée aux élèves résidant sur le territoire d’Oust à Brocéliande Communauté, de <strong>20%</strong> aux élèves hors Redon Agglomération et hors Oust à Brocéliande Communauté.</p>
+      <p>En conséquence, une <strong>majoration de <%= @plan.obc_markup %>%</strong> sur nos tarifs est demandée aux élèves résidant sur le territoire d’Oust à Brocéliande Communauté, de <strong><%= @plan.outbounds_markup %>%</strong> aux élèves hors Redon Agglomération et hors Oust à Brocéliande Communauté.</p>
       <dl>
         <dt>Redon Agglomération</dt>
         <dd>

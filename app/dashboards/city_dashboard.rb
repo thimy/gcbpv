@@ -22,7 +22,6 @@ class CityDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     name
-    status
     created_at
     updated_at
   ].freeze

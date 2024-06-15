@@ -12,6 +12,7 @@ class PathwaySlotDashboard < Administrate::BaseDashboard
     city: Field::BelongsTo,
     teachers: Field::HasMany,
     day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,6 +27,7 @@ class PathwaySlotDashboard < Administrate::BaseDashboard
     city
     teachers
     day_of_week
+    comment
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -35,6 +37,7 @@ class PathwaySlotDashboard < Administrate::BaseDashboard
     city
     teachers
     day_of_week
+    comment
     created_at
     updated_at
   ].freeze
@@ -46,6 +49,7 @@ class PathwaySlotDashboard < Administrate::BaseDashboard
     city
     teachers
     day_of_week
+    comment
   ].freeze
 
   # COLLECTION_FILTERS
@@ -63,7 +67,7 @@ class PathwaySlotDashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how pathway slots are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(pathway_slot)
-  #   "PathwaySlot ##{pathway_slot.id}"
-  # end
+  def display_resource(pathway_slot)
+    "Créneau ##{pathway_slot.id}"
+  end
 end
