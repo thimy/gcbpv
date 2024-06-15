@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class ProjectDashboard < Administrate::BaseDashboard
+class PathwaySlotDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,10 +9,9 @@ class ProjectDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: TrixField,
-    name: Field::String,
-    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    project_instances: Field::NestedHasMany.with_options(skip: :project),
+    city: Field::BelongsTo,
+    teachers: Field::HasMany,
+    day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -23,18 +22,19 @@ class ProjectDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    name
-    description
-    status
+    id
+    city
+    teachers
+    day_of_week
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    name
-    description
-    project_instances
-    status
+    id
+    city
+    teachers
+    day_of_week
     created_at
     updated_at
   ].freeze
@@ -43,10 +43,9 @@ class ProjectDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    name
-    description
-    project_instances
-    status
+    city
+    teachers
+    day_of_week
   ].freeze
 
   # COLLECTION_FILTERS
@@ -61,10 +60,10 @@ class ProjectDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how projects are displayed
+  # Overwrite this method to customize how pathway slots are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(project)
-    project.name
-  end
+  # def display_resource(pathway_slot)
+  #   "PathwaySlot ##{pathway_slot.id}"
+  # end
 end

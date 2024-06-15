@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     resources :trainings
     resources :projects
     resources :instruments
+    resources :pathways
     resources :teachers
     resources :slots
     resources :cities

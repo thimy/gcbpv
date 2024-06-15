@@ -1,5 +1,12 @@
 fr:
+  helpers:
+    label:
+      created_at: "Créé le"
+      updated_at: "Modifié le"
+  name: "Nom"
   administrate:
+    created_at: "Créé le"
+    updated_at: "Modifié le"
     fields:
       nested_has_many:
         add: "Ajouter"
@@ -15,30 +22,24 @@ fr:
       city:
         one: "Ville"
         other: "Villes"
-      discovery:
-        one: "Atelier découverte"
-        other: "Ateliers découverte"
-      d_class:
-        one: "Session découverte"
-        other: "Sessions découverte"
       edition:
         one: "Édition"
         other: "Éditions"
       event:
         one: "Événement"
         other: "Événements"
-      course:
+      instrument:
         one: "Cours"
         other: "Cours"
-      group_work:
-        one: "Atelier autonome"
-        other: "Ateliers autonomes"
       kid_workshop:
         one: "Enfance"
         other: "Enfance"
-      meeting:
-        one: "Rendez-vous"
-        other: "Rendez-vous"
+      pathway:
+        one: "Parcours"
+        other: "Parcours"
+      pathway_slot:
+        one: "Créneau de parcours"
+        other: "Créneaux de parcours"
       payment_state:
         one: "Statut de d’inscription"
         other: "Statuts d’inscription"
@@ -54,6 +55,9 @@ fr:
       project:
         one: "Projet"
         other: "Projets"
+      project_instance:
+        one: "Édition de projet"
+        other: "Édition de projet"
       season:
         one: "Année scolaire"
         other: "Années scolaires"
@@ -91,22 +95,6 @@ fr:
         one: "Créneau"
         other: "Créneaux"
     attributes:
-      name: "Name"
-      active: "Actif"
-      inactive: "Inactif"
-      hidden: "Caché"
-      monday: "lundi"
-      tuesday: "mardi"
-      wednesday: "mercredi"
-      thursday: "jeudi"
-      friday: "vendredi"
-      always: "hebdo"
-      every_two_weeks: "toutes les deux semaines"
-      even_weeks: "semaines paires"
-      odd_weeks: "semaines impaires"
-      once_per_month: "1 fois par semaine"
-      six_times: "6 séances environ en période inter-vacances"
-      flexible: "ajustable"
       administrator:
         encrypted_password: "Mot de passe chiffré"
         remember_created_at: "Souvenir de session"
@@ -180,6 +168,18 @@ fr:
         name: "Nom"
         price: "Prix"
         status: "Statut"
+      pathway:
+        name: "Nom"
+        pathway_slots: "Créneaux de parcours"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
+      pathway_slot:
+        city: "Ville"
+        city_id: "Ville"
+        teachers: "Professeurs"
+        day_of_week: "Jour"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
       payment:
         amount: "Montant"
         comment: "Commentaires"
@@ -193,7 +193,7 @@ fr:
         students: "Élèves"
         phone: "Téléphone"
         postcode: "Code postal"
-        street_address: "Adresse"
+        address: "Adresse"
         mail: "Email"
         subscription_groups: "Inscriptions"
       plan:
@@ -232,6 +232,16 @@ fr:
         season: "Année"
         season_id: "Année"
         status: "Statut"
+        project_instance: "Édition de projet"
+        project_instances: "Éditions de projet"
+        project_instance_id: "Éditions de projet"
+        project_instances_id: "Éditions de projet"
+      project_instance:
+        comment: "Commentaires"
+        project: "Projet"
+        season_id: "Année"
+        status: "Statut"
+        students: "Élèves"
       season:
         name: "Année"
         start_year: "Année de début"
@@ -371,6 +381,7 @@ fr:
       workshop:
         name: "Nom"
         location: "Lieu"
+        frequency: "Fréquence"
         teachers: "Professeurs"
         teacher_id: "Professeur"
         day_of_week: "Jour"
