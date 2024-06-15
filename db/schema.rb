@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_14_235839) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_15_084754) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -163,11 +163,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_235839) do
   end
 
   create_table "pathway_slot_teachers", force: :cascade do |t|
-    t.bigint "pathway_id", null: false
     t.bigint "teacher_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pathway_id"], name: "index_pathway_slot_teachers_on_pathway_id"
+    t.bigint "pathway_slot_id"
+    t.index ["pathway_slot_id"], name: "index_pathway_slot_teachers_on_pathway_slot_id"
     t.index ["teacher_id"], name: "index_pathway_slot_teachers_on_teacher_id"
   end
 
@@ -469,7 +469,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_14_235839) do
   add_foreign_key "kid_workshop_slot_teachers", "teachers"
   add_foreign_key "kid_workshop_slots", "cities"
   add_foreign_key "kid_workshop_slots", "kid_workshops"
-  add_foreign_key "pathway_slot_teachers", "pathways"
   add_foreign_key "pathway_slot_teachers", "teachers"
   add_foreign_key "pathway_slots", "cities"
   add_foreign_key "pathway_slots", "pathways"
