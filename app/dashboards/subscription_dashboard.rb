@@ -10,6 +10,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     courses: Field::NestedHasMany.with_options(skip: :subscription),
+    pathway_slots: Field::HasMany,
     workshop_slots: Field::HasMany,
     kid_workshop_slot: Field::BelongsTo,
     student: Field::BelongsTo,
@@ -40,6 +41,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     id
     student
     courses
+    pathway_slots
     workshop_slots
     kid_workshop_slot
     season
@@ -57,6 +59,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     student
     courses
+    pathway_slots
     workshop_slots
     kid_workshop_slot
     season

@@ -52,12 +52,12 @@ Rails.application.routes.draw do
     resources :subscription_groups
     resources :subscriptions
     resources :students
+    resources :instruments
+    resources :pathways
     resources :workshops
     resources :kid_workshops
     resources :trainings
     resources :projects
-    resources :instruments
-    resources :pathways
     resources :teachers
     resources :slots
     resources :cities

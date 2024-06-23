@@ -1,6 +1,7 @@
 class Subscription < ApplicationRecord
   belongs_to :student
   has_many :courses
+  has_many :pathway_slots
   belongs_to :kid_workshop_slot, optional: true
   has_many :subbed_workshops
   has_many :workshop_slots, through: :subbed_workshops
@@ -10,7 +11,7 @@ class Subscription < ApplicationRecord
 
   validates :season, presence: true
   validates :student, presence: true, uniqueness: { scope: :season,
-    message: "a déjà une inscription pour cette année" }
+    message: "L’élève a déjà une inscription pour cette année" }
 
   enum status: {
     "Demande d’information": 0,

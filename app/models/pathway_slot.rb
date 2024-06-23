@@ -14,4 +14,12 @@ class PathwaySlot < ApplicationRecord
     "Samedi": 6,
     "Dimanche": 7,
   }
+
+  def teacher_names
+    teachers.map {|teacher| teacher.name }.join("/")
+  end
+
+  def name
+    "#{pathway.name} – #{teacher_names} à #{city.name}"
+  end
 end

@@ -68,6 +68,6 @@ class PathwaySlotDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(pathway_slot)
-    "Créneau ##{pathway_slot.id}"
+    pathway_slot.name
   end
 end
