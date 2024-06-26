@@ -290,7 +290,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_15_113049) do
     t.bigint "teacher_id", null: false
     t.bigint "city_id", null: false
     t.integer "day_of_week"
-    t.string "time"
+    t.string "slot_time"
     t.integer "frequency"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

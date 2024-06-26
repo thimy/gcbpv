@@ -14,4 +14,8 @@ class Teacher < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+  def student_count
+    Course.joins(:subscription, :slot).where(slot: {teacher: self}).size
+  end
 end

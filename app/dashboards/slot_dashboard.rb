@@ -12,7 +12,7 @@ class SlotDashboard < Administrate::BaseDashboard
     city: Field::BelongsTo,
     day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    time: Field::String,
+    slot_time: Field::String,
     teacher: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

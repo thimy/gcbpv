@@ -14,11 +14,12 @@ class TeacherDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     instruments: Field::HasMany,
     last_name: Field::String,
-    name: Field::String,
+    name: Field::String.with_options(searchable: false),
     phone: Field::String,
     photo: Field::Image,
     slots: Field::NestedHasMany.with_options(skip: :teacher),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    student_count: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,11 +30,13 @@ class TeacherDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    name
+    first_name
+    last_name
     description
     instruments
     phone
     email
+    student_count
     status
   ].freeze
 
