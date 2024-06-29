@@ -14,6 +14,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     workshop_slots: Field::NestedHasMany.with_options(skip: :workshop),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    max_students: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,7 +28,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name
     description
     status
-    workshop_type
+    max_students
   ].freeze
   
   # SHOW_PAGE_ATTRIBUTES
@@ -38,6 +39,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     status
     workshop_type
     workshop_slots
+    max_students
     created_at
     updated_at
   ].freeze
@@ -51,6 +53,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     status
     workshop_type
     workshop_slots
+    max_students
   ].freeze
 
   # COLLECTION_FILTERS

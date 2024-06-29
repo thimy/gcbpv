@@ -19,6 +19,7 @@ class StudentDashboard < Administrate::BaseDashboard
     gender: Field::Select,
     payor: Field::BelongsTo,
     phone: Field::String,
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,7 +30,6 @@ class StudentDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     first_name
     last_name
     city
@@ -39,7 +39,6 @@ class StudentDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     first_name
     last_name
     birth_year
@@ -49,6 +48,7 @@ class StudentDashboard < Administrate::BaseDashboard
     email
     phone
     gender
+    comment
     created_at
     updated_at
   ].freeze
@@ -66,6 +66,7 @@ class StudentDashboard < Administrate::BaseDashboard
     email
     phone
     gender
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

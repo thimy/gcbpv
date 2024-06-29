@@ -14,6 +14,8 @@ class SlotDashboard < Administrate::BaseDashboard
     frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     slot_time: Field::String,
     teacher: Field::BelongsTo,
+    comment: Field::Text,
+    students: Field::Text.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,6 +29,7 @@ class SlotDashboard < Administrate::BaseDashboard
     teacher
     city
     day_of_week
+    students
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,6 +40,7 @@ class SlotDashboard < Administrate::BaseDashboard
     day_of_week
     frequency
     slot_time
+    comment
     created_at
     updated_at
   ].freeze
@@ -49,6 +53,7 @@ class SlotDashboard < Administrate::BaseDashboard
     city
     day_of_week
     slot_time
+    comment
     frequency
   ].freeze
 

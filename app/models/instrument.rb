@@ -10,4 +10,18 @@ class Instrument < ApplicationRecord
       teacher.cities
     }.flatten.uniq
   end
+
+  def time_period
+    if time.present?
+      time
+    else
+      "Horaire à définir"
+    end
+  end
+
+  def teacher_list
+    teachers.map {|teacher|
+      teacher.name
+  }.join(", ")
+  end
 end

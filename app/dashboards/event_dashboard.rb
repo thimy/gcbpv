@@ -18,6 +18,7 @@ class EventDashboard < Administrate::BaseDashboard
     organizer: Field::String,
     website: Field::String,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -48,6 +49,7 @@ class EventDashboard < Administrate::BaseDashboard
     organizer
     status
     website
+    comment
     created_at
     updated_at
   ].freeze
@@ -65,6 +67,7 @@ class EventDashboard < Administrate::BaseDashboard
     organizer
     status
     website
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

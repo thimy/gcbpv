@@ -16,6 +16,7 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
     teachers: Field::HasMany,
     slot_time: Field::String,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -43,9 +44,10 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
     kid_workshop
     teachers
     slot_time
+    status
+    comment
     created_at
     updated_at
-    status
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -59,6 +61,7 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
     teachers
     slot_time
     status
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

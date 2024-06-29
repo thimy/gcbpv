@@ -11,6 +11,7 @@ class CityDashboard < Administrate::BaseDashboard
     id: Field::Number,
     name: Field::String,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -31,6 +32,7 @@ class CityDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     name
     status
+    comment
     created_at
     updated_at
   ].freeze
@@ -41,6 +43,7 @@ class CityDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     status
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

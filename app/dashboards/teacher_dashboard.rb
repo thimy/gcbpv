@@ -32,8 +32,6 @@ class TeacherDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     first_name
     last_name
-    description
-    instruments
     phone
     email
     student_count

@@ -32,7 +32,6 @@ class PostDashboard < Administrate::BaseDashboard
     id
     title
     content
-    categories
     status
     event
     published_at

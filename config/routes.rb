@@ -53,7 +53,6 @@ Rails.application.routes.draw do
     resources :subscriptions
     resources :students
     resources :instruments
-    resources :pathways
     resources :workshops
     resources :kid_workshops
     resources :trainings

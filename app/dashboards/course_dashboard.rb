@@ -13,6 +13,8 @@ class CourseDashboard < Administrate::BaseDashboard
     slot: Field::BelongsTo,
     start_time: Field::String,
     end_time: Field::String,
+    comment: Field::Text,
+    option: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,6 +29,7 @@ class CourseDashboard < Administrate::BaseDashboard
     slot
     start_time
     end_time
+    option
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -36,6 +39,8 @@ class CourseDashboard < Administrate::BaseDashboard
     slot
     start_time
     end_time
+    comment
+    option
     created_at
     updated_at
   ].freeze
@@ -48,6 +53,8 @@ class CourseDashboard < Administrate::BaseDashboard
     slot
     start_time
     end_time
+    option
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

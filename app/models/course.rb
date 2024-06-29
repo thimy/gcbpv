@@ -3,5 +3,10 @@ class Course < ApplicationRecord
   belongs_to :slot
   has_many :teachers, through: :slots
   belongs_to :subscription
-end
 
+  enum :option, "Confirmé" => 0, "Optionel" => 1
+
+  def name
+    "#{instrument.name} - #{slot.name}"
+  end
+end

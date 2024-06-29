@@ -22,7 +22,8 @@ class Slot < ApplicationRecord
     "Semaines paires": 3,
     "Semaines impaires": 4,
     "Tous les mois": 5,
-    "Six séances dans l'année": 6
+    "Six séances dans l'année": 6,
+    "5x4 séances par répertoire": 7
   }
 
   def name
@@ -43,5 +44,9 @@ class Slot < ApplicationRecord
     else
       "jour et horaires à définir"
     end
+  end
+
+  def students
+    Course.joins(:subscription, :slot).where(slot: self).count
   end
 end

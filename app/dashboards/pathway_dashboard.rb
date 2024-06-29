@@ -12,6 +12,7 @@ class PathwayDashboard < Administrate::BaseDashboard
     description: Field::Text,
     name: Field::String,
     pathway_slots: Field::NestedHasMany.with_options(skip: :pathways),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -22,20 +23,18 @@ class PathwayDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     name
     description
-    pathway_slots
     created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     name
     description
     pathway_slots
+    comment
     created_at
     updated_at
   ].freeze
@@ -47,6 +46,7 @@ class PathwayDashboard < Administrate::BaseDashboard
     name
     description
     pathway_slots
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

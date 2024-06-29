@@ -14,6 +14,7 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
     kid_workshop_slots: Field::NestedHasMany.with_options(skip: :kid_workshop),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -24,7 +25,6 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     name
     description
     workshop_type
@@ -33,12 +33,12 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     name
     description
     workshop_type
     kid_workshop_slots
     status
+    comment
     created_at
     updated_at
   ].freeze
@@ -52,6 +52,7 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
     workshop_type
     kid_workshop_slots
     status
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

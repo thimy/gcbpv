@@ -6,4 +6,23 @@ class SubscriptionGroup < ApplicationRecord
   has_many :students, through: :subscriptions
 
   accepts_nested_attributes_for :subscriptions, :payments, allow_destroy: true
+
+  enum status: {
+    "Demande d’information": 0,
+    "Inscrit – à régler": 1,
+    "Inscrit – réglé": 2,
+    "À rembourser": 3
+  }
+
+  enum majoration_class: {
+    "Redon Agglo": 0,
+    "OBC communauté": 1,
+    "Hors agglo": 2
+  }
+
+  def student_list
+    subscriptions.map {|subscription|
+      subscription.student.name
+  }.join(", ")
+  end
 end

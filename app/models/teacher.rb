@@ -10,12 +10,15 @@ class Teacher < ApplicationRecord
   accepts_nested_attributes_for :slots
 
   enum :status, "Public" => 0, "Privé" => 1
+  scope :active, -> {where(status: 0)}
 
   def name
     "#{first_name} #{last_name}"
   end
 
   def student_count
-    Course.joins(:subscription, :slot).where(slot: {teacher: self}).size
+    Course.joins(:subscription, :slot).where(slot: {teacher: self}).group(:instrument).count.map {|group|
+      "#{group.first.name}: #{group.count}"
+    }.join(", ")
   end
 end

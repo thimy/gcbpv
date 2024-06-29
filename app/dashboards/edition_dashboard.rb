@@ -15,6 +15,7 @@ class EditionDashboard < Administrate::BaseDashboard
     name: Field::String,
     price: Field::String.with_options(searchable: false),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -43,6 +44,7 @@ class EditionDashboard < Administrate::BaseDashboard
     image
     status
     price
+    comment
     created_at
     updated_at
   ].freeze
@@ -57,6 +59,7 @@ class EditionDashboard < Administrate::BaseDashboard
     image
     status
     price
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

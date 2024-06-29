@@ -29,8 +29,8 @@ fr:
         one: "Événement"
         other: "Événements"
       instrument:
-        one: "Cours"
-        other: "Cours"
+        one: "Discipline"
+        other: "Disciplines"
       kid_workshop:
         one: "Enfance"
         other: "Enfance"
@@ -62,14 +62,17 @@ fr:
         one: "Année scolaire"
         other: "Années scolaires"
       slot:
-        one: "Disponibilité"
-        other: "Disponibilités"
+        one: "Créneau prof"
+        other: "Créneaux prof"
       staff:
         one: "Membre"
         other: "Membres"
       student:
         one: "Élève"
         other: "Élèves"
+      subbed_workshop:
+        one: "Atelier"
+        other: "Atelier"
       subscription:
         one: "Inscription par élève"
         other: "Inscriptions par élève"
@@ -135,6 +138,7 @@ fr:
         teachers: "Professeurs"
         courses: "Cours par instrument"
         status: "Statut"
+        teacher_list: "Professeurs"
         created_at: "Créé le"
         updated_at: "Modifié le"
       course:
@@ -252,7 +256,7 @@ fr:
         workshop: "Ateliers"
         teacher: "Professeur"
         subscription: "Élèves"
-        student: "Nom"
+        student_count: "Nombre d'élèves"
         amount: "Montant"
         amount_paid: "Montant réglé"
         season: "Année scolaire"
@@ -267,6 +271,7 @@ fr:
         day_of_week: "Jour"
         start_time: "Heure de début"
         end_time: "Heure de fin"
+        students: "Nombre d’élèves"
       staff:
         last_name: "Nom"
         first_name: "Prénom"
@@ -287,6 +292,11 @@ fr:
         gender: "Genre"
         created_at: "Créé le"
         updated_at: "Modifié le"
+      subbed_workshops:
+        workshop_slot: "Choix de l'atelier"
+        workshop_slot_id: "Choix de l'atelier"
+        option: "Optionel"
+        comment: "Commentaires"
       subscription:
         archived: "Archivé"
         location: "Lieu de l’atelier"
@@ -302,8 +312,8 @@ fr:
         workshop_slots: "Ateliers"
         kid_workshop_slot: "Enfance"
         kid_workshop_slot_id: "Enfance"
-        courses: "Cours"
-        course_id: "Cours"
+        courses: "Disciplines"
+        course_id: "Discipline"
         payment_state_id: "Statut d’inscription"
         payor: "Payeur"
         payor_id: "Payeur"
@@ -316,10 +326,19 @@ fr:
         disability: "Situation empêchée"
         ars: "ARS"
         donation: "Don"
+        slot: "Créneau"
+        course_list: "Cours"
+        workshop_list: "Ateliers"
+        pathway_list: "Parcours"
         created_at: "Créé le"
         updated_at: "Modifié le"
         year: "Année scolaire"
+        option: "Optionel"
+        comment: "Commentaires"
+        subbed_workshops: "Ateliers"
+        workshop_slot: "Choix de l'atelier"
       subscription_group:
+        amount: "Montant dû"
         amount_paid: "Montant réglé"
         comment: "Commentaires"
         donation: "Don"
@@ -334,6 +353,15 @@ fr:
         subscription_id: "Inscription"
         subscriptions: "Inscriptions"
         subscriptions_id: "Inscriptions"
+        student_list: "Élèves"
+        course_list: "Cours"
+        workshop_list: "Ateliers"
+        pathway_list: "Parcours"
+        majoration_class: "Agglo"
+        status: "Statut"
+        option: "Optionel"
+        subbed_workshops: "Ateliers"
+        workshop_slot: "Choix de l'atelier"
       teacher:
         first_name: "Prénom"
         last_name: "Nom"
@@ -397,6 +425,7 @@ fr:
         updated_at: "Modifié le"
         workshop_slots: "Créneaux"
         workshop_type: "Type de tarification"
+        max_students: "Capacité de l'atelier"
       workshop_slot:
         teachers: "Professeurs"
         frequency: "Fréquence"

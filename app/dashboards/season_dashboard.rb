@@ -12,6 +12,7 @@ class SeasonDashboard < Administrate::BaseDashboard
     name: Field::String,
     plan: Field::BelongsTo,
     start_year: Field::Number,
+    student_count: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -24,9 +25,8 @@ class SeasonDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
+    student_count
     plan
-    start_year
-    created_at
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

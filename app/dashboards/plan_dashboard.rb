@@ -25,6 +25,7 @@ class PlanDashboard < Administrate::BaseDashboard
     membership_price: Field::Number,
     special_workshop_price: Field::Number,
     pathway_price: Field::Number,
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -66,6 +67,7 @@ class PlanDashboard < Administrate::BaseDashboard
     third_step_discount
     obc_markup
     outbounds_markup
+    comment
     created_at
     updated_at
   ].freeze
@@ -90,6 +92,7 @@ class PlanDashboard < Administrate::BaseDashboard
     third_step_discount
     obc_markup
     outbounds_markup
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

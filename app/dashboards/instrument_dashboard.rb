@@ -12,8 +12,10 @@ class InstrumentDashboard < Administrate::BaseDashboard
     description: TrixField,
     name: Field::String,
     teachers: Field::HasMany,
+    teacher_list: Field::String.with_options(searchable: false),
     image: Field::Image,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,7 +28,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     name
     description
-    teachers
+    teacher_list
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,6 +39,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     teachers
     status
     image
+    comment
     created_at
     updated_at
   ].freeze
@@ -50,6 +53,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     teachers
     status
     image
+    comment
   ].freeze
 
   # COLLECTION_FILTERS

@@ -16,6 +16,10 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     payor: Field::BelongsTo,
     season: Field::BelongsTo.with_options(include_blank: false),
     subscriptions: Field::NestedHasMany.with_options(skip: :subscription_group),
+    status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
+    majoration_class: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    student_list: Field::String.with_options(searchable: false),
+    amount: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -27,10 +31,10 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     payor
-    season
-    subscriptions
-    amount_paid
+    student_list
+    status
     comment
+    amount
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -39,7 +43,10 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     payor
     season
     subscriptions
+    amount
     amount_paid
+    status
+    majoration_class
     comment
     donation
     payments
@@ -54,10 +61,13 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     payor
     season
     subscriptions
+    status
+    amount
     amount_paid
+    payments
+    majoration_class
     comment
     donation
-    payments
   ].freeze
 
   # COLLECTION_FILTERS
@@ -76,6 +86,6 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(subscription_group)
-    "Foyer #{subscription_group.payor.last_name} - #{subscription_group.season.name}"
+    "Foyer #{subscription_group.payor.last_name}"
   end
 end

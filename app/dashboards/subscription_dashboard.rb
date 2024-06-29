@@ -11,14 +11,18 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     id: Field::Number,
     courses: Field::NestedHasMany.with_options(skip: :subscription),
     pathway_slots: Field::HasMany,
-    workshop_slots: Field::HasMany,
+    subbed_workshops: Field::NestedHasMany.with_options(skip: :subscription),
     kid_workshop_slot: Field::BelongsTo,
     student: Field::BelongsTo,
-    season: Field::BelongsTo.with_options(include_blank: false),
-    status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     image_consent: Field::Boolean,
     disability: Field::Boolean,
     ars: Field::Boolean,
+    course_list: Field::String.with_options(searchable: false),
+    workshop_list: Field::String.with_options(searchable: false),
+    phone: Field::String.with_options(searchable: false),
+    email: Field::String.with_options(searchable: false),
+    city: Field::String.with_options(searchable: false),
+    comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,26 +33,25 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
     student
-    courses
-    status
+    course_list
+    workshop_list
+    phone
+    email
+    city
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    id
     student
     courses
-    pathway_slots
-    workshop_slots
+    subbed_workshops
     kid_workshop_slot
-    season
-    status
     image_consent
     disability
     ars
+    comment
     created_at
     updated_at
   ].freeze
@@ -59,14 +62,12 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     student
     courses
-    pathway_slots
-    workshop_slots
+    subbed_workshops
     kid_workshop_slot
-    season
-    status
     image_consent
     disability
     ars
+    comment
   ].freeze
 
   # COLLECTION_FILTERS
