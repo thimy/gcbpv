@@ -17,8 +17,8 @@ class Teacher < ApplicationRecord
   end
 
   def student_count
-    Course.joins(:subscription, :slot).where(slot: {teacher: self}).group(:instrument).count.map {|group|
-      "#{group.first.name}: #{group.count}"
+    Course.joins(:subscription, :slot).where(slot: {teacher: self}).group(:instrument_id).count.map {|id, count|
+      "#{Instrument.find_by(id: id).name}: #{count}"
     }.join(", ")
   end
 end
