@@ -426,6 +426,7 @@ fr:
         workshop_slots: "Créneaux"
         workshop_type: "Type de tarification"
         max_students: "Capacité de l'atelier"
+        student_count: "Nombre d'élèves"
       workshop_slot:
         teachers: "Professeurs"
         frequency: "Fréquence"

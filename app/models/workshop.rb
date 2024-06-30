@@ -13,4 +13,11 @@ class Workshop < ApplicationRecord
   enum :workshop_type, "Normal" => 0, "Spécial" => 1
 
   scope :active, -> {where(status: 0)}
+
+  def student_count
+    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self}).group(:workshop_slot_id).count.map {|id, count|
+      slot = WorkshopSlot.find_by(id: id)
+      "#{slot.city.name} le #{slot.day_of_week}: #{count}"
+    }.join(", ")
+  end
 end

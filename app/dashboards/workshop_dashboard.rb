@@ -15,6 +15,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     max_students: Field::Number,
+    student_count: Field::Text.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -26,9 +27,9 @@ class WorkshopDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     name
-    description
     status
     max_students
+    student_count
   ].freeze
   
   # SHOW_PAGE_ATTRIBUTES
