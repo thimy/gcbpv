@@ -1,0 +1,33 @@
+<div class="stats">
+  <h1>Stats</h1>
+  <dl class="numbers">
+    <dt>Saison courante</dt>
+    <dd><%= @season.name %></dd>
+    <dt>Foyers</dt>
+    <dd><%= @subscription_groups.size %></dd>
+    <dt>Inscriptions</dt>
+    <dd><%= @subscriptions.size %></dd>
+  </dl>
+
+  <div class="count">
+    <div>
+      <h2>Professeurs</h2>
+      <dl>
+        <% @teachers.each do |teacher| %>
+          <dt><%= teacher.name %></dt>
+          <dd><%= teacher.student_count.presence || "-" %></dd>
+        <% end %>
+      </dl>
+    </div>
+
+    <div>
+      <h2>Ateliers</h2>
+      <dl>
+        <% @workshops.each do |workshop| %>
+          <dt><%= workshop.name %></dt>
+          <dd><%= workshop.student_count.presence || "-" %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</div>

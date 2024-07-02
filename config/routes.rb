@@ -48,9 +48,10 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    resources :stats, only: [:index]
     resources :payors
     resources :subscription_groups
-    resources :subscriptions
+    resources :subscriptions, only: [:index, :show, :edit, :update]
     resources :students
     resources :instruments
     resources :workshops
@@ -69,7 +70,7 @@ Rails.application.routes.draw do
     resources :administrators
     resources :configs, only: [:index, :show, :edit, :update]
     
-    root to: "subscriptions#index"
+    root to: "stats#index"
   end
   get "", to: "website#index", as: "/"
   get "bogue", to: "website#bogue"

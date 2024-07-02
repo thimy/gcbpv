@@ -29,3 +29,41 @@
 @import "components/search";
 
 @import "utilities/text-color";
+
+.stats {
+  padding: 2rem;
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  .numbers {
+    display: flex;
+    gap: 1rem;
+
+    dt {
+      margin: 0;
+    }
+  }
+
+  .count {
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: 1fr 1fr;
+    margin-block-start: 2rem;
+
+    dd {
+      padding-block-end: 1rem;
+    }
+
+    dd + dt {
+      border-block-start: 1px solid lightgray;
+      margin: 0;
+      padding-block-start: 1rem;
+    }
+  }
+}

@@ -17,7 +17,7 @@ class Workshop < ApplicationRecord
   def student_count
     SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self}).group(:workshop_slot_id).count.map {|id, count|
       slot = WorkshopSlot.find_by(id: id)
-      "#{slot.city.name} le #{slot.day_of_week}: #{count}"
+      "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
     }.join(", ")
   end
 end
