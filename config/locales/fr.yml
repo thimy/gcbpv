@@ -3,10 +3,13 @@ fr:
     label:
       created_at: "Créé le"
       updated_at: "Modifié le"
+      workshop_slot_id: "Atelier"
   name: "Nom"
   administrate:
     created_at: "Créé le"
     updated_at: "Modifié le"
+    true: "Oui"
+    false: "Non"
     fields:
       nested_has_many:
         add: "Ajouter"
@@ -95,8 +98,8 @@ fr:
         one: "Atelier"
         other: "Ateliers"
       workshop_slot:
-        one: "Créneau"
-        other: "Créneaux"
+        one: "Atelier"
+        other: "Ateliers"
     attributes:
       administrator:
         encrypted_password: "Mot de passe chiffré"
@@ -293,6 +296,7 @@ fr:
         created_at: "Créé le"
         updated_at: "Modifié le"
       subbed_workshops:
+        workshop_slots: "Choix de l'atelier"
         workshop_slot: "Choix de l'atelier"
         workshop_slot_id: "Choix de l'atelier"
         option: "Optionel"
@@ -309,6 +313,8 @@ fr:
         student_id: "Élève"
         amount: "Montant"
         paid_amount: "Montant réglé"
+        workshop_slot: "Choix de l'atelier"
+        workshop_slot_id: "Choix de l'atelier"
         workshop_slots: "Ateliers"
         kid_workshop_slot: "Enfance"
         kid_workshop_slot_id: "Enfance"
@@ -336,7 +342,6 @@ fr:
         option: "Optionel"
         comment: "Commentaires"
         subbed_workshops: "Ateliers"
-        workshop_slot: "Choix de l'atelier"
       subscription_group:
         amount: "Montant dû"
         amount_paid: "Montant réglé"

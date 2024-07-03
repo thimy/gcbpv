@@ -35,6 +35,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     status
     comment
     amount
+    majoration_class
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -80,7 +81,11 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    agglo: ->(resources) { resources.where(majoration_class: "Redon Agglo") },
+    obc: ->(resources) { resources.where(majoration_class: "OBC communauté") },
+    hors_agglo: ->(resources) { resources.where(majoration_class: "Hors agglo") }
+  }.freeze
 
   # Overwrite this method to customize how subscription groups are displayed
   # across all pages of the admin dashboard.

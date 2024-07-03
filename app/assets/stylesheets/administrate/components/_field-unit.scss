@@ -18,7 +18,7 @@
 .field-unit__field {
   float: left;
   margin-left: 2rem;
-  max-width: 50rem;
+  max-width: 60rem;
   width: 100%;
 
   .optgroup-header {
@@ -34,20 +34,24 @@
 
 .field-unit--nested {
   border: $base-border;
-  margin-left: 7.5%;
+  margin-left: calc(15% + 2rem);
   max-width: 60rem;
   padding: $small-spacing;
   width: 100%;
 
-  .field-unit__field {
+  .field-unit--nested {
     margin-inline: 1rem;
-    width: 100%;
+  }
+
+  .field-unit__field {
+    flex-grow: 1;
+    margin-inline: 1rem;
+    width: 50%;
   }
 
   .field-unit__label {
     margin-inline: 1rem;
-    text-align: left;
-    width: 10rem;
+    width: 8rem;
   }
 
   .field-unit--boolean {

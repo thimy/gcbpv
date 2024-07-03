@@ -48,6 +48,9 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     courses
     subbed_workshops
     kid_workshop_slot
+    phone
+    email
+    city
     image_consent
     disability
     ars

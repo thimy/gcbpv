@@ -79,7 +79,10 @@ class TeacherDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    actif: ->(resources) { resources.where(status: 0) },
+    accordeon: ->(resources) { resources.where(instruments: {name: "Accordéon diatonique"}) }
+  }.freeze
 
   # Overwrite this method to customize how teachers are displayed
   # across all pages of the admin dashboard.
