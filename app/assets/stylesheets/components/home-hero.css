@@ -32,6 +32,7 @@ hero-container.home-hero {
     background-image: url("icons/underline2.svg");
     background-position: center 0.625em;
     position: relative;
+
     &:hover {
       animation-name:              shake;    
       animation-duration:          0.8s;

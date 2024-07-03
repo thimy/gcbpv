@@ -3,7 +3,7 @@ module Admin
     def index
       @season = Config.first.season
       @subscription_groups = SubscriptionGroup.where(season: @season).count
-      @subscriptions = Subscription.where(subscription_group: @subscription_groups).count
+      @subscriptions = Subscription.joins(:subscription_group).where(subscription_group: {season: @season}).count
       @teachers = Teacher.active.includes(:slots)
       @workshops = Workshop.active
     end

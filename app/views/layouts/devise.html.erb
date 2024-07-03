@@ -1,8 +1,8 @@
-<% content_for(:page_class, "website authentication content") %>
+<% content_for(:page_class, "authentication") %>
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new %>
-  <main class="full content">
+  <main class="content">
     <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
     <section>
       <p class="banner"><%= notice %></p>
