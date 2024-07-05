@@ -6,6 +6,7 @@ module Admin
       @subscriptions = Subscription.joins(:subscription_group).where(subscription_group: {season: @season}).count
       @teachers = Teacher.active.includes(:slots)
       @workshops = Workshop.active
+      @kid_workshops = KidWorkshop.active
     end
   end
 end

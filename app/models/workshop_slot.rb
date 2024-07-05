@@ -1,6 +1,7 @@
 class WorkshopSlot < ApplicationRecord
   include WithTime
 
+  has_many :subbed_workshops
   has_many :subscriptions, through: :subbed_workshops
   has_many :workshop_slot_teachers
   has_many :teachers, through: :workshop_slot_teachers
@@ -45,5 +46,9 @@ class WorkshopSlot < ApplicationRecord
 
   def name
     "#{workshop.name} – #{teacher_names} à #{city.name}"
+  end
+
+  def subbed_workshops
+    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: self)
   end
 end

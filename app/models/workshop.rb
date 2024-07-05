@@ -15,9 +15,17 @@ class Workshop < ApplicationRecord
   scope :active, -> {where(status: 0)}
 
   def student_count
+    students_by_slot.join(", ")
+  end
+
+  def students_by_slot
     SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self}).group(:workshop_slot_id).count.collect {|id, count|
       slot = WorkshopSlot.find_by(id: id)
       "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
-    }.join(", ")
+    }
+  end
+
+  def subscriptions
+    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self})
   end
 end

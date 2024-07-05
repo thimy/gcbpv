@@ -41,6 +41,11 @@
     font-size: 1.5rem;
   }
 
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
   .numbers {
     display: flex;
     gap: 1rem;
@@ -58,6 +63,10 @@
 
     dd {
       padding-block-end: 1rem;
+
+      h4 {
+        margin-block-start: 0.75rem;
+      }
     }
 
     dd + dt {

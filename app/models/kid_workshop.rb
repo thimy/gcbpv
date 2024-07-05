@@ -6,5 +6,16 @@ class KidWorkshop < ApplicationRecord
   enum :workshop_type, "Éveil" => 0, "Découverte" => 1, "Parent-Enfant" => 2
   enum :status, "Public" => 0, "Privé" => 1
 
-  scope :visible, -> { where(status: "Public") }
+  scope :active, -> { where(status: 0) }
+
+  def student_count
+    students_by_slot.join(", ")
+  end
+
+  def students_by_slot
+    Subscription.joins(:kid_workshop_slot).where(kid_workshop_slot: self).group(:kid_workshop_slot_id).count.collect {|id, count|
+      slot = KidWorkshopSlot.find_by(id: id)
+      "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
+    }
+  end
 end

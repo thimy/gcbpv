@@ -44,4 +44,8 @@ class KidWorkshopSlot < ApplicationRecord
   def name
     "#{kid_workshop.name} – #{teacher_names} à #{city.name}"
   end
+
+  def subscriptions
+    Subscription.joins(:kid_workshop_slot).where(kid_workshop_slot: self)
+  end
 end

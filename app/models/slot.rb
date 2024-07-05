@@ -3,6 +3,7 @@ class Slot < ApplicationRecord
 
   belongs_to :teacher
   belongs_to :city
+  has_many :subscriptions
 
   enum day_of_week: {
     "Jour à définir": 0,
@@ -46,7 +47,11 @@ class Slot < ApplicationRecord
     end
   end
 
-  def students
-    Course.joins(:subscription, :slot).where(slot: self).count
+  def courses
+    Course.joins(:subscription, :slot).where(slot: self)
+  end
+
+  def student_count
+    students.count
   end
 end

@@ -14,18 +14,64 @@
       <h2>Professeurs</h2>
       <dl>
         <% @teachers.each do |teacher| %>
-          <dt><%= teacher.name %></dt>
-          <dd><%= teacher.student_count.presence || "-" %></dd>
+          <dt><h3><%= teacher.name %></h3></dt>
+          <dd>
+            <% teacher.slots.each do |slot| %>
+              <% if slot.courses.present? %>
+                <h4><%= "#{slot.city.name} #{slot.datetime}" %></h3>
+                <ul>
+                  <% slot.courses.each do |course| %>
+                    <li><%= course.subscription.student.name %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          </dd>
+        <% end %>
+      </dl>
+      <hr>
+      <h2>Enfance</h2>
+      <dl>
+        <% @kid_workshops.each do |workshop| %>
+          <dt><h3><%= workshop.name %></h3></dt>
+          <dd>
+            <% workshop.kid_workshop_slots.each do |slot| %>
+              <% if slot.subscriptions.present? %>
+                <h4><%= "#{slot.city.name} : #{slot.subscriptions.size}" %></h4>
+                <ul>
+                  <% if slot.subscriptions.present? %>
+                    <% slot.subscriptions.each do |subscription| %>
+                      <li><%= subscription.student.name %></li>
+                    <% end %>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          </dd>
         <% end %>
       </dl>
     </div>
+
 
     <div>
       <h2>Ateliers</h2>
       <dl>
         <% @workshops.each do |workshop| %>
-          <dt><%= workshop.name %></dt>
-          <dd><%= workshop.student_count.presence || "-" %></dd>
+          <dt><h3><%= workshop.name %></h3></dt>
+          <dd>
+            <% workshop.workshop_slots.each do |slot| %>
+              <% if slot.subbed_workshops.present? %>
+                <% if workshop.workshop_slots.size > 1 %>
+                  <h4><%= "#{slot.day_of_week} à #{slot.city.name} : #{slot.subbed_workshops.size}" %></h4>
+                <% end %>
+                <ul>
+                  <% slot.subbed_workshops.each do |subbed_workshop| %>
+                    <li><%= subbed_workshop.subscription.student.name %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+          </dd>
         <% end %>
       </dl>
     </div>
