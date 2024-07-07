@@ -6,6 +6,6 @@ class Season < ApplicationRecord
   end
 
   def student_count
-    "#{Subscription.where(season_id: Config.first.season.id).size} élèves"
+    "#{Subscription.joins(:subscription_group).where(subscription_group: {season_id: Config.first.season.id}).size} élèves"
   end
 end

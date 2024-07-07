@@ -1,1 +1,1 @@
-<%= truncate(field.to_s) %>
+<%= truncate(field.to_s.gsub(/<div>|<\/div>/, "")) if field.to_s.present? %>

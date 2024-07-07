@@ -17,6 +17,7 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
     slot_time: Field::String,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     comment: Field::Text,
+    subscription_count: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -31,6 +32,7 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
     city
     day_of_week
     frequency
+    subscription_count
     status
   ].freeze
 

@@ -4,6 +4,7 @@ class Slot < ApplicationRecord
   belongs_to :teacher
   belongs_to :city
   has_many :subscriptions
+  has_many :courses, through: :subscriptions
 
   enum day_of_week: {
     "Jour à définir": 0,
@@ -52,6 +53,6 @@ class Slot < ApplicationRecord
   end
 
   def student_count
-    students.count
+    courses.count
   end
 end

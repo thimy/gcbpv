@@ -21,7 +21,7 @@
                 <h4><%= "#{slot.city.name} #{slot.datetime}" %></h3>
                 <ul>
                   <% slot.courses.each do |course| %>
-                    <li><%= course.subscription.student.name %></li>
+                    <li><%= link_to course.subscription.student.name, admin_subscription_path(course.subscription) %></li>
                   <% end %>
                 </ul>
               <% end %>
@@ -41,7 +41,7 @@
                 <ul>
                   <% if slot.subscriptions.present? %>
                     <% slot.subscriptions.each do |subscription| %>
-                      <li><%= subscription.student.name %></li>
+                      <li><%= link_to subscription.student.name, admin_subscription_path(subscription) %></li>
                     <% end %>
                   <% end %>
                 </ul>
@@ -51,7 +51,6 @@
         <% end %>
       </dl>
     </div>
-
 
     <div>
       <h2>Ateliers</h2>
@@ -66,7 +65,7 @@
                 <% end %>
                 <ul>
                   <% slot.subbed_workshops.each do |subbed_workshop| %>
-                    <li><%= subbed_workshop.subscription.student.name %></li>
+                    <li><%= link_to subbed_workshop.subscription.student.name, admin_subscription_path(subbed_workshop.subscription) %></li>
                   <% end %>
                 </ul>
               <% end %>

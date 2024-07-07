@@ -28,8 +28,8 @@ class WorkshopDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     name
     status
-    max_students
     student_count
+    max_students
   ].freeze
   
   # SHOW_PAGE_ATTRIBUTES

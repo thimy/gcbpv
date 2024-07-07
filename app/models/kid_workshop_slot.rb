@@ -48,4 +48,8 @@ class KidWorkshopSlot < ApplicationRecord
   def subscriptions
     Subscription.joins(:kid_workshop_slot).where(kid_workshop_slot: self)
   end
+
+  def subscription_count
+    subscriptions.size
+  end
 end

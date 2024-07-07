@@ -15,7 +15,7 @@ class SlotDashboard < Administrate::BaseDashboard
     slot_time: Field::String,
     teacher: Field::BelongsTo,
     comment: Field::Text,
-    students: Field::Text.with_options(searchable: false),
+    student_count: Field::Text.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -29,7 +29,8 @@ class SlotDashboard < Administrate::BaseDashboard
     teacher
     city
     day_of_week
-    students
+    slot_time
+    student_count
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

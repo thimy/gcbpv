@@ -11,7 +11,7 @@ class PaymentDashboard < Administrate::BaseDashboard
     id: Field::Number,
     subscription_group: Field::BelongsTo,
     amount: Field::String.with_options(searchable: false),
-    comment: TrixField,
+    comment: Field::Text,
     payment_method: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

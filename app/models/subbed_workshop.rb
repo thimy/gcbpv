@@ -4,4 +4,12 @@ class SubbedWorkshop < ApplicationRecord
 
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
+
+  def student_name
+    subscription.student.name
+  end
+
+  def workshop_name
+    workshop_slot.name
+  end
 end

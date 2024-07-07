@@ -8,8 +8,6 @@ fr:
   administrate:
     created_at: "Créé le"
     updated_at: "Modifié le"
-    true: "Oui"
-    false: "Non"
     fields:
       nested_has_many:
         add: "Ajouter"
@@ -160,6 +158,9 @@ fr:
         status: "Statut"
         workshop_type: "Type"
         kid_workshop_slots: "Créneaux"
+        day_of_week: "Jour"
+        city: "Ville"
+        subscription_count: "Nombre d'élèves"
       kid_workshop_slot:
         teachers: "Professeurs"
         frequency: "Fréquence"
@@ -168,13 +169,6 @@ fr:
         status: "Statut"
         city: "Ville"
         city_id: "Ville"
-      meeting:
-        amount: "Nombre de sessions"
-        archived: "Archivé"
-        meeting_day: "Jour du rendez-vous"
-        name: "Nom"
-        price: "Prix"
-        status: "Statut"
       pathway:
         name: "Nom"
         pathway_slots: "Créneaux de parcours"
@@ -274,7 +268,8 @@ fr:
         day_of_week: "Jour"
         start_time: "Heure de début"
         end_time: "Heure de fin"
-        students: "Nombre d’élèves"
+        student_count: "Nombre d’élèves"
+        slot_time: "Créneau"
       staff:
         last_name: "Nom"
         first_name: "Prénom"
@@ -295,12 +290,14 @@ fr:
         gender: "Genre"
         created_at: "Créé le"
         updated_at: "Modifié le"
-      subbed_workshops:
+      subbed_workshop:
         workshop_slots: "Choix de l'atelier"
         workshop_slot: "Choix de l'atelier"
         workshop_slot_id: "Choix de l'atelier"
         option: "Optionel"
         comment: "Commentaires"
+        workshop_name: "Atelier"
+        student_name: "Élève"
       subscription:
         archived: "Archivé"
         location: "Lieu de l’atelier"
@@ -342,6 +339,10 @@ fr:
         option: "Optionel"
         comment: "Commentaires"
         subbed_workshops: "Ateliers"
+        workshop_name: "Atelier"
+        student_name: "Élève"
+        phone: "Téléphone"
+        city: "Ville"
       subscription_group:
         amount: "Montant dû"
         amount_paid: "Montant réglé"
@@ -365,6 +366,7 @@ fr:
         majoration_class: "Agglo"
         status: "Statut"
         option: "Optionel"
+        subbed_workshop: "Atelier"
         subbed_workshops: "Ateliers"
         workshop_slot: "Choix de l'atelier"
       teacher:
@@ -381,6 +383,10 @@ fr:
         slots: "Disponibilités"
         phone: "Téléphone"
         student_count: "Nombre d’élèves"
+        slot_time: "Créneau"
+        day_of_week: "Jour"
+        city: "Ville"
+        teacher: "Professeur"
       training:
         name: "Nom"
         price: "Prix d’une séance"
@@ -391,6 +397,7 @@ fr:
         status: "Statut"
         created_at: "Créé le"
         updated_at: "Modifié le"
+        guest: "Invités"
       training_session:
         name: "Nom"
         guest: "Intervenants"

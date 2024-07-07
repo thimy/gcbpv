@@ -15,6 +15,8 @@ class SubbedWorkshopDashboard < Administrate::BaseDashboard
     workshop_slot: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    student_name: Field::String.with_options(searchable: false),
+    workshop_name: Field::String.with_options(searchable: false)
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -23,10 +25,9 @@ class SubbedWorkshopDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
-    comment
+    workshop_name
     option
-    subscription
+    comment
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
