@@ -69,8 +69,8 @@ fr:
         one: "Membre"
         other: "Membres"
       student:
-        one: "Élève"
-        other: "Élèves"
+        one: "Fiche élève"
+        other: "Fiches élève"
       subbed_workshop:
         one: "Atelier"
         other: "Atelier"
@@ -369,6 +369,8 @@ fr:
         subbed_workshop: "Atelier"
         subbed_workshops: "Ateliers"
         workshop_slot: "Choix de l'atelier"
+        phone: "Téléphone"
+        city: "Ville"
       teacher:
         first_name: "Prénom"
         last_name: "Nom"
@@ -439,6 +441,7 @@ fr:
         workshop_type: "Type de tarification"
         max_students: "Capacité de l'atelier"
         student_count: "Nombre d'élèves"
+        subbed_workshops: "Élèves"
       workshop_slot:
         teachers: "Professeurs"
         frequency: "Fréquence"
@@ -447,4 +450,5 @@ fr:
         status: "Statut"
         city: "Ville"
         city_id: "Ville"
+        subbed_workshops: "Élèves"
 

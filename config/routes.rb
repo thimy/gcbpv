@@ -50,16 +50,18 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :stats, only: [:index]
     resources :payors
+    resources :students
     resources :subscription_groups
     resources :subscriptions, only: [:index, :show, :edit, :update]
-    resources :students
-    resources :instruments
+    resources :teachers
+    resources :slots, only: [:show]
     resources :workshops
+    resources :workshop_slots, only: [:show]
     resources :kid_workshops
+    resources :kid_workshops, only: [:show]
     resources :trainings
     resources :projects
-    resources :teachers
-    resources :slots
+    resources :instruments
     resources :cities
     resources :plans
     resources :seasons

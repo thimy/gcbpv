@@ -16,6 +16,7 @@ class SlotDashboard < Administrate::BaseDashboard
     teacher: Field::BelongsTo,
     comment: Field::Text,
     student_count: Field::Text.with_options(searchable: false),
+    courses: SubscriptionListField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -38,6 +39,7 @@ class SlotDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     teacher
     city
+    courses
     day_of_week
     frequency
     slot_time

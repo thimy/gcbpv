@@ -43,13 +43,10 @@ class TeacherDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     first_name
     last_name
-    description
-    instruments
-    email
-    status
-    phone
-    photo
     slots
+    email
+    phone
+    status
     created_at
     updated_at
   ].freeze

@@ -17,6 +17,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     workshop: Field::BelongsTo,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     name: Field::String.with_options(searchable: false),
+    subbed_workshops: SubscriptionListField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -28,6 +29,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     name
+    subbed_workshops
     day_of_week
   ].freeze
 
@@ -35,6 +37,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    subbed_workshops
     teachers
     city
     frequency

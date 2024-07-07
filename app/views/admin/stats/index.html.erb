@@ -4,9 +4,9 @@
     <dt>Saison courante</dt>
     <dd><%= @season.name %></dd>
     <dt>Foyers</dt>
-    <dd><%= @subscription_groups %></dd>
+    <dd><%= "#{@confirmed_subscription_groups_size} (+#{@unconfirmed_subscription_groups_size})" %></dd>
     <dt>Inscriptions</dt>
-    <dd><%= @subscriptions %></dd>
+    <dd><%= "#{@confirmed_subscription_size} (+#{@unconfirmed_subscription_groups_size})" %></dd>
   </dl>
 
   <div class="count">
@@ -21,7 +21,11 @@
                 <h4><%= "#{slot.city.name} #{slot.datetime}" %></h3>
                 <ul>
                   <% slot.courses.each do |course| %>
-                    <li><%= link_to course.subscription.student.name, admin_subscription_path(course.subscription) %></li>
+                    <% if course.option == "Optionel" %>
+                     <li>(<%= link_to course.subscription.student.name, admin_subscription_path(course.subscription) %>)</li>
+                    <% else %>
+                      <li><%= link_to course.subscription.student.name, admin_subscription_path(course.subscription) %></li>
+                    <% end %>
                   <% end %>
                 </ul>
               <% end %>

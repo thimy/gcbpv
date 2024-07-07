@@ -16,7 +16,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     payor: Field::BelongsTo,
     season: Field::BelongsTo.with_options(include_blank: false),
     subscriptions: Field::NestedHasMany.with_options(skip: :subscription_group),
-    status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }, include_blank: true),
+    status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     majoration_class: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     student_list: Field::String.with_options(searchable: false),
     amount: Field::Number,

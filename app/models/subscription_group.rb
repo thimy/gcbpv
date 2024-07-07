@@ -20,6 +20,9 @@ class SubscriptionGroup < ApplicationRecord
     "Hors agglo": 2
   }
 
+  scope :unconfirmed, -> { where(status: 0) }
+  scope :confirmed, -> { where(status: [nil, 1, 2, 3]) }
+
   def student_list
     subscriptions.map {|subscription|
       subscription.student.name

@@ -22,6 +22,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     phone: Field::String.with_options(searchable: false),
     email: Field::String.with_options(searchable: false),
     city: Field::String.with_options(searchable: false),
+    subscription_group: Field::BelongsTo,
     comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -45,6 +46,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     student
+    subscription_group
     courses
     subbed_workshops
     kid_workshop_slot

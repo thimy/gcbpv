@@ -1,0 +1,20 @@
+<% if field.present? %>
+  <table aria-labelledby="Élèves">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Téléphone</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% field.data.each do |resource| %>
+        <tr class="js-table-row" tabindex="0" role="link" data-url="<%= "/admin/subscriptions/#{resource.subscription.id}" %>">
+          <td><%= resource.subscription.student.name %></td>
+          <td><%= resource.subscription.student.email %></td>
+          <td><%= resource.subscription.student.phone %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
