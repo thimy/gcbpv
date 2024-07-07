@@ -13,7 +13,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     pathway_slots: Field::HasMany,
     subbed_workshops: Field::NestedHasMany.with_options(skip: :subscription),
     kid_workshop_slot: Field::BelongsTo,
-    student: Field::BelongsTo,
+    student: Field::BelongsTo.with_options(searchable: true, searchable_fields: ["last_name", "first_name"], order: "last_name"),
     image_consent: Field::Boolean,
     disability: Field::Boolean,
     ars: Field::Boolean,

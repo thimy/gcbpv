@@ -13,7 +13,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     comment: TrixField,
     donation: Field::String.with_options(searchable: false),
     payments: Field::NestedHasMany.with_options(skip: :subscription_group),
-    payor: Field::BelongsTo,
+    payor: Field::BelongsTo.with_options(searchable: true, searchable_fields: ["last_name", "first_name"], order: "last_name"),
     season: Field::BelongsTo.with_options(include_blank: false),
     subscriptions: Field::NestedHasMany.with_options(skip: :subscription_group),
     status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
