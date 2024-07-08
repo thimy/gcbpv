@@ -49,7 +49,11 @@
                 <ul>
                   <% if slot.subbed_kid_workshops.present? %>
                     <% slot.subbed_kid_workshops.each do |subbed_kid_workshop| %>
-                      <li><%= link_to subbed_kid_workshop.subscription.student.name, admin_subscription_path(subbed_kid_workshop.subscription) %></li>
+                      <% if subbed_kid_workshop.is_option? %>
+                        <li>(<%= link_to subbed_kid_workshop.subscription.student.name, admin_subscription_path(subbed_kid_workshop.subscription) %>)</li>
+                      <% else %>
+                        <li><%= link_to subbed_kid_workshop.subscription.student.name, admin_subscription_path(subbed_kid_workshop.subscription) %></li>
+                      <% end %>
                     <% end %>
                   <% end %>
                 </ul>
@@ -73,7 +77,11 @@
                 <% end %>
                 <ul>
                   <% slot.subbed_workshops.each do |subbed_workshop| %>
-                    <li><%= link_to subbed_workshop.subscription.student.name, admin_subscription_path(subbed_workshop.subscription) %></li>
+                    <% if subbed_workshop.is_option? %>
+                      <li>(<%= link_to subbed_workshop.subscription.student.name, admin_subscription_path(subbed_workshop.subscription) %>)</li>
+                    <% else %>
+                      <li><%= link_to subbed_workshop.subscription.student.name, admin_subscription_path(subbed_workshop.subscription) %></li>
+                    <% end %>
                   <% end %>
                 </ul>
               <% end %>

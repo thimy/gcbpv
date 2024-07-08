@@ -11,4 +11,8 @@ class SubbedWorkshop < ApplicationRecord
   def workshop_name
     workshop_slot.name
   end
+
+  def is_option?
+    option == "Optionel" || subscription.subscription_group.status == 0
+  end
 end
