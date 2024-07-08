@@ -30,7 +30,6 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     name
     subbed_workshops
-    day_of_week
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

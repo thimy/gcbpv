@@ -9,15 +9,16 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    city: Field::BelongsTo,
-    day_of_week: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    frequency: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    kid_workshop: Field::BelongsTo,
     teachers: Field::HasMany,
+    city: Field::BelongsTo,
+    frequency: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    day_of_week: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     slot_time: Field::String,
+    kid_workshop: Field::BelongsTo,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    name: Field::String.with_options(searchable: false),
     comment: Field::Text,
-    subscription_count: Field::Text,
+    subbed_workshops: SubscriptionListField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -28,11 +29,10 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    id
-    city
+    name
+    subbed_workshops
     day_of_week
     frequency
-    subscription_count
     status
   ].freeze
 
@@ -40,12 +40,13 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    city
-    day_of_week
-    frequency
-    kid_workshop
+    subbed_workshops
     teachers
+    city
+    frequency
+    day_of_week
     slot_time
+    kid_workshop
     status
     comment
     created_at

@@ -112,6 +112,7 @@ fr:
         created_at: "Créé le"
         updated_at: "Modifié le"
       city:
+        comment: "Commentaire"
         name: "Nom"
         status: "Statut"
         created_at: "Créé le"
@@ -145,6 +146,7 @@ fr:
         teacher_list: "Professeurs"
         created_at: "Créé le"
         updated_at: "Modifié le"
+        comment: "Commentaire"
       course:
         start_time: "Heure de début"
         end_time: "Heure de fin"
@@ -156,6 +158,7 @@ fr:
         created_at: "Créé le"
         updated_at: "Modifié le"
       kid_workshop:
+        comment: "Commentaire"
         name: "Nom"
         frequency: "Fréquence"
         status: "Statut"
@@ -164,14 +167,20 @@ fr:
         day_of_week: "Jour"
         city: "Ville"
         subscription_count: "Nombre d'élèves"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
       kid_workshop_slot:
-        teachers: "Professeurs"
-        frequency: "Fréquence"
-        day_of_week: "Jour"
-        slot_time: "Horaires"
-        status: "Statut"
         city: "Ville"
         city_id: "Ville"
+        day_of_week: "Jour"
+        frequency: "Fréquence"
+        kid_workshop: "Enfance"
+        slot_time: "Horaires"
+        status: "Statut"
+        subbed_workshops: "Élèves"
+        teachers: "Professeurs"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
       pathway:
         name: "Nom"
         pathway_slots: "Créneaux de parcours"
@@ -201,6 +210,7 @@ fr:
         mail: "Email"
         subscription_groups: "Inscriptions"
       plan:
+        comment: "Commentaire"
         name: "Nom"
         class_price: "Prix du cours"
         kids_class_price: "Prix du cours enfants"
@@ -241,6 +251,8 @@ fr:
         project_instances: "Éditions de projet"
         project_instance_id: "Éditions de projet"
         project_instances_id: "Éditions de projet"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
       project_instance:
         comment: "Commentaires"
         project: "Projet"
@@ -263,6 +275,7 @@ fr:
         created_at: "Créé le"
         updated_at: "Modifié le"
       slot:
+        courses: "Élèves"
         frequency: "Fréquence"
         teacher: "Professeur"
         teacher_id: "Professeur"
@@ -273,6 +286,8 @@ fr:
         end_time: "Heure de fin"
         student_count: "Nombre d’élèves"
         slot_time: "Créneau"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
       staff:
         last_name: "Nom"
         first_name: "Prénom"
@@ -350,6 +365,7 @@ fr:
         comment: "Commentaires"
         subbed_workshops: "Ateliers"
         subbed_kid_workshops: "Enfance"
+        subscription_group: "Foyer"
         workshop_name: "Atelier"
         student_name: "Élève"
         phone: "Téléphone"
@@ -382,6 +398,8 @@ fr:
         workshop_slot: "Choix de l'atelier"
         phone: "Téléphone"
         city: "Ville"
+        created_at: "Créé le"
+        updated_at: "Modifié le"
       teacher:
         first_name: "Prénom"
         last_name: "Nom"

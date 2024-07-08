@@ -58,7 +58,7 @@ Rails.application.routes.draw do
     resources :workshops
     resources :workshop_slots, only: [:show]
     resources :kid_workshops
-    resources :kid_workshops, only: [:show]
+    resources :kid_workshop_slots, only: [:show]
     resources :trainings
     resources :projects
     resources :instruments

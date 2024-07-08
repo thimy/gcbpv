@@ -44,7 +44,6 @@ class SlotDashboard < Administrate::BaseDashboard
     frequency
     slot_time
     comment
-    created_at
     updated_at
   ].freeze
 

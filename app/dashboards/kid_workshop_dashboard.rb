@@ -26,6 +26,7 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     name
+    status
     description
     workshop_type
   ].freeze
@@ -35,9 +36,9 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     name
     description
+    status
     workshop_type
     kid_workshop_slots
-    status
     comment
     created_at
     updated_at
@@ -71,6 +72,6 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(kid_workshop)
-    "Atelier Enfance"
+    kid_workshop.name
   end
 end
