@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_30_161250) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_08_192544) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -335,6 +335,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_161250) do
     t.index ["payor_id"], name: "index_students_on_payor_id"
   end
 
+  create_table "subbed_kid_workshops", force: :cascade do |t|
+    t.bigint "kid_workshop_slot_id", null: false
+    t.bigint "subscription_id", null: false
+    t.text "comment"
+    t.integer "option"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["kid_workshop_slot_id"], name: "index_subbed_kid_workshops_on_kid_workshop_slot_id"
+    t.index ["subscription_id"], name: "index_subbed_kid_workshops_on_subscription_id"
+  end
+
   create_table "subbed_pathways", force: :cascade do |t|
     t.bigint "pathway_slot_id", null: false
     t.bigint "subscription_id", null: false
@@ -360,12 +371,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_161250) do
     t.decimal "amount_paid"
     t.text "comment"
     t.bigint "payor_id", null: false
+    t.bigint "season_id", null: false
     t.decimal "donation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status"
     t.integer "majoration_class"
-    t.bigint "season_id"
     t.decimal "amount"
     t.index ["payor_id"], name: "index_subscription_groups_on_payor_id"
     t.index ["season_id"], name: "index_subscription_groups_on_season_id"
@@ -380,9 +391,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_161250) do
     t.boolean "disability"
     t.boolean "ars"
     t.bigint "subscription_group_id"
-    t.bigint "kid_workshop_slot_id"
     t.text "comment"
-    t.index ["kid_workshop_slot_id"], name: "index_subscriptions_on_kid_workshop_slot_id"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
     t.index ["subscription_group_id"], name: "index_subscriptions_on_subscription_group_id"
   end
@@ -491,7 +500,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_161250) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "configs", "seasons"
-  add_foreign_key "configs", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
   add_foreign_key "kid_workshop_slot_teachers", "kid_workshop_slots"
@@ -511,10 +519,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_30_161250) do
   add_foreign_key "slots", "teachers"
   add_foreign_key "specialties", "instruments"
   add_foreign_key "specialties", "teachers"
+  add_foreign_key "subbed_kid_workshops", "kid_workshop_slots"
+  add_foreign_key "subbed_kid_workshops", "subscriptions"
   add_foreign_key "subbed_pathways", "pathway_slots"
   add_foreign_key "subbed_pathways", "subscriptions"
   add_foreign_key "subbed_workshops", "subscriptions"
   add_foreign_key "subscription_groups", "payors"
+  add_foreign_key "subscription_groups", "seasons"
   add_foreign_key "subscriptions", "students"
   add_foreign_key "training_sessions", "trainings"
   add_foreign_key "trainings", "seasons"

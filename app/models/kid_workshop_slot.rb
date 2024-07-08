@@ -1,5 +1,6 @@
 class KidWorkshopSlot < ApplicationRecord
-  has_many :subscriptions
+  has_many :subbed_kid_workshops
+  has_many :subscriptions, through: :subbed_kid_workshops
   has_many :kid_workshop_slot_teachers
   has_many :teachers, through: :kid_workshop_slot_teachers
   belongs_to :kid_workshop
@@ -49,7 +50,11 @@ class KidWorkshopSlot < ApplicationRecord
     Subscription.joins(:kid_workshop_slot).where(kid_workshop_slot: self)
   end
 
+  def subbed_workshops
+    SubbedKidWorkshop.joins(:subscription, :kid_workshop_slot).where(kid_workshop_slot: self)
+  end
+
   def subscription_count
-    subscriptions.size
+    subbed_workshops.size
   end
 end

@@ -13,7 +13,7 @@ class KidWorkshop < ApplicationRecord
   end
 
   def students_by_slot
-    Subscription.joins(:kid_workshop_slot).where(kid_workshop_slot: self).group(:kid_workshop_slot_id).count.collect {|id, count|
+    SubbedKidWorkshop.joins(:subscription, :kid_workshop_slot).where(kid_workshop_slot: {kid_workshop: self}).group(:kid_workshop_slot_id).count.collect {|id, count|
       slot = KidWorkshopSlot.find_by(id: id)
       "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
     }

@@ -1,5 +1,5 @@
-class SubbedWorkshop < ApplicationRecord
-  belongs_to :workshop_slot
+class SubbedKidWorkshop < ApplicationRecord
+  belongs_to :kid_workshop_slot
   belongs_to :subscription
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
@@ -9,6 +9,6 @@ class SubbedWorkshop < ApplicationRecord
   end
 
   def workshop_name
-    workshop_slot.name
+    kid_workshop_slot.name
   end
 end

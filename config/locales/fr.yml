@@ -74,6 +74,9 @@ fr:
       subbed_workshop:
         one: "Atelier"
         other: "Atelier"
+      subbed_kid_workshop:
+        one: "Enfance"
+        other: "Enfance"
       subscription:
         one: "Inscription par élève"
         other: "Inscriptions par élève"
@@ -298,6 +301,13 @@ fr:
         comment: "Commentaires"
         workshop_name: "Atelier"
         student_name: "Élève"
+      subbed_kid_workshop:
+        kid_workshop_slots: "Choix de l'atelier"
+        kid_workshop_slot_id: "Choix de l'atelier"
+        option: "Optionel"
+        comment: "Commentaires"
+        workshop_name: "Atelier"
+        student_name: "Élève"
       subscription:
         archived: "Archivé"
         location: "Lieu de l’atelier"
@@ -339,6 +349,7 @@ fr:
         option: "Optionel"
         comment: "Commentaires"
         subbed_workshops: "Ateliers"
+        subbed_kid_workshops: "Enfance"
         workshop_name: "Atelier"
         student_name: "Élève"
         phone: "Téléphone"

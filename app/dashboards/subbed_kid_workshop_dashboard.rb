@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class SubscriptionDashboard < Administrate::BaseDashboard
+class SubbedKidWorkshopDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -9,23 +9,14 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    courses: Field::NestedHasMany.with_options(skip: :subscription),
-    pathway_slots: Field::HasMany,
-    subbed_workshops: Field::NestedHasMany.with_options(skip: :subscription),
-    subbed_kid_workshops: Field::NestedHasMany.with_options(skip: :subscription),
-    student: Field::BelongsTo.with_options(searchable: true, searchable_fields: ["last_name", "first_name"], order: "last_name"),
-    image_consent: Field::Boolean,
-    disability: Field::Boolean,
-    ars: Field::Boolean,
-    course_list: Field::String.with_options(searchable: false),
-    workshop_list: Field::String.with_options(searchable: false),
-    phone: Field::String.with_options(searchable: false),
-    email: Field::String.with_options(searchable: false),
-    city: Field::String.with_options(searchable: false),
-    subscription_group: Field::BelongsTo,
     comment: Field::Text,
+    option: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    subscription: Field::BelongsTo,
+    kid_workshop_slot: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    student_name: Field::String.with_options(searchable: false),
+    workshop_name: Field::String.with_options(searchable: false)
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -34,28 +25,18 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    student
-    course_list
-    workshop_list
-    phone
-    email
-    city
+    workshop_name
+    option
+    comment
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    student
-    subscription_group
-    courses
-    subbed_workshops
-    subbed_kid_workshops
-    phone
-    email
-    city
-    image_consent
-    disability
-    ars
+    id
+    subscription
+    kid_workshop_slot
+    option
     comment
     created_at
     updated_at
@@ -65,14 +46,10 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    student
-    courses
-    subbed_workshops
-    subbed_kid_workshops
-    image_consent
-    disability
-    ars
+    kid_workshop_slot
+    option
     comment
+    subscription
   ].freeze
 
   # COLLECTION_FILTERS
@@ -87,10 +64,10 @@ class SubscriptionDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how subscriptions are displayed
+  # Overwrite this method to customize how subbed kid workshops are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(subscription)
-    subscription.student.name
-  end
+  # def display_resource(subbed_kid_workshop)
+  #   "SubbedKidWorkshop ##{subbed_kid_workshop.id}"
+  # end
 end

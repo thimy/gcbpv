@@ -3,12 +3,13 @@ class Subscription < ApplicationRecord
   has_many :courses
   has_many :subbed_pathways
   has_many :pathway_slots, through: :subbed_pathways
-  belongs_to :kid_workshop_slot, optional: true
+  has_many :subbed_kid_workshops
+  has_many :kid_workshop_slots, through: :subbed_kid_workshops
   has_many :subbed_workshops
   has_many :workshop_slots, through: :subbed_workshops
   belongs_to :subscription_group
 
-  accepts_nested_attributes_for :student, :courses, :subbed_workshops, :workshop_slots, allow_destroy: true
+  accepts_nested_attributes_for :student, :courses, :subbed_workshops, :subbed_kid_workshops, :workshop_slots, allow_destroy: true
 
   enum status: {
     "Demande d’information": 0,
