@@ -35,6 +35,9 @@ fr:
       kid_workshop:
         one: "Enfance"
         other: "Enfance"
+      lists:
+        one: Cours par profs
+        other: Cours par profs
       pathway:
         one: "Parcours"
         other: "Parcours"

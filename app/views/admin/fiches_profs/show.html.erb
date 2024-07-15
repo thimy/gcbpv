@@ -1,0 +1,40 @@
+<% content_for(:title, @teacher.name) %>
+
+<div class="custom-page lists">
+  <h1><%= @teacher.name%></h1>
+  <% if @teacher.slots.present? %>
+    <% @teacher.slots.order(:day_of_week).each do |slot|%>
+      <% if slot.courses.present? %>
+        <h2><%= "#{slot.day_of_week} – #{slot.city.name}" %></h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <% if @teacher.instruments.size > 1 %>
+                <th>Discipline</th>
+              <% end %>
+              <th>Téléphone</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% slot.courses.each do |course| %>
+              <tr>
+                <% if course.option == "Optionel" %>
+                  <td>(<%= link_to course.subscription.student.name, admin_subscription_path(course.subscription) %>)</td>
+                    <% else %>
+                  <td><%= link_to course.subscription.student.name, admin_subscription_path(course.subscription) %></td>
+                <% end %>
+                <% if @teacher.instruments.size > 1 %>
+                  <td><%= course.instrument.name %></td>
+                <% end %>
+                <td><%= course.subscription.student.phone %></td>
+                <td><%= course.subscription.student.email %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

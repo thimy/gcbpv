@@ -1,0 +1,25 @@
+<% content_for(:title, "Professeurs") %>
+
+<div class="custom-page lists">
+  <h1>Professeurs</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+        <th>Élèves</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @teachers.each do |teacher| %>
+        <tr class="js-table-row" tabindex="0" role="link" data-url="<%= "/admin/fiches_profs/#{teacher.id}" %>">
+          <td><%= teacher.name %></td>
+          <td><%= teacher.phone %></td>
+          <td><%= teacher.email %></td>
+          <td><%= teacher.student_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

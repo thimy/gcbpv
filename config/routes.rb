@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :stats, only: [:index]
+    resources :fiches_profs, only: [:index, :show]
     resources :payors
     resources :students
     resources :subscription_groups
