@@ -1,5 +1,5 @@
 class EcoleController < ApplicationController
-  layout "website"
+  layout "ecole"
 
   def index
   end

@@ -1,12 +1,12 @@
-class Ecole::TeachersController < BaseController
+class Ecole::TeachersController < EcoleController
   before_action :set_teacher, only: %i[ show ]
 
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.active
   end
 
   def show
-    @other_teachers = Teacher.where.not(id: params[:id])
+    @other_teachers = Teacher.active.where.not(id: params[:id]).order(:last_name)
   end
 
   private

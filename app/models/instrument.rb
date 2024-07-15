@@ -4,6 +4,7 @@ class Instrument < ApplicationRecord
   has_one_attached :image
 
   enum :status, "Public" => 0, "Privé" => 1
+  scope :active, -> {where(status: 0)}
 
   def cities
     teachers.map { |teacher|

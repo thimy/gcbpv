@@ -1,6 +1,7 @@
 .card {
   align-items: start;
-  background-color: var(--white);
+  background-color: var(--main-brand);
+  border: 2px solid var(--main-brand);
   border-radius: var(--radius-2);
   box-shadow: var(--light-elevation-low);
   color: var(--black);
@@ -14,7 +15,7 @@
   transition: var(--transition-short);
 
   &:hover {
-    box-shadow: var(--light-elevation-medium);
+    box-shadow: var(--light-elevation-high);
   }
 
   .card-info {
@@ -30,7 +31,7 @@
 
   &:where([data-card-type="image"]) {
     --card-margin-top: var(--size-8);
-    --image-background-color: var(--main-brand);
+    --image-background-color: var(--mint);
     box-shadow: var(--light-elevation-medium);
     margin-top: var(--card-margin-top);
 
@@ -42,10 +43,6 @@
       margin-top: calc(var(--card-margin-top) * -1);
       overflow: hidden;
       width: 100%;
-
-      &:is(.card:nth-child(even) *) {
-        --image-background-color: var(--dark-accent);
-      }
 
       img {
         height: 100%;

@@ -1,4 +1,4 @@
-class Ecole::TrainingsController < BaseController
+class Ecole::TrainingsController < EcoleController
   before_action :set_training, only: %i[ show ]
 
   def index

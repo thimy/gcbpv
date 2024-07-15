@@ -63,6 +63,10 @@ a {
   gap: var(--size-2);
 }
 
+.gap-3 {
+  gap: var(--size-3);
+}
+
 .gap-4 {
   gap: var(--size-4);
 }

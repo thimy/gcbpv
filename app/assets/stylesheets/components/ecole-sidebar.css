@@ -1,0 +1,35 @@
+.ecole-sidebar {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: var(--size-11);
+
+  a {
+    --entry-bg-color: color-mix(in srgb, var(--dark-accent), transparent 80%);
+    --entry-border-color: color-mix(in srgb, var(--dark-accent), transparent 75%);
+    align-items: center;
+    border: 1px solid transparent;
+    border-radius: var(--radius-2);
+    color: var(--text-color);
+    display: flex;
+    margin: auto 0;
+    padding: var(--size-1) var(--size-3);
+    position: relative;
+    text-decoration: none;
+    transition: var(--transition-short);
+    z-index: 1;
+
+    &[aria-current="page"] {
+      --entry-bg-color: color-mix(in srgb, var(--light-accent), transparent 80%);
+      --entry-border-color: color-mix(in srgb, var(--light-accent), transparent 75%);
+    }
+
+    &[aria-current="page"],
+    &:hover {
+      background-color: var(--entry-bg-color);
+      border: 1px solid var(--entry-border-color);
+      color: currentColor;
+    }
+  }
+}

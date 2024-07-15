@@ -1,6 +1,5 @@
 .teachers {
   section.grid {
-    --column-width: 350px;
     background: 0;
     box-shadow: none;
     padding: 0;
@@ -12,9 +11,9 @@
 }
 
 .teacher-page {
-  .left {
-    float: left;
-    padding: var(--size-2) var(--size-4) var(--size-4) 0;
+  .image {
+    float: right;
+    padding: var(--size-2) 0 var(--size-6) var(--size-6);
     width: 500px;
 
     img {

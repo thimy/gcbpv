@@ -8,9 +8,9 @@ class Website::Card::Workshop::Component < ViewComponent::Base
     @path = path
   end
 
-  def teacher_names(slot)
-    slot.teachers.map { |teacher|
-      teacher.name
-  }.join("/")
+  def teacher_names
+    @workshop.workshop_slots.collect{|slot| slot.teachers }.uniq.map { |teachers|
+      teachers.collect{|teacher| teacher.name}
+  }.flatten.uniq
   end
 end

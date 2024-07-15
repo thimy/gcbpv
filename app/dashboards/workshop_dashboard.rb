@@ -15,6 +15,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     max_students: Field::Number,
+    kid_friendly: Field::Boolean,
     student_count: Field::Text.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -41,6 +42,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     workshop_type
     workshop_slots
     max_students
+    kid_friendly
     created_at
     updated_at
   ].freeze
@@ -55,6 +57,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     workshop_type
     workshop_slots
     max_students
+    kid_friendly
   ].freeze
 
   # COLLECTION_FILTERS

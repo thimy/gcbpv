@@ -1,8 +1,8 @@
 <% content_for(:page_class, "ecole teacher-page ") %>
 <% content_for(:page_title, @teacher.name) %>
 
-<section class="panel popout">
-  <div class="left flex-column gap-4">
+<section class="popout">
+  <div class="image flex-column gap-4">
     <div class="tag-list">
       <% @teacher.instruments.each do |instrument| %>
         <span class="tag" data-tag-color="light-accent">
@@ -21,8 +21,8 @@
       <%= inline_svg_tag "icons/singing.svg" %>
     <% end %>
   </div>
-  <div class="right">
-    <%= simple_format(@teacher.description) %>
+  <div class="description">
+    <%= @teacher.description.present? ? simple_format(@teacher.description) : "La description de ce professeur est indisponible" %>
   </div>
 </section>
 <%= render Website::OtherRecords::Component.new(label: "professeurs") do %>

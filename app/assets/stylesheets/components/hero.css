@@ -1,24 +1,28 @@
 hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-3);
   padding-block-start: var(--size-8);
   position: relative;
   text-align: center;
 
   h1 {
-    background: url("icons/underline.svg") center 0.75em no-repeat;
-    background-size: 100%;
+    background: url("icons/underline.svg") center bottom -0.5em no-repeat;
+    background-size: 1000px;
     color: var(--black);
-    display: inline;
+    display: inline-block;
     font-family: "Garden Grown";
     font-size: var(--font-size-fluid-4);
     position: relative;
-    text-wrap: initial;
+    text-wrap: balance;
+    width: 100%;
     z-index: 1;
   }
 
   p {
-    color: var(--light-accent);
+    color: var(--dark-accent);
     font-family: var(--font-serif);
-    font-size: var(--font-size-fluid-2);
+    font-size: var(--font-size-fluid-1);
     line-height: 1.2;
     margin: 0;
     text-align: center;

@@ -5,14 +5,22 @@
   <section>
     <h2><%= inline_svg "icons/calendar-check" %>Les événements à venir</h2>
     <div class="panel">
-      <%= render Website::Card::Event::Component.with_collection(@upcoming_events) %>
+      <% if @upcoming_events.present? %>
+        <%= render Website::Card::Event::Component.with_collection(@upcoming_events) %>
+      <% else %>
+        Aucun événement à venir
+      <% end %>
     </div>
   </section>
 
   <section>
     <h2><%= inline_svg "icons/calendar-off" %>Les événements passés</h2>
     <div class="panel">
-      <%= render Website::Card::Event::Component.with_collection(@passed_events) %>
+      <% if @passed_events.present? %>
+        <%= render Website::Card::Event::Component.with_collection(@passed_events) %>
+      <% else %>
+        Aucun événement passé
+      <%end %>
     </div>
   </section>
 </div>

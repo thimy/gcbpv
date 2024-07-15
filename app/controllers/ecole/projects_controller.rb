@@ -1,8 +1,8 @@
-class Ecole::ProjectsController < BaseController
+class Ecole::ProjectsController < EcoleController
   before_action :set_project, only: %i[ show ]
 
   def index
-    @projects = Project.where(public: true)
+    @projects = Project.where(status: "Public")
   end
 
   def show

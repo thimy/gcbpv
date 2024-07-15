@@ -4,59 +4,47 @@
 <div class="popout flex-column gap-8">
   <section class="payment">
     <h2>Adhésion</h2>
-    <div class="panel">
-      <p>L’adhésion est familiale. Elle s’élève à <%= number_to_currency(@plan.membership_price, unit: "€", precision: 0) %> et vous permet d’avoir accès au Centre-Ressources (archives sonores, photographiques, livres...), et vous permet de bénéficier de réductions sur l’achat de livres et CDs édités par le Groupement. Une fois inscrit à l’Ecole de Musique Traditionnelle vous devenez adhérent de l’association et êtes invité à participer de différentes manières à la vie de l’association.</p>
-    </div>
+    <p>L’adhésion est familiale. Elle s’élève à <%= number_to_currency(@plan.membership_price, unit: "€", precision: 0) %> et vous permet d’avoir accès au Centre-Ressources (archives sonores, photographiques, livres...), et vous permet de bénéficier de réductions sur l’achat de livres et CDs édités par le Groupement. Une fois inscrit à l’Ecole de Musique Traditionnelle vous devenez adhérent de l’association et êtes invité à participer de différentes manières à la vie de l’association.</p>
     <h2>Mécénat</h2>
-    <div class="panel">
-      <p>L’association est habilitée à recevoir des dons et à émettre un reçu fiscal pour déduction d’impôts.</p>
-    </div>
+    <p>L’association est habilitée à recevoir des dons et à émettre un reçu fiscal pour déduction d’impôts.</p>
   </section>
   <section>
     <h2>Mode de règlement</h2>
-    <div class="panel">
-      <p>Les cours sont payables à l’inscription en chèque(s) (ordre : GCBPV), en espèces, par virement, en chèques vacances ou en vignettes CAF pour le Morbihan.</p>
-      <p>Des facilités de paiement sont possibles (de 3 à 10 fois).</p>
-      <p>En cas de règlement en plusieurs fois, le premier chèque doit inclure le coût de l’adhésion au GCBPV.</p>
-    </div>
+    <p>Les cours sont payables à l’inscription en chèque(s) (ordre : GCBPV), en espèces, par virement, en chèques vacances ou en vignettes CAF pour le Morbihan.</p>
+    <p>Des facilités de paiement sont possibles (de 3 à 10 fois).</p>
+    <p>En cas de règlement en plusieurs fois, le premier chèque doit inclure le coût de l’adhésion au GCBPV.</p>
     <h2>Aides</h2>
-    <div class="panel">
-      <dl>
-        <dt>CAF Morbihan</dt>
-        <dd>Fournir la vignette au GCBPV au moment de l’inscription en déduction de la somme due.</dd>
-        <dt>Chèques-vacances</dt>
-        <dd>À fournir au moment de l’inscription.</dd>
-        <dt>Coupon culture-sport</dt>
-        <dd>Concerne les enfants redonnais scolarisés à Redon dans les écoles publiques et privées de la maternelle au CM2. Il s’élève à 65€ pour la rentrée 2023.</dd>
-        <dt>Pass Culture</dt>
-        <dd>Les cours et ateliers sont éligibles au Pass Culture pour les élèves âgés de 18 ans.</dd>
-      </dl>
-    </div>
+    <dl>
+      <dt>CAF Morbihan</dt>
+      <dd>Fournir la vignette au GCBPV au moment de l’inscription en déduction de la somme due.</dd>
+      <dt>Chèques-vacances</dt>
+      <dd>À fournir au moment de l’inscription.</dd>
+      <dt>Coupon culture-sport</dt>
+      <dd>Concerne les enfants redonnais scolarisés à Redon dans les écoles publiques et privées de la maternelle au CM2. Il s’élève à 65€ pour la rentrée 2023.</dd>
+      <dt>Pass Culture</dt>
+      <dd>Les cours et ateliers sont éligibles au Pass Culture pour les élèves âgés de 18 ans.</dd>
+    </dl>
     <h2>Remises</h2>
-    <div class="panel">
-      <p>La remise familiale est valable au sein d’une même famille et se calcule de la façon suivante :</p>
-      <ul>
-        <li>Le total des cours et ateliers est compris entre <strong><%= number_to_currency(@plan.first_step, unit: "€", precision: 0) %></strong> et <strong><%= number_to_currency(@plan.second_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.first_step_discount, precision: 0) %></strong> de la somme, puis vous ajoutez le coût de l’adhésion</li>
-        <li>Le total des cours et ateliers est compris entre <strong><%= number_to_currency(@plan.second_step, unit: "€", precision: 0) %></strong> et <strong><%= number_to_currency(@plan.third_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.second_step_discount, precision: 0) %></strong> de la somme, puis ajoutez le coût de l’adhésion</li>
-        <li>Le total des cours et ateliers est au dessus de <strong><%= number_to_currency(@plan.third_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.third_step_discount, precision: 0) %></strong> de la somme, puis ajoutez le coût de l’adhésion</li>
-      </ul>
-    </div>
+    <p>La remise familiale est valable au sein d’une même famille et se calcule de la façon suivante :</p>
+    <ul>
+      <li>Le total des cours et ateliers est compris entre <strong><%= number_to_currency(@plan.first_step, unit: "€", precision: 0) %></strong> et <strong><%= number_to_currency(@plan.second_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.first_step_discount, precision: 0) %></strong> de la somme, puis vous ajoutez le coût de l’adhésion</li>
+      <li>Le total des cours et ateliers est compris entre <strong><%= number_to_currency(@plan.second_step, unit: "€", precision: 0) %></strong> et <strong><%= number_to_currency(@plan.third_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.second_step_discount, precision: 0) %></strong> de la somme, puis ajoutez le coût de l’adhésion</li>
+      <li>Le total des cours et ateliers est au dessus de <strong><%= number_to_currency(@plan.third_step, unit: "€", precision: 0) %></strong>, vous ôtez <strong><%= number_to_percentage(@plan.third_step_discount, precision: 0) %></strong> de la somme, puis ajoutez le coût de l’adhésion</li>
+    </ul>
     <h2 id="majorations">Majoration hors Redon Agglomération</h2>
-    <div class="panel">
-      <p>Les activités de l’EMTPV sont soutenues par Redon Agglomération et Oust à Brocéliande Communauté à moindre échelle.</p>
-      <p>En conséquence, une <strong>majoration de <%= @plan.obc_markup %>%</strong> sur nos tarifs est demandée aux élèves résidant sur le territoire d’Oust à Brocéliande Communauté, de <strong><%= @plan.outbounds_markup %>%</strong> aux élèves hors Redon Agglomération et hors Oust à Brocéliande Communauté.</p>
-      <dl>
-        <dt>Redon Agglomération</dt>
-        <dd>
-          <ul><li>Allaire</li><li>Avessac</li><li>Bains-sur-Oust</li><li>Béganne</li><li>Bruc-sur-Aff</li><li>La Chapelle de Brain</li><li>Conquereuil</li><li>Fégréac</li><li>Guémené-Penfao</li><li>Langon</li><li>Les Fougerêts</li><li>Lieuron</li><li>Massérac</li><li>Peillac</li><li>Pierric</li><li>Pipriac</li><li>Plessé</li><li>Redon</li><li>Renac</li><li>Rieux</li><li>St-Ganton</li><li>St-Gorgon</li><li>St-Jacut-les-Pins</li><li>St-Jean-La-Poterie</li><li>St-Just</li><li>Sainte-Marie</li><li>St-Nicolas-de-Redon</li><li>St-Perreux</li><li>St-Vincent-sur-Oust</li><li>Sixt-sur-Aff</li><li>Théhillac</li></ul></dd>
-        <dt>Oust à Brocéliande Communauté :</dt>
-        <dd>
-          <ul><li>Augan</li><li>Beignon</li><li>Bohal</li><li>Carentoir</li><li>Caro</li><li>Cournon</li><li>Guer</li><li>La Gacilly</li><li>Lizio</li><li>Malestroit</li><li>Missiriac</li><li>Monteneuf</li><li>Pleucadeuc</li><li>Porcaro</li><li>Réminiac</li><li>Ruffiac</li><li>St-Abraham</li><li>St-Congard</li><li>St-Guyomard</li><li>St Laurent-sur-Oust</li><li>St Malo-de-Beignon</li><li>St Marcel</li><li>St Martin-sur-Oust</li><li>St Nicolas-du-Tertre</li><li>Sérent</li><li>Tréal</li></ul></dd>
-      </dl>
-    </div>
+    <p>Les activités de l’EMTPV sont soutenues par Redon Agglomération et Oust à Brocéliande Communauté à moindre échelle.</p>
+    <p>En conséquence, une <strong>majoration de <%= @plan.obc_markup %>%</strong> sur nos tarifs est demandée aux élèves résidant sur le territoire d’Oust à Brocéliande Communauté, de <strong><%= @plan.outbounds_markup %>%</strong> aux élèves hors Redon Agglomération et hors Oust à Brocéliande Communauté.</p>
+    <dl>
+      <dt>Redon Agglomération</dt>
+      <dd>
+        <ul><li>Allaire</li><li>Avessac</li><li>Bains-sur-Oust</li><li>Béganne</li><li>Bruc-sur-Aff</li><li>La Chapelle de Brain</li><li>Conquereuil</li><li>Fégréac</li><li>Guémené-Penfao</li><li>Langon</li><li>Les Fougerêts</li><li>Lieuron</li><li>Massérac</li><li>Peillac</li><li>Pierric</li><li>Pipriac</li><li>Plessé</li><li>Redon</li><li>Renac</li><li>Rieux</li><li>St-Ganton</li><li>St-Gorgon</li><li>St-Jacut-les-Pins</li><li>St-Jean-La-Poterie</li><li>St-Just</li><li>Sainte-Marie</li><li>St-Nicolas-de-Redon</li><li>St-Perreux</li><li>St-Vincent-sur-Oust</li><li>Sixt-sur-Aff</li><li>Théhillac</li></ul>
+      </dd>
+      <dt>Oust à Brocéliande Communauté :</dt>
+      <dd>
+        <ul><li>Augan</li><li>Beignon</li><li>Bohal</li><li>Carentoir</li><li>Caro</li><li>Cournon</li><li>Guer</li><li>La Gacilly</li><li>Lizio</li><li>Malestroit</li><li>Missiriac</li><li>Monteneuf</li><li>Pleucadeuc</li><li>Porcaro</li><li>Réminiac</li><li>Ruffiac</li><li>St-Abraham</li><li>St-Congard</li><li>St-Guyomard</li><li>St Laurent-sur-Oust</li><li>St Malo-de-Beignon</li><li>St Marcel</li><li>St Martin-sur-Oust</li><li>St Nicolas-du-Tertre</li><li>Sérent</li><li>Tréal</li></ul>
+      </dd>
+    </dl>
     <h2>EAC - Éducation artistique et culturelle</h2>
-    <div class="panel">
-      <p>L’EMT est désormais référencée sur le PASS CULTURE sur l’application Adage de l’Education Nationale ! Contactez-nous pour organiser des projets ou bénéficier des offres !</p>
-    </div>
+    <p>L’EMT est désormais référencée sur le PASS CULTURE sur l’application Adage de l’Education Nationale ! Contactez-nous pour organiser des projets ou bénéficier des offres !</p>
   </section>
 </div>

@@ -1,0 +1,12 @@
+.ecole-content {
+  background: var(--white);
+  border-radius: var(--radius-3);
+  display: grid;
+  gap: var(--size-3) var(--size-8);
+  grid-template-columns: 250px auto;
+  padding: var(--size-6);
+
+  > :not(aside) {
+    grid-column: 2;
+  }
+}

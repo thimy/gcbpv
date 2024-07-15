@@ -1,8 +1,8 @@
 <% content_for(:page_class, "ecole workshop-page ") %>
 <% content_for(:page_title, @workshop.name) %>
 
-<section class="popout grid" data-grid="2-3">
-  <div class="left">
+<section class="popout flex-column gap-4">
+  <div class="flex-row gap-4">
     <% @workshop.workshop_slots.each do |slot| %>
       <div class="dual-tag">
         <span class="tag" data-tag-color="dark">
@@ -16,9 +16,7 @@
       </div>
     <% end %>
   </div>
-  <div class="right">
-    <%= simple_format(@workshop.description) %>
-  </div>
+  <%= simple_format(@workshop.description) %>
 </section>
 <%= render Website::OtherRecords::Component.new(label: "ateliers") do %>
   <% @other_workshops.each do |workshop| %>

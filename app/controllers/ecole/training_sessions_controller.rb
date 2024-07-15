@@ -1,4 +1,4 @@
-class Ecole::TrainingSessionsController < BaseController
+class Ecole::TrainingSessionsController < EcoleController
   before_action :set_training_session, only: %i[ show ]
 
   def show

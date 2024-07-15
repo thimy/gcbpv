@@ -26,35 +26,48 @@
 }
 
 .instrument-page {
-  .left {
-    .slot-list {
+  .slot-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-6);
+
+    h3 {
+      border-block-start: 1px solid var(--gray);
+      font-size: var(--font-size-4);
+      margin-block: var(--size-4) 0;
+      padding-block-start: var(--size-3);
+      width: 130px;
+
+      &:first-child {
+        border: 0;
+        margin-block-start: 0;
+        padding-block-start: 0;
+      }
+    }
+
+    .city-block {
+      &:not(:first-child) {
+        border-top: var(--border-default);
+        padding-block-start: var(--size-4);
+      }
+    }
+
+    .city {
       display: flex;
       flex-direction: column;
+      gap: var(--size-2);
+      margin-block-start: var(--size-2);
+    }
 
-      h3 {
-        border-block-start: 1px solid var(--gray);
-        font-size: var(--font-size-5);
-        margin-block: var(--size-4) 0;
-        padding-block-start: var(--size-3);
+    .day {
+      display: flex;
+      flex-direction: column;
+      gap: var(--size-2);
+      margin-block-start: var(--size-1);
+    }
 
-        &:first-child {
-          border: 0;
-          margin-block-start: 0;
-          padding-block-start: 0;
-        }
-      }
-
-      h4:empty {
-        display: none;
-      }
-
-      .slot {
-        margin-block-start: var(--size-1);
-      }
-
-      time {
-        width: 160px;
-      }
+    .slot {
+      margin-block-start: var(--size-1);
     }
   }
 }

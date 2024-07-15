@@ -1,39 +1,39 @@
 <% content_for(:page_class, "ecole instrument-page ") %>
 <% content_for(:page_title, @instrument.name) %>
 
-<section class="feature grid gap-8">
+<section class="feature flex-column gap-8">
   <div class="left">
-    <h2><%= inline_svg "icons/clock" %>Les créneaux de cours</h2>
-    <div class="panel slot-list">
-      <% @slots.each do |city_day_teacher, slots| %>
-        <% city, day, teacher = city_day_teacher %>
-        <% slots.each do |slot| %>
-          <% courses = slot.teacher.specialties.where(instrument_id: @instrument.id) %>
-          <% courses.each do |course| %>
-            <% if course.teacher == slot.teacher && city != @city %>
-                <h3><%= city %></h3>
-                <% @city = city %>
-            <% end %>
-            <% if day != @day %>
-              <h4><%= day %></h4>
-              <% @day = day %>
-            <% end %>
-            <% if course.teacher == slot.teacher %>
-              <div class="slot flex-row gap-4">
-                <time><%= slot.time_period %></time>
-                <div class="slot-teacher">
-                  <%= link_to ecole_teacher_path(slot.teacher), class: "tag" do %>
-                    <span><%= slot.teacher.name %></span>
+    <div class="slot-list">
+      <% @cities.each do |city| %>
+        <div class="city-block flex-row gap-4">
+          <h3><%= city.name %></h3>
+          <% city.slots.order(:day_of_week).group_by {|slot| slot.day_of_week}.each do |day, slots| %>
+            <% slots_with_day = slots.select { |slot|
+              slot.teacher.instruments.include?(@instrument)
+            } %>
+              <% if slots_with_day.count > 0 %>
+                <div class="day flex-column gap-2">
+                  <h4><%= day %></h4>
+                  <% slots.each do |slot| %>
+                    <% if slot.teacher.instruments.include?(@instrument) %>
+                      <div class="dual-tag">
+                        <time class="tag" data-tag-color="dark">
+                          <span><%= slot.slot_time.present? ? slot.slot_time : "Horaires à définir" %></span>
+                        </time>
+                        <%= link_to ecole_teacher_path(slot.teacher), class: "tag" do %>
+                          <span><%= slot.teacher.name %></span>
+                        <% end %>
+                      </div>
+                    <% end %>
                   <% end %>
                 </div>
-              </div>
+              <% end %>
             <% end %>
-          <% end %>
-        <% end %>
+        </div>
       <% end %>
     </div>
   </div>
-  <div class="right panel">
+  <div class="right">
     <%= simple_format(@instrument.description) %>
   </div>
 </section>

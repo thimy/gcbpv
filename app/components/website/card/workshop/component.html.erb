@@ -1,14 +1,19 @@
 <%= link_to public_send(@path, @workshop), class: "card" do %>
   <div class="card-info">
+    <h3><%= @workshop.name %></h3>
     <% if @workshop.workshop_slots.present? %>
       <div class="tag-list">
-        <% @workshop.workshop_slots.each do |slot| %>
+        <% @workshop.workshop_slots.collect{|slot| slot.city }.uniq.each do |city| %>
           <span class="tag" data-tag-color="dark">
-            <span><%= "#{slot.city.name} : #{teacher_names(slot)}" %></span>
+            <span><%= "#{city.name}" %></span>
+          </span>
+        <% end %>
+        <% teacher_names.each do |name| %>
+          <span class="tag" data-tag-color="light-accent">
+            <span><%= "#{name}" %></span>
           </span>
         <% end %>
       </div>
     <% end %>
-    <h3><%= @workshop.name %></h3>
   </div>
 <% end %>

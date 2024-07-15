@@ -1,11 +1,11 @@
 <% content_for(:page_class, "ecole trainings ") %>
 <% content_for(:page_title, "Les rendez-vous") %>
 
-<section class="panel">
+<section>
   <p>Le succès de ces rendez-vous ponctuels, mais réguliers avec des figures emblématiques d’un instrument nous a donné envie d’en proposer d’autres...</p>
   <p>Les rendez-vous "Chant", "Accordéon", "Flûte" et thématiques "Balades Irlandaises" et "Chant de Marin" changent de formule et seront mis en place en collaboration avec des événements du Pays.</p>
   <p>Le programme sera diffusé à la rentrée. <strong>Les inscriptions se font à chaque rendez-vous.</strong>
 </section>
-<section class="feature grid" data-grid="repeat">
-  <%= render Website::Card::Training::Component.with_collection(@trainings) %>
+<section class="grid" data-grid="repeat">
+  <%# render Website::Card::Training::Component.with_collection(@trainings) %>
 </section>

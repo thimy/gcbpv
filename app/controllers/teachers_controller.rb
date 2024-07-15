@@ -3,7 +3,7 @@ class TeachersController < ApplicationController
 
   # GET /teachers or /teachers.json
   def index
-    @teachers = Teacher.all
+    @teachers = Teacher.active
   end
 
   # GET /teachers/1 or /teachers/1.json
@@ -13,7 +13,7 @@ class TeachersController < ApplicationController
   # GET /teachers/new
   def new
     @teacher = Teacher.new
-    @instruments = Instrument.all
+    @instruments = Instrument.active
   end
 
   # GET /teachers/1/edit

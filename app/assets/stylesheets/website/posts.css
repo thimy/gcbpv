@@ -6,10 +6,6 @@
 }
 
 .post-page {
-  dl {
-    margin-block-end: var(--size-8);
-  }
-
   img {
     margin-block-start: var(--size-4);
     width: 100%;

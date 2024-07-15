@@ -1,5 +1,12 @@
 html {
   background-color: var(--background-color);
+  background-filter: opacity(0.1);
+  background-image: url("icons/sprinkles.svg"),
+                    url("icons/sparkles.svg"),
+                    url("icons/crosses.svg");
+  background-position: 62% 6%, right 1% top 2%, right 100% top 5%;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-size: 20%, 20%, 10%;
 }
 
 body {
@@ -131,9 +138,11 @@ main {
 }
 
 :where(.panel) {
-  background-color: var(--white);
+  background: var(--white);
   border-radius: var(--radius-3);
   box-shadow: var(--light-elevation-low);
+  display: grid;
+  gap: var(--size-8);
   overflow: hidden;
   padding: var(--size-3) var(--size-6);
 
@@ -165,7 +174,7 @@ main {
   }
 
   &:where([data-grid="repeat"]) {
-    --column-width: 350px;
+    --column-width: 300px;
     grid-template-columns: repeat(auto-fit, minmax(var(--column-width), 1fr));
   }
 
@@ -198,7 +207,7 @@ p {
 }
 
 
-@container (width < 1000px) {
+@container (width < 500px) {
   .grid {
     grid-template-columns: 1fr;
   }

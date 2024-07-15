@@ -1,4 +1,4 @@
-class Ecole::WorkshopsController < BaseController
+class Ecole::WorkshopsController < EcoleController
   before_action :set_workshop, only: %i[ show ]
 
   def index

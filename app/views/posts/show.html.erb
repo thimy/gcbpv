@@ -1,26 +1,28 @@
 <% content_for(:page_class, "post-page ") %>
 <% content_for(:page_title, @post.title) %>
 
-<section class="panel popout">
-  <div class="tag-list">
-    <% @post.categories.each do |category| %>
-      <%= link_to "", class: "tag", "data-tag-color": "dark-accent" do %>
-        <span><%= category.name %></span>
-      <% end %>
-    <% end %>
-  </div>
-  <dl class="horizontal">
-    <div>
-      <dt>Publié le</dt>
-      <dd><%= @post.publication_datetime %></dd>
-    </div>
-    <div>
-      <% if @post.event.present? %>
-        <dt>Événement lié</dt>
-        <dd><%= link_to @post.event.name, event_path(@post.event) %></dd>
+<section class="panel popout grid" data-grid="1-3">
+  <aside>
+    <div class="tag-list">
+      <% @post.categories.each do |category| %>
+        <%= link_to "", class: "tag", "data-tag-color": "light-accent" do %>
+          <span><%= category.name %></span>
+        <% end %>
       <% end %>
     </div>
-  </dl>
+    <dl>
+      <div>
+        <dt>Publié le</dt>
+        <dd><%= @post.publication_datetime %></dd>
+      </div>
+      <div>
+        <% if @post.event.present? %>
+          <dt>Événement lié</dt>
+          <dd><%= link_to @post.event.name, event_path(@post.event) %></dd>
+        <% end %>
+      </div>
+    </dl>
+  </aside>
   <%= simple_format(@post.content) %>
   <%= image_tag @post.image if @post.image.present? %>
 </section>
