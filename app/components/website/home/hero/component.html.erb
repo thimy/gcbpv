@@ -8,7 +8,14 @@
   </div>
   <div class="bento">
     <div class="carousel">
-      <%= image_tag "home/joute.jpg" %>
+      <div class="container">
+        <%= image_tag "home/joute.jpg" %>
+        <%= image_tag "home/bal.jpg" %>
+        <%= image_tag "home/concours-musiciens.jpg" %>
+        <%= image_tag "home/balade.jpg" %>
+        <%= image_tag "home/bogue.jpg" %>
+        <%= image_tag "home/joute.jpg" %>
+      </div>
     </div>
     <%= render Website::HeroCard::Component.new(title: "La Bogue d’Or", url: bogue_path, css_classes: "bogue") %>
     <%= render Website::HeroCard::Component.new(title: "L'école de musique traditionnelle", url: ecole_path, css_classes: "ecole") %>
