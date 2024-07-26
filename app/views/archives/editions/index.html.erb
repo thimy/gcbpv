@@ -1,11 +1,10 @@
 <% content_for(:page_class, "archives editions ") %>
 <% content_for(:page_title, "Les éditions") %>
 
-<div class="feature flex-column gap-6">
+<div class="flex-column gap-6">
   <section class="panel">
     <p>CDs, ouvrages… tous contribuent à valoriser le patrimoine culturel. Certains d’entre eux sont édités directement par le Groupement Culturel Breton ou en co-édition. D’autres sont l’œuvre  d’artistes locaux… mais tous sont en vente dans nos locaux ou sur commande.</p>
   </section>
-  <section class="feature grid" data-grid="repeat">
-    <%= render Website::Card::Edition::Component.with_collection(@editions)%>
-  </section>
+  <%= render Shared::UnderConstruction::Component.new %>
+    <%# render Website::Card::Edition::Component.with_collection(@editions)%>
 </div>
