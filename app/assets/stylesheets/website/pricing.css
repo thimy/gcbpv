@@ -1,0 +1,11 @@
+.pricing {
+  .cell-description {
+    padding-inline-end: var(--size-5);
+    text-align: right;
+    width: 45ch;
+  }
+
+  .cell-price {
+    font-weight: var(--font-weight-6);
+  }
+}

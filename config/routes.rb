@@ -29,7 +29,8 @@ Rails.application.routes.draw do
     resources :workshops, path: :ateliers, only: [:index, :show]
     get "enfance", to: "youth#index", as: :youth
     get "adhesion", to: "membership#index", as: :membership
-  end
+    end
+  get "ecole/tarifs", to: "ecole#pricing", as: :pricing
   get "ecole", to: "ecole#index"
   
   devise_for :administrators, path: "admin", path_names: {

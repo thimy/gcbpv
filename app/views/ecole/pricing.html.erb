@@ -1,0 +1,70 @@
+<% content_for(:page_class, "ecole pricing ") %>
+<% content_for(:page_title, "Les tarifs") %>
+
+<section>
+  <h2><%= inline_svg "icons/guitar" %>Cycle 1 et 2</h2>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header do |header| %>
+      <% header.with_column(name: "table-head", colspan: 2) do %>1 cours instrument + 1 atelier au choix inclus de 45 min/semaine ou 1h30 bimensuel<% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>- 18ans<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.kids_class_price, unit: "€", precision: 0) %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>18 ans et +<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.class_price, unit: "€", precision: 0) %><% end %>
+    <% end %>
+  <% end %>
+</section>
+
+<section>
+  <h2><%= inline_svg "icons/baby" %>Enfance : découvrir</h2>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header do |header| %>
+      <% header.with_column(name: "table-head", colspan: 2) do %>1 atelier de 45 min/semaine<% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Eveil musical (4-6 ans)<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.early_learning_price, unit: "€", precision: 0) %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Découverte instrumentale (7-9 ans)<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.kid_discovery_price, unit: "€", precision: 0) %><% end %>
+    <% end %>
+  <% end %>
+</section>
+
+<section>
+  <h2><%= inline_svg "icons/users" %>Pratiquer</h2>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header do |header| %>
+      <% header.with_column(name: "table-head", colspan: 2) do %>1 atelier de pratique d'ensemble : 45 min/semaine ou 1h30 bimensuelle ou 3h mensuelles<% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Atelier d'ensemble seul (élève non-inscrit en cours)<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.workshop_price, unit: "€", precision: 0) %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Atelier autonome (harmonica, cornemuse)<% end %>
+      <% row.with_cell(name: "price") do %>40€<% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Atelier Uilleann pipes (niveau confirmé - 6 rdvs/an)<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.special_workshop_price, unit: "€", precision: 0) %><% end %>
+    <% end %>
+  <% end %>
+</section>
+
+<section>
+  <h2><%= inline_svg "icons/guitar" %>Rendez-vous</h2>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header do |header| %>
+      <% header.with_column(name: "description", colspan: 2) do %>&nbsp;<% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Tarif rendez-vous seul<% end %>
+      <% row.with_cell(name: "price") do %>30€ hors adhésion<% end %>
+    <% end %>
+  <% end %>
+</section>

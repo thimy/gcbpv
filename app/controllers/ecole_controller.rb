@@ -3,4 +3,8 @@ class EcoleController < ApplicationController
 
   def index
   end
+
+  def pricing
+    @season = Config.first.season
+  end
 end
