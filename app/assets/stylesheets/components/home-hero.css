@@ -7,7 +7,7 @@ hero-container.home-hero {
   .bento {
     color: var(--white);
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 3fr 2fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: var(--size-6);
     margin: 0;
@@ -21,16 +21,18 @@ hero-container.home-hero {
       /* transition: var(--transition-short); */
 
       .container {
+        display: flex;
         position: relative;
-        width: 600%;
+        width: 500%;
         left: 0;
         text-align: left;
         animation: 30s carousel infinite;
       }
 
       img {
+        object-fit: cover;
+        object-position: center;
         width: 20%;
-        float: left;
       }
     }
   }
@@ -98,5 +100,4 @@ hero-container.home-hero {
   70% { left: -200%; }
   75% { left: -300%; }
   95% { left: -300%; }
-  100% { left: -400%; }
 }
