@@ -1,0 +1,25 @@
+<div class="content-header">
+  <h1>Professeurs</h1>
+  <%= link_to "Créer un nouveau professeur", new_teacher_path %>
+</div>
+<p style="color: green"><%= notice %></p>
+<%= render Shared::Table::Component.new do |table| %>
+  <% table.with_header do |header| %>
+    <% header.with_column(name: "name") do %>Nom<% end %>
+    <% header.with_column(name: "email") do %>Email<% end %>
+    <% header.with_column(name: "phone") do %>Téléphone<% end %>
+    <% header.with_column(name: "students") do %>Nombre d’élèves<% end %>
+    <% header.with_column(name: "instrument") do %>Instrument<% end %>
+  <% end %>
+  <% @teachers.each do |teacher| %>
+    <% table.with_row(link_url: teacher) do |row| %>
+      <% row.with_cell(name: "name") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}", secretariat_teacher_path(teacher) %><% end %>
+      <% row.with_cell(name: "email") do %><%= teacher.email %><% end %>
+      <% row.with_cell(name: "phone") do %><%= teacher.phone %><% end %>
+      <% row.with_cell(name: "students") do %><%= teacher.student_count %><% end %>
+      <% row.with_cell(name: "instrument") do %>
+        <%= teacher.specialties.map { |specialty| specialty.instrument.name }.join(", ") %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

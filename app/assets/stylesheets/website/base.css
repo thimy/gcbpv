@@ -102,7 +102,16 @@ dl {
 
   &.horizontal {
     display: flex;
-    gap: var(--size-8);
+    gap: var(--size-2);
+
+    dt, dd {
+      display: flex;
+      align-items: center;
+    }
+
+    dd + dt {
+      margin-inline-start: var(--size-4);
+    }
   }
 }
 
@@ -110,7 +119,7 @@ dt {
   font-family: var(--font-serif);
   font-size: var(--font-size-4);
 
-  &:is(dd + *) {
+  &:is(dt:not(.horizontal) > dd + *) {
     margin-top: var(--size-3);
   }
 }

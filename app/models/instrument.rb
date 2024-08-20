@@ -25,4 +25,9 @@ class Instrument < ApplicationRecord
       teacher.name
   }.join(", ")
   end
+
+  def courses
+    subscriptions = Subscription.joins(:subscription_group).where(subscription_group: { season: Config.first.season })
+    Course.joins(:subscription).where(instrument: self, subscription: subscriptions)
+  end
 end

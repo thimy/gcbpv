@@ -1,0 +1,155 @@
+<%= form_with(model: subscription, url: secretariat_subscriptions_path, class: "subscription-form") do |form| %>
+  <% if subscription.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(subscription.errors.count, "erreur") %> dans ce formulaire :</h2>
+
+      <ul>
+        <% subscription.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-inputs">
+    <%= field_set_tag "Élève" do %>
+      <%= turbo_frame_tag "student" do %>
+        <%= text_field :student, :name, list: "student-list", placeholder: "Rechercher un élève existant", required: true %>
+        <datalist id="student-list">
+          <% @students.each do |student| %>
+            <option value="<%= student.name %>"><%= student.name %></option>
+          <% end %>
+        </datalist>
+        ou
+        <%= link_to "Créer un nouvel élève", new_secretariat_student_path, class: "button" %>
+      <% end %>
+    <% end %>
+
+    <%= field_set_tag "Payeur" do %>
+      <%= turbo_frame_tag "payor" do %>
+        <%= text_field :payor, :name, list: "payor-list", placeholder: "Rechercher un payeur existant", required: true %>
+        <datalist id="payor-list">
+          <% @payors.each do |payor| %>
+            <option value="<%= payor.name %>"><%= payor.name %></option>
+          <% end %>
+        </datalist>
+        ou
+        <%= link_to "Créer un nouveau payeur", new_secretariat_payor_path, class: "button" %>
+      <% end %>
+    <% end %>
+
+    <%= field_set_tag "Enfance" do %>
+      <%= turbo_frame_tag form.field_id(:subbed_kid_workshops) do %>
+        <%= dynamic_fields_for form, :subbed_kid_workshops, "Ajouter un atelier" do |kid_workshop_form| %>
+          <div data-controller="kid-workshop" class="form-group">
+            <div class="form-element">
+              <%= label_tag "Nom de l'atelier" %>
+              <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: true },
+                {
+                  data: {
+                    kid_workshop_target: "workshop",
+                    action: "kid-workshop#updateSlots"
+                  }
+                } %>
+            </div>
+            <%= render "kid_workshop_slots", slots: [], form: kid_workshop_form %>
+            <div class="form-inline">
+              <%= kid_workshop_form.check_box :option %>
+              <%= kid_workshop_form.label :option, "Optionel" %>
+            </div>
+            <div class="form-element notes">
+              <%= kid_workshop_form.label :comment, "Notes" %>
+              <%= kid_workshop_form.text_area :comment, rows: 2 %>
+            </div>
+            <button data-action="kid-workshop#removeRow" aria-label="Supprimer cet atelier enfant" data-button-type="naked" title="Supprimer ce cours"><%= inline_svg "icons/cross" %></button>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= field_set_tag "Cours" do %>
+      <%= turbo_frame_tag form.field_id(:courses) do %>
+        <%= dynamic_fields_for form, :courses, "Ajouter un cours" do |course_form| %>
+          <div data-controller="course" class="form-group">
+            <div class="form-element">
+              <%= course_form.label "Discipline" %>
+              <%= course_form.collection_select :instrument_id, @instruments, :id, :name, { include_blank: true, required: true },
+                {
+                  data: {
+                    course_target: "instrument",
+                    action: "course#updateTeachers"
+                  }
+                } %>
+            </div>
+            <%= render "teachers", teachers: [] %>
+            <%= render "slots", slots: [], form: course_form %>
+            <div class="form-inline">
+              <%= course_form.check_box :option %>
+              <%= course_form.label :option, "Optionel" %>
+            </div>
+            <div class="form-element notes">
+              <%= course_form.label :comment, "Notes" %>
+              <%= course_form.text_area :comment, rows: 2 %>
+            </div>
+            <button data-action="course#removeRow" aria-label="Supprimer ce cours" data-button-type="naked" title="Supprimer ce cours"><%= inline_svg "icons/cross" %></button>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= field_set_tag "Ateliers" do %>
+      <%= turbo_frame_tag form.field_id(:subbed_workshops) do %>
+        <%= dynamic_fields_for form, :subbed_workshops, "Ajouter un atelier" do |workshop_form| %>
+          <div data-controller="workshop" class="form-group">
+            <div class="form-element">
+              <%= label_tag "Nom de l'atelier" %>
+              <%= collection_select :workshop, :workshop_ids, @workshops, :id, :name, { include_blank: true },
+                {
+                  data: {
+                    workshop_target: "workshop",
+                    action: "workshop#updateSlots"
+                  }
+                } %>
+            </div>
+            <%= render "workshop_slots", slots: [], form: workshop_form %>
+            <div class="form-inline">
+              <%= workshop_form.check_box :option %>
+              <%= workshop_form.label :option, "Optionel" %>
+            </div>
+            <div class="form-element notes">
+              <%= workshop_form.label :comment, "Notes" %>
+              <%= workshop_form.text_area :comment, rows: 2 %>
+            </div>
+            <button data-action="workshop#removeRow" aria-label="Supprimer cet atelier" data-button-type="naked" title="Supprimer ce cours"><%= inline_svg "icons/cross" %></button>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%= field_set_tag "Divers", class: "form-inputs" do %>
+      <div class="form-group">
+        <div class="form-inline">
+          <%= form.check_box :image_consent %>
+          <%= form.label :image_consent, "Consentement à l'image" %>
+        </div>
+        <div class="form-inline">
+          <%= form.check_box :disability %>
+          <%= form.label :disability, "Situation empêchée" %>
+        </div>
+        <div class="form-inline">
+          <%= form.check_box :ars %>
+          <%= form.label :ars, "ARS" %>
+        </div>
+        <div class="form-inline">
+          <%= form.select :status, Subscription.statuses.keys.map {|status| [status,status]}, include_blank: "Statut", required: true %>
+        </div>      
+      </div>
+      <div class="form-element">
+        <%= form.label :comment, "Notes" %>
+        <%= form.text_area :comment, rows: 2 %>
+      </div>
+    <% end %>
+
+    <%= form.submit %>
+  </div>
+<% end %>

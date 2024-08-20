@@ -1,0 +1,35 @@
+<div class="form-inputs">
+  <div class="flex-row gap-6">
+    <div class="form-element">
+      <label for="student_first_name">Prénom</label>
+      <%= text_field :student, :first_name, required: true %>
+    </div>
+
+    <div class="form-element">
+      <label for="student_last_name">Nom</label>
+      <%= text_field :student, :last_name, required: true %>
+    </div>
+  </div>
+
+  <div class="flex-row gap-6">
+    <div class="form-element">
+      <label for="student_phone">Téléphone</label>
+      <%= text_field :student, :phone %>
+    </div>
+
+    <div class="form-element">
+      <label for="student_email">Email</label>
+      <%= text_field :student, :email %>
+    </div>
+  </div>
+
+  <div class="form-element">
+    <label for="student_gender">Genre</label>
+    <%= select :student, :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+  </div>
+  
+  <div class="form-element">
+    <label for="payor_comment">Notes</label>
+    <%= text_area :payor, :comment, rows: 2 %>
+  </div>
+</div>

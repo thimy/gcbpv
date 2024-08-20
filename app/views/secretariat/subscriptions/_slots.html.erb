@@ -1,0 +1,7 @@
+<div id="slots" class="form-element">
+  <%= label_tag "Lieu et heure" %>
+  <%= form.collection_select :slot_id, slots, :id, :name, {include_blank: true},
+    {
+      "data-course-target": "slot"
+    }  %>
+</div>

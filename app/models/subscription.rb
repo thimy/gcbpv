@@ -1,11 +1,12 @@
 class Subscription < ApplicationRecord
   belongs_to :student
   has_many :courses
+  has_many :instrument, through: :courses
   has_many :subbed_pathways
   has_many :pathway_slots, through: :subbed_pathways
-  has_many :subbed_kid_workshops
+  has_many :subbed_kid_workshops, dependent: :destroy
   has_many :kid_workshop_slots, through: :subbed_kid_workshops
-  has_many :subbed_workshops
+  has_many :subbed_workshops, dependent: :destroy
   has_many :workshop_slots, through: :subbed_workshops
   belongs_to :subscription_group
 

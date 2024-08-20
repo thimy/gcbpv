@@ -1,0 +1,46 @@
+<div class="content-header">
+  <h1>Élèves</h1>
+  <%= link_to "Créer une nouvelle inscription", new_secretariat_subscription_path %>
+</div>
+<p style="color: green"><%= notice %></p>
+<%= form_for secretariat_subscriptions_path,
+    method: :get,
+    html: {
+      data: {
+        turbo_frame: "subscriptions"
+      },
+      class: "list-form"
+    } do |f| %>
+  <div class="search-input">
+    <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
+    <%= f.button do %>
+      <%= inline_svg_tag "icons/search.svg" %>
+    <% end %>
+  </div>
+  <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name"), include_blank: "Discipline", onchange: "this.form.requestSubmit()" %>
+  <%= select_tag "workshop", options_from_collection_for_select(@workshops, "id", "name"), include_blank: "Atelier", onchange: "this.form.requestSubmit()" %>
+<% end %>
+<%= turbo_frame_tag "subscriptions", class: "flex-column gap-3" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "student", sortable: true) do %>Elève<% end %>
+      <% header.with_column(name: "phone", sortable: true) do %>Téléphone<% end %>
+      <% header.with_column(name: "email", sortable: true) do %>Email<% end %>
+      <% header.with_column(name: "course") do %>Cours<% end %>
+      <% header.with_column(name: "workshop") do %>Ateliers<% end %>
+      <% header.with_column(name: "status") do %>Statut<% end %>
+    <% end %>
+    <% @subscriptions.each do |subscription| %>
+      <% table.with_row(link_url: subscription) do |row| %>
+        <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, secretariat_subscription_path(subscription), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "phone") do %><%= number_to_phone(subscription.phone, pattern: /(\d{2})(\d{2})(\d{2})$/, delimiter: " ") %><% end %>
+        <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
+        <% row.with_cell(name: "course") do %><%= subscription.course_list %><% end %>
+        <% row.with_cell(name: "workshop") do %><%= subscription.workshop_list %><% end %>
+        <% row.with_cell(name: "status") do %><%= subscription.subscription_group.status %><% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<div>
+  <%= link_to "Éditer cet atelier", edit_workshop_path(@workshop) %> |
+  <%= link_to "Retour aux ateliers", workshops_path %>
+
+  <%= button_to "Supprimer cet atelier", @workshop, method: :delete %>
+</div>
+
+<%= render @workshop %>

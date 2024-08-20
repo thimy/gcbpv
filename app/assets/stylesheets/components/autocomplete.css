@@ -1,0 +1,31 @@
+*:has(> .autocomplete) {
+  position: relative;
+}
+
+.autocomplete {
+  background-color: var(--white);
+  border: 1px solid var(--dark-gray);
+  border-radius: var(--radius-2);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 3px);
+  width: 100%;
+}
+
+.autocomplete-category {
+  background: var(--gray);
+  font-size: var(--font-size-0);
+  padding: var(--size-1) var(--size-2);
+}
+
+.autocomplete-entry {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--size-3);
+  padding: var(--size-1) var(--size-2);
+
+  .street {
+    font-weight: var(--font-weight-6);
+  }
+}

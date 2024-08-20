@@ -23,7 +23,7 @@ class Compte::SubscriptionsController < CompteController
 
   # POST /subscriptions or /subscriptions.json
   def create
-    @subscription = Subscription.new(subscription_params.merge({id: params[:id], season_id: Config.first.season.id}))
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
 
     respond_to do |format|
       if params[:add_course]
@@ -45,13 +45,13 @@ class Compte::SubscriptionsController < CompteController
   end
 
   def add_course
-    @subscription = Subscription.new(subscription_params.merge({id: params[:id], season_id: Config.first.season.id}))
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
     @subscription.courses.build
     render :new
   end
 
   def add_workshop
-    @subscription = Subscription.new(subscription_params.merge({id: params[:id], season_id: Config.first.season.id}))
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
     @subscription.subbed_workshops.build
     render :new
   end

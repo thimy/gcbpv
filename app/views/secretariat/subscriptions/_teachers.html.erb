@@ -1,0 +1,10 @@
+<div id="teachers" class="form-element">
+  <%= label_tag "Professeur" %>
+  <%= collection_select :teacher, :teacher_ids, teachers, :id, :name, { include_blank: true },
+    {
+      data: {
+        course_target: "teacher",
+        action: "course#updateSlots"
+      }
+    } %>
+</div>

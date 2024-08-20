@@ -1,7 +1,7 @@
 :where(button, .button, [type="button"], [type="submit"]) {
   --button-bg-color: var(--main-brand);
   background-color: var(--button-bg-color);
-  border: none;
+  border: 2px solid var(--button-bg-color);
   border-radius: var(--radius-2);
   cursor: pointer;
   padding: var(--size-2) var(--size-3);
@@ -13,8 +13,17 @@
 
   &:where([data-button-type="naked"]) {
     background: none;
-    border: 0;
+    border-color: transparent;
     padding: 0;
+  }
+
+  &:where([data-button-type="outline"]) {
+    background: none;
+    border: 2px solid var(--button-bg-color);
+
+    &:hover {
+      background: color-mix(in srgb, var(--button-bg-color), transparent 80%);
+    }
   }
 
   svg {

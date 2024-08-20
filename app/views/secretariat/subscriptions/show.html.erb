@@ -1,0 +1,24 @@
+<div class="content-header">
+  <h1><%= @subscription.student.name %></h1>
+
+  <div>
+    <%= link_to "Éditer cette inscription", edit_secretariat_subscription_path(@subscription) %> |
+    <%= link_to "Retour aux inscriptions", secretariat_subscriptions_path %>
+  </div>
+</div>
+
+<dl class="horizontal">
+  <dt>Email :</dt>
+  <dd><%= @subscription.email %></dd>
+  <dt>Téléphone :</dt>
+  <dd><%= @subscription.phone %></dd>
+  <dt>Foyer :</dt>
+  <dd><%= @subscription.subscription_group.payor.name %></dd>
+</dl>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @subscription %>
+
+  <%= button_to "Supprimer cette inscription", secretariat_subscription_path(@subscription), method: :delete %>
+

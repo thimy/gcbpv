@@ -4,6 +4,10 @@ html {
   font-size: 18px;
 }
 
+[aria-hidden="true"] {
+  display: none;
+}
+
 .content {
   --gap: clamp(1rem, 6vw, 3rem);
   --full: minmax(var(--gap), 1fr);

@@ -1,0 +1,13 @@
+<div class="content-header">
+  <h1><%= @subscription.student.name %></h1>
+  <div>
+    <%= link_to "Voir la fiche", secretariat_subscription_path(@subscription) %> |
+    <%= link_to "Retour aux élèves", secretariat_subscriptions_path %>
+  </div>
+</div>
+<%= form_for(@subscription.student) do |form| %>
+  <%= field_set_tag "Élève" do %>
+    <%= render "secretariat/students/form" %>
+    <%= form.submit "Mettre à jour le nom de l'élève" %>
+  <% end %>
+<% end %>
