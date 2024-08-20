@@ -1,6 +1,6 @@
 class Student < ApplicationRecord
   belongs_to :payor, optional: true
-  has_many :subscriptions
+  has_many :subscriptions, dependent: :destroy
   has_many :subscription_groups, through: :subscriptions
   has_many :courses, through: :subscriptions
   has_many :subbed_workshops, through: :subscriptions
