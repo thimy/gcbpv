@@ -77,6 +77,7 @@ Rails.application.routes.draw do
     root to: "stats#index"
   end
   get "", to: "website#index", as: "/"
+  get "contact", to: "website#contact", as: "/contact"
   get "bogue", to: "website#bogue"
   namespace :secretariat do
     resources :teachers
