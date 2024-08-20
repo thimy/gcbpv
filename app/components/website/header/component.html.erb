@@ -1,4 +1,7 @@
 <header>
+  <% if @banner.present? %>
+    <div class="information-banner"><%= simple_format(@banner) %></div>
+  <% end %>
   <nav data-controller="menu-toggle">
     <%= link_to "Groupement Culturel Breton des Pays de Vilaine", "/", class: "home-button" %>
     <%= render Shared::MenuButton::Component.new %>

@@ -123,6 +123,7 @@ fr:
       config:
         season: "Année scolaire"
         season_id: "Année scolaire"
+        banner: "Bannière d’information"
       edition:
         name: "Nom"
         price: "Prix"

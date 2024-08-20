@@ -12,3 +12,10 @@
 @import "posts.css";
 @import "pricing.css";
 @import "teachers.css";
+
+.information-banner {
+  background: color-mix(in srgb, var(--light-accent), var(--white) 30%);
+  border: 1px solid var(--light-accent);
+  padding: var(--size-2) var(--size-4);
+  text-align: center;
+}

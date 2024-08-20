@@ -10,6 +10,7 @@ class ConfigDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     season: Field::BelongsTo,
+    banner: TrixField,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -22,6 +23,7 @@ class ConfigDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     season
+    banner
     created_at
     updated_at
   ].freeze
@@ -31,6 +33,7 @@ class ConfigDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     id
     season
+    banner
     created_at
     updated_at
   ].freeze
@@ -40,6 +43,7 @@ class ConfigDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
     season
+    banner
   ].freeze
 
   # COLLECTION_FILTERS
