@@ -10,7 +10,7 @@
   transition: var(--transition-short);
   
   &:hover {
-    background: color-mix(in oklch, var(--dark-accent), transparent 75%);
+    background: color-mix(in oklch, var(--background-color), transparent 50%);
     color: var(--black);
   }
   

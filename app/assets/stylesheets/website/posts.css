@@ -11,3 +11,9 @@
     width: 100%;
   }
 }
+
+.post-content {
+  h1 {
+    margin: 0;
+  }
+}

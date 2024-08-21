@@ -1,11 +1,16 @@
 html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: var(--font-weight-3);
 }
 
 [aria-hidden="true"] {
   display: none;
+}
+
+strong {
+  font-weight: var(--font-weight-6);
 }
 
 .content {

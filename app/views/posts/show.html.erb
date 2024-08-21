@@ -23,6 +23,8 @@
       </div>
     </dl>
   </aside>
-  <%= simple_format(@post.content) %>
-  <%= image_tag @post.image if @post.image.present? %>
+  <div class="post-content">
+    <%= simple_format(@post.content) %>
+    <%= image_tag @post.image if @post.image.present? %>
+  </div>
 </section>

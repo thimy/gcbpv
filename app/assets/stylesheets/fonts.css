@@ -1,62 +1,4 @@
 @font-face {
-  font-family: "Montserrat";
-  src: url("Montserrat/Montserrat-VF.woff2") format("woff2-variations");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 100;
-  src: url("Mohr/MohrAlt-ExtraLight.otf");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 200;
-  src: url("Mohr/MohrAlt-Light.otf");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 300;
-  src: url("Mohr/MohrAlt-Regular.otf");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 400;
-  src: url("Mohr/MohrAlt-Medium.otf");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 500;
-  src: url("Mohr/MohrAlt-SemiBold.otf");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 600;
-  src: url("Mohr/MohrAlt-Bold.otf");
-}
-
-@font-face {
-  font-family: "Mohr";
-  font-weight: 800;
-  src: url("Mohr/MohrAlt-Black.otf");
-}
-
-@font-face {
-  font-family: "Satoshi";
-  src: url("Satoshi/Satoshi-Variable.ttf") format("ttf-variations");
-}
-
-@font-face {
-  font-family: "Satoshi";
-  src: url("Satoshi/Satoshi-VariableItalic.ttf") format("ttf-variations");
-  font-style: italic;
-}
-
-@font-face {
   font-family: "Garden Grown";
   src: url("GardenGrown-Regular.ttf");
 }
@@ -67,4 +9,34 @@
   src: url("YoungSerif/YoungSerif-Regular.woff2") format("woff2"),
        url("YoungSerif/YoungSerif-Regular.otf") format("opentype"),
        url("YoungSerif/YoungSerif-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  font-style: normal;
+  font-weight: var(--font-weight-7, 700);
+  src: url("AvenirNext/AvenirNext-Bold.woff2") format("woff2"),
+    url("AvenirNext/AvenirNext-Bold.woff") format("woff"),
+    url("AvenirNext/AvenirNext-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  font-style: normal;
+  font-weight: var(--font-weight-6, 600);
+  src: url("AvenirNext/AvenirNext-DemiBold.woff2") format("woff2"),
+    url("AvenirNext/AvenirNext-DemiBold.woff") format("woff"),
+    url("AvenirNext/AvenirNext-DemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  font-style: normal;
+  font-weight: var(--font-weight-5, 500);
+  src: url("AvenirNext/AvenirNext-Medium.woff2") format("woff2"),
+    url("AvenirNext/AvenirNext-Medium.woff") format("woff"),
+    url("AvenirNext/AvenirNext-Medium.ttf") format("truetype");
+  font-display: swap;
 }

@@ -41,7 +41,7 @@ h2 {
   --underline-color: var(--main-brand);
   align-items: center;
   display: flex;
-  font-size: var(--font-size-fluid-2);
+  font-size: var(--font-size-5);
   gap: var(--size-3);
   justify-self: start;
   margin-block-end: var(--size-6);
@@ -153,7 +153,7 @@ main {
   display: grid;
   gap: var(--size-6);
   overflow: hidden;
-  padding: var(--size-3) var(--size-6);
+  padding: var(--size-6) var(--size-8);
 
   h2 {
     margin-bottom: var(--size-4);

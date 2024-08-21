@@ -45,7 +45,7 @@ hero-container.home-hero {
 
   h1 {
     background-image: url("icons/underline2.svg");
-    background-position: center bottom -0.5em;
+    background-position: center bottom;
     background-size: 70%;
     display: inline-block;
     position: relative;
