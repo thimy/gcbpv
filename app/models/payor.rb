@@ -1,6 +1,6 @@
   class Payor < ApplicationRecord
   has_many :students
-  has_many :subscription_groups
+  has_many :subscription_groups, dependent: :destroy
 
   accepts_nested_attributes_for :subscription_groups
 
