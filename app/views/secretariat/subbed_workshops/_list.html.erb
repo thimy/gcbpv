@@ -1,0 +1,19 @@
+<%= form_with url: secretariat_subbed_workshop_path, method: "put", data: {"subscription-id": subscription.id, "item-type": "subbed_workshop"} do |form| %>
+<table class="subbed-workshop-list item-list">
+  <thead>
+    <tr>
+      <th class="cell-workshop">Cours</th>
+      <th class="cell-city">Ville</th>
+      <th class="cell-day_of_week">Jour</th>
+      <th class="cell-time">Heure du cours</th>
+      <th class="cell-option">Optionel</th>
+      <th class="cell-comment">Notes</th>
+      <th class="cell-options">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render @subbed_workshops %>
+    <%= render "secretariat/subbed_workshops/add" %>
+  </tbody>
+</table>
+<% end %>

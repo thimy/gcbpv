@@ -1,8 +1,8 @@
-<table <%= "class=#{css_classes}" if css_classes.present? %>>
+<%= tag.table class: css_classes, **options do %>
   <%= header %>
   <tbody>
     <% rows.each do |row| %>
       <%= row %>
     <% end %>
   </tbody>
-</table>
+<% end %>

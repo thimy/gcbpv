@@ -1,4 +1,5 @@
 class Compte::SubscriptionsController < CompteController
+  layout: "secretariat/subscriptions"
   before_action :set_subscription, only: %i[ show edit update destroy ]
   before_action :set_lists, only: %i[ new create edit add_course add_workshop ]
 

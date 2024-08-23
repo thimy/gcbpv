@@ -1,24 +1,42 @@
+<% content_for(:page_class, "subscriptions ") %>
 <div class="content-header">
   <h1><%= @subscription.student.name %></h1>
 
   <div>
-    <%= link_to "Éditer cette inscription", edit_secretariat_subscription_path(@subscription) %> |
+    <%= link_to "Créer une nouvelle inscription", new_secretariat_subscription_path(@subscription) %> |
     <%= link_to "Retour aux inscriptions", secretariat_subscriptions_path %>
   </div>
 </div>
 
-<dl class="horizontal">
-  <dt>Email :</dt>
-  <dd><%= @subscription.email %></dd>
-  <dt>Téléphone :</dt>
-  <dd><%= @subscription.phone %></dd>
-  <dt>Foyer :</dt>
-  <dd><%= @subscription.subscription_group.payor.name %></dd>
-</dl>
+<div>
+  <dl class="horizontal">
+    <dt>Email :</dt>
+    <dd><%= @subscription.email %></dd>
+    <dt>Téléphone :</dt>
+    <dd><%= @subscription.phone %></dd>
+    <dt>Foyer :</dt>
+    <dd><%= @subscription.subscription_group.payor.name %></dd>
+  </dl>
+  <dl class="horizontal">
+    <dt>Consentement à l’image :</dt>
+    <dd><%= @subscription.image_consent ? "✅" : "❌" %></dd>
+    <dt>Situation empêchée :</dt>
+    <dd><%= @subscription.disability ? "✅" : "❌" %></dd>
+    <dt>ARS :</dt>
+    <dd><%= @subscription.ars ? "✅" : "❌" %></dd>
+  </dl>
+</div>
 
 <p style="color: green"><%= notice %></p>
 
 <%= render @subscription %>
 
-  <%= button_to "Supprimer cette inscription", secretariat_subscription_path(@subscription), method: :delete %>
+<%= link_to "Supprimer cette inscription",
+  secretariat_subscription_path(@subscription),
+  class: "button",
+  data: {
+    "button-status": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette inscription ?"
+  } %>
 

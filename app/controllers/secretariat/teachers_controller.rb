@@ -1,5 +1,5 @@
 class Secretariat::TeachersController < SecretariatController
-  before_action :set_teacher, only: %i[ show edit update destroy ]
+  before_action :set_teacher, only: %i[ show edit update destroy get_slots ]
 
   # GET /teachers or /teachers.json
   def index
@@ -46,6 +46,12 @@ class Secretariat::TeachersController < SecretariatController
         format.json { render json: @teacher.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  def get_slots
+    @slots = Slot.where(teacher: @teacher)
+
+    render json: @slots.as_json(only: [:id, :slot_time, :day_of_week], include: { city: { only: :name }}), status: :ok
   end
 
   # DELETE /teachers/1 or /teachers/1.json

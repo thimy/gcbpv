@@ -1,5 +1,46 @@
-.subscription-form {
-  .notes {
-    flex-grow: 1;
+.secretariat.subscriptions {
+  h2 {
+    margin: 0;
+  }
+
+  .subscription-form {
+    .notes {
+      flex-grow: 1;
+    }
+  }
+  
+  .new-item + .add-item {
+    display: none;
+  }
+
+  .item-list {
+    th {
+      &.cell-time,
+      &.cell-start_time,
+      &.cell-end_time {
+        width: 10%;
+      }
+
+      &.cell-options {
+        width: 10%;
+
+        .actions {
+          display: flex;
+          gap: var(--size-2);
+        }
+      }
+
+      &.cell-comment {
+        width: 20%;
+      }
+    }
+
+    input, select {
+      width: 100%;
+    }
+  }
+
+  table .add-item {
+    text-align: end;
   }
 }

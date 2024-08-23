@@ -5,9 +5,46 @@
     <%= link_to "Retour aux élèves", secretariat_subscriptions_path %>
   </div>
 </div>
-<%= form_for(@subscription.student) do |form| %>
+<%= form_for(@subscription, url: secretariat_subscription_path) do |form| %>
   <%= field_set_tag "Élève" do %>
-    <%= render "secretariat/students/form" %>
+    <%= form.field_for :student do |student_form| %>
+      <div class="form-inputs">
+        <div class="flex-row gap-6">
+          <div class="form-element">
+            <%= form.label :first_name, "Prénom" %>
+            <%= form.text_field :first_name, required: true %>
+          </div>
+
+          <div class="form-element">
+            <%= form.label :last_name, "Nom" %>
+            <%= form.text_field :last_name, required: true %>
+          </div>
+        </div>
+
+        <div class="flex-row gap-6">
+          <div class="form-element">
+            <label for="student_phone">Téléphone</label>
+            <%= text_field :student, :phone %>
+          </div>
+
+          <div class="form-element">
+            <label for="student_email">Email</label>
+            <%= text_field :student, :email %>
+          </div>
+        </div>
+
+        <div class="form-element">
+          <label for="student_gender">Genre</label>
+          <%= select :student, :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+        </div>
+        
+        <div class="form-element">
+          <label for="payor_comment">Notes</label>
+          <%= text_area :payor, :comment, rows: 2 %>
+        </div>
+      </div>
+    <% end %>
+
     <%= form.submit "Mettre à jour le nom de l'élève" %>
   <% end %>
 <% end %>

@@ -1,0 +1,31 @@
+<%= form.fields_for slot do |kid_workshop_form| %>
+  <% table.with_row("data-controller": "kid-workshop", hidden: true) do |row| %>
+    <% row.with_cell(name: "workshop") do %>
+      <div class="form-element">
+        <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: true, selected: slot.present? ? slot.kid_workshop_slot&.kid_workshop_id : "" },
+          {
+            data: {
+              kid_workshop_target: "workshop",
+              action: "kid-workshop#updateSlots"
+            }
+          } %>
+      </div>
+    <% end %>
+    <% row.with_cell(name: "city", colspan: 3) do %>
+      <%= render "kid_workshop_slots", slots: KidWorkshopSlot.where(kid_workshop_id: slot.kid_workshop_slot&.kid_workshop_id), form: kid_workshop_form, selected: slot.kid_workshop_slot&.id, selected: slot.kid_workshop_slot&.id %>
+    <% end %>
+    <% row.with_cell(name: "option") do %>
+      <div class="form-element">
+        <%= kid_workshop_form.check_box :option, {checked: slot.option == "Confirmé"} %>
+      </div>
+    <% end %>
+    <% row.with_cell(name: "option") do %>
+      <div class="form-element notes">
+        <%= kid_workshop_form.text_area :comment, rows: 1 %>
+      </div>
+    <% end %>
+    <% row.with_cell(name: "options") do %>
+      <%= kid_workshop_form.submit action[:label], name: action[:name] %>
+    <% end %>
+  <% end %>
+<% end %>

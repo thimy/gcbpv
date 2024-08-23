@@ -13,6 +13,10 @@ html {
 
   --text-color: var(--black);
   --text-color-secondary: color-mix(in srgb, var(--text-color), transparent 30%);
+
+  --color-success: var(--apple);
+  --color-warning: var(--orange);
+  --color-alert: var(--vermilion);
   
   --shadow-color-dark: 211deg 66% 5%;
   --shadow-color-light: 111deg 6% 58%;

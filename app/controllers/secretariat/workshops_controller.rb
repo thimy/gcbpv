@@ -1,5 +1,5 @@
 class Secretariat::WorkshopsController < SecretariatController
-  before_action :set_workshop, only: %i[ show edit update destroy ]
+  before_action :set_workshop, only: %i[ show edit update destroy get_slots ]
 
   # GET /workshops or /workshops.json
   def index
@@ -55,6 +55,12 @@ class Secretariat::WorkshopsController < SecretariatController
       format.html { redirect_to workshops_url, notice: "Workshop was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def get_slots
+    @slots = WorkshopSlot.where(workshop: @workshop)
+
+    render json: @slots.as_json(only: [:id, :slot_time, :day_of_week], include: { city: { only: :name }}), status: :ok
   end
 
   private

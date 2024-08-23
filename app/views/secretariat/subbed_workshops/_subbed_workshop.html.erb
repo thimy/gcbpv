@@ -1,0 +1,68 @@
+<% if defined?(is_form) && !!is_form %>
+  <tr class="<%= "new-item" if !subbed_workshop.id %>" data-controller="edit-subscription fill-select" id="<%= dom_id subbed_workshop %>" data-edit-subscription-id-value="<%= subbed_workshop.id %>">
+    <td class="cell-workshop">
+      <%= collection_select :subbed_workshop, :workshop_id, workshops, :id, :name, { include_blank: subbed_workshop.id.blank?, selected: subbed_workshop.present? ? subbed_workshop.workshop_slot&.workshop_id : "", required: subbed_workshop.id.blank? },
+        {
+          data: {
+            fill_select_url_param: "/get_workshop_slots?id=",
+            fill_select_target_param: ".workshop-slot-select",
+            action: "fill-select#updateSlots",
+          }
+        } %>
+      </td>
+    <td class="cell-slot" colspan="3">
+      <%= collection_select :subbed_workshop, :workshop_slot_id, workshop_slots, :id, :name, { selected: subbed_workshop.workshop_slot&.id, required: true }, class: "workshop-slot-select" %>
+    </td>
+    <td class="cell-option">
+      <%= check_box :subbed_workshop, :option, {checked: subbed_workshop.option == "Optionel"}, "Optionel", "Confirmé" %>
+    </td>
+    <td class="cell-comment">
+      <%= text_area :subbed_workshop, :comment, rows: 2 %>
+    </td>
+    <td class="cell-options">
+      <div class="actions">
+        <% if subbed_workshop.id.present? %>
+          <%= hidden_field_tag "subbed_workshop[id]", subbed_workshop.id %>
+          <button class="button" type="submit">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-subscription#editEntry" data-edit-subscription-url-param="<%= secretariat_subbed_workshop_path(subbed_workshop) %>">
+            <%= inline_svg "icons/undo", "aria-label": "Annuler" %>
+          </button>
+        <% else %>
+          <button class="button" data-action="edit-subscription#createEntry" data-edit-subscription-url-param="<%= secretariat_subbed_workshops_path %>">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-subscription#cancelNew">
+            <%= inline_svg "icons/delete", "aria-label": "Annuler" %>
+          </button>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% else %>
+  <tr data-controller="edit-subscription" id="<%= dom_id subbed_workshop %>" data-edit-subscription-id-value="<%= subbed_workshop.id %>">
+    <td class="cell-workshop"><%= link_to subbed_workshop.workshop_slot.workshop.name, "" %></td>
+    <td class="cell-city"><%= subbed_workshop.workshop_slot.city.name %></td>
+    <td class="cell-day_of_week"><%= subbed_workshop.workshop_slot.day_of_week %></td>
+    <td class="cell-time"><%= subbed_workshop.workshop_slot.slot_time %></td>
+    <td class="cell-option"><%= subbed_workshop.option %></td>
+    <td class="cell-comment"><%= simple_format(subbed_workshop.comment) %></td>
+    <td class="cell-options">
+      <div class="actions">
+        <button data-action="edit-subscription#editEntry" 
+                data-edit-subscription-url-param="<%= edit_secretariat_subbed_workshop_path(subbed_workshop) %>">
+          <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+        </button>
+        <%= link_to secretariat_subbed_workshop_path(subbed_workshop), 
+          class: "button",
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet atelier ?"
+          } do %>
+          <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

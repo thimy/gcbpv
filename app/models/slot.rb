@@ -36,9 +36,13 @@ class Slot < ApplicationRecord
     "#{teacher.name} #{datetime}"
   end
 
+  def name_without_teacher
+    "#{city.name} - #{datetime}"
+  end
+
   def datetime
     if day_of_week.present? && slot_time.present?
-      "le #{day_of_week} - #{slot_time}".downcase
+      "le #{day_of_week} #{slot_time}".downcase
     elsif day_of_week.present?
       "le #{day_of_week} - horaires à définir"
     elsif slot_time.present?

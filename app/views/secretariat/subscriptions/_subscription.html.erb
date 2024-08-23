@@ -1,84 +1,16 @@
-<div id="<%= dom_id subscription %>" class="record">
-  <% if subscription.subbed_kid_workshops.present? %>
-    <section>
-      <%= render Shared::Table::Component.new do |table| %>
-        <% table.with_header do |header| %>
-          <% header.with_column(name: "workshop") do %>Cours<% end %>
-          <% header.with_column(name: "teachers") do %>Professeur<% end %>
-          <% header.with_column(name: "day_of_week") do %>Jour<% end %>
-          <% header.with_column(name: "city") do %>Ville<% end %>
-          <% header.with_column(name: "time") do %>Heure du cours<% end %>
-          <% header.with_column(name: "option") do %>Optionel<% end %>
-        <% end %>
-        <% subscription.subbed_kid_workshops.each do |slot| %>
-          <% table.with_row do |row| %>
-            <% row.with_cell(name: "workshop") do %><%= link_to slot.kid_workshop_slot.kid_workshop.name, "" %><% end %>
-            <% row.with_cell(name: "teacher") do %>
-              <% slot.kid_workshop_slot.teachers.each do |teacher| %>
-                <%= link_to teacher.name, secretariat_teacher_path(teacher) %>
-              <% end %>
-            <% end %>
-            <% row.with_cell(name: "day_of_week") do %><%= slot.kid_workshop_slot.day_of_week %><% end %>
-            <% row.with_cell(name: "city") do %><%= slot.kid_workshop_slot.city.name %><% end %>
-            <% row.with_cell(name: "time") do %><%= slot.kid_workshop_slot.slot_time %><% end %>
-            <% row.with_cell(name: "option") do %><%= slot.option %><% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </section>
-  <% end %>
+<div id="<%= dom_id subscription %>" class="record flex-column gap-10">
+  <section class="flex-column gap-3">
+    <h2>Enfance</h2>
+    <%= render "secretariat/subbed_kid_workshops/list", subscription: @subscription %>
+  </section>
 
-  <% if subscription.courses.present? %>
-    <section>
-      <%= render Shared::Table::Component.new do |table| %>
-        <% table.with_header do |header| %>
-          <% header.with_column(name: "workshop") do %>Cours<% end %>
-          <% header.with_column(name: "teachers") do %>Professeur<% end %>
-          <% header.with_column(name: "day_of_week") do %>Jour<% end %>
-          <% header.with_column(name: "city") do %>Ville<% end %>
-          <% header.with_column(name: "time") do %>Heure du cours<% end %>
-          <% header.with_column(name: "option") do %>Optionel<% end %>
-        <% end %>
-        <% subscription.courses.each do |course| %>
-          <% table.with_row do |row| %>
-            <% row.with_cell(name: "instrument") do %><%= link_to course.instrument.name, secretariat_instrument_path(course.instrument) %><% end %>
-            <% row.with_cell(name: "teacher") do %>
-              <%= link_to course.slot.teacher.name, secretariat_teacher_path(course.slot.teacher) %>
-            <% end %>
-            <% row.with_cell(name: "day_of_week") do %><%= course.slot.day_of_week %><% end %>
-            <% row.with_cell(name: "city") do %><%= course.slot.city.name %><% end %>
-            <% row.with_cell(name: "time") do %><%= course.start_time %><% end %>
-            <% row.with_cell(name: "option") do %><%= course.option %><% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </section>
-  <% end %>
+  <section class="flex-column gap-3">
+    <h2>Cours</h2>
+    <%= render "secretariat/courses/list", subscription: @subscription %>
+  </section>
 
-  <% if subscription.workshop_slots.present? %>
-    <section>
-      <%= render Shared::Table::Component.new do |table| %>
-        <% table.with_header do |header| %>
-          <% header.with_column(name: "instrument") do %>Ateliers<% end %>
-          <% header.with_column(name: "teachers") do %>Professeur<% end %>
-          <% header.with_column(name: "day_of_week") do %>Jour<% end %>
-          <% header.with_column(name: "city") do %>Ville<% end %>
-          <% header.with_column(name: "slot_time") do %>Horaire de l'atelier<% end %>
-        <% end %>
-        <% subscription.workshop_slots.each do |slot| %>
-          <% table.with_row do |row| %>
-            <% row.with_cell(name: "instrument") do %><%= link_to slot.workshop.name, secretariat_workshop_path(slot.workshop) %><% end %>
-            <% row.with_cell(name: "teacher") do %>
-              <% slot.teachers.each do |teacher| %>
-                <%= link_to teacher.name, secretariat_teacher_path(teacher) %>
-              <% end %>
-            <% end %>
-            <% row.with_cell(name: "day_of_week") do %><%= slot.day_of_week %><% end %>
-            <% row.with_cell(name: "city") do %><%= slot.city.name %><% end %>
-            <% row.with_cell(name: "slot_time") do %><%= slot.slot_time %><% end %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </section>
-  <% end %>
+  <section class="flex-column gap-3">
+    <h2>Ateliers</h2>
+    <%= render "secretariat/subbed_workshops/list", subscription: @subscription %>
+  </section>
 </div>

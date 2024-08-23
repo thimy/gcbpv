@@ -1,10 +1,13 @@
-:where(button, .button, [type="button"], [type="submit"]) {
+:is(button, .button, a.button, [type="button"], [type="submit"]) {
   --button-bg-color: var(--main-brand);
+  --button-text-color: currentColor;
   background-color: var(--button-bg-color);
   border: 2px solid var(--button-bg-color);
   border-radius: var(--radius-2);
+  color: var(--button-text-color);
   cursor: pointer;
   padding: var(--size-2) var(--size-3);
+  text-align: center;
   transition: var(--transition-short);
 
   &:hover {
@@ -29,5 +32,10 @@
   svg {
     height: 1em;
     width: 1em;
+  }
+
+  &[data-button-status="alert"] {
+    --button-bg-color: var(--color-alert);
+    --button-text-color: var(--white);
   }
 }

@@ -1,8 +1,5 @@
-<tr <% if @link_url.present? %>
-  data-action="click->linkable#navigate"
-  data-linkable-path-param="<%= @link_url %>"
-<% end %>>
+<%= tag.tr **row_options do %>
   <% cells.each do |cell| %>
     <%= cell %>
   <% end %>
-</tr>
+<% end %>

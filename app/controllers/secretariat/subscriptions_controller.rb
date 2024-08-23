@@ -3,7 +3,7 @@ class Secretariat::SubscriptionsController < SecretariatController
 
   before_action :query
   before_action :set_subscription, only: %i[ show edit update destroy ]
-  before_action :set_lists, only: %i[ new create edit add_course add_workshop ]
+  before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
 
   SORT_ATTRIBUTES = {
     "subscriptions" => [
@@ -13,13 +13,14 @@ class Secretariat::SubscriptionsController < SecretariatController
 
   # GET /subscriptions or /subscriptions.json
   def index
-    @instruments = Instrument.active
-    @workshops = Workshop.active
     set_tab_data
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
   def show
+    @subbed_workshops = @subscription.subbed_workshops
+    @subbed_kid_workshops = @subscription.subbed_kid_workshops
+    @courses = @subscription.courses
   end
 
   # GET /subscriptions/new
@@ -70,8 +71,47 @@ class Secretariat::SubscriptionsController < SecretariatController
   # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
   def update
     respond_to do |format|
+      if params[:add_kid_workshop]
+        subbed_kid_workshop = SubbedKidWorkshop.new(subbed_kid_workshop_params.merge({subscription_id: params[:id]}))
+        if subbed_kid_workshop.save
+          format.html { redirect_to secretariat_subscription_url(@subscription), notice: "L’atelier enfant a bien été ajouté." }
+          format.json { render :show, status: :created, location: @subscription }
+        end
+      end
+      if params[:add_kid_workshop]
+        course = Course.new(course_params.merge({subscription_id: params[:id]}))
+        if course.save
+          format.html { redirect_to secretariat_subscription_url(@subscription), notice: "Le cours a bien été ajouté." }
+          format.json { render :show, status: :created, location: @subscription }
+        end
+      end
+      if params[:add_course]
+        course = Course.new(course_params.merge({subscription_id: params[:id]}))
+        if course.save
+          format.html { redirect_to secretariat_subscription_url(@subscription), notice: "Le cours a bien été ajouté." }
+          format.json { render :show, status: :created, location: @subscription }
+        end
+      end
+      if params[:add_workshop]
+        subbed_workshop = SubbedWorkshop.new(subbed_workshop_params.merge({subscription_id: params[:id]}))
+        if subbed_workshop.save
+          format.html { redirect_to secretariat_subscription_url(@subscription), notice: "L’atelier a bien été ajouté." }
+          format.json { render :show, status: :created, location: @subscription }
+        end
+      end
+      if params[:edit_kid_workshop]
+        subbed_kid_workshop = SubbedKidWorkshop.find(params[:subbed_kid_workshop_id])
+        raise
+        if subbed_kid_workshop.update(subbed_kid_workshop_params)
+          format.html { redirect_to secretariat_subscription_url(@subscription), notice: "L’atelier a bien été modifié." }
+          format.json { render :show, status: :ok, location: @subscription }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @subscription.errors, status: :unprocessable_entity }
+        end        
+      end
       if @subscription.update(subscription_params)
-        format.html { redirect_to subscription_url(@subscription), notice: "L’inscription a bien été modifiée." }
+        format.html { redirect_to secretariat_subscription_url(@subscription), notice: "L’inscription a bien été modifiée." }
         format.json { render :show, status: :ok, location: @subscription }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -90,6 +130,12 @@ class Secretariat::SubscriptionsController < SecretariatController
     end
   end
 
+  def add_kid_workshop
+    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
+    @subscription.courses.build
+    render :new
+  end
+
   def add_course
     @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
     @subscription.courses.build
@@ -102,29 +148,10 @@ class Secretariat::SubscriptionsController < SecretariatController
     render :new
   end
 
-  def update_teachers
-    @teachers = Teacher.where(specialties: Specialty.where(instrument: Instrument.find(params[:instrument_id])))
-
-    render json: @teachers.as_json(only: [:first_name, :last_name, :id]), status: :ok
-  end
-
-  def update_slots
-    @slots = Slot.where(teacher: params[:teacher_id])
-
-    render json: @slots.as_json(only: [:id, :slot_time], include: { city: { only: :name }}), status: :ok
-  end
-
-  def update_workshop_slots
-    @slots = WorkshopSlot.where(workshop: params[:workshop_id])
-
-    render json: @slots.as_json(only: [:id, :slot_time], include: { city: { only: :name }}), status: :ok
-  end
-
-  def update_kid_workshop_slots
-    @slots = KidWorkshopSlot.where(kid_workshop: params[:kid_workshop_id])
-
-    render json: @slots.as_json(only: [:id, :slot_time], include: { city: { only: :name }}), status: :ok
-  end
+  # def get_kid_workshop_slot
+  #   @slot = SubbedKidWorkshop.find(params[:subbed_kid_workshop_id])
+  #   render json: @slot.as_json(only: [:id, :slot_time, :day_of_week], include: { kid_workshop_slot: { only: :name }}), status: :ok
+  # end
 
   private
 
@@ -139,7 +166,28 @@ class Secretariat::SubscriptionsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def subscription_params
-      params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], subbed_kid_workshops_attributes: [:kid_workshop_slot_id, :option, :comment])
+      params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], subbed_kid_workshops_attributes: [:kid_workshop_slot_id, :option, :comment], subbed_kid_workshop_attributes: [:kid_workshop_slot_id, :option, :comment])
+    end
+
+    def subbed_kid_workshop_params
+      if params[:subscription][:subbed_kid_workshop].present?
+        params[:subscription][:subbed_kid_workshop][:option] = params[:subscription][:subbed_kid_workshop][:option].to_i
+      end
+      params[:subscription].require(:subbed_kid_workshop).permit(:sub_id, :kid_workshop_slot_id, :option, :comment)
+    end
+
+    def course_params
+      if params[:subscription][:course].present?
+        params[:subscription][:course][:option] = params[:subscription][:course][:option].to_i
+      end
+      params[:subscription].require(:course).permit(:instrument_id, :slot_id, :option, :comment)
+    end
+
+    def subbed_workshop_params
+      if params[:subscription][:subbed_workshop].present?
+        params[:subscription][:subbed_workshop][:option] = params[:subscription][:subbed_workshop][:option].to_i
+      end
+      params[:subscription].require(:subbed_workshop).permit(:workshop_slot_id, :option, :comment)
     end
 
     def student_params
@@ -175,13 +223,32 @@ class Secretariat::SubscriptionsController < SecretariatController
     end
 
     def set_records
-      @filtered_courses = params[:instrument].present? ? Course.where(instrument: params[:instrument]) : Course.all
-      @filtered_workshops = params[:workshop].present? ? SubbedWorkshop.joins(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) : SubbedWorkshop.all
-      if query.present? 
-        @pagy, @subscriptions = paginate_records(Subscription.joins(:subscription_group).where(subscription_group: { season: @season }, courses: @filtered_courses, subbed_workshops: @filtered_workshops, student: Student.where("last_name ILIKE ?", "%#{query}%")).or(Subscription.joins(:subscription_group).where(subscription_group: { season: @season }, courses: @filtered_courses, subbed_workshops: @filtered_workshops, student: Student.where("first_name ILIKE ?", "%#{query}%"))))
+      @filters = {}
+      @filters[:subscription_group] = {}
+      @filters[:subscription_group][:status] = params[:status] if params[:status].present?
+      @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
+      @filters[:courses] = Course.where(instrument: params[:instrument]) if params[:instrument].present?
+      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) if params[:workshop].present?
+
+      if !@filters.empty?
+        @filters[:subscription_group][:season] = @season
+        @filtered_subscriptions = Subscription.includes(:subscription_group).where(@filters)
       else
-        @pagy, @subscriptions = paginate_records(Subscription.joins(:subscription_group).where(subscription_group: { season: @season }, courses: @filtered_courses, subbed_workshops: @filtered_workshops))
+        @filtered_subscriptions = Subscription.includes(:subscription_group).where(subscription_group: { season: @season })
       end
+
+      @not_filters = {}
+      @not_filters[:subscription_group] = { status: params[:exclude_status] } if params[:exclude_status].present?
+
+      if !@not_filters.empty?
+        @filtered_subscriptions = @filtered_subscriptions.where.not(@not_filters)
+      end
+
+      if query.present?
+        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE ?", "%#{query}%")).or(@filtered_subscriptions.where(student: Student.where("first_name ILIKE ?", "%#{query}%")))
+      end
+      @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join(", ")
+      @pagy, @subscriptions = paginate_records(@filtered_subscriptions)
     end
     
     def default_sort_attribute
@@ -190,7 +257,7 @@ class Secretariat::SubscriptionsController < SecretariatController
 
     def with_sort_params(records)
       if @sort_attribute.present?
-        records.joins(:student).merge(Student.order(last_name: @sort_direction))
+        records.includes(:student).merge(Student.order(last_name: @sort_direction))
       else
         records
       end

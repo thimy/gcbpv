@@ -1,22 +1,94 @@
-<div id="<%= dom_id course %>">
-  <p>
-    <strong>Slot:</strong>
-    <%= course.slot_id %>
-  </p>
-
-  <p>
-    <strong>Instrument:</strong>
-    <%= course.instrument_id %>
-  </p>
-
-  <p>
-    <strong>Start time:</strong>
-    <%= course.start_time %>
-  </p>
-
-  <p>
-    <strong>End time:</strong>
-    <%= course.end_time %>
-  </p>
-
-</div>
+<% if defined?(is_form) && !!is_form %>
+  <tr class="<%= "new-item" if !course.id %>" data-controller="edit-subscription fill-select" id="<%= dom_id course %>" data-edit-subscription-id-value="<%= course.id %>">
+    <td class="cell-instrument">
+      <%= collection_select :course, :instrument_id, instruments, :id, :name, 
+        {
+          include_blank: course.id.blank?,
+          selected: course.present? ? course.instrument_id : "", required: course.id.blank?
+        }, {
+          data: {
+            fill_select_url_param: "/get_teachers?id=",
+            fill_select_target_param: ".teacher-select",
+            fill_select_reset_param: ".slot-select",
+            action: "fill-select#updateTeachers",
+          }
+        } %>
+    </td>
+    <td class="cell-teachers">
+      <%= collection_select :course, :teacher_id, teachers, :id, :name,
+        {
+          selected: course.slot&.teacher.id,
+          required: true
+        }, {
+          class: "teacher-select",
+          data: {
+            fill_select_url_param: "/get_slots?id=",
+            fill_select_target_param: ".slot-select",
+            action: "fill-select#updateSlots"
+          }
+        } %>
+    </td>
+    <td class="cell-slot" colspan="2">
+      <%= collection_select :course, :slot_id, slots, :id, :name_without_teacher, { selected: course.slot&.id, required: true }, class: "slot-select" %>
+    </td>
+    <td class="cell-start_time">
+      <%= text_field :course, :start_time, value: course.start_time %>
+    </td>
+    <td class="cell-end_time">
+      <%= text_field :course, :end_time, value: course.end_time %>
+    </td>
+    <td class="cell-option">
+      <%= check_box :course, :option, {checked: course.option == "Optionel"}, "Optionel", "Confirmé" %>
+    </td>
+    <td class="cell-comment">
+      <%= text_area :course, :comment, rows: 2 %>
+    </td>
+    <td class="cell-options">
+      <div class="actions">
+        <% if course.id.present? %>
+          <%= hidden_field_tag "course[id]", course.id %>
+          <button class="button" type="submit">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-subscription#editEntry" data-edit-subscription-url-param="<%= secretariat_course_path(course) %>">
+            <%= inline_svg "icons/undo", "aria-label": "Annuler" %>
+          </button>
+        <% else %>
+          <button class="button" data-action="edit-subscription#createEntry" data-edit-subscription-url-param="<%= secretariat_courses_path %>">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-subscription#cancelNew">
+            <%= inline_svg "icons/delete", "aria-label": "Annuler" %>
+          </button>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% else %>
+  <tr data-controller="edit-subscription" id="<%= dom_id course %>" data-edit-subscription-id-value="<%= course.id %>">
+    <td class="cell-instrument"><%= link_to course.instrument.name, secretariat_instrument_path(course.instrument) %></td>
+    <td class="cell-teachers"><%= link_to course.slot.teacher.name, secretariat_teacher_path(course.slot.teacher) %></td>
+    <td class="cell-city"><%= course.slot.city.name %></td>
+    <td class="cell-day_of_week"><%= course.slot.day_of_week %></td>
+    <td class="cell-start_time"><%= course.start_time %></td>
+    <td class="cell-end_time"><%= course.end_time %></td>
+    <td class="cell-option"><%= course.option %></td>
+    <td class="cell-comment"><%= simple_format(course.comment) %></td>
+    <td class="cell-options">
+      <div class="actions">
+        <button data-action="edit-subscription#editEntry" 
+                data-edit-subscription-url-param="<%= edit_secretariat_course_path(course) %>">
+          <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+        </button>
+        <%= link_to secretariat_course_path(course), 
+          class: "button",
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce cours?"
+          } do %>
+          <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

@@ -2,9 +2,11 @@
   <%= label_tag "Professeur" %>
   <%= collection_select :teacher, :teacher_ids, teachers, :id, :name, { include_blank: true },
     {
+      class: "teacher-select",
       data: {
-        course_target: "teacher",
-        action: "course#updateSlots"
+        fill_select_url_param: "/get_slots?id=",
+        fill_select_target_param: ".slot-select",
+        action: "fill-select#updateSlots"
       }
     } %>
 </div>

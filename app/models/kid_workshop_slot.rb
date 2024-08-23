@@ -43,7 +43,7 @@ class KidWorkshopSlot < ApplicationRecord
   end
 
   def name
-    "#{kid_workshop.name} – #{teacher_names} à #{city.name}"
+    "#{city.name} – #{day_of_week} – #{slot_time || "Horaire à définir"}"
   end
 
   def subscriptions

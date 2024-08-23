@@ -19,6 +19,12 @@ class Subscription < ApplicationRecord
     "À rembourser": 3
   }
 
+  def kid_workshop_list
+    kid_workshop_slots.map {|slot|
+      slot.kid_workshop.name
+  }.join(", ")
+  end
+
   def course_list
     courses.map {|course|
       course.instrument.name
@@ -38,14 +44,14 @@ class Subscription < ApplicationRecord
   end
 
   def phone
-    student.try(:phone) || subscription_group.payor.phone
+    student.phone.presence || subscription_group.payor.phone
   end
 
   def email
-    student.try(:email) || subscription_group.payor.email
+    student.email.presence || subscription_group.payor.email
   end
 
   def city
-    student.try(:city) || subscription_group.payor.city
+    student.city.presence || subscription_group.payor.city
   end
 end

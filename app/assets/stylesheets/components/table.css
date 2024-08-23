@@ -48,6 +48,14 @@ thead {
   }
 }
 
+tr[data-action] {
+  cursor: pointer;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--light-accent), transparent 80%);
+  }
+}
+
 tbody {
   vertical-align: top;
 }
@@ -67,6 +75,7 @@ td {
 
   &.cell-options {
     text-align: right;
+    width: fit-content;
   }
 
   &.cell-student,

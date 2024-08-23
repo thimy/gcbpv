@@ -1,18 +1,6 @@
 Rails.application.routes.draw do
   get "association", to: "association#index"
   get "bogue", to: "bogue#index"
-  namespace :bogue do
-  end
-  namespace :account do
-  end
-  get "compte", to: "compte#index", as: :account
-  namespace :compte do
-    resources :students, path: "eleves"
-    resources :subscriptions, path: "inscriptions" do
-      post :add_course, on: :collection
-      post :add_workshop, on: :collection
-    end
-  end
 
   namespace :archives do
     resources :editions, only: [:index, :show]
@@ -86,18 +74,20 @@ Rails.application.routes.draw do
       post :add_course, on: :collection
       post :add_workshop, on: :collection
     end
-    resources :courses
     resources :workshops
+    resources :courses
+    resources :subbed_workshops
+    resources :subbed_kid_workshops
     resources :payors
     resources :instruments, path: "disciplines"
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "secretariat", to: "secretariat#index", as: "/"
 
-  get "update_teachers", to: "secretariat/subscriptions#update_teachers"
-  get "update_slots", to: "secretariat/subscriptions#update_slots"
-  get "update_workshop_slots", to: "secretariat/subscriptions#update_workshop_slots"
-  get "update_kid_workshop_slots", to: "secretariat/subscriptions#update_kid_workshop_slots"
-    
+  get "get_teachers", to: "secretariat/instruments#get_teachers"
+  get "get_slots", to: "secretariat/teachers#get_slots"
+  get "get_workshop_slots", to: "secretariat/workshops#get_slots"
+  get "get_kid_workshop_slots", to: "secretariat/kid_workshops#get_slots"
+
   resources :subscriptions
   resources :workshops
   resources :students

@@ -1,5 +1,5 @@
 class Secretariat::InstrumentsController < SecretariatController
-  before_action :set_instrument, only: %i[ show edit update destroy ]
+  before_action :set_instrument, only: %i[ show edit update destroy get_teachers ]
 
   # GET /instruments or /instruments.json
   def index
@@ -55,6 +55,11 @@ class Secretariat::InstrumentsController < SecretariatController
       format.html { redirect_to instruments_url, notice: "Instrument was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def get_teachers
+    @teachers = Teacher.where(specialties: Specialty.where(instrument: @instrument))
+    render json: @teachers.as_json(only: [:first_name, :last_name, :id]), status: :ok
   end
 
   private
