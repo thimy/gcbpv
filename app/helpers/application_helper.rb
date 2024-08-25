@@ -26,4 +26,8 @@ module ApplicationHelper
       ])
     end
   end
+
+  def get_emails(list)
+    list.map { |element| element.subscription.email }.join(", ")
+  end
 end

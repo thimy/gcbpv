@@ -1,8 +1,4 @@
 .secretariat.subscriptions {
-  h2 {
-    margin: 0;
-  }
-
   .subscription-form {
     .notes {
       flex-grow: 1;

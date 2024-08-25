@@ -1,42 +1,51 @@
 <div id="<%= dom_id teacher %>" class="record">
   <h1><%= teacher.name %></h1>
-  <dl class="horizontal">
-    <dt>Email :</dt>
-    <dd><%= teacher.email %></dd>
-    <dt>Téléphone :</dt>
-    <dd><%= teacher.phone %></dd>
-  </dl>
+  <div class="page-info">
+    <dl class="horizontal">
+      <dt>Email :</dt>
+      <dd><%= teacher.email %></dd>
+      <dt>Téléphone :</dt>
+      <dd><%= teacher.phone %></dd>
+    </dl>
+  </div>
 
   <section data-controller="tabs">
     <header>
       <button data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="cours">Cours</button>
       <button data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Informations personnelles</button>
     </header>
-    <div data-tabs-target="panel" id="cours">
+    <div data-tabs-target="panel" id="cours" class="record flex-column gap-10">
       <% teacher.slots.order(:day_of_week).each do |slot| %>
-        <h3><%= "#{slot.day_of_week} – #{slot.city.name}" %></h3>
-        <%= render Shared::Table::Component.new do |table| %>
-          <% table.with_header do |header| %>
-            <% header.with_column(name: "name") do %>Nom<% end %>
-            <% header.with_column(name: "time") do %>Heure du cours<% end %>
-            <% if @teacher.instruments.size > 1 %>
-              <% header.with_column(name: "discipline") do %>Discipline<% end %>
-            <% end %>
-            <% header.with_column(name: "phone") do %>Téléphone<% end %>
-            <% header.with_column(name: "email") do %>Email<% end %>
-          <% end %>
-          <% slot.courses.each do |course| %>
-            <% table.with_row(link_url: teacher) do |row| %>
-              <% row.with_cell(name: "name") do %><%= link_to "#{course.subscription.student.name} ", secretariat_teacher_path(teacher) %><% end %>
-              <% row.with_cell(name: "time") do %><%= course.start_time %><% end %>
+        <div>
+          <h2><%= "#{slot.day_of_week} – #{slot.city.name} (#{slot.courses.size})" %></h2>
+          <%= render Shared::Table::Component.new do |table| %>
+            <% table.with_header do |header| %>
+              <% header.with_column(name: "name") do %>Nom<% end %>
+              <% header.with_column(name: "time") do %>Heure du cours<% end %>
               <% if @teacher.instruments.size > 1 %>
-                <% row.with_cell(name: "discipline") do %><%= course.instrument.name %><% end %>
+                <% header.with_column(name: "discipline") do %>Discipline<% end %>
               <% end %>
-              <% row.with_cell(name: "phone") do %><%= course.subscription.student.phone %><% end %>
-              <% row.with_cell(name: "email") do %><%= course.subscription.student.email %><% end %>
+              <% header.with_column(name: "phone") do %>Téléphone<% end %>
+              <% header.with_column(name: "email") do %>Email<% end %>
+            <% end %>
+            <% slot.courses.each do |course| %>
+              <% table.with_row(link_url: teacher) do |row| %>
+                <% row.with_cell(name: "name") do %><%= link_to "#{course.subscription.student.name} ", secretariat_teacher_path(teacher) %><% end %>
+                <% row.with_cell(name: "time") do %><%= course.start_time %><% end %>
+                <% if @teacher.instruments.size > 1 %>
+                  <% row.with_cell(name: "discipline") do %><%= course.instrument.name %><% end %>
+                <% end %>
+                <% row.with_cell(name: "phone") do %><%= course.subscription.phone %><% end %>
+                <% row.with_cell(name: "email") do %><%= course.subscription.email %><% end %>
+              <% end %>
+            <% end %>
+            <% table.with_row(link_url: teacher) do |row| %>
+              <% row.with_cell(name: "full", colspan: @teacher.instruments.size > 1 ? 5 : 4) do %>
+                <button class="button" data-emails-list-value="<%= get_emails(slot.courses) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        </div>
       <% end %>
     </div>
     <div data-tabs-target="panel" id="infos">
