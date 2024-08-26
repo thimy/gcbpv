@@ -5,6 +5,6 @@
   accepts_nested_attributes_for :subscription_groups
 
   def name
-    "#{first_name} #{last_name.upcase}"
+    "#{first_name} #{last_name.upcase if last_name.present?}"
   end
 end
