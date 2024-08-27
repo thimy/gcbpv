@@ -1,5 +1,5 @@
 <div class="content-header">
-  <h1>Élèves</h1>
+  <h1><%= "Élèves – #{@confirmed_count} (+#{@unconfirmed_count})" %></h1>
   <%= link_to "Créer une nouvelle inscription", new_secretariat_subscription_path %>
 </div>
 <p style="color: green"><%= notice %></p>

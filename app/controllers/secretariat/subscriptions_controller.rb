@@ -14,6 +14,8 @@ class Secretariat::SubscriptionsController < SecretariatController
   # GET /subscriptions or /subscriptions.json
   def index
     set_tab_data
+    @unconfirmed_count = Subscription.includes(:subscription_group).where(subscription_group: {status: 0, season: @season}).size
+    @confirmed_count = Subscription.includes(:subscription_group).where.not(subscription_group: {status: 0, season: @season}).size
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
