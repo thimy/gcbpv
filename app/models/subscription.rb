@@ -16,8 +16,13 @@ class Subscription < ApplicationRecord
     "Demande d’information": 0,
     "Inscrit – à régler": 1,
     "Inscrit – réglé": 2,
-    "À rembourser": 3
+    "À rembourser": 3,
+    "Annulé": 4
   }
+
+  scope :active, -> {includes(:subscription_group).where(subscription_group: { season: Config.first.season })}
+  scope :registered, ->{active.where(subscription_group: { status: [1, 2, 3] })}
+  scope :inquired, ->{active.where.not(id: registered)}
 
   def kid_workshop_list
     kid_workshop_slots.map {|slot|

@@ -1,5 +1,4 @@
 <div id="<%= dom_id workshop %>" class="record">
-  <h1><%= workshop.name %></h1>
   <section data-controller="tabs">
     <header>
       <button data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="atelier">Atelier</button>
@@ -21,17 +20,30 @@
               <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
             <% end %>
           <% end %>
+          <% table.with_empty_state_with_header do %>
+            <td class="empty-state" colspan="3">
+              Pas d’inscription
+            </td>
+          <% end %>
         <% end %>
       <% end %>
     </div>
     <div data-tabs-target="panel" id="infos">
       <h2>Informations de la discipline</h2>
       <dl>
-        <dt>Name:</dt>
+        <dt>Nom :</dt>
         <dd><%= workshop.name %></dd>
-        <dt>Description:</dt>
+        <dt>Description :</dt>
         <dd><%= simple_format(workshop.description) %></dd>
       </dl>
+      <%= link_to "Supprimer cet atelier",
+        secretariat_workshop_path(@workshop),
+        class: "button page-end",
+        data: {
+          "button-status": "alert",
+          turbo_method: :delete,
+          turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet atelier ?"
+        } %>
     </div>
   </section>
 </div>

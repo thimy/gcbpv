@@ -48,6 +48,10 @@ class WorkshopSlot < ApplicationRecord
     "#{workshop.name} – #{teacher_names} à #{city.name}"
   end
 
+  def teachers_and_location
+    "#{city.name} (#{teacher_names})"
+  end
+
   def subbed_workshops
     SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: self)
   end

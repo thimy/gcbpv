@@ -1,8 +1,17 @@
-<%= tag.table class: css_classes, **options do %>
-  <%= header %>
-  <tbody>
-    <% rows.each do |row| %>
-      <%= row %>
-    <% end %>
-  </tbody>
+<% if rows.blank? && empty_state_with_header.blank? %>
+  <%= empty_state %>
+<% else %>
+  <%= content_tag "table", class: @css_classes, **@options do %>
+    <%= header %>
+    <tbody>
+      <% if rows.present? %>
+        <% rows.each do |row| %>
+          <%= row %>
+        <% end %>
+      <% else %>
+        <tr class="coucou"><%= empty_state_with_header %></tr>
+      <% end %>
+    </tbody>
+  <% end %>
+  <%= pagination %>
 <% end %>

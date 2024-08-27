@@ -89,4 +89,18 @@
   .cell-full {
     text-align: end;
   }
+
+  .optional-count {
+    color: var(--dark-accent);
+  }
+
+  .page-end {
+    margin-block-start: auto;
+  }
+
+  #infos:not([aria-hidden="true"]) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-3);
+  }
 }

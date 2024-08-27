@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<% content_for(:page_class, "workshops ") %>
+<div class="content-header">
+  <h1><%= @workshop.name %></h1>
 
-<div>
-  <%= link_to "Éditer cet atelier", edit_workshop_path(@workshop) %> |
-  <%= link_to "Retour aux ateliers", workshops_path %>
-
-  <%= button_to "Supprimer cet atelier", @workshop, method: :delete %>
+  <div>
+    <%= link_to "Créer un nouvel atelier", new_secretariat_workshop_path(@workshop) %> |
+    <%= link_to "Retour aux ateliers", secretariat_workshops_path %>
+  </div>
 </div>
+
+<div class="page-info">
+  <dl class="horizontal">
+    <dt>Nombre d’élèves :</dt>
+    <dd><%= "#{@workshop.subscriptions.registered.size} (+#{@workshop.subscriptions.inquired.size})" %></dd>
+    <dt>Statut :</dt>
+    <dd><%= @workshop.status %></dd>
+  </dl>
+</div>
+
+<p style="color: green"><%= notice %></p>
 
 <%= render @workshop %>

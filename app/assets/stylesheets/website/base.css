@@ -117,7 +117,7 @@ dl {
 
 dt {
   font-family: var(--font-serif);
-  font-size: var(--font-size-4);
+  font-size: var(--font-size-2);
 
   &:is(dt:not(.horizontal) > dd + *) {
     margin-top: var(--size-3);
@@ -127,10 +127,10 @@ dt {
 dd {
   margin: 0;
 
-  ul {
+  /* ul {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(auto, 230px));
-  }
+  } */
 }
 
 address {
