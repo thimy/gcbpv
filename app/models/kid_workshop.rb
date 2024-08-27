@@ -1,5 +1,8 @@
 class KidWorkshop < ApplicationRecord
   has_many :kid_workshop_slots
+  has_many :subbed_kid_workshops, through: :kid_workshop_slots
+  has_many :subscriptions, through: :subbed_kid_workshops
+  has_many :cities, through: :kid_workshop_slots
 
   accepts_nested_attributes_for :kid_workshop_slots
 
@@ -17,5 +20,9 @@ class KidWorkshop < ApplicationRecord
       slot = KidWorkshopSlot.find_by(id: id)
       "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
     }
+  end
+
+  def subscriptions
+    SubbedKidWorkshop.joins(:subscription, :kid_workshop_slot).where(kid_workshop_slot: {kid_workshop: self})
   end
 end

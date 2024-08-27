@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       post :add_course, on: :collection
       post :add_workshop, on: :collection
     end
+    resources :kid_workshops, path: "enfance"
     resources :workshops
     resources :courses
     resources :subbed_workshops

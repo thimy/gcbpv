@@ -46,8 +46,8 @@ class KidWorkshopSlot < ApplicationRecord
     "#{city.name} – #{day_of_week} – #{slot_time || "Horaire à définir"}"
   end
 
-  def subscriptions
-    Subscription.joins(:kid_workshop_slot).where(kid_workshop_slot: self)
+  def teachers_and_location
+    "#{city.name} (#{teacher_names})"
   end
 
   def subbed_workshops

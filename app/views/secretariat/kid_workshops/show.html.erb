@@ -1,0 +1,22 @@
+<% content_for(:page_class, "kid_workshops ") %>
+<div class="content-header">
+  <h1><%= @kid_workshop.name %></h1>
+
+  <div>
+    <%= link_to "Créer un nouvel atelier", new_secretariat_kid_workshop_path(@kid_workshop) %> |
+    <%= link_to "Retour aux ateliers", secretariat_kid_workshops_path %>
+  </div>
+</div>
+
+<div class="page-info">
+  <dl class="horizontal">
+    <dt>Nombre d’élèves :</dt>
+    <dd><%= "#{@kid_workshop.subscriptions.registered.size} (+#{@kid_workshop.subscriptions.inquired.size})" %></dd>
+    <dt>Statut :</dt>
+    <dd><%= @kid_workshop.status %></dd>
+  </dl>
+</div>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @kid_workshop %>

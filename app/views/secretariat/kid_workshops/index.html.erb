@@ -1,6 +1,6 @@
 <div class="content-header">
-  <h1>Ateliers</h1>
-  <%= link_to "Créer un nouvel atelier", new_secretariat_workshop_path %>
+  <h1>Ateliers Enfance</h1>
+  <%= link_to "Créer un nouvel atelier", new_secretariat_kid_workshop_path %>
 </div>
 <p style="color: green"><%= notice %></p>
 <%= render Shared::Table::Component.new do |table| %>
@@ -8,22 +8,22 @@
     <% header.with_column(name: "name") do %>Nom<% end %>
     <% header.with_column(name: "subscriptions") do %>Nombre d'élèves<% end %>
   <% end %>
-  <% @workshops.each do |workshop| %>
-    <% table.with_row(link_url: workshop) do |row| %>
-      <% row.with_cell(name: "name") do %><%= link_to workshop.name, secretariat_workshop_path(workshop) %><% end %>
+  <% @kid_workshops.each do |kid_workshop| %>
+    <% table.with_row(link_url: kid_workshop) do |row| %>
+      <% row.with_cell(name: "name") do %><%= link_to kid_workshop.name, secretariat_kid_workshop_path(kid_workshop) %><% end %>
       <% row.with_cell(name: "subscriptions") do %>
-        <% workshop.workshop_slots.each do |slot| %>
+        <% kid_workshop.kid_workshop_slots.each do |slot| %>
           <div>
             <strong>
-              <%= "#{SubbedWorkshop.where(workshop_slot_id: slot.id, subscription: Subscription.registered).size}" %>
-              <% @student_count = SubbedWorkshop.where(workshop_slot_id: slot.id, subscription: Subscription.inquired).size %>
+              <%= "#{SubbedKidWorkshop.where(kid_workshop_slot_id: slot.id, subscription: Subscription.registered).size}" %>
+              <% @student_count = SubbedKidWorkshop.where(kid_workshop_slot_id: slot.id, subscription: Subscription.inquired).size %>
                 <% if @student_count > 0 %>
                 <span class="optional-count">
                   <%= "(+#{@student_count})" %>
                 </span>
               <% end %>
             </strong>
-            <% if workshop.workshop_slots.size > 1 %>
+            <% if kid_workshop.kid_workshop_slots.size > 1 %>
               <%= ": #{slot.teachers_and_location}" %>
             <% end %>
           </div>
