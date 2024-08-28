@@ -11,7 +11,7 @@
 <div class="page-info">
   <dl class="horizontal">
     <dt>Nombre d’élèves :</dt>
-    <dd><%= "#{@kid_workshop.subscriptions.registered.size} (+#{@kid_workshop.subscriptions.inquired.size})" %></dd>
+    <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
     <dt>Statut :</dt>
     <dd><%= @kid_workshop.status %></dd>
   </dl>

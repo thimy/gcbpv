@@ -15,7 +15,7 @@
           <% header.with_column(name: "city") do %>Ville<% end %>
         <% end %>
         <% instrument.courses.each do |course| %>
-          <% table.with_row do |row| %>
+          <% table.with_row(class: "#{course.subscription.optional? || course.subscription.optional_course?(instrument) ? "optional" : "confirmed"}") do |row| %>
             <% row.with_cell(name: "student") do %><%= link_to course.subscription.student.name, secretariat_subscription_path(course.subscription) %><% end %>
             <% row.with_cell(name: "phone") do %><%= format_phone(course.subscription.phone) %><% end %>
             <% row.with_cell(name: "email") do %><%= course.subscription.email %><% end %>
@@ -36,6 +36,14 @@
         <dt>Description:</dt>
         <dd><%= simple_format(instrument.description) %></dd>
       </dl>
+      <%= link_to "Supprimer cette discipline",
+        secretariat_instrument_path(instrument),
+        class: "button page-end",
+        data: {
+          "button-status": "alert",
+          turbo_method: :delete,
+          turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette discipline ?"
+        } %>
     </div>
   </section>
 </div>

@@ -14,7 +14,7 @@
             <% header.with_column(name: "email") do %>Email<% end %>
           <% end %>
           <% slot.subscriptions.each do |subscription| %>
-            <% table.with_row do |row| %>
+            <% table.with_row(class: "#{subscription.optional? || subscription.optional_kid_workshop?(kid_workshop) ? "optional" : "confirmed"}") do |row| %>
               <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, secretariat_subscription_path(subscription) %><% end %>
               <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
               <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>

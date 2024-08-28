@@ -28,7 +28,7 @@
               <% header.with_column(name: "email") do %>Email<% end %>
             <% end %>
             <% slot.courses.each do |course| %>
-              <% table.with_row(link_url: teacher) do |row| %>
+              <% table.with_row(link_url: teacher, class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
                 <% row.with_cell(name: "name") do %><%= link_to "#{course.subscription.student.name} ", secretariat_subscription_path(course.subscription) %><% end %>
                 <% row.with_cell(name: "time") do %><%= course.start_time %><% end %>
                 <% if @teacher.instruments.size > 1 %>

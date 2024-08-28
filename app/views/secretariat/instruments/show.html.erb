@@ -1,10 +1,13 @@
 <p style="color: green"><%= notice %></p>
 
-<div>
-  <%= link_to "Éditer cette discipline", edit_instrument_path(@instrument) %> |
-  <%= link_to "Retour aux disciplines", secretariat_instruments_path %>
+<div class="content-header">
+  <h1><%= @instrument.name %></h1>
 
-  <%= button_to "Supprimer cette discipline", @instrument, method: :delete %>
+  <div>
+    <%= link_to "Créer cette discipline", new_secretariat_instrument_path(@instrument) %> |
+    <%= link_to "Retour aux disciplines", secretariat_instruments_path %>
+  </div>
+
 </div>
 
 <%= render @instrument %>

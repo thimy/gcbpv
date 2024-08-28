@@ -32,6 +32,6 @@ module ApplicationHelper
   end
 
   def format_phone(phone)
-    phone.phony_formatted(normalize: :FR)
+    phone.phony_formatted(normalize: :FR) if phone.present?
   end
 end

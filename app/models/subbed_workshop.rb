@@ -6,6 +6,10 @@ class SubbedWorkshop < ApplicationRecord
 
   scope :registered, -> {joins(:subscription).where(subscription: Subscription.registered)}
   scope :inquired, -> {joins(:subscription).where(subscription: Subscription.inquired)}
+  scope :has_workshop, ->(workshop) {includes(:workshop_slot).where(workshop_slot: {workshop: workshop})}
+  scope :has_slot, ->(slot) {where(workshop_slot: slot)}
+  scope :confirmed, -> { where(option: "Confirmé")}
+  scope :optional, -> { where(option: "Optionel")}
 
   def student_name
     subscription.student.name

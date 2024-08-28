@@ -15,8 +15,8 @@
         <% workshop.workshop_slots.each do |slot| %>
           <div>
             <strong>
-              <%= "#{SubbedWorkshop.where(workshop_slot_id: slot.id, subscription: Subscription.registered).size}" %>
-              <% @student_count = SubbedWorkshop.where(workshop_slot_id: slot.id, subscription: Subscription.inquired).size %>
+              <%= "#{SubbedWorkshop.registered.confirmed.has_slot(slot).size}" %>
+              <% @student_count = SubbedWorkshop.registered.optional.has_slot(slot).size + SubbedWorkshop.inquired.has_slot(slot).size %>
                 <% if @student_count > 0 %>
                 <span class="optional-count">
                   <%= "(+#{@student_count})" %>

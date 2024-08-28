@@ -8,6 +8,8 @@ class Secretariat::KidWorkshopsController < SecretariatController
 
   # GET /kid_workshops/1 or /kid_workshops/1.json
   def show
+    @confirmed_count = @kid_workshop.subscriptions.registered.confirmed.has_workshop(@kid_workshop).size
+    @optional_count = @kid_workshop.subscriptions.registered.optional.has_workshop(@kid_workshop).size + @kid_workshop.subscriptions.inquired.has_workshop(@kid_workshop).size
   end
 
   # GET /kid_workshops/new

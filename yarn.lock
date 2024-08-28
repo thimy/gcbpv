@@ -38,11 +38,6 @@
   resolved "https://registry.npmjs.org/@sindresorhus/merge-streams/-/merge-streams-2.3.0.tgz#719df7fb41766bc143369eaa0dd56d8dc87c9958"
   integrity sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==
 
-"@wizardhealth/stimulus-multiselect@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@wizardhealth/stimulus-multiselect/-/stimulus-multiselect-1.0.0.tgz#88991537588cdcc2212a2c3995ac141bd4bae05f"
-  integrity sha512-lHN9tJNkOTpZdeToTRucdvxKBUkyGoVKiZ5P7SjQgSRn+1WW4Ych5BW+OcZv7Obbik2nfGuelv4BtJFe6ONjsA==
-
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
