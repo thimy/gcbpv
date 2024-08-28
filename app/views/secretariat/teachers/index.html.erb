@@ -1,25 +1,62 @@
 <div class="content-header">
   <h1>Professeurs</h1>
-  <%= link_to "Créer un nouveau professeur", new_teacher_path %>
+  <%= link_to "Créer un nouveau professeur", new_secretariat_teacher_path %>
 </div>
 
 <p style="color: green"><%= notice %></p>
-<%= render Shared::Table::Component.new do |table| %>
-  <% table.with_header do |header| %>
-    <% header.with_column(name: "name") do %>Nom<% end %>
-    <% header.with_column(name: "email") do %>Email<% end %>
-    <% header.with_column(name: "phone") do %>Téléphone<% end %>
-    <% header.with_column(name: "students") do %>Nombre d’élèves<% end %>
-    <% header.with_column(name: "instrument") do %>Instrument<% end %>
-  <% end %>
-  <% @teachers.each do |teacher| %>
-    <% table.with_row(link_url: teacher) do |row| %>
-      <% row.with_cell(name: "name") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}", secretariat_teacher_path(teacher) %><% end %>
-      <% row.with_cell(name: "email") do %><%= teacher.email %><% end %>
-      <% row.with_cell(name: "phone") do %><%= teacher.phone %><% end %>
-      <% row.with_cell(name: "students") do %><%= teacher.student_count %><% end %>
-      <% row.with_cell(name: "instrument") do %>
-        <%= teacher.specialties.map { |specialty| specialty.instrument.name }.join(", ") %>
+
+<%= form_for secretariat_teachers_path,
+    method: :get,
+    html: {
+      data: {
+        turbo_frame: "teachers"
+      },
+      class: "list-form"
+    } do |f| %>
+  <div class="form-group">
+    <div class="form-element">
+      <%= label_tag :q, "Noms" %>
+      <div class="search-input">
+        <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
+        <%= f.button do %>
+          <%= inline_svg_tag "icons/search.svg" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-element">
+      <%= label_tag :status, "Status" %>
+      <%= select_tag :status, options_for_select(Teacher.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+    <div class="form-element">
+      <%= label_tag :instrument, "Discipline" %>
+      <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name", params[:instrument].presence || ""), include_blank: "--- Discipline ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+  </div>
+<% end %>
+<button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+
+<%= turbo_frame_tag "teachers", class: "flex-column gap-3" do %>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "last_name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "email") do %>Email<% end %>
+      <% header.with_column(name: "phone") do %>Téléphone<% end %>
+      <% header.with_column(name: "students") do %>Nombre d’élèves<% end %>
+      <% header.with_column(name: "instrument") do %>Instruments<% end %>
+      <% header.with_column(name: "workshop") do %>Ateliers<% end %>
+    <% end %>
+    <% @teachers.each do |teacher| %>
+      <% table.with_row(link_url: teacher) do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}", secretariat_teacher_path(teacher), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "email") do %><%= teacher.email %><% end %>
+        <% row.with_cell(name: "phone") do %><%= format_phone(teacher.phone) %><% end %>
+        <% row.with_cell(name: "students") do %><%= teacher.student_count %><% end %>
+        <% row.with_cell(name: "instrument") do %>
+          <%= teacher.instruments.map { |instrument| link_to instrument.name, secretariat_instrument_path(instrument), "data-turbo": false }.join(", ").html_safe %>
+        <% end %>
+        <% row.with_cell(name: "workshop") do %>
+          <%= teacher.workshops.uniq.map { |workshop| link_to workshop.name, secretariat_workshop_path(workshop), "data-turbo": false }.join(", ").html_safe %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

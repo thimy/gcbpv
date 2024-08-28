@@ -30,4 +30,8 @@ module ApplicationHelper
   def get_emails(list)
     list.map { |element| element.subscription.email }.join(", ")
   end
+
+  def format_phone(phone)
+    phone.phony_formatted(normalize: :FR)
+  end
 end

@@ -1,10 +1,13 @@
 class Teacher < ApplicationRecord
+  phony_normalize :phone, default_country_code: "FR"
+
   has_many :specialties, dependent: :delete_all
   has_many :instruments, through: :specialties
   has_many :slots
   has_many :cities, through: :slots
   has_many :workshop_slot_teachers
   has_many :workshop_slots, through: :workshop_slot_teachers
+  has_many :workshops, through: :workshop_slots
   has_one_attached :photo
 
   accepts_nested_attributes_for :slots

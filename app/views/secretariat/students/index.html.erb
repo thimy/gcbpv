@@ -16,7 +16,7 @@
       <% row.with_cell(name: "name") do %><%= link_to "#{student.first_name} #{student.last_name}" %><% end %>
       <% row.with_cell(name: "email") do %><%= student.email %><% end %>
       <% row.with_cell(name: "gender") do %><%= student.gender %><% end %>
-      <% row.with_cell(name: "phone") do %><%= student.phone %><% end %>
+      <% row.with_cell(name: "phone") do %><%= format_phone(student.phone) %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_student_path(student) do %>
           Editer cet élève

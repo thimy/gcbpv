@@ -1,0 +1,35 @@
+import { Controller } from "@hotwired/stimulus"
+
+// Connects to data-controller="menu-button"
+export default class extends Controller {
+  static targets = ["workshop", "slot"]
+
+  updateSlots() {
+    const workshopId = this.workshopTarget.value;
+    this.fetchAndUpdate(`/update_kid_workshop_slots?kid_workshop_id=${workshopId}`, this.slotTarget)
+  }
+
+  fetchAndUpdate(url, target) {
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        this.#fillSelect(data, target)
+      })
+      .catch(error => console.error("Error:", error))
+  }
+
+  removeRow() {
+    this.element.remove()
+  }
+
+  #fillSelect(data, target) {
+    target.options.length = 0
+    if (data.length > 1) {
+      target.append(new Option("", ""))
+    }
+    data.forEach(element => {
+      const option = new Option(`${element.city.name} – ${element.day_of_week} – ${element.slot_time || "Horaire à définir"}`, element.id)
+      target.append(option)
+    })
+  }
+}

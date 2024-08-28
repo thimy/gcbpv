@@ -13,7 +13,7 @@
     <dt>Email :</dt>
     <dd><%= @subscription.email %></dd>
     <dt>Téléphone :</dt>
-    <dd><%= @subscription.phone %></dd>
+    <dd><%= format_phone(@subscription.phone) %></dd>
     <dt>Foyer :</dt>
     <dd><%= @subscription.subscription_group.payor.name %></dd>
   </dl>

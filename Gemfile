@@ -94,3 +94,4 @@ gem "inline_svg", "~> 1.9"
 gem "trix"
 
 gem "pagy", "~> 9.0"
+gem "phony_rails"

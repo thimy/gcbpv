@@ -60,7 +60,7 @@
     <% @subscriptions.each do |subscription| %>
       <% table.with_row(link_url: secretariat_subscription_path(subscription)) do |row| %>
         <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, secretariat_subscription_path(subscription), "data-turbo": false %><% end %>
-        <% row.with_cell(name: "phone") do %><%= subscription.phone %><% end %>
+        <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
         <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
         <% row.with_cell(name: "course") do %>
           <%= [subscription.kid_workshop_list, subscription.course_list, subscription.pathway_list].reject!(&:empty?).join(", ") %><% end %>

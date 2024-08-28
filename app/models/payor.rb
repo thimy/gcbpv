@@ -1,4 +1,6 @@
-  class Payor < ApplicationRecord
+class Payor < ApplicationRecord
+  phony_normalize :phone, default_country_code: "FR"
+
   has_many :students
   has_many :subscription_groups, dependent: :destroy
 

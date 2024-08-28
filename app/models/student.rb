@@ -1,4 +1,6 @@
 class Student < ApplicationRecord
+  phony_normalize :phone, default_country_code: "FR"
+
   belongs_to :payor, optional: true
   has_many :subscriptions, dependent: :destroy
   has_many :subscription_groups, through: :subscriptions

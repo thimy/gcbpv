@@ -1,9 +1,19 @@
 class Secretariat::TeachersController < SecretariatController
+  include WithTableConcern
+
   before_action :set_teacher, only: %i[ show edit update destroy get_slots ]
+
+  SORT_ATTRIBUTES = [ "last_name" ]
 
   # GET /teachers or /teachers.json
   def index
-    @teachers = Teacher.active
+    @instruments = params[:q].present? ? Instrument.where("name LIKE ?", "%#{params[:q]}%") : Instrument.all
+    set_tab_data
+
+    respond_to do |format|
+      format.json
+      format.html
+    end
   end
 
   # GET /teachers/1 or /teachers/1.json
@@ -13,11 +23,25 @@ class Secretariat::TeachersController < SecretariatController
   # GET /teachers/new
   def new
     @teacher = Teacher.new
-    @instruments = Instrument.active
+    @instruments = Instrument.all
+    @instrument_list = Instrument.all.map{|instrument|
+      {
+        value: instrument.id,
+        text: instrument.name
+      }
+    }
   end
 
   # GET /teachers/1/edit
   def edit
+    @selected_instruments = @teacher.instruments.map{|instrument| {text: instrument.name, value: instrument.id}}.to_json
+    @instruments = Instrument.all
+    @instrument_list = Instrument.all.map{|instrument|
+      {
+        value: instrument.id,
+        text: instrument.name
+      }
+    }
   end
 
   # POST /teachers or /teachers.json
@@ -26,7 +50,7 @@ class Secretariat::TeachersController < SecretariatController
 
     respond_to do |format|
       if @teacher.save
-        format.html { redirect_to teacher_url(@teacher), notice: "Teacher was successfully created." }
+        format.html { redirect_to secretariat_teacher_url(@teacher), notice: "Le professeur a bien été créé." }
         format.json { render :show, status: :created, location: @teacher }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +63,7 @@ class Secretariat::TeachersController < SecretariatController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to teacher_url(@teacher), notice: "Teacher was successfully updated." }
+        format.html { redirect_to secretariat_teacher_url(@teacher), notice: "Teacher was successfully updated." }
         format.json { render :show, status: :ok, location: @teacher }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -59,12 +83,17 @@ class Secretariat::TeachersController < SecretariatController
     @teacher.destroy!
 
     respond_to do |format|
-      format.html { redirect_to teachers_url, notice: "Teacher was successfully destroyed." }
+      format.html { redirect_to secretariat_teachers_url, notice: "Le professeur a bien été supprimé." }
       format.json { head :no_content }
     end
   end
 
   private
+
+  def query
+    params[:q]
+  end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_teacher
       @teacher = Teacher.find(params[:id])
@@ -72,6 +101,32 @@ class Secretariat::TeachersController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def teacher_params
-      params.require(:teacher).permit(:first_name, :last_name, :email, :phone, :instrument_id, :description, :photo)
+      params.require(:teacher).permit(:first_name, :last_name, :email, :phone, :description, :photo, :instrument_ids => [])
+    end
+
+    def set_records
+      filters = {}
+      filters[:status] = params[:status] if params[:status].present?
+      filters[:specialties] = Specialty.where(instrument: params[:instrument]) if params[:instrument].present?
+
+      if !filters.empty?
+        @filtered_teachers = Teacher.where(filters)
+      else
+        @filtered_teachers = Teacher.active
+      end
+
+      if query.present?
+        @filtered_teachers = @filtered_teachers.where("last_name ILIKE ?", "%#{query}%").or("first_name ILIKE ?", "%#{query}%")
+      end
+      @selected_emails = @filtered_teachers.map {|teacher| teacher.email}.uniq.join(", ")
+      @pagy, @teachers = paginate_records(@filtered_teachers)
+    end
+
+    def default_sort_attribute
+      SORT_ATTRIBUTES.first
+    end
+
+    def valid_sort_attribute?(attribute)
+      SORT_ATTRIBUTES.include?(attribute)
     end
 end

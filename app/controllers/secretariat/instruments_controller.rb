@@ -3,7 +3,18 @@ class Secretariat::InstrumentsController < SecretariatController
 
   # GET /instruments or /instruments.json
   def index
+    @instrument_optionss = Instrument.where("name ILIKE ?", "%#{params[:q]}%").map{|instrument|
+      {
+        value: instrument.id,
+        text: instrument.name
+      }
+    }
     @instruments = Instrument.all
+
+    respond_to do |format|
+      format.json
+      format.html
+    end
   end
 
   # GET /instruments/1 or /instruments/1.json

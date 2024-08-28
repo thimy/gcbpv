@@ -68,18 +68,18 @@ Rails.application.routes.draw do
   get "contact", to: "website#contact", as: "/contact"
   get "bogue", to: "website#bogue"
   namespace :secretariat do
-    resources :teachers
-    resources :students
-    resources :subscriptions do
+    resources :teachers, path: "professeurs"
+    # resources :students, path: "eleves"
+    resources :subscriptions, path: "eleves" do
       post :add_course, on: :collection
       post :add_workshop, on: :collection
     end
     resources :kid_workshops, path: "enfance"
-    resources :workshops
-    resources :courses
+    resources :workshops, path: "ateliers"
+    resources :courses, path: "cours"
     resources :subbed_workshops
     resources :subbed_kid_workshops
-    resources :payors
+    resources :payors, path: "payeurs"
     resources :instruments, path: "disciplines"
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "secretariat", to: "secretariat#index", as: "/"

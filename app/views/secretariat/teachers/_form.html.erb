@@ -1,4 +1,4 @@
-<%= form_with(model: teacher) do |form| %>
+<%= form_for(teacher, url: secretariat_teachers_path) do |form| %>
   <% if teacher.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
@@ -11,42 +11,42 @@
     </div>
   <% end %>
 
-  <div>
+  <div class="form-element">
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div>
+  <div class="form-element">
     <%= form.label :last_name, style: "display: block" %>
     <%= form.text_field :last_name %>
   </div>
 
-  <div>
-    <%= form.label :email, style: "display: block" %>
+  <div class="form-element">
+    <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 
-  <div>
-    <%= form.label :phone, style: "display: block" %>
+  <div class="form-element">
+    <%= form.label :phone %>
     <%= form.text_field :phone %>
   </div>
 
-  <div>
-    <%= form.label :instrument_id, style: "display: block" %>
-    <%= form.text_field :instrument_id %>
+  <div class="form-element" data-controller="multiselect" data-multiselect-items-value="<%= @instrument_list.to_json %>" data-multiselect-search-url-value="/secretariat/disciplines" data-placeholder="Sélectionnez des disciplines" data-multiselect-selected-value="<%= @selected_instruments.present? ? @selected_instruments : [] %>">
+    <%= form.label "specialties", "Disciplines" %>
+    <%= form.collection_select :instrument_ids, @instruments, :id, :name, {selected: teacher.instrument_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
+  <div class="form-element">
+    <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
 
-  <div>
-    <%= form.label :photo, style: "display: block" %>
-    <%= form.text_field :photo %>
+  <div class="form-element">
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
   </div>
 
-  <div>
+  <div class="form-element">
     <%= form.submit %>
   </div>
 <% end %>
