@@ -83,6 +83,6 @@ class KidWorkshopSlotDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(kid_workshop_slot)
-    kid_workshop_slot.name
+    kid_workshop_slot.full_name
   end
 end

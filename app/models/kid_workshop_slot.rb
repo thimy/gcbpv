@@ -42,6 +42,10 @@ class KidWorkshopSlot < ApplicationRecord
     teachers.map {|teacher| teacher.name }.join("/")
   end
 
+  def full_name
+    "#{kid_workshop.name} – #{teacher_names} à #{city.name}"
+  end
+
   def name
     "#{city.name} – #{day_of_week} – #{slot_time || "Horaire à définir"}"
   end
