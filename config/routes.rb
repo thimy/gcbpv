@@ -81,6 +81,7 @@ Rails.application.routes.draw do
     resources :subbed_kid_workshops
     resources :payors, path: "payeurs"
     resources :instruments, path: "disciplines"
+    resources :emails
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "secretariat", to: "secretariat#index", as: "/"
 
