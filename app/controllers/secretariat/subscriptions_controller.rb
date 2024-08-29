@@ -150,10 +150,9 @@ class Secretariat::SubscriptionsController < SecretariatController
     render :new
   end
 
-  # def get_kid_workshop_slot
-  #   @slot = SubbedKidWorkshop.find(params[:subbed_kid_workshop_id])
-  #   render json: @slot.as_json(only: [:id, :slot_time, :day_of_week], include: { kid_workshop_slot: { only: :name }}), status: :ok
-  # end
+  def send_email
+    SubscriptionMailer.with(subscriptions: @subscriptions).standard_mail.deliver_later
+  end
 
   private
 

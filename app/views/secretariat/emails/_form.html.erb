@@ -1,0 +1,6 @@
+<%= form_with model: email, url: secretariat_emails_path do |form| %>
+  <%= form.label :body, "Corps du message" %>
+  <%= form.markdown_field :body%>
+
+  <%= form.submit "Sauvegarder" %>
+<% end %>

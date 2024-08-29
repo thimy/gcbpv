@@ -89,6 +89,7 @@ Rails.application.routes.draw do
   get "get_slots", to: "secretariat/teachers#get_slots"
   get "get_workshop_slots", to: "secretariat/workshops#get_slots"
   get "get_kid_workshop_slots", to: "secretariat/kid_workshops#get_slots"
+  post "send_email", to: "secretariat/subscriptions#send_email", as: "secretariat_subscriptions_send_email"
 
   resources :subscriptions
   resources :workshops
