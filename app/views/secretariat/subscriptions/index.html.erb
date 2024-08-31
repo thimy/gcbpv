@@ -46,9 +46,6 @@
   </div>
 <% end %>
 <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
-<%= form_with url: secretariat_subscriptions_send_email_path do |form| %>
-  <%= form.submit "Envoyer un email" %>
-<% end %>
 <%= turbo_frame_tag "subscriptions", class: "flex-column gap-3" do %>
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>

@@ -150,10 +150,6 @@ class Secretariat::SubscriptionsController < SecretariatController
     render :new
   end
 
-  def send_email
-    SubscriptionMailer.with(subscriptions: @subscriptions).standard_mail.deliver_later
-  end
-
   private
 
     def query
@@ -248,7 +244,7 @@ class Secretariat::SubscriptionsController < SecretariatController
       if query.present?
         @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE ?", "%#{query}%")).or(@filtered_subscriptions.where(student: Student.where("first_name ILIKE ?", "%#{query}%")))
       end
-      @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join(", ")
+      @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join("\n")
       @pagy, @subscriptions = paginate_records(@filtered_subscriptions)
     end
     
