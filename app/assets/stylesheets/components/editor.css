@@ -5,8 +5,23 @@
   max-width: 650px;
 }
 
+.codex-editor__redactor {
+  margin: 0 !important;
+}
+
+.ce-block__content {
+  width: 100%;
+}
+
 .ce-toolbar__actions {
-  right: -10px;
+  right: 100% !important;
+}
+
+.editor-content-wrapper {
+  border: var(--border-default);
+  border-radius: var(--radius-3);
+  max-width: 600px;
+  padding: var(--size-3) var(--size-4);
 }
 
 .file-link {

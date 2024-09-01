@@ -69,30 +69,16 @@ class Secretariat::EmailsController < SecretariatController
     end
   end
 
-  def upload_image
-    image = params[:image]
-
-    if image.nil?
-      render json: { success: 0, error: "Pas d’image dans cette requête" }
-      return
-    end
-
-    uploaded_image = EmailImage.create!(image: image)
-    stored_image_url = rails_blob_url(uploaded_image.image)
-
-    render json: { success: 1, file: { url: stored_image_url } }
-  rescue StandardError => e
-    render json: { success: 0, error: e.message }
-  end
-
   def upload_file
     file_params = {
-      file: params[:file]
+      file: params[:file] || params[:image]
     }
 
-    file_params[:name] = params[:file].original_filename if params[:file].original_filename.present?
-    file_params[:extension] = Rack::Mime::MIME_TYPES.invert[params[:file].content_type].sub(".", "") if params[:file].content_type.present?
-    file_params[:size] = params[:file].size if params[:file].size.present?
+    if params[:file].present?
+      file_params[:name] = params[:file].original_filename if params[:file].original_filename.present?
+      file_params[:extension] = Rack::Mime::MIME_TYPES.invert[params[:file].content_type].sub(".", "") if params[:file].content_type.present?
+      file_params[:size] = params[:file].size if params[:file].size.present?
+    end
 
     if file_params[:file].nil?
       render json: { success: 0, error: "Pas de fichier dans cette requête" }

@@ -45,7 +45,7 @@ export default class extends Controller {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: this.imageUrlValue
+              byFile: this.fileUrlValue
             },
             additionalRequestHeaders: {
               "X-CSRF-Token": this.csrfToken()

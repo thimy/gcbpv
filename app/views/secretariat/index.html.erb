@@ -1,15 +1,27 @@
 <h2>Année <%= @season.name %></h2>
 <div class="grid" data-grid="repeat">
+  <%= link_to secretariat_subscriptions_path, class: "card" do %>
+    <div class="card-info">
+      <h3>Élèves</h3>
+      <div><%= @active_subscription_size %></div>
+    </div>
+  <% end %>
+  <%= link_to "#{secretariat_subscriptions_path}?exclude_status=0", class: "card" do %>
+    <div class="card-info">
+      <h3>Élèves confirmés</h3>
+      <div><%= @confirmed_subscription_size %></div>
+    </div>
+  <% end %>
+  <%= link_to "#{secretariat_subscriptions_path}?status=0", class: "card" do %>
+    <div class="card-info">
+      <h3>Demandes d’information</h3>
+      <div><%= @unconfirmed_subscription_size %></div>
+    </div>
+  <% end %>
   <%= link_to secretariat_teachers_path, class: "card" do %>
     <div class="card-info">
       <h3>Professeurs</h3>
       <div><%= @teachers.size %></div>
-    </div>
-  <% end %>
-  <%= link_to secretariat_subscriptions_path, class: "card" do %>
-    <div class="card-info">
-      <h3>Élèves</h3>
-      <div><%= @unconfirmed_subscription_size %></div>
     </div>
   <% end %>
   <%= link_to secretariat_workshops_path, class: "card" do %>
