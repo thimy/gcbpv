@@ -4,12 +4,14 @@
 @import "card.css";
 @import "ecole-sidebar";
 @import "edition-card.css";
+@import "editor.css";
 @import "event-card.css";
 @import "footer.css";
 @import "header.css";
 @import "home-hero.css";
 @import "hero.css";
 @import "hero-card.css";
+@import "list.css";
 @import "list-element.css";
 @import "menu-button.css";
 @import "other-records.css";

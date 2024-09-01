@@ -8,4 +8,11 @@ class SubscriptionMailer < ApplicationMailer
     @content = params[:content]
     mail(to: @subscriptions, subject: @subject)
   end
+
+  def custom_mail(email)
+    @subject = email.subject
+    @recipients = email.recipients
+    @content = email.formatted_content
+    mail(to: @recipients, subject: @subject, content: @content)
+  end
 end

@@ -1,13 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <style>
-      /* Email styles need to be inline */
-    </style>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <%= stylesheet_link_tag "mailer" %>
   </head>
 
   <body>
-    <%= yield %>
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+          <div class="content">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader">This is preheader text. Some clients will show this text as a preview.</span>
+            <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="main">
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="header">
+                  <h1>
+                    <a href="https://www.gcbpv.org">
+                      <%= image_tag "logo.svg", alt: "Groupement Culturel Breton des Pays de Vilaine" %>
+                    </a>
+                  </h1>
+                </td>
+              </tr>
+              <tr>
+                <td class="wrapper">
+                  <%= @content %>
+                </td>
+              </tr>
+
+              <!-- END MAIN CONTENT AREA -->
+              </table>
+
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <a class="apple-link" href="https://www.gcbpv.org">Groupement Culturel Breton des Pays de Vilaine</a>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="content-block">
+                    <span>6, rue Joseph Lamour de Caslou<br>35600 Redon</span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+
+            <!-- END FOOTER -->
+            
+<!-- END CENTERED WHITE CONTAINER --></div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
   </body>
 </html>

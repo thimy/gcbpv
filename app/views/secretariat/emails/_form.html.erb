@@ -1,6 +1,18 @@
-<%= form_with model: email, url: secretariat_emails_path do |form| %>
-  <%= form.label :body, "Corps du message" %>
-  <%= form.markdown_field :body%>
+<%= form_for email, url: url, data: {controller: "editor", "editor-image-url-value": "/secretariat/emails/upload_image"} do |form| %>
+  <div class="form-element">
+    <%= form.label :subject, "Sujet" %>
+    <%= form.text_field :subject %>
+  </div>
+  <div class="form-element">
+    <%= form.label :recipients, "Destinataires" %>
+    <%= form.text_field :recipients %>
+  </div>
+  <div class="form-element">
+    <%= form.label :content, "Corps du message" %>
+    <div id="email_content" data-editor-target="editor"></div>
+  </div>
 
-  <%= form.submit "Sauvegarder" %>
+  <%= form.hidden_field :content, id: "email_content_hidden", data: {"editor-target": "hidden"} %>
+  <%= form.submit "Sauvegarder et envoyer plus tard" %>
+  <%= form.submit "Envoyer maintenant", name: "send_now", data: { confirm: "Êtes-vous sûr·e de vouloir envoyer ces emails maintenant ?"} %>
 <% end %>

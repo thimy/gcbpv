@@ -95,3 +95,5 @@ gem "trix"
 
 gem "pagy", "~> 9.0"
 gem "phony_rails"
+
+gem "premailer-rails", "~> 1.12"

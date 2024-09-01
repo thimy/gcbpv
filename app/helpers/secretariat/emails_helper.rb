@@ -1,2 +1,0 @@
-module Secretariat::EmailsHelper
-end

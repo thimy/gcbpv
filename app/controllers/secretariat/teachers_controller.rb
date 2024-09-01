@@ -63,7 +63,7 @@ class Secretariat::TeachersController < SecretariatController
   def update
     respond_to do |format|
       if @teacher.update(teacher_params)
-        format.html { redirect_to secretariat_teacher_url(@teacher), notice: "Teacher was successfully updated." }
+        format.html { redirect_to secretariat_teacher_url(@teacher), notice: "Le professeur a bien été mis à jour." }
         format.json { render :show, status: :ok, location: @teacher }
       else
         format.html { render :edit, status: :unprocessable_entity }

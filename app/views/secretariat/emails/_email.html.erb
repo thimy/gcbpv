@@ -1,0 +1,18 @@
+<div id="<%= dom_id email %>">
+  <div>
+    <strong>Objet :</strong>
+    <%= email.subject %>
+  </p>
+
+  <p>
+    <strong>Destinaires :</strong>
+    <%= email.recipients %>
+  </p>
+
+  <p>
+    <strong>Corps du message :</strong>
+    <div class="email-wrapper">
+      <%= email.formatted_content %>
+    </div>
+  </p>
+</div>

@@ -1,0 +1,12 @@
+<div class="content-header">
+  <h1><%= @email.subject || "Pas d’objet" %></h1>
+
+  <div>
+    <%= button_to "Envoyer cet email", secretariat_email_secretariat_emails_send_email_path(@email) %> |
+    <%= link_to "Éditer cet email", edit_secretariat_email_path(@email) %> |
+    <%= link_to "Retour à la liste des emails", secretariat_emails_path %>
+  </div>
+</div>
+
+<p style="color: green"><%= notice %></p>
+<%= render @email %>

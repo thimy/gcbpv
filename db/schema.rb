@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_29_150333) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_30_095541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,11 +111,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_150333) do
     t.text "comment"
   end
 
+  create_table "email_images", force: :cascade do |t|
+    t.bigint "email_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_id"], name: "index_email_images_on_email_id"
+  end
+
   create_table "emails", force: :cascade do |t|
     t.string "subject"
     t.string "recipients"
-    t.text "body"
-    t.integer "status"
+    t.jsonb "content"
+    t.datetime "sent_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -512,6 +519,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_29_150333) do
   add_foreign_key "configs", "seasons"
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
+  add_foreign_key "email_images", "emails"
   add_foreign_key "kid_workshop_slot_teachers", "kid_workshop_slots"
   add_foreign_key "kid_workshop_slot_teachers", "teachers"
   add_foreign_key "kid_workshop_slots", "cities"

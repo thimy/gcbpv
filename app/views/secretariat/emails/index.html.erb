@@ -8,7 +8,6 @@
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "subject", sortable: true) do %>Sujet<% end %>
-      <% header.with_column(name: "body") do %>Message<% end %>
       <% header.with_column(name: "created_at") do %>Créé le<% end %>
       <% header.with_column(name: "sent_at") do %>Envoyé le<% end %>
       <% header.with_column(name: "status") do %>Statut<% end %>
@@ -16,10 +15,9 @@
     <% @emails.each do |email| %>
       <% table.with_row do |row| %>
         <% row.with_cell(name: "subject") do %><%= link_to email.subject, secretariat_email_path(email), "data-turbo": false %><% end %>
-        <% row.with_cell(name: "body") do %><%= simple_format(email.body) %><% end %>
         <% row.with_cell(name: "created_at") do %><%= email.created_at %><% end %>
-        <% row.with_cell(name: "sent_at") do %><%= email.sent_at %><% end %>
-        <% row.with_cell(name: "status") do %><%= email.status %><% end %>
+        <% row.with_cell(name: "sent_at") do %><%= email.sent_at if email.sent_at.present? %><% end %>
+        <% row.with_cell(name: "status") do %>Brouillon<% end %>
       <% end %>
     <% end %>
   <% end %>

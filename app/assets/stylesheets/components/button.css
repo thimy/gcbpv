@@ -1,4 +1,4 @@
-:is(button, .button, a.button, [type="button"], [type="submit"]) {
+:is(.button, a.button, [type="submit"]) {
   --button-bg-color: var(--main-brand);
   --button-text-color: currentColor;
   background-color: var(--button-bg-color);

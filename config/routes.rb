@@ -81,7 +81,10 @@ Rails.application.routes.draw do
     resources :subbed_kid_workshops
     resources :payors, path: "payeurs"
     resources :instruments, path: "disciplines"
-    resources :emails
+    resources :emails do
+      post :upload_image, on: :collection, as: "secretariat_emails_upload_image"
+      post :send_email, path: "/send_email(.:format)", as: "secretariat_emails_send_email"
+    end
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "secretariat", to: "secretariat#index", as: "/"
 
@@ -89,7 +92,6 @@ Rails.application.routes.draw do
   get "get_slots", to: "secretariat/teachers#get_slots"
   get "get_workshop_slots", to: "secretariat/workshops#get_slots"
   get "get_kid_workshop_slots", to: "secretariat/kid_workshops#get_slots"
-  post "send_email", to: "secretariat/subscriptions#send_email", as: "secretariat_subscriptions_send_email"
 
   resources :subscriptions
   resources :workshops
@@ -107,5 +109,4 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :events, path: :evenements, only: [:index, :show]
-
 end

@@ -48,7 +48,7 @@ strong {
   grid-column: full;
 }
 
-:is(div, p):empty {
+:is(div, p):not([class]):empty {
   display: none;
 }
 
@@ -56,6 +56,10 @@ a {
   svg {
     vertical-align: middle;
   }
+}
+
+b {
+  font-weight: var(--font-weight-6);
 }
 
 .flex-row {
@@ -99,3 +103,4 @@ a {
 .rotate90 {
   transform: rotate(90deg);
 }
+

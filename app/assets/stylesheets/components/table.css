@@ -2,6 +2,7 @@ table {
   border-collapse: separate;
   border-spacing: 0;
   font-size: 0.875rem;
+  margin-block-start: var(--size-3);
   text-align: left;
   width: 100%;
   word-break: keep-all;
