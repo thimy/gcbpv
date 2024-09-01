@@ -9,6 +9,37 @@
   right: -10px;
 }
 
+.file-link {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--gray);
+  border-radius: var(--radius-2);
+  gap: var(--size-2);
+  font-size: 14px;
+  margin-block-start: var(--size-3);
+  padding: var(--size-2);
+
+  &:hover {
+    border-color: var(--dark-gray);
+  }
+
+  .extension {
+    background-color: var(--black);
+    border-radius: 8px;
+    color: var(--white);
+    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-size: 10px;
+    font-weight: var(--font-weight-6);
+    padding: var(--size-2) var(--size-1);
+    text-transform: uppercase;
+  }
+
+  .file-size {
+    color: var(--dark-gray);
+    font-size: 12px;
+  }
+}
+
 .image-container {
   display: flex;
   flex-direction: column;

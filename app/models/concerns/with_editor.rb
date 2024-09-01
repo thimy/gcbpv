@@ -1,5 +1,6 @@
 module WithEditor
   extend ActiveSupport::Concern
+  require "action_view"
 
   def formatted_content
     return if content.blank?
@@ -43,6 +44,23 @@ module WithEditor
             <img src="#{url}" alt="#{caption}" class="#{image_class}" />
             <figcaption class="centered-content">#{caption}</figcaption>
           </figure>
+        HTML
+      when "attaches"
+        url = block["data"]["file"]["url"]
+        name = block["data"]["title"] || block["data"]["file"]["name"]
+        size = ::ApplicationController.helpers.number_to_human_size(block["data"]["file"]["size"])
+        extension = block["data"]["file"]["extension"]
+
+        file_html = <<-HTML
+          <a href="#{url}" class="file-link">
+            <div class="extension">
+              #{extension}
+            </div>
+            <div class="flex-column">
+              #{name}
+              <span class="file-size">#{size}</span>
+            </div>
+          </a>
         HTML
       when "table"
         rows = block["data"]["content"].map.with_index { |row, index|

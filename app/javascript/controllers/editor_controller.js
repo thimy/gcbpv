@@ -15,7 +15,7 @@ import Underline from "@editorjs/underline"
 
 export default class extends Controller {
   static targets = ["editor", "hidden"]
-  static values = { imageUrl: String }
+  static values = { imageUrl: String, fileUrl: String }
 
   connect() {
     const initialContent = this.getInitialContent()
@@ -27,7 +27,7 @@ export default class extends Controller {
         attaches: {
           class: AttachesTool,
           config: {
-            endpoint: "secretariat/attachements/upload_file",
+            endpoint: this.fileUrlValue,
             buttonText: "Ajouter un fichier",
             errorMessage: "L’envoi de l’image a échoué",
             additionalRequestHeaders: {
@@ -121,6 +121,7 @@ export default class extends Controller {
             "Bold": "Gras",
             "Italic": "Italique",
             "Underline": "Soulignement",
+            "Attachment": "Fichier"
           },
           tools: {
             "header": {
@@ -169,7 +170,8 @@ export default class extends Controller {
               "Convert to" :"Convertir en"
               },
             "delete": {
-              "Delete": "Supprimer"
+              "Delete": "Supprimer",
+              "Click to delete": "Cliquer pour supprimer"
             },
             "moveUp": {
               "Move up": "Déplacer vers le haut"

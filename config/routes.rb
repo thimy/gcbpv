@@ -83,6 +83,7 @@ Rails.application.routes.draw do
     resources :instruments, path: "disciplines"
     resources :emails do
       post :upload_image, on: :collection, as: "secretariat_emails_upload_image"
+      post :upload_file, on: :collection, as: "secretariat_emails_upload_file"
       post :send_email, path: "/send_email(.:format)", as: "secretariat_emails_send_email"
     end
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
