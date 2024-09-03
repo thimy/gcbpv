@@ -12,11 +12,12 @@
     }
   }
 
-  .grid {
+  .now {
+    display: grid;
     align-items: start;
+    gap: var(--space-l);
     grid-template-columns: 1fr 520px;
     grid-template-rows: auto 1fr;
-    padding-block-end: var(--size-6);
 
     section {
       display: flex;
@@ -29,20 +30,12 @@
 
         a {
           color: var(--text-color-secondary);
+          font-size: var(--font-size-fluid-0);
 
           &:hover {
             color: var(--dark-accent);
           }
         }
-      }
-
-      h2 {
-        margin: 0;
-        text-align: start;
-      }
-
-      h3 {
-        font-size: var(--font-size-4);
       }
 
       .event {

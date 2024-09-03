@@ -16,7 +16,7 @@ class PostDashboard < Administrate::BaseDashboard
       searchable_fields: ['name'],
     ),
     image: Field::Image,
-    status: Field::Select.with_options(collection: Post::VALID_STATUSES, include_blank: true),
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     title: Field::String,
     published_at: Field::DateTime.with_options(format: "%d/%m/%Y à %H:%M"),
     created_at: Field::DateTime.with_options(format: "%d/%m/%Y à %H:%M"),

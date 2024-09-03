@@ -1,0 +1,25 @@
+<div id="<%= dom_id post %>">
+  <div>
+    <strong>Objet :</strong>
+    <%= post.title %>
+  </div>
+
+  <div>
+    <strong>Status :</strong>
+    <%= post.status %>
+  </div>
+
+  <% if post.event.present? %>
+    <div>
+      <strong>Événement lié :</strong>
+      <%= post.event.name %>
+    </div>
+  <% end %>
+
+  <div>
+    <strong>Corps du message :</strong>
+    <div class="editor-content-wrapper">
+      <%= post.formatted_content %>
+    </div>
+  </div>
+</div>

@@ -76,7 +76,7 @@
     <td class="cell-comment"><%= simple_format(course.comment) %></td>
     <td class="cell-options">
       <div class="actions">
-        <button data-action="edit-subscription#editEntry" 
+        <button class="button" data-action="edit-subscription#editEntry" 
                 data-edit-subscription-url-param="<%= edit_secretariat_course_path(course) %>">
           <%= inline_svg "icons/edit", "aria-label": "Editer" %>
         </button>

@@ -9,12 +9,12 @@ event-card {
     gap: var(--size-2) var(--size-6);
   
     time {
-      flex: 0 0 100px;
-      font-size: var(--font-size-0);
+      flex: 0 0 120px;
+      font-size: var(--font-size-fluid-0);
     }
   
     h3 {
-      font-size: var(--font-size-5);
+      font-size: var(--font-size-fluid-1);
     }
   
     address {

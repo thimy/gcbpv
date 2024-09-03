@@ -4,11 +4,7 @@
   <%= render Website::Header::Component.new(banner: @banner) %>
   <main class="full content">
     <%= render Website::Home::Hero::Component.new(title: content_for(:page_title)) %>
-    <div class="full content">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <%= yield %>
-    </div>
+    <%= yield %>
   </main>
   <%= render Website::Footer::Component.new %>
 <% end %>

@@ -2,7 +2,7 @@ class PostsController < BaseController
   before_action :set_post, only: %i[ show ]
 
   def index
-    @posts = Post.all
+    @posts = Post.latest
   end
 
   def show

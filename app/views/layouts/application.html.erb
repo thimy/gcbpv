@@ -11,6 +11,8 @@
   </head>
 
   <body class="<%= "#{controller.view_context.controller_name} #{content_for(:page_class)}" %>">
+    <p class="flash notice"><%= notice %></p>
+    <p class="flash alert"><%= alert %></p>
     <%= content_for?(:content) ? yield(:content) : yield %>
   </body>
 </html>

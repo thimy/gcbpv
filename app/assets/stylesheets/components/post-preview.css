@@ -1,7 +1,7 @@
 .post-preview {
   time {
     color: var(--light-accent);
-    font-size: var(--font-size-0);
+    font-size: var(--font-size-fluid-0);
   }
 
   .image {

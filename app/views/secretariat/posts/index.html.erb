@@ -1,0 +1,21 @@
+<div class="content-header">
+  <h1>Actualités</h1>
+  <%= link_to "Créer un nouvel article", new_secretariat_post_path %>
+</div>
+<p style="color: green"><%= notice %></p>
+<%= turbo_frame_tag "posts", class: "flex-column gap-3" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "title", sortable: true) do %>Titre<% end %>
+      <% header.with_column(name: "published_at") do %>Publié le<% end %>
+    <% end %>
+    <% @posts.each do |post| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "title") do %><%= link_to post.title, secretariat_post_path(post), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "published_at") do %><%= post.published_at if post.published_at.present? %><% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

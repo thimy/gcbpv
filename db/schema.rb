@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_01_091935) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_02_155416) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -276,13 +276,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_091935) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.text "content"
-    t.string "image"
-    t.string "status"
+    t.jsonb "content"
+    t.datetime "sent_at"
+    t.bigint "event_id"
+    t.integer "status"
+    t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "event_id"
-    t.datetime "published_at"
     t.index ["event_id"], name: "index_posts_on_event_id"
   end
 

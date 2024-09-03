@@ -27,7 +27,7 @@ module WithAttachment
   end
   
   def filter_file_blocks(content)
-    content["blocks"].select { |block| block["type"] == "attaches"}
+    content["blocks"].select { |block| block["type"] == "image" || block["type"] == "attaches"}
   end
 
   def extract_signed_id(file_block)

@@ -24,6 +24,39 @@ export default class extends Controller {
       data: initialContent,
       placeholder: "Commencez à écrire ici...",
       tools: {
+        header: {
+          class: Header,
+          config: {
+            placeholder: "Insérez un titre",
+            levels: [2, 3, 4]
+          }
+        },
+        table: {
+          class: Table,
+          inlineToolbar: true,
+          config: {
+            rows: 2,
+            cols: 3,
+          },
+        },
+        list: {
+          class: List,
+          inlineToolbar: true,
+          config: {
+            defaultStyle: "unordered"
+          }
+        },
+        image: {
+          class: ImageTool,
+          config: {
+            endpoints: {
+              byFile: this.fileUrlValue
+            },
+            additionalRequestHeaders: {
+              "X-CSRF-Token": this.csrfToken()
+            }
+          }
+        },
         attaches: {
           class: AttachesTool,
           config: {
@@ -38,24 +71,6 @@ export default class extends Controller {
         embed: {
           class: Embed
         },
-        header: {
-          class: Header
-        },
-        image: {
-          class: ImageTool,
-          config: {
-            endpoints: {
-              byFile: this.fileUrlValue
-            },
-            additionalRequestHeaders: {
-              "X-CSRF-Token": this.csrfToken()
-            }
-          }
-        },
-        list: {
-          class: List,
-          inlineToolbar: true,
-        },
         marker: {
           class: Marker,
           shortcut: 'CMD+SHIFT+M'
@@ -66,19 +81,12 @@ export default class extends Controller {
             inlineToolbar: true
           }
         },
-        table: {
-          class: Table,
-          inlineToolbar: true,
-          config: {
-            rows: 2,
-            cols: 3,
-          },
-        },
         textVariant: TextVariantTune,
         underline: {
           class: Underline
         },
       },
+      toolbar: ["header", "text", "list", "table", "image", "attaches"],
       tunes: ["textVariant"],
       i18n: {
         messages: {

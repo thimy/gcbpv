@@ -1,0 +1,2 @@
+module Secretariat::PostsHelper
+end

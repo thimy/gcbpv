@@ -10,7 +10,8 @@
     font-size: var(--font-size-5);
   }
 
-  header {
+  > header {
+    padding: var(--size-3);
     nav {
       align-items: start;
       display: flex;
@@ -25,6 +26,7 @@
     background-color: var(--white);
     border-radius: var(--radius-2);
     display: flex;
+    align-items: stretch;
     flex-direction: column;
     gap: var(--size-3);
     padding: var(--size-8) var(--size-16);
@@ -34,6 +36,7 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+    width: 100%;
   }
 
   table {
@@ -68,11 +71,10 @@
   }
 
   h1 {
-    font-size: var(--font-size-5);
+    font-size: var(--font-size-fluid-3);
   }
 
   h2 {
-    font-size: var(--font-size-4);
     margin: 0;
   }
 

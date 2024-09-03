@@ -9,12 +9,20 @@
   margin: 0 !important;
 }
 
+.ce-header {
+  text-wrap: auto !important;
+}
+
 .ce-block__content {
   width: 100%;
 }
 
 .ce-toolbar__actions {
   right: 100% !important;
+}
+
+.cdx-search-field__input {
+  width: 100%;
 }
 
 .editor-content-wrapper {

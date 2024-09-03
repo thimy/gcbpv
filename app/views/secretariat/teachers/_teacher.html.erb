@@ -10,8 +10,8 @@
 
   <section data-controller="tabs">
     <header>
-      <button data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="cours">Cours</button>
-      <button data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Informations personnelles</button>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="cours">Cours</button>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Informations personnelles</button>
     </header>
     <div data-tabs-target="panel" id="cours" class="record gap-10">
       <% teacher.slots.order(:day_of_week).each do |slot| %>

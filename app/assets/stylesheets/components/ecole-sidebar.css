@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   position: sticky;
-  top: var(--size-11);
+  top: var(--size-20);
 
   a {
     --entry-bg-color: color-mix(in srgb, var(--dark-accent), transparent 80%);

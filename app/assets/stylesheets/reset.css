@@ -39,8 +39,7 @@ button, input, label {
 }
 
 /* Balance text wrapping on headings */
-h1, h2,
-h3, h4 {
+h1 {
   text-wrap: balance;
 }
 
@@ -72,4 +71,8 @@ textarea:not([rows]) {
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
   scroll-margin-block: 5ex;
+}
+
+address {
+  font-style: normal;
 }

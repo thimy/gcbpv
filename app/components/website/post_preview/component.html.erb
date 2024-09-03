@@ -10,10 +10,4 @@
   <% end %>
   <h3><%= @post.title %></h3>
   <time>Publié le <%= @post.publication_datetime %></time>
-  <% if @post.image.present? %>
-    <div class="image">
-      <%= image_tag @post.image %>
-    </div>
-  <% end %>
-  <%= stripped_content %>
 <% end %>

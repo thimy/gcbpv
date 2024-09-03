@@ -1,5 +1,6 @@
 html {
   font-family: var(--font-sans);
+  font-weight: 100;
 }
 
 :where(h1, h2, h3, h4, p) {
@@ -17,17 +18,16 @@ html {
 }
 
 h1 {
-  font-size: var(--font-size-7);
+  font-size: var(--font-size-fluid-5);
 }
 
 h2 {
   --underline-color: var(--main-brand);
   align-items: center;
   display: flex;
-  font-size: var(--font-size-5);
+  font-size: var(--font-size-fluid-2);
   gap: var(--size-3);
   justify-self: start;
-  margin-block-end: var(--size-6);
   position: relative;
   scroll-margin-top: var(--size-12);
   width: 100%;
@@ -50,19 +50,17 @@ h2 {
 }
 
 h3 {
-  --underline-color: var(--dark-accent);
   font-size: var(--font-size-fluid-1);
   position: relative;
 }
 
 h4 {
-  font-family: var(--font-sans);
-  font-weight: var(--font-weight-7);
-  margin-block-start: var(--size-3);
+  font-size: var(--font-size-fluid-0);
 }
 
 .subtitle {
-  font-size: var(--font-size-2);
+  color: var(--light-accent);
+  font-size: var(--font-size-fluid-0);
   font-weight: var(--font-weight-6);
   margin-block: 0 var(--size-3);
 }
