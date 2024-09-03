@@ -18,10 +18,25 @@ class Secretariat::PostsController < SecretariatController
   # GET /posts/new
   def new
     @post = Post.new
+    @categories = Category.all
+    @category_list = Category.all.map{|category|
+      {
+        value: category.id,
+        text: category.name
+      }
+    }
   end
 
   # GET /posts/1/edit
   def edit
+    @selected_categories = @post.categories.map{|category| {text: category.name, value: category.id}}.to_json
+    @categories = Category.all
+    @category_list = Category.all.map{|category|
+      {
+        value: category.id,
+        text: category.name
+      }
+    }
   end
 
   # POST /posts or /posts.json
@@ -136,12 +151,12 @@ class Secretariat::PostsController < SecretariatController
       if params[:post][:published_at].blank? && params[:post][:status] == "Public"
         params[:post][:published_at] = DateTime.now
       end
-      params.require(:post).permit(:title, :content, :status, :file, :published_at, :event_id)
+      params.require(:post).permit(:title, :content, :status, :file, :published_at, :event_id, :category_ids => [])
     end
     
 
     def set_records
-      @pagy, @posts = paginate_records(Post.all)
+      @pagy, @posts = paginate_records(Post.ordered)
     end
     
     def default_sort_attribute

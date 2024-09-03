@@ -68,6 +68,7 @@ Rails.application.routes.draw do
   get "contact", to: "website#contact", as: "/contact"
   get "bogue", to: "website#bogue"
   namespace :secretariat do
+    resources :categories, on: :collection
     resources :posts, path: "actualites" do
       post :upload_image, on: :collection, as: "secretariat_posts_upload_image"
       post :upload_file, on: :collection, as: "secretariat_posts_upload_file"

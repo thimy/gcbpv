@@ -1,25 +1,34 @@
 <div id="<%= dom_id post %>">
-  <div>
+  <p>
     <strong>Objet :</strong>
     <%= post.title %>
-  </div>
+  </p>
 
-  <div>
+  <p>
+    <strong>Catégories :</strong>
+    <% post.categories.each do |category| %>
+      <span class="tag" data-tag-color="light-accent">
+        <span><%= category.name %></span>
+      </span>
+    <% end %>
+  </p>
+
+  <p>
     <strong>Status :</strong>
     <%= post.status %>
-  </div>
+  </p>
 
   <% if post.event.present? %>
-    <div>
+    <p>
       <strong>Événement lié :</strong>
       <%= post.event.name %>
-    </div>
+    </p>
   <% end %>
 
-  <div>
+  <p>
     <strong>Corps du message :</strong>
     <div class="editor-content-wrapper">
       <%= post.formatted_content %>
     </div>
-  </div>
+  </p>
 </div>

@@ -3,6 +3,12 @@
     <%= form.label :title, "Titre" %>
     <%= form.text_field :title %>
   </div>
+
+  <div class="form-element" data-controller="multiselect" data-multiselect-items-value="<%= @category_list.to_json %>" data-multiselect-search-url-value="/secretariat/categories" data-placeholder="Sélectionnez des catégories" data-multiselect-selected-value="<%= @selected_categories.present? ? @selected_categories : [] %>">
+    <%= form.label "category_ids", "Catégories" %>
+    <%= form.collection_select :category_ids, @categories, :id, :name, {selected: post.category_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
+  </div>
+
   <div class="form-element">
     <%= form.label :status, "Statut de l’article" %>
     <%= form.select :status, options_for_select(Post.statuses.keys.to_a, selected: post.present? ? post.status : 0) %>
@@ -17,6 +23,5 @@
   </div>
 
   <%= form.hidden_field :content, id: "post_content_hidden", data: {"editor-target": "hidden"} %>
-  <%= form.submit "Sauvegarder le brouillon" %>
-  <%= form.submit "Sauvegarder et publier", name: "publish_now", data: { confirm: "Êtes-vous sûr·e de vouloir publier cet article maintenant ?"} %>
+  <%= form.submit "Sauvegarder" %>
 <% end %>
