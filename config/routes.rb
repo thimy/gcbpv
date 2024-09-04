@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :payors
     resources :students
     resources :subscription_groups
-    resources :subscriptions
+    resources :subscriptions, only: [:show, :edit, :destroy]
     resources :teachers
     resources :slots, only: [:show, :edit, :destroy]
     resources :workshops

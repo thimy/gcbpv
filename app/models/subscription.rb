@@ -66,7 +66,7 @@ class Subscription < ApplicationRecord
   end
 
   def optional?
-    ["Demande d’information", "Annulé"].include?(subscription_group.status) if subscription_group.status.present?
+    ["Demande d’information", "Annulé"].include?(subscription_group.status) if subscription_group&.status.present?
   end
 
   def optional_course?(instrument)
