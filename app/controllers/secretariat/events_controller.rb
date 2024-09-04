@@ -133,7 +133,7 @@ class Secretariat::EventsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :location, :organizer, :website, :comment)
+      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :location, :organizer, :website, :comment, :city)
     end
     
 

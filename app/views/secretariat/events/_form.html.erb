@@ -1,43 +1,54 @@
-<%= form_for event, url: url, data: {controller: "editor", "editor-file-url-value": "/secretariat/evenements/upload_file"} do |form| %>
-  <p class="form-element">
+<%= form_for event, url: url, data: {controller: "editor address", "editor-file-url-value": "/secretariat/evenements/upload_file"} do |form| %>
+  <div class="form-element">
     <%= form.label :name, "Titre" %>
-    <%= form.text_field :name %>
-  </p>
+    <%= form.text_field :name, required: true %>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
     <%= form.label :start_date, "Date de début" %>
-    <%= form.date_field :start_date %>
-  </p>
+    <%= form.date_field :start_date, required: true %>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
     <%= form.label :end_date, "Date de fin" %>
     <%= form.date_field :end_date %>
-  </p>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
+    <%= form.label :location, "Lieu" %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="form-element">
+    <%= form.label :city, "Ville" %>
+    <%= form.text_field :city, "data-action": "address#searchCity focus->address#searchCity click@window->address#hideList", "data-address-target": "address", required: true %>
+    <%= render "website/autocomplete" %>
+  </div>
+
+  <div class="form-element">
     <%= form.label :organizer, "Organisateur" %>
     <%= form.text_field :organizer %>
-  </p>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
     <%= form.label :website, "Site" %>
     <%= form.text_field :website %>
-  </p>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
     <%= form.label :status, "Statut de l’événement" %>
     <%= form.select :status, options_for_select(Post.statuses.keys.to_a, selected: event.present? ? event.status : 0) %>
-  </p>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
     <%= form.label :content, "Description" %>
     <div id="event_content" data-editor-target="editor"></div>
-  </p>
+  </div>
 
-  <p class="form-element">
+  <div class="form-element">
     <%= form.label :comment, "Notes" %>
     <%= form.text_field :comment %>
-  </p>
+  </div>
 
   <%= form.hidden_field :content, id: "event_content_hidden", data: {"editor-target": "hidden"} %>
   <%= form.submit "Sauvegarder" %>

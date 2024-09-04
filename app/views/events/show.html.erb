@@ -10,6 +10,8 @@
         <dt>Lieu</dt>
         <dd><%= @event.location %></dd>
       <% end %>
+      <dt>Ville</dt>
+      <dd><%= @event.city %></dd>
       <% if @event.organizer.present? %>
         <dt>Organisateurs</dt>
         <dd><%= @event.organizer %></dd>
