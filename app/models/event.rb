@@ -3,6 +3,7 @@ class Event < ApplicationRecord
   has_one_attached :image
   has_many :posts
 
+  scope :ordered, -> { order(start_date: :asc) }
   scope :upcoming, -> {where(start_date: Date.today...)}
   scope :passed, -> {where(start_date: ...Date.today)}
 
