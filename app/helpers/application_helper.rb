@@ -35,6 +35,10 @@ module ApplicationHelper
     phone.phony_formatted(normalize: :FR) if phone.present?
   end
 
+  def format_time(time)
+    time.strftime("%H:%M") if time.present?
+  end
+
   def display_editor_content(content)
     return if content.blank?
     parsed_content = JSON.parse(content)

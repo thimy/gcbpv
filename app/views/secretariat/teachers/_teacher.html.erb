@@ -20,17 +20,19 @@
           <%= render Shared::Table::Component.new do |table| %>
             <% table.with_header do |header| %>
               <% header.with_column(name: "name") do %>Nom<% end %>
-              <% header.with_column(name: "time") do %>Heure du cours<% end %>
+              <% header.with_column(name: "start_time") do %>Heure de début<% end %>
+              <% header.with_column(name: "end_time") do %>Heure de fin<% end %>
               <% if @teacher.instruments.size > 1 %>
                 <% header.with_column(name: "discipline") do %>Discipline<% end %>
               <% end %>
               <% header.with_column(name: "phone") do %>Téléphone<% end %>
               <% header.with_column(name: "email") do %>Email<% end %>
             <% end %>
-            <% slot.courses.each do |course| %>
+            <% slot.courses.ordered.each do |course| %>
               <% table.with_row(link_url: teacher, class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
                 <% row.with_cell(name: "name") do %><%= link_to "#{course.subscription.student.name} ", secretariat_subscription_path(course.subscription) %><% end %>
-                <% row.with_cell(name: "time") do %><%= course.start_time %><% end %>
+                <% row.with_cell(name: "start_time") do %><%= format_time(course.start_time) %><% end %>
+                <% row.with_cell(name: "end_time") do %><%= format_time(course.end_time) %><% end %>
                 <% if @teacher.instruments.size > 1 %>
                   <% row.with_cell(name: "discipline") do %><%= course.instrument.name %><% end %>
                 <% end %>
@@ -39,7 +41,7 @@
               <% end %>
             <% end %>
             <% table.with_row(link_url: teacher) do |row| %>
-              <% row.with_cell(name: "full", colspan: @teacher.instruments.size > 1 ? 5 : 4) do %>
+              <% row.with_cell(name: "full", colspan: @teacher.instruments.size > 1 ? 6 : 5) do %>
                 <button class="button" data-emails-list-value="<%= get_emails(slot.courses) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
               <% end %>
             <% end %>

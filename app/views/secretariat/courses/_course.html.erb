@@ -32,10 +32,10 @@
       <%= collection_select :course, :slot_id, slots, :id, :name_without_teacher, { selected: course.slot&.id, required: true }, class: "slot-select" %>
     </td>
     <td class="cell-start_time">
-      <%= text_field :course, :start_time, value: course.start_time %>
+      <%= time_field :course, :start_time, value: course.start_time, include_seconds: false %>
     </td>
     <td class="cell-end_time">
-      <%= text_field :course, :end_time, value: course.end_time %>
+      <%= time_field :course, :end_time, value: course.end_time, include_seconds: false %>
     </td>
     <td class="cell-option">
       <%= check_box :course, :option, {checked: course.option == "Optionel"}, "Optionel", "Confirmé" %>
@@ -70,8 +70,8 @@
     <td class="cell-teachers"><%= link_to course.slot.teacher.name, secretariat_teacher_path(course.slot.teacher) %></td>
     <td class="cell-city"><%= course.slot.city.name %></td>
     <td class="cell-day_of_week"><%= course.slot.day_of_week %></td>
-    <td class="cell-start_time"><%= course.start_time %></td>
-    <td class="cell-end_time"><%= course.end_time %></td>
+    <td class="cell-start_time"><%= format_time(course.start_time) %></td>
+    <td class="cell-end_time"><%= format_time(course.end_time) %></td>
     <td class="cell-option"><%= course.option %></td>
     <td class="cell-comment"><%= simple_format(course.comment) %></td>
     <td class="cell-options">

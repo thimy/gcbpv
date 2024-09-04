@@ -104,7 +104,7 @@
     margin-block-start: auto;
   }
 
-  #infos:not([aria-hidden="true"]) {
+  #infos:not([hidden="true"]) {
     display: flex;
     flex-direction: column;
     gap: var(--size-3);

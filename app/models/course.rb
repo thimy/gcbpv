@@ -6,6 +6,8 @@ class Course < ApplicationRecord
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
+  scope :ordered, -> { order(start_time: :asc) }
+
   def name
     "#{instrument.name} - #{slot.name}"
   end

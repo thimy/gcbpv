@@ -7,7 +7,7 @@ export default class extends Controller {
   connect() {
     this.panelTargets.forEach((panel, index) => {
       if (index > 0) {
-        panel.setAttribute("aria-hidden", true)
+        panel.setAttribute("hidden", true)
       }
     })
     this.currentTab = this.tabTargets[0]
@@ -16,10 +16,10 @@ export default class extends Controller {
 
   click(event) {
     this.currentTab.setAttribute("data-button-type", "outline")
-    this.currentPanel.setAttribute("aria-hidden", true)
+    this.currentPanel.setAttribute("hidden", true)
     this.currentTab = event.currentTarget
     this.currentTab.removeAttribute("data-button-type")
     this.currentPanel = document.getElementById(this.currentTab.dataset.tabsPanelValue)
-    this.currentPanel.removeAttribute("aria-hidden")
+    this.currentPanel.removeAttribute("hidden")
   }
 }
