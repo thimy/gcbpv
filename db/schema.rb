@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_155416) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_04_090246) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_155416) do
     t.string "website"
     t.integer "status"
     t.text "comment"
+    t.jsonb "content"
   end
 
   create_table "instruments", force: :cascade do |t|

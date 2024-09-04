@@ -1,7 +1,11 @@
 class Event < ApplicationRecord
   include WithTime
+  include WithAttachment
+  include WithEditor
+
   has_one_attached :image
   has_many :posts
+  has_many :attachments, as: :attachable, dependent: :destroy
 
   scope :ordered, -> { order(start_date: :asc) }
   scope :upcoming, -> {where(start_date: Date.today...)}

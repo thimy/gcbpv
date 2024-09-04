@@ -1,0 +1,44 @@
+<%= form_for event, url: url, data: {controller: "editor", "editor-file-url-value": "/secretariat/evenements/upload_file"} do |form| %>
+  <p class="form-element">
+    <%= form.label :name, "Titre" %>
+    <%= form.text_field :name %>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :start_date, "Date de début" %>
+    <%= form.date_field :start_date %>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :end_date, "Date de fin" %>
+    <%= form.date_field :end_date %>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :organizer, "Organisateur" %>
+    <%= form.text_field :organizer %>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :website, "Site" %>
+    <%= form.text_field :website %>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :status, "Statut de l’événement" %>
+    <%= form.select :status, options_for_select(Post.statuses.keys.to_a, selected: event.present? ? event.status : 0) %>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :content, "Description" %>
+    <div id="event_content" data-editor-target="editor"></div>
+  </p>
+
+  <p class="form-element">
+    <%= form.label :comment, "Notes" %>
+    <%= form.text_field :comment %>
+  </p>
+
+  <%= form.hidden_field :content, id: "event_content_hidden", data: {"editor-target": "hidden"} %>
+  <%= form.submit "Sauvegarder" %>
+<% end %>

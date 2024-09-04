@@ -21,4 +21,8 @@ section.event-description {
   h2 {
     font-size: var(--font-size-6);
   }
+
+  aside ul {
+    padding-inline-start: var(--size-4);
+  }
 }

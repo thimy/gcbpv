@@ -1,8 +1,8 @@
 <% content_for(:page_class, "event-page ") %>
 <% content_for(:page_title, @event.name) %>
 
-<section class="event-description feature panel grid" data-grid="2-3">
-  <div class="left">
+<section class="event-description feature panel grid" data-grid="1-3">
+  <aside>
     <dl>
       <dt>Date</dt>
       <dd><%= @event.date_period %></dd>
@@ -18,10 +18,22 @@
         <dt>Site internet</dt>
         <dd><%= link_to @event.website, @event.website %></dd>
       <% end %>
+      <% if @posts.present? %>
+        <dt>Actualités de l’événement</dt>
+        <dd>
+          <ul>
+            <% @posts.each do |post| %>
+              <li><%= link_to post.title, post %></li>
+            <% end %>
+          </ul>
+        </dd>
+      <% end %>
     </dl>
-    <%= image_tag @event.image %>
-  </div>
+    <% unless @event.content.present? %>
+      <%= image_tag @event.image %>
+    <% end %>
+  </aside>
   <div class="description">
-    <%= simple_format(@event.description) %>
+    <%= @event.formatted_content || simple_format(@event.description) %>
   </div>
 </section>

@@ -1,0 +1,22 @@
+<div id="<%= dom_id event %>">
+  <dl>
+    <dt>Date :</dt>
+    <dd><%= event.date_period %></dd>
+    <dt>Lieu :</dt>
+    <dd><%= event.location %></dd>
+    <dt>Organisateur :</dt>
+    <dd><%= event.organizer %></dd>
+    <dt>Site :</dt>
+    <dd><%= event.website %></dd>
+    <dt>Status :</dt>
+    <dd><%= event.status %></dd>
+    <dt>Description :</dt>
+    <dd>
+      <div class="editor-content-wrapper">
+        <%= event.formatted_content %>
+      </div>
+    </dd>
+    <dt>Notes :</dt>
+    <dd><%= event.comment %></dd>
+  </dl>
+</div>

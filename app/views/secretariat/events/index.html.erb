@@ -1,0 +1,21 @@
+<div class="content-header">
+  <h1>Événements</h1>
+  <%= link_to "Créer un nouvel événement", new_secretariat_event_path %>
+</div>
+<p style="color: green"><%= notice %></p>
+<%= turbo_frame_tag "events", class: "flex-column gap-3" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "start_date") do %>Date<% end %>
+    <% end %>
+    <% @events.each do |event| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to event.name, secretariat_event_path(event), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "start_date") do %><%= event.date_period %><% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

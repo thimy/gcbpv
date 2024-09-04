@@ -7,6 +7,7 @@ class EventsController < BaseController
   end
 
   def show
+    @posts = Post.latest.where(event: @event)
   end
 
   private

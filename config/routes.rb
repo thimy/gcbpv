@@ -69,8 +69,10 @@ Rails.application.routes.draw do
   get "bogue", to: "website#bogue"
   namespace :secretariat do
     resources :categories, on: :collection
+    resources :events, path: "evenements" do
+      post :upload_file, on: :collection, as: "secretariat_events_upload_file"
+    end
     resources :posts, path: "actualites" do
-      post :upload_image, on: :collection, as: "secretariat_posts_upload_image"
       post :upload_file, on: :collection, as: "secretariat_posts_upload_file"
     end
     resources :teachers, path: "professeurs"

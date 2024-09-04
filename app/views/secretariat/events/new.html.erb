@@ -1,0 +1,9 @@
+<div id="new-event">
+  <div class="content-header">
+    <h1>Nouvel événement</h1>
+    <%= link_to "Retour aux événements", secretariat_events_path %>
+  </div>
+
+  <%= render "form", event: @event, url: secretariat_events_path %>
+
+</div>
