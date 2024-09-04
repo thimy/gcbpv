@@ -13,7 +13,7 @@ class SlotDashboard < Administrate::BaseDashboard
     day_of_week: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     slot_time: Field::String,
-    teacher: Field::BelongsTo,
+    teacher: Field::BelongsTo.with_options(scope: -> { Teacher.where(status: 0) }),
     comment: Field::Text,
     student_count: Field::Text.with_options(searchable: false),
     courses: SubscriptionListField,

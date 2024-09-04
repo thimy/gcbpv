@@ -9,7 +9,7 @@ class CourseDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    instrument: Field::BelongsTo,
+    instrument: Field::BelongsTo.with_options(scope: -> { Instrument.where(status: 0) }),
     slot: Field::BelongsTo,
     start_time: Field::String,
     end_time: Field::String,
