@@ -1,10 +1,12 @@
+<div class="content-header">
+  <h1><%= @payor.name %></h1>
+
+  <div>
+    <%= link_to "Éditer le payeur", edit_secretariat_payor_path(@payor) %> |
+    <%= link_to "Retour à la liste des foyers", secretariat_payors_path %>
+  </div>
+</div>
+
 <p style="color: green"><%= notice %></p>
 
-<%= render @student %>
-
-<div>
-  <%= link_to "Edit this student", edit_student_path(@student) %> |
-  <%= link_to "Back to students", students_path %>
-
-  <%= button_to "Destroy this student", @student, method: :delete %>
-</div>
+<%= render @payor %>

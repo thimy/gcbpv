@@ -1,3 +1,7 @@
-<%= turbo_frame_tag "payor" do %>
-  <%= render "form", payor: @payor %>
-<% end %>
+<h1>Créer un nouveau foyer</h1>
+
+<%= render "form", payor: @payor, url: secretariat_payors_path %>
+
+<div>
+  <%= link_to "Retour aux foyers", secretariat_payors_path %>
+</div>

@@ -53,7 +53,7 @@
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
-      <% header.with_column(name: "student", sortable: true) do %>Elève<% end %>
+      <% header.with_column(name: "student", sortable: true) do %>Élève<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
       <% header.with_column(name: "email") do %>Email<% end %>
       <% header.with_column(name: "course") do %>Cours<% end %>

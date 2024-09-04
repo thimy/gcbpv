@@ -1,48 +1,54 @@
-<div class="form-inputs" data-controller="address">
-  <div class="flex-row gap-6">
-    <div class="form-element">
-      <label for="payor_first_name">Prénom</label>
-      <%= text_field :payor, :first_name %>
-    </div>
+<%= form_for(payor, url: url, data: {controller: "address"}) do |form| %>
+  <% if payor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(payor.errors.count, "error") %> prohibited this payor from being saved:</h2>
 
-    <div class="form-element">
-      <label for="payor_last_name">Nom</label>
-      <%= text_field :payor, :last_name %>
+      <ul>
+        <% payor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
     </div>
-  </div>
+  <% end %>
 
-  <div class="flex-row gap-6">
-    <div class="form-element">
-      <label for="payor_phone">Téléphone</label>
-      <%= text_field :payor, :phone %>
-    </div>
-
-    <div class="form-element">
-      <label for="payor_email">Email</label>
-      <%= email_field :payor, :email %>
-    </div>
+  <div class="form-element">
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
   </div>
 
   <div class="form-element">
-    <label for="payor_address">Adresse</label>
-    <%= text_field :payor, :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="form-element">
+    <%= form.label :address, "Adresse" %>
+    <%= form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address", required: true %>
     <%= render "website/autocomplete" %>
   </div>
 
-  <div class="flex-row gap-6">
-    <div class="form-element">
-      <label for="payor_postcode">Code postal</label>
-      <%= text_field :payor, :postcode, "data-address-target": "postcode" %>
-    </div>
-
-    <div class="form-element">
-      <label for="payor_city">Ville</label>
-      <%= text_field :payor, :city, "data-address-target": "city" %>
-    </div>
+  <div class="form-element">
+    <%= form.label :postcode, "Code postal" %>
+    <%= form.text_field :postcode, "data-address-target": "postcode", required: true %>
   </div>
 
   <div class="form-element">
-    <label for="payor_comment">Notes</label>
-    <%= text_area :payor, :comment, rows: 2 %>
+    <%= form.label :city, "Ville" %>
+    <%= form.text_field :city, "data-address-target": "city", required: true %>
+    <%= render "website/autocomplete" %>
   </div>
-</div>
+
+  <div class="form-element">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="form-element">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="form-element">
+    <%= form.submit %>
+  </div>
+<% end %>
