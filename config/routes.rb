@@ -55,8 +55,6 @@ Rails.application.routes.draw do
     resources :cities
     resources :plans
     resources :seasons
-    resources :events
-    resources :posts
     resources :editions
     resources :categories
     resources :administrators

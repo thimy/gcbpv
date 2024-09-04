@@ -8,16 +8,6 @@
 section.event-description {
   gap: var(--size-8);
 
-  > * {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-8);
-  }
-
-  > .description {
-    gap: var(--size-4);
-  }
-
   h2 {
     font-size: var(--font-size-6);
   }

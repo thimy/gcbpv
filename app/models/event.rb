@@ -14,4 +14,11 @@ class Event < ApplicationRecord
   scope :past_week, -> { where(created_at: Time.zone.now.at_beginning_of_week...Time.zone.now.at_end_of_week) }
 
   enum :status, "Public" => 0, "Privé" => 1
+
+  def full_location
+    full_location = []
+    full_location << location if location.present?
+    full_location << city.upcase if city.present?
+    full_location.join(" – ")
+  end
 end

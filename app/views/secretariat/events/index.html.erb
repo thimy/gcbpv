@@ -8,11 +8,13 @@
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "city", sortable: true) do %>Nom<% end %>
       <% header.with_column(name: "start_date") do %>Date<% end %>
     <% end %>
     <% @events.each do |event| %>
       <% table.with_row do |row| %>
         <% row.with_cell(name: "name") do %><%= link_to event.name, secretariat_event_path(event), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "city") do %><%= event.full_location %><% end %>
         <% row.with_cell(name: "start_date") do %><%= event.date_period %><% end %>
       <% end %>
     <% end %>
