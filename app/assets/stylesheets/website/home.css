@@ -89,6 +89,16 @@
     }
   }
 
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-10);
+
+    .list-element {
+      margin: calc(var(--size-3) * -1);
+    }
+  }
+
   .latest-posts {
     grid-row: 1 / -1;
   }
