@@ -1,4 +1,4 @@
-class Secretariat::StudentsController < SecretariatController
+class StudentsController < SecretariatController
   before_action :set_student, only: %i[ show edit update destroy ]
 
   # GET /students or /students.json
