@@ -6,6 +6,7 @@
   border-radius: var(--radius-2);
   color: var(--button-text-color);
   cursor: pointer;
+  display: inline-flex;
   padding: var(--size-2) var(--size-3);
   text-align: center;
   transition: var(--transition-short);

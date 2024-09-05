@@ -4,6 +4,7 @@ class Course < ApplicationRecord
   has_many :teachers, through: :slots
   belongs_to :subscription
   delegate :student, to: :subscription
+  delegate :subscription_group, to: :subscription
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
@@ -11,5 +12,9 @@ class Course < ApplicationRecord
 
   def name
     "#{instrument.name} - #{slot.name}"
+  end
+
+  def price
+    subscription_group.season.plan.class_price
   end
 end

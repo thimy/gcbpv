@@ -54,6 +54,7 @@ class Secretariat::SubbedWorkshopsController < SecretariatController
     @subbed_workshop = SubbedWorkshop.new(subbed_workshop_params)
 
     respond_to do |format|
+  puts subbed_workshop_params
       if @subbed_workshop.save
         format.html { redirect_to secretariat_subbed_workshop_url(@subbed_workshop), notice: "L’atelier a bien été enregistré." }
         format.json { render :show, status: :created, location: @subbed_workshop }

@@ -14,6 +14,7 @@
       <% header.with_column(name: "email") do %>Email<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
       <% header.with_column(name: "status") do %>Status<% end %>
+      <% header.with_column(name: "amount") do %>Montant<% end %>
     <% end %>
     <% @payors.each do |payor| %>
       <% table.with_row(link_url: payor) do |row| %>
@@ -21,7 +22,8 @@
         <% row.with_cell(name: "students") do %><%= payor.current_subscription_group.present? ? payor.current_subscription_group.subscriptions.size : 0 %><% end %>
         <% row.with_cell(name: "email") do %><%= payor.email %><% end %>
         <% row.with_cell(name: "phone") do %><%= format_phone(payor.phone) %><% end %>
-        <% row.with_cell(name: "status") do %><%= payor.current_subscription_group&.status %><% end %>
+        <% row.with_cell(name: "status") do %><%= payor.current_subscription_group.payment_state %><% end %>
+        <% row.with_cell(name: "amount") do %><%= number_to_currency(payor.current_subscription_group.amount, unit: "€") if payor.current_subscription_group.present? %><% end %>
       <% end %>
     <% end %>
   <% end %>

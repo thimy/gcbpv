@@ -42,33 +42,41 @@
             <% header.with_column(name: "day_of_week") do %>Jour<% end %>
             <% header.with_column(name: "city") do %>Ville<% end %>
             <% header.with_column(name: "comment") do %>Notes<% end %>
+            <% header.with_column(name: "amount") do %>Prix<% end %>
           <% end %>
           <% subscription_group.subscriptions.each do |subscription| %>
-            <% subscription.subbed_kid_workshops.each do |subbed_kid_workshop| %>
+            <% subscription.subbed_kid_workshops.order(:option).each do |subbed_kid_workshop| %>
               <% table.with_row do |row| %>
                 <% row.with_cell(name: "type") do %><%= subbed_kid_workshop.kid_workshop.name %><% end %>
                 <% row.with_cell(name: "student") do %><%= subbed_kid_workshop.student.name %><% end %>
                 <% row.with_cell(name: "day_of_week") do %><%= subbed_kid_workshop.kid_workshop_slot.day_of_week %><% end %>
                 <% row.with_cell(name: "city") do %><%= subbed_kid_workshop.kid_workshop_slot.city.name %><% end %>
                 <% row.with_cell(name: "comment") do %><%= subbed_kid_workshop.comment %><% end %>
+                <% row.with_cell(name: "amount") do %>
+                  <%= subbed_kid_workshop.price.present? ? number_to_currency(subbed_kid_workshop.price, unit: "€") : "À définir" %>
+                <% end %>
               <% end %>
             <% end %>
-            <% subscription.courses.each do |course| %>
+            <% subscription.courses.order(:option).each do |course| %>
               <% table.with_row do |row| %>
                 <% row.with_cell(name: "type") do %><%= course.instrument.name %><% end %>
                 <% row.with_cell(name: "student") do %><%= course.student.name %><% end %>
                 <% row.with_cell(name: "day_of_week") do %><%= course.slot.day_of_week %><% end %>
                 <% row.with_cell(name: "city") do %><%= course.slot.city.name %><% end %>
                 <% row.with_cell(name: "comment") do %><%= course.comment %><% end %>
+                <% row.with_cell(name: "amount") do %><%= number_to_currency(course.price, unit: "€") %><% end %>
               <% end %>
             <% end %>
-            <% subscription.subbed_workshops.each do |subbed_workshop| %>
+            <% subscription.subbed_workshops.order(:option).each_with_index do |subbed_workshop, index| %>
               <% table.with_row do |row| %>
                 <% row.with_cell(name: "type") do %><%= subbed_workshop.workshop.name %><% end %>
                 <% row.with_cell(name: "student") do %><%= subbed_workshop.student.name %><% end %>
                 <% row.with_cell(name: "day_of_week") do %><%= subbed_workshop.workshop_slot.day_of_week %><% end %>
                 <% row.with_cell(name: "city") do %><%= subbed_workshop.workshop_slot.city.name %><% end %>
                 <% row.with_cell(name: "comment") do %><%= subbed_workshop.comment %><% end %>
+                <% row.with_cell(name: "amount") do %>
+                  <%= index < subscription.courses.size ? "---" : number_to_currency(subbed_workshop.price, unit: "€") %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -78,23 +86,29 @@
         <h2>Paiements</h2>
         <dl class="horizontal">
           <dt>Montant :</dt>
-          <dd><%= payor.current_subscription_group.amount %></dd>
+          <dd><%= subscription_group.amount %></dd>
           <dt>Agglo :</dt>
-          <dd><%= payor.current_subscription_group.majoration_class %></dd>
+          <dd><%= subscription_group.majoration_class %></dd>
+          <dt>Don :</dt>
+          <dd><%= subscription_group.donation %></dd>
         </dl>
-        <%= render Shared::Table::Component.new do |table| %>
-          <% table.with_header do |header| %>
-            <% header.with_column(name: "payment_method") do %>Type de paiement<% end %>
-            <% header.with_column(name: "amount") do %>Montant<% end %>
-            <% header.with_column(name: "comment") do %>Notes<% end %>
-          <% end %>
-          <% subscription_group.payments.each do |payment| %>
-            <% table.with_row do |row| %>
-              <% row.with_cell(name: "payment_method") do %><%= payment.payment_method %><% end %>
-              <% row.with_cell(name: "amount") do %><%= payment.amount %><% end %>
-              <% row.with_cell(name: "comment") do %><%= payment.comment %><% end %>
-            <% end %>
-          <% end %>
+        <%= form_with url: secretariat_payment_path, method: "put", data: {"subscription-group-id": subscription_group.id, "item-type": "payment"} do |form| %>
+          <table class="payment-list item-list">
+            <thead>
+              <tr>
+                <th class="cell-payment_method">Type de paiement</th>
+                <th class="cell-amount">Montant</th>
+                <th class="cell-comment">Notes</th>
+                <th class="cell-options">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% subscription_group.payments.each do |payment| %>
+                <%= render "secretariat/payments/payment", payment: payment %>
+              <% end %>
+              <%= render "secretariat/payments/add" %>
+            </tbody>
+          </table>
         <% end %>
       </div>
     <% end %>

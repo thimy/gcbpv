@@ -85,6 +85,7 @@ Rails.application.routes.draw do
     resources :courses, path: "cours"
     resources :subbed_workshops
     resources :subbed_kid_workshops
+    resources :payments
     resources :payors, path: "payeurs"
     resources :instruments, path: "disciplines"
     resources :emails do

@@ -17,7 +17,7 @@
     <td class="cell-teachers">
       <%= collection_select :course, :teacher_id, teachers, :id, :name,
         {
-          selected: course.slot&.teacher.id,
+          selected: course.slot&.teacher&.id,
           required: true
         }, {
           class: "teacher-select",

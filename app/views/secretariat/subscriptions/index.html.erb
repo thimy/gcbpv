@@ -23,11 +23,11 @@
     </div>
     <div class="form-element">
       <%= label_tag :status, "Inclure seulement le statut" %>
-      <%= select_tag :status, options_for_select(Subscription.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+      <%= select_tag :status, options_for_select(SubscriptionGroup.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
     </div>
     <div class="form-element">
       <%= label_tag :exclude_status, "Exclure le statut" %>
-      <%= select_tag :exclude_status, options_for_select(Subscription.statuses, params[:exclude_status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+      <%= select_tag :exclude_status, options_for_select(SubscriptionGroup.statuses, params[:exclude_status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
     </div>
   </div>
   <div class="form-group">
@@ -68,7 +68,9 @@
         <% row.with_cell(name: "course") do %>
           <%= [subscription.kid_workshop_list, subscription.course_list, subscription.pathway_list].reject!(&:empty?).join(", ") %><% end %>
         <% row.with_cell(name: "workshop") do %><%= subscription.workshop_list %><% end %>
-        <% row.with_cell(name: "status") do %><%= subscription.subscription_group.status %><% end %>
+        <% row.with_cell(name: "status") do %>
+          <%= subscription.subscription_group.payment_state %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

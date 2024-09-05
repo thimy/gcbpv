@@ -16,13 +16,11 @@ class Subscription < ApplicationRecord
   enum status: {
     "Demande d’information": 0,
     "Inscrit – à régler": 1,
-    "Inscrit – réglé": 2,
-    "Inscrit – À rembourser": 3,
-    "Annulé": 4
+    "Annulé": 2
   }
 
   scope :active, -> {includes(:subscription_group).where(subscription_group: { season: Config.first.season })}
-  scope :registered, ->{active.where(subscription_group: { status: [1, 2, 3] })}
+  scope :registered, ->{active.where(subscription_group: { status: 1 })}
   scope :inquired, ->{active.where.not(id: registered)}
   scope :has_optional_workshop, ->(workshop) { where(subbed_workshops.optional.has_workshop(workshop)) }
   scope :has_confirmed_workshop, ->(workshop) { where(subbed_workshops.confirme.has_workshop(workshop)) }

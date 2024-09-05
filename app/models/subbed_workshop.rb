@@ -3,6 +3,7 @@ class SubbedWorkshop < ApplicationRecord
   belongs_to :subscription
   delegate :workshop, to: :workshop_slot
   delegate :student, to: :subscription
+  delegate :subscription_group, to: :subscription
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
@@ -23,5 +24,13 @@ class SubbedWorkshop < ApplicationRecord
 
   def is_option?
     option == "Optionel" || subscription.subscription_group.status == 0
+  end
+
+  def price
+    if workshop.workshop_type == "Spécial"
+      subscription_group.season.plan.special_workshop_price
+    else
+      subscription_group.season.plan.workshop_price
+    end
   end
 end

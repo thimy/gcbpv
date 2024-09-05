@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_04_162117) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_05_162115) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -132,8 +132,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_162117) do
   create_table "emails", force: :cascade do |t|
     t.string "subject"
     t.string "recipients"
-    t.jsonb "content"
-    t.datetime "sent_at"
+    t.text "body"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -274,6 +274,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_162117) do
     t.integer "membership_price"
     t.decimal "special_workshop_price"
     t.text "comment"
+    t.decimal "parent_kid_price"
   end
 
   create_table "posts", force: :cascade do |t|

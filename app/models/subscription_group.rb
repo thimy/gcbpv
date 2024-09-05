@@ -9,9 +9,8 @@ class SubscriptionGroup < ApplicationRecord
 
   enum status: {
     "Demande d’information": 0,
-    "Inscrit – à régler": 1,
-    "Inscrit – réglé": 2,
-    "À rembourser": 3
+    "Inscrit": 1,
+    "Annulé": 2
   }
 
   enum majoration_class: {
@@ -21,11 +20,31 @@ class SubscriptionGroup < ApplicationRecord
   }
 
   scope :unconfirmed, -> { where(status: 0) }
-  scope :confirmed, -> { where(status: [nil, 1, 2, 3]) }
+  scope :confirmed, -> { where(status: [nil, 1]) }
 
   def student_list
     subscriptions.map {|subscription|
       subscription.student.name
   }.join(", ")
+  end
+
+  def total_payment
+    payments.pluck(:amount).reduce(:+)
+  end
+
+  def payment_state
+    return status if status != "Inscrit"
+      
+    state = if total_payment.nil?
+      "À régler"
+    elsif total_payment < amount
+      "Règlement partiel"
+    elsif total_payment == amount
+      "Réglé"
+    else
+      "Trop perçu"
+    end
+
+    "#{status} – #{state}"
   end
 end
