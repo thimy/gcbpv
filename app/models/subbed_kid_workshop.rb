@@ -1,6 +1,8 @@
 class SubbedKidWorkshop < ApplicationRecord
   belongs_to :kid_workshop_slot
   belongs_to :subscription
+  delegate :kid_workshop, to: :kid_workshop_slot
+  delegate :student, to: :subscription
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 

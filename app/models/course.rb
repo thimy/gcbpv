@@ -3,6 +3,7 @@ class Course < ApplicationRecord
   belongs_to :slot
   has_many :teachers, through: :slots
   belongs_to :subscription
+  delegate :student, to: :subscription
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
