@@ -28,7 +28,8 @@ export default class extends Controller {
           class: Header,
           config: {
             placeholder: "Insérez un titre",
-            levels: [2, 3, 4]
+            levels: [2, 3, 4],
+            defaultLevel: 2
           }
         },
         table: {

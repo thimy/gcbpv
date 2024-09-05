@@ -7,7 +7,7 @@ class Event < ApplicationRecord
   has_many :posts
   has_many :attachments, as: :attachable, dependent: :destroy
 
-  scope :ordered, -> { order(start_date: :asc) }
+  scope :ordered, -> { order(start_date: :desc) }
   scope :upcoming, -> {where(start_date: Date.today...)}
   scope :passed, -> {where(start_date: ...Date.today)}
 
