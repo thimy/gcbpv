@@ -28,7 +28,7 @@ module ApplicationHelper
   end
 
   def get_emails(list)
-    list.map { |element| element.subscription.email }.join(", ")
+    list.map { |element| element.subscription.email }.reject {|email| email.nil?}.join(", ")
   end
 
   def format_phone(phone)

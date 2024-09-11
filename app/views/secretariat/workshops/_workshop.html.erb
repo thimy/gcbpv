@@ -20,6 +20,11 @@
               <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
             <% end %>
           <% end %>
+          <% table.with_row do |row| %>
+            <% row.with_cell(name: "full", colspan: 3) do %>
+              <button class="button" data-emails-list-value="<%= get_emails(slot.subbed_workshops) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+            <% end %>
+          <% end %>
           <% table.with_empty_state_with_header do %>
             <td class="empty-state" colspan="3">
               Pas d’inscription
