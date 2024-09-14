@@ -1,0 +1,19 @@
+<% content_for(:page_class, "bogue ") %>
+<% content_for(:page_title, "Temps forts") %>
+
+<section id="highlights">
+  <% @events.each do |event| %>
+    <%= link_to programmation_event_bogue_path(bogue_slug: @bogue.slug, event_slug: event.slug), class: "card", "data-card-type": "image" do %>
+      <div class="image">
+        <%= image_tag event.cover.present? ? event.cover : "icons/singing.svg" %>
+      </div>
+      <div class="card-info">
+        <h3><%= event.name %></h3>
+        <address><%= event.full_location %></address>
+        <time>
+          <%= event.date_period %>
+        </time>
+      </div>
+    <% end %>
+  <% end %>
+</section>

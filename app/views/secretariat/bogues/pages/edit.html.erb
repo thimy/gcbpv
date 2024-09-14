@@ -1,0 +1,13 @@
+<div class="content-header">
+  <h1>Éditer la page</h1>
+  <div>
+    <%= link_to "Retour aux pages", secretariat_bogue_path(@bogue.id) %> |
+    <%= link_to "Supprimer la page", secretariat_bogue_page_path(bogue_id: @bogue.id, id: @page.id), 
+      data: {
+        turbo_method: :delete,
+        turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette page ?"
+      } %>
+  </div>
+</div>
+
+<%= render "form", page: @page, url: edit_secretariat_bogue_page_path %>

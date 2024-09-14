@@ -1,0 +1,9 @@
+<div id="new-page">
+  <div class="content-header">
+    <h1>Nouvelle page</h1>
+    <%= link_to "Retour aux pages", secretariat_bogue_path(@bogue.id) %>
+  </div>
+
+  <%= render "secretariat/bogues/pages/form", page: @page, url: secretariat_bogue_pages_path %>
+
+</div>

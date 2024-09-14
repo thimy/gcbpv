@@ -1,0 +1,25 @@
+<% content_for(:page_class, "bogue ") %>
+<% content_for(:page_title, "Concours") %>
+
+<section id="contests">
+  <% @contests.each do |event| %>
+    <event-card>
+      <%= link_to programmation_event_bogue_path(bogue_slug: @bogue.slug, event_slug: event.slug), class: "list-element event-card" do %>
+        <time>
+          <%= event.date_period %>
+        </time>
+        <div class="event-info">
+          <h3><%= event.name %></h3>
+          <address>
+            <%= event.full_location %>
+          </address>
+        </div>
+        <div class="tag-list">
+          <span class="tag">
+            <span><%= event.event_type %></span>
+          </span>
+        </div>
+      <% end %>
+    </event-card>
+  <% end %>
+</section>

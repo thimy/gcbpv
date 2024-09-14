@@ -1,66 +1,62 @@
-class Secretariat::Bogues::EventsController < SecretariatController
+class Secretariat::Bogues::PagesController < SecretariatController
   include WithTableConcern
 
   before_action :query
-  before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_page, only: %i[ show edit update destroy ]
 
   SORT_ATTRIBUTES = ["created_at", "start_date"]
 
-  # GET /events/1 or /events/1.json
+  # GET /pages/1 or /pages/1.json
   def show
   end
 
-  # GET /events/new
+  # GET /pages/new
   def new
     @bogue = Bogue.find(params[:bogue_id])
-    @event = Event.new
-    @events = @bogue.events
+    @page = Page.new
   end
 
-  # GET /events/1/edit
+  # GET /pages/1/edit
   def edit
-    @events = @bogue.events
   end
 
-  # POST /events or /events.json
+  # POST /pages or /pages.json
   def create
     @bogue = Bogue.find(params[:bogue_id])
-    @event = Event.new(event_params)
+    @page = Page.new(page_params)
 
     respond_to do |format|
-      if @event.save
-        @event.cover.attach(params[:event][:cover]) if params[:event][:cover].present?
-        @event.save_attachments
-        format.html { redirect_to secretariat_bogue_path(@bogue), notice: "L’événement a bien été enregistré." }
-        format.json { render :show, status: :created, location: @event }
+      if @page.save
+        @page.save_attachments
+        format.html { redirect_to secretariat_bogue_path(@bogue), notice: "La page a bien été enregistrée." }
+        format.json { render :show, status: :created, location: @page }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /events/1 or /events/1.json
+  # PATCH/PUT /pages/1 or /pages/1.json
   def update
     respond_to do |format|
-      if @event.update(event_params)
-        @event.cover.attach(params[:event][:cover]) if params[:event][:cover].present?
-        @event.save_attachments
-        format.html { redirect_to secretariat_bogue_path(@bogue), notice: "L’événement a bien été modifié." }
-        format.json { render :show, status: :ok, location: @event }
+      if @page.update(page_params)
+        @page.save_attachments
+        format.html { redirect_to secretariat_bogue_path(@bogue), notice: "La page a bien été modifiée." }
+        format.json { render :show, status: :ok, location: @page }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.json { render json: @page.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /events/1 or /events/1.json
+  # DELETE /pages/1 or /pages/1.json
   def destroy
-    @event.destroy!
+    @page.destroy!
 
     respond_to do |format|
-      format.html { redirect_to secretariat_bogue_url(@bogue), notice: "L’événement a bien été supprimé." }
+      format.html { redirect_to secretariat_bogue_url(@bogue), notice: "La page a bien été supprimée." }
       format.json { head :no_content }
     end
   end
@@ -96,12 +92,12 @@ class Secretariat::Bogues::EventsController < SecretariatController
     render json: { success: 0, error: e.message }
   end
 
-  def send_event
-    @event = Event.find(params[:event_id])
-    SubscriptionMailer.custom_mail(@event).deliver_later
+  def send_page
+    @page = Page.find(params[:page_id])
+    SubscriptionMailer.custom_mail(@page).deliver_later
 
     respond_to do |format|
-      format.html { redirect_to secretariat_event_url(@event) }
+      format.html { redirect_to secretariat_page_url(@page) }
     end
   end
 
@@ -112,20 +108,20 @@ class Secretariat::Bogues::EventsController < SecretariatController
     end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-      @bogue = Bogue.find(params[:bogue_id]) || @event.bogue
+    def set_page
+      @page = Page.find(params[:id])
+      @bogue = Bogue.find(params[:bogue_id]) || @page.bogue
     end
 
     # Only allow a list of trusted parameters through.
-    def event_params
-      params[:event][:slug] = "#{params[:event][:name].parameterize}"
-      params[:event][:bogue_id] = params[:bogue_id]
-      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :slug, :event_type, :location, :city, :comment, :bogue_id, :highlight, :parent_event_id, :description, :cover)
+    def page_params
+      params[:page][:slug] = "#{params[:page][:name].parameterize}"
+      params[:page][:bogue_id] = params[:bogue_id]
+      params.require(:page).permit(:name, :content, :status, :file, :start_date, :end_date, :slug, :page_type, :location, :city, :comment, :bogue_id, :highlight)
     end
     
     def set_records
-      @pagy, @events = paginate_records(Event.ordered)
+      @pagy, @pages = paginate_records(Page.ordered)
     end
     
     def default_sort_attribute

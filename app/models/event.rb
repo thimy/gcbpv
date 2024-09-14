@@ -3,10 +3,11 @@ class Event < ApplicationRecord
   include WithAttachment
   include WithEditor
 
-  has_one_attached :image
+  has_one_attached :cover
   has_many :posts
   has_many :attachments, as: :attachable, dependent: :destroy
   belongs_to :bogue, optional: true
+  belongs_to :parent_event, class_name: "Event", optional: true
 
   scope :ordered, -> { order(start_date: :desc) }
   scope :upcoming, -> {where(start_date: Date.today...)}
@@ -32,5 +33,9 @@ class Event < ApplicationRecord
     full_location << location if location.present?
     full_location << city.upcase if city.present?
     full_location.join(" – ")
+  end
+
+  def events
+    Event.where(parent_event_id: self.id)
   end
 end

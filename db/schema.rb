@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_08_120619) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_14_141705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,21 +63,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_120619) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["attachable_type", "attachable_id"], name: "index_attachments_on_attachable"
-  end
-
-  create_table "bogue_pages", force: :cascade do |t|
-    t.string "name"
-    t.jsonb "content"
-    t.string "location"
-    t.string "city"
-    t.datetime "start_date"
-    t.datetime "end_date"
-    t.integer "status"
-    t.string "type"
-    t.string "slug"
-    t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "bogues", force: :cascade do |t|
@@ -184,7 +169,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_120619) do
     t.integer "event_type"
     t.string "slug"
     t.boolean "highlight"
+    t.bigint "parent_event_id"
+    t.string "cover"
     t.index ["bogue_id"], name: "index_events_on_bogue_id"
+    t.index ["parent_event_id"], name: "index_events_on_parent_event_id"
   end
 
   create_table "instruments", force: :cascade do |t|
@@ -230,6 +218,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_08_120619) do
     t.datetime "updated_at", null: false
     t.decimal "price"
     t.text "comment"
+  end
+
+  create_table "pages", force: :cascade do |t|
+    t.string "name"
+    t.jsonb "content"
+    t.integer "status"
+    t.string "type"
+    t.string "slug"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "end_date"
+    t.datetime "start_date"
+    t.string "city"
+    t.string "location"
+    t.bigint "bogue_id"
+    t.index ["bogue_id"], name: "index_pages_on_bogue_id"
   end
 
   create_table "pathway_slot_teachers", force: :cascade do |t|

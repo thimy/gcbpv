@@ -6,6 +6,7 @@ class Bogue < ApplicationRecord
   has_many :posts
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :events
+  has_many :pages
 
   enum :status, "Public" => 0, "Privé" => 1
   scope :active, -> {where(status: 0)}

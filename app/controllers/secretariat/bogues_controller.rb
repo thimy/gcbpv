@@ -14,6 +14,7 @@ class Secretariat::BoguesController < SecretariatController
   # GET /events/1 or /events/1.json
   def show
     @events = Event.where(bogue: @bogue)
+    @pages = Page.where(bogue: @bogue)
   end
 
   # GET /events/new

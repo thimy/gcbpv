@@ -94,6 +94,7 @@ Rails.application.routes.draw do
 
     resources :bogues, on: :collection do
       resources :events, controller: "bogues/events", path: "evenements"
+      resources :pages, controller: "bogues/pages"
     end
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "secretariat", to: "secretariat#index", as: "secretariat_root"
@@ -114,8 +115,11 @@ Rails.application.routes.draw do
   resources :payors
   resources :instruments
   resource "bogue/:bogue_slug", controller: :bogues, only: [:show], as: "bogue" do
+    get "temps-fort", to: "highlights", as: "highlights"
     get "programmation", to: "schedule"
     get "programmation/:event_slug", to: "event", as: "programmation_event"
+    get "concours", to: "contests", as: "contests"
+    get ":page_slug", to: "page", as: "page"
   end
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
