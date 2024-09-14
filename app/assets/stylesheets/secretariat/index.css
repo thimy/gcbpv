@@ -43,7 +43,7 @@
     td {
       vertical-align: middle;
     }
-    
+
     .add-item {
       text-align: end;
     }
@@ -55,7 +55,7 @@
     gap: var(--size-4);
     margin-block-start: var(--size-4);
 
-    &[aria-hidden=true] {
+    &[hidden=true] {
       display: none;
     }
   }

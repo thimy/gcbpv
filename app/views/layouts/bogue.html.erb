@@ -1,0 +1,16 @@
+<% content_for(:page_class, "ecole-layout") %>
+
+<% content_for :content do %>
+  <%= render Website::Header::Component.new %>
+  <main class="content">
+    <%= render Website::Hero::Component.new(title: content_for(:page_title), subtitle: content_for(:page_description)) %>
+    <div class="feature ecole-content">
+      <%= render Website::Bogue::Sidebar::Component.new %>
+      <div class="flex-column gap-8">
+        <%= yield %>
+      </div>
+    </div>
+  </main>
+  <%= render Website::Footer::Component.new %>
+<% end %>
+<%= render template: "layouts/application" %>

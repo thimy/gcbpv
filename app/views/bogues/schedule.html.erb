@@ -1,0 +1,45 @@
+<% content_for(:page_class, "bogue ") %>
+<% content_for(:page_title, "La Bogue d’Or") %>
+<% content_for(:page_description, "Fête de la culture traditionnelle de Haute-Bretagne") %>
+
+<%= form_for programmation_bogue_path,
+    method: :get,
+    html: {
+      data: {
+        turbo_frame: "events"
+      },
+      class: "list-form"
+    } do |f| %>
+  <div class="form-group">
+    <div class="form-element">
+      <%= label_tag :event_type, "Type d’événement" %>
+      <%= select_tag :event_type, options_for_select(Event.event_types, params[:event_type].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+    <div class="form-element">
+      <%= label_tag :Ville, "Discipline" %>
+      <%= select_tag "Ville", options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+  </div>
+<% end %>
+<section id="events">
+  <% @events.each do |event| %>
+    <event-card>
+      <%= link_to programmation_event_bogue_path(bogue_slug: @bogue.slug, event_slug: event.slug), class: "list-element event-card" do %>
+        <time>
+          <%= event.date_period %>
+        </time>
+        <div class="event-info">
+          <h3><%= event.name %></h3>
+          <address>
+            <%= event.full_location %>
+          </address>
+        </div>
+        <div class="tag-list">
+          <span class="tag">
+            <span><%= event.event_type %></span>
+          </span>
+        </div>
+      <% end %>
+    </event-card>
+  <% end %>
+</section>

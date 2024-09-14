@@ -35,6 +35,10 @@ module ApplicationHelper
     phone.phony_formatted(normalize: :FR) if phone.present?
   end
 
+  def format_date(date)
+    date.strftime("%d/%m/%Y") if date.present?
+  end
+
   def format_time(time)
     time.strftime("%H:%M") if time.present?
   end

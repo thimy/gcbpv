@@ -31,4 +31,8 @@ event-card {
       }
     }
   }
+
+  .event-info {
+    flex-grow: 1;
+  }
 }
