@@ -93,6 +93,7 @@ Rails.application.routes.draw do
     end
 
     resources :bogues, on: :collection do
+      post :upload_file, on: :collection, as: "upload_file"
       resources :events, controller: "bogues/events", path: "evenements"
       resources :pages, controller: "bogues/pages"
     end
