@@ -41,6 +41,11 @@
   </div>
 
   <div class="form-element">
+    <%= form.label :bogue_id, "Lié à la Bogue" %>
+    <%= form.collection_select :bogue_id, @bogues, :id, :name, { selected: @event&.bogue_id || "", include_blank: "---" } %>
+  </div>
+
+  <div class="form-element">
     <%= form.label :content, "Description" %>
     <div id="event_content" data-editor-target="editor"></div>
   </div>

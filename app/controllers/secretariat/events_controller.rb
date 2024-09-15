@@ -18,10 +18,12 @@ class Secretariat::EventsController < SecretariatController
   # GET /events/new
   def new
     @event = Event.new
+    @bogues = Bogue.all
   end
 
   # GET /events/1/edit
   def edit
+    @bogues = Bogue.all
   end
 
   # POST /events or /events.json
@@ -133,7 +135,7 @@ class Secretariat::EventsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def event_params
-      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :location, :organizer, :website, :comment, :city)
+      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :location, :organizer, :website, :comment, :city, :bogue_id)
     end
     
 
