@@ -32,3 +32,12 @@
     </div>
   </p>
 </div>
+
+<%= link_to "Supprimer cet article",
+  secretariat_post_path(post),
+  class: "button page-end",
+  data: {
+    "button-status": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet article ?"
+  } %>

@@ -114,3 +114,12 @@
     <% end %>
   </section>
 </div>
+
+<%= link_to "Supprimer ce foyer",
+  secretariat_payor_path(payor),
+  class: "button page-end",
+  data: {
+    "button-status": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce foyer ?"
+  } %>
