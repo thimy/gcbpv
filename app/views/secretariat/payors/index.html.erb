@@ -5,6 +5,32 @@
 
 <p style="color: green"><%= notice %></p>
 
+<%= form_for secretariat_payors_path,
+    method: :get,
+    html: {
+      data: {
+        turbo_frame: "payors"
+      },
+      class: "list-form"
+    } do |f| %>
+  <div class="form-group">
+    <div class="form-element">
+      <%= label_tag :q, "Noms" %>
+      <div class="search-input">
+        <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
+        <%= f.button do %>
+          <%= inline_svg_tag "icons/search.svg" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-element">
+      <%= label_tag :status, "Inclure seulement le statut" %>
+      <%= select_tag :status, options_for_select(SubscriptionGroup.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+  </div>
+<% end %>
+<button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+
 <%= turbo_frame_tag "payors", class: "flex-column gap-3" do %>
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new do |table| %>

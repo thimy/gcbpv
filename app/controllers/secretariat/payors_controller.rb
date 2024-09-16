@@ -62,6 +62,10 @@ class Secretariat::PayorsController < SecretariatController
   end
 
   private
+    def query
+      params[:q]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_payor
       @payor = Payor.find(params[:id])
@@ -73,7 +77,20 @@ class Secretariat::PayorsController < SecretariatController
     end
 
     def set_records
-      @pagy, @payors = paginate_records(Payor.all)
+      @subscription_groups = SubscriptionGroup.where(status: params[:status]) if params[:status].present?
+
+      if !@subscription_groups.nil?
+        @filtered_payors = Payor.includes(:subscription_groups).where(subscription_groups: @subscription_groups)
+      else
+        @filtered_payors = Payor.includes(:subscription_groups).where(subscription_groups: { season: @season })
+      end
+
+      if query.present?
+        @filtered_payors = @filtered_payors.where("last_name ILIKE ?", "%#{query}%").or(@filtered_payors.where("first_name ILIKE ?", "%#{query}%"))
+      end
+
+      @selected_emails = @filtered_payors.map {|payor| payor.email}.uniq.join("\n")
+      @pagy, @payors = paginate_records(@filtered_payors)
     end
 
     def default_sort_attribute

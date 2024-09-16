@@ -116,7 +116,7 @@ class Secretariat::TeachersController < SecretariatController
       end
 
       if query.present?
-        @filtered_teachers = @filtered_teachers.where("last_name ILIKE ?", "%#{query}%").or("first_name ILIKE ?", "%#{query}%")
+        @filtered_teachers = @filtered_teachers.where("last_name ILIKE ?", "%#{query}%").or(@filtered_teachers.where("first_name ILIKE ?", "%#{query}%"))
       end
       @selected_emails = @filtered_teachers.map {|teacher| teacher.email}.uniq.join(", ")
       @pagy, @teachers = paginate_records(@filtered_teachers)
