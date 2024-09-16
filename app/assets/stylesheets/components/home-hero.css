@@ -12,31 +12,31 @@ hero-container.home-hero {
     gap: var(--size-6);
     margin: 0;
     padding: 0;
-  
-    > .carousel {
-      border-radius: var(--radius-3);
-      grid-row: span 3;
-      height: 50vh;
-      overflow: hidden;
-      /* transition: var(--transition-short); */
-
-      .container {
-        display: flex;
-        position: relative;
-        width: 500%;
-        left: 0;
-        text-align: left;
-        animation: 30s carousel infinite;
-      }
-
-      img {
-        object-fit: cover;
-        object-position: center;
-        width: 20%;
-      }
-    }
   }
   
+  .carousel {
+    border-radius: var(--radius-3);
+    grid-row: span 3;
+    height: 50vh;
+    overflow: hidden;
+    /* transition: var(--transition-short); */
+
+    .container {
+      display: flex;
+      position: relative;
+      width: 500%;
+      left: 0;
+      text-align: left;
+      animation: 30s carousel infinite;
+    }
+
+    img {
+      object-fit: cover;
+      object-position: center;
+      width: 20%;
+    }
+  }
+
   .title {
     display: flex;
     flex-direction: column;
@@ -86,7 +86,7 @@ hero-container.home-hero {
     }
 
     .carousel {
-      height: 15rem;
+      height: auto;
     }
   }
 }

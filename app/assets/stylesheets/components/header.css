@@ -101,14 +101,17 @@ body > header {
         overflow-y: scroll;
         padding: var(--size-8) var(--size-4);
         position: fixed;
-        right: calc(100% + var(--size-4));
-        top: calc(var(--size-4) * -1);
+        right: 100%;
+        top: 0;
         transition: transform ease-out 0.4s;
-        width: calc(100% - var(--size-8));
 
         &:is([data-menu-active="true"] *) {
           box-shadow: var(--dark-elevation-high);
           transform: translateX(100%);
+        }
+
+        a {
+          margin: 0;
         }
 
         .dropdown {
@@ -121,6 +124,7 @@ body > header {
             display: flex;
             margin-inline-start: var(--size-3);
             max-width: 100%;
+            min-width: initial;
             position: relative;
             top: initial;
 

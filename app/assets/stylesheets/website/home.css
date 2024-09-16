@@ -108,7 +108,15 @@
   }
 
   @container (max-width: 1000px) {
+    main {
+      gap: var(--size-12) 0;
+    }
+
     .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .now {
       grid-template-columns: 1fr;
     }
   }

@@ -2,7 +2,7 @@
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new(banner: @banner) %>
-  <main class="full content">
+  <main class="content">
     <%= render Website::Home::Hero::Component.new(title: content_for(:page_title)) %>
     <%= yield %>
   </main>

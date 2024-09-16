@@ -15,6 +15,11 @@ body {
   display: flex;
   flex-direction: column;
   position: relative;
+
+  &:has([data-menu-active="true"]) {
+    height: 100dvh;
+    overflow: hidden;
+  }
 }
 
 main {
@@ -32,5 +37,37 @@ main {
     max-height: 600px;
     max-width: 100%;
     width: auto;
+  }
+}
+
+.dual-content {
+  background: var(--white);
+  border-radius: var(--radius-3);
+  display: grid;
+  gap: var(--size-3) var(--size-8);
+  grid-template-columns: 250px auto;
+  padding: var(--size-6);
+
+  > :not(aside) {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 1000px) {
+  main {
+    column-gap: 0;
+  }
+
+  .dual-content {
+    display: flex;
+    flex-direction: column;
+
+    .content-sidebar {
+      border-bottom: var(--border-default);
+      padding-block-end: var(--size-5);
+      position: relative;
+      top: 0;
+      width: 100%;
+    }
   }
 }

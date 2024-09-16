@@ -6,7 +6,7 @@
     <%= link_to "Groupement Culturel Breton des Pays de Vilaine", "/", class: "home-button" %>
     <%= render Shared::MenuButton::Component.new %>
     <div class="links">
-      <button data-action="menu-toggle#toggle" data-button-type="naked"><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button>
+      <button class="button" data-action="menu-toggle#toggle" data-button-type="naked"><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button>
       <%= link_to "L’association", association_path %>
       <%= link_to "La Bogue d’Or", "/bogue/#{Bogue.active.ordered.first.slug}" %>
       <div class="dropdown">

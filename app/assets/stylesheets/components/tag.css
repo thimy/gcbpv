@@ -48,6 +48,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--size-2);
+
+  &:empty {
+    display: none;
+  }
 }
 
 .dual-tag {
