@@ -2,7 +2,8 @@
 <% content_for(:page_title, @event.name) %>
 <% content_for(:page_description, @event.description) %>
 
-<section>
+<section class="formatted-content">
+  <%= image_tag @event.cover if @event.cover.present? %>
   <%= @event.formatted_content %>
   <% if @event.events.present? %>
     <h2>Événements connexes</h2>

@@ -25,3 +25,12 @@ main {
   gap: var(--space-xl);
   padding-block: var(--space-xl);
 }
+
+.formatted-content {
+  img {
+    margin: auto;
+    max-height: 600px;
+    max-width: 100%;
+    width: auto;
+  }
+}
