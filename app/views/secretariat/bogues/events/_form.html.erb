@@ -11,12 +11,22 @@
 
   <div class="form-element">
     <%= form.label :start_date, "Date de début" %>
-    <%= form.datetime_field :start_date, required: true %>
+    <%= form.date_field :start_date, required: true %>
   </div>
 
   <div class="form-element">
     <%= form.label :end_date, "Date de fin" %>
     <%= form.date_field :end_date %>
+  </div>
+
+  <div class="form-element">
+    <%= form.label :start_time, "Heure de début" %>
+    <%= form.time_field :start_time %>
+  </div>
+
+  <div class="form-element">
+    <%= form.label :end_time, "Heure de fin" %>
+    <%= form.time_field :end_time %>
   </div>
 
   <div class="form-element">

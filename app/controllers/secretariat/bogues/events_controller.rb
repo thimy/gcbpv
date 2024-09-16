@@ -121,7 +121,7 @@ class Secretariat::Bogues::EventsController < SecretariatController
     def event_params
       params[:event][:slug] = "#{params[:event][:name].parameterize}"
       params[:event][:bogue_id] = params[:bogue_id]
-      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :slug, :event_type, :location, :city, :comment, :bogue_id, :highlight, :parent_event_id, :description, :cover)
+      params.require(:event).permit(:name, :content, :status, :file, :start_date, :end_date, :start_time, :end_time, :slug, :event_type, :location, :city, :comment, :bogue_id, :highlight, :parent_event_id, :description, :cover)
     end
     
     def set_records
