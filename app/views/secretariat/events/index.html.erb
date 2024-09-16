@@ -11,6 +11,7 @@
       <% header.with_column(name: "city", sortable: true) do %>Nom<% end %>
       <% header.with_column(name: "start_date") do %>Date<% end %>
       <% header.with_column(name: "organizer") do %>Organisé par<% end %>
+      <% header.with_column(name: "options") do %>Actions<% end %>
     <% end %>
     <% @events.each do |event| %>
       <% table.with_row do |row| %>
@@ -18,6 +19,19 @@
         <% row.with_cell(name: "city") do %><%= event.full_location %><% end %>
         <% row.with_cell(name: "start_date") do %><%= event.date_period %><% end %>
         <% row.with_cell(name: "organizer") do %><%= event.organizer %><% end %>
+        <% row.with_cell(name: "options") do %>
+          <%= link_to edit_secretariat_event_path(event), class: "button" do %>
+            <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+          <% end %>
+          <%= link_to secretariat_event_path(event),
+            class: "button",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
+            } do %>
+            <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>

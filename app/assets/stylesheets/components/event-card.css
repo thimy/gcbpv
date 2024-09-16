@@ -9,8 +9,14 @@ event-card {
     gap: var(--size-2) var(--size-6);
   
     time {
-      flex: 0 0 120px;
-      font-size: var(--font-size-fluid-0);
+      color: var(--light-accent);
+      flex: 0 0 130px;
+      font-size: var(--font-size-0);
+
+      div {
+        color: var(--text-color);
+        font-size: var(--font-size-fluid-0);
+      }
     }
   
     h3 {

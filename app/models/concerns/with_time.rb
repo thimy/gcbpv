@@ -28,12 +28,10 @@ module WithTime
   def time_period
     if start_time.present?
       if end_time.present?
-        "De #{start_time} à #{end_time}"
+        "De #{start_time.strftime("%H:%M")} à #{end_time.strftime("%H:%M")}"
       else
-        "À partir de #{start_time}"
+        "À partir de #{start_time.strftime("%H:%M")}"
       end
-    else
-      "Horaire à définir"
     end
   end
 end

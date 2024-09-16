@@ -2,7 +2,7 @@ class EventsController < BaseController
   before_action :set_event, only: %i[ show ]
 
   def index
-    @upcoming_events = Event.ordered.upcoming
+    @upcoming_events = Event.ordered.upcoming.reverse
     @passed_events = Event.ordered.passed
   end
 

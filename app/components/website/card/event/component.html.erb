@@ -1,7 +1,8 @@
 <event-card>
   <%= link_to @event, class: "list-element event-card" do %>
     <time>
-      <%= @event.date_period %>
+      <div><%= @event.date_period %></div>
+      <%= @event.time_period if @event.time_period.present? %>
     </time>
     <div class="event-info">
       <h3><%= @event.name %></h3>
