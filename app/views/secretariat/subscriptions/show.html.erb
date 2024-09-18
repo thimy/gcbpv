@@ -3,6 +3,7 @@
   <h1><%= @subscription.student.name %></h1>
 
   <div>
+    <%= link_to "Éditer la fiche de l'élève", edit_secretariat_subscription_path(@subscription) %> |
     <%= link_to "Créer une nouvelle inscription", new_secretariat_subscription_path(@subscription) %> |
     <%= link_to "Retour aux inscriptions", secretariat_subscriptions_path %>
   </div>

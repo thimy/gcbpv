@@ -7,44 +7,67 @@
 </div>
 <%= form_for(@subscription, url: secretariat_subscription_path) do |form| %>
   <%= field_set_tag "Élève" do %>
-    <%= form.field_for :student do |student_form| %>
+    <%= form.fields_for :student do |student_form| %>
       <div class="form-inputs">
         <div class="flex-row gap-6">
           <div class="form-element">
-            <%= form.label :first_name, "Prénom" %>
-            <%= form.text_field :first_name, required: true %>
+            <%= student_form.label :first_name, "Prénom" %>
+            <%= student_form.text_field :first_name, required: true %>
           </div>
 
           <div class="form-element">
-            <%= form.label :last_name, "Nom" %>
-            <%= form.text_field :last_name, required: true %>
+            <%= student_form.label :last_name, "Nom" %>
+            <%= student_form.text_field :last_name, required: true %>
           </div>
         </div>
 
         <div class="flex-row gap-6">
           <div class="form-element">
             <label for="student_phone">Téléphone</label>
-            <%= text_field :student, :phone %>
+            <%= student_form.text_field :phone %>
           </div>
 
           <div class="form-element">
             <label for="student_email">Email</label>
-            <%= text_field :student, :email %>
+            <%= student_form.text_field :email %>
           </div>
         </div>
 
         <div class="form-element">
           <label for="student_gender">Genre</label>
-          <%= select :student, :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+          <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
         </div>
         
         <div class="form-element">
           <label for="payor_comment">Notes</label>
-          <%= text_area :payor, :comment, rows: 2 %>
+          <%= student_form.text_area :comment, rows: 2 %>
         </div>
       </div>
     <% end %>
-
-    <%= form.submit "Mettre à jour le nom de l'élève" %>
   <% end %>
+  <%= field_set_tag "Informations supplémentaires" do %>
+    <div class="form-inputs">
+      <div class="flex-row gap-6">
+        <div class="form-inline">
+          <%= form.check_box :image_consent %>
+          <%= form.label :image_consent, "Consentement à l’image" %>
+        </div>
+        <div class="form-inline">
+          <%= form.check_box :disability %>
+          <%= form.label :disability, "Situation empêchée" %>
+        </div>
+        <div class="form-inline">
+          <%= form.check_box :ars %>
+          <%= form.label :ars, "ARS" %>
+        </div>
+      </div>
+
+      <div class="form-element">
+        <%= form.label :comment, "Notes" %>
+        <%= form.text_area :comment, rows: 2 %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= form.submit "Mettre à jour l'élève" %>
 <% end %>

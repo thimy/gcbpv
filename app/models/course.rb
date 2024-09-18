@@ -8,7 +8,7 @@ class Course < ApplicationRecord
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
-  scope :ordered, -> { order(start_time: :asc) }
+  scope :ordered, -> { includes(:slot).order("slots.day_of_week", :start_time) }
 
   def name
     "#{instrument.name} - #{slot.name}"

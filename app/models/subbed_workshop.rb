@@ -13,6 +13,7 @@ class SubbedWorkshop < ApplicationRecord
   scope :has_slot, ->(slot) {where(workshop_slot: slot)}
   scope :confirmed, -> { where(option: "Confirmé")}
   scope :optional, -> { where(option: "Optionel")}
+  scope :ordered, -> { includes(:workshop_slot).order("workshop_slots.day_of_week", "workshop_slots.slot_time") }
 
   def student_name
     subscription.student.name
