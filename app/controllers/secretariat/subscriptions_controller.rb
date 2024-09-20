@@ -81,7 +81,7 @@ class Secretariat::SubscriptionsController < SecretariatController
           format.json { render :show, status: :created, location: @subscription }
         end
       end
-      if params[:add_kid_workshop]
+      if params[:edit_kid_workshop]
         course = Course.new(course_params.merge({subscription_id: params[:id]}))
         if course.save
           format.html { redirect_to secretariat_subscription_url(@subscription), notice: "Le cours a bien été ajouté." }

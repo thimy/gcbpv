@@ -14,8 +14,8 @@
       <% row.with_cell(name: "instrument") do %><%= link_to instrument.name, secretariat_instrument_path(instrument) %><% end %>
       <% row.with_cell(name: "instrument") do %><%= instrument.courses.size %><% end %>
       <% row.with_cell(name: "options") do %>
-        <%= link_to edit_instrument_path(instrument) do %>
-          Editer cet instrument
+        <%= link_to edit_secretariat_instrument_path(instrument) do %>
+          Éditer cet instrument
           <%= inline_svg "icons/chevron-right", { class: "caret" } %>
         <% end %>
       <% end %>

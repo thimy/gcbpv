@@ -3,7 +3,7 @@ class WorkshopSlot < ApplicationRecord
 
   has_many :subbed_workshops
   has_many :subscriptions, through: :subbed_workshops
-  has_many :workshop_slot_teachers
+  has_many :workshop_slot_teachers, dependent: :delete_all
   has_many :teachers, through: :workshop_slot_teachers
   belongs_to :workshop
   belongs_to :city

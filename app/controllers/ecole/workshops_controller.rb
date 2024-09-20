@@ -2,7 +2,7 @@ class Ecole::WorkshopsController < EcoleController
   before_action :set_workshop, only: %i[ show ]
 
   def index
-    @workshops = Workshop.all
+    @workshops = Workshop.active
   end
 
   def show
