@@ -1,32 +1,59 @@
-<div id="<%= dom_id slot %>">
-  <p>
-    <strong>Teacher:</strong>
-    <%= slot.teacher_id %>
-  </p>
-
-  <p>
-    <strong>City:</strong>
-    <%= slot.city_id %>
-  </p>
-
-  <p>
-    <strong>Day of week:</strong>
-    <%= slot.day_of_week %>
-  </p>
-
-  <p>
-    <strong>Start time:</strong>
-    <%= slot.start_time %>
-  </p>
-
-  <p>
-    <strong>End time:</strong>
-    <%= slot.end_time %>
-  </p>
-
-  <p>
-    <strong>Frequency:</strong>
-    <%= slot.frequency %>
-  </p>
-
-</div>
+<% if defined?(is_form) && !!is_form %>
+  <tr class="<%= "new-item" if !slot.id %>" data-controller="edit-slot fill-select" id="<%= dom_id slot %>" data-edit-slot-id-value="<%= slot.id %>">
+    <td class="cell-day_of_week">
+      <%= select :slot, :day_of_week, options_for_select(Slot.day_of_weeks.keys.to_a, selected: slot.present? ? slot.day_of_week : 0) %>
+    </td>
+    <td class="cell-city">
+      <%= collection_select :slot, :city_id, cities, :id, :name,
+        {
+          selected: slot&.city&.id,
+          required: true
+        } %>
+    </td>
+    <td class="cell-slot_time">
+      <%= text_field :slot, :slot_time, value: slot.slot_time %>
+    </td>
+    <td class="cell-options">
+      <div class="actions">
+        <% if slot.id.present? %>
+          <%= hidden_field_tag "slot[id]", slot.id %>
+          <button class="button" type="submit">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-slot#editEntry" data-edit-slot-url-param="<%= secretariat_slot_path(slot) %>">
+            <%= inline_svg "icons/undo", "aria-label": "Annuler" %>
+          </button>
+        <% else %>
+          <button class="button" data-action="edit-slot#createEntry" data-edit-slot-url-param="<%= secretariat_slots_path %>">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-slot#cancelNew">
+            <%= inline_svg "icons/delete", "aria-label": "Annuler" %>
+          </button>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% else %>
+  <tr data-controller="edit-slot" id="<%= dom_id slot %>" data-edit-slot-id-value="<%= slot.id %>">
+    <td class="cell-day_of_week"><%= slot.day_of_week %></td>
+    <td class="cell-city"><%= slot.city.name %></td>
+    <td class="cell-slot_time"><%= slot.slot_time %></td>
+    <td class="cell-options">
+      <div class="actions">
+        <button class="button" data-action="edit-slot#editEntry" 
+                data-edit-slot-url-param="<%= edit_secretariat_slot_path(slot) %>">
+          <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+        </button>
+        <%= link_to secretariat_slot_path(slot), 
+          class: "button",
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce cours ?"
+          } do %>
+          <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

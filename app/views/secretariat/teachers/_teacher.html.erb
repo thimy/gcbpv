@@ -11,6 +11,7 @@
   <section data-controller="tabs">
     <header>
       <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="cours">Cours</button>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="creneaux" data-button-type="outline">Créneaux</button>
       <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Informations personnelles</button>
     </header>
     <div data-tabs-target="panel" id="cours" class="record gap-10">
@@ -48,6 +49,9 @@
           <% end %>
         </div>
       <% end %>
+    </div>
+    <div data-tabs-target="panel" id="creneaux" class="record gap-10">
+      <%= render "secretariat/slots/list", teacher: @teacher%>
     </div>
     <div data-tabs-target="panel" id="infos">
       <dl>

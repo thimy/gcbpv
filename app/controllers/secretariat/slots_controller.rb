@@ -13,10 +13,36 @@ class Secretariat::SlotsController < SecretariatController
   # GET /slots/new
   def new
     @slot = Slot.new
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.before(
+          "add-slot",
+          partial: "secretariat/slots/slot", 
+          locals: {
+            slot: Slot.new,
+            cities: City.all,
+            is_form: true
+          }
+        )
+      end
+    end
   end
 
   # GET /slots/1/edit
   def edit
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          @slot,
+          partial: "secretariat/slots/slot", 
+          locals: {
+            slot: @slot,
+            cities: City.all,
+            is_form: true
+          }
+        )
+      end
+    end
   end
 
   # POST /slots or /slots.json
@@ -27,6 +53,16 @@ class Secretariat::SlotsController < SecretariatController
       if @slot.save
         format.html { redirect_to slot_url(@slot), notice: "Slot was successfully created." }
         format.json { render :show, status: :created, location: @slot }
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(
+            "new_slot",
+            partial: "secretariat/slots/slot", 
+            locals: {
+              slot: @slot,
+              is_form: false
+            }
+          )
+        }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @slot.errors, status: :unprocessable_entity }
@@ -38,7 +74,7 @@ class Secretariat::SlotsController < SecretariatController
   def update
     respond_to do |format|
       if @slot.update(slot_params)
-        format.html { redirect_to slot_url(@slot), notice: "Slot was successfully updated." }
+        format.html { redirect_to secretariat_slot_url(@slot), notice: "Le créneau a bien été modifié." }
         format.json { render :show, status: :ok, location: @slot }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,11 +96,15 @@ class Secretariat::SlotsController < SecretariatController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_slot
+      if params[:slot].present? && params[:slot][:id].present?
+        params[:id] = params[:slot][:id]
+        params[:slot].delete(:id)
+      end
       @slot = Slot.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def slot_params
-      params.require(:slot).permit(:teacher_id, :city_id, :day_of_week, :start_time, :end_time, :frequency)
+      params.require(:slot).permit(:slot_id, :city_id, :day_of_week, :slot_time, :frequency, :teacher_id)
     end
 end

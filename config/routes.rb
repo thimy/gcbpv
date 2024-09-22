@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       post :upload_file, on: :collection, as: "secretariat_posts_upload_file"
     end
     resources :teachers, path: "professeurs"
+    resources :slots, path: "creneaux"
     resources :subscriptions, path: "eleves" do
       post :add_course, on: :collection
       post :add_workshop, on: :collection

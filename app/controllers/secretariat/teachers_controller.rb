@@ -18,6 +18,7 @@ class Secretariat::TeachersController < SecretariatController
 
   # GET /teachers/1 or /teachers/1.json
   def show
+    @slots = @teacher.slots
   end
 
   # GET /teachers/new

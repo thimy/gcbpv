@@ -7,4 +7,6 @@ class City < ApplicationRecord
   validates :name, presence: true
 
   enum :status, "Public" => 0, "Privé" => 1
+
+  scope :active, -> {where(status: 0)}
 end
