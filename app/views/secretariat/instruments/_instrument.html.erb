@@ -26,6 +26,11 @@
             <% row.with_cell(name: "city") do %><%= course.slot.city.name %><% end %>
           <% end %>
         <% end %>
+        <% table.with_row do |row| %>
+          <% row.with_cell(name: "full", colspan: 6) do %>
+            <button class="button" data-emails-list-value="<%= get_emails(instrument.courses) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
     <div data-tabs-target="panel" id="infos">
