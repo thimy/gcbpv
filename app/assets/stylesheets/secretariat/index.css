@@ -47,6 +47,12 @@
     .add-item {
       text-align: end;
     }
+
+    .cell-start_date,
+    .cell-end_date,
+    .cell-options {
+      white-space: nowrap;
+    }
   }
 
   .record {

@@ -9,9 +9,12 @@ class Event < ApplicationRecord
   belongs_to :bogue, optional: true
   belongs_to :parent_event, class_name: "Event", optional: true
 
-  scope :ordered, -> { order(start_date: :desc) }
-  scope :upcoming, -> {where(start_date: Date.today...)}
-  scope :passed, -> {where(start_date: ...Date.today)}
+  scope :ordered, -> { order(start_date: :desc, start_time: :desc)}
+  scope :upcoming, -> {where(end_date: Date.today...).or(has_no_end_date.where(start_date: Date.today...))}
+  scope :has_no_end_date, -> {where(end_date: nil)}
+  scope :start_passed, -> {where(start_date: ...Date.today)}
+  scope :end_passed, -> {where(end_date: ...Date.today)}
+  scope :passed, -> {has_no_end_date.start_passed.or(end_passed)}
   scope :active, -> {where(status: 0)}
 
   scope :past_week, -> { where(created_at: Time.zone.now.at_beginning_of_week...Time.zone.now.at_end_of_week) }
@@ -27,6 +30,22 @@ class Event < ApplicationRecord
     "Scène ouverte / Jam / Session" => 6,
     "Enfance / Jeunes" => 7
   }
+
+  def upcoming
+    if end_date.nil?
+      start_date >= Date.today
+    else
+      end_date >= Date.today
+    end
+  end
+
+  def passed
+    if end_date.nil?
+      start_date < Date.today
+    else
+      end_date < Date.today
+    end
+  end
 
   def full_location
     full_location = []

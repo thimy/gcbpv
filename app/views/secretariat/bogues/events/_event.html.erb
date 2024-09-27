@@ -42,7 +42,7 @@
 </div>
 
 <%= link_to "Supprimer cet événement",
-  secretariat_bogue_event_path(bogue_id: @bogue.id, id: event.parent_event.id),
+  secretariat_bogue_event_path(bogue_id: @bogue.id, id: event.id),
   class: "button page-end",
   data: {
     "button-status": "alert",

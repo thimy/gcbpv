@@ -12,7 +12,8 @@ class BoguesController < BaseController
   end
 
   def schedule
-    @events = @bogue.events.active.ordered
+    @events = @bogue.events.active.upcoming.ordered.reverse
+    @passed_events = @bogue.events.active.passed.ordered
     @cities = @events.pluck(:city).uniq
   end
 
