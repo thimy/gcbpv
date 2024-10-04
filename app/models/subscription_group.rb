@@ -37,6 +37,8 @@ class SubscriptionGroup < ApplicationRecord
       
     state = if total_payment.nil?
       "À régler"
+    elsif amount.nil?
+      "Montant de l’inscription à renseigner"
     elsif total_payment < amount
       "Règlement partiel"
     elsif total_payment == amount
