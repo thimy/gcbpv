@@ -48,8 +48,11 @@
       text-align: end;
     }
 
+    .cell-day_of_week,
+    .cell-city,
     .cell-start_date,
     .cell-end_date,
+    .cell-amount,
     .cell-options {
       white-space: nowrap;
     }
