@@ -48,7 +48,6 @@ class Secretariat::PaymentsController < SecretariatController
 
   def create
     @payment = Payment.new(payment_params)
-puts payment_params
     respond_to do |format|
       if @payment.save
         format.html { redirect_to secretariat_payment_url(@payment), notice: "Le paiement a bien été enregistré." }
@@ -64,7 +63,6 @@ puts payment_params
           )
         }
       else
-        puts "not save"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @payment.errors, status: :unprocessable_entity }
       end
@@ -102,6 +100,8 @@ puts payment_params
         params[:id] = params[:payment][:id]
         params[:payment].delete(:id)
         params[:payment].delete(:payment_id)
+
+        params[:payment][:amount] = 0 if params[:payment][:amount].blank?
       end
       @payment = Payment.find(params[:id])
     end

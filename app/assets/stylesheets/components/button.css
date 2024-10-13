@@ -7,9 +7,12 @@
   color: var(--button-text-color);
   cursor: pointer;
   display: inline-flex;
-  padding: var(--size-2) var(--size-3);
+  align-items: center;
+  height: var(--size-10);
+  padding: 0 var(--size-3);
   text-align: center;
   transition: var(--transition-short);
+  vertical-align: middle;
 
   &:hover {
     filter: grayscale(0.3);

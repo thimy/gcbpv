@@ -27,6 +27,10 @@ class Subscription < ApplicationRecord
   scope :has_optional_kid_workshop, ->(workshop) { where(subbed_workshops.optional.has_kid_workshop(workshop)) }
   scope :has_confirmed_kid_workshop, ->(workshop) { where(subbed_workshops.confirme.has_kid_workshop(workshop)) }
 
+  scope :youth, -> { includes(:student).where(Student.youth) }
+  scope :adults, -> { includes(:student).where(Student.adults) }
+  scope :undefined_age, -> { includes(:student).where(student: Student.undefined_age) }
+
   def kid_workshop_list
     kid_workshop_slots.map {|slot|
       slot.kid_workshop.name

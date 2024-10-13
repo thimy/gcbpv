@@ -104,7 +104,6 @@ class Secretariat::SubscriptionsController < SecretariatController
       end
       if params[:edit_kid_workshop]
         subbed_kid_workshop = SubbedKidWorkshop.find(params[:subbed_kid_workshop_id])
-        raise
         if subbed_kid_workshop.update(subbed_kid_workshop_params)
           format.html { redirect_to secretariat_subscription_url(@subscription), notice: "L’atelier a bien été modifié." }
           format.json { render :show, status: :ok, location: @subscription }
@@ -245,6 +244,17 @@ class Secretariat::SubscriptionsController < SecretariatController
       if query.present?
         @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE ?", "%#{query}%")).or(@filtered_subscriptions.where(student: Student.where("first_name ILIKE ?", "%#{query}%")))
       end
+
+      if params[:age_type].present?
+        if params[:age_type] == "1"
+          @filtered_subscriptions = @filtered_subscriptions.youth
+        elsif params[:age_type] == "2"
+          @filtered_subscriptions = @filtered_subscriptions.adults
+        else
+          @filtered_subscriptions = @filtered_subscriptions.undefined_age
+        end
+      end
+
       @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join("\n")
       @pagy, @subscriptions = paginate_records(@filtered_subscriptions)
     end

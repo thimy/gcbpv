@@ -53,6 +53,7 @@ label {
 :where(input:not([type=checkbox], [type=button], [type=submit]), select, textarea) {
   border: 1px solid var(--dark-gray);
   border-radius: var(--radius-2);
+  vertical-align: middle;
   width: 300px;
 
   &.double {
