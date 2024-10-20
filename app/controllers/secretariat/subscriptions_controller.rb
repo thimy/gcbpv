@@ -245,15 +245,9 @@ class Secretariat::SubscriptionsController < SecretariatController
         @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE ?", "%#{query}%")).or(@filtered_subscriptions.where(student: Student.where("first_name ILIKE ?", "%#{query}%")))
       end
 
-      if params[:age_type].present?
-        if params[:age_type] == "1"
-          @filtered_subscriptions = @filtered_subscriptions.youth
-        elsif params[:age_type] == "2"
-          @filtered_subscriptions = @filtered_subscriptions.adults
-        else
-          @filtered_subscriptions = @filtered_subscriptions.undefined_age
-        end
-      end
+      @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year > ?", params[:birthyear_under])) if params[:birthyear_under].present?
+      
+      @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year < ?", params[:birthyear_over])) if params[:birthyear_over].present?
 
       @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join("\n")
       @pagy, @subscriptions = paginate_records(@filtered_subscriptions)

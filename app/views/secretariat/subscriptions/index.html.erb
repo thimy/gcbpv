@@ -46,8 +46,12 @@
   </div>
   <div class="form-group">
     <div class="form-element">
-      <%= label_tag :age_type, "Âge" %>
-      <%= select_tag :age_type, options_for_select(Student.age_types, params[:age_type].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+      <%= label_tag :birthyear_under, "Année de naissance supérieure à" %>
+      <%= select_tag :birthyear_under, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_under].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+    <div class="form-element">
+      <%= label_tag :birthyear_over, "Année de naissance inférieure à" %>
+      <%= select_tag :birthyear_over, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_over].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
     </div>
   </div>
 <% end %>
@@ -60,7 +64,7 @@
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "student", sortable: true) do %>Élève<% end %>
-      <% header.with_column(name: "age") do %>Âge<% end %>
+      <% header.with_column(name: "birth_year") do %>Année de naissance<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
       <% header.with_column(name: "email") do %>Email<% end %>
       <% header.with_column(name: "course") do %>Cours<% end %>
@@ -70,7 +74,7 @@
     <% @subscriptions.each do |subscription| %>
       <% table.with_row(link_url: secretariat_subscription_path(subscription), class: "#{subscription.optional? ? "optional" : "confirmed"}") do |row| %>
         <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, secretariat_subscription_path(subscription), "data-turbo": false %><% end %>
-        <% row.with_cell(name: "age") do %><%= @season.start_year - subscription.student.birth_year if subscription.student.birth_year.present? %><% end %>
+        <% row.with_cell(name: "birth_year") do %><%= subscription.student.birth_year.presence %><% end %>
         <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
         <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
         <% row.with_cell(name: "course") do %>
