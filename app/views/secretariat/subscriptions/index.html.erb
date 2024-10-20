@@ -53,6 +53,10 @@
       <%= label_tag :birthyear_over, "Année de naissance inférieure à" %>
       <%= select_tag :birthyear_over, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_over].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
     </div>
+    <div class="form-element">
+      <%= label_tag :city, "Ville" %>
+      <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+    </div>
   </div>
 <% end %>
 <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
@@ -64,7 +68,8 @@
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "student", sortable: true) do %>Élève<% end %>
-      <% header.with_column(name: "birth_year") do %>Année de naissance<% end %>
+      <% header.with_column(name: "birth_year", sortable: true) do %>Année de naissance<% end %>
+      <% header.with_column(name: "city") do %>Ville<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
       <% header.with_column(name: "email") do %>Email<% end %>
       <% header.with_column(name: "course") do %>Cours<% end %>
@@ -75,6 +80,7 @@
       <% table.with_row(link_url: secretariat_subscription_path(subscription), class: "#{subscription.optional? ? "optional" : "confirmed"}") do |row| %>
         <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, secretariat_subscription_path(subscription), "data-turbo": false %><% end %>
         <% row.with_cell(name: "birth_year") do %><%= subscription.student.birth_year.presence %><% end %>
+        <% row.with_cell(name: "city") do %><%= subscription.student.city %><% end %>
         <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
         <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
         <% row.with_cell(name: "course") do %>

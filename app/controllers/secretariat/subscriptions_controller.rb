@@ -8,6 +8,8 @@ class Secretariat::SubscriptionsController < SecretariatController
   SORT_ATTRIBUTES = {
     "subscriptions" => [
       "student",
+      "birth_year",
+      "city"
     ]
   }
 
@@ -16,6 +18,9 @@ class Secretariat::SubscriptionsController < SecretariatController
     set_tab_data
     @unconfirmed_count = Subscription.includes(:subscription_group).where(subscription_group: {status: 0, season: @season}).size
     @confirmed_count = Subscription.includes(:subscription_group).where.not(subscription_group: {status: 0, season: @season}).size
+    @cities = Student.all.map { |student|
+      student.city
+    }.flatten.uniq.reject { |c| c == nil }.sort
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
@@ -248,6 +253,8 @@ class Secretariat::SubscriptionsController < SecretariatController
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year > ?", params[:birthyear_under])) if params[:birthyear_under].present?
       
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year < ?", params[:birthyear_over])) if params[:birthyear_over].present?
+      
+      @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("city = ?", params[:city])) if params[:city].present?
 
       @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join("\n")
       @pagy, @subscriptions = paginate_records(@filtered_subscriptions)
