@@ -41,7 +41,7 @@ class Student < ApplicationRecord
   end
 
   def postcode_or_payor_postcode
-    postcode || subscriptions.last&.subscription_group&.payor&.zipcode
+    postcode || subscriptions.last&.subscription_group&.payor&.postcode
   end
 
   def city_or_payor_city

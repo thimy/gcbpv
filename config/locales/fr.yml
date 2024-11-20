@@ -311,7 +311,7 @@ fr:
         phone: "Téléphone"
         gender: "Genre"
         address_or_payor_address: Adresse
-        zipcode_or_payor_zipcode: Code postal
+        postcode_or_payor_postcode: Code postal
         city_or_payor_city: Ville
         created_at: "Créé le"
         updated_at: "Modifié le"
