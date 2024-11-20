@@ -19,6 +19,14 @@
     <dd><%= link_to @subscription.subscription_group&.payor&.name, secretariat_payor_path(@subscription.subscription_group.payor) %></dd>
   </dl>
   <dl class="horizontal">
+    <dt>Adresse :</dt>
+    <dd><%= @subscription.student.address_or_payor_address %></dd>
+    <dt>Code postal :</dt>
+    <dd><%= @subscription.student.postcode_or_payor_postcode %></dd>
+    <dt>City :</dt>
+    <dd><%= @subscription.student.city_or_payor_city %></dd>
+  </dl>
+  <dl class="horizontal">
     <dt>Année de naissance :</dt>
     <dd><%= @subscription.student.birth_year %></dd>
     <dt>Consentement à l’image :</dt>

@@ -13,15 +13,15 @@ class StudentDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     birth_year: Field::Number,
-    street: Field::String,
-    zip_code: Field::Number,
+    address: Field::String,
+    postcode: Field::Number,
     city: Field::String,
     gender: Field::Select,
     payor: Field::BelongsTo,
     phone: Field::String,
     comment: Field::Text,
     address_or_payor_address: Field::Text,
-    zipcode_or_payor_zipcode: Field::Text,
+    postcode_or_payor_postcode: Field::Text,
     city_or_payor_city: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -48,7 +48,7 @@ class StudentDashboard < Administrate::BaseDashboard
     last_name
     birth_year
     address_or_payor_address
-    zipcode_or_payor_zipcode
+    postcode_or_payor_postcode
     city_or_payor_city
     email
     phone
@@ -65,8 +65,8 @@ class StudentDashboard < Administrate::BaseDashboard
     first_name
     last_name
     birth_year
-    street
-    zip_code
+    address
+    postcode
     city
     email
     phone

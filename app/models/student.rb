@@ -37,11 +37,11 @@ class Student < ApplicationRecord
   end
 
   def address_or_payor_address
-    street || subscriptions.last&.subscription_group&.payor&.address
+    address || subscriptions.last&.subscription_group&.payor&.address
   end
 
-  def zipcode_or_payor_zipcode
-    zipcode || subscriptions.last&.subscription_group&.payor&.zipcode
+  def postcode_or_payor_postcode
+    postcode || subscriptions.last&.subscription_group&.payor&.zipcode
   end
 
   def city_or_payor_city

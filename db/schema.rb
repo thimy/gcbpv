@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_16_073918) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -225,16 +225,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_073918) do
   create_table "pages", force: :cascade do |t|
     t.string "name"
     t.jsonb "content"
+    t.string "location"
+    t.string "city"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.integer "status"
     t.string "type"
     t.string "slug"
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "end_date"
-    t.datetime "start_date"
-    t.string "city"
-    t.string "location"
     t.bigint "bogue_id"
     t.index ["bogue_id"], name: "index_pages_on_bogue_id"
   end
@@ -397,8 +397,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_16_073918) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "payor_id"
-    t.string "street"
-    t.string "zip_code"
+    t.string "address"
+    t.string "postcode"
     t.string "city"
     t.integer "birth_year"
     t.text "comment"
