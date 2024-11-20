@@ -104,6 +104,10 @@ dl.horizontal {
   flex-direction: column;
 }
 
+.align-center {
+  align-items: center;
+}
+
 .gap-2 {
   gap: var(--size-2);
 }

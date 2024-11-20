@@ -231,6 +231,7 @@ class Secretariat::SubscriptionsController < SecretariatController
       @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
       @filters[:courses] = Course.where(instrument: params[:instrument]) if params[:instrument].present?
       @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) if params[:workshop].present?
+      @filters[:ars] = params[:ars] if params[:ars].present?
 
       if !@filters.empty?
         @filters[:subscription_group][:season] = @season

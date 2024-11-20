@@ -57,6 +57,10 @@
       <%= label_tag :city, "Ville" %>
       <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
     </div>
+    <div class="form-element">
+      <%= label_tag :ars, "ARS" %>
+      <%= check_box_tag :ars, checked: params[:ars].present? && params[:ars] == "1", onchange: "this.form.requestSubmit()" %>
+    </div>
   </div>
 <% end %>
 <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
