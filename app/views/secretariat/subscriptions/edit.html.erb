@@ -5,6 +5,13 @@
     <%= link_to "Retour aux élèves", secretariat_subscriptions_path %>
   </div>
 </div>
+<% if @subscription.errors.present? %>
+  <ul>
+    <% @subscription.errors.each do |error| %>
+      <li><%= error.message %></li>
+    <% end %>
+  </ul>
+<% end %>
 <%= form_for(@subscription, url: secretariat_subscription_path) do |form| %>
   <%= field_set_tag "Élève" do %>
     <%= form.fields_for :student do |student_form| %>
@@ -33,14 +40,21 @@
           </div>
         </div>
 
-        <div class="form-element">
-          <label for="student_gender">Genre</label>
-          <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+        <div class="flex-row gap-6">
+          <div class="form-element">
+            <label for="student_gender">Genre</label>
+            <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+          </div>
+
+          <div class="form-element">
+            <label for="student_birth_year">Année de naissance</label>
+            <%= student_form.text_field :birth_year %>
+          </div>
         </div>
 
         <div class="form-element">
           <%= student_form.label :address, "Adresse" %>
-          <%= student_form.text_field :address, required: true, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+          <%= student_form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
           <%= render "website/autocomplete" %>
         </div>
         
