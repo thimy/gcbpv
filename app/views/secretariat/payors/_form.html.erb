@@ -23,7 +23,7 @@
 
   <div class="form-element">
     <%= form.label :address, "Adresse" %>
-    <%= form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address", required: true %>
+    <%= form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
     <%= render "website/autocomplete" %>
   </div>
 
