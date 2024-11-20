@@ -310,6 +310,9 @@ fr:
         status: "Statut"
         phone: "Téléphone"
         gender: "Genre"
+        address_or_payor_address: Adresse
+        zipcode_or_payor_zipcode: Code postal
+        city_or_payor_city: Ville
         created_at: "Créé le"
         updated_at: "Modifié le"
       subbed_workshop:

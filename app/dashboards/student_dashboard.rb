@@ -20,6 +20,9 @@ class StudentDashboard < Administrate::BaseDashboard
     payor: Field::BelongsTo,
     phone: Field::String,
     comment: Field::Text,
+    address_or_payor_address: Field::Text,
+    zipcode_or_payor_zipcode: Field::Text,
+    city_or_payor_city: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -33,7 +36,7 @@ class StudentDashboard < Administrate::BaseDashboard
     id
     first_name
     last_name
-    city
+    city_or_payor_city
     email
   ].freeze
 
@@ -44,9 +47,9 @@ class StudentDashboard < Administrate::BaseDashboard
     first_name
     last_name
     birth_year
-    street
-    zip_code
-    city
+    address_or_payor_address
+    zipcode_or_payor_zipcode
+    city_or_payor_city
     email
     phone
     gender

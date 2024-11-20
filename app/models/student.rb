@@ -35,4 +35,16 @@ class Student < ApplicationRecord
       Student.age_types["Jeunes"]
     end
   end
+
+  def address_or_payor_address
+    street || subscriptions.last&.subscription_group&.payor&.address
+  end
+
+  def zipcode_or_payor_zipcode
+    zipcode || subscriptions.last&.subscription_group&.payor&.zipcode
+  end
+
+  def city_or_payor_city
+    city || subscriptions.last&.subscription_group&.payor&.city
+  end
 end
