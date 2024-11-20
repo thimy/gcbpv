@@ -73,7 +73,7 @@ class Secretariat::PayorsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def payor_params
-      params.require(:payor).permit(:last_name, :first_name, :email, :phone)
+      params.require(:payor).permit(:last_name, :first_name, :email, :phone, :address, :postcode, :city)
     end
 
     def set_records
