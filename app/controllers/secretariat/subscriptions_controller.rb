@@ -227,34 +227,27 @@ class Secretariat::SubscriptionsController < SecretariatController
     def set_records
       @filters = {}
       @filters[:subscription_group] = {}
+      @filters[:subscription_group][:season] = @season
+
       @filters[:subscription_group][:status] = params[:status] if params[:status].present?
       @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
       @filters[:courses] = Course.where(instrument: params[:instrument]) if params[:instrument].present?
       @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) if params[:workshop].present?
       @filters[:ars] = params[:ars] if params[:ars].present?
 
-      if !@filters.empty?
-        @filters[:subscription_group][:season] = @season
-        @filtered_subscriptions = Subscription.includes(:subscription_group).where(@filters)
-      else
-        @filtered_subscriptions = Subscription.includes(:subscription_group).where(subscription_group: { season: @season })
-      end
-
       @not_filters = {}
       @not_filters[:subscription_group] = { status: params[:exclude_status] } if params[:exclude_status].present?
 
-      if !@not_filters.empty?
-        @filtered_subscriptions = @filtered_subscriptions.where.not(@not_filters)
-      end
-
-      if query.present?
-        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE ?", "%#{query}%")).or(@filtered_subscriptions.where(student: Student.where("first_name ILIKE ?", "%#{query}%")))
-      end
+      @filtered_subscriptions = Subscription.includes(:subscription_group).where(@filters).where.not(@not_filters).where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term OR :term IS NULL", { term: "%#{query}%" }))
 
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year > ?", params[:birthyear_under])) if params[:birthyear_under].present?
       
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year < ?", params[:birthyear_over])) if params[:birthyear_over].present?
       
+      if params[:postcode].present?
+        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("postcode LIKE ?", params[:postcode])).or(@filtered_subscriptions.where(student: Student.where(postcode: nil), subscription_group: { payor: Payor.where("postcode LIKE ?", params[:postcode]) }))
+      end
+
       if params[:city].present?
         @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("city = ?", params[:city])).or(@filtered_subscriptions.where(student: Student.where(city: nil), subscription_group: { payor: Payor.where("city = ?", params[:city]) }))
       end

@@ -13,13 +13,8 @@
     } do |f| %>
   <div class="form-group">
     <div class="form-element">
-      <%= label_tag :q, "Noms" %>
-      <div class="search-input">
-        <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
-        <%= f.button do %>
-          <%= inline_svg_tag "icons/search.svg" %>
-        <% end %>
-      </div>
+      <%= label_tag :q, "Nom" %>
+      <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
     </div>
     <div class="form-element">
       <%= label_tag :status, "Inclure seulement le statut" %>
@@ -46,6 +41,16 @@
   </div>
   <div class="form-group">
     <div class="form-element">
+      <%= label_tag :q, "Code postal" %>
+      <%= search_field_tag :postcode, params[:postcode] %>
+    </div>
+    <div class="form-element">
+      <%= label_tag :city, "Ville" %>
+      <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="form-element">
       <%= label_tag :birthyear_under, "Année de naissance supérieure à" %>
       <%= select_tag :birthyear_under, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_under].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
     </div>
@@ -54,19 +59,20 @@
       <%= select_tag :birthyear_over, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_over].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
     </div>
     <div class="form-element">
-      <%= label_tag :city, "Ville" %>
-      <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="form-element">
       <%= label_tag :ars, "ARS" %>
       <%= check_box_tag :ars, checked: params[:ars].present? && params[:ars] == "1", onchange: "this.form.requestSubmit()" %>
     </div>
   </div>
+  <div class="form-group">
+    <%= f.button do %>Rechercher<% end %>
+    <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+  </div>
 <% end %>
-<button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
-<%# form_with url: secretariat_subscriptions_send_email_path do |form| %>
-  <%# form.submit "Envoyer un email" %>
-<%# end %>
+<div>
+  <%# form_with url: secretariat_subscriptions_send_email_path do |form| %>
+    <%# form.submit "Envoyer un email" %>
+  <%# end %>
+</div>
 <%= turbo_frame_tag "subscriptions", class: "flex-column gap-3" do %>
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
