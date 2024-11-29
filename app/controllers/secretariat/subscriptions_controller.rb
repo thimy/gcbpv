@@ -246,7 +246,7 @@ class Secretariat::SubscriptionsController < SecretariatController
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year < ?", params[:birthyear_over])) if params[:birthyear_over].present?
       
       if params[:postcode].present?
-        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("postcode LIKE ?", params[:postcode])).or(@filtered_subscriptions.where(student: Student.where(postcode: nil), subscription_group: { payor: Payor.where("postcode LIKE ?", params[:postcode]) }))
+        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("postcode LIKE ?", "#{params[:postcode]}%")).or(@filtered_subscriptions.where(student: Student.where(postcode: nil), subscription_group: { payor: Payor.where("postcode LIKE ?", "#{params[:postcode]}%")}))
       end
 
       if params[:city].present?
