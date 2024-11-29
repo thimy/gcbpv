@@ -231,6 +231,7 @@ class Secretariat::SubscriptionsController < SecretariatController
       @filters[:subscription_group][:season] = @season
 
       @filters[:subscription_group][:status] = params[:status] if params[:status].present?
+      @filters[:subscription_group][:majoration_class] = params[:majoration_class] if params[:majoration_class].present?
       @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
       @filters[:courses] = Course.where(instrument: params[:instrument]) if params[:instrument].present?
       @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) if params[:workshop].present?

@@ -48,6 +48,10 @@
       <%= label_tag :city, "Ville" %>
       <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
     </div>
+    <div class="form-element">
+      <%= label_tag :majoration_class, "Communauté de communes" %>
+      <%= select_tag :majoration_class, options_for_select(SubscriptionGroup.majoration_classes, params[:majoration_class].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+    </div>
   </div>
   <div class="form-group">
     <div class="form-element">
