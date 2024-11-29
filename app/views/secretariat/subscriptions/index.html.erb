@@ -1,5 +1,5 @@
 <div class="content-header">
-  <h1><%= "Élèves – #{@confirmed_count} (+#{@unconfirmed_count})" %></h1>
+  <h1><%= "Élèves – #{@confirmed_count} #{"(+#{@unconfirmed_count})" if @unconfirmed_count > 0}" %></h1>
   <%= link_to "Créer une nouvelle inscription", new_secretariat_subscription_path %>
 </div>
 <p style="color: green"><%= notice %></p>
@@ -74,6 +74,7 @@
   <%# end %>
 </div>
 <%= turbo_frame_tag "subscriptions", class: "flex-column gap-3" do %>
+  <h2><%= @item_size %> élèves</h2>
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
