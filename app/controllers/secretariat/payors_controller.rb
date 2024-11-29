@@ -3,7 +3,7 @@ class Secretariat::PayorsController < SecretariatController
 
   before_action :set_payor, only: %i[ show edit update destroy ]
 
-  SORT_ATTRIBUTES = ["last_name"]
+  SORT_ATTRIBUTES = ["last_name", "birth_year"]
 
   # GET /payors or /payors.json
   def index

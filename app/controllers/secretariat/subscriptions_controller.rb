@@ -265,7 +265,11 @@ class Secretariat::SubscriptionsController < SecretariatController
 
     def with_sort_params(records)
       if @sort_attribute.present?
-        records.includes(:student).merge(Student.order(last_name: @sort_direction))
+        if @sort_attribute == "student"
+          records.includes(:student).merge(Student.order(last_name: @sort_direction))
+        elsif @sort_attribute == "birth_year"
+          records.includes(:student).merge(Student.order(birth_year: @sort_direction))
+        end
       else
         records
       end
