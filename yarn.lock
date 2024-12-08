@@ -18,9 +18,9 @@
   integrity sha512-L7Q5PET8PjKcBT5wp7VR+FCjwCi5PUp7rd/XjsgQ0CI5FJz0DphyHGRILMuDUdCW2MQT9NHbVr4QP31vwAkS/A==
 
 "@codexteam/icons@^0.3.0", "@codexteam/icons@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.npmjs.org/@codexteam/icons/-/icons-0.3.2.tgz#b7aed0ba7b344e07953101f5476cded570d4f150"
-  integrity sha512-P1ep2fHoy0tv4wx85eic+uee5plDnZQ1Qa6gDfv7eHPkCXorMtVqJhzMb75o1izogh6G7380PqmFDXV3bW3Pig==
+  version "0.3.3"
+  resolved "https://registry.npmjs.org/@codexteam/icons/-/icons-0.3.3.tgz#89d53af1d2bfc106e4e44be5fd824a059e94c098"
+  integrity sha512-cp7mkZPgmBuSxigTm3Vb+DtVHYeX7qXfQd7o05vcLD8Ag5WvRlol2QSn5P10k0CDAJwmkH9nQGQLBycErS9lsQ==
 
 "@csstools/selector-resolve-nested@^1.1.0":
   version "1.1.0"
@@ -67,9 +67,9 @@
     "@editorjs/editorjs" "^2.29.1"
 
 "@editorjs/image@^2.9.3":
-  version "2.10.0"
-  resolved "https://registry.npmjs.org/@editorjs/image/-/image-2.10.0.tgz#e7b06e06b5d9441e4635e8939a6b874bd28a08ca"
-  integrity sha512-WkQtXE8gICUagnBfowI/4tiVqsPTkBju7IqDVigMgEMzmw6AFuKDSYpVL12uB9ByDikAZWOK/mdUzeVfVBnKwg==
+  version "2.10.1"
+  resolved "https://registry.npmjs.org/@editorjs/image/-/image-2.10.1.tgz#0676563b44686f9953b77fa625d6b473d0ffec64"
+  integrity sha512-ECjYQCEuPRzyruKY4+6XOyukQ2sCw4+9O1Jg8sDHyqbHLq0DMe+tgVsuXR+yfOXdocnywBOg4kLsJiP1uUYFcA==
   dependencies:
     "@codexteam/icons" "^0.3.0"
 
@@ -95,9 +95,9 @@
     "@codexteam/icons" "^0.0.4"
 
 "@editorjs/table@^2.4.1":
-  version "2.4.2"
-  resolved "https://registry.npmjs.org/@editorjs/table/-/table-2.4.2.tgz#99a2b3f9ea8f39c9ca4df80b8e63bff6e21d0193"
-  integrity sha512-zGmwLCarsaTgOfccxR3Lc6oC3QTX0JdoK0O3+8TE/VCR/xnW92VO7rAcu4cqTwtbFMQErYl8id9a5hM23vyFng==
+  version "2.4.3"
+  resolved "https://registry.npmjs.org/@editorjs/table/-/table-2.4.3.tgz#3bf7d2185297138864ece0ff04bc8ec699e2596f"
+  integrity sha512-TBLVFA1T6PIZRSWz0gXZUtNrFu4a59FeABM/wS0/Coc/bhOfWBRrf5/Ic5tVHaTazXEo1dYWWrVgg/jRaRnYbw==
   dependencies:
     "@codexteam/icons" "^0.0.6"
 
@@ -194,9 +194,9 @@ browserslist@^4.23.3:
     update-browserslist-db "^1.1.1"
 
 caniuse-lite@^1.0.30001646, caniuse-lite@^1.0.30001669:
-  version "1.0.30001680"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001680.tgz#5380ede637a33b9f9f1fc6045ea99bd142f3da5e"
-  integrity sha512-rPQy70G6AGUMnbwS1z6Xg+RkHYPAi18ihs47GH0jcxIG7wArmPgY3XbS2sRdBbxJljp3thdT8BIqv9ccCypiPA==
+  version "1.0.30001687"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001687.tgz#d0ac634d043648498eedf7a3932836beba90ebae"
+  integrity sha512-0S/FDhf4ZiqrTUiQ39dKeUjYRjkv7lOZU1Dgif2rIqrTzX/1wV2hfKu9TOm1IHkdSijfLswxTFzl/cvir+SLSQ==
 
 chokidar@^3.3.0:
   version "3.6.0"
@@ -245,9 +245,9 @@ dependency-graph@^0.11.0:
   integrity sha512-JeMq7fEshyepOWDfcfHK06N3MhyPhz++vtqWhMT5O9A3K42rdsEDpfdVqjaqaAhsw6a+ZqeDvQVtD0hFHQWrzg==
 
 electron-to-chromium@^1.5.41:
-  version "1.5.63"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.63.tgz#69444d592fbbe628d129866c2355691ea93eda3e"
-  integrity sha512-ddeXKuY9BHo/mw145axlyWjlJ1UBt4WK3AlvkT7W2AbqfRQoacVoRUCF6wL3uIx/8wT9oLKXzI+rFqHHscByaA==
+  version "1.5.71"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.5.71.tgz#d8b5dba1e55b320f2f4e9b1ca80738f53fcfec2b"
+  integrity sha512-dB68l59BI75W1BUGVTAEJy45CEVuEGy9qPVVQ8pnHyHMn36PLPPoE1mjLH+lo9rKulO3HC2OhbACI/8tCqJBcA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -400,9 +400,9 @@ jsonfile@^6.0.1:
     graceful-fs "^4.1.6"
 
 lilconfig@^3.1.1:
-  version "3.1.2"
-  resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-3.1.2.tgz#e4a7c3cb549e3a606c8dcc32e5ae1005e62c05cb"
-  integrity sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==
+  version "3.1.3"
+  resolved "https://registry.npmjs.org/lilconfig/-/lilconfig-3.1.3.tgz#a1bcfd6257f9585bf5ae14ceeebb7b559025e4c4"
+  integrity sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==
 
 merge2@^1.3.0:
   version "1.4.1"
@@ -418,9 +418,9 @@ micromatch@^4.0.4:
     picomatch "^2.3.1"
 
 nanoid@^3.3.7:
-  version "3.3.7"
-  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
-  integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
+  version "3.3.8"
+  resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.3.8.tgz#b1be3030bee36aaff18bacb375e5cce521684baf"
+  integrity sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==
 
 node-releases@^2.0.18:
   version "2.0.18"
