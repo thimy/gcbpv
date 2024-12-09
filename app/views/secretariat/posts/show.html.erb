@@ -1,0 +1,11 @@
+<div class="content-header">
+  <h1><%= @post.title %></h1>
+
+  <div>
+    <%= link_to "Éditer cette actualité", edit_secretariat_post_path(@post) %> |
+    <%= link_to "Retour à la liste des actualités", secretariat_posts_path %>
+  </div>
+</div>
+
+<p style="color: green"><%= notice %></p>
+<%= render @post %>
