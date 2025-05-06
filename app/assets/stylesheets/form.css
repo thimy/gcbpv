@@ -50,7 +50,7 @@ label {
   font-size: var(--font-size-0);
 }
 
-:where(input:not([type=checkbox], [type=button], [type=submit]), select, textarea) {
+:where(input:not([type=checkbox], [type=radio], [type=button], [type=submit]), select, textarea) {
   border: 1px solid var(--dark-gray);
   border-radius: var(--radius-2);
   vertical-align: middle;

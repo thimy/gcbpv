@@ -65,6 +65,6 @@ class StudentsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :gender, :phone, :email)
+      params.require(:student).permit(:first_name, :last_name, :birth_year, :gender, :phone, :email)
     end
 end

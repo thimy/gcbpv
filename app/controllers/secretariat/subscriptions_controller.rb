@@ -169,6 +169,11 @@ class Secretariat::SubscriptionsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def subscription_params
+      if params[:payor_address] == "yes"
+        params[:subscription][:student_attributes][:address] = nil
+        params[:subscription][:student_attributes][:postcode] = nil
+        params[:subscription][:student_attributes][:city] = nil
+      end
       params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], subbed_kid_workshops_attributes: [:kid_workshop_slot_id, :option, :comment], subbed_kid_workshop_attributes: [:kid_workshop_slot_id, :option, :comment], student_attributes: [:id, :first_name, :last_name, :phone, :email, :gender, :address, :postcode, :city, :birth_year, :comment])
     end
 
@@ -201,7 +206,10 @@ class Secretariat::SubscriptionsController < SecretariatController
           params[:student][:last_name] = name_params.last
           params[:student].delete(:name)
         end
-        params.require(:student).permit(:first_name, :last_name, :gender, :phone, :email, :comment)
+        if params[:student][:birth_year].present?
+          params[:student][:birth_year] = params[:student][:birth_year].to_i
+        end
+        params.require(:student).permit(:first_name, :last_name, :birth_year, :gender, :phone, :email, :comment, :address, :postcode, :city)
       end
     end
 

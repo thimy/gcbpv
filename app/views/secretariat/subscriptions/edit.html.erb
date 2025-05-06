@@ -42,32 +42,40 @@
 
         <div class="flex-row gap-6">
           <div class="form-element">
-            <label for="student_gender">Genre</label>
-            <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+            <label for="student_birth_year">Année de naissance</label>
+            <%= student_form.text_field :birth_year %>
           </div>
 
           <div class="form-element">
-            <label for="student_birth_year">Année de naissance</label>
-            <%= student_form.text_field :birth_year %>
+            <label for="student_gender">Genre</label>
+            <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
           </div>
         </div>
 
         <div class="form-element">
-          <%= student_form.label :address, "Adresse" %>
-          <%= student_form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
-          <%= render "website/autocomplete" %>
+          <label>Utiliser l'adresse du payeur</label>
+          <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", @subscription.student.city.present? ? false : true %> Oui</label>
+          <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", @subscription.student.city.present? ? true : false %> Non</label>
         </div>
         
-        <div class="flex-row gap-6">
-
+        <div class="address-block form-element gap-6">
           <div class="form-element">
-            <%= student_form.label :postcode, "Code postal" %>
-            <%= student_form.text_field :postcode, required: true, "data-address-target": "postcode" %>
+            <%= student_form.label :address, "Adresse" %>
+            <%= student_form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+            <%= render "website/autocomplete" %>
           </div>
 
-          <div class="form-element">
-            <%= student_form.label :city, "Ville" %>
-            <%= student_form.text_field :city, required: true, "data-address-target": "city" %>
+          <div class="flex-row gap-6">
+
+            <div class="form-element">
+              <%= student_form.label :postcode, "Code postal" %>
+              <%= student_form.text_field :postcode, "data-address-target": "postcode" %>
+            </div>
+
+            <div class="form-element">
+              <%= student_form.label :city, "Ville" %>
+              <%= student_form.text_field :city, "data-address-target": "city" %>
+            </div>
           </div>
         </div>
 

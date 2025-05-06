@@ -12,19 +12,6 @@
   <% end %>
 
   <div class="form-inputs">
-    <%= field_set_tag "Élève" do %>
-      <%= turbo_frame_tag "student" do %>
-        <%= text_field :student, :name, list: "student-list", placeholder: "Rechercher un élève existant", required: true %>
-        <datalist id="student-list">
-          <% @students.each do |student| %>
-            <option value="<%= student.name %>"><%= student.name %></option>
-          <% end %>
-        </datalist>
-        ou
-        <%= link_to "Créer un nouvel élève", new_student_path, class: "button" %>
-      <% end %>
-    <% end %>
-
     <%= field_set_tag "Payeur" do %>
       <%= turbo_frame_tag "payor" do %>
         <%= text_field :payor, :name, list: "payor-list", placeholder: "Rechercher un payeur existant", required: true %>
@@ -35,6 +22,19 @@
         </datalist>
         ou
         <%= link_to "Créer un nouveau payeur", new_payor_path, class: "button" %>
+      <% end %>
+    <% end %>
+
+    <%= field_set_tag "Élève" do %>
+      <%= turbo_frame_tag "student" do %>
+        <%= text_field :student, :name, list: "student-list", placeholder: "Rechercher un élève existant", required: true %>
+        <datalist id="student-list">
+          <% @students.each do |student| %>
+            <option value="<%= student.name %>"><%= student.name %></option>
+          <% end %>
+        </datalist>
+        ou
+        <%= link_to "Créer un nouvel élève", new_student_path, class: "button" %>
       <% end %>
     <% end %>
 

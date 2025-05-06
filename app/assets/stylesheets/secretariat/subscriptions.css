@@ -35,4 +35,12 @@
       width: 100%;
     }
   }
+
+  .address-block {
+    display: none;
+  }
+
+  .form-element:has(#payor_address_no:checked) + .address-block {
+    display: flex;
+  }
 }
