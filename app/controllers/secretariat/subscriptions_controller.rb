@@ -243,17 +243,19 @@ class Secretariat::SubscriptionsController < SecretariatController
 
       @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
 
-      if params[:instrument].present?
-        if params[:teacher].present?
-          @filters[:courses] = Course.includes(:slot).where(slot: {teacher: params[:teacher]}, instrument: params[:instrument])
-        else
-          @filters[:courses] = Course.where(instrument: params[:instrument])
-        end
-      elsif params[:teacher].present?
-        @filters[:courses] = Course.includes(:slot).where(slot: {teacher: params[:teacher]})
-      end
+      @course_filter = {}
+      @course_filter[:instrument] = params[:instrument] if params[:instrument].present?
+      @course_filter[:slot] = {}
+      @course_filter[:slot][:teacher] = params[:teacher] if params[:teacher].present?
+      @course_filter[:slot][:day_of_week] = params[:course_day] if params[:course_day].present?
+      @course_filter[:slot][:frequency] = params[:frequency] if params[:frequency].present?
+      @filters[:courses] = Course.includes(:slot).where(@course_filter) if @course_filter[:slot].present? || @course_filter[:instrument].present?
 
-      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) if params[:workshop].present?
+      @workshop_filter = {}
+      @workshop_filter[:workshop] = params[:workshop] if params[:workshop].present?
+      @workshop_filter[:day_of_week] = params[:workshop_day] if params[:workshop_day].present?
+      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
+
       @filters[:ars] = params[:ars] if params[:ars].present?
       @filters[:image_consent] = params[:image_consent] if params[:image_consent].present?
 

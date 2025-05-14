@@ -67,22 +67,36 @@
     <div class="flow flex-column gap-3">
       <div class="form-group">
         <div class="form-element">
+          <%= label_tag :teacher, "Professeur" %>
+          <%= select_tag :teacher, options_from_collection_for_select(Teacher.active, "id", "name", params[:teacher].presence || ""), include_blank: "--- Professeur ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
           <%= label_tag :kid_workshop, "Enfance" %>
           <%= select_tag "kid_workshop", options_from_collection_for_select(@kid_workshops, "id", "name", params[:kid_workshop].presence || ""), include_blank: "--- Enfance ---", onchange: "this.form.requestSubmit()" %>
         </div>
+      </div>
+      <div class="form-group">
         <div class="form-element">
           <%= label_tag :instrument, "Discipline" %>
           <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name", params[:instrument].presence || ""), include_blank: "--- Discipline ---", onchange: "this.form.requestSubmit()" %>
         </div>
         <div class="form-element">
-          <%= label_tag :workshop, "Atelier" %>
-          <%= select_tag "workshop", options_from_collection_for_select(@workshops, "id", "name", params[:workshop]), include_blank: "--- Atelier ---", onchange: "this.form.requestSubmit()" %>
+          <%= label_tag :course_day, "Jour du cours" %>
+          <%= select_tag :course_day, options_for_select(Slot.day_of_weeks.keys.to_a, params[:course_day].presence || ""), include_blank: "--- Jour de cours ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :course_frequency, "Fréquence du cours" %>
+          <%= select_tag :course_frequency, options_for_select(Slot.frequencies.keys.to_a, params[:course_frequency].presence || ""), include_blank: "--- Fréquence du cours ---", onchange: "this.form.requestSubmit()" %>
         </div>
       </div>
       <div class="form-group">
         <div class="form-element">
-          <%= label_tag :teacher, "Professeur" %>
-          <%= select_tag :teacher, options_from_collection_for_select(Teacher.active, "id", "name", params[:teacher].presence || ""), include_blank: "--- Professeur ---", onchange: "this.form.requestSubmit()" %>
+          <%= label_tag :workshop, "Atelier" %>
+          <%= select_tag "workshop", options_from_collection_for_select(@workshops, "id", "name", params[:workshop]), include_blank: "--- Atelier ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :workshop_day, "Jour de l’atelier" %>
+          <%= select_tag :workshop_day, options_for_select(Slot.day_of_weeks.keys.to_a, params[:workshop_day].presence || ""), include_blank: "--- Jour de l’atelier ---", onchange: "this.form.requestSubmit()" %>
         </div>
       </div>
     </div>
