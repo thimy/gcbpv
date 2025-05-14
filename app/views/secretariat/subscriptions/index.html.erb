@@ -9,64 +9,84 @@
       data: {
         turbo_frame: "subscriptions"
       },
-      class: "list-form"
+      class: "filters list-form"
     } do |f| %>
-  <div class="form-group">
-    <div class="form-element">
-      <%= label_tag :q, "Nom" %>
-      <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
+  <fieldset>
+    <legend>Filtrer les élèves</legend>
+    <div class="flow flex-column gap-3">
+      <div class="form-group">
+        <div class="form-element">
+          <%= label_tag :q, "Nom" %>
+          <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :status, "Inclure seulement le statut" %>
+          <%= select_tag :status, options_for_select(SubscriptionGroup.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :exclude_status, "Exclure le statut" %>
+          <%= select_tag :exclude_status, options_for_select(SubscriptionGroup.statuses, params[:exclude_status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-element">
+          <%= label_tag :birthyear_under, "Année de naissance supérieure à" %>
+          <%= select_tag :birthyear_under, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_under].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :birthyear_over, "Année de naissance inférieure à" %>
+          <%= select_tag :birthyear_over, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_over].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :ars, "ARS" %>
+          <%= check_box_tag :ars, checked: params[:ars].present? && params[:ars] == "1", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :image_consent, "Consentement à l’image" %>
+          <%= check_box_tag :image_consent, checked: params[:image_consent].present? && params[:image_consent] == "1", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-element">
+          <%= label_tag :q, "Code postal" %>
+          <%= search_field_tag :postcode, params[:postcode] %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :city, "Ville" %>
+          <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :majoration_class, "Communauté de communes" %>
+          <%= select_tag :majoration_class, options_for_select(SubscriptionGroup.majoration_classes, params[:majoration_class].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </div>
     </div>
-    <div class="form-element">
-      <%= label_tag :status, "Inclure seulement le statut" %>
-      <%= select_tag :status, options_for_select(SubscriptionGroup.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+  </fieldset>
+  <fieldset>
+    <legend>Filtrer les enseignements</legend>
+    <div class="flow flex-column gap-3">
+      <div class="form-group">
+        <div class="form-element">
+          <%= label_tag :kid_workshop, "Enfance" %>
+          <%= select_tag "kid_workshop", options_from_collection_for_select(@kid_workshops, "id", "name", params[:kid_workshop].presence || ""), include_blank: "--- Enfance ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :instrument, "Discipline" %>
+          <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name", params[:instrument].presence || ""), include_blank: "--- Discipline ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="form-element">
+          <%= label_tag :workshop, "Atelier" %>
+          <%= select_tag "workshop", options_from_collection_for_select(@workshops, "id", "name", params[:workshop]), include_blank: "--- Atelier ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="form-element">
+          <%= label_tag :teacher, "Professeur" %>
+          <%= select_tag :teacher, options_from_collection_for_select(Teacher.active, "id", "name", params[:teacher].presence || ""), include_blank: "--- Professeur ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+      </div>
     </div>
-    <div class="form-element">
-      <%= label_tag :exclude_status, "Exclure le statut" %>
-      <%= select_tag :exclude_status, options_for_select(SubscriptionGroup.statuses, params[:exclude_status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-element">
-      <%= label_tag :kid_workshop, "Enfance" %>
-      <%= select_tag "kid_workshop", options_from_collection_for_select(@kid_workshops, "id", "name", params[:kid_workshop].presence || ""), include_blank: "--- Enfance ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="form-element">
-      <%= label_tag :instrument, "Discipline" %>
-      <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name", params[:instrument].presence || ""), include_blank: "--- Discipline ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="form-element">
-      <%= label_tag :workshop, "Atelier" %>
-      <%= select_tag "workshop", options_from_collection_for_select(@workshops, "id", "name", params[:workshop]), include_blank: "--- Atelier ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-element">
-      <%= label_tag :q, "Code postal" %>
-      <%= search_field_tag :postcode, params[:postcode] %>
-    </div>
-    <div class="form-element">
-      <%= label_tag :city, "Ville" %>
-      <%= select_tag :city, options_for_select(@cities, params[:city].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="form-element">
-      <%= label_tag :majoration_class, "Communauté de communes" %>
-      <%= select_tag :majoration_class, options_for_select(SubscriptionGroup.majoration_classes, params[:majoration_class].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-element">
-      <%= label_tag :birthyear_under, "Année de naissance supérieure à" %>
-      <%= select_tag :birthyear_under, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_under].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="form-element">
-      <%= label_tag :birthyear_over, "Année de naissance inférieure à" %>
-      <%= select_tag :birthyear_over, options_for_select((Time.zone.now.year - 100)..(Time.zone.now.year - 1), params[:birthyear_over].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="form-element">
-      <%= label_tag :ars, "ARS" %>
-      <%= check_box_tag :ars, checked: params[:ars].present? && params[:ars] == "1", onchange: "this.form.requestSubmit()" %>
-    </div>
-  </div>
+  </fieldset>
   <div class="form-group">
     <%= f.button do %>Rechercher<% end %>
     <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>

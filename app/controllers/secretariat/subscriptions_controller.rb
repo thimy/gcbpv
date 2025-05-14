@@ -240,10 +240,22 @@ class Secretariat::SubscriptionsController < SecretariatController
 
       @filters[:subscription_group][:status] = params[:status] if params[:status].present?
       @filters[:subscription_group][:majoration_class] = params[:majoration_class] if params[:majoration_class].present?
+
       @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
-      @filters[:courses] = Course.where(instrument: params[:instrument]) if params[:instrument].present?
+
+      if params[:instrument].present?
+        if params[:teacher].present?
+          @filters[:courses] = Course.includes(:slot).where(slot: {teacher: params[:teacher]}, instrument: params[:instrument])
+        else
+          @filters[:courses] = Course.where(instrument: params[:instrument])
+        end
+      elsif params[:teacher].present?
+        @filters[:courses] = Course.includes(:slot).where(slot: {teacher: params[:teacher]})
+      end
+
       @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: { workshop: params[:workshop] }) if params[:workshop].present?
       @filters[:ars] = params[:ars] if params[:ars].present?
+      @filters[:image_consent] = params[:image_consent] if params[:image_consent].present?
 
       @not_filters = {}
       @not_filters[:subscription_group] = { status: params[:exclude_status] } if params[:exclude_status].present?
