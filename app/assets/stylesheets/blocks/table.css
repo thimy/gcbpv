@@ -1,0 +1,93 @@
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  margin-block-start: var(--space-s);
+  text-align: left;
+  width: 100%;
+  word-break: keep-all;
+}
+
+thead {
+  vertical-align: top;
+
+  tr {
+    &[data-action] {
+      cursor: pointer;
+  
+      &:hover {
+        background-color: var(--color-mint);
+      }
+    }
+
+    th {
+      background-color: var(--color-mint);
+      color: var(--color-dark);
+      font-weight: 400;
+      padding: var(--space-xs) var(--space-xs);
+    
+      a {
+        display: flex;
+        align-items: center;
+        gap: var(--space-xxs);
+      }
+
+      svg {
+        width: var(--space-s);
+      }
+    }    
+  }
+}
+
+tr {
+  &.confirmed {
+    background-color: color-mix(in srgb, var(--color-success), transparent 80%);
+  }
+
+  &.optional {
+    background-color: color-mix(in srgb, var(--color-warning), transparent 80%);
+  }
+
+  &[data-action] {
+    cursor: pointer;
+
+    &:hover {
+      background-color: color-mix(in srgb, var(--color-secondary), transparent 80%);
+    }
+  }
+}
+
+tbody {
+  vertical-align: top;
+}
+
+td {
+  border-bottom: var(--border-default);
+  word-break: break-word;
+  padding: var(--space-xs);
+
+  [data-button-style="naked"] {
+    height: auto;
+
+    svg {
+      height: auto;
+    }
+  }
+
+  &.cell-options {
+    text-align: right;
+    width: fit-content;
+  }
+
+  &.cell-student,
+  &.cell-phone,
+  &.cell-email {
+    white-space: nowrap;
+  }
+
+  .button {
+    --button-x-padding: 1em;
+    --button-y-padding: 0.6em;
+    font-size: var(--size-step-000);
+  }
+}

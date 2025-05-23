@@ -1,15 +1,15 @@
 <% content_for(:page_class, "ecole projects ") %>
 <% content_for(:page_title, "Les projets") %>
-<% content_for(:page_description, "Focus : accompagnement à la formation / création d’ensemble") %>
 
-<section>
+<section class="flow">
+  <h3>Focus : accompagnement à la formation / création d’ensemble</h3>
   <p>L’équipe des professeurs de l’Ecole de Musique est à l’écoute de vos projets de création d’ensemble, de vos envies de monter votre propre groupe de musique. Nous proposons un accompagnement personnalisé et sur mesure en fonction de vos besoins, profitez-en !</p>
   <p>L’école est aussi à l’initiative de projets qui impliquent les élèves tout au long de l’année. Les professeurs vous informeront.</p>
-</section>
-<section class="grid" data-grid="repeat">
-  <% @projects.each do |project| %>
-    <%= render Website::Card::Component.new(record: project, path: "ecole_project_path") do %>
-      <h3><%= project.name %></h3>
+  <div class="grid" data-grid="50-50">
+    <% @projects.each do |project| %>
+      <%= render Website::Card::Component.new(record: project, path: "ecole_project_path") do %>
+        <h3><%= project.name %></h3>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </section>

@@ -1,0 +1,10 @@
+<% content_for(:page_class, "event-page") %>
+
+<% content_for :content do %>
+  <%= render Website::Header::Component.new %>
+  <main class="grid" data-layout="50-50">
+    <%= yield %>
+  </main>
+  <%= render Website::Footer::Component.new %>
+<% end %>
+<%= render template: "layouts/application" %>

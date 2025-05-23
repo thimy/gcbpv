@@ -5,7 +5,7 @@
   <div class="flex-row gap-4">
     <% @workshop.workshop_slots.each do |slot| %>
       <div class="dual-tag">
-        <span class="tag" data-tag-color="dark">
+        <span class="tag">
           <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>
         </span>
         <% slot.teachers.each do |teacher| %>

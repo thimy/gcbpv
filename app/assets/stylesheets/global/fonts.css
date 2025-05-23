@@ -1,0 +1,63 @@
+@font-face {
+  font-family: "Young Serif";
+  font-weight: 800;
+  src: url("YoungSerif/YoungSerif-Regular.woff2") format("woff2"),
+       url("YoungSerif/YoungSerif-Regular.otf") format("opentype"),
+       url("YoungSerif/YoungSerif-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi/Satoshi-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi/Satoshi-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi/Satoshi-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi/Satoshi-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi/Satoshi-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("Satoshi/Satoshi-Black.woff2") format("woff2");
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: "DM Mono";
+  font-style: normal;
+  font-weight: 500;
+  src: url("Satoshi/dm-mono-v14-latin-500.woff2") format("woff2");
+}

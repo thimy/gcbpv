@@ -1,0 +1,19 @@
+{
+  "title": "Stroke Weights",
+  "description": "Helper classes and custom properties for common stroke weights",
+  "meta": {},
+  "items": [
+    {
+      "name": "Light",
+      "value": "1px"
+    },
+    {
+      "name": "Medium",
+      "value": "3px"
+    },
+    {
+      "name": "Heavy",
+      "value": "6px"
+    }
+  ]
+}

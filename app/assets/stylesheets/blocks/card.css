@@ -1,0 +1,45 @@
+.card {
+  align-items: start;
+  color: var(--color-dark);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  justify-content: end;
+  min-height: var(--space-xxs);
+  text-decoration: none;
+  transition: all var(--transition-base);
+
+  &:hover {
+    box-shadow: var(--shadow-elevation-medium);
+  }
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  &:where([data-card-type="image"]) {
+    --card-margin-top: var(--space-2xl);
+    --image-background-color: var(--mint);
+    box-shadow: var(--shadow-elevation-medium);
+    margin-top: var(--card-margin-top);
+
+    .image {
+      aspect-ratio: 3 / 2;
+      background-color: var(--image-background-color);
+      border-radius: var(--radius-s);
+      box-shadow: var(--shadow-elevation-medium);
+      margin-top: calc(var(--card-margin-top) * -1);
+      overflow: hidden;
+      width: 100%;
+
+      img {
+        height: 100%;
+        max-width: initial;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
+  }
+}

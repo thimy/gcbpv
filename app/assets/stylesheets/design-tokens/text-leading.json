@@ -1,0 +1,26 @@
+{
+  "title": "Leading",
+  "description": "Ratio-based leading/line-height values",
+  "items": [
+    {
+      "name": "Micro",
+      "value": 0.85
+    },
+    {
+      "name": "Flat",
+      "value": 1
+    },
+    {
+      "name": "Fine",
+      "value": 1.25
+    },
+    {
+      "name": "Standard",
+      "value": 1.5
+    },
+    {
+      "name": "Loose",
+      "value": 1.75
+    }
+  ]
+}

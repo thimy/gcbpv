@@ -1,0 +1,63 @@
+.tag {
+  --tag-bg-color: var(--color-primary);
+  background-color: var(--tag-bg-color);
+  border-radius: var(--radius-s);
+  display: inline-flex;
+  font-family: var(--font-base);
+  font-size: 12px;
+  font-weight: 600;
+  padding: var(--space-xxs) var(--space-xs);
+  text-decoration: none;
+  transition: all ease-out 0.2s;
+
+  &:hover {
+    background-color: color-mix(in srgb, var(--tag-bg-color), transparent 20%);
+  }
+
+  &:where([data-tag-color="light"]) {
+    --tag-bg-color: var(--color-light);
+  }
+
+  &:where([data-tag-color="dark"]) {
+    --tag-bg-color: var(--color-dark);
+  }
+
+  &:where([data-tag-color="secondary"]) {
+    --tag-bg-color: var(--color-secondary);
+  }
+
+  > span {
+    color: var(--tag-bg-color);
+    filter: 
+      invert(1)
+      grayscale(1)
+      contrast(9000)
+    ;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    mix-blend-mode: luminosity;
+  }
+}
+
+.tag-list {
+  --gutter: var(--space-xs);
+
+  &:empty {
+    display: none;
+  }
+}
+
+.dual-tag {
+  display: flex;
+
+  .tag {
+    &:first-child {
+      border-radius: var(--radius-m) 0 0 var(--radius-m);
+    }
+
+    &:last-child {
+      border-radius: 0 var(--radius-m) var(--radius-m) 0;
+    }
+  }
+}

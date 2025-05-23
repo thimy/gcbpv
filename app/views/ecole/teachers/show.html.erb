@@ -1,16 +1,16 @@
 <% content_for(:page_class, "ecole teacher-page ") %>
 <% content_for(:page_title, @teacher.name) %>
 
-<section class="popout">
-  <div class="image flex-column gap-4">
-    <div class="tag-list">
+<section class="flow">
+  <div class="image flow">
+    <div class="tag-list cluster">
       <% @teacher.instruments.each do |instrument| %>
-        <span class="tag" data-tag-color="light-accent">
+        <span class="tag">
           <span><%= instrument.name %></span>
         </span>
       <% end %>
       <% @teacher.cities.pluck(:name).uniq.each do |city| %>
-        <span class="tag" data-tag-color="dark">
+        <span class="tag">
           <span><%= city %></span>
         </span>
       <% end %>
@@ -24,11 +24,11 @@
   <div class="description">
     <%= @teacher.description.present? ? simple_format(@teacher.description) : "La description de ce professeur est indisponible" %>
   </div>
-</section>
-<%= render Website::OtherRecords::Component.new(label: "professeurs") do %>
-  <% @other_teachers.each do |teacher| %>
-    <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "blue" do %>
-      <span><%= teacher.name %></span>
+  <%= render Website::OtherRecords::Component.new(label: "professeurs") do %>
+    <% @other_teachers.each do |teacher| %>
+      <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "blue" do %>
+        <span><%= teacher.name %></span>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</section>

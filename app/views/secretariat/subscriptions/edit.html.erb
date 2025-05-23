@@ -12,103 +12,100 @@
     <% end %>
   </ul>
 <% end %>
-<%= form_for(@subscription, url: secretariat_subscription_path) do |form| %>
-  <%= field_set_tag "Élève" do %>
-    <%= form.fields_for :student do |student_form| %>
-      <div class="form-inputs" data-controller="address">
-        <div class="flex-row gap-6">
-          <div class="form-element">
-            <%= student_form.label :first_name, "Prénom" %>
-            <%= student_form.text_field :first_name, required: true %>
-          </div>
-
-          <div class="form-element">
-            <%= student_form.label :last_name, "Nom" %>
-            <%= student_form.text_field :last_name, required: true %>
-          </div>
+<%= form_for(@subscription, url: secretariat_subscription_path, html: {class: "panel"}) do |form| %>
+  <%= form.fields_for :student do |student_form| %>
+    <div class="flow" data-controller="address">
+      <div class="cluster">
+        <div class="flow">
+          <%= student_form.label :first_name, "Prénom" %>
+          <%= student_form.text_field :first_name, required: true %>
         </div>
 
-        <div class="flex-row gap-6">
-          <div class="form-element">
-            <label for="student_phone">Téléphone</label>
-            <%= student_form.text_field :phone %>
-          </div>
+        <div class="flow">
+          <%= student_form.label :last_name, "Nom" %>
+          <%= student_form.text_field :last_name, required: true %>
+        </div>
+      </div>
 
-          <div class="form-element">
-            <label for="student_email">Email</label>
-            <%= student_form.text_field :email %>
-          </div>
+      <div class="cluster">
+        <div class="flow">
+          <label for="student_phone">Téléphone</label>
+          <%= student_form.text_field :phone %>
         </div>
 
-        <div class="flex-row gap-6">
-          <div class="form-element">
-            <label for="student_birth_year">Année de naissance</label>
-            <%= student_form.text_field :birth_year %>
-          </div>
+        <div class="flow">
+          <label for="student_email">Email</label>
+          <%= student_form.text_field :email %>
+        </div>
+      </div>
 
-          <div class="form-element">
-            <label for="student_gender">Genre</label>
-            <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
-          </div>
+      <div class="cluster">
+        <div class="flow">
+          <label for="student_birth_year">Année de naissance</label>
+          <%= student_form.text_field :birth_year %>
         </div>
 
-        <div class="form-element">
-          <label>Utiliser l'adresse du payeur</label>
-          <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", @subscription.student.city.present? ? false : true %> Oui</label>
-          <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", @subscription.student.city.present? ? true : false %> Non</label>
+        <div class="flow">
+          <label for="student_gender">Genre</label>
+          <%= student_form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
         </div>
-        
-        <div class="address-block form-element gap-6">
-          <div class="form-element">
+      </div>
+
+      <div class="address-condition flow">
+        <label>Utiliser l'adresse du payeur</label>
+        <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", @subscription.student.city.present? ? false : true %> Oui</label>
+        <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", @subscription.student.city.present? ? true : false %> Non</label>
+      </div>
+
+      <div class="address-block flow">
+        <div class="cluster">
+          <div class="flow">
             <%= student_form.label :address, "Adresse" %>
             <%= student_form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
             <%= render "website/autocomplete" %>
           </div>
+        </div>
+        
+        <div class="cluster">
+          <div class="flow">
+            <%= student_form.label :postcode, "Code postal" %>
+            <%= student_form.text_field :postcode, "data-address-target": "postcode" %>
+          </div>
 
-          <div class="flex-row gap-6">
-
-            <div class="form-element">
-              <%= student_form.label :postcode, "Code postal" %>
-              <%= student_form.text_field :postcode, "data-address-target": "postcode" %>
-            </div>
-
-            <div class="form-element">
-              <%= student_form.label :city, "Ville" %>
-              <%= student_form.text_field :city, "data-address-target": "city" %>
-            </div>
+          <div class="flow">
+            <%= student_form.label :city, "Ville" %>
+            <datalist id="city-autocomplete">
+              <% @cities.each do |city| %>
+                <option><%= city %></option>
+              <% end %>
+            </datalist>
+            <%= student_form.text_field :city, list: "city-autocomplete", "data-address-target": "city" %>
           </div>
         </div>
+      </div>
 
-        <div class="form-element">
+      <div class="cluster">
+        <div class="flow">
           <label for="payor_comment">Notes</label>
-          <%= student_form.text_area :comment, rows: 2 %>
+          <%= student_form.text_area :comment, class: "double", rows: 2 %>
         </div>
-      </div>
-    <% end %>
-  <% end %>
-  <%= field_set_tag "Informations supplémentaires" do %>
-    <div class="form-inputs">
-      <div class="flex-row gap-6">
-        <div class="form-inline">
-          <%= form.check_box :image_consent %>
-          <%= form.label :image_consent, "Consentement à l’image" %>
-        </div>
-        <div class="form-inline">
-          <%= form.check_box :disability %>
-          <%= form.label :disability, "Situation empêchée" %>
-        </div>
-        <div class="form-inline">
-          <%= form.check_box :ars %>
-          <%= form.label :ars, "ARS" %>
-        </div>
-      </div>
-
-      <div class="form-element">
-        <%= form.label :comment, "Notes" %>
-        <%= form.text_area :comment, rows: 2 %>
       </div>
     </div>
   <% end %>
+  <div class="flow">
+    <div class="cluster">
+      <label for="subscription_image_consent"><%= form.check_box :image_consent %> Consentement à l’image</label>
+      <label for="subscription_disability"><%= form.check_box :disability %> Situation empêchée</label>
+      <label for="subscription_ars"><%= form.check_box :ars %> ARS</label>
+    </div>
 
-  <%= form.submit "Mettre à jour l'élève" %>
+    <div class="cluster">
+      <div class="flow">
+        <%= form.label :comment, "Notes" %>
+        <%= form.text_area :comment, class: "double", rows: 2 %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit "Mettre à jour l'élève", class: "button" %>
 <% end %>

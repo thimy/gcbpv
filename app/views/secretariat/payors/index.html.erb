@@ -14,7 +14,7 @@
       class: "list-form"
     } do |f| %>
   <div class="form-group">
-    <div class="form-element">
+    <div class="flow">
       <%= label_tag :q, "Noms" %>
       <div class="search-input">
         <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
@@ -23,7 +23,7 @@
         <% end %>
       </div>
     </div>
-    <div class="form-element">
+    <div class="flow">
       <%= label_tag :status, "Inclure seulement le statut" %>
       <%= select_tag :status, options_for_select(SubscriptionGroup.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
     </div>

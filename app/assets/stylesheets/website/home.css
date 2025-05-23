@@ -1,123 +1,20 @@
 .home {
-  container-type: inline-size;
-
-  section:not(.hero, .categories) {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-4);
-  
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
-
-  .now {
-    display: grid;
-    align-items: start;
-    gap: var(--space-l);
-    grid-template-columns: 1fr 520px;
-    grid-template-rows: auto 1fr;
-
-    section {
-      display: flex;
-      flex-direction: column;
-      gap: var(--size-4);
-
-      header {
-        display: flex;
-        flex-direction: column;
-
-        a {
-          color: var(--text-color-secondary);
-          font-size: var(--font-size-fluid-0);
-
-          &:hover {
-            color: var(--dark-accent);
-          }
-        }
-      }
-
-      .event {
-        display: grid;
-        height: var(--size-13);
-        overflow: hidden;
-        position: relative;
-        transition: all ease-out 0.2s;
-
-        & > * {
-          grid-area: 1 / 1 / 1 / 1;
-        }
-
-        .event-info {
-          align-self: end;
-          padding: var(--size-4);
-          z-index: 1;
-
-          h3 {
-            font-size: var(--font-size-5);
-          }
-
-          p {
-            font-size: var(--font-size-2);
-            margin: 0;
-          }
-        }
-
-        &::after {
-          background-image: linear-gradient(to bottom, transparent, var(--black) 80%);
-          content: "";
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 0;
-        }
-
-        img {
-          height: 100%;
-          object-fit: cover;
-          transition: all ease-out 0.2s;
-          width: 100%;
-
-          &:is(.event:hover > *) {
-            transform: scale(1.05);
-          }
-        }
-      }
-    }
-  }
-
-  .panel {
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-10);
-
-    .list-element {
-      margin: calc(var(--size-3) * -1);
-    }
+  .upcoming-events, .latest-posts {
+    --gutter: var(--space-s);
   }
 
   .latest-posts {
-    grid-row: 1 / -1;
+    grid-column: 1 / 3;
   }
 
-  .upcoming-events {
-    margin-top: 0;
+  .upcoming-events .grid {
+    background-color: var(--color-mint);
+    border-radius: var(--space-xs);
+    padding: var(--space-s);
   }
 
-  @container (max-width: 1000px) {
-    main {
-      gap: var(--size-12) 0;
-    }
-
-    .grid {
-      grid-template-columns: 1fr;
-    }
-
-    .now {
-      grid-template-columns: 1fr;
-    }
+  .upcoming-events event-card + event-card {
+    border-inline-start: var(--stroke);
+    padding-inline-start: var(--space-s);
   }
 }

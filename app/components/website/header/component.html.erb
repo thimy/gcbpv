@@ -1,36 +1,32 @@
-<header>
-  <% if @banner.present? %>
-    <div class="information-banner"><%= simple_format(@banner) %></div>
-  <% end %>
-  <nav data-controller="menu-toggle">
-    <%= link_to "Groupement Culturel Breton des Pays de Vilaine", "/", class: "home-button" %>
-    <%= render Shared::MenuButton::Component.new %>
-    <div class="links">
-      <button class="button" data-action="menu-toggle#toggle" data-button-type="naked"><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button>
-      <%= link_to "L’association", association_path %>
-      <%= link_to "La Bogue d’Or", "/bogue/#{Bogue.active.ordered.first.slug}" %>
-      <div class="dropdown">
-        <%= link_to "École", ecole_path %>
-        <div class="dropdown-menu">
-          <%= link_to "Tarifs", pricing_path %>
-          <%= link_to "L’enfance", ecole_youth_path %>
-          <%= link_to "Les cours", ecole_instruments_path %>
-          <%= link_to "Les ateliers", ecole_workshops_path %>
-          <%= link_to "Les rendez-vous", ecole_trainings_path %>
-          <%= link_to "Les projets", ecole_projects_path %>
-          <%= link_to "Les professeurs", ecole_teachers_path %>
-          <%= link_to "Participation et financement", ecole_membership_path %>
-        </div>
-      </div>
-      <div class="dropdown">
-        <%= link_to "Centre de ressources", archives_path %>
-        <div class="dropdown-menu">
-          <%= link_to "Les éditions", archives_editions_path %>
-        </div>
-      </div>
-      <%= link_to "Actualités", posts_path %>
-      <%= link_to "Événements", events_path %>
-      <%= link_to "Contact", contact_path %>
+<% if @banner.present? %>
+  <div class="information-banner"><%= simple_format(@banner) %></div>
+<% end %>
+<header class="main-header">
+  <div class="main-header__title wrapper region">
+    <div class="feature flow">
+      <h1 class="main-header__logo">
+        <%= link_to "/", class: "home-button" do %>
+          Groupement Culturel Breton<br>des Pays de Vilaine
+        <% end %>
+      </h1>
+      <p class="main-header__tagline">
+        Collecter, sauvegarder, transmettre et valoriser le patrimoine culturel local. <br>
+        Promouvoir de nouvelles formes d'expression à partir de ce patrimoine.
+      </p>
+    </div>
+  </div>
+  <nav class="main-header__nav feature" data-controller="menu-toggle">
+    <!-- button class="button menu-button" data-action="click->menu-toggle#toggle" aria-label="Ouvrir le menu" hidden>
+      <%= inline_svg "icons/menu" %>
+    </button-->
+    <ul class="cluster">
+      <!--button class="button" data-action="menu-toggle#toggle" data-button-type="naked" hidden><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button-->
+      <li><%= link_to "Actualités", posts_path, class: "decorated" %></li>
+      <li><%= link_to "Événements", events_path, class: "decorated" %></li>
+      <li><%= link_to "La Bogue d’Or", "/bogue/#{Bogue.active.ordered.first.slug}", class: "decorated" %></li>
+      <li><%= link_to "L'école de musique", ecole_path, class: "decorated" %></li>
+      <li><%= link_to "Centre ressources", archives_path, class: "decorated" %></li>
+      <li><%= link_to "L’association", association_path, class: "decorated" %></li>
     </div>
   </nav>
 </header>

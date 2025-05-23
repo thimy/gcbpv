@@ -1,14 +1,9 @@
-<event-card>
-  <%= link_to @event, class: "list-element event-card" do %>
-    <time>
-      <div><%= @event.date_period %></div>
-      <%= @event.time_period if @event.time_period.present? %>
-    </time>
-    <div class="event-info">
+<event-card class="card panel <% if @inline %>row<% end %>">
+  <%= link_to @event, class: "repel" do %>
+    <time><%= @event.date_period %></time>
+    <div class="flow">
       <h3><%= @event.name %></h3>
-      <address>
-        <%= @event.full_location %>
-      </address>
+      <address><%= @event.city %></address>
     </div>
   <% end %>
 </event-card>

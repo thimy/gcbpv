@@ -1,0 +1,65 @@
+.main-header {
+  .main-header__title {
+    --flow-space: var(--space-xs);
+    background: linear-gradient(to right, var(--color-light), color-mix(in oklch, var(--color-light), transparent 50%)),
+                url("home/events.jpg") right center no-repeat;
+    background-size: cover;
+  }
+
+  .main-header__logo a {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .main-header__tagline {
+    align-content: center;
+    font-size: var(--size-step-2);
+    font-weight: 700;
+  }
+
+  .main-header__nav ul {
+    flex-wrap: nowrap;
+    list-style: none;
+    margin: 0;
+    padding: var(--space-m);
+    overflow-x: scroll;
+
+    > li {
+      white-space: nowrap;
+    }
+  }
+
+  .home-button {
+    font-family: var(--font-brand);
+  }
+
+  @media (width > 50em) {
+    --region-space: var(--space-l);
+
+    .main-header__logo {
+      padding: 0;
+    }
+  
+    .main-header__tagline {
+      flex-shrink: 1;
+      padding: 0;
+    }
+  
+    .main-header__nav {
+      border-block: var(--stroke);
+      padding-block: var(--brand-header-nav-sm-padding-block,var(--space-s));
+    }
+
+    .main-header__nav ul {
+      --cluster-wrap: var(--brand-header-nav-ul-wrap,wrap);
+      --cluster-column-gap: var(--brand-header-nav-ul-cluster-column-gap,var(--space-l));
+      --cluster-row-gap: var(--brand-header-nav-ul-cluster-row-gap,var(--space-xs));
+      --cluster-horizontal-alignment: var(--brand-header-nav-ul-cluster-horizontal-alignment,flex-start);
+      --cluster-vertical-alignment: var(--brand-header-nav-ul-cluster-vertical-alignment,center);
+      --cluster-direction: var(--brand-header-nav-ul-cluster-direction,row);
+      justify-content: center;
+      overflow: auto;
+      padding: 0;
+    }
+  }
+}

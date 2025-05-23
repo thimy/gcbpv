@@ -1,0 +1,60 @@
+event-card {
+
+  > a {
+    color: var(--color-dark);
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    gap: var(--space-xs) var(--space-s);
+    text-decoration: none;
+  }
+
+  .flow {
+    --flow-space: var(--space-xxs);
+  }
+
+  h3 {
+    font-size: var(--size-step-1);
+  }
+
+  time {
+    font-size: var(--size-step-0);
+  }
+
+  address {
+    font-size: var(--size-step-0);
+    font-style: normal;
+  }
+
+  &.row {
+    container-type: inline-size;
+    display: block;
+  }
+
+  &.row > a {
+    align-items:center;
+    display:flex;
+    flex-direction:row;
+    justify-content:start;
+    gap:var(--space-xs) var(--space-xl)
+  }
+
+  &.row .tag-list {
+    margin-inline-start: auto;
+  }
+
+  &.row .tag {
+    --tag-bg-color: var(--color-secondary);
+  }
+
+  :is(time) {
+    font-size: var(--size-step-0);
+    width: 12ch;
+  }
+
+  time div {
+    color: var(--secondary);
+    flex: 0 0 130px;
+    font-size: var(--font-size-0);
+  }
+}

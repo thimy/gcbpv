@@ -2,8 +2,11 @@
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new(banner: @banner) %>
-  <main class="content">
-    <%= render Website::Hero::Component.new(title: content_for(:page_title), subtitle: content_for(:page_description)) %>
+  <main class="wrapper region">
+    <div class="page-title">
+      <h1><%= content_for(:page_title) %></h1>
+      <p><%= content_for(:page_description) %></p>
+    </div>
     <%= yield %>
   </main>
   <%= render Website::Footer::Component.new %>

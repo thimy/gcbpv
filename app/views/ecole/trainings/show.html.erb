@@ -1,8 +1,8 @@
 <% content_for(:page_class, "ecole training-page ") %>
 <% content_for(:page_title, @training.name) %>
 
-<section>
-  <div class="tag-list">
+<section class="flow">
+  <div class="tag-list cluster">
     <% @training.training_sessions.each do |session| %>
       <span class="tag" data-tag-color="red">
         <span><%= session.city %></span>
@@ -13,17 +13,17 @@
     <% end %>
   </div>
   <%= simple_format(@training.description) %>
-</section>
-<% if @training.training_sessions.present? %>
-  <section>
-    <h2>Liste des rendez-vous</h2>
-    <%= render Website::Card::TrainingSession::Component.with_collection(@training.training_sessions) %>
-  </section>
-<% end %>
-<%= render Website::OtherRecords::Component.new(label: "rendez-vous") do %>
-  <% @other_trainings.each do |training| %>
-    <%= link_to ecole_training_path(training), class: "tag", "data-tag-color": "blue" do %>
-      <span><%= training.name %></span>
+  <% if @training.training_sessions.present? %>
+    <section>
+      <h2>Liste des rendez-vous</h2>
+      <%= render Website::Card::TrainingSession::Component.with_collection(@training.training_sessions) %>
+    </section>
+  <% end %>
+  <%= render Website::OtherRecords::Component.new(label: "rendez-vous") do %>
+    <% @other_trainings.each do |training| %>
+      <%= link_to ecole_training_path(training), class: "tag", "data-tag-color": "blue" do %>
+        <span><%= training.name %></span>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</section>

@@ -9,53 +9,71 @@
   </div>
 </div>
 
-<div class="page-info">
-  <fieldset>
-    <dl class="horizontal">
+<div class="panel">
+  <dl class="cluster">
+    <div>
       <dt>Foyer :</dt>
       <dd><%= link_to @subscription.subscription_group&.payor&.name, secretariat_payor_path(@subscription.subscription_group.payor) %></dd>
+    </div>
+    <div>
       <dt>Année de naissance :</dt>
       <dd><%= @subscription.student.birth_year %></dd>
+    </div>
+    <div>
       <dt>Genre :</dt>
       <dd><%= @subscription.student.gender %></dd>
-    </dl>
-    <dl class="horizontal">
-      <dt>Email :</dt>
-      <dd><%= @subscription.email %></dd>
-      <dt>Téléphone :</dt>
-      <dd><%= format_phone(@subscription.phone) %></dd>
-    </dl>
-    <dl class="horizontal">
-      <dt>Adresse :</dt>
-      <dd><%= @subscription.student.address_or_payor_address %></dd>
-      <dt>Code postal :</dt>
-      <dd><%= @subscription.student.postcode_or_payor_postcode %></dd>
-      <dt>Ville :</dt>
-      <dd><%= @subscription.student.city_or_payor_city %></dd>
-    </dl>
-    <% if @subscription.student.comment.present? %>
-      <dl>
-        <dt>Commentaires sur l'élève :</dt>
-        <dd><%= @subscription.student.comment %></dd>
-      <dl>
-    <% end %>
-  </fieldset>
-  <fieldset>
-    <dl class="horizontal">
+    </div>
+    <div>
       <dt>Consentement à l’image :</dt>
       <dd><%= @subscription.image_consent ? "✅" : "❌" %></dd>
+    </div>
+    <div>
       <dt>Situation empêchée :</dt>
       <dd><%= @subscription.disability ? "✅" : "❌" %></dd>
+    </div>
+    <div>
       <dt>ARS :</dt>
       <dd><%= @subscription.ars ? "✅" : "❌" %></dd>
-    </dl>
-    <% if @subscription.comment.present? %>
-      <dl>
+    </div>
+  </dl>
+  <dl class="cluster">
+    <div>
+      <dt>Email :</dt>
+      <dd><%= @subscription.email %></dd>
+    </div>
+    <div>
+      <dt>Téléphone :</dt>
+      <dd><%= format_phone(@subscription.phone) %></dd>
+    </div>
+    <div>
+      <dt>Adresse :</dt>
+      <dd><%= @subscription.student.address_or_payor_address %></dd>
+    </div>
+    <div>
+      <dt>Code postal :</dt>
+      <dd><%= @subscription.student.postcode_or_payor_postcode %></dd>
+    </div>
+    <div>
+      <dt>Ville :</dt>
+      <dd><%= @subscription.student.city_or_payor_city %></dd>
+    </div>
+  </dl>
+  <% if @subscription.student.comment.present? %>
+    <dl>
+      <div>
+        <dt>Commentaires sur l'élève :</dt>
+        <dd><%= @subscription.student.comment %></dd>
+      </div>
+    <dl>
+  <% end %>
+  <% if @subscription.comment.present? %>
+    <dl class="cluster">
+      <div>
         <dt>Commentaires sur l'inscription en cours :</dt>
         <dd><%= @subscription.comment %></dd>
-      <dl>
-    <% end %>
-  </fieldset>
+      </div>
+    <dl>
+  <% end %>
 </div>
 
 <p style="color: green"><%= notice %></p>
@@ -64,9 +82,9 @@
 
 <%= link_to "Supprimer cette inscription",
   secretariat_subscription_path(@subscription),
-  class: "button page-end",
+  class: "button",
   data: {
-    "button-status": "alert",
+    "button-variant": "alert",
     turbo_method: :delete,
     turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette inscription ?"
   } %>

@@ -6,6 +6,6 @@
   }
 
   .authentication-links {
-    margin-top: var(--size-4);
+    margin-top: var(--space-m);
   }
 }

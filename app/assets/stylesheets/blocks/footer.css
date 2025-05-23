@@ -1,0 +1,13 @@
+footer {
+  background: var(--color-dark);
+  color: var(--color-light);
+
+  > * {
+    padding-block: var(--space-l);
+  }
+  
+  h3 {
+    font-size: var(--size-step-3);
+    margin-block-end: var(--space-xs);
+  }
+}

@@ -13,7 +13,7 @@
 .teacher-page {
   .image {
     float: right;
-    padding: var(--size-2) 0 var(--size-6) var(--size-6);
+    padding: var(--space-xs) 0 var(--space-xl) var(--space-xl);
     width: 500px;
 
     img {
@@ -25,12 +25,12 @@
     }
   
     svg {
-      color: var(--white);
+      color: var(--color-light);
       height: 20rem;
-      margin-top: var(--size-4);
-      padding: var(--size-4);
+      margin-top: var(--space-m);
+      padding: var(--space-m);
       width: 100%;  stroke: transparent;
-      fill: var(--black);
+      fill: var(--color-dark);
     }
   }
 }

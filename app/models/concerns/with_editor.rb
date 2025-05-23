@@ -84,4 +84,11 @@ module WithEditor
     end
     content_html.join.html_safe
   end
+
+  def excerpt
+    return if content.blank?
+    parsed_content = JSON.parse(content)
+    block = parsed_content["blocks"].find { |block| block["type"] == "paragraph" }
+    block["data"]["text"] if block.present?
+  end
 end

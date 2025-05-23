@@ -6,6 +6,7 @@ class PostsController < BaseController
   end
 
   def show
+    render layout: "post"
   end
 
   private

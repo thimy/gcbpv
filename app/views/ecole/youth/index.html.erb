@@ -1,22 +1,16 @@
 <% content_for(:page_class, "ecole youth ") %>
 <% content_for(:page_title, "Enfance") %>
 
-<section>
+<section class="flow">
   <p>L’école de musique traditionnelle propose différents ateliers à destination des enfants pour leur permettre de s’initier à la musique et à la pratique instrumentale.</p>
-</section>
-<section>
   <h2>L’éveil musical</h2>
-  <p class="subtitle"><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</p>
+  <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @early_learning.description.html_safe %>
-</section>
-<section>
   <h2>Découverte instrumentale</h2>
-  <p class="subtitle"><%= "#{number_to_currency(@plan.kid_discovery_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</p>
+  <strong><%= "#{number_to_currency(@plan.kid_discovery_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @kid_discovery.description.html_safe %>
-</section>
-<section>
   <h2>Ensembles jeunesse</h2>
-  <p class="subtitle"><%= "#{number_to_currency(@plan.workshop_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</p>
+  <strong><%= "#{number_to_currency(@plan.workshop_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <% @kid_workshops.each do |workshop| %>
     <h3><%= workshop.name %></h3>
     <% if workshop.workshop_slots.present? %>

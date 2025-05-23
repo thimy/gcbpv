@@ -1,19 +1,26 @@
-/* Entry point for your PostCSS build */
+@import 'tailwindcss/base';
 
-@import "variables/index.css";
+@import 'global/reset.css';
+@import 'global/fonts.css';
 
-@import "reset.css";
-@import "fonts.css";
-@import "typography.css";
-@import "form.css";
-@import "base.css";
+@import 'tailwindcss/components';
 
 @import "vendors/multiselect.css";
 
-@import "components/index.css";
+@import 'global/variables.css';
+@import 'global/global-styles.css';
 
-@import "website/index.css";
+@import-glob 'blocks/*.css';
+@import-glob 'compositions/*.css';
+@import-glob 'utilities/*.css';
+
+@import 'tailwindcss/utilities';
+
+/* Entry point for your PostCSS build */
+
+@import "website/home.css";
+@import "website/posts.css";
 @import "secretariat/index.css";
-@import "secretariat/emails.css";
+/* @import "secretariat/emails.css";
 @import "secretariat/subscriptions.css";
-@import "secretariat/teachers.css";
+@import "secretariat/teachers.css"; */

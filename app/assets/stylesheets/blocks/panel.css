@@ -1,0 +1,7 @@
+.panel {
+  background-color: var(--color-mint);
+  border-radius: var(--space-xs);
+  color: var(--text-color);
+  display: block;
+  padding: var(--space-s);
+}

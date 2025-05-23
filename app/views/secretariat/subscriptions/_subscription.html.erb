@@ -1,16 +1,16 @@
-<div id="<%= dom_id subscription %>" class="record flex-column gap-10">
-  <section class="flex-column gap-3">
+<div id="<%= dom_id subscription %>" class="record flow">
+  <div>
     <h2>Enfance</h2>
     <%= render "secretariat/subbed_kid_workshops/list", subscription: @subscription %>
-  </section>
+  </div>
 
-  <section class="flex-column gap-3">
+  <div>
     <h2>Cours</h2>
     <%= render "secretariat/courses/list", subscription: @subscription %>
-  </section>
+  </div>
 
-  <section class="flex-column gap-3">
+  <div>
     <h2>Ateliers</h2>
     <%= render "secretariat/subbed_workshops/list", subscription: @subscription %>
-  </section>
+  </div>
 </div>

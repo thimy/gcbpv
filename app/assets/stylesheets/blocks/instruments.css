@@ -1,0 +1,75 @@
+.instruments {
+  .prices {
+    display: grid;
+    gap: 0 var(--space-l);
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+
+    dl {
+      border: 2px solid var(--color-dark);
+      border-radius: var(--radius-2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-s) var(--space-m);
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+
+  .card {
+    align-items: start;
+  }
+}
+
+.instrument-page {
+  .slot-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+
+    h3 {
+      border-block-start: 1px solid var(--mid);
+      font-size: var(--font-space-m);
+      margin-block: var(--space-m) 0;
+      padding-block-start: var(--space-s);
+      width: 12ch;
+
+      &:first-child {
+        border: 0;
+        margin-block-start: 0;
+        padding-block-start: 0;
+      }
+    }
+
+    .city-block {
+      display: flex;
+      gap: var(--space-m);
+      
+      &:not(:first-child) {
+        border-top: var(--border-default);
+        padding-block-start: var(--space-m);
+      }
+    }
+
+    .city {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      margin-block-start: var(--space-xs);
+    }
+
+    .day {
+      --flow-space: var(--space-xs);
+
+      h4 {
+        font-size: var(--side-step-0);
+      }
+    }
+
+    .slot {
+      margin-block-start: var(--space-xxs);
+    }
+  }
+}

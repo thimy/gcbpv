@@ -1,0 +1,16 @@
+.banner {
+  --banner-color: var(--secondary);
+  background-color: color-mix(in srgb, var(--banner-color), transparent 40%);
+  border: 1px solid var(--banner-color);
+  border-radius: var(--radius-m);
+  margin-block-end: var(--space-2xl);
+  padding: var(--space-xs) var(--space-s);
+
+  &:where([data-banner-type="success"]) {
+    --banner-color: var(--success);
+  }
+
+  &:where([data-banner-type="alert"]) {
+    --banner-color: var(--error);
+  }
+}

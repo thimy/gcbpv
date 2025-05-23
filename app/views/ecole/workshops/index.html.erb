@@ -1,12 +1,10 @@
 <% content_for(:page_class, "ecole workshops ") %>
 <% content_for(:page_title, "Les ateliers") %>
 
-<section>
+<section class="flow">
   <h2><%= inline_svg "icons/users" %>Atelier de pratique musicale d’ensemble (108€/an)</h2>
   <p>Ce sont des ateliers thématiques qui permettent d’aborder du répertoire, de la danse, d’apprendre à jouer à plusieurs.</p>
-</section>
-<section>
-  <div class="grid" data-grid="repeat">
+  <div class="grid" data-grid="50-50">
     <%= render Website::Card::Workshop::Component.with_collection(@workshops, path: "ecole_workshop_path") %>
   </div>
 </section>

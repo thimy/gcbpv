@@ -1,23 +1,27 @@
 <% content_for(:page_class, "home ") %>
 <% content_for(:page_title, "Groupement Culturel Breton des Pays de Vilaine".html_safe) %>
 
-<div class="feature now">
-  <section class="latest-posts">
-    <header>
+<div class="feature feed grid" data-layout="thirds">
+  <section class="latest-posts flow">
+    <header class="flow">
       <h2><%= inline_svg "icons/newspaper" %>Dernières actualités</h2>
       <%= link_to "↬ Voir tous les articles", posts_path %>
     </header>
-    <div class="panel">
-      <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
-    </div>
+    <% if @posts.present? %>
+      <div class="flow">
+        <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
+      </div>
+    <% end %>
   </section>
-  <section class="upcoming-events">
-    <header>
+  <section class="upcoming-events flow">
+    <header class="flow">
       <h2><%= inline_svg "icons/party" %>Événements à venir</h2>
       <%= link_to "↬ Voir tous les événements", events_path %>
     </header>
-    <div class="panel">
-      <%= render Website::Card::Event::Component.with_collection(@events) %>
-    </div>
+    <% if @events.present? %>
+      <div class="flow">
+        <%= render Website::Card::Event::Component.with_collection(@events) %>
+      </div>
+    <% end %>
   </section>
 </div>

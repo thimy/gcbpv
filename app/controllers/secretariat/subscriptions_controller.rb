@@ -3,6 +3,7 @@ class Secretariat::SubscriptionsController < SecretariatController
 
   before_action :query
   before_action :set_subscription, only: %i[ show edit update destroy ]
+  before_action :set_cities, only: %i[ index edit update ]
   before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
 
   SORT_ATTRIBUTES = {
@@ -19,9 +20,6 @@ class Secretariat::SubscriptionsController < SecretariatController
     @total_subscriptions = Subscription.active
     @confirmed_count = Subscription.active.registered.size
     @unconfirmed_count = @total_subscriptions.size - @confirmed_count
-    @cities = Student.all.map { |student|
-      student.city_or_payor_city
-    }.flatten.uniq.reject { |c| c.blank? }.sort
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
@@ -165,6 +163,12 @@ class Secretariat::SubscriptionsController < SecretariatController
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
       @subscription = Subscription.find(params[:id])
+    end
+
+    def set_cities
+      @cities = Student.all.map { |student|
+        student.city_or_payor_city
+      }.flatten.uniq.reject { |c| c.blank? }.sort
     end
 
     # Only allow a list of trusted parameters through.

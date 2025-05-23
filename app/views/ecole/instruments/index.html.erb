@@ -1,7 +1,7 @@
 <% content_for(:page_class, "ecole instruments ") %>
 <% content_for(:page_title, "Les cycles de cours") %>
 
-<section>
+<section class="flow">
   <h2><%= inline_svg "icons/file-music" %>Apprendre un instrument</h2>
   <h3>Cycle 1 – Durée : 1 à 3 ans</h3>
   <p>L’entrée dans ce cycle se formalise par le choix de l’élève de pratiquer un instrument défini.</p>
@@ -9,8 +9,6 @@
   <h3>Cycle 2 – Durée : 2 à 4 ans</h3>
   <p>Ce cycle contribuera au développement artistique et musical personnel de l’élève en favorisant une bonne ouverture culturelle, l’appropriation d’un langage musical, l’acquisition des bases d’une pratique autonome, et en aidant l’élève à mieux tenir sa place dans une pratique collective.</p>
   <p>Ce cycle vise à accompagner l’élève vers une autonomie dans sa pratique musicale, et l’aidera à développer son expression propre, son interprétation, son style.</p>
-</section>
-<section>
   <h2><%= inline_svg "icons/hand-coin" %>Tarifs</h2>
   <p>L’inscription ouvre droit à un volume de 30 séances de cours individuels et à <%= link_to "un atelier de pratique d’ensemble", ecole_workshops_path %>.</p>
   <div class="prices">
@@ -24,10 +22,10 @@
     </dl>
   </div>
   <p>Majoration si <%= link_to "hors Redon Agglomération", ecole_membership_path(anchor: "majorations") %>.</p>
-</section>
-<section class="instrument-list">
   <h2 class="full"><%= inline_svg "icons/guitar" %>Les instruments enseignés</h2>
-  <div class="grid full" data-grid="repeat">
-    <%= render Website::Card::Instrument::Component.with_collection(@instruments) %>
-  </div>
+  <% @instruments.each do |instrument| %>
+    <%= link_to ecole_instrument_path(instrument), class: "tag", "data-tag-color": "secondary" do %>
+      <span><%= instrument.name %></span> 
+    <% end %>
+  <% end %>
 </section>

@@ -7,7 +7,7 @@
   <p>
     <strong>Catégories :</strong>
     <% post.categories.each do |category| %>
-      <span class="tag" data-tag-color="light-accent">
+      <span class="tag">
         <span><%= category.name %></span>
       </span>
     <% end %>
@@ -35,9 +35,9 @@
 
 <%= link_to "Supprimer cet article",
   secretariat_post_path(post),
-  class: "button page-end",
+  class: "button",
   data: {
-    "button-status": "alert",
+    "button-variant": "alert",
     turbo_method: :delete,
     turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet article ?"
   } %>

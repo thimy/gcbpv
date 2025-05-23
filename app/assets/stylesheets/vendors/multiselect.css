@@ -59,9 +59,9 @@
 }
 
 .multiselect__preview {
-  width: -webkit-fill-available;
+  width: stretch;
   width: -moz-available;
-  width: -webkit-fill-available;
+  width: stretch;
   gap: 0.5rem;
   font-size: 0.875rem;
   display: flex;
@@ -69,7 +69,7 @@
 }
 
 .multiselect__pill {
-  max-width: fill-available;
+  max-width: stretch;
   color: rgb(55, 61, 63);
   font-size: 0.75rem;
   padding-left: 0.5rem;

@@ -1,22 +1,19 @@
 <% content_for(:page_class, "events ") %>
 <% content_for(:page_title, "Événements") %>
 
-<section class="popout flex-column gap-6">
+<section class="flow">
   <h2><%= inline_svg "icons/calendar-check" %>Les événements à venir</h2>
-  <div class="panel">
     <% if @upcoming_events.present? %>
-      <%= render Website::Card::Event::Component.with_collection(@upcoming_events) %>
+      <%= render Website::Card::Event::Component.with_collection(@upcoming_events, inline: true) %>
     <% else %>
-      Aucun événement à venir
+      <div class="panel">
+        Aucun événement à venir
+      </div>
     <% end %>
-  </div>
-</section>
-
-<section class="popout flex-column gap-6">
   <h2><%= inline_svg "icons/calendar-off" %>Les événements passés</h2>
-  <div class="panel">
+  <div class="flow">
     <% if @passed_events.present? %>
-      <%= render Website::Card::Event::Component.with_collection(@passed_events) %>
+      <%= render Website::Card::Event::Component.with_collection(@passed_events, inline: true) %>
     <% else %>
       Aucun événement passé
     <%end %>

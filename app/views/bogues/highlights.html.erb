@@ -9,10 +9,13 @@
       </div>
       <div class="card-info">
         <h3><%= event.name %></h3>
-        <address><%= event.full_location %></address>
         <time>
           <%= event.date_period %>
         </time>
+        <address>
+          <% if event.location.present? %><div><%= event.location %></div><% end %>
+          <% if event.city.present? %><div><%= event.city.upcase %></div><% end %>
+        </address>
       </div>
     <% end %>
   <% end %>

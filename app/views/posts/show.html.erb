@@ -1,25 +1,8 @@
 <% content_for(:page_class, "post-page ") %>
-<% content_for(:page_title, @post.title) %>
 
-<section class="panel feature dual-content">
-  <aside>
-    <div class="tag-list">
-      <% @post.categories.each do |category| %>
-        <%= link_to "", class: "tag", "data-tag-color": "light-accent" do %>
-          <span><%= category.name %></span>
-        <% end %>
-      <% end %>
-    </div>
-    <dl>
-      <dt>Publié le</dt>
-      <dd><%= @post.publication_datetime %></dd>
-      <% if @post.event.present? %>
-        <dt>Événement lié</dt>
-        <dd><%= link_to @post.event.name, event_path(@post.event) %></dd>
-      <% end %>
-    </dl>
-  </aside>
-  <div class="post-content">
-    <%= @post.formatted_content %>
-  </div>
-</section>
+<% if @post.event.present? %>
+  <%= render Website::Card::Event::Component.new(event: @post.event, inline: true) %>
+<% end %>
+<div class="flow">
+  <%= @post.formatted_content %>
+</div>

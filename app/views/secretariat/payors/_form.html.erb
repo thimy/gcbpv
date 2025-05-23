@@ -11,44 +11,44 @@
     </div>
   <% end %>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :last_name, style: "display: block" %>
     <%= form.text_field :last_name %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :address, "Adresse" %>
     <%= form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
     <%= render "website/autocomplete" %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :postcode, "Code postal" %>
     <%= form.text_field :postcode, "data-address-target": "postcode", required: true %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :city, "Ville" %>
     <%= form.text_field :city, "data-address-target": "city", required: true %>
     <%= render "website/autocomplete" %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :phone %>
     <%= form.text_field :phone %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.submit %>
   </div>
 <% end %>

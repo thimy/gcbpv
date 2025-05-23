@@ -1,13 +1,17 @@
-<%= link_to post_path(@post), class: "list-element post-preview" do %>
+<post-preview class="panel flow">
   <% if @post.categories.present? %>
-    <div class="tag-list">
+    <div class="tag-list cluster cluster">
       <% @post.categories.each do |category| %>
-        <span class="tag" data-tag-color="light-accent">
+        <span class="tag" data-tag-color="">
           <span><%= category.name %></span>
         </span>
       <% end %>
     </div>
   <% end %>
-  <h3><%= @post.title %></h3>
+  <h3><%= link_to @post.title, post_path(@post) %></h3>
   <time>Publié le <%= @post.publication_datetime %></time>
-<% end %>
+  <% if @post.excerpt.present? %>
+    <p><%= raw @post.excerpt %></p>
+    <%= link_to "↬ Lire la suite", post_path(@post), class: "read-more" %>
+  <% end %>
+</post-preview>

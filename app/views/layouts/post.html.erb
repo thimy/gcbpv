@@ -1,0 +1,14 @@
+<% content_for(:page_class, "website post ") %>
+
+<% content_for :content do %>
+  <%= render Website::Header::Component.new(banner: @banner) %>
+  <main class="wrapper region">
+    <div class="page-title">
+      <h1><%= @post.title %></h1>
+      <p>Publié le <%= @post.publication_datetime %></p>
+    </div>
+    <%= yield %>
+  </main>
+  <%= render Website::Footer::Component.new %>
+<% end %>
+<%= render template: "layouts/application" %>

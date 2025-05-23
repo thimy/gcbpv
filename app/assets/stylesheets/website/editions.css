@@ -7,10 +7,10 @@
 .editions, .edition-page {
   dl {
     display: flex;
-    gap: var(--size-6);
+    gap: var(--space-xl);
 
     dt {
-      font-size: var(--font-size-3);
+      font-size: var(--font-space-s);
     }
   }
 }

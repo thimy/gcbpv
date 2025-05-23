@@ -5,7 +5,7 @@
   <p>Le succès de ces rendez-vous ponctuels, mais réguliers avec des figures emblématiques d’un instrument nous a donné envie d’en proposer d’autres...</p>
   <p>Les rendez-vous "Chant", "Accordéon", "Flûte" et thématiques "Balades Irlandaises" et "Chant de Marin" changent de formule et seront mis en place en collaboration avec des événements du Pays.</p>
   <p>Le programme sera diffusé à la rentrée. <strong>Les inscriptions se font à chaque rendez-vous.</strong>
-</section>
-<section class="grid" data-grid="repeat">
-  <%# render Website::Card::Training::Component.with_collection(@trainings) %>
+  <div class="grid" data-grid="50-50">
+    <% render Website::Card::Training::Component.with_collection(@trainings) %>
+  </div>
 </section>

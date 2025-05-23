@@ -6,14 +6,12 @@
 }
 
 .post-page {
-  img {
-    margin-block-start: var(--size-4);
-    width: 100%;
+  event-card {
+    margin-block-end: var(--space-l);
   }
-}
 
-.post-content {
-  h1 {
-    margin: 0;
+  img {
+    margin-block-start: var(--space-m);
+    width: 100%;
   }
 }

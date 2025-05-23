@@ -4,14 +4,14 @@
   </div>
   <div class="card-info">
     <h3><%= @teacher.name %></h3>
-    <div class="tag-list">
+    <div class="tag-list cluster">
       <% @teacher.instruments.each do |instrument| %>
-        <span class="tag" data-tag-color="light-accent">
+        <span class="tag">
           <span><%= instrument.name %></span>
         </span>
       <% end %>
       <% @teacher.cities.uniq.each do |city| %>
-        <span class="tag" data-tag-color="dark">
+        <span class="tag">
           <span><%= city.name %></span>
         </span>
       <% end %>

@@ -11,42 +11,42 @@
     </div>
   <% end %>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :first_name, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :last_name, style: "display: block" %>
     <%= form.text_field :last_name %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :email %>
     <%= form.text_field :email %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :phone %>
     <%= form.text_field :phone %>
   </div>
 
-  <div class="form-element" data-controller="multiselect" data-multiselect-items-value="<%= @instrument_list.to_json %>" data-multiselect-search-url-value="/secretariat/disciplines" data-placeholder="Sélectionnez des disciplines" data-multiselect-selected-value="<%= @selected_instruments.present? ? @selected_instruments : [] %>">
+  <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @instrument_list.to_json %>" data-multiselect-search-url-value="/secretariat/disciplines" data-placeholder="Sélectionnez des disciplines" data-multiselect-selected-value="<%= @selected_instruments.present? ? @selected_instruments : [] %>">
     <%= form.label "specialties", "Disciplines" %>
     <%= form.collection_select :instrument_ids, @instruments, :id, :name, {selected: teacher.instrument_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :description %>
     <%= form.text_area :description %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.label :photo %>
     <%= form.file_field :photo %>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <%= form.submit %>
   </div>
 <% end %>

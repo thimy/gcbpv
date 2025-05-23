@@ -1,13 +1,13 @@
 <% content_for(:page_class, "ecole project-page ") %>
 <% content_for(:page_title, @project.name) %>
 
-<section>
+<section class="flow">
   <%= simple_format(@project.description) %>
-</section>
-<%= render Website::OtherRecords::Component.new(label: "projets") do %>
-  <% @other_projects.each do |project| %>
-    <%= link_to ecole_project_path(project), class: "tag", "data-tag-color": "blue" do %>
-      <span><%= project.name %></span>
+  <%= render Website::OtherRecords::Component.new(label: "projets") do %>
+    <% @other_projects.each do |project| %>
+      <%= link_to ecole_project_path(project), class: "tag", "data-tag-color": "blue" do %>
+        <span><%= project.name %></span>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</section>

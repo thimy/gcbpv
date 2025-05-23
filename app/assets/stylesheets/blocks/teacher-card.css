@@ -1,0 +1,28 @@
+:is(.teacher-card) {
+  align-items: stretch;
+  color: var(--color-light);
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-m);
+  position: relative;
+  text-decoration: none;
+  transition: all ease-out 0.2s;
+
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+
+  img {
+    flex-grow: 0;
+    height: var(--space-xxs);
+    object-fit: cover;
+    transition: all ease-out 0.2s;
+    width: 30%;
+
+    &:is(.event:hover > *) {
+      transform: scale(1.05);
+    }
+  }
+}

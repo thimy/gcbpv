@@ -1,0 +1,36 @@
+*:has(> .autocomplete) {
+  position: relative;
+}
+
+.autocomplete {
+  background-color: var(--color-light);
+  border: 1px solid var(--color-dark-glare);
+  border-radius: var(--radius-2);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 3px);
+  width: 100%;
+  z-index: 10;
+
+  a:hover {
+    background-color: var(--main-brand);
+  }
+}
+
+.autocomplete-category {
+  background: var(--mid);
+  font-size: var(--font-size-0);
+  padding: var(--space-xxs) var(--space-xs);
+}
+
+.autocomplete-entry {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-s);
+  padding: var(--space-xxs) var(--space-xs);
+
+  .street {
+    font-weight: var(--font-weight-6);
+  }
+}

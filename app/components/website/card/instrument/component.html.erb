@@ -1,14 +1,5 @@
 <%= link_to ecole_instrument_path(@instrument), class: "card" do %>
   <div class="card-info">
     <h3><%= @instrument.name %></h3>
-    <% if @instrument.cities.present? %>
-      <div class="tag-list">
-        <% @instrument.cities.each do |city| %>
-          <span class="tag">
-            <span><%= city.name %></span>
-          </span>
-        <% end %>
-      </div>
-    <% end %>
   </div>
 <% end %>

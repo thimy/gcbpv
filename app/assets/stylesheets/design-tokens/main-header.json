@@ -1,0 +1,10 @@
+{
+  "title": "Main Header",
+  "items": [
+    {
+      "name": "Nav SM Padding Block",
+      "min": "0.75rem",
+      "max": "1rem"
+    }
+  ]
+}

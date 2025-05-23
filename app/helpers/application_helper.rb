@@ -12,7 +12,7 @@ module ApplicationHelper
 
         # render "Add" button that will call `add()` function
         # stimulus:         `add(event)` v
-        button_tag(name, data: {action: "dynamic-fields#add"}),
+        button_tag(name, class: "button", data: {action: "dynamic-fields#add"}),
 
         # render "<template>"
         # stimulus:           `this.templateTarget` v

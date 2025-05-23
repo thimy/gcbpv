@@ -1,41 +1,49 @@
 <% content_for(:page_class, "event-page ") %>
 <% content_for(:page_title, @event.name) %>
 
-<section class="event-description feature panel grid" data-grid="1-3">
-  <aside>
-    <dl>
-      <dt>Date</dt>
+<div class="flow">
+  <dl class="panel flow">
+    <div>
+      <dt>Date :</dt>
       <dd><%= @event.date_period %></dd>
-      <% if @event.location.present? %>
-        <dt>Lieu</dt>
-        <dd><%= @event.location %></dd>
-      <% end %>
-      <dt>Ville</dt>
-      <dd><%= @event.city %></dd>
-      <% if @event.organizer.present? %>
-        <dt>Organisateurs</dt>
-        <dd><%= @event.organizer %></dd>
-      <% end %>
-      <% if @event.website.present? %>
-        <dt>Site internet</dt>
-        <dd><%= link_to @event.website, @event.website %></dd>
-      <% end %>
-      <% if @posts.present? %>
-        <dt>Actualités de l’événement</dt>
-        <dd>
-          <ul>
-            <% @posts.each do |post| %>
-              <li><%= link_to post.title, post %></li>
-            <% end %>
-          </ul>
-        </dd>
-      <% end %>
-    </dl>
-    <% unless @event.content.present? %>
-      <%= image_tag @event.image %>
+    </div>
+    <% if @event.location.present? %>
+    <div>
+      <dt>Lieu :</dt>
+      <dd><%= @event.location %></dd>
+    </div>
     <% end %>
-  </aside>
-  <div class="description">
+    <div>
+      <dt>Ville :</dt>
+      <dd><%= @event.city %></dd>
+    </div>
+    <% if @event.organizer.present? %>
+      <div>
+        <dt>Organisateurs :</dt>
+        <dd><%= @event.organizer %></dd>
+      </div>
+    <% end %>
+    <% if @event.website.present? %>
+      <div>
+        <dt>Site internet :</dt>
+        <dd><%= link_to @event.website, @event.website %></dd>
+      </div>
+    <% end %>
+    <% if @posts.present? %>
+      <dt>Actualités de l’événement :</dt>
+      <dd>
+        <ul>
+          <% @posts.each do |post| %>
+            <li><%= link_to post.title, post %></li>
+          <% end %>
+        </ul>
+      </dd>
+    <% end %>
+  </dl>
+  <% unless @event.content.present? %>
+    <%= image_tag @event.image %>
+  <% end %>
+  <div class="flow content">
     <%= @event.formatted_content || simple_format(@event.description) %>
   </div>
-</section>
+</div>

@@ -1,0 +1,115 @@
+.codex-editor {
+  border: 1px solid var(--color-dark-glare);
+  border-radius: var(--radius-2);
+  padding-inline: var(--space-m);
+  max-width: 650px;
+}
+
+.codex-editor__redactor {
+  margin: 0 !important;
+}
+
+.ce-header {
+  text-wrap: auto !important;
+}
+
+.ce-block__content {
+  width: 100%;
+}
+
+.ce-toolbar__actions {
+  right: 100% !important;
+}
+
+.cdx-search-field__input {
+  width: 100%;
+}
+
+.editor-content-wrapper {
+  border: var(--border-default);
+  border-radius: var(--radius-3);
+  max-width: 600px;
+  padding: var(--space-s) var(--space-m);
+}
+
+.file-link {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--mid);
+  border-radius: var(--radius-2);
+  gap: var(--space-xs);
+  font-size: 14px;
+  margin-block-start: var(--space-s);
+  padding: var(--space-xs);
+
+  &:hover {
+    border-color: var(--color-dark-glare);
+  }
+
+  .extension {
+    background-color: var(--color-dark);
+    border-radius: 8px;
+    color: var(--color-light);
+    font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace;
+    font-size: 10px;
+    font-weight: var(--font-weight-6);
+    padding: var(--space-xs) var(--space-xxs);
+    text-transform: uppercase;
+  }
+
+  .file-size {
+    color: var(--color-dark-glare);
+    font-size: 12px;
+  }
+}
+
+.image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-border {
+  border: 1px solid var(--main-brand);
+}
+
+.image-background {
+  background-color: var(--background-color);
+}
+
+.image-stretched {
+  width: 100%;
+  max-width: 100%;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+}
+
+.image-with-background {
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+.centered-content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+} 
+
+.paragraph--call-out {
+  border: 1px solid var(--color-alert);
+  padding: var(--space-s) var(--space-m);
+  border-radius: 6px;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-alert), transparent 90%);
+}
+
+.paragraph--details {
+  font-size: 13px;
+}
+
+.paragraph--citation {
+  font-style: italic;
+}

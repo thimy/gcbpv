@@ -22,7 +22,7 @@
 
         .actions {
           display: flex;
-          gap: var(--size-2);
+          gap: var(--space-xs);
         }
       }
 
@@ -34,13 +34,5 @@
     input, select {
       width: 100%;
     }
-  }
-
-  .address-block {
-    display: none;
-  }
-
-  .form-element:has(#payor_address_no:checked) + .address-block {
-    display: flex;
   }
 }

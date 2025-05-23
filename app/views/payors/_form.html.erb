@@ -1,47 +1,47 @@
-<div class="form-inputs" data-controller="address">
-  <div class="flex-row gap-6">
-    <div class="form-element">
+<div class="flow" data-controller="address">
+  <div class="cluster">
+    <div class="flow">
       <label for="payor_first_name">Prénom</label>
       <%= text_field :payor, :first_name %>
     </div>
 
-    <div class="form-element">
+    <div class="flow">
       <label for="payor_last_name">Nom</label>
       <%= text_field :payor, :last_name %>
     </div>
   </div>
 
-  <div class="flex-row gap-6">
-    <div class="form-element">
+  <div class="cluster">
+    <div class="flow">
       <label for="payor_phone">Téléphone</label>
       <%= text_field :payor, :phone %>
     </div>
 
-    <div class="form-element">
+    <div class="flow">
       <label for="payor_email">Email</label>
       <%= email_field :payor, :email %>
     </div>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <label for="payor_address">Adresse</label>
     <%= text_field :payor, :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
     <%= render "website/autocomplete" %>
   </div>
 
-  <div class="flex-row gap-6">
-    <div class="form-element">
+  <div class="cluster">
+    <div class="flow">
       <label for="payor_postcode">Code postal</label>
       <%= text_field :payor, :postcode, "data-address-target": "postcode" %>
     </div>
 
-    <div class="form-element">
+    <div class="flow">
       <label for="payor_city">Ville</label>
       <%= text_field :payor, :city, "data-address-target": "city" %>
     </div>
   </div>
 
-  <div class="form-element">
+  <div class="flow">
     <label for="payor_comment">Notes</label>
     <%= text_area :payor, :comment, rows: 2 %>
   </div>

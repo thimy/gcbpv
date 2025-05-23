@@ -1,0 +1,6 @@
+.filters {
+  :is(input:not([type=checkbox], [type=radio], [type=button], [type=submit]), select, textarea) {
+    --input-font-size: var(--size-step-00);
+    width: 200px;
+  }
+}
