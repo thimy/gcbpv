@@ -1,0 +1,16 @@
+<button class="menu-select cluster">
+  <%= @title %>
+  <%= inline_svg "icons/chevron-right" %>
+  <div class="dropdown-menu">
+    <% @links.each do |link| %>
+      <% if link[:name] == @title %>
+        <div class="cluster">
+          <%= link[:name] %>
+          <%= inline_svg "icons/check" %>
+        </div>
+      <% else %>
+        <%= link_to link[:name], link[:link], class: "cluster" %>
+      <% end %>
+    <% end %>
+  </div>
+</button>

@@ -44,8 +44,8 @@
   /* The initial fallback value for no support now becomes our minimum clamp value */
   font-size: clamp(
     var(--size-step-11),
-    1em * var(--container-fill-text-ratio),
-    var(--container-fill-text-max-font-size, infinity * 1px)
+    calc(1em * var(--container-fill-text-ratio)),
+    var(--container-fill-text-max-font-size, calc(infinity * 1px))
   );
 }
 

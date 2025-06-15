@@ -15,6 +15,7 @@ class Slot < ApplicationRecord
     "Vendredi": 5,
     "Samedi": 6,
     "Dimanche": 7,
+    "Jour variable": 8
   }
 
   enum frequency: {
@@ -25,7 +26,8 @@ class Slot < ApplicationRecord
     "Semaines impaires": 4,
     "Tous les mois": 5,
     "Six séances dans l'année": 6,
-    "5x4 séances par répertoire": 7
+    "5x4 séances par répertoire": 7,
+    "Fréquence variable": 8
   }
 
   def name

@@ -1,0 +1,54 @@
+<div id="<%= dom_id kid_workshop %>" class="record">
+  <section data-controller="tabs">
+    <header>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="atelier">Atelier</button>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Informations de l’atelier</button>
+    </header>
+    <div class="flow" data-tabs-target="panel" id="atelier">
+      <% kid_workshop.kid_workshop_slots.each do |slot| %>
+        <h3><%= "#{slot.city.name} – #{slot.day_of_week} avec #{slot.teacher_names}" %></h3>
+        <%= render Shared::Table::Component.new do |table| %>
+          <% table.with_header do |header| %>
+            <% header.with_column(name: "student") do %>Élève<% end %>
+            <% header.with_column(name: "phone") do %>Téléphone<% end %>
+            <% header.with_column(name: "email") do %>Email<% end %>
+          <% end %>
+          <% slot.subscriptions.active(@season).each do |subscription| %>
+            <% table.with_row(class: "#{subscription.optional? || subscription.optional_kid_workshop?(kid_workshop) ? "optional" : "confirmed"}") do |row| %>
+              <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, subscription_path(subscription) %><% end %>
+              <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
+              <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
+            <% end %>
+          <% end %>
+          <% table.with_row do |row| %>
+            <% row.with_cell(name: "full", colspan: 3) do %>
+              <button class="button" data-emails-list-value="<%= get_emails(slot.subbed_kid_workshops) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+            <% end %>
+          <% end %>
+          <% table.with_empty_state_with_header do %>
+            <td class="empty-state" colspan="3">
+              Pas d’inscription
+            </td>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div data-tabs-target="panel" id="infos">
+      <h2>Informations de l’atelier</h2>
+      <dl>
+        <dt>Nom :</dt>
+        <dd><%= kid_workshop.name %></dd>
+        <dt>Description :</dt>
+        <dd><%= simple_format(kid_workshop.description) %></dd>
+      </dl>
+      <%= link_to "Supprimer cet atelier",
+        kid_workshop_path(@kid_workshop),
+        class: "button",
+        data: {
+          "button-variant": "alert",
+          turbo_method: :delete,
+          turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet atelier ?"
+        } %>
+    </div>
+  </section>
+</div>

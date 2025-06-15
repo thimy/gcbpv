@@ -1,49 +1,10 @@
-<% content_for(:page_class, "event-page ") %>
-<% content_for(:page_title, @event.name) %>
+<div class="repel">
+  <h1><%= @event.name %></h1>
 
-<div class="flow">
-  <dl class="panel flow">
-    <div>
-      <dt>Date :</dt>
-      <dd><%= @event.date_period %></dd>
-    </div>
-    <% if @event.location.present? %>
-    <div>
-      <dt>Lieu :</dt>
-      <dd><%= @event.location %></dd>
-    </div>
-    <% end %>
-    <div>
-      <dt>Ville :</dt>
-      <dd><%= @event.city %></dd>
-    </div>
-    <% if @event.organizer.present? %>
-      <div>
-        <dt>Organisateurs :</dt>
-        <dd><%= @event.organizer %></dd>
-      </div>
-    <% end %>
-    <% if @event.website.present? %>
-      <div>
-        <dt>Site internet :</dt>
-        <dd><%= link_to @event.website, @event.website %></dd>
-      </div>
-    <% end %>
-    <% if @posts.present? %>
-      <dt>Actualités de l’événement :</dt>
-      <dd>
-        <ul>
-          <% @posts.each do |post| %>
-            <li><%= link_to post.title, post %></li>
-          <% end %>
-        </ul>
-      </dd>
-    <% end %>
-  </dl>
-  <% unless @event.content.present? %>
-    <%= image_tag @event.image %>
-  <% end %>
-  <div class="flow content">
-    <%= @event.formatted_content || simple_format(@event.description) %>
+  <div>
+    <%= link_to "Éditer cet événement", edit_event_path(@event), class: "button" %>
+    <%= link_to "Retour à la liste des événements", events_path, class: "button" %>
   </div>
 </div>
+
+<%= render @event %>

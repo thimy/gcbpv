@@ -1,0 +1,49 @@
+<%= form_for(payor, url: url, html: {class: "flow"}, data: {controller: "address"}) do |form| %>
+  <% if payor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(payor.errors.count, "error") %> prohibited this payor from being saved:</h2>
+
+      <ul>
+        <% payor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flow">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :address, "Adresse" %>
+    <%= form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+    <%= render "website/autocomplete" %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :postcode, "Code postal" %>
+    <%= form.text_field :postcode, "data-address-target": "postcode", required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :city, "Ville" %>
+    <%= form.text_field :city, "data-address-target": "city", required: true %>
+    <%= render "website/autocomplete" %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="flow">
+    <%= form.submit "Valider ces informations", class: "button" %>
+  </div>
+<% end %>

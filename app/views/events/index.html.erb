@@ -1,21 +1,38 @@
-<% content_for(:page_class, "events ") %>
-<% content_for(:page_title, "Événements") %>
-
-<section class="flow">
-  <h2><%= inline_svg "icons/calendar-check" %>Les événements à venir</h2>
-    <% if @upcoming_events.present? %>
-      <%= render Website::Card::Event::Component.with_collection(@upcoming_events, inline: true) %>
-    <% else %>
-      <div class="panel">
-        Aucun événement à venir
-      </div>
+<div class="repel">
+  <h1>Événements</h1>
+  <%= link_to "Créer un nouvel événement", new_event_path, class: "button" %>
+</div>
+<%= turbo_frame_tag "events", class: "flow" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "city") do %>Lieu<% end %>
+      <% header.with_column(name: "start_date") do %>Date<% end %>
+      <% header.with_column(name: "organizer") do %>Organisé par<% end %>
+      <% header.with_column(name: "options") do %>Actions<% end %>
     <% end %>
-  <h2><%= inline_svg "icons/calendar-off" %>Les événements passés</h2>
-  <div class="flow">
-    <% if @passed_events.present? %>
-      <%= render Website::Card::Event::Component.with_collection(@passed_events, inline: true) %>
-    <% else %>
-      Aucun événement passé
-    <%end %>
-  </div>
-</section>
+    <% @events.each do |event| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to event.name, event_path(event), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "city") do %><%= event.full_location %><% end %>
+        <% row.with_cell(name: "start_date") do %><%= event.date_period %><% end %>
+        <% row.with_cell(name: "organizer") do %><%= event.organizer %><% end %>
+        <% row.with_cell(name: "options") do %>
+          <%= link_to edit_event_path(event), class: "button" do %>
+            <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+          <% end %>
+          <%= link_to event_path(event),
+            class: "button",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
+            } do %>
+            <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

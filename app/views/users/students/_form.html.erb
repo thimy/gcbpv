@@ -1,0 +1,10 @@
+<%= form_with(model: subscription, url: subscriptions_path, class: "subscription-form flow") do |form| %>
+  <div class="panel flow">
+    <h3>Élève</h3>
+    <%= turbo_frame_tag "student", class: "cluster" do %>
+      <%= link_to "Créer un nouvel élève", new_student_path, class: "button" %>
+    <% end %>
+  </div>
+
+  <%= form.submit class: "button" %>
+<% end %>

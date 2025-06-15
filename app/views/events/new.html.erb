@@ -1,0 +1,9 @@
+<div id="new-event">
+  <div class="repel">
+    <h1>Nouvel événement</h1>
+    <%= link_to "Retour aux événements", events_path, class: "button" %>
+  </div>
+
+  <%= render "form", event: @event, url: events_path %>
+
+</div>

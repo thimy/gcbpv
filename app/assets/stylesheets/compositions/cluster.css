@@ -22,3 +22,19 @@ Can be any acceptable flexbox alignment value.
   justify-content: var(--cluster-horizontal-alignment, flex-start);
   align-items: var(--cluster-vertical-alignment, center);
 }
+
+.cluster[data-type="50-50"] {
+  --cluster-vertical-alignment: stretch;
+
+  > * {
+    flex-basis: calc((100% - var(--gutter)) / 2);
+  }
+}
+
+.cluster[data-type="thirds"] {
+  --cluster-vertical-alignment: stretch;
+
+  > * {
+    flex-basis: calc((100% - var(--gutter) * 2) / 3);
+  }
+}

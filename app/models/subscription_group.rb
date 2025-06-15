@@ -4,23 +4,33 @@ class SubscriptionGroup < ApplicationRecord
   has_many :subscriptions, dependent: :destroy
   has_many :payments, dependent: :destroy
   has_many :students, through: :subscriptions
+  delegate :plan, to: :season
 
   accepts_nested_attributes_for :subscriptions, :payments, allow_destroy: true
 
+  STATUSES = {
+    INQUIRY: "Demande d’information",
+    REGISTERED: "Inscrit",
+    CANCELED: "Annulé",
+    ON_HOLD: "Dans le panier"
+  }
+
   enum status: {
-    "Demande d’information": 0,
-    "Inscrit": 1,
-    "Annulé": 2
+    INQUIRY: 0,
+    REGISTERED: 1,
+    CANCELED: 2,
+    ON_HOLD: 3
   }
 
   enum majoration_class: {
     "Redon Agglo": 0,
-    "OBC communauté": 1,
+    "OBC Communauté": 1,
     "Hors agglo": 2
   }
 
   scope :unconfirmed, -> { where(status: 0) }
   scope :confirmed, -> { where(status: [nil, 1]) }
+  scope :active, ->(season) { where(season: season)}
 
   def student_list
     subscriptions.map {|subscription|
@@ -48,5 +58,53 @@ class SubscriptionGroup < ApplicationRecord
     end
 
     "#{status} – #{state}"
+  end
+
+  def course_cost
+    subscriptions.present? ? subscriptions.map {|subscription| subscription.total_cost}.compact.sum : 0
+  end
+
+  def additional_cost
+    if majoration_class = "Redon Agglo"
+      0
+    elsif majoration_class = "OBC Communauté"
+      subscription_cost * plan.obc_markup / 100
+    else
+      subscription_cost * plan.outbounds_markup / 100
+    end
+  end
+
+  def subscription_cost
+    [course_cost, additional_cost].sum
+  end
+
+  def discount
+    if subscription_cost < plan.first_step
+      return 0
+    end
+
+    if subscription_cost < plan.second_step
+      subscription_cost * plan.first_step_discount / 100
+    elsif subscription_cost < plan.third_step
+      subscription_cost * plan.second_step_discount / 100
+    else
+      subscription_cost * plan.third_step_discount / 100
+    end
+  end
+
+  def subscription_cost_after_discount
+    subscription_cost - discount
+  end
+
+  def total_cost
+    [subscription_cost_after_discount, plan.membership_price].sum
+  end
+
+  def total_paid
+    payments.pluck(:amount).sum
+  end
+
+  def total_remaining
+    total_cost - total_paid
   end
 end

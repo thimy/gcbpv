@@ -8,6 +8,8 @@ class Instrument < ApplicationRecord
   enum :status, "Public" => 0, "Privé" => 1
   scope :active, -> {where(status: 0)}
 
+  validates :name, presence: true
+
   def cities
     teachers.map { |teacher|
       teacher.cities
@@ -28,8 +30,8 @@ class Instrument < ApplicationRecord
   }.join(", ")
   end
 
-  def courses
-    subscriptions = Subscription.joins(:subscription_group).where(subscription_group: { season: Config.first.season })
+  def courses(season: Config.first.season)
+    subscriptions = Subscription.joins(:subscription_group).where(subscription_group: { season: season })
     Course.joins(:subscription).where(instrument: self, subscription: subscriptions)
   end
 end

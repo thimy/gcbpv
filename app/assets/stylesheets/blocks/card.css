@@ -21,7 +21,7 @@
 
   &:where([data-card-type="image"]) {
     --card-margin-top: var(--space-2xl);
-    --image-background-color: var(--mint);
+    --image-background-color: var(--color-secondary);
     box-shadow: var(--shadow-elevation-medium);
     margin-top: var(--card-margin-top);
 

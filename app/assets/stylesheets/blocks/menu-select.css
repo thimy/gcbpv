@@ -1,0 +1,23 @@
+.menu-select {
+  --gutter: var(--space-s);
+  appearance: none;
+  background: var(--bg-color);
+  border: var(--stroke);
+  border-radius: var(--radius-s);
+  padding: var(--space-xxs) var(--space-s);
+  position: relative;
+
+  &:focus-within .dropdown-menu {
+    background-color: var(--bg-color);
+    border: var(--stroke);
+    border-radius: var(--radius-s);
+    box-shadow: var(--shadow-elevation-medium);
+    display: flex;
+    flex-direction: column;
+    left: 0;
+
+    & a:hover {
+      background: var(--color-mint);
+    }
+  }
+}

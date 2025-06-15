@@ -1,0 +1,37 @@
+<%= form_with(model: instrument) do |form| %>
+  <% if instrument.errors.any? %>
+    <div class="banner" data-banner-variant="alert">
+      <h2><%= pluralize(instrument.errors.count, "error") %>:</h2>
+
+      <ul>
+        <% instrument.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flow">
+    <%= form.label :name, "Nom" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :status, "Statut" %>
+    <%= form.select :status, options_for_select(Instrument.statuses.keys.to_a, selected: instrument.status.present? ? instrument.status : 1) %>
+  </div>
+
+  <div>
+    <%= form.label :comment, "Notes" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.submit "Sauvegarder la discipline", class: "button" %>
+  </div>
+<% end %>

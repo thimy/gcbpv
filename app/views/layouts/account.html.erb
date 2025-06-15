@@ -1,11 +1,21 @@
-<% content_for(:page_class, "account") %>
+<% content_for(:page_class, "website") %>
 
 <% content_for :content do %>
-  <%= render Website::Header::Component.new %>
-  <main class="content">
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+  <%= render Website::Header::Component.new(banner: @banner) %>
+  <main class="wrapper region">
+    <div class="feature flow">
+      <nav class="cluster">
+        <%= link_to "Mes inscriptions", account_subscriptions_path %>
+        <%#= link_to "Mon foyer", account_students_path %>
+        <%#= link_to "Mes infos" %>
+      </nav>
+      <div class="page-title">
+        <h1><%= content_for(:page_title) %></h1>
+        <p><%= content_for(:page_description) %></p>
+      </div>
+      <%= yield %>
+    </div>
   </main>
+  <%= render Website::Footer::Component.new %>
 <% end %>
 <%= render template: "layouts/application" %>

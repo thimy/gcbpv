@@ -7,7 +7,7 @@ class Website::Header::Entry::Component < ViewComponent::Base
   end
 
   def options
-    if current_page?(@path)
+    if current_page?(@path, controller: "ecole")
       {"aria-current": "page"}
     end
   end

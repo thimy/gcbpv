@@ -1,0 +1,100 @@
+<%= form_with(model: subscription, url: account_subscriptions_path) do |form| %>
+  <% if subscription.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(subscription.errors.count, "erreur") %> dans le formulaire :</h2>
+
+      <ul>
+        <% subscription.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.fields_for :student, Student.new do |student_form| %>
+    <div>
+      <%= form.label "Prénom", style: "display: block" %>
+      <%= form.text_field :first_name %>
+    </div>
+
+    <div>
+      <%= form.label "Nom", style: "display: block" %>
+      <%= form.text_field :last_name %>
+    </div>
+
+    <div>
+      <%= form.label "Genre", style: "display: block" %>
+      <%= form.select :gender, options_for_select(Student.genders) %>
+    </div>
+
+    <div>
+      <%= form.label "Téléphone", style: "display: block" %>
+      <%= form.text_field :phone %>
+    </div>
+
+    <div>
+      <%= form.label :email, style: "display: block" %>
+      <%= form.text_field :email %>
+    </div>
+
+  <% end %>
+
+  <div>
+    <%= form.button "Ajouter un cours", formmethod: "post", formaction: add_course_account_subscriptions_path(id: form.object), data: {turbo_frame: form.field_id(:courses)} %>
+    <%= form.button "Ajouter un atelier", formmethod: "post", formaction: add_workshop_account_subscriptions_path(id: form.object), data: {turbo_frame: form.field_id(:subbed_workshops)} %>
+    <%= form.submit "Ajouter un atelier d’éveil musical", name: :add_early_learning %>
+    <%= form.submit "Ajouter un atelier de découverte musicale enfant", name: :add_kid_discovery %>
+    <%= form.submit "Ajouter un atelier de découverte musicale adulte", name: :add_discovery %>
+  </div>
+  
+  <%= turbo_frame_tag form.field_id(:courses) do %>
+    <%= form.fields_for :courses do |course_form| %>
+      <h3>Ajouter un cours</h3>
+      <div>
+        <%= course_form.label "Instrument", style: "display: block" %>
+        <%= course_form.collection_select :id, @instruments, :id, :name %>
+      </div>
+
+      <div>
+        <%= course_form.label "Professeur", style: "display: block" %>
+        <%= collection_select :teacher, :teacher_ids, @teachers, :id, :name %>
+      </div>
+
+      <div>
+        <%= course_form.label "Lieu et heure", style: "display: block" %>
+        <%= course_form.collection_select :slot_id, @slots, :id, :name %>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <%= turbo_frame_tag form.field_id(:subbed_workshops) do %>
+    <%= form.fields_for :subbed_workshops do |workshop_form| %>
+      <div>
+        <%= workshop_form.label "Atelier", style: "display: block" %>
+        <%= workshop_form.collection_select :workshop_id, Workshop.all, :id, :name %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div>
+    <%= form.check_box :image_consent %>
+    <%= form.label "Autorisation utilisation image" %>
+    <p class="hint">J’autorise le Groupement Culturel Breton des Pays de Vilaine à réaliser des prises de vue photographiques, des vidéos ou des captations numériques pour cette personne</p>
+  </div>
+
+  <div>
+    <%= form.check_box :disability %>
+    <%= form.label "Situation empêchée" %>
+    <p class="hint">Vous êtes une personne en situation de handicap, vous avez la possibilité d’avoir pour le même tarif d’inscription, un cours hebdomadaire d’une durée de 30 minutes (au lieu de 20 minutes) sur présentation d’un justificatif.</p>
+  </div>
+
+  <div>
+    <%= form.check_box :ars %>
+    <%= form.label "Allocation rentrée scolaire (ARS)" %>
+    <p class="hint">Cet élément nous est demandé par le Conseil Départemental d’Ille-et-Vilaine pour le versement de sa subvention</p>
+  </div>
+
+  <div>
+    <%= form.submit "Créer une inscription pour cet élève" %>
+  </div>
+<% end %>

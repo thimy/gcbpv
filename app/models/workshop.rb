@@ -12,7 +12,7 @@ class Workshop < ApplicationRecord
   validates :name, presence: true
 
   enum :status, "Public" => 0, "Privé" => 1
-  enum :workshop_type, "Normal" => 0, "Spécial" => 1
+  enum :workshop_type, "Normal" => 0, "Spécial" => 1, "Autonome" => 2
 
   scope :active, -> {where(status: 0)}
 

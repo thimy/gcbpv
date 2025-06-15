@@ -1,11 +1,11 @@
 <% content_for(:page_class, "ecole instrument-page ") %>
 <% content_for(:page_title, @instrument.name) %>
 
-<section class="feature flow">
-  <div class="left">
-    <div class="slot-list">
+<div class="flow">
+  <div class="popout flow">
+    <div class="cluster tag-list">
       <% @cities.each do |city| %>
-        <div class="city-block">
+        <div class="flow">
           <h3><%= city.name %></h3>
           <% city.slots.order(:day_of_week).group_by {|slot| slot.day_of_week}.each do |day, slots| %>
             <% slots_with_day = slots.select { |slot|
@@ -14,33 +14,19 @@
               <% if slots_with_day.count > 0 %>
                 <div class="day flow">
                   <h4><%= day %></h4>
-                  <% slots.each do |slot| %>
-                    <% if slot.teacher.instruments.include?(@instrument) %>
-                      <div class="dual-tag">
-                        <time class="tag">
-                          <span><%= slot.slot_time.present? ? slot.slot_time : "Horaires à définir" %></span>
-                        </time>
-                        <%= link_to ecole_teacher_path(slot.teacher), class: "tag" do %>
-                          <span><%= slot.teacher.name %></span>
-                        <% end %>
-                      </div>
-                    <% end %>
-                  <% end %>
                 </div>
               <% end %>
             <% end %>
         </div>
       <% end %>
     </div>
-  </div>
-  <div class="right">
     <%= simple_format(@instrument.description) %>
   </div>
-</section>
-<%= render Website::OtherRecords::Component.new(label: "instruments") do %>
-  <% @other_instruments.each do |instrument| %>
-    <%= link_to ecole_instrument_path(instrument), class: "tag", "data-tag-color": "blue" do %>
-      <span><%= instrument.name %></span>
+  <%= render Website::OtherRecords::Component.new(label: "instruments") do %>
+    <% @other_instruments.each do |instrument| %>
+      <%= link_to ecole_instrument_path(instrument), class: "tag", "data-tag-color": "secondary" do %>
+        <span><%= instrument.name %></span>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>

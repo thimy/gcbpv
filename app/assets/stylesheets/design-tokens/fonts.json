@@ -6,7 +6,7 @@
       "name": "Base",
       "description": "System fonts for body copy and globally set text.",
       "value": [
-        "Satoshi",
+        "Montserrat",
         "Segoe UI",
         "Roboto",
         "Helvetica Neue",

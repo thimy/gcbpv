@@ -1,12 +1,12 @@
-<%= link_to ecole_teacher_path(@teacher), class: "card", "data-card-type": "image" do %>
+<%= link_to ecole_teacher_path(@teacher), class: "panel card flow", "data-card-type": "image" do %>
   <div class="image">
     <%= image_tag @teacher.photo.present? ? @teacher.photo : "icons/singing.svg" %>
   </div>
-  <div class="card-info">
+  <div class="card-info flow">
     <h3><%= @teacher.name %></h3>
     <div class="tag-list cluster">
       <% @teacher.instruments.each do |instrument| %>
-        <span class="tag">
+        <span class="tag" data-tag-color="dark">
           <span><%= instrument.name %></span>
         </span>
       <% end %>

@@ -1,8 +1,7 @@
-<div class="content-header">
+<div class="repel">
   <h1>Emails</h1>
   <%= link_to "Créer un nouvel email", new_secretariat_email_path %>
 </div>
-<p style="color: green"><%= notice %></p>
 <%= turbo_frame_tag "subscriptions", class: "flex-column gap-3" do %>
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>

@@ -1,0 +1,24 @@
+<div class="repel">
+  <h1><%= @kid_workshop.name %></h1>
+
+  <div>
+    <%= link_to "Créer un nouvel atelier", new_kid_workshop_path, class: "button" %>
+    <%= link_to "Éditer cet atelier", edit_kid_workshop_path(@kid_workshop), class: "button" %>
+    <%= link_to "Retour aux ateliers", kid_workshops_path, class: "button" %>
+  </div>
+</div>
+
+<div class="page-info">
+  <dl class="horizontal">
+    <dt>Type d’atelier :</dt>
+    <dd><%= @kid_workshop.workshop_type %></dd>
+    <dt>Nombre d’élèves :</dt>
+    <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
+    <dt>Statut :</dt>
+    <dd><%= @kid_workshop.status %></dd>
+    <dt>Notes :</dt>
+    <dd><%= @kid_workshop.comment %></dd>
+  </dl>
+</div>
+
+<%= render @kid_workshop %>

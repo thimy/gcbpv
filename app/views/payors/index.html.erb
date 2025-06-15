@@ -1,28 +1,58 @@
-<div class="content-header">
-  <h1>Elèves</h1>
-  <%= link_to "Créer un nouvel élève", new_student_path %>
+<div class="repel">
+  <h1>Foyers</h1>
+  <%= link_to "Créer un nouveau foyer", new_payor_path, class: "button" %>
 </div>
-<p style="color: green"><%= notice %></p>
-<%= render Shared::Table::Component.new do |table| %>
-  <% table.with_header do |header| %>
-    <% header.with_column(name: "name") do %>Créneau<% end %>
-    <% header.with_column(name: "email") do %>Email<% end %>
-    <% header.with_column(name: "gender") do %>Genre<% end %>
-    <% header.with_column(name: "phone") do %>Téléphone<% end %>
-    <% header.with_column(name: "options", show_label: false) %>
-  <% end %>
-  <% @students.each do |student| %>
-    <% table.with_row(link_url: student) do |row| %>
-      <% row.with_cell(name: "name") do %><%= link_to "#{student.first_name} #{student.last_name}" %><% end %>
-      <% row.with_cell(name: "email") do %><%= student.email %><% end %>
-      <% row.with_cell(name: "gender") do %><%= student.gender %><% end %>
-      <% row.with_cell(name: "phone") do %><%= format_phone(student.phone) %><% end %>
-      <% row.with_cell(name: "options") do %>
-        <%= link_to edit_student_path(student) do %>
-          Editer cet élève
-          <%= inline_svg "icons/chevron-right", { class: "caret" } %>
-        <% end %>
+
+<%= form_for payors_path,
+    method: :get,
+    html: {
+      data: {
+        turbo_frame: "payors"
+      },
+      class: "filters panel"
+    } do |f| %>
+  <div class="flow">
+    <div class="cluster">
+      <div class="flow">
+        <%= label_tag :q, "Nom" %>
+          <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
+        </div>
+      <div class="flow">
+        <%= label_tag :status, "Inclure seulement le statut" %>
+        <%= select_tag :status, options_for_select(SubscriptionGroup.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
+      </div>
+    </div>
+    <div class="cluster button-group repel">
+      <%= f.button class: "button" do %>Rechercher<% end %>
+      <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+    </div>
+  </div>
+<% end %>
+
+<%= turbo_frame_tag "payors", class: "flow" do %>
+  <h2>Foyers</h2>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "last_name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "students") do %>Membres du foyer<% end %>
+      <% header.with_column(name: "city") do %>Ville<% end %>
+      <% header.with_column(name: "email") do %>Email<% end %>
+      <% header.with_column(name: "phone") do %>Téléphone<% end %>
+      <% header.with_column(name: "status") do %>Status<% end %>
+      <% header.with_column(name: "amount") do %>Montant<% end %>
+    <% end %>
+    <% @payors.each do |payor| %>
+      <% table.with_row(link_url: payor) do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to payor.last_name, payor_url(season: @season, record: payor), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "students") do %><%= payor.subscription_group(@season).present? ? payor.subscription_group(@season).subscriptions.size : 0 %><% end %>
+        <% row.with_cell(name: "city") do %><%= payor.city %><% end %>
+        <% row.with_cell(name: "email") do %><%= payor.email %><% end %>
+        <% row.with_cell(name: "phone") do %><%= format_phone(payor.phone) %><% end %>
+        <% row.with_cell(name: "status") do %><%= SubscriptionGroup::STATUSES[payor.subscription_group(@season).payment_state.to_sym] %><% end %>
+        <% row.with_cell(name: "amount") do %><%= number_to_currency(payor.subscription_group(@season).amount, unit: "€") if payor.subscription_group(@season).present? %><% end %>
       <% end %>
     <% end %>
   <% end %>
+  <%== pagy_nav(@pagy) %>
 <% end %>

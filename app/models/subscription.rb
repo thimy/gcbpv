@@ -10,6 +10,7 @@ class Subscription < ApplicationRecord
   has_many :workshop_slots, through: :subbed_workshops
   has_many :workshops, through: :workshop_slots
   belongs_to :subscription_group
+  delegate :season, to: :subscription_group
 
   accepts_nested_attributes_for :student, :courses, :subbed_workshops, :subbed_kid_workshops, :workshop_slots, allow_destroy: true
 
@@ -19,9 +20,9 @@ class Subscription < ApplicationRecord
     "Annulé": 2
   }
 
-  scope :active, -> {includes(:subscription_group).where(subscription_group: { season: Config.first.season })}
-  scope :registered, ->{active.where(subscription_group: SubscriptionGroup.confirmed)}
-  scope :inquired, ->{active.where(subscription_group: {status: 0})}
+  scope :active, ->(season) {includes(:subscription_group).where(subscription_group: { season: season })}
+  scope :registered, ->(season) {active(season).where(subscription_group: SubscriptionGroup.confirmed)}
+  scope :inquired, ->(season) {active(season).where(subscription_group: {status: 0})}
   scope :has_optional_workshop, ->(workshop) { where(subbed_workshops.optional.has_workshop(workshop)) }
   scope :has_confirmed_workshop, ->(workshop) { where(subbed_workshops.confirme.has_workshop(workshop)) }
   scope :has_optional_kid_workshop, ->(workshop) { where(subbed_workshops.optional.has_kid_workshop(workshop)) }
@@ -81,5 +82,26 @@ class Subscription < ApplicationRecord
 
   def optional_kid_workshop?(kid_workshop)
     subbed_kid_workshops.includes(:kid_workshop_slot).find_by(kid_workshop_slot: {kid_workshop: kid_workshop}).option == "Optionel"
+  end
+
+  def course_cost
+    courses.confirmed.map { |course| course.price }.sum
+  end
+
+  def workshop_cost
+    subbed_workshops.confirmed.map { |workshop| workshop.price }.sum
+  end
+
+  def kid_workshop_cost
+    subbed_kid_workshops.confirmed.map { |sum, workshop| workshop.price }.sum
+  end
+
+  def all_workshops_cost
+    extra_workshops = subbed_workshops.confirmed.size + subbed_kid_workshops.confirmed.size - courses.size
+    subbed_workshops.confirmed.map { |workshop| workshop.price }.concat(subbed_kid_workshops.confirmed.map { |workshop| workshop.price }).sort!.reverse.drop(courses.size).sum
+  end
+
+  def total_cost
+    [course_cost, all_workshops_cost].compact.sum
   end
 end

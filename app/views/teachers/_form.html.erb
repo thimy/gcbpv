@@ -1,0 +1,52 @@
+<%= form_for(teacher, url: url) do |form| %>
+  <% if teacher.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(teacher.errors.count, "error") %> prohibited this teacher from being saved:</h2>
+
+      <ul>
+        <% teacher.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flow">
+    <%= form.label :first_name, style: "display: block" %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :last_name, style: "display: block" %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :phone %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @instrument_list.to_json %>" data-multiselect-search-url-value="/secretariat/disciplines" data-placeholder="Sélectionnez des disciplines" data-multiselect-selected-value="<%= @selected_instruments.present? ? @selected_instruments : [] %>">
+    <%= form.label "specialties", "Disciplines" %>
+    <%= form.collection_select :instrument_ids, @instruments, :id, :name, {selected: teacher.instrument_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :photo %>
+    <%= form.file_field :photo %>
+  </div>
+
+  <div class="flow">
+    <%= form.submit "Modifier ce professeur", class: "button" %>
+  </div>
+<% end %>

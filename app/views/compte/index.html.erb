@@ -1,9 +1,0 @@
-<% content_for(:page_title, "Compte") %>
-
-<section>
-  <h1>Bienvenue, <%= current_user.email %> !</h1>
-  <nav>
-    <%= link_to "Mon foyer", compte_students_path %>
-    <%= link_to "Mes inscriptions", compte_subscriptions_path %>
-  </nav>
-</section>

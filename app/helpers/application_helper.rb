@@ -3,7 +3,7 @@ module ApplicationHelper
 
   def dynamic_fields_for f, association, name = "Ajouter"
     # stimulus:      controller v
-    tag.div data: {controller: "dynamic-fields"} do
+    tag.div class: "flow", data: {controller: "dynamic-fields"} do
       safe_join([
         # render existing fields
         f.fields_for(association) do |ff|

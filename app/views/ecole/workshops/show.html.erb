@@ -1,27 +1,29 @@
 <% content_for(:page_class, "ecole workshop-page ") %>
 <% content_for(:page_title, @workshop.name) %>
 
-<section class="popout flex-column gap-4">
-  <div class="flex-row gap-4">
-    <% @workshop.workshop_slots.each do |slot| %>
-      <div class="dual-tag">
-        <span class="tag">
-          <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>
-        </span>
-        <% slot.teachers.each do |teacher| %>
-          <%= link_to ecole_teacher_path(teacher), class: "tag" do %>
-            <span><%= teacher.name %></span>
+<div class="flow">
+  <div class="popout flow">
+    <div class="cluster tag-list">
+      <% @workshop.workshop_slots.each do |slot| %>
+        <div class="dual-tag">
+          <span class="tag">
+            <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>
+          </span>
+          <% slot.teachers.each do |teacher| %>
+            <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "dark" do %>
+              <span><%= teacher.name %></span>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    </div>
+    <%= simple_format(@workshop.description) %>
   </div>
-  <%= simple_format(@workshop.description) %>
-</section>
-<%= render Website::OtherRecords::Component.new(label: "ateliers") do %>
-  <% @other_workshops.each do |workshop| %>
-    <%= link_to ecole_workshop_path(workshop), class: "tag", "data-tag-color": "blue" do %>
-      <span><%= workshop.name %></span>
+  <%= render Website::OtherRecords::Component.new(label: "ateliers") do %>
+    <% @other_workshops.each do |workshop| %>
+      <%= link_to ecole_workshop_path(workshop), class: "tag", "data-tag-color": "secondary" do %>
+        <span><%= workshop.name %></span>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>

@@ -1,8 +1,10 @@
-<% content_for(:page_class, "post-page ") %>
+<div class="repel">
+  <h1><%= @post.title %></h1>
 
-<% if @post.event.present? %>
-  <%= render Website::Card::Event::Component.new(event: @post.event, inline: true) %>
-<% end %>
-<div class="flow">
-  <%= @post.formatted_content %>
+  <div>
+    <%= link_to "Éditer cette actualité", edit_post_path(@post) %> |
+    <%= link_to "Retour à la liste des actualités", posts_path %>
+  </div>
 </div>
+
+<%= render @post %>

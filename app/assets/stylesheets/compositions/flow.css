@@ -3,6 +3,6 @@ FLOW COMPOSITION
 Like the Every Layout stack: https://every-layout.dev/layouts/stack/
 Info about this implementation: https://piccalil.li/blog/my-favourite-3-lines-of-css/ 
 */
-.flow > * + * {
+.flow > *:not([hidden], [type=hidden]) + *:not(template) {
   margin-block-start: var(--flow-space, 1em);
 }

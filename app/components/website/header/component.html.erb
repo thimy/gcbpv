@@ -3,7 +3,7 @@
 <% end %>
 <header class="main-header">
   <div class="main-header__title wrapper region">
-    <div class="feature flow">
+    <div class="feature switcher">
       <h1 class="main-header__logo">
         <%= link_to "/", class: "home-button" do %>
           Groupement Culturel Breton<br>des Pays de Vilaine
@@ -21,8 +21,8 @@
     </button-->
     <ul class="cluster">
       <!--button class="button" data-action="menu-toggle#toggle" data-button-type="naked" hidden><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button-->
-      <li><%= link_to "Actualités", posts_path, class: "decorated" %></li>
-      <li><%= link_to "Événements", events_path, class: "decorated" %></li>
+      <li><%= link_to "Actualités", website_post_index_path, class: "decorated" %></li>
+      <li><%= link_to "Événements", website_event_index_path, class: "decorated" %></li>
       <li><%= link_to "La Bogue d’Or", "/bogue/#{Bogue.active.ordered.first.slug}", class: "decorated" %></li>
       <li><%= link_to "L'école de musique", ecole_path, class: "decorated" %></li>
       <li><%= link_to "Centre ressources", archives_path, class: "decorated" %></li>

@@ -1,4 +1,4 @@
-class StudentsController < SecretariatController
+class StudentsController < BaseController
   before_action :set_student, only: %i[ show edit update destroy ]
 
   # GET /students or /students.json
@@ -25,7 +25,7 @@ class StudentsController < SecretariatController
 
     respond_to do |format|
       if @student.save
-        format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
+        format.html { redirect_to students_url, notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -65,6 +65,6 @@ class StudentsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :birth_year, :gender, :phone, :email)
+      params.require(:student).permit(:first_name, :last_name, :birth_year, :gender, :phone, :email, ars, :image_consent, :disability)
     end
 end

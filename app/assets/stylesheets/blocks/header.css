@@ -1,20 +1,25 @@
 .main-header {
   .main-header__title {
     --flow-space: var(--space-xs);
-    background: linear-gradient(to right, var(--color-light), color-mix(in oklch, var(--color-light), transparent 50%)),
-                url("home/events.jpg") right center no-repeat;
+    background: var(--color-dark) url("home/poissnoz.jpg") right center no-repeat;
     background-size: cover;
   }
 
   .main-header__logo a {
-    color: var(--color-primary);
+    color: var(--color-light);
+    font-family: var(--font-base);
     text-decoration: none;
+    text-shadow: 0 0 10px var(--color-dark);
   }
 
   .main-header__tagline {
     align-content: center;
+    align-self: center;
+    color: var(--color-light);
+    font-family: var(--font-serif);
     font-size: var(--size-step-2);
     font-weight: 700;
+    text-shadow: 0 0 10px var(--color-dark);
   }
 
   .main-header__nav ul {
@@ -33,7 +38,15 @@
     font-family: var(--font-brand);
   }
 
-  @media (width > 50em) {
+  .sign_out {
+    appearance: none;
+    background: none;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  @media (min-width: 50em) {
     --region-space: var(--space-l);
 
     .main-header__logo {

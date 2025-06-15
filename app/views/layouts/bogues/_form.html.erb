@@ -1,0 +1,29 @@
+<%= form_for bogue, url: url, data: {controller: "editor address", "editor-file-url-value": upload_file_bogues_path} do |form| %>
+  <div class="flow">
+    <%= form.label :name, "Titre" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :start_date, "Date de début" %>
+    <%= form.date_field :start_date, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :end_date, "Date de fin" %>
+    <%= form.date_field :end_date, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Statut de l’événement" %>
+    <%= form.select :status, options_for_select(Bogue.statuses.keys.to_a, selected: bogue.present? ? bogue.status : 0) %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :content, "Description" %>
+    <div id="bogue_content" data-editor-target="editor"></div>
+  </div>
+
+  <%= form.hidden_field :content, id: "bogue_content_hidden", data: {"editor-target": "hidden"} %>
+  <%= form.submit "Sauvegarder", class: "button" %>
+<% end %>

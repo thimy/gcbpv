@@ -5,7 +5,7 @@ A common wrapper/container
 .wrapper {
   --gap: clamp(1rem, 6vw, 3rem);
   --full: minmax(var(--gap), 1fr);
-  --content: min(75ch, 100% - var(--gap) * 2);
+  --content: min(51.3ch, 100% - var(--gap) * 2);
   --popout: minmax(0, 8rem);
   --feature: minmax(0, 15rem);
 
@@ -22,10 +22,6 @@ A common wrapper/container
 
 .wrapper > * {
   grid-column: content;
-}
-
-.wrapper > .text {
-  grid-column: text;
 }
 
 .popout {

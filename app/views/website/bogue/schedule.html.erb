@@ -1,0 +1,78 @@
+<% content_for(:page_class, "bogue ") %>
+<% content_for(:page_title, "Programmation") %>
+
+<div class="flow">
+  <%= form_for programmation_website_bogue_path,
+      method: :get,
+      html: {
+        data: {
+          turbo_frame: "events"
+        },
+        class: "list-form"
+      } do |f| %>
+    <div class="form-group">
+      <div class="flow">
+        <%= label_tag :type, "Type d’événement" %>
+        <%= select_tag :type, options_for_select(Event.event_types, params[:type].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+      </div>
+      <div class="flow">
+        <%= label_tag :ville, "Commune" %>
+        <%= select_tag :ville, options_for_select(@cities, params[:ville].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+      </div>
+    </div>
+  <% end %>
+  <section id="events" class="flow">
+    <% if @events.present? %>
+      <h2>Événements à venir</h2>
+      <div class="flow">
+        <% @events.each do |event| %>
+          <event-card class="panel">
+            <%= link_to programmation_event_website_bogue_path(bogue_slug: @bogue.slug, event_slug: event.slug), class: "list-element event-card" do %>
+              <time>
+                <div><%= event.date_period %></div>
+                <%= event.time_period if event.time_period.present? %>
+              </time>
+              <div class="event-info">
+                <h3><%= event.name %></h3>
+                <address>
+                  <%= event.full_location %>
+                </address>
+              </div>
+              <div class="tag-list cluster">
+                <span class="tag">
+                  <span><%= event.event_type %></span>
+                </span>
+              </div>
+            <% end %>
+          </event-card>
+        <% end %>
+      </div>
+    <% end %>
+    <% if @passed_events.present? %>
+      <h2>Événements passés</h2>
+      <div class="flow">
+        <% @passed_events.each do |event| %>
+          <event-card class="row panel">
+            <%= link_to programmation_event_website_bogue_path(bogue_slug: @bogue.slug, event_slug: event.slug), class: "list-element event-card" do %>
+              <time>
+                <%= event.date_period %>
+                <div><%= event.time_period if event.time_period.present? %></div>
+              </time>
+              <div class="event-info">
+                <h3><%= event.name %></h3>
+                <address>
+                  <%= event.full_location %>
+                </address>
+              </div>
+              <div class="tag-list cluster">
+                <span class="tag">
+                  <span><%= event.event_type %></span>
+                </span>
+              </div>
+            <% end %>
+          </event-card>
+        <% end %>
+      </div>
+    <% end %>
+  </section>
+</div>

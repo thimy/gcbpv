@@ -1,9 +1,9 @@
-@import 'tailwindcss/base';
+@import 'tailwindcss/base.css';
 
 @import 'global/reset.css';
 @import 'global/fonts.css';
 
-@import 'tailwindcss/components';
+@import 'tailwindcss/components.css';
 
 @import "vendors/multiselect.css";
 
@@ -14,7 +14,7 @@
 @import-glob 'compositions/*.css';
 @import-glob 'utilities/*.css';
 
-@import 'tailwindcss/utilities';
+@import 'tailwindcss/utilities.css';
 
 /* Entry point for your PostCSS build */
 

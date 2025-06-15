@@ -6,10 +6,12 @@ class KidWorkshop < ApplicationRecord
 
   accepts_nested_attributes_for :kid_workshop_slots
 
-  enum :workshop_type, "Éveil" => 0, "Découverte" => 1, "Parent-Enfant" => 2
+  enum :workshop_type, "Éveil" => 0, "Découverte" => 1, "Parcours famille" => 2
   enum :status, "Public" => 0, "Privé" => 1
 
   scope :active, -> { where(status: 0) }
+  
+  validates :name, presence: true
 
   def student_count
     students_by_slot.join(", ")

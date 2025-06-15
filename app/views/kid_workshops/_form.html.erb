@@ -1,0 +1,42 @@
+<%= form_with(model: kid_workshop) do |form| %>
+  <% if kid_workshop.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(kid_workshop.errors.count, "erreur") %></h2>
+
+      <ul>
+        <% kid_workshop.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, "Nom" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description, "Description" %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :workshop_type, "Type d’atelier" %>
+    <%= form.select :workshop_type, options_for_select(KidWorkshop.workshop_types.keys.to_a) %>
+  </div>
+
+  <div>
+    <%= form.label :status, "Statut" %>
+    <%= form.select :status, options_for_select(KidWorkshop.statuses.keys.to_a, selected: kid_workshop.status.present? ? kid_workshop.status : 1) %>
+  </div>
+
+  <div>
+    <%= form.label :comment, "Notes" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <div>
+    <%= form.submit "Sauvegarder l’atelier enfance", class: "button" %>
+  </div>
+<% end %>

@@ -1,0 +1,43 @@
+<div id="<%= dom_id post %>">
+  <p>
+    <strong>Objet :</strong>
+    <%= post.title %>
+  </p>
+
+  <p>
+    <strong>Catégories :</strong>
+    <% post.categories.each do |category| %>
+      <span class="tag">
+        <span><%= category.name %></span>
+      </span>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Status :</strong>
+    <%= post.status %>
+  </p>
+
+  <% if post.event.present? %>
+    <p>
+      <strong>Événement lié :</strong>
+      <%= post.event.name %>
+    </p>
+  <% end %>
+
+  <p>
+    <strong>Corps du message :</strong>
+    <div class="editor-content-wrapper">
+      <%= post.formatted_content %>
+    </div>
+  </p>
+</div>
+
+<%= link_to "Supprimer cet article",
+  post_path(post),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet article ?"
+  } %>

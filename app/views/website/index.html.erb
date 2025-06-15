@@ -20,7 +20,7 @@
     </header>
     <% if @events.present? %>
       <div class="flow">
-        <%= render Website::Card::Event::Component.with_collection(@events) %>
+        <%= render Website::Card::Event::Component.with_collection(@events, inline: true) %>
       </div>
     <% end %>
   </section>

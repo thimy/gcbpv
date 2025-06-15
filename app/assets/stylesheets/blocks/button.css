@@ -7,6 +7,8 @@
   --button-radius: var(--radius-s);
   --focus-color: var(--color-primary);
 
+  --flow-space: var(--space-m);
+
   display: inline-flex;
   gap: var(--button-gutter);
   align-items: center;
@@ -48,6 +50,12 @@
 .button[data-button-variant='alert'] {
   --button-bg: var(--color-error);
   --button-text: var(--color-light);
+}
+
+.button[data-button-variant="naked"] {
+  --button-bg: transparent;
+  --button-x-padding: 0px;
+  --button-y-padding: 0px;
 }
 
 .button[data-button-size="small"] {

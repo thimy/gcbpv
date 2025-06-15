@@ -285,7 +285,7 @@ a[class] {
   text-decoration: none;
 }
 
-a.decorated {
+.decorated {
   position: relative;
 
   &::after {
@@ -342,8 +342,8 @@ a:not([class]):hover {
 }
 
 ::selection {
-  color: var(--color-dark);
-  background: var(--color-light);
+  color: var(--color-light);
+  background: var(--color-dark);
 }
 
 hr {
@@ -371,6 +371,14 @@ svg[role='img'][width][height] {
 /* There's a .flow composition, but this prevents forms from having to have that applied where markup is harder to control in certain systems. It still uses the --flow-space variables though to make managing space easier */
 form > * + * {
   margin-top: var(--flow-space, 1rem);
+
+  label + * {
+    --flow-space: var(--space-xxs);
+  }
+}
+
+form .cluster {
+  --gutter: var(--space-x);
 }
 
 :is(input, select, textarea) {
@@ -378,14 +386,17 @@ form > * + * {
 }
 
 :is(input:not([class='button'], [type='checkbox'], [type='radio'], [type='color']), select, textarea) {
+  --flow-space: var(--space-xxs);
   --input-font-size: var(--size-step-0);
   padding: 0.5em 0.8em;
   border-radius: var(--radius-s);
-  border: var(--stroke-solid);
-  background: var(--color-dark-glare);
-  color: var(--color-light);
+  border: var(--stroke);
   font-size: var(--input-font-size);
   width: 100%;
+
+  &:is(.cluster > *) {
+    width: auto;
+  }
 
   &::placeholder {
     color: var(--color-mint);
@@ -394,7 +405,7 @@ form > * + * {
 }
 
 :is(input, select, textarea):is(.double) {
-  width: 536px;
+  width: 565px;
 }
 
 label {
@@ -417,7 +428,7 @@ label:has(input) {
 }
 
 label:has(input) + label:has(input) {
-  --flow-spce: var(--space-s-m);
+  --flow-space: var(--space-s-m);
 }
 
 /* Slightly adjusts the vertical position of the check/radio */
@@ -465,4 +476,8 @@ details[open] summary {
 
 main.region {
   --region-space: var(--space-xl);
+}
+
+.strong {
+  font-weight: 600;
 }

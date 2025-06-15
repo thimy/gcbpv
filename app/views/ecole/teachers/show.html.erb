@@ -1,7 +1,7 @@
 <% content_for(:page_class, "ecole teacher-page ") %>
 <% content_for(:page_title, @teacher.name) %>
 
-<section class="flow">
+<div class="flow">
   <div class="image flow">
     <div class="tag-list cluster">
       <% @teacher.instruments.each do |instrument| %>
@@ -31,4 +31,4 @@
       <% end %>
     <% end %>
   <% end %>
-</section>
+</div>

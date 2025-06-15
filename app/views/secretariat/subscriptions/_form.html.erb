@@ -1,4 +1,4 @@
-<%= form_with(model: subscription, url: secretariat_subscriptions_path, class: "subscription-form flow") do |form| %>
+<%= form_with(model: subscription, url: subscriptions_path, class: "subscription-form flow") do |form| %>
   <% if subscription.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(subscription.errors.count, "erreur") %> dans ce formulaire :</h2>

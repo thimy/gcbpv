@@ -1,0 +1,6 @@
+<% content_for(:page_class, "posts ") %>
+<% content_for(:page_title, "Actualités") %>
+
+<section class="flow">
+  <%= render Website::PostPreview::Component.with_collection(@posts) %>
+</section>

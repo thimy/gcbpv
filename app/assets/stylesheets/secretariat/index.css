@@ -1,6 +1,4 @@
 .secretariat {
-  padding: var(--size-step-4);
-
   .header-title,
   .header-title:visited {
     color: var(--text-color);
@@ -10,9 +8,8 @@
   }
 
   > header {
-    background-color: var(--color-primary);
-    border-radius: var(--radius-m);
-    padding: var(--space-s) var(--space-m);
+    border-block-end: var(--stroke);
+    padding: var(--space-s) var(--space-l);
 
     nav {
       display: flex;
@@ -20,11 +17,8 @@
     }
   }
 
-  .content-header {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  main {
+    padding: var(--size-step-4);
   }
 
   table {
@@ -58,18 +52,8 @@
   }
 
   form {
-    --flow-space: var(--space-xs);
-
     .cluster {
       --gutter: var(--space-s);
-    }
-
-    .cluster .cluster {
-      --gutter: 0;
-    }
-
-    .cluster .flow {
-      --flow-space: 0;
     }
 
     .search-input {

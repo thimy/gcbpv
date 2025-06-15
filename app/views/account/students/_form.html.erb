@@ -1,0 +1,38 @@
+<% if student.errors.any? %>
+  <div style="color: red">
+    <h2>Cette personne n’a pas pu être enregistrée :</h2>
+
+    <ul>
+      <% student.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= simple_form_for(student, url: account_student_path) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                label: "Prénom" %>
+
+    <%= f.input :last_name,
+                required: true,
+                label: "Nom" %>
+    
+    <%= f.input :email %>
+
+    <%= f.input :phone,
+                label: "Numéro de téléphone" %>
+
+    <%= f.input :gender,
+                as: :radio_buttons,
+                collection: Student.genders,
+                label: "Genre",
+                hint: "Cette information ne sera utilisée qu’à des fins statistiques" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+<% end %>

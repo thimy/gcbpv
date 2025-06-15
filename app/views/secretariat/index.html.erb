@@ -1,33 +1,23 @@
-<h2>Année <%= @season.name %></h2>
-<div class="grid">
-  <%= link_to secretariat_subscriptions_path, class: "card panel" do %>
-    <div class="card-info">
-      <h3>Élèves</h3>
-      <div><%= @active_subscription_size %></div>
-    </div>
-  <% end %>
-  <%= link_to "#{secretariat_subscriptions_path}?exclude_status=0", class: "card panel" do %>
-    <div class="card-info">
-      <h3>Élèves confirmés</h3>
-      <div><%= @confirmed_subscription_size %></div>
-    </div>
-  <% end %>
-  <%= link_to "#{secretariat_subscriptions_path}?status=0", class: "card panel" do %>
-    <div class="card-info">
-      <h3>Demandes d’information</h3>
-      <div><%= @unconfirmed_subscription_size %></div>
-    </div>
-  <% end %>
-  <%= link_to secretariat_teachers_path, class: "card panel" do %>
-    <div class="card-info">
-      <h3>Professeurs</h3>
-      <div><%= @teachers.size %></div>
-    </div>
-  <% end %>
-  <%= link_to secretariat_workshops_path, class: "card panel" do %>
-    <div class="card-info">
-      <h3>Ateliers</h3>
-      <div><%= @workshops.size %></div>
-    </div>
-  <% end %>
-</div>
+<% @seasons.each do |season| %>
+  <h2>Année <%= season.name %></h2>
+  <div class="grid">
+    <%= link_to subscriptions_url(season: season), class: "card panel" do %>
+      <div class="card-info">
+        <h3>Tous les élèves</h3>
+        <div><%= season.active_subscription_size %></div>
+      </div>
+    <% end %>
+    <%= link_to "#{subscriptions_url(season: season)}?exclude_status=0", class: "card panel" do %>
+      <div class="card-info">
+        <h3>Élèves confirmés</h3>
+        <div><%= season.confirmed_subscription_size %></div>
+      </div>
+    <% end %>
+    <%= link_to "#{subscriptions_url(season: season)}?status=0", class: "card panel" do %>
+      <div class="card-info">
+        <h3>Demandes d’information</h3>
+        <div><%= season.unconfirmed_subscription_size %></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>

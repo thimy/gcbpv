@@ -1,0 +1,12 @@
+<% content_for(:page_class, "account ") %>
+<% content_for(:page_title, "Compte") %>
+
+<section>
+<%= render @city %>
+
+<div>
+  <%= link_to "Éditer cet élève", edit_account_student_path(@student) %> |
+  <%= link_to "Retour aux élèves", account_students_path %>
+
+  <%= button_to "Supprimer cet élève", @student, method: :delete %>
+</div>

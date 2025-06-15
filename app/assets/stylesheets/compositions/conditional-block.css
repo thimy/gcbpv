@@ -1,0 +1,11 @@
+.condition:has(.display-condition) ~ :is(.conditional-block) {
+  display: none;
+}
+
+.condition:has(.display-condition:checked) ~ :is(.conditional-block) {
+  display: revert;
+}
+
+.condition:has(.hide-condition:checked) ~ :is(.conditional-block) {
+  display: none;
+}

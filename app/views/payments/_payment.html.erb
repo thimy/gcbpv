@@ -1,0 +1,60 @@
+<% if defined?(is_form) && !!is_form %>
+  <tr class="<%= "new-item" if !payment.id %>" data-controller="edit-payment" id="<%= dom_id payment %>">
+    <td class="cell-payment_method">
+      <%= select :payment, :payment_method, Payment.payment_methods.keys.map {|method| [method,method]},
+        {
+          include_blank: payment.id.blank?,
+          selected: payment.present? ? payment.payment_method : "",
+          required: payment.id.blank?
+        } %>
+    </td>
+    <td class="cell-amount">
+      <%= text_field :payment, :amount %>
+    </td>
+    <td class="cell-comment">
+      <%= text_area :payment, :comment, rows: 2 %>
+    </td>
+    <td class="cell-options">
+      <div class="actions">
+        <% if payment.id.present? %>
+          <%= hidden_field_tag "payment[id]", payment.id %>
+          <button class="button" type="submit">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-payment#editEntry" data-edit-payment-url-param="<%= payment_path(payment) %>">
+            <%= inline_svg "icons/undo", "aria-label": "Annuler" %>
+          </button>
+        <% else %>
+          <button class="button" data-action="edit-payment#createEntry" data-edit-payment-url-param="<%= payments_path %>">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-payment#cancelNew">
+            <%= inline_svg "icons/delete", "aria-label": "Annuler" %>
+          </button>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% else %>
+  <tr data-controller="edit-payment" id="<%= dom_id payment %>" data-edit-payment-id-value="<%= payment.id %>">
+    <td class="cell-payment_method"><%= payment.payment_method %></td>
+    <td class="cell-amount"><%= payment.amount %></td>
+    <td class="cell-comment"><%= simple_format(payment.comment) %></td>
+    <td class="cell-options">
+      <div class="actions">
+        <button class="button" data-action="edit-payment#editEntry" 
+                data-edit-payment-url-param="<%= edit_payment_path(payment) %>">
+          <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+        </button>
+        <%= link_to payment_path(payment), 
+          class: "button",
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce paiement ?"
+          } do %>
+          <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

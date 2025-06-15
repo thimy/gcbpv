@@ -1,5 +1,6 @@
 class City < ApplicationRecord
   # Cities where the school dispenses classes
+  belongs_to :agglomeration, optional: true
   has_many :slots
   has_many :teachers, through: :slots
   has_many :workshop_slots

@@ -1,0 +1,25 @@
+<%= form_with url: @is_account ? account_course_path : course_path, method: "put", data: {"subscription-id": @subscription.id, "item-type": "course"} do |form| %>
+  <table class="course-list item-list">
+    <thead>
+      <tr>
+        <th class="cell-instrument">Discipline</th>
+        <th class="cell-teachers">Professeur</th>
+        <th class="cell-city">Ville</th>
+        <th class="cell-day_of_week">Jour</th>
+        <th class="cell-start_time">Heure de début</th>
+        <th class="cell-end_time">Heure de fin</th>
+        <th class="cell-option">Optionel</th>
+        <% unless @hide_private %>
+          <th class="cell-comment">Notes</th>
+        <% end %>
+        <th class="cell-options">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @courses.each do |course| %>
+      <%= render "courses/course", course: course %>
+    <% end %>
+      <%= render "courses/add" %>
+    </tbody>
+  </table>
+<% end %>

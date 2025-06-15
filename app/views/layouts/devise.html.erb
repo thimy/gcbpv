@@ -2,13 +2,14 @@
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new %>
-  <main class="content">
-    <%= render Website::Hero::Component.new(title: content_for(:page_title)) %>
-    <section>
-      <p class="banner"><%= notice %></p>
-      <p class="banner" data-banner-type="alert"><%= alert %></p>
-      <%= yield %>
-    </section>
+  <main class="wrapper region">
+    <div class="page-title">
+      <h1><%= content_for(:page_title) %></h1>
+      <p><%= content_for(:page_description) %></p>
+    </div>
+    <% if notice.present? %><p><%= notice %></p><% end %>
+    <% if alert.present? %><p data-banner-variant="alert"><%= alert %></p><% end %>
+    <%= yield %>
   </main>
 <% end %>
 <%= render template: "layouts/application" %>

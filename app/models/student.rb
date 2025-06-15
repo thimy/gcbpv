@@ -14,7 +14,7 @@ class Student < ApplicationRecord
   validates :first_name, presence: true
   validates :birth_year, numericality: {only_integer: true, greater_than_or_equal_to: Config.first.season.start_year - 120, less_than_or_equal_to: Config.first.season.start_year - 2, message: "Année de naissance invalide"}
 
-  enum :gender, "Ne se prononce pas" => 0, "Homme" => 1, "Femme" => 2, "Non-binaire" => 3
+  enum :gender, "Ne se prononce pas" => 0, "Homme" => 1, "Femme" => 2, "Non-binaire" => 3, "Autre" => 4
   enum :age_type, "Non renseigné" => 0, "Jeunes" => 1, "Adultes" => 2
 
   attribute :age_type, :integer
@@ -47,5 +47,9 @@ class Student < ApplicationRecord
 
   def city_or_payor_city
     city || subscriptions.last&.subscription_group&.payor&.city
+  end
+
+  def email_or_payor_email
+    email || subscriptions.last&.subscription_group&.payor&.payor_email
   end
 end

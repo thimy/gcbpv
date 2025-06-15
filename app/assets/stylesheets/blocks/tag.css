@@ -53,11 +53,11 @@
 
   .tag {
     &:first-child {
-      border-radius: var(--radius-m) 0 0 var(--radius-m);
+      border-radius: var(--radius-s) 0 0 var(--radius-s);
     }
 
     &:last-child {
-      border-radius: 0 var(--radius-m) var(--radius-m) 0;
+      border-radius: 0 var(--radius-s) var(--radius-s) 0;
     }
   }
 }

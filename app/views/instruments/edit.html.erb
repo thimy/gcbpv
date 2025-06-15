@@ -1,0 +1,7 @@
+<div class="repel">
+  <h1>Modifier la discipline – <%= @instrument.name %></h1>
+  <%= link_to "Retour aux disciplines", instruments_path, class: "button" %>
+</div>
+
+<%= render "form", instrument: @instrument %>
+

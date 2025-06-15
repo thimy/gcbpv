@@ -1,0 +1,166 @@
+<%= form_with(model: subscription, url: subscriptions_path, class: "subscription-form flow") do |form| %>
+  <% if subscription.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(subscription.errors.count, "erreur") %> :</h2>
+
+      <ul>
+        <% subscription.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="cluster" data-type="50-50">
+    <div class="panel flow">
+      <h3>Payeur</h3>
+      <%= turbo_frame_tag "payor", class: "cluster" do %>
+        <%= text_field :payor, :name, list: "payor-list", placeholder: "Rechercher un payeur existant", required: true %>
+        <datalist id="payor-list">
+          <% @payors.each do |payor| %>
+            <option value="<%= payor.name %>"><%= payor.name %></option>
+          <% end %>
+        </datalist>
+        ou
+        <%= link_to "Créer un nouveau payeur", new_payor_path, class: "button" %>
+      <% end %>
+    </div>
+
+    <div class="panel flow">
+      <h3>Élève</h3>
+      <%= turbo_frame_tag "student", class: "cluster" do %>
+        <%= text_field :student, :name, list: "student-list", placeholder: "Rechercher un élève existant", required: true %>
+        <datalist id="student-list">
+          <% @students.each do |student| %>
+            <option value="<%= student.name %>"><%= student.name %></option>
+          <% end %>
+        </datalist>
+        ou
+        <%= link_to "Créer un nouvel élève", new_student_path, class: "button" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="cluster" data-type="thirds">
+    <div class="panel flow">
+      <h3>Enfance</h3>
+      <%= turbo_frame_tag form.field_id(:subbed_kid_workshops), class: "cluster" do %>
+        <%= dynamic_fields_for form, :subbed_kid_workshops, "+ Ajouter un atelier" do |kid_workshop_form| %>
+          <div data-controller="fill-select" class="flow">
+            <div class="flow">
+              <%= label_tag "Nom de l'atelier" %>
+              <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: true },
+                {
+                  data: {
+                    fill_select_url_param: "/get_kid_workshop_slots?id=",
+                    fill_select_target_param: ".kid-workshop-slot-select",
+                    action: "fill-select#updateSlots"
+                  }
+                } %>
+            </div>
+            <%= render "kid_workshop_slots", slots: [], form: kid_workshop_form, selected: "" %>
+            <div class="form-inline">
+              <%= kid_workshop_form.check_box :option, {}, "Optionel", "Confirmé" %>
+              <%= kid_workshop_form.label :option, "Optionel" %>
+            </div>
+            <div class="flow notes">
+              <%= kid_workshop_form.label :comment, "Notes" %>
+              <%= kid_workshop_form.text_area :comment, rows: 2 %>
+            </div>
+            <button class="button" data-action="fill-select#removeRow" data-button-variant="alert" title="Supprimer cet atelier enfance"><%= inline_svg "icons/cross" %> Supprimer cet atelier enfance</button>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="panel flow">
+      <h3>Cours</h3>
+      <%= turbo_frame_tag form.field_id(:courses), class: "cluster" do %>
+        <%= dynamic_fields_for form, :courses, "+ Ajouter un cours" do |course_form| %>
+          <div data-controller="fill-select" class="flow">
+            <div class="flow">
+              <%= course_form.label "Discipline" %>
+              <%= course_form.collection_select :instrument_id, @instruments, :id, :name, { include_blank: true, required: true },
+                {
+                  data: {
+                    fill_select_url_param: "/get_teachers?id=",
+                    fill_select_target_param: ".teacher-select",
+                    fill_select_reset_param: ".slot-select",
+                    action: "fill-select#updateTeachers",
+                  }
+                } %>
+            </div>
+            <%= render "teachers", teachers: [] %>
+            <%= render "slots", slots: [], form: course_form %>
+            <label for="subscription_courses_option">
+              <%= course_form.check_box :option, {}, "Optionel", "Confirmé" %> Optionel
+            </label>
+            <div class="flow notes">
+              <%= course_form.label :comment, "Notes" %>
+              <%= course_form.text_area :comment, rows: 2 %>
+            </div>
+            <button class="button" data-action="fill-select#removeRow" data-button-variant="alert" title="Supprimer ce cours"><%= inline_svg "icons/cross" %>Supprimer ce cours</button>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="panel flow">
+      <h3>Ateliers</h3>
+      <%= turbo_frame_tag form.field_id(:subbed_workshops), class: "cluster" do %>
+        <%= dynamic_fields_for form, :subbed_workshops, "+ Ajouter un atelier" do |workshop_form| %>
+          <div data-controller="fill-select" class="flow">
+            <div class="flow">
+              <%= label_tag "Nom de l'atelier" %>
+              <%= collection_select :workshop, :workshop_ids, @workshops, :id, :name, { include_blank: true },
+                {
+                  data: {
+                    fill_select_url_param: "/get_workshop_slots?id=",
+                    fill_select_target_param: ".workshop-slot-select",
+                    action: "fill-select#updateSlots"
+                  }
+                } %>
+            </div>
+            <%= render "workshop_slots", slots: [], form: workshop_form %>
+            <div class="form-inline">
+              <%= workshop_form.check_box :option, {}, "Optionel", "Confirmé" %>
+              <%= workshop_form.label :option, "Optionel" %>
+            </div>
+            <div class="flow notes">
+              <%= workshop_form.label :comment, "Notes" %>
+              <%= workshop_form.text_area :comment, rows: 2 %>
+            </div>
+            <button class="button" data-action="fill-select#removeRow" data-button-variant="alert" title="Supprimer cet atelier"><%= inline_svg "icons/cross" %> Supprimer cet atelier</button>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="panel flow">
+    <h3>Divers</h3>
+    <div class="cluster">
+      <label for="subscription_image_consent">
+        <%= form.check_box :image_consent, {} %>
+        <%= form.label :image_consent, "Consentement à l'image" %>
+      </label>
+      <label for="subscription_disability">
+        <%= form.check_box :disability, {} %>
+        <%= form.label :disability, "Situation empêchée" %>
+      </label>
+      <label for="subscription_ars">
+        <%= form.check_box :ars, {} %>
+        <%= form.label :ars, "ARS" %>
+      </label>
+      <div class="form-inline">
+        <%= form.select :status, options_for_select(Subscription.statuses), include_blank: "Statut", required: true %>
+      </div>      
+    </div>
+    <div class="flow">
+      <%= form.label :comment, "Notes" %>
+      <%= form.text_area :comment, rows: 2 %>
+    </div>
+  </div>
+
+  <%= form.submit "Créer une nouvelle inscription", class: "button" %>
+<% end %>

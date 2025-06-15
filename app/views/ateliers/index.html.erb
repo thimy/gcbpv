@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Ateliers</h1>
 
 <div id="ateliers">
@@ -12,11 +10,10 @@
 </div>
 
 <%= link_to "New atelier", new_atelier_path %>
-<div class="content-header">
+<div class="repel">
   <h1>Ateliers</h1>
   <%= link_to "Créer un nouvel atelier", new_atelier_path %>
 </div>
-<p style="color: green"><%= notice %></p>
 <%= render Shared::Table::Component.new do |table| %>
   <% table.with_header do |header| %>
     <% header.with_column(name: "nom") do %>Nom<% end %>

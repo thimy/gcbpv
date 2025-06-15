@@ -1,0 +1,33 @@
+<div class="repel">
+  <h1>Ateliers Enfance</h1>
+  <%= link_to "Créer un nouvel atelier", new_kid_workshop_path %>
+</div>
+<%= render Shared::Table::Component.new do |table| %>
+  <% table.with_header do |header| %>
+    <% header.with_column(name: "name") do %>Nom<% end %>
+    <% header.with_column(name: "subscriptions") do %>Nombre d'élèves<% end %>
+  <% end %>
+  <% @kid_workshops.each do |kid_workshop| %>
+    <% table.with_row(link_url: kid_workshop) do |row| %>
+      <% row.with_cell(name: "name") do %><%= link_to kid_workshop.name, kid_workshop_url(season: @season, record: kid_workshop) %><% end %>
+      <% row.with_cell(name: "subscriptions") do %>
+        <% kid_workshop.kid_workshop_slots.each do |slot| %>
+          <div>
+            <strong>
+              <%= "#{SubbedKidWorkshop.registered(@season).confirmed.has_slot(slot).size}" %>
+              <% @student_count = SubbedKidWorkshop.registered(@season).optional.has_slot(slot).size + SubbedKidWorkshop.inquired(@season).has_slot(slot).size %>
+                <% if @student_count > 0 %>
+                <span class="optional-count">
+                  <%= "(+#{@student_count})" %>
+                </span>
+              <% end %>
+            </strong>
+            <% if kid_workshop.kid_workshop_slots.size > 1 %>
+              <%= ": #{slot.teachers_and_location}" %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

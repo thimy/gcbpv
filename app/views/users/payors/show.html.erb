@@ -1,0 +1,10 @@
+<div class="repel">
+  <h1><%= @payor.name %></h1>
+
+  <div>
+    <%= link_to "Éditer le payeur", edit_payor_path(@payor) %> |
+    <%= link_to "Retour à la liste des foyers", payors_path %>
+  </div>
+</div>
+
+<%= render @payor %>

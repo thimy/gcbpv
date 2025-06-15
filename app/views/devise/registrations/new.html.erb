@@ -1,25 +1,61 @@
 <% content_for(:page_title, "Inscription") %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), class: "flow") do |f| %>
   <%= f.error_notification %>
+  <p class="panel">Je suis majeur·e et/ou je souhaite inscrire mes enfants</p>
 
-  <div class="form-inputs">
-    <%= f.input :email,
-                required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
-  </div>
+  <%= f.input :email,
+              required: true,
+              autofocus: true,
+              input_html: { autocomplete: "email" }%>
+  <%= f.input :password,
+              required: true,
+              input_html: { autocomplete: "new-password" } %>
+  <%= f.input :password_confirmation,
+              required: true,
+              input_html: { autocomplete: "new-password" } %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "S’inscrire" %>
-  </div>
+  <%= f.fields_for :payor do |payor_form| %>
+  aa
+    <div class="cluster">
+      <div class="flow">
+        <%= payor_form.label :first_name, "Prénom" %>
+        <%= payor_form.text_field :first_name %>
+      </div>
+
+      <div class="flow">
+        <%= payor_form.label :last_name, "Nom" %>
+        <%= payor_form.text_field :last_name %>
+      </div>
+    </div>
+
+    <div class="flow">
+      <%= payor_form.label :address, "Adresse" %>
+      <%= payor_form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+      <%= render "website/autocomplete" %>
+    </div>
+
+    <div class="cluster">
+      <div class="flow">
+        <%= payor_form.label :postcode, "Code postal" %>
+        <%= payor_form.text_field :postcode, "data-address-target": "postcode", required: true %>
+      </div>
+
+      <div class="flow">
+        <%= payor_form.label :city, "Ville" %>
+        <%= payor_form.text_field :city, "data-address-target": "city", required: true %>
+        <%= render "website/autocomplete" %>
+      </div>
+    </div>
+
+    <div class="flow">
+      <%= payor_form.label :phone %>
+      <%= payor_form.text_field :phone %>
+    </div>
+  <% end %>
+
+  <%= f.button :submit, "S’inscrire", class: "button" %>
+
+  <%= render "devise/shared/links" %>
 <% end %>
 
-<%= render "devise/shared/links" %>

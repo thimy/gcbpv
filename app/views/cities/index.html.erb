@@ -1,8 +1,7 @@
-<div class="content-header">
+<div class="repel">
   <h1>Villes</h1>
   <%= link_to "Créer une nouvelle ville", new_city_path %>
 </div>
-<p style="color: green"><%= notice %></p>
 <%= render Shared::Table::Component.new do |table| %>
   <% table.with_header do |header| %>
     <% header.with_column(name: "name") do %>Nom<% end %>

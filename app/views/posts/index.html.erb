@@ -1,6 +1,40 @@
-<% content_for(:page_class, "posts ") %>
-<% content_for(:page_title, "Actualités") %>
-
-<section class="flow">
-  <%= render Website::PostPreview::Component.with_collection(@posts) %>
-</section>
+<div class="repel">
+  <h1>Actualités</h1>
+  <%= link_to "Créer une nouvelle actualité", new_post_path, class: "button" %>
+</div>
+<%= turbo_frame_tag "posts", class: "flow" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "title", sortable: true) do %>Titre<% end %>
+      <% header.with_column(name: "created_at") do %>Créé le<% end %>
+      <% header.with_column(name: "status") do %>Status<% end %>
+      <% header.with_column(name: "options") do %>Actions<% end %>
+    <% end %>
+    <% @posts.each do |post| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "title") do %><%= link_to post.title, post_path(post), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "created_at") do %><%= post.created_at %><% end %>
+        <% row.with_cell(name: "status") do %><%= post.status %><% end %>
+        <% row.with_cell(name: "options") do %>
+          <%= link_to edit_post_path(post),
+            class: "button",
+            data: {
+              turbo: false
+            } do %>
+            <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+          <% end %>
+          <%= link_to post_path(post),
+            class: "button",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
+            } do %>
+            <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

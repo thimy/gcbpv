@@ -25,6 +25,7 @@ class PlanDashboard < Administrate::BaseDashboard
     membership_price: Field::Number.with_options(suffix: "€"),
     special_workshop_price: Field::Number.with_options(suffix: "€"),
     pathway_price: Field::Number.with_options(suffix: "€"),
+    standalone_workshop_price: Field::Number.with_options(suffix: "€"),
     comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -42,6 +43,7 @@ class PlanDashboard < Administrate::BaseDashboard
     class_price
     workshop_price
     special_workshop_price
+    standalone_workshop_price
     obc_markup
     outbounds_markup
     pathway_price
@@ -56,6 +58,7 @@ class PlanDashboard < Administrate::BaseDashboard
     kids_class_price
     workshop_price
     special_workshop_price
+    standalone_workshop_price
     early_learning_price
     kid_discovery_price
     pathway_price
@@ -81,6 +84,7 @@ class PlanDashboard < Administrate::BaseDashboard
     kids_class_price
     workshop_price
     special_workshop_price
+    standalone_workshop_price
     early_learning_price
     kid_discovery_price
     pathway_price

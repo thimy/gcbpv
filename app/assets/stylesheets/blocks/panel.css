@@ -4,4 +4,11 @@
   color: var(--text-color);
   display: block;
   padding: var(--space-s);
+
+  .panel {
+    --gutter: var(--space-xs);
+    --stroke-color: color-mix(in oklch, var(--text-color), transparent 80%);
+    background-color: color-mix(in oklch, var(--color-light), transparent 50%);
+    border: var(--stroke);
+  }
 }

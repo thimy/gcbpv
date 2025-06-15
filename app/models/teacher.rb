@@ -19,8 +19,8 @@ class Teacher < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def student_count
-    Course.joins(:subscription, :slot).where(slot: {teacher: self}).group(:slot).count.collect {|id, count|
+  def student_count(season)
+    Course.joins(:subscription, :slot).where(subscription: Subscription.active(season), slot: {teacher: self}).group(:slot).count.collect {|id, count|
       slot = Slot.find_by(id: id)
       "#{slot.day_of_week} à #{slot.city.name}: #{count}"
     }.join(", ")

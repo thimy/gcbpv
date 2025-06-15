@@ -1,11 +1,11 @@
 <aside class="vertical-menu">
   <%= render Website::Header::Entry::Component.new(label: "Présentation", path: "/bogue/#{@bogue.slug}") %>
-  <%= render Website::Header::Entry::Component.new(label: "Temps forts", path: highlights_bogue_path) %>
-  <%= render Website::Header::Entry::Component.new(label: "Programmation", path: programmation_bogue_path) %>
-  <%= render Website::Header::Entry::Component.new(label: "Concours", path: contests_bogue_path) %>
+  <%= render Website::Header::Entry::Component.new(label: "Temps forts", path: highlights_website_bogue_path) %>
+  <%= render Website::Header::Entry::Component.new(label: "Programmation", path: programmation_website_bogue_path) %>
+  <%= render Website::Header::Entry::Component.new(label: "Concours", path: contests_website_bogue_path) %>
   <% if @pages.present? %>
     <% @pages.each do |page| %>
-      <%= render Website::Header::Entry::Component.new(label: page.name, path: page_bogue_path(bogue_slug: @bogue.slug, page_slug: page.slug)) %>
+      <%= render Website::Header::Entry::Component.new(label: page.name, path: page_website_bogue_path(bogue_slug: @bogue.slug, page_slug: page.slug)) %>
     <% end %>
   <% end %>
 </aside>

@@ -1,0 +1,16 @@
+<%= form_with url: slot_path, method: "put", data: {"teacher-id": @teacher.id, "item-type": "slot"} do |form| %>
+  <table class="slot-list item-list">
+    <thead>
+      <tr>
+        <th class="cell-day_of_week">Jour</th>
+        <th class="cell-city">Ville</th>
+        <th class="cell-slot_time">Heure de début</th>
+        <th class="cell-options">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @slots %>
+      <%= render "slots/add" %>
+    </tbody>
+  </table>
+<% end %>

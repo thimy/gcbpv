@@ -220,6 +220,7 @@ fr:
         kids_class_price: "Prix du cours enfants"
         workshop_price: "Prix de l’atelier"
         special_workshop_price: "Prix atelier spécial"
+        standalone_workshop_price: "Prix atelier autonome"
         membership_price: "Adhésion"
         early_learning_price: "Prix de l’éveil musical"
         kid_discovery_price: "Prix de l’atelier découverte enfants"

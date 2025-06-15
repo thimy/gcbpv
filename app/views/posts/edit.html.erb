@@ -1,0 +1,8 @@
+<div class="repel">
+  <h1>Éditer l’actualité</h1>
+  <div>
+    <%= link_to "Retour aux actualités", posts_path, class: "button" %>
+  </div>
+</div>
+
+<%= render "form", post: @post, url: post_path, class: "button" %>

@@ -1,13 +1,19 @@
 class PayorsController < SecretariatController
+  include WithTableConcern
+
   before_action :set_payor, only: %i[ show edit update destroy ]
+
+  SORT_ATTRIBUTES = ["last_name", "birth_year"]
 
   # GET /payors or /payors.json
   def index
-    @payors = Payor.all
+    set_tab_data
   end
 
   # GET /payors/1 or /payors/1.json
   def show
+    @subscription_group = @payor.subscription_group(@season)
+    @subscriptions = @subscription_group.subscriptions
   end
 
   # GET /payors/new
@@ -58,6 +64,10 @@ class PayorsController < SecretariatController
   end
 
   private
+    def query
+      params[:q]
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_payor
       @payor = Payor.find(params[:id])
@@ -65,6 +75,31 @@ class PayorsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def payor_params
-      params.require(:payor).permit(:last_name, :first_name, :email, :phone)
+      params.require(:payor).permit(:last_name, :first_name, :email, :phone, :address, :postcode, :city, :comment)
+    end
+
+    def set_records
+      @subscription_groups = SubscriptionGroup.where(status: params[:status]) if params[:status].present?
+
+      if !@subscription_groups.nil?
+        @filtered_payors = Payor.includes(:subscription_groups).where(subscription_groups: @subscription_groups)
+      else
+        @filtered_payors = Payor.includes(:subscription_groups).where(subscription_groups: { season: @season })
+      end
+
+      if query.present?
+        @filtered_payors = @filtered_payors.where("last_name ILIKE ?", "%#{query}%").or(@filtered_payors.where("first_name ILIKE ?", "%#{query}%"))
+      end
+
+      @selected_emails = @filtered_payors.map {|payor| payor.payor_email}.uniq.join("\n")
+      @pagy, @payors = paginate_records(@filtered_payors)
+    end
+
+    def default_sort_attribute
+      SORT_ATTRIBUTES.first
+    end
+  
+    def valid_sort_attribute?(attribute)
+      SORT_ATTRIBUTES.include?(attribute)
     end
 end

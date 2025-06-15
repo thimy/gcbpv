@@ -1,0 +1,10 @@
+<div class="repel">
+  <h1><%= @teacher.name %></h1>
+
+  <div>
+    <%= link_to "Éditer ce professeur", edit_teacher_path(@teacher), class: "button" %>
+    <%= link_to "Retour à la liste des professeurs", teachers_path, class: "button" %>
+  </div>
+</div>
+
+<%= render @teacher %>

@@ -1,0 +1,50 @@
+<div class="repel">
+  <h1>Inscriptions</h1>
+  <%= link_to "Ajouter une inscription pour cette année", new_account_subscription_path, class: "button" %>
+</div>
+<%= turbo_frame_tag "subscriptions" do %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "student", sortable: true) do %>Élève<% end %>
+      <% header.with_column(name: "course") do %>Cours<% end %>
+      <% header.with_column(name: "workshop") do %>Ateliers<% end %>
+      <% header.with_column(name: "price") do %>Coût<% end %>
+    <% end %>
+    <% if @subscriptions.present? %>
+      <% @subscriptions.each do |subscription| %>
+        <% table.with_row(link_url: subscription_path(subscription)) do |row| %>
+          <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, account_subscription_path(subscription), "data-turbo": false %><% end %>
+          <% row.with_cell(name: "course") do %>
+            <%= [subscription.kid_workshop_list, subscription.course_list, subscription.pathway_list].reject!(&:empty?).join(", ") %><% end %>
+          <% row.with_cell(name: "workshop") do %><%= subscription.workshop_list %><% end %>
+          <% row.with_cell(name: "price") do %><%= number_to_currency(subscription.total_cost, unit: "€") %><% end %>
+        <% end %>
+      <% end %>
+      <% table.with_row(class: "strong") do |row| %>
+        <% row.with_cell(name: "total", colspan: 3) do %>Total<% end %>
+        <% row.with_cell(name: "price") do %><%= number_to_currency(@subscription_group.course_cost, unit: "€") %><% end %>
+      <% end %>
+      <% unless @subscription_group.additional_cost == 0 %>
+        <% table.with_row(class: "strong") do |row| %>
+          <% row.with_cell(name: "additional_cost", colspan: 3) do %>
+            <%= "Majoration #{@subscription_group.agglo} (+#{@subscription_group.agglo_markup}%)" %><% end %>
+          <% row.with_cell(name: "price") do %><%= number_to_currency(@subscription_group.additional_cost, unit: "€") %><% end %>
+        <% end %>
+      <% end %>
+      <% unless @subscription_group.discount == 0 %>
+        <% table.with_row(class: "strong") do |row| %>
+          <% row.with_cell(name: "additional_cost", colspan: 3) do %>
+            <%= "Remise (-#{@subscription_group.discount}%)" %><% end %>
+          <% row.with_cell(name: "price") do %><%= number_to_currency(@subscription_group.discount, unit: "€") %><% end %>
+        <% end %>
+      <% end %>
+      <% table.with_row(class: "strong") do |row| %>
+        <% row.with_cell(name: "total", colspan: 3) do %>Adhésion au Groupement Culturel Breton des Pays de Vilaine<% end %>
+        <% row.with_cell(name: "price") do %><%= number_to_currency(@membership, unit: "€") %><% end %>
+      <% end %>
+    <% end %>
+    <% table.with_empty_state do %>
+      <div class="banner"><p>Vous n’avez pas encore d’inscriptions</p></div>
+    <% end %>
+  <% end %>
+<% end %>

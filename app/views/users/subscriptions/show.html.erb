@@ -1,0 +1,21 @@
+<% content_for(:page_class, "subscriptions ") %>
+<div class="repel">
+  <h1><%= @subscription.student.name %></h1>
+
+  <div>
+    <%= link_to "Créer une nouvelle inscription", new_account_subscription_path(@subscription), class: "button" %>
+    <%= link_to "Retour aux inscriptions", account_subscriptions_path, class: "button" %>
+  </div>
+</div>
+
+<%= render @subscription %>
+
+<%= link_to "Supprimer cette inscription",
+  subscription_path(@subscription),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette inscription ?"
+  } %>
+

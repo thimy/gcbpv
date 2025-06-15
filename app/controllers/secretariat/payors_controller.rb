@@ -29,7 +29,7 @@ class Secretariat::PayorsController < SecretariatController
 
     respond_to do |format|
       if @payor.save
-        format.html { redirect_to secretariat_payor_url(@payor), notice: "Payor was successfully created." }
+        format.html { redirect_to payor_url(@payor), notice: "Payor was successfully created." }
         format.json { render :show, status: :created, location: @payor }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class Secretariat::PayorsController < SecretariatController
   def update
     respond_to do |format|
       if @payor.update(payor_params)
-        format.html { redirect_to secretariat_payor_url(@payor), notice: "Payor was successfully updated." }
+        format.html { redirect_to payor_url(@payor), notice: "Payor was successfully updated." }
         format.json { render :show, status: :ok, location: @payor }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class Secretariat::PayorsController < SecretariatController
     @payor.destroy!
 
     respond_to do |format|
-      format.html { redirect_to secretariat_payors_url, notice: "Payor was successfully destroyed." }
+      format.html { redirect_to payors_url, notice: "Payor was successfully destroyed." }
       format.json { head :no_content }
     end
   end

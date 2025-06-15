@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_161828) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -52,6 +52,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_administrators_on_email", unique: true
     t.index ["reset_password_token"], name: "index_administrators_on_reset_password_token", unique: true
+  end
+
+  create_table "agglomerations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "attachments", force: :cascade do |t|
@@ -97,6 +103,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.text "comment"
+    t.string "postcode"
+    t.bigint "agglomeration_id"
+    t.index ["agglomeration_id"], name: "index_cities_on_agglomeration_id"
   end
 
   create_table "configs", force: :cascade do |t|
@@ -314,6 +323,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
     t.decimal "special_workshop_price"
     t.text "comment"
     t.decimal "parent_kid_price"
+    t.decimal "standalone_workshop_price"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -448,6 +458,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
     t.integer "status"
     t.integer "majoration_class"
     t.decimal "amount"
+    t.decimal "discount"
     t.index ["payor_id"], name: "index_subscription_groups_on_payor_id"
     t.index ["season_id"], name: "index_subscription_groups_on_season_id"
   end
@@ -528,8 +539,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_20_122229) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "payor_id"
+    t.bigint "student_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["payor_id"], name: "index_users_on_payor_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["student_id"], name: "index_users_on_student_id"
   end
 
   create_table "workshop_slot_teachers", force: :cascade do |t|

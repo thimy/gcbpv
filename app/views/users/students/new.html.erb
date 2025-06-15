@@ -1,0 +1,80 @@
+<div id="new-subscription flow">
+    <h1>Nouvelle inscription</h1>
+
+  <%= form_with(model: @student) do |form| %>
+    <div class="flow" data-controller="address">
+
+      <div class="condition cluster">
+        <label for="is_payor_yes"><%= radio_button_tag :is_payor, "yes" %> Pour moi-même</label>
+        <label for="is_payor_no"><%= radio_button_tag :is_payor, "no", class: "display-condition" %> Pour un membre de mon foyer</label>
+      </div>
+
+      <div class="conditional-block flow">
+        <div class="flow">
+          <label for="student_first_name">Prénom</label>
+          <%= text_field :student, :first_name, required: true %>
+        </div>
+
+        <div class="flow">
+          <label for="student_last_name" class="required">Nom</label>
+          <%= text_field :student, :last_name, required: true %>
+        </div>
+
+        <div class="flow">
+          <label for="student_phone">Téléphone</label>
+          <%= text_field :student, :phone %>
+        </div>
+
+        <div class="flow">
+          <label for="student_email">Email</label>
+          <%= text_field :student, :email %>
+        </div>
+      </div>
+
+      <div class="cluster">
+        <div class="flow">
+          <label for="student_birth_year">Année de naissance</label>
+          <%= text_field :student, :birth_year, required: true %>
+        </div>
+
+        <div class="flow">
+          <label for="student_gender">Genre</label>
+          <%= select :student, :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+        </div>
+      </div>
+
+      <div class="conditional-block flow">
+        <div class="condition flow">
+          <label>Utiliser l'adresse du représentant légal</label>
+          <div class="cluster">
+            <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", :true %> Oui</label>
+            <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", :false, class: "display-condition" %> Non</label>
+          </div>
+        </div>
+
+        <div class="conditional-block flow">
+          <div class="flow">
+            <label for="student_comment">Adresse</label>
+            <%= text_field :student, :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+            <%= render "website/autocomplete" %>
+          </div>
+
+          <div class="cluster">
+            <div class="flow">
+              <label for="student_postcode">Code Postal</label>
+              <%= text_field :student, :postcode, "data-address-target": "postcode" %>
+            </div>
+
+            <div class="flow">
+              <label for="student_city">Ville</label>
+              <%= text_field :student, :city, "data-address-target": "city" %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= form.submit "Ajouter un·e élève", class: "button" %>
+  <% end %>
+
+</div>

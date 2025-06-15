@@ -5,10 +5,14 @@ class Course < ApplicationRecord
   belongs_to :subscription
   delegate :student, to: :subscription
   delegate :subscription_group, to: :subscription
+  delegate :season, to: :subscription_group
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
   scope :ordered, -> { includes(:slot).order("slots.day_of_week", :start_time) }
+  scope :confirmed, -> { where(option: "Confirmé") }
+  scope :optional, -> { where(option: "Optionel") }
+  scope :active, ->(season) { joins(:subscription).where(subscription: Subscription.joins(:subscription_group).where(subscription_group: SubscriptionGroup.active(season))) }
 
   def name
     "#{instrument.name} - #{slot.name}"

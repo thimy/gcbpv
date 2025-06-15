@@ -3,13 +3,12 @@
 <% content_for :content do %>
   <%= render Website::Header::Component.new %>
   <main class="wrapper region">
-    <div class="page-title">
-      <h1><%= content_for(:page_title) %></h1>
-      <% if content_for(:page_description).present? %><p><%= content_for(:page_description) %></p><% end %>
-    </div>
-    <div class="popout sidebar">
+    <div class="feature sidebar">
       <%= render Website::Ecole::Sidebar::Component.new %>
-      <%= yield %>
+      <section class="flow">
+        <h1><%= content_for(:page_title) %></h1>
+        <%= yield %>
+      </section>
     </div>
   </main>
   <%= render Website::Footer::Component.new %>

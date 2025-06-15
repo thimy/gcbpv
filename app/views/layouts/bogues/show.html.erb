@@ -1,0 +1,10 @@
+<div class="repel">
+  <h1><%= @bogue.name %></h1>
+
+  <div>
+    <%= link_to "Éditer cette Bogue", edit_bogue_path(@bogue), class: "button" %>
+    <%= link_to "Retour à la liste des éditions", bogues_path, class: "button" %>
+  </div>
+</div>
+
+<%= render @bogue %>

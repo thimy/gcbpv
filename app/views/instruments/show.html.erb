@@ -1,0 +1,12 @@
+<div class="repel">
+  <h1><%= @instrument.name %></h1>
+
+  <div>
+    <%= link_to "Créer une nouvelle discipline", new_instrument_path(@instrument), class: "button" %>
+    <%= link_to "Éditer cette discipline", edit_instrument_path(@instrument), class: "button" %>
+    <%= link_to "Retour aux disciplines", instruments_path, class: "button" %>
+  </div>
+
+</div>
+
+<%= render @instrument %>

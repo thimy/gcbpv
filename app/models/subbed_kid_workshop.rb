@@ -1,4 +1,6 @@
 class SubbedKidWorkshop < ApplicationRecord
+  include WithSubbedWorkshop
+
   belongs_to :kid_workshop_slot
   belongs_to :subscription
   delegate :kid_workshop, to: :kid_workshop_slot
@@ -13,24 +15,17 @@ class SubbedKidWorkshop < ApplicationRecord
     "Découverte": "kid_discovery_price"
   }
 
-  scope :registered, -> {joins(:subscription).where(subscription: Subscription.registered)}
-  scope :inquired, -> {joins(:subscription).where(subscription: Subscription.inquired)}
-  scope :has_workshop, ->(workshop) {includes(:kid_workshop_slot).where(kid_workshop_slot: {kid_workshop: workshop})}
-  scope :has_slot, ->(slot) {where(kid_workshop_slot: slot)}
+  scope :registered, ->(season) {joins(:subscription).where(subscription: Subscription.registered(season))}
+  scope :inquired, ->(season) {joins(:subscription).where(subscription: Subscription.inquired(season))}
   scope :confirmed, -> { where(option: "Confirmé")}
   scope :optional, -> { where(option: "Optionel")}
-  scope :ordered, -> { includes(:kid_workshop_slot).order("kid_workshop_slots.day_of_week", "kid_workshop_slots.slot_time") }
 
-  def student_name
-    subscription.student.name
-  end
+  scope :has_workshop, ->(workshop) {includes(:kid_workshop_slot).where(kid_workshop_slot: {kid_workshop: workshop})}
+  scope :has_slot, ->(slot) {where(kid_workshop_slot: slot)}
+  scope :ordered, -> { includes(:kid_workshop_slot).order("kid_workshop_slots.day_of_week", "kid_workshop_slots.slot_time") }
 
   def workshop_name
     kid_workshop_slot.name
-  end
-
-  def is_option?
-    option == "Optionel" || subscription.subscription_group.status == "Demande d’information"
   end
 
   def price
