@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_10_161828) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_15_210212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -324,6 +324,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_161828) do
     t.text "comment"
     t.decimal "parent_kid_price"
     t.decimal "standalone_workshop_price"
+    t.decimal "family_pathway_price"
   end
 
   create_table "posts", force: :cascade do |t|
