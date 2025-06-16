@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :payor
+  belongs_to :payor, optional: true
   has_one :student
 
   delegate :subscription_groups, to: :payor

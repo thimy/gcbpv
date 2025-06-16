@@ -74,9 +74,14 @@ td {
     }
   }
 
-  &.cell-options {
+  &.cell-options,
+  &.cell-price {
     text-align: right;
     width: fit-content;
+
+    input[type=text] {
+      width: 5em;
+    }
   }
 
   &.cell-student,
@@ -84,6 +89,7 @@ td {
   &.cell-email {
     white-space: nowrap;
   }
+  
 
   .button {
     --button-x-padding: 1em;

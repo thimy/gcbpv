@@ -9,6 +9,12 @@ class SubbedWorkshop < ApplicationRecord
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
+  TYPE_PRICES = {
+    "Normal": "workshop_price",
+    "Spécial": "special_workshop_price",
+    "Autonome": "standalone_workshop_price"
+  }
+
   scope :registered, ->(season) {joins(:subscription).where(subscription: Subscription.registered(season))}
   scope :inquired, ->(season) {joins(:subscription).where(subscription: Subscription.inquired(season))}
   scope :confirmed, -> { where(option: "Confirmé")}
@@ -23,12 +29,6 @@ class SubbedWorkshop < ApplicationRecord
   end
 
   def price
-    if workshop.workshop_type == "Spécial"
-      subscription_group.season.plan.special_workshop_price
-    elsif workshop.workshop_type == "Autonome"
-      subscription_group.season.plan.standalone_workshop_price
-    else
-      subscription_group.season.plan.workshop_price
-    end
+    subscription_group.season.plan[TYPE_PRICES[workshop.workshop_type.to_sym]]
   end
 end

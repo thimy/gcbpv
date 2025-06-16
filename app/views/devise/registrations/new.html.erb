@@ -1,8 +1,8 @@
 <% content_for(:page_title, "Inscription") %>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), class: "flow") do |f| %>
-  <%= f.error_notification %>
   <p class="panel">Je suis majeur·e et/ou je souhaite inscrire mes enfants</p>
+  <%= f.error_notification %>
 
   <%= f.input :email,
               required: true,

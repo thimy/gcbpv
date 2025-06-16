@@ -59,7 +59,7 @@ class Users::SubbedKidWorkshopsController < BaseController
 
     respond_to do |format|
       if @subbed_kid_workshop.save
-        format.html { redirect_to secretariat_subbed_kid_workshop_url(@subbed_kid_workshop), notice: "L’atelier a bien été enregistré." }
+        format.html { redirect_to account_subbed_kid_workshop_url(@subbed_kid_workshop), notice: "L’atelier a bien été enregistré." }
         format.json { render :show, status: :created, location: @subbed_kid_workshop }
         format.turbo_stream {
           render turbo_stream: turbo_stream.replace(
@@ -83,7 +83,7 @@ class Users::SubbedKidWorkshopsController < BaseController
   def update
     respond_to do |format|
       if @subbed_kid_workshop.update(subbed_kid_workshop_params)
-        format.html { redirect_back fallback_location: secretariat_subscription_url(@subbed_kid_workshop.subscription_id), notice: "L’atelier a bien été modifié." }
+        format.html { redirect_back fallback_location: account_subscription_url(@subbed_kid_workshop.subscription_id), notice: "L’atelier a bien été modifié." }
         format.json { render :show, status: :ok, location: @subbed_kid_workshop }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -98,7 +98,7 @@ class Users::SubbedKidWorkshopsController < BaseController
     @subbed_kid_workshop.destroy!
 
     respond_to do |format|
-      format.html { redirect_to secretariat_subscription_url(@subscription_id), notice: "L’atelier a bien été supprimé." }
+      format.html { redirect_to account_subscription_url(@subscription_id), notice: "L’atelier a bien été supprimé." }
       format.json { head :no_content }
     end
   end

@@ -8,6 +8,8 @@ class WorkshopSlot < ApplicationRecord
   belongs_to :workshop
   belongs_to :city
 
+  scope :active, -> {where(status: 0)}
+
   enum :status, "Public" => 0, "Privé" => 1
 
   enum day_of_week: {
@@ -30,15 +32,6 @@ class WorkshopSlot < ApplicationRecord
     "Six séances dans l'année": 5,
     "A définir": 6
   }
-
-  def datetime
-    sentence = []
-    sentence << "le #{day_of_week}" if day_of_week.present? && day_of_week != "À définir"
-    sentence << frequency if frequency.present?
-    sentence << slot_time if slot_time.present?
-
-    sentence.join(" ").downcase.capitalize
-  end
 
   def teacher_names
     teachers.map {|teacher| teacher.name }.join("/")

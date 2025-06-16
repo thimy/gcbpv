@@ -34,4 +34,13 @@ module WithTime
       end
     end
   end
+
+  def datetime
+    sentence = []
+    sentence << "le #{day_of_week}" if day_of_week.present? && day_of_week != "À définir"
+    sentence << frequency if frequency.present?
+    sentence << slot_time if slot_time.present?
+
+    sentence.join(" ").downcase.capitalize
+  end
 end

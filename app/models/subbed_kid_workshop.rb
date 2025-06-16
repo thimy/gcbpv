@@ -10,7 +10,7 @@ class SubbedKidWorkshop < ApplicationRecord
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
   TYPE_PRICES = {
-    "Parcours famille": "parent_kid_price",
+    "Parcours famille": "family_pathway_price",
     "Éveil": "early_learning_price",
     "Découverte": "kid_discovery_price"
   }

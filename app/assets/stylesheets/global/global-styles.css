@@ -8,12 +8,18 @@
 body {
   background: var(--bg-color);
   color: var(--color-dark);
+  display: flex;
+  flex-direction: column;
   font-size: var(--size-step-0);
   font-family: var(--font-base);
   font-weight: 500;
   line-height: var(--leading-standard);
   font-size-adjust: from-font;
   margin: 0;
+}
+
+main {
+  flex-grow: 1;
 }
 
 :is(h1, h2, h3, h4) {

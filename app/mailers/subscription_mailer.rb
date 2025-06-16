@@ -15,4 +15,11 @@ class SubscriptionMailer < ApplicationMailer
     @content = email.formatted_content
     mail(to: @recipients, subject: @subject, content: @content)
   end
+
+  def confirm_subscription(user)
+    mail(
+      to: user.payor.payor_email,
+      subject: "[GCBPV] Confirmation de votre inscription"
+    )
+  end
 end

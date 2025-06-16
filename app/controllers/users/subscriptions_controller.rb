@@ -10,6 +10,11 @@ class Users::SubscriptionsController < BaseController
     @subscription_group = @payor.subscription_groups.find_by(season: @season)
     @subscriptions = Subscription.where(subscription_group: @subscription_group)
     @membership = @season.plan.membership_price
+
+    @form_data = {
+      "update-price-total-value": @subscription_group.total_cost
+    }
+    @form_data["controller"] = "update-price" if @subscription_group.status == "ON_HOLD"
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
@@ -76,7 +81,7 @@ class Users::SubscriptionsController < BaseController
       else
         if @subscription.save
           current_user.update!(student_id: @subscription.student.id) if params[:is_payor]
-          format.html { redirect_to account_subscription_url(@subscription), notice: "L’inscription a bien été enregistrée." }
+          format.html { redirect_to account_subscriptions_url, notice: "L’inscription a bien été enregistrée." }
           format.json { render :show, status: :created, location: @subscription }
         else
           format.html { render :new, status: :unprocessable_entity }

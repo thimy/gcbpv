@@ -93,15 +93,15 @@ class Subscription < ApplicationRecord
   end
 
   def kid_workshop_cost
-    subbed_kid_workshops.confirmed.map { |sum, workshop| workshop.price }.sum
+    subbed_kid_workshops.confirmed.map { |workshop| workshop.price }.sum
   end
 
   def all_workshops_cost
-    extra_workshops = subbed_workshops.confirmed.size + subbed_kid_workshops.confirmed.size - courses.size
-    subbed_workshops.confirmed.map { |workshop| workshop.price }.concat(subbed_kid_workshops.confirmed.map { |workshop| workshop.price }).sort!.reverse.drop(courses.size).sum
+    extra_workshops = subbed_workshops.confirmed.size + courses.size
+    subbed_workshops.confirmed.map { |workshop| workshop.price }.compact.sort!.reverse.drop(courses.size).sum
   end
 
   def total_cost
-    [course_cost, all_workshops_cost].compact.sum
+    [kid_workshop_cost, course_cost, all_workshops_cost].compact.sum
   end
 end

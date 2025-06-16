@@ -61,6 +61,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :administrators
     resources :configs, only: [:index, :show, :edit, :update]
+    resources :users
     
     root to: "stats#index"
   end
@@ -129,9 +130,11 @@ Rails.application.routes.draw do
     resources :subbed_workshops
     resources :students, path: "eleves"
     resources :subscriptions, path: "inscriptions"
+    resources :subscription_groups, only: [:update]
     resources :payors, path: "foyer"
   end
   get "compte", to: "users#index", as: "account_root"
+  get "compte/validation", to: "users#validation", as: "account_validation"
 
   # resources :events, path: :evenements, only: [:index, :show]
   resources :courses

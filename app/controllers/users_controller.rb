@@ -4,9 +4,13 @@ class UsersController < BaseController
   before_action :authenticate_user!
   before_action :set_season
   before_action :set_payor
+  before_action :set_subscriptions
   before_action :require_payor
 
   def index
+  end
+
+  def validation
   end
 
   private
@@ -19,14 +23,14 @@ class UsersController < BaseController
     @payor = current_user.payor_id.present? ? Payor.find(current_user.payor_id) : nil
   end
 
-  def set_members
-    @members = Student.where(payor: @payor)
+  def set_subscriptions
+    @subscription_group = SubscriptionGroup.active(@season).where(payor: @payor)
   end
 
   def require_payor
     if @payor.nil?
       redirect_to new_account_payor_path
-    elsif @members.nil?
+    elsif @subscription_group.nil?
       redirect_to account_subscriptions_path
     end
   end

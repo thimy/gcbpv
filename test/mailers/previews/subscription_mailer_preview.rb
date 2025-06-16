@@ -4,4 +4,9 @@ class SubscriptionMailerPreview < ActionMailer::Preview
     email = Email.last
     SubscriptionMailer.custom_mail(email)
   end
+
+  def confirm_subscription
+    user = User.last
+    SubscriptionMailer.confirm_subscription(user)
+  end
 end

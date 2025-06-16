@@ -60,7 +60,7 @@ class WorkshopsController < SecretariatController
   end
 
   def get_slots
-    @slots = WorkshopSlot.where(workshop: @workshop)
+    @slots = WorkshopSlot.active.where(workshop: @workshop)
 
     render json: @slots.as_json(only: [:id, :slot_time, :day_of_week], include: { city: { only: :name }}), status: :ok
   end

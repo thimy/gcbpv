@@ -110,7 +110,7 @@ class Users::CoursesController < BaseController
     @course.destroy!
 
     respond_to do |format|
-      format.html { redirect_to secretariat_subscription_url(@subscription_id), notice: "Le cours a bien été supprimé." }
+      format.html { redirect_to account_subscription_url(@subscription_id), notice: "Le cours a bien été supprimé." }
       format.json { head :no_content }
     end
   end

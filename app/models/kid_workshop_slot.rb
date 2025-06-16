@@ -29,15 +29,6 @@ class KidWorkshopSlot < ApplicationRecord
     "A définir": 6
   }
 
-  def datetime
-    sentence = []
-    sentence << "le #{day_of_week}" if day_of_week.present?
-    sentence << frequency if frequency.present?
-    sentence << time_period if time_period.present?
-
-    sentence.join(" ").downcase.capitalize
-  end
-
   def teacher_names
     teachers.map {|teacher| teacher.name }.join("/")
   end

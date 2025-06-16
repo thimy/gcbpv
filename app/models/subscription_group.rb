@@ -78,18 +78,26 @@ class SubscriptionGroup < ApplicationRecord
     [course_cost, additional_cost].sum
   end
 
-  def discount
+  def discount_percentage
     if subscription_cost < plan.first_step
-      return 0
+      return
     end
 
     if subscription_cost < plan.second_step
-      subscription_cost * plan.first_step_discount / 100
+      plan.first_step_discount
     elsif subscription_cost < plan.third_step
-      subscription_cost * plan.second_step_discount / 100
+      plan.second_step_discount
     else
-      subscription_cost * plan.third_step_discount / 100
+      plan.third_step_discount
     end
+  end
+
+  def discount
+    if discount_percentage.nil?
+      return 0
+    end
+
+    subscription_cost * discount_percentage / 100
   end
 
   def subscription_cost_after_discount
@@ -97,7 +105,7 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def total_cost
-    [subscription_cost_after_discount, plan.membership_price].sum
+    [subscription_cost_after_discount, plan.membership_price, donation].compact.sum
   end
 
   def total_paid
@@ -106,5 +114,11 @@ class SubscriptionGroup < ApplicationRecord
 
   def total_remaining
     total_cost - total_paid
+  end
+
+  def send_subscription_confirmation(user)
+    SubscriptionMailer
+      .confirm_subscription(user)
+      .deliver_later
   end
 end
