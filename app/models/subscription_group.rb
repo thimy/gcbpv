@@ -68,9 +68,9 @@ class SubscriptionGroup < ApplicationRecord
     if majoration_class == "Redon Agglo"
       0
     elsif majoration_class == "OBC Communauté"
-      subscription_cost * plan.obc_markup / 100
+      course_cost * plan.obc_markup / 100
     else
-      subscription_cost * plan.outbounds_markup / 100
+      course_cost * plan.outbounds_markup / 100
     end
   end
 

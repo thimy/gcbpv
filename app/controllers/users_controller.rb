@@ -8,6 +8,7 @@ class UsersController < BaseController
   before_action :require_payor
 
   def index
+    redirect_to account_subscriptions_path
   end
 
   def validation

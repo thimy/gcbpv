@@ -16,7 +16,7 @@ class Teacher < ApplicationRecord
   scope :active, -> {where(status: 0)}
 
   def name
-    "#{first_name} #{last_name}"
+    [first_name, last_name].compact.join(" ")
   end
 
   def student_count(season)

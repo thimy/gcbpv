@@ -8,7 +8,7 @@
       <% end %>
     </div>
   <% end %>
-  <h3><%= link_to @post.title, post_path(@post) %></h3>
+  <h3><%= link_to @post.title, website_post_path(@post) %></h3>
   <time>Publié le <%= @post.publication_datetime %></time>
   <% if @post.excerpt.present? %>
     <p><%= raw @post.excerpt %></p>

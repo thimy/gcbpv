@@ -90,7 +90,7 @@ Rails.application.routes.draw do
     resources :instruments, path: "disciplines"
     resources :kid_workshops, path: "enfance"
     resources :payments
-    resources :payors
+    resources :payors, path: "foyers"
     resources :posts, path: "actualites" do
       post :upload_file, on: :collection, as: "posts_upload_file"
     end
@@ -107,7 +107,7 @@ Rails.application.routes.draw do
     scope path: ":season_name", as: :season do
       resources :instruments, path: "disciplines"
       resources :kid_workshops, path: "enfance"
-      resources :payors
+      resources :payors, path: "foyers"
       resources :slots, path: "creneaux"
       resources :students
       resources :subscriptions, path: "eleves"
