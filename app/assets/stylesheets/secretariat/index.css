@@ -18,7 +18,7 @@
   }
 
   main {
-    padding: var(--size-step-4);
+    padding: var(--size-step-8);
   }
 
   table {
