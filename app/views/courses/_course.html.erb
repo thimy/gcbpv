@@ -7,6 +7,7 @@
           selected: course.present? ? course.instrument_id : "", required: course.id.blank?
         }, {
           data: {
+            fill_select_target: "course",
             fill_select_url_param: "/get_teachers?id=",
             fill_select_target_param: ".teacher-select",
             fill_select_reset_param: ".slot-select",
@@ -22,6 +23,7 @@
         }, {
           class: "teacher-select",
           data: {
+            fill_select_target: "slotParent",
             fill_select_url_param: "/get_slots?id=",
             fill_select_target_param: ".slot-select",
             action: "fill-select#updateSlots"

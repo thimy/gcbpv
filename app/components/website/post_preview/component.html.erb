@@ -12,6 +12,6 @@
   <time>Publié le <%= @post.publication_datetime %></time>
   <% if @post.excerpt.present? %>
     <p><%= raw @post.excerpt %></p>
-    <%= link_to "↬ Lire la suite", post_path(@post), class: "read-more" %>
+    <%= link_to "↬ Lire la suite", website_post_path(@post), class: "read-more" %>
   <% end %>
 </post-preview>

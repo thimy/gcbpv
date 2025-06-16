@@ -13,7 +13,7 @@
   <dl class="cluster">
     <div>
       <dt>Foyer :</dt>
-      <dd><%= link_to @subscription.subscription_group&.payor&.name, payor_path(@subscription.subscription_group.payor) %></dd>
+      <dd><%= link_to @subscription.subscription_group&.payor&.name, payor_url(season: @season, record: @subscription.subscription_group.payor) %></dd>
     </div>
     <div>
       <dt>Année de naissance :</dt>

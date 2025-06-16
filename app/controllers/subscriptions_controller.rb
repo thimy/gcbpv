@@ -19,7 +19,7 @@ class SubscriptionsController < SecretariatController
   def index
     set_tab_data
     @seasons = Season.all.reverse.map {|season| season.name}
-    @total_subscriptions = Subscription.active(@season)
+    @total_subscriptions = Subscription.active(@season).not_on_hold
     @confirmed_count = Subscription.active(@season).registered(@season).size
     @unconfirmed_count = @total_subscriptions.size - @confirmed_count
   end
@@ -58,14 +58,14 @@ class SubscriptionsController < SecretariatController
       end
     end
 
-    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: Config.first.season, status: "REGISTERED", payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
+    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: Config.first.season, status: "REGISTERED", majoration_class: @payor.agglo, payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
 
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
     else
       existing_payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
       @payor = existing_payor || Payor.new(payor_params)
-      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, status: "REGISTERED")
+      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, majoration_class: @payor.agglo, status: "REGISTERED")
     end
     @subscription = Subscription.new(new_params.merge(subscription_params))
 
@@ -278,7 +278,8 @@ class SubscriptionsController < SecretariatController
       @filters[:image_consent] = params[:image_consent] if params[:image_consent].present?
 
       @not_filters = {}
-      @not_filters[:subscription_group] = { status: params[:exclude_status] } if params[:exclude_status].present?
+      @not_filters[:subscription_group] = { status: [3] }
+      @not_filters[:subscription_group][:status].concat(params[:exclude_status]) if params[:exclude_status].present?
 
       @filtered_subscriptions = Subscription.includes(:subscription_group).where(@filters).where.not(@not_filters).where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term OR :term IS NULL", { term: "%#{query}%" }))
 

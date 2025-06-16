@@ -389,7 +389,11 @@ form .cluster {
 }
 
 :is(input, select, textarea):is(.double) {
-  width: 565px;
+  width: 535px;
+}
+
+:is(select) {
+  max-width: 535px;
 }
 
 label {
@@ -464,4 +468,9 @@ main.region {
 
 .strong {
   font-weight: 600;
+}
+
+.form-wrapper {
+  margin-inline: auto;
+  width: 45ch;
 }

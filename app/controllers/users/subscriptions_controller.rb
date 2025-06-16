@@ -8,13 +8,17 @@ class Users::SubscriptionsController < BaseController
 
   def index
     @subscription_group = @payor.subscription_groups.find_by(season: @season)
-    @subscriptions = Subscription.where(subscription_group: @subscription_group)
     @membership = @season.plan.membership_price
 
-    @form_data = {
-      "update-price-total-value": @subscription_group.total_cost
-    }
-    @form_data["controller"] = "update-price" if @subscription_group.status == "ON_HOLD"
+    @group_on_hold = @subscription_group&.status == "Dans le panier"
+    
+    if @subscription_group.present?
+      @subscriptions = Subscription.where(subscription_group: @subscription_group)
+      @form_data = {
+        "update-price-total-value": @subscription_group.total_cost
+      }
+      @form_data["controller"] = "update-price" if @subscription_group.status == "ON_HOLD"
+    end
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
@@ -52,6 +56,7 @@ class Users::SubscriptionsController < BaseController
   # POST /subscriptions or /subscriptions.json
   def create
     new_params = {id: params[:id]}
+
     if params[:is_payor]
       if @payor.student.present?
         new_params[:student] = Student.find(@payor.student)
@@ -63,6 +68,7 @@ class Users::SubscriptionsController < BaseController
         end
       end
     end
+
     @subscription_group = @payor.subscription_groups.find { |group| group.season == @season }
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
@@ -110,7 +116,6 @@ class Users::SubscriptionsController < BaseController
       end
       if params[:add_workshop]
         subbed_workshop = SubbedWorkshop.new(subbed_workshop_params.merge({subscription_id: params[:id]}))
-        raise
         if subbed_workshop.save
           format.html { redirect_to account_subscription_url(@subscription), notice: "L’atelier a bien été ajouté." }
           format.json { render :show, status: :created, location: @subscription }

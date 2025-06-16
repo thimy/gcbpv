@@ -21,7 +21,7 @@ class UsersController < BaseController
   end
 
   def set_payor
-    @payor = current_user.payor_id.present? ? Payor.find(current_user.payor_id) : nil
+    @payor = current_user.payor_id.present? ? Payor.find(current_user&.payor_id) : nil
   end
 
   def set_subscriptions

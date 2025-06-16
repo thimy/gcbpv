@@ -22,7 +22,6 @@ class Users::StudentsController < BaseController
 
   # POST /students or /students.json
   def create
-    raise
     @student = Student.new(student_params)
 
     respond_to do |format|
@@ -71,7 +70,6 @@ class Users::StudentsController < BaseController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      raise
       if params[:is_payor] == "yes"
         params[:student][:first_name] = @payor.first_name
         params[:student][:last_name] = @payor.last_name

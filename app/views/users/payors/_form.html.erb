@@ -13,17 +13,17 @@
 
   <div class="flow">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
+    <%= form.text_field :first_name, required: true %>
   </div>
 
   <div class="flow">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
+    <%= form.text_field :last_name, required: true %>
   </div>
 
   <div class="flow">
     <%= form.label :address, "Adresse" %>
-    <%= form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+    <%= form.text_field :address, required: true, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
     <%= render "website/autocomplete" %>
   </div>
 
@@ -40,7 +40,7 @@
 
   <div class="flow">
     <%= form.label :phone %>
-    <%= form.text_field :phone %>
+    <%= form.text_field :phone, required: true %>
   </div>
 
   <div class="flow">

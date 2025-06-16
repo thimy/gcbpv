@@ -4,6 +4,7 @@
       <%= collection_select :subbed_kid_workshop, :kid_workshop_id, kid_workshops, :id, :name, { include_blank: subbed_kid_workshop.id.blank?, selected: subbed_kid_workshop.present? ? subbed_kid_workshop.kid_workshop_slot&.kid_workshop_id : "", required: subbed_kid_workshop.id.blank? },
         {
           data: {
+            fill_select_target: "slotParent",
             fill_select_url_param: "/get_kid_workshop_slots?id=",
             fill_select_target_param: ".kid-workshop-slot-select",
             action: "fill-select#updateSlots",

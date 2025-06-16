@@ -16,10 +16,10 @@ class SubscriptionGroup < ApplicationRecord
   }
 
   enum status: {
-    INQUIRY: 0,
-    REGISTERED: 1,
-    CANCELED: 2,
-    ON_HOLD: 3
+    "Demande d’information": 0,
+    "Inscrit": 1,
+    "Annulé": 2,
+    "Dans le panier": 3
   }
 
   enum majoration_class: {
@@ -30,6 +30,7 @@ class SubscriptionGroup < ApplicationRecord
 
   scope :unconfirmed, -> { where(status: 0) }
   scope :confirmed, -> { where(status: [nil, 1]) }
+  scope :not_on_hold, -> {where(status: [nil, 0, 1, 2])}
   scope :active, ->(season) { where(season: season)}
 
   def student_list

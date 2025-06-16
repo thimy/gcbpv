@@ -19,15 +19,30 @@ class Users::PayorsController < BaseController
 
   # POST /payors or /payors.json
   def create
-    @payor = Payor.new(payor_params)
-    respond_to do |format|
-      if @payor.save
-        current_user.update!(payor_id: @payor.id)
-        format.html { redirect_to account_subscriptions_path, notice: "Vos informations ont bien été enregistrées." }
-        format.json { render :show, status: :created, location: @payor }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @payor.errors, status: :unprocessable_entity }
+    existing_payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name], email: [current_user.email, nil])
+    if existing_payor.present?
+      @payor = existing_payor
+      respond_to do |format|
+        if @payor.update(payor_params)
+          current_user.update!(payor_id: @payor.id)
+          format.html { redirect_to account_subscriptions_path, notice: "Vos informations ont bien été enregistrées." }
+          format.json { render :show, status: :ok, location: @payor }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @payor.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      @payor = Payor.new(payor_params)
+      respond_to do |format|
+        if @payor.save
+          current_user.update!(payor_id: @payor.id)
+          format.html { redirect_to account_subscriptions_path, notice: "Vos informations ont bien été enregistrées." }
+          format.json { render :show, status: :created, location: @payor }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @payor.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

@@ -63,10 +63,10 @@
         width: 252px;
       }
     }
+  }
 
-    :is(table input:not([type='checkbox'], [type='radio'], [type='color']), select, textarea) {
-      width: 100%;
-    }
+  :where(table input:not([type='checkbox'], [type='radio'], [type='color']), select, textarea) {
+    width: 100%;
   }
 
   .button-group {

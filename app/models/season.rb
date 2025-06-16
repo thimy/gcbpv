@@ -30,7 +30,7 @@ class Season < ApplicationRecord
   end
 
   def active_subscriptions
-    Subscription.active(self)
+    Subscription.active(self).not_on_hold
   end
 
   def active_subscription_size
