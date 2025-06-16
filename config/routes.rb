@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :subscription_groups
     resources :subscriptions, only: [:show, :edit, :destroy]
     resources :teachers
-    resources :slots, only: [:index, :show, :edit, :destroy]
+    resources :slots
     resources :workshops
     resources :workshop_slots, only: [:show]
     resources :kid_workshops

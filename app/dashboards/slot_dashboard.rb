@@ -14,6 +14,7 @@ class SlotDashboard < Administrate::BaseDashboard
     frequency: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     slot_time: Field::String,
     teacher: Field::BelongsTo.with_options(scope: -> { Teacher.where(status: 0) }),
+    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     comment: Field::Text,
     student_count: Field::Text.with_options(searchable: false),
     courses: SubscriptionListField,
@@ -44,6 +45,7 @@ class SlotDashboard < Administrate::BaseDashboard
     frequency
     slot_time
     comment
+    status
     updated_at
   ].freeze
 
@@ -57,6 +59,7 @@ class SlotDashboard < Administrate::BaseDashboard
     slot_time
     comment
     frequency
+    status
   ].freeze
 
   # COLLECTION_FILTERS

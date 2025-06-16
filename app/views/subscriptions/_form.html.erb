@@ -83,6 +83,7 @@
               <%= course_form.collection_select :instrument_id, @instruments, :id, :name, { include_blank: true, required: true },
                 {
                   data: {
+                    fill_select_target: "course",
                     fill_select_url_param: "/get_teachers?id=",
                     fill_select_target_param: ".teacher-select",
                     fill_select_reset_param: ".slot-select",

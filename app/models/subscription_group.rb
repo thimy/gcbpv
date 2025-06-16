@@ -65,9 +65,9 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def additional_cost
-    if majoration_class = "Redon Agglo"
+    if majoration_class == "Redon Agglo"
       0
-    elsif majoration_class = "OBC Communauté"
+    elsif majoration_class == "OBC Communauté"
       subscription_cost * plan.obc_markup / 100
     else
       subscription_cost * plan.outbounds_markup / 100

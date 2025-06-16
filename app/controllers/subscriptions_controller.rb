@@ -201,7 +201,7 @@ class SubscriptionsController < SecretariatController
           params[:student][:first_name] = name_params.first
           params[:student][:last_name] = name_params.last
           params[:student].delete(:name)    
-        elsif params[:is_payor] == true
+        elsif params[:is_payor] == "1"
           payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
 
           if payor.present?

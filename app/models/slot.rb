@@ -6,6 +6,10 @@ class Slot < ApplicationRecord
   has_many :subscriptions
   has_many :courses, through: :subscriptions
 
+  scope :active, -> {where(status: 0)}
+
+  enum :status, "Public" => 0, "Privé" => 1
+
   enum day_of_week: {
     "Jour à définir": 0,
     "Lundi": 1,
