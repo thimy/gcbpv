@@ -126,7 +126,7 @@
           <%= [subscription.kid_workshop_list, subscription.course_list, subscription.pathway_list].reject!(&:empty?).join(", ") %><% end %>
         <% row.with_cell(name: "workshop") do %><%= subscription.workshop_list %><% end %>
         <% row.with_cell(name: "status") do %>
-          <%= SubscriptionGroup::STATUSES[subscription.subscription_group.payment_state.to_sym] %>
+          <%= SubscriptionGroup::STATUSES[subscription.subscription_group.payment_state&.to_sym] %>
         <% end %>
       <% end %>
     <% end %>

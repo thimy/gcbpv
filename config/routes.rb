@@ -45,7 +45,7 @@ Rails.application.routes.draw do
     resources :subscription_groups
     resources :subscriptions, only: [:show, :edit, :destroy]
     resources :teachers
-    resources :slots, only: [:show, :edit, :destroy]
+    resources :slots, only: [:index, :show, :edit, :destroy]
     resources :workshops
     resources :workshop_slots, only: [:show]
     resources :kid_workshops
@@ -90,7 +90,7 @@ Rails.application.routes.draw do
     resources :instruments, path: "disciplines"
     resources :kid_workshops, path: "enfance"
     resources :payments
-    resources :payors, on: :collection, path: "foyers"
+    resources :payors
     resources :posts, path: "actualites" do
       post :upload_file, on: :collection, as: "posts_upload_file"
     end
@@ -107,7 +107,7 @@ Rails.application.routes.draw do
     scope path: ":season_name", as: :season do
       resources :instruments, path: "disciplines"
       resources :kid_workshops, path: "enfance"
-      resources :payors, on: :collection, path: "foyers"
+      resources :payors
       resources :slots, path: "creneaux"
       resources :students
       resources :subscriptions, path: "eleves"

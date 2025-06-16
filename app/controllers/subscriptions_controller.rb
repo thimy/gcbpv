@@ -54,7 +54,7 @@ class SubscriptionsController < SecretariatController
       new_params[:student_id] = Student.find_by(first_name: student_params[:first_name], last_name: student_params[:last_name]).id
     end
 
-    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: @season, payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
+    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: @season, status: "REGISTERED", payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
 
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id

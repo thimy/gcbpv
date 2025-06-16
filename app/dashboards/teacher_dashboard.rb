@@ -19,7 +19,6 @@ class TeacherDashboard < Administrate::BaseDashboard
     photo: Field::Image,
     slots: Field::NestedHasMany.with_options(skip: :teacher),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    student_count: Field::String.with_options(searchable: false),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -34,7 +33,6 @@ class TeacherDashboard < Administrate::BaseDashboard
     last_name
     phone
     email
-    student_count
     status
   ].freeze
 

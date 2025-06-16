@@ -1,6 +1,3 @@
-<div class="repel">
-  <h1>Nouvelle inscription</h1>
-  <%= link_to "Retour aux foyers", payors_path, class: "button" %>
-</div>
-
-<%= render "form", payor: @payor, url: payors_path, class: "button" %>
+<%= turbo_frame_tag "payor" do %>
+  <%= render "form", payor: @payor %>
+<% end %>

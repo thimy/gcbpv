@@ -17,7 +17,7 @@
           <td><%= teacher.name %></td>
           <td><%= teacher.phone %></td>
           <td><%= teacher.email %></td>
-          <td><%= teacher.student_count %></td>
+          <td><%= teacher.student_count(Config.first.season) %></td>
         </tr>
       <% end %>
     </tbody>
