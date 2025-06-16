@@ -10,14 +10,16 @@
       </div>
 
       <div class="conditional-block flow">
-        <div class="flow">
-          <label for="student_first_name">Prénom</label>
-          <%= text_field :student, :first_name, required: true %>
-        </div>
+        <div class="cluster">
+          <div class="flow">
+            <label for="student_first_name">Prénom</label>
+            <%= text_field :student, :first_name, required: true %>
+          </div>
 
-        <div class="flow">
-          <label for="student_last_name" class="required">Nom</label>
-          <%= text_field :student, :last_name, required: true %>
+          <div class="flow">
+            <label for="student_last_name" class="required">Nom</label>
+            <%= text_field :student, :last_name, required: true %>
+          </div>
         </div>
 
         <div class="flow">

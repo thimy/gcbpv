@@ -2,6 +2,12 @@
   <h1>Inscriptions</h1>
   <%= link_to "Ajouter une inscription pour cette année", new_account_subscription_path, class: "button" if @subscription_group.status == "ON_HOLD" %>
 </div>
+<% if @subscription_group.status != "ON_HOLD" %>
+  <div class="banner">
+    <p>Votre inscription a bien été prise en compte.</p>
+    <p>Si vous souhaitez la modifier ou que vous avez constaté une erreur, contactez-nous !</p>
+  </div>
+<% end %>
 <%= form_for(@subscription_group, url: account_subscription_group_path(@subscription_group), class: "flow", data: @form_data) do |f| %>
   <%= turbo_frame_tag "subscriptions" do %>
     <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>

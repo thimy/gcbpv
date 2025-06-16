@@ -3,6 +3,7 @@
   <%= form.collection_select :slot_id, slots, :id, :name, {include_blank: true},
     {
       class: "slot-select",
+      fill_select_target: "slot",
       "data-course-target": "slot"
     }  %>
 </div>

@@ -33,6 +33,7 @@ Can be any acceptable flexbox alignment value.
 
 .cluster[data-type="thirds"] {
   --cluster-vertical-alignment: stretch;
+  --gutter: var(--space-s);
 
   > * {
     flex-basis: calc((100% - var(--gutter) * 2) / 3);

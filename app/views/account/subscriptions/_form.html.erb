@@ -12,14 +12,16 @@
   <% end %>
 
   <%= form.fields_for :student, Student.new do |student_form| %>
-    <div>
-      <%= form.label "Prénom", style: "display: block" %>
-      <%= form.text_field :first_name %>
-    </div>
+    <div class="cluster">
+      <div class="flow">
+        <%= form.label "Prénom", style: "display: block" %>
+        <%= form.text_field :first_name %>
+      </div>
 
-    <div>
-      <%= form.label "Nom", style: "display: block" %>
-      <%= form.text_field :last_name %>
+      <div>
+        <%= form.label "Nom", style: "display: block" %>
+        <%= form.text_field :last_name %>
+      </div>
     </div>
 
     <div>

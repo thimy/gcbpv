@@ -2,15 +2,15 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="menu-button"
 export default class extends Controller {
-  static targets = ["course"]
+  static targets = ["course", "slotParent"]
 
   initialize() {
-    if (this.courseTarget && this.courseTarget.value) {
+    if (this.hasCourseTarget && this.courseTarget.value) {
       this.updateTeachers()
     }
   }
 
-  updateTeachers(event) {
+  updateTeachers() {
     const itemId = this.courseTarget.value;
     this.fetchAndUpdate(`${this.courseTarget.dataset.fillSelectUrlParam}${itemId}`, 
                         this.#fillTeachers.bind(this), 
@@ -18,9 +18,11 @@ export default class extends Controller {
                         this.element.querySelector(this.courseTarget.dataset.fillSelectResetParam))
   }
 
-  updateSlots(event) {
-    const itemId = event.currentTarget.value;
-    this.fetchAndUpdate(`${event.params.url}${itemId}`, this.#fillSlots.bind(this), this.element.querySelector(event.params.target))
+  updateSlots() {
+    const itemId = this.slotParentTarget.value;
+    this.fetchAndUpdate(`${this.slotParentTarget.dataset.fillSelectUrlParam}${itemId}`,
+                        this.#fillSlots.bind(this),
+                        this.element.querySelector(this.slotParentTarget.dataset.fillSelectTargetParam))
   }
 
   fetchAndUpdate(url, callback, target, reset = "") {
