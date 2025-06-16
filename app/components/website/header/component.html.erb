@@ -16,11 +16,7 @@
     </div>
   </div>
   <nav class="main-header__nav feature" data-controller="menu-toggle">
-    <!-- button class="button menu-button" data-action="click->menu-toggle#toggle" aria-label="Ouvrir le menu" hidden>
-      <%= inline_svg "icons/menu" %>
-    </button-->
     <ul class="cluster">
-      <!--button class="button" data-action="menu-toggle#toggle" data-button-type="naked" hidden><%= inline_svg "icons/arrow", class: "rotate-90" %> Fermer le menu</button-->
       <li><%= link_to "Actualités", website_post_index_path, class: "decorated" %></li>
       <li><%= link_to "Événements", website_event_index_path, class: "decorated" %></li>
       <li><%= link_to "La Bogue d’Or", "/bogue/#{Bogue.active.ordered.first.slug}", class: "decorated" %></li>
