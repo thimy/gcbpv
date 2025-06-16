@@ -13,7 +13,7 @@ class PayorsController < SecretariatController
   # GET /payors/1 or /payors/1.json
   def show
     @subscription_group = @payor.subscription_group(@season)
-    @subscriptions = @subscription_group.subscriptions
+    @subscriptions = @subscription_group&.subscriptions
   end
 
   # GET /payors/new

@@ -47,22 +47,26 @@ class SubscriptionsController < SecretariatController
   # POST /subscriptions or /subscriptions.json
   def create
     new_params = {id: params[:id]}
-
+    
     if student_params.present?
-      new_params[:student] = Student.new(student_params)
-    else
-      new_params[:student_id] = Student.find_by(first_name: student_params[:first_name], last_name: student_params[:last_name]).id
+      existing_student = Student.find_by(first_name: student_params[:first_name], last_name: student_params[:last_name])&.id
+      
+      if existing_student.present?
+        new_params[:student_id] = existing_student
+      else
+        new_params[:student] = Student.new(student_params)
+      end
     end
 
-    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: @season, status: "REGISTERED", payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
+    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: Config.first.season, status: "REGISTERED", payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
 
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
     else
-      @payor = Payor.new(payor_params)
-      new_params[:subscription_group] = SubscriptionGroup.new(season: @season, payor: @payor)
+      existing_payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
+      @payor = existing_payor || Payor.new(payor_params)
+      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, status: "REGISTERED")
     end
-
     @subscription = Subscription.new(new_params.merge(subscription_params))
 
     respond_to do |format|
@@ -212,7 +216,7 @@ class SubscriptionsController < SecretariatController
             params[:student][:city] = payor.city
             params[:student][:email] = payor.email
           else
-            params[:student][:last_name] = payor_params[:first_name]
+            params[:student][:first_name] = payor_params[:first_name]
             params[:student][:last_name] = payor_params[:last_name]
             params[:student][:address] = payor_params[:address]
             params[:student][:postcode] = payor_params[:postcode]
