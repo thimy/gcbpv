@@ -396,6 +396,11 @@ form .cluster {
   max-width: 535px;
 }
 
+:is(input[type="checkbox"]) {
+  aspect-ratio: 1 / 1; 
+  width: 1.5em;
+}
+
 label {
   line-height: var(--leading-fine);
   font-size: var(--size-step-00);

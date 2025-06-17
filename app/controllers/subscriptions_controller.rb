@@ -58,14 +58,15 @@ class SubscriptionsController < SecretariatController
       end
     end
 
-    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: Config.first.season, status: "REGISTERED", majoration_class: @payor.agglo, payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
+    existing_payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
+    @payor = existing_payor || Payor.new(payor_params)
+
+    @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: Config.first.season, status: "Inscrit", majoration_class: @payor.agglo, payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
 
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
     else
-      existing_payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
-      @payor = existing_payor || Payor.new(payor_params)
-      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, majoration_class: @payor.agglo, status: "REGISTERED")
+      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, majoration_class: @payor.agglo, status: "Inscrit")
     end
     @subscription = Subscription.new(new_params.merge(subscription_params))
 
