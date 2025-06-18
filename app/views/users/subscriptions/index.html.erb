@@ -10,7 +10,7 @@
 <% end %>
 <% if @subscription_group.present? %>
   <%= form_for(@subscription_group, url: account_subscription_group_path(@subscription_group), class: "flow", data: @form_data) do |f| %>
-    <%= render "subscriptions" %>
+    <%= render "subscriptions", f: f %>
   <% end %>
 <% else %>
   <%= render "subscriptions" %>

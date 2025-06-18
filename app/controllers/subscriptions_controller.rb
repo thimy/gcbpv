@@ -47,18 +47,15 @@ class SubscriptionsController < SecretariatController
   # POST /subscriptions or /subscriptions.json
   def create
     new_params = {id: params[:id]}
-    
-    if student_params.present?
-      existing_student = Student.find_by(first_name: student_params[:first_name], last_name: student_params[:last_name])&.id
-      
-      if existing_student.present?
-        new_params[:student_id] = existing_student
-      else
-        new_params[:student] = Student.new(student_params)
-      end
-    end
 
-    existing_payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
+    existing_student = Student.find { |student|
+      params[:student][:name] == student.name
+    }
+    new_params[:student] = existing_student || Student.new(student_params)
+
+    existing_payor = Payor.find { |payor|
+      params[:payor][:name] == payor.name
+    }
     @payor = existing_payor || Payor.new(payor_params)
 
     @subscription_group = SubscriptionGroup.joins(:payor).find_by(season: Config.first.season, status: "Inscrit", majoration_class: @payor.agglo, payor: {first_name: payor_params[:first_name], last_name: payor_params[:last_name]})
@@ -201,28 +198,17 @@ class SubscriptionsController < SecretariatController
 
     def student_params
       if params[:student].present?
-        if params[:student][:name].present?
-          name_params = params[:student][:name].split(/ /, 2)
-          params[:student][:first_name] = name_params.first
-          params[:student][:last_name] = name_params.last
-          params[:student].delete(:name)    
-        elsif params[:is_payor] == "1"
-          payor = Payor.find_by(first_name: payor_params[:first_name], last_name: payor_params[:last_name])
+        if params[:is_payor] == "1"
+          payor = Payor.find { |payor|
+            params[:payor][:name] == payor.name
+          }
 
           if payor.present?
             params[:student][:first_name] = payor.first_name
             params[:student][:last_name] = payor.last_name
-            params[:student][:address] = payor.address
-            params[:student][:postcode] = payor.postcode
-            params[:student][:city] = payor.city
-            params[:student][:email] = payor.email
           else
             params[:student][:first_name] = payor_params[:first_name]
             params[:student][:last_name] = payor_params[:last_name]
-            params[:student][:address] = payor_params[:address]
-            params[:student][:postcode] = payor_params[:postcode]
-            params[:student][:city] = payor_params[:city]
-            params[:student][:email] = payor_params[:email]
           end
           if params[:student][:birth_year].present?
             params[:student][:birth_year] = params[:student][:birth_year].to_i
@@ -234,12 +220,6 @@ class SubscriptionsController < SecretariatController
 
     def payor_params
       if params[:payor].present?
-        if params[:payor][:name].present?
-          name_params = params[:payor][:name].split(/ /, 2)
-          params[:payor][:first_name] = name_params.first
-          params[:payor][:last_name] = name_params.last
-          params[:payor].delete(:name)
-        end
         params.require(:payor).permit(:first_name, :last_name, :phone, :email, :address, :postcode, :city, :comment)
       end
     end

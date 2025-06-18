@@ -3,7 +3,7 @@
     <% row.with_cell(name: "workshop") do %>
       <div class="flow">
         <%= label_tag "Nom de l'atelier" %>
-        <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: true },
+        <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: "---" },
           {
             data: {
               kid_workshop_target: "workshop",

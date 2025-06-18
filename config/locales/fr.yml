@@ -13,6 +13,9 @@ fr:
         add: "Ajouter"
         remove: "Supprimer"
   activerecord:
+    errors:
+      messages:
+        required: ": le champ doit être renseigné."
     models:
       administrator:
         one: "Admin"

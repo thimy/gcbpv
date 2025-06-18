@@ -43,11 +43,16 @@ export default class extends Controller {
 
   #fillTeachers(data, target, reset) {
     target.options.length = 0
-    target.append(new Option("---", ""))
     data.forEach(element => {
-      const option = new Option(`${element.first_name} ${element.last_name}`, element.id)
+      const option = new Option(`${[element.first_name, element.last_name].join(" ")}`, element.id)
       target.append(option)
     })
+    if (data.length > 1) {
+      target.prepend(new Option("---", ""))
+      target.value = ""
+    } else {
+      this.dispatch("change", { target: target, prefix: false })
+    }
     reset.options.length = 0
   }
 
@@ -64,9 +69,9 @@ export default class extends Controller {
 
   #setSlotTime(element) {
     if (element.day_of_week && element.slot_time) {
-      return `le ${element.day_of_week} ${element.slot_time}`.toLowerCase()
+      return `${element.day_of_week} ${element.slot_time}`.toLowerCase()
     } else if (element.day_of_week) {
-      return `le ${element.day_of_week} - horaires à définir`
+      return `${element.day_of_week} - horaires à définir`
     } else if (element.slot_time) {
       return `jour à définir - ${element.slot_time}`.toLowerCase()
     } else {

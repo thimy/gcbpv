@@ -49,7 +49,7 @@
           <div data-controller="fill-select" class="flow">
             <div class="flow">
               <%= label_tag "Nom de l'atelier" %>
-              <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: true },
+              <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: "---" },
                 {
                   data: {
                     fill_select_target: "slotParent",
@@ -81,7 +81,7 @@
           <div data-controller="fill-select" class="flow">
             <div class="flow">
               <%= course_form.label "Discipline" %>
-              <%= course_form.collection_select :instrument_id, @instruments, :id, :name, { include_blank: true, required: true },
+              <%= course_form.collection_select :instrument_id, @instruments, :id, :name, { include_blank: "---", required: true },
                 {
                   data: {
                     fill_select_target: "course",
@@ -114,7 +114,7 @@
           <div data-controller="fill-select" class="flow">
             <div class="flow">
               <%= label_tag "Nom de l'atelier" %>
-              <%= collection_select :workshop, :workshop_ids, @workshops, :id, :name, { include_blank: true },
+              <%= collection_select :workshop, :workshop_ids, @workshops, :id, :name, { include_blank: "---", required: true },
                 {
                   data: {
                     fill_select_target: "slotParent",

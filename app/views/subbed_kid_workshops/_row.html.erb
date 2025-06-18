@@ -2,7 +2,7 @@
   <% table.with_row("data-controller": "kid-workshop", hidden: true) do |row| %>
     <% row.with_cell(name: "workshop") do %>
       <div class="flow">
-        <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: true, selected: slot.present? ? slot.kid_workshop_slot&.kid_workshop_id : "" },
+        <%= collection_select :kid_workshop, :kid_workshop_ids, @kid_workshops, :id, :name, { include_blank: "---", selected: slot.present? ? slot.kid_workshop_slot&.kid_workshop_id : "" },
           {
             data: {
               kid_workshop_target: "workshop",

@@ -1,6 +1,6 @@
 <div id="teachers" class="flow">
   <%= label_tag "Professeur" %>
-  <%= collection_select :teacher, :teacher_ids, teachers, :id, :name, { include_blank: true },
+  <%= collection_select :teacher, :teacher_ids, teachers, :id, :name, { required: true },
     {
       class: "teacher-select",
       data: {

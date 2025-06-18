@@ -17,7 +17,7 @@ class Payor < ApplicationRecord
   end
 
   def name
-    "#{first_name} #{last_name if last_name.present?}"
+    "#{first_name} #{last_name.upcase if last_name.present?}"
   end
 
   def payor_email

@@ -57,12 +57,20 @@ class Subscription < ApplicationRecord
   }.join(", ")
   end
 
+  def address
+    student.address.presence || subscription_group&.payor&.address
+  end
+
   def phone
     student.phone.presence || subscription_group.payor.phone
   end
 
   def email
     student.email.presence || subscription_group.payor.email
+  end
+
+  def postcode
+    student.postcode.presence || subscription_group&.payor&.postcode
   end
 
   def city

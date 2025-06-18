@@ -2,7 +2,7 @@ module WithPerson
   extend ActiveSupport::Concern
 
   def first_name=(value)
-    super(value.to_s.squish.upcase)
+    super(value.to_s.squish)
   end
 
   def last_name=(value)

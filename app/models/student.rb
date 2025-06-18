@@ -13,6 +13,7 @@ class Student < ApplicationRecord
 
   validates :last_name, presence: true
   validates :first_name, presence: true
+
   # validates :birth_year, numericality: {only_integer: true, greater_than_or_equal_to: Config.first.season.start_year - 120, less_than_or_equal_to: Config.first.season.start_year - 2, message: "Année de naissance invalide"}
 
   enum :gender, "Ne se prononce pas" => 0, "Homme" => 1, "Femme" => 2, "Non-binaire" => 3, "Autre" => 4

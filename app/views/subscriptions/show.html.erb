@@ -47,15 +47,15 @@
     </div>
     <div>
       <dt>Adresse :</dt>
-      <dd><%= @subscription.student.address_or_payor_address %></dd>
+      <dd><%= @subscription.address %></dd>
     </div>
     <div>
       <dt>Code postal :</dt>
-      <dd><%= @subscription.student.postcode_or_payor_postcode %></dd>
+      <dd><%= @subscription.postcode %></dd>
     </div>
     <div>
       <dt>Ville :</dt>
-      <dd><%= @subscription.student.city_or_payor_city %></dd>
+      <dd><%= @subscription.city %></dd>
     </div>
   </dl>
   <% if @subscription.student.comment.present? %>
