@@ -1,4 +1,5 @@
 class Student < ApplicationRecord
+  include WithPerson
   phony_normalize :phone, default_country_code: "FR"
 
   belongs_to :payor, optional: true

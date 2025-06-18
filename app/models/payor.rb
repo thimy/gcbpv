@@ -1,4 +1,5 @@
 class Payor < ApplicationRecord
+  include WithPerson
   phony_normalize :phone, default_country_code: "FR"
 
   has_one :user
@@ -7,9 +8,16 @@ class Payor < ApplicationRecord
 
   accepts_nested_attributes_for :subscription_groups
 
+  def students
+    subscription_groups.map { |subscription_group|
+      subscription_group.subscriptions.map { |subscription|
+        subscription.student
+      }
+    }.flatten.uniq
+  end
 
   def name
-    "#{first_name} #{last_name.upcase if last_name.present?}"
+    "#{first_name} #{last_name if last_name.present?}"
   end
 
   def payor_email

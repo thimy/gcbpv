@@ -389,11 +389,11 @@ form .cluster {
 }
 
 :is(input, select, textarea):is(.double) {
-  width: 535px;
+  width: 435px;
 }
 
 :is(select) {
-  max-width: 535px;
+  max-width: 435px;
 }
 
 :is(input[type="checkbox"]) {

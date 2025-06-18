@@ -1,4 +1,5 @@
 class Teacher < ApplicationRecord
+  include WithPerson
   phony_normalize :phone, default_country_code: "FR"
 
   has_many :specialties, dependent: :delete_all

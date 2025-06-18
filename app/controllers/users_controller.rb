@@ -5,7 +5,7 @@ class UsersController < BaseController
   before_action :set_season
   before_action :set_payor
   before_action :set_subscriptions
-  before_action :require_payor
+  before_action :redirect_account, only: %i[ index show ]
 
   def index
     redirect_to account_subscriptions_path
@@ -28,7 +28,7 @@ class UsersController < BaseController
     @subscription_group = SubscriptionGroup.active(@season).where(payor: @payor)
   end
 
-  def require_payor
+  def redirect_account
     if @payor.nil?
       redirect_to new_account_payor_path
     elsif @subscription_group.nil?
