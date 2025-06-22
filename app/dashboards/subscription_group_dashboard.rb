@@ -83,7 +83,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {
     agglo: ->(resources) { resources.where(majoration_class: "Redon Agglo") },
-    obc: ->(resources) { resources.where(majoration_class: "OBC communauté") },
+    obc: ->(resources) { resources.where(majoration_class: "Oust à Brocéliande Communauté") },
     hors_agglo: ->(resources) { resources.where(majoration_class: "Hors agglo") }
   }.freeze
 

@@ -19,11 +19,10 @@ class Course < ApplicationRecord
   end
 
   def price
-    return "Année de naissance à vérifier --" if student.birth_year.nil? || student.birth_year < 1900
-    if subscription_group.season.start_year - student.birth_year > 18
-      subscription_group.season.plan.class_price
-    else 
+    if student.birth_year.present? && subscription_group.season.start_year - student.birth_year <= 18
       subscription_group.season.plan.kids_class_price
+    else 
+      subscription_group.season.plan.class_price
     end
   end
 end

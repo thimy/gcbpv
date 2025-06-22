@@ -101,7 +101,15 @@
       <h2>Paiements</h2>
       <dl class="panel cluster">
         <div>
-          <dt>Montant estimé :</dt>
+          <dt>Montant total estimé :</dt>
+          <dd><%= number_to_currency(@subscription_group.subscription_cost, unit: "€") %></dd>
+        </div>
+        <div>
+          <dt>Montant de la remise :</dt>
+          <dd><%= number_to_currency(@subscription_group.discount, unit: "€") %></dd>
+        </div>
+        <div>
+          <dt>Montant total après remise et adhésion :</dt>
           <dd><%= number_to_currency(@subscription_group.total_cost, unit: "€") %></dd>
         </div>
         <div>

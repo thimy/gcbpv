@@ -24,7 +24,7 @@ class SubscriptionGroup < ApplicationRecord
 
   enum majoration_class: {
     "Redon Agglo": 0,
-    "OBC Communauté": 1,
+    "Oust à Brocéliande Communauté": 1,
     "Hors agglo": 2
   }
 
@@ -68,7 +68,7 @@ class SubscriptionGroup < ApplicationRecord
   def additional_cost
     if majoration_class == "Redon Agglo"
       0
-    elsif majoration_class == "OBC Communauté"
+    elsif majoration_class == "Oust à Brocéliande Communauté"
       course_cost * plan.obc_markup / 100
     else
       course_cost * plan.outbounds_markup / 100
