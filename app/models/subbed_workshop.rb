@@ -31,4 +31,8 @@ class SubbedWorkshop < ApplicationRecord
   def price
     subscription_group.season.plan[TYPE_PRICES[workshop.workshop_type.to_sym]]
   end
+
+  def optional?
+    option == "Optionel" || subscription.optional?
+  end
 end

@@ -243,11 +243,11 @@ th {
   padding: var(--space-xs) var(--space-s);
 }
 
-th:not(:only-of-type) {
+thead th:not(:only-of-type) {
   border-block-end: var(--stroke);
 }
 
-th:only-of-type {
+thead th:only-of-type {
   border-inline-end: var(--stroke);
 }
 

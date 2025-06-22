@@ -25,4 +25,8 @@ class Course < ApplicationRecord
       subscription_group.season.plan.class_price
     end
   end
+
+  def optional?
+    option == "Optionel" || subscription.optional?
+  end
 end

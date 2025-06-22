@@ -8,7 +8,7 @@ table {
   word-break: keep-all;
 }
 
-thead {
+thead, tfoot {
   vertical-align: top;
 
   tr {
@@ -23,7 +23,6 @@ thead {
     th {
       background-color: var(--color-mint);
       color: var(--color-dark);
-      font-weight: 400;
       padding: var(--space-xs) var(--space-xs);
     
       a {
@@ -61,6 +60,13 @@ tbody {
   vertical-align: top;
 }
 
+tfoot {
+  th {
+    border-block-start: var(--stroke);
+    font-weight: 600;
+  }
+}
+
 td {
   border-bottom: var(--border-default);
   word-break: break-word;
@@ -75,7 +81,7 @@ td {
   }
 
   &.cell-options,
-  &.cell-price {
+  &.cell-amount {
     text-align: right;
     width: fit-content;
 

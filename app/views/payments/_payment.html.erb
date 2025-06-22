@@ -38,7 +38,7 @@
 <% else %>
   <tr data-controller="edit-payment" id="<%= dom_id payment %>" data-edit-payment-id-value="<%= payment.id %>">
     <td class="cell-payment_method"><%= payment.payment_method %></td>
-    <td class="cell-amount"><%= payment.amount %></td>
+    <td class="cell-amount"><%= number_to_currency(payment.amount, unit: "€") %></td>
     <td class="cell-comment"><%= simple_format(payment.comment) %></td>
     <td class="cell-options">
       <div class="actions">

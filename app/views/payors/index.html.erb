@@ -48,8 +48,8 @@
         <% row.with_cell(name: "city") do %><%= payor.city %><% end %>
         <% row.with_cell(name: "email") do %><%= payor.email %><% end %>
         <% row.with_cell(name: "phone") do %><%= format_phone(payor.phone) %><% end %>
-        <% row.with_cell(name: "status") do %><%= SubscriptionGroup::STATUSES[payor.subscription_group(@season).payment_state&.to_sym] %><% end %>
-        <% row.with_cell(name: "amount") do %><%= number_to_currency(payor.subscription_group(@season).amount, unit: "€") if payor.subscription_group(@season).present? %><% end %>
+        <% row.with_cell(name: "status") do %><%= payor.subscription_group(@season).payment_state %><% end %>
+        <% row.with_cell(name: "amount") do %><%= number_to_currency(payor.subscription_group(@season).total_cost, unit: "€") if payor.subscription_group(@season).present? %><% end %>
       <% end %>
     <% end %>
   <% end %>

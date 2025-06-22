@@ -11,8 +11,8 @@ class SubscriptionGroup < ApplicationRecord
   STATUSES = {
     INQUIRY: "Demande d’information",
     REGISTERED: "Inscrit",
-    CANCELED: "Annulé",
-    ON_HOLD: "Dans le panier"
+    CANCELED: "Annulé"
+    # ON_HOLD: "Dans le panier"
   }
 
   enum status: {
@@ -44,15 +44,13 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def payment_state
-    return status if status != "Inscrit"
+    return STATUSES[status.to_sym] if status != "Inscrit"
       
     state = if total_payment.nil?
       "À régler"
-    elsif amount.nil?
-      "Montant de l’inscription à renseigner"
-    elsif total_payment < amount
+    elsif total_payment < total_cost
       "Règlement partiel"
-    elsif total_payment == amount
+    elsif total_payment == total_cost
       "Réglé"
     else
       "Trop perçu"
@@ -115,6 +113,24 @@ class SubscriptionGroup < ApplicationRecord
 
   def total_remaining
     total_cost - total_paid
+  end
+
+  def redon_agglo?
+    majoration_class == "Redon Agglo"
+  end
+
+  def obc?
+    majoration_class == "Oust à Brocéliande Communauté"
+  end
+
+  def agglo_markup
+    if redon_agglo?
+      0
+    elsif obc?
+      Config.first.season.plan.obc_markup
+    else
+      Config.first.season.plan.outbounds_markup
+    end
   end
 
   def send_subscription_confirmation(user)

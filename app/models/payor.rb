@@ -62,16 +62,6 @@ class Payor < ApplicationRecord
     end
   end
 
-  def agglo_markup
-    if redon_agglo?
-      0
-    elsif obc?
-      Config.first.season.plan.obc_markup
-    else
-      Config.first.season.plan.outbounds_markup
-    end
-  end
-
   private
 
   def is_from_agglo?(agglo)
