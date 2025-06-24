@@ -423,9 +423,9 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   capybara
-  cssbundling-rails (~> 1.4)
+  cssbundling-rails (~> 1.4.3)
   debug
-  devise (~> 4.9)
+  devise (~> 4.9.4)
   dotenv
   factory_bot_rails (~> 6.4)
   image_processing (~> 1.2)
@@ -441,13 +441,13 @@ DEPENDENCIES
   rails (~> 7.1.3, >= 7.1.3.2)
   rails-i18n (~> 7.0)
   selenium-webdriver
-  simple_form (~> 5.3)
+  simple_form (~> 5.3.1)
   sprockets-rails
   stimulus-rails
   trix
   turbo-rails
   tzinfo-data
-  view_component (~> 3.12)
+  view_component (~> 3.23)
   web-console
 
 RUBY VERSION

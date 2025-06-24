@@ -69,13 +69,13 @@ end
 
 gem "aws-sdk-s3", require: false
 
-gem "view_component", "~> 3.12"
+gem "view_component", "~> 3.23"
 
-gem "simple_form", "~> 5.3"
+gem "simple_form", "~> 5.3.1"
 
 gem "rails-i18n", "~> 7.0"
 
-gem "cssbundling-rails", "~> 1.4"
+gem "cssbundling-rails", "~> 1.4.3"
 
 gem "activestorage-openstack"
 
@@ -85,7 +85,7 @@ gem "administrate-field-active_storage"
 gem "administrate-field-nested_has_many"
 gem "administrate-field-belongs_to_search"
 
-gem "devise", "~> 4.9"
+gem "devise", "~> 4.9.4"
 gem "dotenv"
 
 gem "factory_bot_rails", "~> 6.4"
