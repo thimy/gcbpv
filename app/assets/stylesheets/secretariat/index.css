@@ -38,6 +38,25 @@
     .cell-options {
       white-space: nowrap;
     }
+
+    .cell-amount {
+      font-size: var(--size-step-00);
+    }
+
+    .cell-amount .cluster {
+      --cluster-horizontal-alignment: end;
+      --gutter: 0;
+    }
+
+    .cell-amount input {
+      font-size: var(--size-step-00);
+      padding: 0.3em 0.5em;
+      text-align: right;
+    }
+
+    .cell-amount :is([type=submit], [type=button]) {
+      margin: 0;
+    }
   }
 
   .record {

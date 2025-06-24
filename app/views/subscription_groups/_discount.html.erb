@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "edit-discount" do %>
+  <div><%= subscription_group.discount.present? ? "-#{number_to_currency(subscription_group.discount, unit: "€")}" : "---" %></div>
+  <%= link_to subscription_group.discount.nil? ? "Ajouter une remise" : "Modifier la remise", subscription_group_edit_discount_path(subscription_group_id: subscription_group.id) %>
+<% end %>

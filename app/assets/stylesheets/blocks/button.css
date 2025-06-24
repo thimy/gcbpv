@@ -56,6 +56,9 @@
   --button-bg: transparent;
   --button-x-padding: 0px;
   --button-y-padding: 0px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-transform: revert;
 }
 
 .button[data-button-size="small"] {

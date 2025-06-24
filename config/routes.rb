@@ -96,6 +96,10 @@ Rails.application.routes.draw do
     end
     resources :slots, path: "creneaux"
     resources :students
+    resources :subscription_groups do
+      get :edit_discount, to: "subscription_groups#edit_discount"
+      get :show_discount, to: "subscription_groups#show_discount"
+    end
     resources :subbed_kid_workshops
     resources :subbed_workshops
     resources :teachers, path: "professeurs" do

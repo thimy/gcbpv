@@ -80,26 +80,24 @@ td {
     }
   }
 
-  &.cell-options,
-  &.cell-amount {
-    text-align: right;
-    width: fit-content;
-
-    input[type=text] {
-      width: 5em;
-    }
-  }
-
   &.cell-student,
   &.cell-phone,
   &.cell-email {
     white-space: nowrap;
   }
-  
 
   .button {
     --button-x-padding: 1em;
     --button-y-padding: 0.6em;
     font-size: var(--size-step-000);
+  }
+}
+
+.cell-options,
+.cell-amount {
+  text-align: right;
+
+  input:is([type=text], [type=number]) {
+    width: 5em;
   }
 }

@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "subscription-summary", partial: "subscription_groups/subscription_summary", locals: { subscription_group: @subscription_group } %>
+
+<%= turbo_stream.replace "payment-summary", partial: "subscription_groups/payment_summary", locals: { subscription_group: @subscription_group } %>

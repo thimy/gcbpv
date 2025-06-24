@@ -91,7 +91,7 @@ class SubscriptionGroup < ApplicationRecord
     end
   end
 
-  def discount
+  def subscriptions_discount
     if discount_percentage.nil?
       return 0
     end
@@ -100,7 +100,7 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def subscription_cost_after_discount
-    subscription_cost - discount
+    subscription_cost - subscriptions_discount - (discount || 0)
   end
 
   def total_cost

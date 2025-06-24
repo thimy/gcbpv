@@ -1,0 +1,11 @@
+<%= turbo_frame_tag "edit-discount" do %>
+  <%= form_for @subscription_group, html: {class: "inline"} do |form| %>
+    <%= form.text_field :discount %> €
+    <button type="submit" class="button" data-button-size="small">
+      <%= inline_svg "icons/check" %>
+    </button>
+    <%= link_to subscription_group_show_discount_path(subscription_group_id: @subscription_group.id), class: "button", "data-button-size": "small" do %>
+      <%= inline_svg "icons/cross" %>
+    <% end %>
+  <% end %>
+<% end %>

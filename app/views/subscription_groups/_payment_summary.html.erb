@@ -1,0 +1,16 @@
+<div class="flow">
+  <dl class="panel cluster">
+    <div>
+      <dt>Montant total estimé :</dt>
+      <dd><%= number_to_currency(subscription_group.total_cost, unit: "€") %></dd>
+    </div>
+    <div>
+      <dt>Montant réglé :</dt>
+      <dd><%= number_to_currency(subscription_group.total_paid, unit: "€") %></dd>
+    </div>
+    <div>
+      <dt>Montant restant :</dt>
+      <dd><%= number_to_currency(subscription_group.total_remaining, unit: "€") %></dd>
+    </div>
+  </dl>
+</div>
