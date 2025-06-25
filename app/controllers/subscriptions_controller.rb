@@ -48,8 +48,10 @@ class SubscriptionsController < SecretariatController
   def create
     new_params = {id: params[:id]}
 
+    build_student
+
     existing_student = Student.find { |student|
-      params[:student][:name] == student.name
+      params[:student][:name] == student.name || [params[:student][:first_name], params[:student][:last_name]].join(" ") == student.name
     }
     new_params[:student] = existing_student || Student.new(student_params)
 
@@ -76,7 +78,7 @@ class SubscriptionsController < SecretariatController
         format.html { render :new, status: :unprocessable_entity }
       else
         if @subscription.save
-          format.html { redirect_to subscription_url(@subscription), notice: "L’inscription a bien été enregistrée." }
+          format.html { redirect_to season_students_url(@season.name), notice: "L’inscription a bien été enregistrée." }
           format.json { render :show, status: :created, location: @subscription }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -92,26 +94,26 @@ class SubscriptionsController < SecretariatController
       if params[:add_kid_workshop]
         subbed_kid_workshop = SubbedKidWorkshop.new(subbed_kid_workshop_params.merge({subscription_id: params[:id]}))
         if subbed_kid_workshop.save
-          format.html { redirect_to subscription_url(@subscription), notice: "L’atelier enfant a bien été ajouté." }
+          format.html { redirect_to season_student_url(student: @subscription.student, season_name: @season.name), notice: "L’atelier enfant a bien été ajouté." }
           format.json { render :show, status: :created, location: @subscription }
         end
       end
       if params[:add_course]
         course = Course.new(course_params.merge({subscription_id: params[:id]}))
         if course.save
-          format.html { redirect_to subscription_url(@subscription), notice: "Le cours a bien été ajouté." }
+          format.html { redirect_to season_student_url(student: @subscription.student, season_name: @season.name), notice: "Le cours a bien été ajouté." }
           format.json { render :show, status: :created, location: @subscription }
         end
       end
       if params[:add_workshop]
         subbed_workshop = SubbedWorkshop.new(subbed_workshop_params.merge({subscription_id: params[:id]}))
         if subbed_workshop.save
-          format.html { redirect_to subscription_url(@subscription), notice: "L’atelier a bien été ajouté." }
+          format.html { redirect_to season_student_url(student: @subscription.student, season_name: @season.name), notice: "L’atelier a bien été ajouté." }
           format.json { render :show, status: :created, location: @subscription }
         end
       end
       if @subscription.update(subscription_params)
-        format.html { redirect_to subscription_url(@subscription), notice: "L’inscription a bien été modifiée." }
+        format.html { redirect_to season_student_url(student: @subscription.student, season_name: @season.name), notice: "L’inscription a bien été modifiée." }
         format.json { render :show, status: :ok, location: @subscription }
         format.turbo_stream
       else
@@ -126,7 +128,7 @@ class SubscriptionsController < SecretariatController
     @subscription.destroy!
 
     respond_to do |format|
-      format.html { redirect_to students_url, notice: "L’inscription a bien été supprimée." }
+      format.html { redirect_to season_students_path(@season), notice: "L’inscription a bien été supprimée." }
       format.json { head :no_content }
     end
   end
@@ -307,5 +309,24 @@ class SubscriptionsController < SecretariatController
   
     def valid_sort_attribute?(attribute)
       SORT_ATTRIBUTES["subscriptions"].include?(attribute)
+    end
+
+    def build_student
+      if params[:is_payor] == "1"
+        payor = Payor.find { |payor|
+          params[:payor][:name] == payor.name
+        }
+
+        if payor.present?
+          params[:student][:first_name] = payor.first_name
+          params[:student][:last_name] = payor.last_name
+        else
+          params[:student][:first_name] = payor_params[:first_name]
+          params[:student][:last_name] = payor_params[:last_name]
+        end
+        if params[:student][:birth_year].present?
+          params[:student][:birth_year] = params[:student][:birth_year].to_i
+        end
+      end
     end
 end

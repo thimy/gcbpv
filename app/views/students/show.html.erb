@@ -2,11 +2,13 @@
 <div class="repel">
   <h1>
     <%= @student.name %>
-    (<%= link_to "Foyer #{@subscription.payor.name}", payor_url(season: @season, record: @subscription.payor) %>)
+    <% if @subscription.present? %>
+      (<%= link_to "Foyer #{@subscription.payor.name}", payor_url(season: @season, record: @subscription.payor) %>)
+    <% end %>
   </h1>
 
   <div>
-    <%= link_to "Retour aux inscriptions", subscriptions_path, class: "button" %>
+    <%= link_to "Retour aux inscriptions", season_students_path(@season.name), class: "button" %>
   </div>
 </div>
 

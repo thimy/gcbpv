@@ -119,6 +119,8 @@ Rails.application.routes.draw do
       resources :students, path: "eleves"
       resources :teachers, path: "professeurs"
     end
+
+    resources :students
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "secretariat", to: "secretariat#index", as: "secretariat_root"
 

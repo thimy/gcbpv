@@ -40,23 +40,23 @@ class Student < ApplicationRecord
   end
 
   def address_or_payor_address
-    address || subscriptions.last&.subscription_group&.payor&.address
+    address.presence || subscriptions.last&.subscription_group&.payor&.address
   end
 
   def postcode_or_payor_postcode
-    postcode || subscriptions.last&.subscription_group&.payor&.postcode
+    postcode.presence || subscriptions.last&.subscription_group&.payor&.postcode
   end
 
   def city_or_payor_city
-    city || subscriptions.last&.subscription_group&.payor&.city
+    city.presence || subscriptions.last&.subscription_group&.payor&.city
   end
 
   def email_or_payor_email
-    email || subscriptions.last&.subscription_group&.payor&.email
+    email.presence || subscriptions.last&.subscription_group&.payor&.email
   end
 
   def phone_or_payor_phone
-    phone || subscriptions.last&.subscription_group&.payor&.phone
+    phone.presence || subscriptions.last&.subscription_group&.payor&.phone
   end
 
   def uses_payor_info?

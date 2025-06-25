@@ -13,6 +13,8 @@ class Subscription < ApplicationRecord
   delegate :season, to: :subscription_group
   delegate :payor, to: :subscription_group
 
+  validate :student_unique_subscription
+
   accepts_nested_attributes_for :student, :courses, :subbed_workshops, :subbed_kid_workshops, :workshop_slots, allow_destroy: true
 
   enum status: {
@@ -33,6 +35,12 @@ class Subscription < ApplicationRecord
   scope :youth, -> { includes(:student).where(Student.youth) }
   scope :adults, -> { includes(:student).where(Student.adults) }
   scope :undefined_age, -> { includes(:student).where(student: Student.undefined_age) }
+
+  def student_unique_subscription
+    if student.subscriptions.active(subscription_group.season).size > 0
+      errors.add(:base, "L’élève est déjà inscrit pour cette année.")
+    end
+  end
 
   def kid_workshop_list
     kid_workshop_slots.map {|slot|

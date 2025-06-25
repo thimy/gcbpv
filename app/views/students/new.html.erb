@@ -1,9 +1,3 @@
-<div id="new-subscription">
-  <div class="repel">
-    <h1>Nouvelle inscription</h1>
-    <%= link_to "Retour aux élèves", subscriptions_path %>
-  </div>
-
-  <%= render "form", subscription: @subscription %>
-
-</div>
+<%= turbo_frame_tag "student" do %>
+  <%= render "form", student: @student %>
+<% end %>

@@ -4,6 +4,7 @@ class StudentsController < SecretariatController
   before_action :query
   before_action :set_student, only: %i[ show edit update destroy edit_personal_info show_personal_info ]
   before_action :set_subscription, only: %i[ show edit update destroy ]
+  before_action :set_cities, only: %i[ index ]
   before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
 
   SORT_ATTRIBUTES = {
@@ -90,7 +91,7 @@ class StudentsController < SecretariatController
   def update
     respond_to do |format|
       if @student.update(student_params)
-        format.html { redirect_to season_student_url(@student), notice: "L’élève a bien été modifié." }
+        format.html { redirect_to season_student_url(id: @student.id, season_name: @season.name), notice: "L’élève a bien été modifié." }
         format.json { render :show, status: :ok, location: @student }
         format.turbo_stream
       else
@@ -103,10 +104,11 @@ class StudentsController < SecretariatController
   # DELETE /subscriptions/1 or /subscriptions/1.json
   def destroy
     @subscription.destroy!
+    @student.destroy! if @student.subscriptions.size == 0
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url, notice: "L’élève a bien été supprimée." }
-      format.json { head :no_contnt }
+      format.html { redirect_to season_students_path(season_name: @season.name), notice: "L’élève a bien été supprimé." }
+      format.json { head :no_content }
     end
   end
 
@@ -147,6 +149,12 @@ class StudentsController < SecretariatController
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
       @subscription = Subscription.includes(:subscription_group).find_by(student: @student, subscription_group: {season: @season})
+    end
+
+    def set_cities
+      @cities = Student.all.map { |student|
+        student.city_or_payor_city
+      }.flatten.uniq.reject { |c| c.blank? }.sort
     end
 
     def student_params
