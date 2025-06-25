@@ -2,9 +2,8 @@ class StudentsController < SecretariatController
   include WithTableConcern
 
   before_action :query
-  before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_student, only: %i[ show edit update destroy edit_personal_info show_personal_info ]
   before_action :set_subscription, only: %i[ show edit update destroy ]
-  before_action :set_cities, only: %i[ index edit update ]
   before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
 
   SORT_ATTRIBUTES = {
@@ -77,7 +76,7 @@ class StudentsController < SecretariatController
         format.html { render :new, status: :unprocessable_entity }
       else
         if @subscription.save
-          format.html { redirect_to subscription_url(@subscription), notice: "L’inscription a bien été enregistrée." }
+          format.html { redirect_to subscription_url(@subscription), notice: "L’élève a bien été enregistré." }
           format.json { render :show, status: :created, location: @subscription }
         else
           format.html { render :new, status: :unprocessable_entity }
@@ -90,33 +89,13 @@ class StudentsController < SecretariatController
   # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
   def update
     respond_to do |format|
-      if params[:add_kid_workshop]
-        subbed_kid_workshop = SubbedKidWorkshop.new(subbed_kid_workshop_params.merge({subscription_id: params[:id]}))
-        if subbed_kid_workshop.save
-          format.html { redirect_to subscription_url(@subscription), notice: "L’atelier enfant a bien été ajouté." }
-          format.json { render :show, status: :created, location: @subscription }
-        end
-      end
-      if params[:add_course]
-        course = Course.new(course_params.merge({subscription_id: params[:id]}))
-        if course.save
-          format.html { redirect_to subscription_url(@subscription), notice: "Le cours a bien été ajouté." }
-          format.json { render :show, status: :created, location: @subscription }
-        end
-      end
-      if params[:add_workshop]
-        subbed_workshop = SubbedWorkshop.new(subbed_workshop_params.merge({subscription_id: params[:id]}))
-        if subbed_workshop.save
-          format.html { redirect_to subscription_url(@subscription), notice: "L’atelier a bien été ajouté." }
-          format.json { render :show, status: :created, location: @subscription }
-        end
-      end
-      if @subscription.update(subscription_params)
-        format.html { redirect_to subscription_url(@subscription), notice: "L’inscription a bien été modifiée." }
-        format.json { render :show, status: :ok, location: @subscription }
+      if @student.update(student_params)
+        format.html { redirect_to season_student_url(@student), notice: "L’élève a bien été modifié." }
+        format.json { render :show, status: :ok, location: @student }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
+        format.json { render json: @student.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -126,8 +105,8 @@ class StudentsController < SecretariatController
     @subscription.destroy!
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url, notice: "L’inscription a bien été supprimée." }
-      format.json { head :no_content }
+      format.html { redirect_to subscriptions_url, notice: "L’élève a bien été supprimée." }
+      format.json { head :no_contnt }
     end
   end
 
@@ -149,6 +128,12 @@ class StudentsController < SecretariatController
     render :new
   end
 
+  def edit_personal_info
+  end
+
+  def show_personal_info
+  end
+
   private
 
     def query
@@ -156,7 +141,7 @@ class StudentsController < SecretariatController
     end
 
     def set_student
-      @student = Student.find(params[:id])
+      @student = Student.find(params[:id] || params[:student_id])
     end
 
     # Use callbacks to share common setup or constraints between actions.
@@ -164,60 +149,14 @@ class StudentsController < SecretariatController
       @subscription = Subscription.includes(:subscription_group).find_by(student: @student, subscription_group: {season: @season})
     end
 
-    def set_cities
-      @cities = Student.all.map { |student|
-        student.city_or_payor_city
-      }.flatten.uniq.reject { |c| c.blank? }.sort
-    end
-
-    # Only allow a list of trusted parameters through.
-    def subscription_params
-      if params[:payor_address] == "yes"
-        params[:subscription][:student_attributes][:address] = nil
-        params[:subscription][:student_attributes][:postcode] = nil
-        params[:subscription][:student_attributes][:city] = nil
-      end
-      params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], subbed_kid_workshops_attributes: [:kid_workshop_slot_id, :option, :comment], subbed_kid_workshop_attributes: [:kid_workshop_slot_id, :option, :comment], student_attributes: [:id, :first_name, :last_name, :phone, :email, :gender, :address, :postcode, :city, :birth_year, :comment])
-    end
-
-    def subbed_kid_workshop_params
-      if params[:subscription][:subbed_kid_workshop].present?
-        params[:subscription][:subbed_kid_workshop][:option] = params[:subscription][:subbed_kid_workshop][:option].to_i
-      end
-      params[:subscription].require(:subbed_kid_workshop).permit(:sub_id, :kid_workshop_slot_id, :option, :comment)
-    end
-
-    def course_params
-      if params[:subscription][:course].present?
-        params[:subscription][:course][:option] = params[:subscription][:course][:option].to_i
-      end
-      params[:subscription].require(:course).permit(:instrument_id, :slot_id, :option, :comment)
-    end
-
-    def subbed_workshop_params
-      if params[:subscription][:subbed_workshop].present?
-        params[:subscription][:subbed_workshop][:option] = params[:subscription][:subbed_workshop][:option].to_i
-      end
-      params[:subscription].require(:subbed_workshop).permit(:workshop_slot_id, :option, :comment)
-    end
-
     def student_params
       if params[:student].present?
-        if params[:is_payor] == "1"
-          payor = Payor.find { |payor|
-            params[:payor][:name] == payor.name
-          }
-
-          if payor.present?
-            params[:student][:first_name] = payor.first_name
-            params[:student][:last_name] = payor.last_name
-          else
-            params[:student][:first_name] = payor_params[:first_name]
-            params[:student][:last_name] = payor_params[:last_name]
-          end
-          if params[:student][:birth_year].present?
-            params[:student][:birth_year] = params[:student][:birth_year].to_i
-          end
+        if params[:payor_address] == "1"
+          params[:student][:address] = nil
+          params[:student][:postcode] = nil
+          params[:student][:city] = nil
+          params[:student][:phone] = nil
+          params[:student][:email] = nil
         end
         params.require(:student).permit(:first_name, :last_name, :birth_year, :gender, :phone, :email, :comment, :address, :postcode, :city)
       end

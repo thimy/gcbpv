@@ -6,55 +6,13 @@
   </h1>
 
   <div>
-    <%= link_to "Éditer la fiche de l'élève", edit_season_student_path(@student), class: "button" %>
     <%= link_to "Retour aux inscriptions", subscriptions_path, class: "button" %>
   </div>
 </div>
 
 <% if @subscription.present? %>
   <div class="panel">
-    <turbo-frame id="student">
-      <dl class="cluster">
-        <div>
-          <dt>Année de naissance :</dt>
-          <dd><%= @student.birth_year %></dd>
-        </div>
-        <div>
-          <dt>Genre :</dt>
-          <dd><%= @student.gender %></dd>
-        </div>
-      </dl>
-      <dl class="cluster">
-        <div>
-          <dt>Email :</dt>
-          <dd><%= @student.email_or_payor_email %></dd>
-        </div>
-        <div>
-          <dt>Téléphone :</dt>
-          <dd><%= format_phone(@subscription.phone) %></dd>
-        </div>
-        <div>
-          <dt>Adresse :</dt>
-          <dd><%= @subscription.address %></dd>
-        </div>
-        <div>
-          <dt>Code postal :</dt>
-          <dd><%= @subscription.postcode %></dd>
-        </div>
-        <div>
-          <dt>Ville :</dt>
-          <dd><%= @subscription.city %></dd>
-        </div>
-      </dl>
-      <% if @student.comment.present? %>
-        <dl>
-          <div>
-            <dt>Commentaires sur l'élève :</dt>
-            <dd><%= @student.comment %></dd>
-          </div>
-        <dl>
-      <% end %>
-    </turbo-frame>
+    <%= render "student", student: @student %>
   </div>
   <div class="panel">
     <%= render "subscriptions/subscription", subscription: @subscription %>

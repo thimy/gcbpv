@@ -1,0 +1,80 @@
+<turbo-frame id="student-form">
+  <%= form_for @student, url: season_student_path(id: @student.id, season_name: @season.name), html: {class: "inline repel"} do |form| %>
+    <div class="flow">
+      <div class="conditional-block flow">
+        <div class="cluster">
+          <div class="flow">
+            <label for="student_first_name">Prénom</label>
+            <%= form.text_field :first_name %>
+          </div>
+
+          <div class="flow">
+            <label for="student_last_name" class="required">Nom</label>
+            <%= form.text_field :last_name %>
+          </div>
+        </div>
+
+        <div class="cluster">
+          <div class="flow">
+            <label for="student_birth_year">Année de naissance</label>
+            <%= form.text_field :birth_year, required: true %>
+          </div>
+
+          <div class="flow">
+            <label for="student_gender">Genre</label>
+            <%= form.select :gender, Student.genders.keys.map {|gender| [gender,gender]} %>
+          </div>
+        </div>
+
+        <div class="cluster condition">
+          <label for="payor_address"><%= check_box_tag :payor_address, checked: @student.uses_payor_info?, class: "hide-condition" %> Utiliser les coordonnées du payeur</label>
+        </div>
+
+        <div class="conditional-block flow">
+          <div class="flow">
+            <label for="student_comment">Adresse</label>
+            <%= form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+            <%= render "website/autocomplete" %>
+          </div>
+
+          <div class="cluster">
+            <div class="flow">
+            <label for="student_postcode">Code Postal</label>
+              <%= form.text_field :postcode, "data-address-target": "postcode" %>
+            </div>
+
+            <div class="flow">
+            <label for="student_city">Ville</label>
+              <%= form.text_field :city, "data-address-target": "city" %>
+            </div>
+          </div>
+
+          <div class="cluster">
+            <div class="flow">
+              <label for="student_phone">Téléphone</label>
+              <%= form.text_field :phone %>
+            </div>
+
+            <div class="flow">
+              <label for="student_email">Email</label>
+              <%= form.text_field :email %>
+            </div>
+          </div>
+        </div>
+
+        <div class="flow">
+          <label for="student_comment">Notes</label>
+          <%= form.text_area :comment, rows: 1 %>
+        </div>
+      </div>
+    </div>
+    <div class="cluster">
+      <button type="submit" class="button" data-button-size="small">
+        <%= inline_svg "icons/check" %>
+      </button>
+      <%= link_to show_personal_info_path(student_id: @student.id), class: "button", "data-button-size": "small" do %>
+        <%= inline_svg "icons/cross" %>
+      <% end %>
+    </div>
+  <% end %>
+</turbo-frame>

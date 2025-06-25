@@ -52,6 +52,14 @@ class Student < ApplicationRecord
   end
 
   def email_or_payor_email
-    email || subscriptions.last&.subscription_group&.payor&.payor_email
+    email || subscriptions.last&.subscription_group&.payor&.email
+  end
+
+  def phone_or_payor_phone
+    phone || subscriptions.last&.subscription_group&.payor&.phone
+  end
+
+  def uses_payor_info?
+    address.nil? && postcode.nil? && city.nil? && email.nil? && phone.nil?
   end
 end
