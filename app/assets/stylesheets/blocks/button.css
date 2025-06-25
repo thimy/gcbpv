@@ -2,7 +2,7 @@
   --button-bg: var(--color-primary);
   --button-text: var(--color-dark);
   --button-x-padding: 2em;
-  --button-y-padding: 1.1em;
+  --button-y-padding: 1em;
   --button-gutter: 0.5ch;
   --button-radius: var(--radius-s);
   --focus-color: var(--color-primary);

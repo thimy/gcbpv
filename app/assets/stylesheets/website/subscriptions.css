@@ -2,4 +2,18 @@
   .choice {
     max-width: 300px;
   }
+
+  .subscription-form {
+    --cluster-vertical-alignment: stretch;
+  }
+
+  .panel.right-panel {
+    position: relative;
+  }
+
+  .summary {
+    margin-block-start: var(--space-s);
+    position: sticky;
+    top: 0;
+  }
 }

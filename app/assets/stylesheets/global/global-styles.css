@@ -177,6 +177,7 @@ dl {
 
 dl > div {
   display: flex;
+  align-items: center;
   gap: var(--space-xs);
 
   dt + dd {
@@ -365,8 +366,16 @@ form:not(.inline) > * + * {
   }
 }
 
+form > [type=hidden] + * {
+  margin-block-start: 0;
+}
+
 form .cluster {
-  --gutter: var(--space-x);
+  --gutter: var(--space-s);
+}
+
+form .cluster:has(> [type=checkbox]) {
+  --gutter: var(--space-xxs);
 }
 
 :is(input, select, textarea) {
@@ -375,7 +384,7 @@ form .cluster {
 
 :is(input:not([class='button'], [type='checkbox'], [type='radio'], [type='color']), select, textarea) {
   --flow-space: var(--space-xxs);
-  --input-font-size: var(--size-step-0);
+  --input-font-size: var(--size-step-00);
   padding: 0.5em 0.8em;
   border-radius: var(--radius-s);
   border: var(--stroke);
@@ -400,15 +409,10 @@ form .cluster {
   max-width: 435px;
 }
 
-:is(input[type="checkbox"]) {
-  aspect-ratio: 1 / 1; 
-  width: 1.5em;
-}
-
 label {
   line-height: var(--leading-fine);
   font-size: var(--size-step-00);
-  font-weight: var(--font-medium);
+  font-weight: 600;
 }
 
 label::after {

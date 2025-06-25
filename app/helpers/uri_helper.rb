@@ -23,7 +23,7 @@ module UriHelper
     "/secretariat/#{season.name}/foyers"
   end
 
-  def subscription_url(season: Config.first.season, record:)
+  def student_url(season: Config.first.season, record:)
     "/secretariat/#{season.name}/eleves/#{record.id}"
   end
 

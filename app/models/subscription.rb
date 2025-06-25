@@ -11,6 +11,7 @@ class Subscription < ApplicationRecord
   has_many :workshops, through: :workshop_slots
   belongs_to :subscription_group
   delegate :season, to: :subscription_group
+  delegate :payor, to: :subscription_group
 
   accepts_nested_attributes_for :student, :courses, :subbed_workshops, :subbed_kid_workshops, :workshop_slots, allow_destroy: true
 

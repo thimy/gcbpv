@@ -4,12 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = ["course", "slotParent"]
 
-  initialize() {
-    if (this.hasCourseTarget && this.courseTarget.value) {
-      this.updateTeachers()
-    }
-  }
-
   updateTeachers() {
     const itemId = this.courseTarget.value;
     this.fetchAndUpdate(`${this.courseTarget.dataset.fillSelectUrlParam}${itemId}`, 

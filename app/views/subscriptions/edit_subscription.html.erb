@@ -1,0 +1,32 @@
+<%= turbo_frame_tag "subscription-form" do %>
+  <%= form_for @subscription, html: {class: "inline repel"} do |form| %>
+    <div class="flow">
+      <div class="cluster">
+        <div class="cluster">
+          <%= form.label :image_consent, "Consentement à l'image :" %>
+          <%= form.check_box :image_consent %>
+        </div>
+        <div class="cluster">
+          <%= form.label :disability, "Situation empêchée :" %>
+          <%= form.check_box :disability %>
+        </div>
+        <div class="cluster">
+          <%= form.label :ars, "ARS :" %>
+          <%= form.check_box :ars %>
+        </div>
+      </div>
+      <div class="cluster">
+        <%= form.label :comment, "Notes sur l’inscription en cours :" %>
+        <%= form.text_area :comment, rows: 1 %>
+      </div>
+    </div>
+    <div class="cluster">
+      <button type="submit" class="button" data-button-size="small">
+        <%= inline_svg "icons/check" %>
+      </button>
+      <%= link_to subscription_show_subscription_path(subscription_id: @subscription.id), class: "button", "data-button-size": "small" do %>
+        <%= inline_svg "icons/cross" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

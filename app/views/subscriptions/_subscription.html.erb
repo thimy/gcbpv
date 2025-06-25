@@ -1,16 +1,29 @@
-<div id="<%= dom_id subscription %>" class="record flow">
-  <div>
-    <h2>Enfance</h2>
-    <%= render "subbed_kid_workshops/list", subscription: @subscription %>
+<turbo-frame id="subscription-form">
+  <div class="repel">
+    <div>
+      <dl class="cluster">
+        <div>
+          <dt>Consentement à l’image :</dt>
+          <dd><%= subscription.image_consent ? "✅" : "❌" %></dd>
+        </div>
+        <div>
+          <dt>Situation empêchée :</dt>
+          <dd><%= subscription.disability ? "✅" : "❌" %></dd>
+        </div>
+        <div>
+          <dt>ARS :</dt>
+          <dd><%= subscription.ars ? "✅" : "❌" %></dd>
+        </div>
+      </dl>
+      <dl>
+        <div>
+          <dt>Notes sur l'inscription en cours :</dt>
+          <dd><%= subscription.comment %></dd>
+        </div>
+      </dl>
+    </div>
+    <%= link_to subscription_edit_subscription_path(subscription_id: subscription.id), class: "button", "data-button-size": "small" do %>
+      <%= inline_svg "icons/edit" %>
+    <% end %>
   </div>
-
-  <div>
-    <h2>Cours</h2>
-    <%= render "courses/list", subscription: @subscription %>
-  </div>
-
-  <div>
-    <h2>Ateliers</h2>
-    <%= render "subbed_workshops/list", subscription: @subscription %>
-  </div>
-</div>
+</turbo-frame>

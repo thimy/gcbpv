@@ -95,7 +95,10 @@ Rails.application.routes.draw do
       post :upload_file, on: :collection, as: "posts_upload_file"
     end
     resources :slots, path: "creneaux"
-    resources :students
+    resources :subscriptions do
+      get :edit_subscription, to: "subscriptions#edit_subscription"
+      get :show_subscription, to: "subscriptions#show_subscription"
+    end
     resources :subscription_groups do
       get :edit_discount, to: "subscription_groups#edit_discount"
       get :show_discount, to: "subscription_groups#show_discount"
@@ -113,8 +116,7 @@ Rails.application.routes.draw do
       resources :kid_workshops, path: "enfance"
       resources :payors, path: "foyers"
       resources :slots, path: "creneaux"
-      resources :students
-      resources :subscriptions, path: "eleves"
+      resources :students, path: "eleves"
       resources :teachers, path: "professeurs"
     end
   end  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

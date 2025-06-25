@@ -71,10 +71,6 @@
   }
 
   form {
-    .cluster {
-      --gutter: var(--space-s);
-    }
-
     .search-input {
       flex-shrink: 0;
       
@@ -135,5 +131,9 @@
 
   .address-condition:has(#payor_address_no:checked) + .address-block {
     display: block;
+  }
+  
+  .edit_student {
+    font-size: var(--size-step-00);
   }
 }

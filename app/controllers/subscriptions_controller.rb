@@ -3,7 +3,7 @@ class SubscriptionsController < SecretariatController
   include WithTableConcern
 
   before_action :query
-  before_action :set_subscription, only: %i[ show edit update destroy ]
+  before_action :set_subscription, only: %i[ show edit update destroy edit_subscription show_subscription ]
   before_action :set_cities, only: %i[ index edit update ]
   before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
 
@@ -113,6 +113,7 @@ class SubscriptionsController < SecretariatController
       if @subscription.update(subscription_params)
         format.html { redirect_to subscription_url(@subscription), notice: "L’inscription a bien été modifiée." }
         format.json { render :show, status: :ok, location: @subscription }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @subscription.errors, status: :unprocessable_entity }
@@ -125,7 +126,7 @@ class SubscriptionsController < SecretariatController
     @subscription.destroy!
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url, notice: "L’inscription a bien été supprimée." }
+      format.html { redirect_to students_url, notice: "L’inscription a bien été supprimée." }
       format.json { head :no_content }
     end
   end
@@ -148,6 +149,12 @@ class SubscriptionsController < SecretariatController
     render :new
   end
 
+  def edit_subscription
+  end
+
+  def show_subscription
+  end
+
   private
 
     def query
@@ -156,7 +163,8 @@ class SubscriptionsController < SecretariatController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
-      @subscription = Subscription.find(params[:id])
+      @subscription = Subscription.find(params[:id] || params[:subscription_id])
+      @subscription_group = @subscription.subscription_group
     end
 
     def set_cities

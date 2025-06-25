@@ -1,0 +1,16 @@
+<div id="<%= dom_id subscription %>" class="record flow">
+  <div>
+    <h2>Enfance</h2>
+    <%= render "subbed_kid_workshops/list", subscription: @subscription %>
+  </div>
+
+  <div>
+    <h2>Cours</h2>
+    <%= render "courses/list", subscription: @subscription %>
+  </div>
+
+  <div>
+    <h2>Ateliers</h2>
+    <%= render "subbed_workshops/list", subscription: @subscription %>
+  </div>
+</div>
