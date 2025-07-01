@@ -1,7 +1,7 @@
 class PayorsController < SecretariatController
   include WithTableConcern
 
-  before_action :set_payor, only: %i[ show edit update destroy ]
+  before_action :set_payor, only: %i[ show edit update destroy edit_personal_info show_personal_info ]
 
   SORT_ATTRIBUTES = ["last_name", "birth_year"]
 
@@ -46,6 +46,7 @@ class PayorsController < SecretariatController
       if @payor.update(payor_params)
         format.html { redirect_to payor_url(@payor), notice: "Payor was successfully updated." }
         format.json { render :show, status: :ok, location: @payor }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @payor.errors, status: :unprocessable_entity }
@@ -63,6 +64,12 @@ class PayorsController < SecretariatController
     end
   end
 
+  def edit_personal_info
+  end
+
+  def show_personal_info
+  end
+
   private
     def query
       params[:q]
@@ -70,7 +77,7 @@ class PayorsController < SecretariatController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_payor
-      @payor = Payor.find(params[:id])
+      @payor = Payor.find(params[:id] || params[:payor_id])
     end
 
     # Only allow a list of trusted parameters through.

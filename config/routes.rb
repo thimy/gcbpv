@@ -132,6 +132,9 @@ Rails.application.routes.draw do
   get :edit_personal_info, to: "students#edit_personal_info"
   get :show_personal_info, to: "students#show_personal_info"
 
+  get :edit_payor_info, to: "payors#edit_personal_info"
+  get :show_payor_info, to: "payors#show_personal_info"
+
   namespace :users, as: "account", path: "compte" do
     resources :courses, path: "cours"
     resources :subbed_kid_workshops

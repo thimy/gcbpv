@@ -1,0 +1,33 @@
+<turbo-frame id="payor-form">
+  <div class="repel">
+    <div>
+      <dl class="cluster">
+        <div>
+          <dt>Nom :</dt>
+          <dd><%= payor.name %></dd>
+        </div>
+        <div>
+          <dt>Adresse :</dt>
+          <dd><%= payor.full_address %></dd>
+        </div>
+        <div>
+          <dt>Email :</dt>
+          <dd><%= payor.email %></dd>
+        </div>
+        <div>
+          <dt>Téléphone :</dt>
+          <dd><%= format_phone(payor.phone) %></dd>
+        </div>
+      </dl>
+      <dl>
+        <div>
+          <dt>Notes :</dt>
+          <dd><%= payor.comment %></dd>
+        </div>
+      </dl>
+    </div>
+    <%= link_to edit_payor_info_path(payor_id: payor.id), class: "button", "data-button-size": "small" do %>
+      <%= inline_svg "icons/edit" %>
+    <% end %>
+  </div>
+</turbo-frame>

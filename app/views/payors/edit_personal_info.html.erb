@@ -1,0 +1,62 @@
+<turbo-frame id="payor-form">
+  <%= form_for @payor, url: season_payor_path(id: @payor.id, season_name: @season.name), html: {class: "inline repel", "data-controller": "address"} do |form| %>
+    <div class="flow">
+      <div class="cluster">
+        <div class="flow">
+          <label for="payor_first_name">Prénom</label>
+          <%= form.text_field :first_name %>
+        </div>
+
+        <div class="flow">
+          <label for="payor_last_name" class="required">Nom</label>
+          <%= form.text_field :last_name %>
+        </div>
+      </div>
+
+      <div class="flow">
+        <div class="flow">
+          <label for="payor_address">Adresse</label>
+          <%= form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+          <%= render "website/autocomplete" %>
+        </div>
+
+        <div class="cluster">
+          <div class="flow">
+          <label for="payor_postcode">Code Postal</label>
+            <%= form.text_field :postcode, "data-address-target": "postcode" %>
+          </div>
+
+          <div class="flow">
+          <label for="payor_city">Ville</label>
+            <%= form.text_field :city, "data-address-target": "city" %>
+          </div>
+        </div>
+
+        <div class="cluster">
+          <div class="flow">
+            <label for="payor_phone">Téléphone</label>
+            <%= form.text_field :phone %>
+          </div>
+
+          <div class="flow">
+            <label for="payor_email">Email</label>
+            <%= form.text_field :email %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flow">
+        <label for="payor_comment">Notes</label>
+        <%= form.text_area :comment, rows: 1 %>
+      </div>
+    </div>
+    <div class="cluster">
+      <button type="submit" class="button" data-button-size="small">
+        <%= inline_svg "icons/check" %>
+      </button>
+      <%= link_to show_payor_info_path(payor_id: @payor.id), class: "button", "data-button-size": "small" do %>
+        <%= inline_svg "icons/cross" %>
+      <% end %>
+    </div>
+  <% end %>
+</turbo-frame>

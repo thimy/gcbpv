@@ -1,5 +1,5 @@
 <turbo-frame id="student-form">
-  <%= form_for @student, url: season_student_path(id: @student.id, season_name: @season.name), html: {class: "inline repel"} do |form| %>
+  <%= form_for @student, url: season_student_path(id: @student.id, season_name: @season.name), html: {class: "inline repel", "data-controller": "address"} do |form| %>
     <div class="flow">
       <div class="conditional-block flow">
         <div class="cluster">
@@ -32,7 +32,7 @@
 
         <div class="conditional-block flow">
           <div class="flow">
-            <label for="student_comment">Adresse</label>
+            <label for="student_address">Adresse</label>
             <%= form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
             <%= render "website/autocomplete" %>
           </div>
