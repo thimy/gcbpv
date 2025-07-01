@@ -80,6 +80,7 @@ class SubscriptionsController < SecretariatController
         if @subscription.save
           format.html { redirect_to season_students_url(@season.name), notice: "L’inscription a bien été enregistrée." }
           format.json { render :show, status: :created, location: @subscription }
+          format.turbo_stream
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @subscription.errors, status: :unprocessable_entity }

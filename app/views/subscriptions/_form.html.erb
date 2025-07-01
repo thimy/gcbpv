@@ -7,7 +7,7 @@
     </ul>
   </div>
 <% end %>
-<%= form_with(model: subscription, url: subscriptions_path, class: "subscription-form flow") do |form| %>
+<%= form_for(@subscription, class: "subscription-form flow") do |form| %>
 
   <div class="cluster" data-type="50-50">
     <div class="panel flow">

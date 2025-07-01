@@ -13,7 +13,7 @@ class Subscription < ApplicationRecord
   delegate :season, to: :subscription_group
   delegate :payor, to: :subscription_group
 
-  validate :student_unique_subscription
+  validate :student_unique_subscription, on: :create
 
   accepts_nested_attributes_for :student, :courses, :subbed_workshops, :subbed_kid_workshops, :workshop_slots, allow_destroy: true
 
