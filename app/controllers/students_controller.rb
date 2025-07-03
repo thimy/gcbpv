@@ -9,6 +9,7 @@ class StudentsController < SecretariatController
 
   SORT_ATTRIBUTES = {
     "subscriptions" => [
+      "created_at",
       "student",
       "birth_year",
       "city"
@@ -238,15 +239,21 @@ class StudentsController < SecretariatController
       SORT_ATTRIBUTES["subscriptions"].first
     end
 
+    def default_sort_direction
+      "desc"
+    end
+
     def with_sort_params(records)
       if @sort_attribute.present?
         if @sort_attribute == "student"
           records.includes(:student).merge(Student.order(last_name: @sort_direction))
         elsif @sort_attribute == "birth_year"
           records.includes(:student).merge(Student.order(birth_year: @sort_direction))
+        else
+          records.order(@sort_attribute => @sort_direction)
         end
       else
-        records
+        records.order(:created_at => @sort_direction)
       end
     end
   

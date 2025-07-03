@@ -31,6 +31,7 @@ class Subscription < ApplicationRecord
   scope :has_confirmed_workshop, ->(workshop) { where(subbed_workshops.confirme.has_workshop(workshop)) }
   scope :has_optional_kid_workshop, ->(workshop) { where(subbed_workshops.optional.has_kid_workshop(workshop)) }
   scope :has_confirmed_kid_workshop, ->(workshop) { where(subbed_workshops.confirme.has_kid_workshop(workshop)) }
+  scope :latest, -> {order(created_at: :desc)}
 
   scope :youth, -> { includes(:student).where(Student.youth) }
   scope :adults, -> { includes(:student).where(Student.adults) }

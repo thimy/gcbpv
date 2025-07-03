@@ -6,12 +6,16 @@ module WithTableConcern
   private
 
   def set_sort_params
-    @sort_direction = (params[:direction] == "desc") ? "desc" : "asc"
+    @sort_direction =  params[:direction] ? params[:direction] : default_sort_direction
     @sort_attribute = if valid_sort_attribute?(params[:sort])
       params[:sort]
     else
       default_sort_attribute
     end
+  end
+
+  def default_sort_direction
+    "asc"
   end
 
   def paginate_records(records)

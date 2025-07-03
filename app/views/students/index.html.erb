@@ -111,6 +111,7 @@
   <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "student", sortable: true) do %>Élève<% end %>
+      <% header.with_column(name: "created_at", sortable: true) do %>Inscrit le<% end %>
       <% header.with_column(name: "birth_year", sortable: true) do %>Année de naissance<% end %>
       <% header.with_column(name: "city") do %>Ville<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
@@ -122,6 +123,7 @@
     <% @subscriptions.each do |subscription| %>
       <% table.with_row(link_url: subscription_path(subscription), class: "#{subscription.optional? ? "optional" : "confirmed"}") do |row| %>
         <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, student_url(season: @season, record: subscription.student), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "created_at") do %><%= format_date(subscription.created_at) %><% end %>
         <% row.with_cell(name: "birth_year") do %><%= subscription.student.birth_year.presence %><% end %>
         <% row.with_cell(name: "city") do %><%= subscription.student.city_or_payor_city %><% end %>
         <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
