@@ -1,0 +1,4 @@
+<%= turbo_frame_tag "edit-donation" do %>
+  <div><%= subscription_group.donation.present? && subscription_group.donation != 0 ? "+#{number_to_currency(subscription_group.donation, unit: "€")}" : "---" %></div>
+  <%= link_to subscription_group.donation.nil? ? "Ajouter un don" : "Modifier le don", subscription_group_edit_donation_path(subscription_group_id: subscription_group.id) %>
+<% end %>

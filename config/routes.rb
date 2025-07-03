@@ -101,7 +101,8 @@ Rails.application.routes.draw do
     end
     resources :subscription_groups do
       get :edit_discount, to: "subscription_groups#edit_discount"
-      get :show_discount, to: "subscription_groups#show_discount"
+      get :edit_donation, to: "subscription_groups#edit_donation"
+      get :show_summary, to: "subscription_groups#show_summary"
     end
     resources :subbed_kid_workshops
     resources :subbed_workshops

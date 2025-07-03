@@ -5,8 +5,10 @@ class SubscriptionGroupsController < BaseController
     render "subscription_groups/edit_discount"
   end
 
-  # GET /subscription_groups/1 or /subscription_groups/1.json
-  def show_discount
+  def edit_donation
+  end
+
+  def show_summary
   end
 
   # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
@@ -31,6 +33,6 @@ class SubscriptionGroupsController < BaseController
 
     # Only allow a list of trusted parameters through.
     def subscription_group_params
-      params.require(:subscription_group).permit(:discount)
+      params.require(:subscription_group).permit(:discount, :donation)
     end
 end

@@ -88,7 +88,7 @@
       <% table.with_row do |row| %>
         <% row.with_cell(name: "donation", colspan: 6) do %>Don<% end %>
         <% row.with_cell(name: "amount") do %>
-          <%= number_to_currency(@subscription_group.donation, unit: "€") || "---" %>
+          <%= render "subscription_groups/donation", subscription_group: @subscription_group %>
         <% end %>
       <% end %>
       <% table.with_footer do |footer| %>

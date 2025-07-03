@@ -1,6 +1,6 @@
-<%= turbo_frame_tag "edit-discount" do %>
+<%= turbo_frame_tag "edit-donation" do %>
   <%= form_for @subscription_group, html: {class: "inline"} do |form| %>
-    <%= form.text_field :discount %> €
+    <%= form.text_field :donation %> €
     <button type="submit" class="button" data-button-size="small">
       <%= inline_svg "icons/check" %>
     </button>
