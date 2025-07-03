@@ -1,8 +1,0 @@
-<div id="slots" class="flow">
-  <%= label_tag "Lieu et heure" %>
-  <%= form.collection_select :slot_id, slots, :id, :name, {include_blank: "---"},
-    {
-      class: "slot-select",
-      "data-course-target": "slot"
-    }  %>
-</div>
