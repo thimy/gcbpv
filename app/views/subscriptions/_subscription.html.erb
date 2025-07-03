@@ -3,6 +3,10 @@
     <div>
       <dl class="cluster">
         <div>
+          <dt>Date d’inscription :</dt>
+          <dd><%= format_date(subscription.created_at) %></dd>
+        </div>
+        <div>
           <dt>Consentement à l’image :</dt>
           <dd><%= subscription.image_consent ? "✅" : "❌" %></dd>
         </div>
