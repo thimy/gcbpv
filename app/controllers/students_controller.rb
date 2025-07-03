@@ -199,6 +199,7 @@ class StudentsController < SecretariatController
       @course_filter[:slot] = {}
       @course_filter[:slot][:teacher] = params[:teacher] if params[:teacher].present?
       @course_filter[:slot][:day_of_week] = params[:course_day] if params[:course_day].present?
+      @course_filter[:slot][:city] = params[:course_city] if params[:course_city].present?
       @course_filter[:slot][:frequency] = params[:frequency] if params[:frequency].present?
       @filters[:courses] = Course.includes(:slot).where(@course_filter) if @course_filter[:slot].present? || @course_filter[:instrument].present?
 

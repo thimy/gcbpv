@@ -72,6 +72,10 @@
         <%= label_tag :course_frequency, "Fréquence du cours" %>
         <%= select_tag :course_frequency, options_for_select(Slot.frequencies.keys.to_a, params[:course_frequency].presence || ""), include_blank: "--- Fréquence du cours ---", onchange: "this.form.requestSubmit()" %>
       </div>
+      <div class="flow">
+        <%= label_tag :course_city, "Lieu du cours" %>
+        <%= select_tag :course_city, options_for_select(City.active, params[:course_city].presence || ""), include_blank: "--- Lieu du cours ---", onchange: "this.form.requestSubmit()" %>
+      </div>
     </div>
     <div class="cluster">
       <div class="flow">
