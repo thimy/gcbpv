@@ -61,12 +61,32 @@ export default class extends Controller {
     }
   }
 
+  searchByPostcode(event) {
+    const value = event.currentTarget.value
+    if (value.length == 5) {
+      fetch(`https://api-adresse.data.gouv.fr/search/?q=${value}&type=municipality`)
+        .then(response => response.json())
+        .then(data => {
+          this.cityTarget.options.length = 0
+          data.features.forEach(municipality => {
+            const option = new Option(municipality.properties.city, municipality.properties.city)
+            this.cityTarget.append(option)
+          })
+        })
+        .catch(error => console.error("Error: ", error))
+    }
+  }
+
   autofill(event) {
     const addressId = event.currentTarget.dataset.addressId
     const address = this.addresses.find(element => element.properties.id == addressId)
     this.addressTarget.value = address.properties.name
     if (this.hasPostcodeTarget) this.postcodeTarget.value = address.properties.postcode
-    if (this.hasCityTarget) this.cityTarget.value = address.properties.city
+    if (this.hasCityTarget) {
+      this.cityTarget.length = 0
+      const option = new Option(address.properties.city, address.properties.city)
+      this.cityTarget.append(option)
+    }
     this.listTarget.setAttribute("hidden", true)
   }
 

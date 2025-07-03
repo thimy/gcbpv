@@ -20,12 +20,12 @@
   <div class="cluster">
     <div class="flow">
       <label for="payor_postcode">Code postal</label>
-      <%= text_field :payor, :postcode, "data-address-target": "postcode", required: true %>
+      <%= text_field :payor, :postcode, data: {"address-target": "postcode", "action": "address#searchByPostcode"}, required: true %>
     </div>
 
     <div class="flow">
       <label for="payor_city">Ville</label>
-      <%= text_field :payor, :city, "data-address-target": "city", required: true %>
+      <%= select_tag :payor, :city, "data-address-target": "city", required: true %>
       <%= render "website/autocomplete" %>
     </div>
   </div>

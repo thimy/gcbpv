@@ -35,7 +35,7 @@
 
         <div class="flow">
         <label for="student_city">Ville</label>
-          <%= text_field :student, :city, "data-address-target": "city" %>
+          <%= select_tag :student, :city, data: {"address-target": "city", "action": "address#searchByPostcode"} %>
         </div>
       </div>
 

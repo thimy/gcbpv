@@ -23,12 +23,12 @@
         <div class="cluster">
           <div class="flow">
           <label for="payor_postcode">Code Postal</label>
-            <%= form.text_field :postcode, "data-address-target": "postcode" %>
+            <%= form.text_field :postcode, data: {"address-target": "postcode", "action": "address#searchByPostcode"} %>
           </div>
 
           <div class="flow">
           <label for="payor_city">Ville</label>
-            <%= form.text_field :city, "data-address-target": "city" %>
+            <%= form.select :city, @payor.city.present? ? options_for_select([@payor.city]) : "", {}, data: {"address-target": "city"} %>
           </div>
         </div>
 
