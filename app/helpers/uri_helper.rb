@@ -16,7 +16,7 @@ module UriHelper
   end
 
   def workshops_url(season: Config.first.season)
-    "/secretariat/#{season.name}/disciplines"
+    "/secretariat/#{season.name}/ateliers"
   end
 
   def payors_url(season: Config.first.season)

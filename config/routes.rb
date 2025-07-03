@@ -114,6 +114,7 @@ Rails.application.routes.draw do
     scope path: ":season_name", as: :season do
       resources :instruments, path: "disciplines"
       resources :kid_workshops, path: "enfance"
+      resources :workshops, path: "ateliers"
       resources :payors, path: "foyers"
       resources :slots, path: "creneaux"
       resources :students, path: "eleves"
