@@ -1,5 +1,6 @@
 table {
-  border-collapse: separate;
+  border: var(--stroke);
+  border-collapse: collapse;
   border-spacing: 0;
   font-size: 0.875rem;
   margin-block-start: var(--space-s);
@@ -10,32 +11,62 @@ table {
 
 thead, tfoot {
   vertical-align: top;
+}
 
-  tr {
-    &[data-action] {
-      cursor: pointer;
-  
-      &:hover {
-        background-color: var(--color-mint);
-      }
+td, th {
+  border-bottom: var(--border-default);
+  word-break: break-word;
+  padding: var(--space-xs);
+
+  [data-button-style="naked"] {
+    height: auto;
+
+    svg {
+      height: auto;
     }
-
-    th {
-      background-color: var(--color-mint);
-      color: var(--color-dark);
-      padding: var(--space-xs) var(--space-xs);
-    
-      a {
-        display: flex;
-        align-items: center;
-        gap: var(--space-xxs);
-      }
-
-      svg {
-        width: var(--space-s);
-      }
-    }    
   }
+
+  .button {
+    --button-x-padding: 1em;
+    --button-y-padding: 0.6em;
+    font-size: var(--size-step-000);
+  }
+}
+
+:is(th, td) ~ :is(th, td) {
+  border-inline-start: var(--stroke);
+}
+
+tr + tr :is(th, td) {
+  border-block-start: var(--stroke);
+}
+
+th {
+  text-align: left;
+  font-weight: 600;
+  line-height: var(--leading-fine);
+  background-color: var(--color-mint);
+  color: var(--color-dark);
+  padding: var(--space-xs);
+  word-break: initial;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xxs);
+  }
+
+  svg {
+    width: var(--space-s);
+  }
+}
+
+thead th:not(:only-of-type) {
+  border-block-end: var(--stroke);
+}
+
+thead th:only-of-type {
+  border-inline-end: var(--stroke);
 }
 
 tr {
@@ -64,32 +95,6 @@ tfoot {
   th {
     border-block-start: var(--stroke);
     font-weight: 600;
-  }
-}
-
-td {
-  border-bottom: var(--border-default);
-  word-break: break-word;
-  padding: var(--space-xs);
-
-  [data-button-style="naked"] {
-    height: auto;
-
-    svg {
-      height: auto;
-    }
-  }
-
-  &.cell-student,
-  &.cell-phone,
-  &.cell-email {
-    white-space: nowrap;
-  }
-
-  .button {
-    --button-x-padding: 1em;
-    --button-y-padding: 0.6em;
-    font-size: var(--size-step-000);
   }
 }
 

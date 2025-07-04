@@ -22,6 +22,7 @@
   text-transform: uppercase;
   letter-spacing: var(--uppercase-kerning);
   text-decoration: none;
+  font-family: var(--font-base);
   font-size: var(--size-step-00);
   font-weight: var(--font-bold);
   border-radius: var(--button-radius);

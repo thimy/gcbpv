@@ -5,13 +5,13 @@
 <%= render Shared::Table::Component.new do |table| %>
   <% table.with_header do |header| %>
     <% header.with_column(name: "instrument") do %>Instrument<% end %>
-    <% header.with_column(name: "student_count") do %>Nombre d’élèves<% end %>
+    <% header.with_column(name: "student-count") do %>Nombre d’élèves<% end %>
     <% header.with_column(name: "options", show_label: false) %>
   <% end %>
   <% @instruments.each do |instrument| %>
     <% table.with_row(link_url: instrument) do |row| %>
       <% row.with_cell(name: "instrument") do %><%= link_to instrument.name, instrument_url(season: @season, record: instrument) %><% end %>
-      <% row.with_cell(name: "instrument") do %><%= instrument.courses(season: @season).size %><% end %>
+      <% row.with_cell(name: "student-count") do %><%= instrument.courses(season: @season).size %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to "Éditer cet instrument", edit_instrument_path(instrument) %>
       <% end %>

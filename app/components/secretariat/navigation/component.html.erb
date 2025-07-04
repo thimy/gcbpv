@@ -1,10 +1,10 @@
 <nav>
   <%= link_to "Élèves", subscriptions_url(season: @season) %>
+  <%= link_to "Foyers", payors_url(season: @season) %>
   <%= link_to "Professeurs", teachers_url(season: @season) %>
   <%= link_to "Disciplines", instruments_url(season: @season) %>
   <%= link_to "Enfance", kid_workshops_url(season: @season) %>
   <%= link_to "Ateliers", workshops_url(season: @season) %>
-  <%= link_to "Foyers", payors_url(season: @season) %>
   <%= link_to "Événements", events_path %>
   <%= link_to "Actualités", posts_path %>
   <%= link_to "Bogue", bogues_path %>

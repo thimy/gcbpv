@@ -122,12 +122,12 @@
     <% end %>
     <% @subscriptions.each do |subscription| %>
       <% table.with_row(link_url: subscription_path(subscription), class: "#{subscription.optional? ? "optional" : "confirmed"}") do |row| %>
-        <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, student_url(season: @season, record: subscription.student), "data-turbo": false %><% end %>
-        <% row.with_cell(name: "created_at") do %><%= format_date(subscription.created_at) %><% end %>
-        <% row.with_cell(name: "birth_year") do %><%= subscription.student.birth_year.presence %><% end %>
+        <% row.with_cell(name: "student", class: "nowrap") do %><%= link_to subscription.student.name, student_url(season: @season, record: subscription.student), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "created_at", class: "nowrap") do %><%= format_date(subscription.created_at) %><% end %>
+        <% row.with_cell(name: "birth_year", class: "nowrap") do %><%= subscription.student.birth_year.presence %><% end %>
         <% row.with_cell(name: "city") do %><%= subscription.student.city_or_payor_city %><% end %>
-        <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
-        <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
+        <% row.with_cell(name: "phone", class: "nowrap") do %><%= format_phone(subscription.phone) %><% end %>
+        <% row.with_cell(name: "email", class: "nowrap") do %><%= subscription.email %><% end %>
         <% row.with_cell(name: "course") do %>
           <%= [subscription.kid_workshop_list, subscription.course_list, subscription.pathway_list].reject!(&:empty?).join(", ") %><% end %>
         <% row.with_cell(name: "workshop") do %><%= subscription.workshop_list %><% end %>

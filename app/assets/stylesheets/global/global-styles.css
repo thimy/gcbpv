@@ -223,43 +223,6 @@ figcaption {
   font-family: monospace;
 }
 
-table {
-  border: var(--stroke);
-  border-collapse: collapse;
-  width: 100%;
-}
-
-th {
-  text-align: left;
-  font-weight: var(--font-bold);
-  line-height: var(--leading-fine);
-}
-
-thead th {
-  padding-block: var(--space-s);
-}
-
-td,
-th {
-  padding: var(--space-xs) var(--space-s);
-}
-
-thead th:not(:only-of-type) {
-  border-block-end: var(--stroke);
-}
-
-thead th:only-of-type {
-  border-inline-end: var(--stroke);
-}
-
-:is(th, td) ~ :is(th, td) {
-  border-inline-start: var(--stroke);
-}
-
-tr + tr :is(th, td) {
-  border-block-start: var(--stroke);
-}
-
 caption {
   caption-side: bottom;
   margin-block-start: var(--space-s);
@@ -486,4 +449,8 @@ main.region {
 .form-wrapper {
   margin-inline: auto;
   width: 45ch;
+}
+
+.nowrap {
+  white-space: nowrap;
 }

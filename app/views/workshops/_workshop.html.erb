@@ -15,9 +15,9 @@
           <% end %>
           <% slot.subscriptions.active(@season).each do |subscription| %>
             <% table.with_row(class: "#{subscription.optional? || subscription.optional_workshop?(workshop) ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "student") do %><%= link_to subscription.student.name, subscription_path(subscription) %><% end %>
-              <% row.with_cell(name: "phone") do %><%= format_phone(subscription.phone) %><% end %>
-              <% row.with_cell(name: "email") do %><%= subscription.email %><% end %>
+              <% row.with_cell(name: "student", class: "nowrap") do %><%= link_to subscription.student.name, student_url(season: @season, record: subscription.student) %><% end %>
+              <% row.with_cell(name: "phone", class: "nowrap") do %><%= format_phone(subscription.phone) %><% end %>
+              <% row.with_cell(name: "email", class: "nowrap") do %><%= subscription.email %><% end %>
             <% end %>
           <% end %>
           <% table.with_row do |row| %>

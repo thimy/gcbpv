@@ -9,15 +9,22 @@
 </div>
 
 <div class="page-info">
-  <dl class="horizontal">
-    <dt>Type d’atelier :</dt>
-    <dd><%= @kid_workshop.workshop_type %></dd>
-    <dt>Nombre d’élèves :</dt>
-    <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
-    <dt>Statut :</dt>
-    <dd><%= @kid_workshop.status %></dd>
-    <dt>Notes :</dt>
-    <dd><%= @kid_workshop.comment %></dd>
+  <dl class="cluster panel">
+    <div>
+      <dt>Type d’atelier :</dt>
+      <dd><%= @kid_workshop.workshop_type %></dd>
+    </div>
+    <div>
+      <dt>Nombre d’élèves :</dt>
+      <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
+    </div>
+    <div>
+      <dt>Statut :</dt>
+      <dd><%= @kid_workshop.status %></dd>
+    </div>
+    <div>
+      <dt>Notes :</dt>
+      <dd><%= @kid_workshop.comment %></dd>
   </dl>
 </div>
 

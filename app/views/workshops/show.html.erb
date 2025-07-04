@@ -9,11 +9,19 @@
 </div>
 
 <div class="page-info">
-  <dl class="horizontal">
-    <dt>Nombre d’élèves :</dt>
-    <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
-    <dt>Statut :</dt>
-    <dd><%= @workshop.status %></dd>
+  <dl class="cluster panel">
+    <div>
+      <dt>Nombre d’élèves :</dt>
+      <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
+    </div>
+    <div>
+      <dt>Statut :</dt>
+      <dd><%= @workshop.status %></dd>
+    </div>
+    <div>
+      <dt>Notes :</dt>
+      <dd><%= @workshop.comment %></dd>
+    </div>
   </dl>
 </div>
 

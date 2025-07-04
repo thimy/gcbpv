@@ -3,7 +3,7 @@
   <h1>
     <%= @student.name %>
     <% if @subscription.present? %>
-      (<%= link_to "Foyer #{@subscription.payor.name}", payor_url(season: @season, record: @subscription.payor) %>)
+      <%= link_to "Foyer #{@subscription.payor.name}", payor_url(season: @season, record: @subscription.payor), class: "button" %>
     <% end %>
   </h1>
 
