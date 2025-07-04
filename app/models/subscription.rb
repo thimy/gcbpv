@@ -72,11 +72,11 @@ class Subscription < ApplicationRecord
   end
 
   def phone
-    student.phone.presence || subscription_group.payor.phone
+    student.phone&.phony_formatted(normalize: :FR) || subscription_group.payor.phones
   end
 
   def email
-    student.email.presence || subscription_group.payor.email
+    student.email.presence || subscription_group.payor.emails
   end
 
   def postcode

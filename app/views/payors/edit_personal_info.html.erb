@@ -39,8 +39,20 @@
           </div>
 
           <div class="flow">
-            <label for="payor_email">Email</label>
+            <label for="payor_secondar_phone">Téléphone secondaire</label>
+            <%= form.text_field :secondary_phone %>
+          </div>
+        </div>
+
+        <div class="cluster">
+          <div class="flow">
+            <label for="payor_phone">Email</label>
             <%= form.text_field :email %>
+          </div>
+
+          <div class="flow">
+            <label for="payor_secondary_email">Email secondaire</label>
+            <%= form.text_field :secondary_email %>
           </div>
         </div>
       </div>

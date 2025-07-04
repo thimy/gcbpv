@@ -171,12 +171,6 @@ class StudentsController < SecretariatController
       end
     end
 
-    def payor_params
-      if params[:payor].present?
-        params.require(:payor).permit(:first_name, :last_name, :phone, :email, :address, :postcode, :city, :comment)
-      end
-    end
-
     def set_lists
       @students = Student.all
       @payors = Payor.all

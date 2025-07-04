@@ -126,7 +126,7 @@
         <% row.with_cell(name: "created_at", class: "nowrap") do %><%= format_date(subscription.created_at) %><% end %>
         <% row.with_cell(name: "birth_year", class: "nowrap") do %><%= subscription.student.birth_year.presence %><% end %>
         <% row.with_cell(name: "city") do %><%= subscription.student.city_or_payor_city %><% end %>
-        <% row.with_cell(name: "phone", class: "nowrap") do %><%= format_phone(subscription.phone) %><% end %>
+        <% row.with_cell(name: "phone", class: "nowrap") do %><%= subscription.phone %><% end %>
         <% row.with_cell(name: "email", class: "nowrap") do %><%= subscription.email %><% end %>
         <% row.with_cell(name: "course") do %>
           <%= [subscription.kid_workshop_list, subscription.course_list, subscription.pathway_list].reject!(&:empty?).join(", ") %><% end %>

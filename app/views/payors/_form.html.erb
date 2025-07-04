@@ -25,7 +25,7 @@
 
     <div class="flow">
       <label for="payor_city">Ville</label>
-      <%= select_tag :payor, :city, "data-address-target": "city", required: true %>
+      <select id="payor_city" name="payor[city]" data-address-target="city" required="required"></select>
       <%= render "website/autocomplete" %>
     </div>
   </div>
@@ -35,10 +35,20 @@
       <label for="payor_phone">Téléphone</label>
       <%= text_field :payor, :phone %>
     </div>
+    <div class="flow">
+      <label for="payor_secondary_phone">Téléphone secondaire</label>
+      <%= text_field :payor, :secondary_phone %>
+    </div>
+  </div>
 
+  <div class="cluster">
     <div class="flow">
       <label for="payor_email">Email</label>
       <%= text_field :payor, :email %>
+    </div>
+    <div class="flow">
+      <label for="payor_secondary_email">Email secondaire</label>
+      <%= text_field :payor, :secondary_email %>
     </div>
   </div>
 

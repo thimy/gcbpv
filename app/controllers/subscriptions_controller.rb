@@ -4,7 +4,6 @@ class SubscriptionsController < SecretariatController
 
   before_action :query
   before_action :set_subscription, only: %i[ show edit update destroy edit_subscription show_subscription ]
-  before_action :set_cities, only: %i[ index edit update ]
   before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
 
   SORT_ATTRIBUTES = {
@@ -170,12 +169,6 @@ class SubscriptionsController < SecretariatController
     @subscription_group = @subscription.subscription_group
   end
 
-  def set_cities
-    @cities = Student.all.map { |student|
-      student.city_or_payor_city
-    }.flatten.uniq.reject { |c| c.blank? }.sort
-  end
-
   # Only allow a list of trusted parameters through.
   def subscription_params
     if params[:payor_address] == "yes"
@@ -231,7 +224,7 @@ class SubscriptionsController < SecretariatController
 
   def payor_params
     if params[:payor].present?
-      params.require(:payor).permit(:first_name, :last_name, :phone, :email, :address, :postcode, :city, :comment)
+      params.require(:payor).permit(:first_name, :last_name, :phone, :secondary_phone, :email, :secondary_email, :address, :postcode, :city, :comment)
     end
   end
 

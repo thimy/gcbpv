@@ -52,11 +52,11 @@ class Student < ApplicationRecord
   end
 
   def email_or_payor_email
-    email.presence || subscriptions.last&.subscription_group&.payor&.email
+    email.presence || subscriptions.last&.subscription_group&.payor&.emails
   end
 
   def phone_or_payor_phone
-    phone.presence || subscriptions.last&.subscription_group&.payor&.phone
+    phone.presence || subscriptions.last&.subscription_group&.payor&.phones
   end
 
   def uses_payor_info?

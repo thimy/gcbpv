@@ -20,6 +20,14 @@ class Payor < ApplicationRecord
     "#{first_name} #{last_name.upcase if last_name.present?}"
   end
 
+  def phones
+    [format_phone(phone), format_phone(secondary_phone)].compact.join(" / ")
+  end
+
+  def emails
+    [email, secondary_email].compact.join(" / ")
+  end
+
   def payor_email
     email || user.present? && user.email || nil
   end
@@ -68,5 +76,9 @@ class Payor < ApplicationRecord
     agglo.cities.find {|agglo_city|
       agglo_city.name == city || agglo_city.postcode == postcode
     }
+  end
+
+  def format_phone(phone_number)
+    phone_number && phone_number.phony_formatted(normalize: :FR)
   end
 end
