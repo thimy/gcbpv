@@ -60,8 +60,8 @@
 
       <div class="condition flow">
         <label>Utiliser l'adresse du payeur</label>
-        <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", @subscription.student.city.present? ? false : true %> Oui</label>
-        <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", @subscription.student.city.present? ? true : false, class: "display-condition" %> Non</label>
+        <label for="household_address_yes"><%= radio_button_tag :household_address, "yes", @subscription.student.city.present? ? false : true %> Oui</label>
+        <label for="household_address_no"><%= radio_button_tag :household_address, "no", @subscription.student.city.present? ? true : false, class: "display-condition" %> Non</label>
       </div>
 
       <div class="conditional-block flow">

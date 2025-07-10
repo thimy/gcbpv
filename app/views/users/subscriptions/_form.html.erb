@@ -27,7 +27,7 @@
           <div class="flow">
             <% unless current_user.current_subscription.present? %>
               <div class="condition cluster">
-                <label for="is_payor"><%= check_box_tag :is_payor, class: "hide-condition" %> L’inscription est pour moi-même</label>
+                <label for="is_household"><%= check_box_tag :is_household, class: "hide-condition" %> L’inscription est pour moi-même</label>
               </div>
             <% end %>
 
@@ -61,8 +61,8 @@
               <div class="condition flow">
                 <label>Utiliser l'adresse du représentant légal</label>
                 <div class="cluster">
-                  <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", :true, checked: true %> Oui</label>
-                  <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", :false, class: "display-condition" %> Non</label>
+                  <label for="household_address_yes"><%= radio_button_tag :household_address, "yes", :true, checked: true %> Oui</label>
+                  <label for="household_address_no"><%= radio_button_tag :household_address, "no", :false, class: "display-condition" %> Non</label>
                 </div>
               </div>
 

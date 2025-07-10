@@ -28,7 +28,7 @@ module Admin
 
     protected
       def configure_permitted_parameters
-        devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, payor_attributes: [:last_name, :first_name, :email, :phone, :address, :postcode, :city]) }
+        devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, household_attributes: [:last_name, :first_name, :email, :phone, :address, :postcode, :city]) }
         devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :current_password) }
       end
   end

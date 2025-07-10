@@ -5,8 +5,8 @@
     <div class="flow" data-controller="address">
 
       <div class="condition cluster">
-        <label for="is_payor_yes"><%= radio_button_tag :is_payor, "yes" %> Pour moi-même</label>
-        <label for="is_payor_no"><%= radio_button_tag :is_payor, "no", class: "display-condition" %> Pour un membre de mon foyer</label>
+        <label for="is_household_yes"><%= radio_button_tag :is_household, "yes" %> Pour moi-même</label>
+        <label for="is_household_no"><%= radio_button_tag :is_household, "no", class: "display-condition" %> Pour un membre de mon foyer</label>
       </div>
 
       <div class="conditional-block flow">
@@ -49,8 +49,8 @@
         <div class="condition flow">
           <label>Utiliser l'adresse du représentant légal</label>
           <div class="cluster">
-            <label for="payor_address_yes"><%= radio_button_tag :payor_address, "yes", :true %> Oui</label>
-            <label for="payor_address_no"><%= radio_button_tag :payor_address, "no", :false, class: "display-condition" %> Non</label>
+            <label for="household_address_yes"><%= radio_button_tag :household_address, "yes", :true %> Oui</label>
+            <label for="household_address_no"><%= radio_button_tag :household_address, "no", :false, class: "display-condition" %> Non</label>
           </div>
         </div>
 

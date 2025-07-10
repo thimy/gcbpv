@@ -27,7 +27,7 @@
         </div>
 
         <div class="cluster condition">
-          <label for="payor_address"><%= check_box_tag :payor_address, checked: @student.uses_payor_info?, class: "hide-condition" %> Utiliser les coordonnées du payeur</label>
+          <label for="household_address"><%= check_box_tag :household_address, checked: @student.uses_household_info?, class: "hide-condition" %> Utiliser les coordonnées du payeur</label>
         </div>
 
         <div class="conditional-block flow">

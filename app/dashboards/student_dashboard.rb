@@ -17,12 +17,12 @@ class StudentDashboard < Administrate::BaseDashboard
     postcode: Field::Number,
     city: Field::String,
     gender: Field::Select,
-    payor: Field::BelongsTo,
+    household: Field::BelongsTo,
     phone: Field::String,
     comment: Field::Text,
-    address_or_payor_address: Field::Text,
-    postcode_or_payor_postcode: Field::Text,
-    city_or_payor_city: Field::Text,
+    address_or_household_address: Field::Text,
+    postcode_or_household_postcode: Field::Text,
+    city_or_household_city: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -36,7 +36,7 @@ class StudentDashboard < Administrate::BaseDashboard
     id
     first_name
     last_name
-    city_or_payor_city
+    city_or_household_city
     email
   ].freeze
 
@@ -47,9 +47,9 @@ class StudentDashboard < Administrate::BaseDashboard
     first_name
     last_name
     birth_year
-    address_or_payor_address
-    postcode_or_payor_postcode
-    city_or_payor_city
+    address_or_household_address
+    postcode_or_household_postcode
+    city_or_household_city
     email
     phone
     gender

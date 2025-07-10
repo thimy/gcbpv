@@ -7,7 +7,7 @@ class Users::SubscriptionsController < BaseController
   attr_reader :hide_private
 
   def index
-    @subscription_group = @payor.subscription_groups.find_by(season: @season)
+    @subscription_group = @household.subscription_groups.find_by(season: @season)
     @membership = @season.plan.membership_price
 
     @group_on_hold = @subscription_group&.status == "Dans le panier"
@@ -57,9 +57,9 @@ class Users::SubscriptionsController < BaseController
   def create
     new_params = {id: params[:id]}
 
-    if params[:is_payor]
-      if @payor.student.present?
-        new_params[:student] = Student.find(@payor.student)
+    if params[:is_household]
+      if @household.student.present?
+        new_params[:student] = Student.find(@household.student)
       else
         if student_params.present?
           new_params[:student] = Student.new(student_params)
@@ -69,11 +69,11 @@ class Users::SubscriptionsController < BaseController
       end
     end
 
-    @subscription_group = @payor.subscription_groups.find { |group| group.season == @season }
+    @subscription_group = @household.subscription_groups.find { |group| group.season == @season }
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
     else
-      new_params[:subscription_group] = SubscriptionGroup.new(season: @season, payor: @payor, majoration_class: SubscriptionGroup.majoration_classes[@payor.agglo], status: 3)
+      new_params[:subscription_group] = SubscriptionGroup.new(season: @season, household: @household, majoration_class: SubscriptionGroup.majoration_classes[@household.agglo], status: 3)
     end
     @subscription = Subscription.new(new_params.merge(subscription_params))
 
@@ -86,7 +86,7 @@ class Users::SubscriptionsController < BaseController
         format.html { render :new, status: :unprocessable_entity }
       else
         if @subscription.save
-          current_user.update!(student_id: @subscription.student.id) if params[:is_payor]
+          current_user.update!(student_id: @subscription.student.id) if params[:is_household]
           format.html { redirect_to account_subscriptions_url, notice: "L’inscription a bien été enregistrée." }
           format.json { render :show, status: :created, location: @subscription }
         else
@@ -161,7 +161,7 @@ class Users::SubscriptionsController < BaseController
 
   private
     def set_lists
-      @payor = Payor.find(current_user.payor_id)
+      @household = Household.find(current_user.household_id)
       @instruments = Instrument.active
       @workshops = Workshop.active
       @kid_workshops = KidWorkshop.active
@@ -174,7 +174,7 @@ class Users::SubscriptionsController < BaseController
 
     # Only allow a list of trusted parameters through.
     def subscription_params
-      if params[:payor_address] == "yes"
+      if params[:household_address] == "yes"
         params[:subscription][:student_attributes][:address] = nil
         params[:subscription][:student_attributes][:postcode] = nil
         params[:subscription][:student_attributes][:city] = nil
@@ -211,13 +211,13 @@ class Users::SubscriptionsController < BaseController
           params[:subscription][:student_attributes][:last_name] = name_params.last
           params[:subscription][:student_attributes].delete(:name)
         else
-          if params[:is_payor] && @payor.student.nil?
-            params[:subscription][:student_attributes][:first_name] = @payor.first_name
-            params[:subscription][:student_attributes][:last_name] = @payor.last_name
-            params[:subscription][:student_attributes][:address] = @payor.address
-            params[:subscription][:student_attributes][:postcode] = @payor.postcode
-            params[:subscription][:student_attributes][:city] = @payor.city
-            params[:subscription][:student_attributes][:email] = @payor.email
+          if params[:is_household] && @household.student.nil?
+            params[:subscription][:student_attributes][:first_name] = @household.first_name
+            params[:subscription][:student_attributes][:last_name] = @household.last_name
+            params[:subscription][:student_attributes][:address] = @household.address
+            params[:subscription][:student_attributes][:postcode] = @household.postcode
+            params[:subscription][:student_attributes][:city] = @household.city
+            params[:subscription][:student_attributes][:email] = @household.email
           end
           params[:subscription][:student_attributes][:birth_year] = params[:subscription][:student_attributes][:birth_year].to_i
         end

@@ -73,7 +73,7 @@ class PaymentsController < SecretariatController
   def update
     respond_to do |format|
       if @payment.update(payment_params)
-        format.html { redirect_back fallback_location: payor_url(@payment.subscription_group.payor), notice: "Le paiement a bien été modifié." }
+        format.html { redirect_back fallback_location: household_url(@payment.subscription_group.household), notice: "Le paiement a bien été modifié." }
         format.json { render :show, status: :ok, location: @payment }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -84,11 +84,11 @@ class PaymentsController < SecretariatController
 
   # DELETE /payments/1 or /payments/1.json
   def destroy
-    @payor_id = @payment.subscription_group.payor_id
+    @household_id = @payment.subscription_group.household_id
     @payment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to payor_url(@payor_id), notice: "Le paiement a bien été supprimé." }
+      format.html { redirect_to household_url(@household_id), notice: "Le paiement a bien été supprimé." }
       format.json { head :no_content }
     end
   end

@@ -1,21 +1,21 @@
-<div id="<%= dom_id payor %>" class="record">
+<div id="<%= dom_id household %>" class="record">
   <div class="page-info">
     <dl class="horizontal">
       <dt>Nom :</dt>
-      <dd><%= payor.name %></dd>
+      <dd><%= household.name %></dd>
       <dt>Adresse :</dt>
-      <dd><%= payor.full_address %></dd>
+      <dd><%= household.full_address %></dd>
     </dl>
     <dl class="horizontal">
       <dt>Email :</dt>
-      <dd><%= payor.email %></dd>
+      <dd><%= household.email %></dd>
       <dt>Téléphone :</dt>
-      <dd><%= format_phone(payor.phone) %></dd>
+      <dd><%= format_phone(household.phone) %></dd>
     </dl>
   </div>
 
   <section class="flex-column gap-8">
-    <% payor.subscription_groups.each do |subscription_group| %>
+    <% household.subscription_groups.each do |subscription_group| %>
       <div>
         <h2>Membres du foyer</h2>
         <%= render Shared::Table::Component.new do |table| %>
@@ -116,7 +116,7 @@
 </div>
 
 <%= link_to "Supprimer ce foyer",
-  payor_path(payor),
+  household_path(household),
   class: "button",
   data: {
     "button-variant": "alert",

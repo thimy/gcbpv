@@ -13,7 +13,7 @@
   <dl class="cluster">
     <div>
       <dt>Foyer :</dt>
-      <dd><%= link_to @subscription.subscription_group&.payor&.name, payor_path(@subscription.subscription_group.payor) %></dd>
+      <dd><%= link_to @subscription.subscription_group&.household&.name, household_path(@subscription.subscription_group.household) %></dd>
     </div>
     <div>
       <dt>Année de naissance :</dt>
@@ -47,15 +47,15 @@
     </div>
     <div>
       <dt>Adresse :</dt>
-      <dd><%= @subscription.student.address_or_payor_address %></dd>
+      <dd><%= @subscription.student.address_or_household_address %></dd>
     </div>
     <div>
       <dt>Code postal :</dt>
-      <dd><%= @subscription.student.postcode_or_payor_postcode %></dd>
+      <dd><%= @subscription.student.postcode_or_household_postcode %></dd>
     </div>
     <div>
       <dt>Ville :</dt>
-      <dd><%= @subscription.student.city_or_payor_city %></dd>
+      <dd><%= @subscription.student.city_or_household_city %></dd>
     </div>
   </dl>
   <% if @subscription.student.comment.present? %>

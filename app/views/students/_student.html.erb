@@ -14,25 +14,25 @@
       <dl class="cluster">
         <div>
           <dt>Email :</dt>
-          <dd><%= @student.email_or_payor_email %></dd>
+          <dd><%= @student.email_or_household_email %></dd>
         </div>
         <div>
           <dt>Téléphone :</dt>
-          <dd><%= @student.phone_or_payor_phone %></dd>
+          <dd><%= @student.phone_or_household_phone %></dd>
         </div>
       </dl>
       <dl class="cluster">
         <div>
           <dt>Adresse :</dt>
-          <dd><%= @student.address_or_payor_address %></dd>
+          <dd><%= @student.address_or_household_address %></dd>
         </div>
         <div>
           <dt>Code postal :</dt>
-          <dd><%= @student.postcode_or_payor_postcode %></dd>
+          <dd><%= @student.postcode_or_household_postcode %></dd>
         </div>
         <div>
           <dt>Ville :</dt>
-          <dd><%= @student.city_or_payor_city %></dd>
+          <dd><%= @student.city_or_household_city %></dd>
         </div>
       </dl>
       <% if @student.comment.present? %>

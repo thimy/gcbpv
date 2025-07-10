@@ -14,7 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at: Field::DateTime,
     email: Field::String,
     encrypted_password: Field::String,
-    payor: Field::BelongsTo,
+    household: Field::BelongsTo,
     remember_created_at: Field::DateTime,
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
@@ -46,7 +46,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at
     email
     encrypted_password
-    payor
+    household
     remember_created_at
     reset_password_sent_at
     reset_password_token
@@ -66,7 +66,7 @@ class UserDashboard < Administrate::BaseDashboard
     confirmed_at
     email
     encrypted_password
-    payor
+    household
     remember_created_at
     reset_password_sent_at
     reset_password_token

@@ -13,7 +13,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
     comment: TrixField,
     donation: Field::String.with_options(searchable: false),
     payments: Field::NestedHasMany.with_options(skip: :subscription_group),
-    payor: Field::BelongsTo.with_options(searchable: true, searchable_fields: ["last_name", "first_name"], order: "last_name"),
+    household: Field::BelongsTo.with_options(searchable: true, searchable_fields: ["last_name", "first_name"], order: "last_name"),
     season: Field::BelongsTo.with_options(include_blank: false),
     subscriptions: Field::NestedHasMany.with_options(skip: :subscription_group),
     status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
@@ -30,7 +30,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    payor
+    household
     student_list
     status
     comment
@@ -41,7 +41,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    payor
+    household
     season
     subscriptions
     amount
@@ -59,7 +59,7 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    payor
+    household
     season
     subscriptions
     status
@@ -91,6 +91,6 @@ class SubscriptionGroupDashboard < Administrate::BaseDashboard
   # across all pages of the admin dashboard.
   #
   def display_resource(subscription_group)
-    "Foyer #{subscription_group.payor.last_name}"
+    "Foyer #{subscription_group.household.last_name}"
   end
 end

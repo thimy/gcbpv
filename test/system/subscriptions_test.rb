@@ -16,7 +16,7 @@ class SubscriptionsTest < ApplicationSystemTestCase
 
     fill_in "Course", with: @subscription.course_id
     fill_in "Paid amount", with: @subscription.paid_amount
-    fill_in "Payor", with: @subscription.payor_id
+    fill_in "Payor", with: @subscription.household_id
     fill_in "Student", with: @subscription.student_id
     fill_in "Workshop", with: @subscription.workshop_id
     fill_in "Year", with: @subscription.year
@@ -32,7 +32,7 @@ class SubscriptionsTest < ApplicationSystemTestCase
 
     fill_in "Course", with: @subscription.course_id
     fill_in "Paid amount", with: @subscription.paid_amount
-    fill_in "Payor", with: @subscription.payor_id
+    fill_in "Payor", with: @subscription.household_id
     fill_in "Student", with: @subscription.student_id
     fill_in "Workshop", with: @subscription.workshop_id
     fill_in "Year", with: @subscription.year

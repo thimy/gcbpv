@@ -132,7 +132,7 @@
     display: none;
   }
 
-  .address-condition:has(#payor_address_no:checked) + .address-block {
+  .address-condition:has(#household_address_no:checked) + .address-block {
     display: block;
   }
   

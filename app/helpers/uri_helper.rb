@@ -19,7 +19,7 @@ module UriHelper
     "/secretariat/#{season.name}/ateliers"
   end
 
-  def payors_url(season: Config.first.season)
+  def households_url(season: Config.first.season)
     "/secretariat/#{season.name}/foyers"
   end
 
@@ -43,7 +43,7 @@ module UriHelper
     "/secretariat/#{season.name}/ateliers/#{record.id}"
   end
 
-  def payor_url(season: Config.first.season, record:)
+  def household_url(season: Config.first.season, record:)
     "/secretariat/#{season.name}/foyers/#{record.id}"
   end
 end

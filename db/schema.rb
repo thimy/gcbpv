@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_08_122808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -186,6 +186,21 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
     t.index ["parent_event_id"], name: "index_events_on_parent_event_id"
   end
 
+  create_table "households", force: :cascade do |t|
+    t.string "last_name"
+    t.string "first_name"
+    t.string "email"
+    t.string "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "address"
+    t.string "postcode"
+    t.string "city"
+    t.text "comment"
+    t.string "secondary_phone"
+    t.string "secondary_email"
+  end
+
   create_table "instruments", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -286,21 +301,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subscription_group_id"], name: "index_payments_on_subscription_group_id"
-  end
-
-  create_table "payors", force: :cascade do |t|
-    t.string "last_name"
-    t.string "first_name"
-    t.string "email"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "address"
-    t.string "postcode"
-    t.string "city"
-    t.text "comment"
-    t.string "secondary_phone"
-    t.string "secondary_email"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -410,13 +410,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "payor_id"
     t.string "address"
     t.string "postcode"
     t.string "city"
     t.integer "birth_year"
     t.text "comment"
-    t.index ["payor_id"], name: "index_students_on_payor_id"
   end
 
   create_table "subbed_kid_workshops", force: :cascade do |t|
@@ -463,6 +461,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
     t.integer "majoration_class"
     t.decimal "amount"
     t.decimal "discount"
+    t.bigint "household_id"
+    t.index ["household_id"], name: "index_subscription_groups_on_household_id"
     t.index ["payor_id"], name: "index_subscription_groups_on_payor_id"
     t.index ["season_id"], name: "index_subscription_groups_on_season_id"
   end
@@ -545,7 +545,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
     t.datetime "updated_at", null: false
     t.bigint "payor_id"
     t.bigint "student_id"
+    t.bigint "household_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["household_id"], name: "index_users_on_household_id"
     t.index ["payor_id"], name: "index_users_on_payor_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["student_id"], name: "index_users_on_student_id"
@@ -614,7 +616,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_04_091150) do
   add_foreign_key "subbed_pathways", "pathway_slots"
   add_foreign_key "subbed_pathways", "subscriptions"
   add_foreign_key "subbed_workshops", "subscriptions"
-  add_foreign_key "subscription_groups", "payors"
+  add_foreign_key "subscription_groups", "households", column: "payor_id"
   add_foreign_key "subscription_groups", "seasons"
   add_foreign_key "subscriptions", "students"
   add_foreign_key "training_sessions", "trainings"

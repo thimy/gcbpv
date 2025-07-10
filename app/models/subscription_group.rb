@@ -1,5 +1,5 @@
 class SubscriptionGroup < ApplicationRecord
-  belongs_to :payor
+  belongs_to :household
   belongs_to :season
   has_many :subscriptions, dependent: :destroy
   has_many :payments, dependent: :destroy

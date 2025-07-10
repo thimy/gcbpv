@@ -14,25 +14,6 @@ class SubscriptionsController < SecretariatController
     ]
   }
 
-  # GET /subscriptions or /subscriptions.json
-  def index
-    set_tab_data
-    @seasons = Season.all.reverse.map {|season| season.name}
-    @total_subscriptions = Subscription.active(@season).not_on_hold
-    @confirmed_count = Subscription.active(@season).registered(@season).size
-    @unconfirmed_count = @total_subscriptions.size - @confirmed_count
-  end
-
-  # GET /subscriptions/1 or /subscriptions/1.json
-  def show
-    @new_course_url = new_course_path
-    @new_kid_workshop_url = new_subbed_kid_workshop_path
-    @new_workshop_url = new_subbed_workshop_path
-    @subbed_workshops = @subscription.subbed_workshops.ordered
-    @subbed_kid_workshops = @subscription.subbed_kid_workshops.ordered
-    @courses = @subscription.courses.ordered
-  end
-
   # GET /subscriptions/new
   def new
     @subscription = Subscription.new
@@ -54,17 +35,17 @@ class SubscriptionsController < SecretariatController
     }
     new_params[:student] = existing_student || Student.new(student_params)
 
-    existing_payor = Payor.find { |payor|
-      params[:payor][:name] == payor.name
+    existing_household = Household.find { |household|
+      params[:household][:name] == household.name
     }
-    @payor = existing_payor || Payor.new(payor_params)
+    @household = existing_household || Household.new(household_params)
 
-    @subscription_group = SubscriptionGroup.joins(:payor).find_by(payor: existing_payor, season: Config.first.season)
+    @subscription_group = SubscriptionGroup.joins(:household).find_by(household: existing_household, season: Config.first.season)
 
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
     else
-      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, majoration_class: @payor.agglo, status: "Inscrit")
+      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, household: @household, majoration_class: @household.agglo, status: "Inscrit")
     end
     @subscription = Subscription.new(new_params.merge(subscription_params))
 
@@ -77,6 +58,9 @@ class SubscriptionsController < SecretariatController
         format.html { render :new, status: :unprocessable_entity }
       else
         if @subscription.save
+          if !User.find_by(student_id: new_params[:student].id)
+            User.new({email: new_params[:student].email || @household.email, student_id: new_params[:student].id}).save
+          end
           format.html { redirect_to season_students_url(@season.name), notice: "L’inscription a bien été enregistrée." }
           format.json { render :show, status: :created, location: @subscription }
           format.turbo_stream
@@ -171,7 +155,7 @@ class SubscriptionsController < SecretariatController
 
   # Only allow a list of trusted parameters through.
   def subscription_params
-    if params[:payor_address] == "yes"
+    if params[:household_address] == "yes"
       params[:subscription][:student_attributes][:address] = nil
       params[:subscription][:student_attributes][:postcode] = nil
       params[:subscription][:student_attributes][:city] = nil
@@ -202,17 +186,17 @@ class SubscriptionsController < SecretariatController
 
   def student_params
     if params[:student].present?
-      if params[:is_payor] == "1"
-        payor = Payor.find { |payor|
-          params[:payor][:name] == payor.name
+      if params[:is_household] == "1"
+        household = Household.find { |household|
+          params[:household][:name] == household.name
         }
 
-        if payor.present?
-          params[:student][:first_name] = payor.first_name
-          params[:student][:last_name] = payor.last_name
+        if household.present?
+          params[:student][:first_name] = household.first_name
+          params[:student][:last_name] = household.last_name
         else
-          params[:student][:first_name] = payor_params[:first_name]
-          params[:student][:last_name] = payor_params[:last_name]
+          params[:student][:first_name] = household_params[:first_name]
+          params[:student][:last_name] = household_params[:last_name]
         end
         if params[:student][:birth_year].present?
           params[:student][:birth_year] = params[:student][:birth_year].to_i
@@ -222,32 +206,32 @@ class SubscriptionsController < SecretariatController
     end
   end
 
-  def payor_params
-    if params[:payor].present?
-      params.require(:payor).permit(:first_name, :last_name, :phone, :secondary_phone, :email, :secondary_email, :address, :postcode, :city, :comment)
+  def household_params
+    if params[:household].present?
+      params.require(:household).permit(:first_name, :last_name, :phone, :secondary_phone, :email, :secondary_email, :address, :postcode, :city, :comment)
     end
   end
 
   def set_lists
     @students = Student.all
-    @payors = Payor.all
+    @households = Household.all
     @instruments = Instrument.active
     @workshops = Workshop.active
     @kid_workshops = KidWorkshop.active
   end
 
   def build_student
-    if params[:is_payor] == "1"
-      payor = Payor.find { |payor|
-        params[:payor][:name] == payor.name
+    if params[:is_household] == "1"
+      household = Household.find { |household|
+        params[:household][:name] == household.name
       }
 
-      if payor.present?
-        params[:student][:first_name] = payor.first_name
-        params[:student][:last_name] = payor.last_name
+      if household.present?
+        params[:student][:first_name] = household.first_name
+        params[:student][:last_name] = household.last_name
       else
-        params[:student][:first_name] = payor_params[:first_name]
-        params[:student][:last_name] = payor_params[:last_name]
+        params[:student][:first_name] = household_params[:first_name]
+        params[:student][:last_name] = household_params[:last_name]
       end
       if params[:student][:birth_year].present?
         params[:student][:birth_year] = params[:student][:birth_year].to_i

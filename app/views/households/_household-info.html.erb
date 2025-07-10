@@ -1,32 +1,32 @@
-<turbo-frame id="payor-form">
+<turbo-frame id="household-form">
   <div class="repel">
     <div>
       <dl class="cluster">
         <div>
           <dt>Nom :</dt>
-          <dd><%= payor.name %></dd>
+          <dd><%= household.name %></dd>
         </div>
         <div>
           <dt>Adresse :</dt>
-          <dd><%= payor.full_address %></dd>
+          <dd><%= household.full_address %></dd>
         </div>
         <div>
           <dt>Email :</dt>
-          <dd><%= payor.emails %></dd>
+          <dd><%= household.emails %></dd>
         </div>
         <div>
           <dt>Téléphone :</dt>
-          <dd><%= payor.phones %></dd>
+          <dd><%= household.phones %></dd>
         </div>
       </dl>
       <dl>
         <div>
           <dt>Notes :</dt>
-          <dd><%= payor.comment %></dd>
+          <dd><%= household.comment %></dd>
         </div>
       </dl>
     </div>
-    <%= link_to edit_payor_info_path(payor_id: payor.id), class: "button", "data-button-size": "small" do %>
+    <%= link_to edit_household_info_path(household_id: household.id), class: "button", "data-button-size": "small" do %>
       <%= inline_svg "icons/edit" %>
     <% end %>
   </div>
