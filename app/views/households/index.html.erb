@@ -2,11 +2,11 @@
   <h1>Foyers</h1>
 </div>
 
-<%= form_for payors_path,
+<%= form_for households_path,
     method: :get,
     html: {
       data: {
-        turbo_frame: "payors"
+        turbo_frame: "households"
       },
       class: "filters panel"
     } do |f| %>
@@ -28,7 +28,7 @@
   </div>
 <% end %>
 
-<%= turbo_frame_tag "payors", class: "flow" do %>
+<%= turbo_frame_tag "households", class: "flow" do %>
   <h2>Foyers</h2>
   <%== pagy_nav(@pagy) %>
   <%= render Shared::Table::Component.new do |table| %>
@@ -41,15 +41,15 @@
       <% header.with_column(name: "status") do %>Status<% end %>
       <% header.with_column(name: "amount") do %>Montant<% end %>
     <% end %>
-    <% @payors.each do |payor| %>
-      <% table.with_row(link_url: payor) do |row| %>
-        <% row.with_cell(name: "name") do %><%= link_to payor.last_name, payor_url(season: @season, record: payor), "data-turbo": false %><% end %>
-        <% row.with_cell(name: "students") do %><%= payor.subscription_group(@season).present? ? payor.subscription_group(@season).subscriptions.size : 0 %><% end %>
-        <% row.with_cell(name: "city") do %><%= payor.city %><% end %>
-        <% row.with_cell(name: "email") do %><%= payor.email %><% end %>
-        <% row.with_cell(name: "phone") do %><%= format_phone(payor.phone) %><% end %>
-        <% row.with_cell(name: "status") do %><%= payor.subscription_group(@season).payment_state %><% end %>
-        <% row.with_cell(name: "amount") do %><%= number_to_currency(payor.subscription_group(@season).total_cost, unit: "€") if payor.subscription_group(@season).present? %><% end %>
+    <% @households.each do |household| %>
+      <% table.with_row(link_url: household) do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to household.last_name, household_url(season: @season, record: household), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "students") do %><%= household.subscription_group(@season).present? ? household.subscription_group(@season).subscriptions.size : 0 %><% end %>
+        <% row.with_cell(name: "city") do %><%= household.city %><% end %>
+        <% row.with_cell(name: "email") do %><%= household.email %><% end %>
+        <% row.with_cell(name: "phone") do %><%= format_phone(household.phone) %><% end %>
+        <% row.with_cell(name: "status") do %><%= household.subscription_group(@season).payment_state %><% end %>
+        <% row.with_cell(name: "amount") do %><%= number_to_currency(household.subscription_group(@season).total_cost, unit: "€") if household.subscription_group(@season).present? %><% end %>
       <% end %>
     <% end %>
   <% end %>

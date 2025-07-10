@@ -1,0 +1,59 @@
+<div class="flow" data-controller="address">
+  <div class="cluster">
+    <div class="flow">
+      <label for="household_first_name">Prénom</label>
+      <%= text_field :household, :first_name, required: true %>
+    </div>
+
+    <div class="flow">
+      <label for="household_last_name">Nom de famille</label>
+      <%= text_field :household, :last_name, required: true %>
+    </div>
+  </div>
+
+  <div class="flow">
+    <label for="household_address">Adresse</label>
+    <%= text_field :household, :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+    <%= render "website/autocomplete" %>
+  </div>
+
+  <div class="cluster">
+    <div class="flow">
+      <label for="household_postcode">Code postal</label>
+      <%= text_field :household, :postcode, data: {"address-target": "postcode", "action": "address#searchByPostcode"}, required: true %>
+    </div>
+
+    <div class="flow">
+      <label for="household_city">Ville</label>
+      <select id="household_city" name="household[city]" data-address-target="city" required="required"></select>
+      <%= render "website/autocomplete" %>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="flow">
+      <label for="household_phone">Téléphone</label>
+      <%= text_field :household, :phone %>
+    </div>
+    <div class="flow">
+      <label for="household_secondary_phone">Téléphone secondaire</label>
+      <%= text_field :household, :secondary_phone %>
+    </div>
+  </div>
+
+  <div class="cluster">
+    <div class="flow">
+      <label for="household_email">Email</label>
+      <%= text_field :household, :email %>
+    </div>
+    <div class="flow">
+      <label for="household_secondary_email">Email secondaire</label>
+      <%= text_field :household, :secondary_email %>
+    </div>
+  </div>
+
+  <div class="flow">
+    <label for="household_comment">Notes</label>
+    <%= text_area :household, :comment, rows: 2 %>
+  </div>
+</div>

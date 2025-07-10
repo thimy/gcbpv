@@ -12,15 +12,15 @@
   <div class="cluster" data-type="50-50">
     <div class="panel flow">
       <h3>Payeur</h3>
-      <%= turbo_frame_tag "payor", class: "cluster" do %>
-        <%= text_field :payor, :name, list: "payor-list", placeholder: "Rechercher un payeur existant", required: true %>
-        <datalist id="payor-list">
-          <% @payors.each do |payor| %>
-            <option value="<%= payor.name %>"><%= payor.name %></option>
+      <%= turbo_frame_tag "household", class: "cluster" do %>
+        <%= text_field :household, :name, list: "household-list", placeholder: "Rechercher un payeur existant", required: true %>
+        <datalist id="household-list">
+          <% @households.each do |household| %>
+            <option value="<%= household.name %>"><%= household.name %></option>
           <% end %>
         </datalist>
         ou
-        <%= link_to "Créer un nouveau payeur", new_payor_path, class: "button" %>
+        <%= link_to "Créer un nouveau payeur", new_household_path, class: "button" %>
       <% end %>
     </div>
 

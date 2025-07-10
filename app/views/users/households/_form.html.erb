@@ -1,10 +1,10 @@
-<%= form_for(payor, url: url, html: {class: "flow"}, data: {controller: "address"}) do |form| %>
-  <% if payor.errors.any? %>
+<%= form_for(household, url: url, html: {class: "flow"}, data: {controller: "address"}) do |form| %>
+  <% if household.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(payor.errors.count, "error") %> prohibited this payor from being saved:</h2>
+      <h2><%= pluralize(household.errors.count, "error") %> prohibited this household from being saved:</h2>
 
       <ul>
-        <% payor.errors.each do |error| %>
+        <% household.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>

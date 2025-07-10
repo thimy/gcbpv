@@ -50,7 +50,7 @@ fr:
       payment_state:
         one: "Statut de d’inscription"
         other: "Statuts d’inscription"
-      payor:
+      household:
         one: "Payeur"
         other: "Payeurs"
       plan:
@@ -206,7 +206,7 @@ fr:
         payment_method: "Moyen de paiement"
       payment_state:
         nom: "Nom"
-      payor:
+      household:
         city: "Ville"
         last_name: "Nom"
         first_name: "Prénom"
@@ -309,14 +309,14 @@ fr:
         street: "Rue"
         zip_code: "Code postal"
         city: "Ville"
-        payor: "Payeur"
-        payor_id: "Payeur"
+        household: "Payeur"
+        household_id: "Payeur"
         status: "Statut"
         phone: "Téléphone"
         gender: "Genre"
-        address_or_payor_address: Adresse
-        postcode_or_payor_postcode: Code postal
-        city_or_payor_city: Ville
+        address_or_household_address: Adresse
+        postcode_or_household_postcode: Code postal
+        city_or_household_city: Ville
         created_at: "Créé le"
         updated_at: "Modifié le"
       subbed_workshop:
@@ -354,8 +354,8 @@ fr:
         courses: "Disciplines"
         course_id: "Discipline"
         payment_state_id: "Statut d’inscription"
-        payor: "Payeur"
-        payor_id: "Payeur"
+        household: "Payeur"
+        household_id: "Payeur"
         pathway_slots: "Parcours"
         teacher_id: "Professeur"
         workshop_day: "Jour de l’atelier"
@@ -387,8 +387,8 @@ fr:
         comment: "Commentaires"
         donation: "Don"
         payments: "Paiements"
-        payor: "Payeur"
-        payor_id: "Payeur"
+        household: "Payeur"
+        household_id: "Payeur"
         season: "Année scolaire"
         season_id: "Année scolaire"
         students: "Élèves"

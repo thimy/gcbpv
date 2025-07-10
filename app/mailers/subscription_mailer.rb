@@ -18,7 +18,7 @@ class SubscriptionMailer < ApplicationMailer
 
   def confirm_subscription(user)
     mail(
-      to: user.payor.payor_email,
+      to: user.household.household_email,
       subject: "[GCBPV] Confirmation de votre inscription"
     )
   end

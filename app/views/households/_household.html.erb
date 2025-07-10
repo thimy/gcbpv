@@ -1,6 +1,6 @@
-<div id="<%= dom_id payor %>" class="record">
+<div id="<%= dom_id household %>" class="record">
   <div class="panel">
-    <%= render "payor-info", payor: payor %>
+    <%= render "household-info", household: household %>
   </div>
 
   <section class="flow">
@@ -50,7 +50,7 @@
 </div>
 
 <%= link_to "Supprimer ce foyer",
-  payor_path(payor),
+  household_path(household),
   class: "button",
   data: {
     "button-variant": "alert",

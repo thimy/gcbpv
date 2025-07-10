@@ -1,6 +1,6 @@
 <div class="flow" data-controller="address">
   <div class="condition cluster">
-    <label for="is_payor"><%= check_box_tag :is_payor, class: "hide-condition" %> L’élève est le payeur</label>
+    <label for="is_household"><%= check_box_tag :is_household, class: "hide-condition" %> L’élève est le payeur</label>
   </div>
 
   <div class="conditional-block flow">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="cluster condition">
-      <label for="payor_address"><%= check_box_tag :payor_address, class: "hide-condition" %> Utiliser les coordonnées du payeur</label>
+      <label for="household_address"><%= check_box_tag :household_address, class: "hide-condition" %> Utiliser les coordonnées du payeur</label>
     </div>
 
     <div class="conditional-block flow">

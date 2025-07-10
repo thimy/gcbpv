@@ -15,42 +15,42 @@
               required: true,
               input_html: { autocomplete: "new-password" } %>
 
-  <%= f.fields_for :payor do |payor_form| %>
+  <%= f.fields_for :household do |household_form| %>
   aa
     <div class="cluster">
       <div class="flow">
-        <%= payor_form.label :first_name, "Prénom" %>
-        <%= payor_form.text_field :first_name %>
+        <%= household_form.label :first_name, "Prénom" %>
+        <%= household_form.text_field :first_name %>
       </div>
 
       <div class="flow">
-        <%= payor_form.label :last_name, "Nom" %>
-        <%= payor_form.text_field :last_name %>
+        <%= household_form.label :last_name, "Nom" %>
+        <%= household_form.text_field :last_name %>
       </div>
     </div>
 
     <div class="flow">
-      <%= payor_form.label :address, "Adresse" %>
-      <%= payor_form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
+      <%= household_form.label :address, "Adresse" %>
+      <%= household_form.text_field :address, "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
       <%= render "website/autocomplete" %>
     </div>
 
     <div class="cluster">
       <div class="flow">
-        <%= payor_form.label :postcode, "Code postal" %>
-        <%= payor_form.text_field :postcode, "data-address-target": "postcode", required: true %>
+        <%= household_form.label :postcode, "Code postal" %>
+        <%= household_form.text_field :postcode, "data-address-target": "postcode", required: true %>
       </div>
 
       <div class="flow">
-        <%= payor_form.label :city, "Ville" %>
-        <%= payor_form.text_field :city, "data-address-target": "city", required: true %>
+        <%= household_form.label :city, "Ville" %>
+        <%= household_form.text_field :city, "data-address-target": "city", required: true %>
         <%= render "website/autocomplete" %>
       </div>
     </div>
 
     <div class="flow">
-      <%= payor_form.label :phone %>
-      <%= payor_form.text_field :phone %>
+      <%= household_form.label :phone %>
+      <%= household_form.text_field :phone %>
     </div>
   <% end %>
 

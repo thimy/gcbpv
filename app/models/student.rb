@@ -2,7 +2,7 @@ class Student < ApplicationRecord
   include WithPerson
   phony_normalize :phone, default_country_code: "FR"
 
-  belongs_to :payor, optional: true
+  belongs_to :household, optional: true
   has_many :subscriptions, dependent: :destroy
   has_many :subscription_groups, through: :subscriptions
   has_many :courses, through: :subscriptions
@@ -39,27 +39,27 @@ class Student < ApplicationRecord
     end
   end
 
-  def address_or_payor_address
-    address.presence || subscriptions.last&.subscription_group&.payor&.address
+  def address_or_household_address
+    address.presence || subscriptions.last&.subscription_group&.household&.address
   end
 
-  def postcode_or_payor_postcode
-    postcode.presence || subscriptions.last&.subscription_group&.payor&.postcode
+  def postcode_or_household_postcode
+    postcode.presence || subscriptions.last&.subscription_group&.household&.postcode
   end
 
-  def city_or_payor_city
-    city.presence || subscriptions.last&.subscription_group&.payor&.city
+  def city_or_household_city
+    city.presence || subscriptions.last&.subscription_group&.household&.city
   end
 
-  def email_or_payor_email
-    email.presence || subscriptions.last&.subscription_group&.payor&.emails
+  def email_or_household_email
+    email.presence || subscriptions.last&.subscription_group&.household&.emails
   end
 
-  def phone_or_payor_phone
-    phone.presence || subscriptions.last&.subscription_group&.payor&.phones
+  def phone_or_household_phone
+    phone.presence || subscriptions.last&.subscription_group&.household&.phones
   end
 
-  def uses_payor_info?
+  def uses_household_info?
     address.nil? && postcode.nil? && city.nil? && email.nil? && phone.nil?
   end
 end

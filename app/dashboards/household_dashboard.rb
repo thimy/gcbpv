@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class PayorDashboard < Administrate::BaseDashboard
+class HouseholdDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -70,10 +70,10 @@ class PayorDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how payors are displayed
+  # Overwrite this method to customize how households are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(payor)
-    payor.name
+  def display_resource(household)
+    household.name
   end
 end

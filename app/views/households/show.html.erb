@@ -1,0 +1,9 @@
+<div class="repel">
+  <h1><%= @household.name %></h1>
+
+  <div>
+    <%= link_to "Retour à la liste des foyers", households_path, class: "button" %>
+  </div>
+</div>
+
+<%= render @household %>

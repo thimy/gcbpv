@@ -6,7 +6,7 @@ one:
   course: one
   workshop: one
   paid_amount: 1
-  payor: one
+  household: one
 
 two:
   year: 1
@@ -14,4 +14,4 @@ two:
   course: two
   workshop: two
   paid_amount: 1
-  payor: two
+  household: two

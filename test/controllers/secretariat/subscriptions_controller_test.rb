@@ -17,7 +17,7 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create subscription" do
     assert_difference("Subscription.count") do
-      post subscriptions_url, params: { subscription: { course_id: @subscription.course_id, paid_amount: @subscription.paid_amount, payor_id: @subscription.payor_id, student_id: @subscription.student_id, workshop_id: @subscription.workshop_id, year: @subscription.year } }
+      post subscriptions_url, params: { subscription: { course_id: @subscription.course_id, paid_amount: @subscription.paid_amount, household_id: @subscription.household_id, student_id: @subscription.student_id, workshop_id: @subscription.workshop_id, year: @subscription.year } }
     end
 
     assert_redirected_to subscription_url(Subscription.last)
@@ -34,7 +34,7 @@ class SubscriptionsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update subscription" do
-    patch subscription_url(@subscription), params: { subscription: { course_id: @subscription.course_id, paid_amount: @subscription.paid_amount, payor_id: @subscription.payor_id, student_id: @subscription.student_id, workshop_id: @subscription.workshop_id, year: @subscription.year } }
+    patch subscription_url(@subscription), params: { subscription: { course_id: @subscription.course_id, paid_amount: @subscription.paid_amount, household_id: @subscription.household_id, student_id: @subscription.student_id, workshop_id: @subscription.workshop_id, year: @subscription.year } }
     assert_redirected_to subscription_url(@subscription)
   end
 

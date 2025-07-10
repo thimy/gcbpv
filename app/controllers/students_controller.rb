@@ -55,17 +55,17 @@ class StudentsController < SecretariatController
     }
     new_params[:student] = existing_student || Student.new(student_params)
 
-    existing_payor = Payor.find { |payor|
-      params[:payor][:name] == payor.name
+    existing_household = Household.find { |household|
+      params[:household][:name] == household.name
     }
-    @payor = existing_payor || Payor.new(payor_params)
+    @household = existing_household || Household.new(household_params)
 
-    @subscription_group = SubscriptionGroup.joins(:payor).find_by(payor: existing_payor, season: Config.first.season)
+    @subscription_group = SubscriptionGroup.joins(:household).find_by(household: existing_household, season: Config.first.season)
 
     if @subscription_group.present?
       new_params[:subscription_group_id] = @subscription_group.id
     else
-      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, payor: @payor, majoration_class: @payor.agglo, status: "Inscrit")
+      new_params[:subscription_group] = SubscriptionGroup.new(season: Config.first.season, household: @household, majoration_class: @household.agglo, status: "Inscrit")
     end
     @subscription = Subscription.new(new_params.merge(subscription_params))
 
@@ -154,13 +154,13 @@ class StudentsController < SecretariatController
 
     def set_cities
       @cities = Student.all.map { |student|
-        student.city_or_payor_city
+        student.city_or_household_city
       }.flatten.uniq.reject { |c| c.blank? }.sort
     end
 
     def student_params
       if params[:student].present?
-        if params[:payor_address] == "1"
+        if params[:household_address] == "1"
           params[:student][:address] = nil
           params[:student][:postcode] = nil
           params[:student][:city] = nil
@@ -173,7 +173,7 @@ class StudentsController < SecretariatController
 
     def set_lists
       @students = Student.all
-      @payors = Payor.all
+      @households = Household.all
       @instruments = Instrument.active
       @workshops = Workshop.active
       @kid_workshops = KidWorkshop.active
@@ -217,11 +217,11 @@ class StudentsController < SecretariatController
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year < ?", params[:birthyear_over])) if params[:birthyear_over].present?
       
       if params[:postcode].present?
-        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("postcode LIKE ?", "#{params[:postcode]}%")).or(@filtered_subscriptions.where(student: Student.where(postcode: nil), subscription_group: { payor: Payor.where("postcode LIKE ?", "#{params[:postcode]}%")}))
+        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("postcode LIKE ?", "#{params[:postcode]}%")).or(@filtered_subscriptions.where(student: Student.where(postcode: nil), subscription_group: { household: Household.where("postcode LIKE ?", "#{params[:postcode]}%")}))
       end
 
       if params[:city].present?
-        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("city = ?", params[:city])).or(@filtered_subscriptions.where(student: Student.where(city: nil), subscription_group: { payor: Payor.where("city = ?", params[:city]) }))
+        @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("city = ?", params[:city])).or(@filtered_subscriptions.where(student: Student.where(city: nil), subscription_group: { household: Household.where("city = ?", params[:city]) }))
       end
 
       @item_size = @filtered_subscriptions.size

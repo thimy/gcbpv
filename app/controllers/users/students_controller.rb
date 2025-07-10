@@ -1,10 +1,10 @@
 class Users::StudentsController < BaseController
   before_action :set_student, only: %i[ show edit update destroy ]
-  before_action :set_payor, only: %i[ show edit update destroy ]
+  before_action :set_household, only: %i[ show edit update destroy ]
 
   # GET /students or /students.json
   def index
-    @students = Student.where(payor_id: current_user.payor_id)
+    @students = Student.where(household_id: current_user.household_id)
   end
 
   # GET /students/1 or /students/1.json
@@ -64,17 +64,17 @@ class Users::StudentsController < BaseController
       @student = Student.find(params[:id])
     end
 
-    def set_payor
-      @payor = Payor.find(current_user.payor_id)
+    def set_household
+      @household = Household.find(current_user.household_id)
     end
 
     # Only allow a list of trusted parameters through.
     def student_params
-      if params[:is_payor] == "yes"
-        params[:student][:first_name] = @payor.first_name
-        params[:student][:last_name] = @payor.last_name
+      if params[:is_household] == "yes"
+        params[:student][:first_name] = @household.first_name
+        params[:student][:last_name] = @household.last_name
         reset_address_params
-      elsif params[:payor_address] == "yes"
+      elsif params[:household_address] == "yes"
         reset_address_params
       end
       params.require(:student).permit(:first_name, :last_name, :birth_year, :gender, :phone, :email, :address, :postcode, :city)

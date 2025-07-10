@@ -11,7 +11,7 @@ class Subscription < ApplicationRecord
   has_many :workshops, through: :workshop_slots
   belongs_to :subscription_group
   delegate :season, to: :subscription_group
-  delegate :payor, to: :subscription_group
+  delegate :household, to: :subscription_group
 
   validate :student_unique_subscription, on: :create
 
@@ -68,23 +68,23 @@ class Subscription < ApplicationRecord
   end
 
   def address
-    student.address.presence || subscription_group&.payor&.address
+    student.address.presence || subscription_group&.household&.address
   end
 
   def phone
-    student.phone&.phony_formatted(normalize: :FR) || subscription_group.payor.phones
+    student.phone&.phony_formatted(normalize: :FR) || subscription_group.household.phones
   end
 
   def email
-    student.email.presence || subscription_group.payor.emails
+    student.email.presence || subscription_group.household.emails
   end
 
   def postcode
-    student.postcode.presence || subscription_group&.payor&.postcode
+    student.postcode.presence || subscription_group&.household&.postcode
   end
 
   def city
-    student.city.presence || subscription_group.payor.city
+    student.city.presence || subscription_group.household.city
   end
 
   def optional?

@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :stats, only: [:index]
     resources :fiches_profs, only: [:index, :show]
-    resources :payors
+    resources :households
     resources :students
     resources :subscription_groups
     resources :subscriptions, only: [:show, :edit, :destroy]
@@ -90,7 +90,7 @@ Rails.application.routes.draw do
     resources :instruments, path: "disciplines"
     resources :kid_workshops, path: "enfance"
     resources :payments
-    resources :payors, path: "foyers"
+    resources :households, path: "foyers"
     resources :posts, path: "actualites" do
       post :upload_file, on: :collection, as: "posts_upload_file"
     end
@@ -116,7 +116,7 @@ Rails.application.routes.draw do
       resources :instruments, path: "disciplines"
       resources :kid_workshops, path: "enfance"
       resources :workshops, path: "ateliers"
-      resources :payors, path: "foyers"
+      resources :households, path: "foyers"
       resources :slots, path: "creneaux"
       resources :students, path: "eleves"
       resources :teachers, path: "professeurs"
@@ -134,8 +134,8 @@ Rails.application.routes.draw do
   get :edit_personal_info, to: "students#edit_personal_info"
   get :show_personal_info, to: "students#show_personal_info"
 
-  get :edit_payor_info, to: "payors#edit_personal_info"
-  get :show_payor_info, to: "payors#show_personal_info"
+  get :edit_household_info, to: "households#edit_personal_info"
+  get :show_household_info, to: "households#show_personal_info"
 
   namespace :users, as: "account", path: "compte" do
     resources :courses, path: "cours"
@@ -144,7 +144,7 @@ Rails.application.routes.draw do
     resources :students, path: "eleves"
     resources :subscriptions, path: "inscriptions"
     resources :subscription_groups, only: [:update]
-    resources :payors, path: "foyer"
+    resources :households, path: "foyer"
   end
   get "compte", to: "users#index", as: "account_root"
   get "compte/validation", to: "users#validation", as: "account_validation"
@@ -154,7 +154,7 @@ Rails.application.routes.draw do
   resources :slots
   resources :teachers
   resources :cities
-  resources :payors
+  resources :households
   resources :instruments
   resource "bogue/:bogue_slug", controller: "website/bogue", only: [:show], as: "website_bogue" do
     get "temps-forts", to: "highlights", as: "highlights"

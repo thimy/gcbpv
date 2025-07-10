@@ -1,4 +1,4 @@
-class Payor < ApplicationRecord
+class Household < ApplicationRecord
   include WithPerson
   phony_normalize :phone, default_country_code: "FR"
 
@@ -28,7 +28,7 @@ class Payor < ApplicationRecord
     [email, secondary_email].compact.join(" / ")
   end
 
-  def payor_email
+  def household_email
     email || user.present? && user.email || nil
   end
 

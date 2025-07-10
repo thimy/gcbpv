@@ -1,64 +1,64 @@
-<turbo-frame id="payor-form">
-  <%= form_for @payor, url: season_payor_path(id: @payor.id, season_name: @season.name), html: {class: "inline repel", "data-controller": "address"} do |form| %>
+<turbo-frame id="household-form">
+  <%= form_for @household, url: season_household_path(id: @household.id, season_name: @season.name), html: {class: "inline repel", "data-controller": "address"} do |form| %>
     <div class="flow">
       <div class="cluster">
         <div class="flow">
-          <label for="payor_first_name">Prénom</label>
+          <label for="household_first_name">Prénom</label>
           <%= form.text_field :first_name %>
         </div>
 
         <div class="flow">
-          <label for="payor_last_name" class="required">Nom</label>
+          <label for="household_last_name" class="required">Nom</label>
           <%= form.text_field :last_name %>
         </div>
       </div>
 
       <div class="flow">
         <div class="flow">
-          <label for="payor_address">Adresse</label>
+          <label for="household_address">Adresse</label>
           <%= form.text_field :address, class: "double", "data-action": "address#search focus->address#search click@window->address#hideList", "data-address-target": "address" %>
           <%= render "website/autocomplete" %>
         </div>
 
         <div class="cluster">
           <div class="flow">
-          <label for="payor_postcode">Code Postal</label>
+          <label for="household_postcode">Code Postal</label>
             <%= form.text_field :postcode, data: {"address-target": "postcode", "action": "address#searchByPostcode"} %>
           </div>
 
           <div class="flow">
-          <label for="payor_city">Ville</label>
-            <%= form.select :city, @payor.city.present? ? options_for_select([@payor.city]) : "", {}, data: {"address-target": "city"} %>
+          <label for="household_city">Ville</label>
+            <%= form.select :city, @household.city.present? ? options_for_select([@household.city]) : "", {}, data: {"address-target": "city"} %>
           </div>
         </div>
 
         <div class="cluster">
           <div class="flow">
-            <label for="payor_phone">Téléphone</label>
+            <label for="household_phone">Téléphone</label>
             <%= form.text_field :phone %>
           </div>
 
           <div class="flow">
-            <label for="payor_secondar_phone">Téléphone secondaire</label>
+            <label for="household_secondar_phone">Téléphone secondaire</label>
             <%= form.text_field :secondary_phone %>
           </div>
         </div>
 
         <div class="cluster">
           <div class="flow">
-            <label for="payor_phone">Email</label>
+            <label for="household_phone">Email</label>
             <%= form.text_field :email %>
           </div>
 
           <div class="flow">
-            <label for="payor_secondary_email">Email secondaire</label>
+            <label for="household_secondary_email">Email secondaire</label>
             <%= form.text_field :secondary_email %>
           </div>
         </div>
       </div>
 
       <div class="flow">
-        <label for="payor_comment">Notes</label>
+        <label for="household_comment">Notes</label>
         <%= form.text_area :comment, rows: 1 %>
       </div>
     </div>
@@ -66,7 +66,7 @@
       <button type="submit" class="button" data-button-size="small">
         <%= inline_svg "icons/check" %>
       </button>
-      <%= link_to show_payor_info_path(payor_id: @payor.id), class: "button", "data-button-size": "small" do %>
+      <%= link_to show_household_info_path(household_id: @household.id), class: "button", "data-button-size": "small" do %>
         <%= inline_svg "icons/cross" %>
       <% end %>
     </div>
