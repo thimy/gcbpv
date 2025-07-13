@@ -4,7 +4,7 @@
 <div class="flow">
   <div class="popout flow">
     <div class="cluster tag-list">
-      <% @workshop.workshop_slots.each do |slot| %>
+      <% @workshop.workshop_slots.active.each do |slot| %>
         <div class="dual-tag">
           <span class="tag">
             <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>

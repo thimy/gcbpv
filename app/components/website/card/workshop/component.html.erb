@@ -3,7 +3,7 @@
     <h3><%= @workshop.name %></h3>
     <% if @workshop.workshop_slots.present? %>
       <div class="tag-list cluster">
-        <% @workshop.workshop_slots.collect{|slot| slot.city }.uniq.each do |city| %>
+        <% @workshop.workshop_slots.active.collect{|slot| slot.city }.uniq.each do |city| %>
           <span class="tag">
             <span><%= "#{city.name}" %></span>
           </span>

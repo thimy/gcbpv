@@ -9,7 +9,7 @@ class Website::Card::Workshop::Component < ViewComponent::Base
   end
 
   def teacher_names
-    @workshop.workshop_slots.collect{|slot| slot.teachers }.uniq.map { |teachers|
+    @workshop.workshop_slots.active.collect{|slot| slot.teachers }.uniq.map { |teachers|
       teachers.collect{|teacher| teacher.name}
   }.flatten.uniq
   end

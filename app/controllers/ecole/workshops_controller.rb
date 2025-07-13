@@ -6,7 +6,7 @@ class Ecole::WorkshopsController < EcoleController
   end
 
   def show
-    @other_workshops = Workshop.where.not(id: params[:id])
+    @other_workshops = Workshop.active.where.not(id: params[:id])
   end
 
   private
