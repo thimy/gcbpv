@@ -2,6 +2,11 @@ class SecretariatController < ApplicationController
   layout "secretariat"
 
   before_action :set_season
+  before_action :authenticate_admin
+
+  def authenticate_admin
+    authenticate_administrator!
+  end
 
   def index
     @seasons = Season.all.reverse
