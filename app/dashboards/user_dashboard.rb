@@ -19,6 +19,7 @@ class UserDashboard < Administrate::BaseDashboard
     reset_password_sent_at: Field::DateTime,
     reset_password_token: Field::String,
     student: Field::HasOne,
+    teacher: Field::BelongsTo,
     student_id: Field::Number,
     unconfirmed_email: Field::String,
     created_at: Field::DateTime,
@@ -61,17 +62,17 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    student
+    teacher
+    household
     confirmation_sent_at
     confirmation_token
     confirmed_at
     email
     encrypted_password
-    household
     remember_created_at
     reset_password_sent_at
     reset_password_token
-    student
-    student_id
     unconfirmed_email
   ].freeze
 

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     resources :workshops, path: :ateliers, only: [:index, :show]
     get "enfance", to: "youth#index", as: :youth
     get "adhesion", to: "membership#index", as: :membership
-    end
+  end
   get "ecole/tarifs", to: "ecole#pricing", as: :pricing
   get "ecole", to: "ecole#index"
   
@@ -148,6 +148,12 @@ Rails.application.routes.draw do
   end
   get "compte", to: "users#index", as: "account_root"
   get "compte/validation", to: "users#validation", as: "account_validation"
+
+  namespace :profs do
+    scope path: ":season_name", as: :season do
+      root "index"
+    end
+  end
 
   # resources :events, path: :evenements, only: [:index, :show]
   resources :courses

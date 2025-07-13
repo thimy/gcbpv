@@ -64,10 +64,12 @@ h3 {
   letter-spacing: 1;
 }
 
-:is(h4, h5, h6) {
+h4, h5, h6 {
   font-family: var(--font-base);
-  font-size: var(--size-step-1);
-  font-weight: 500;
+  font-size: var(--size-step-00);
+  font-weight: 700;
+  letter-spacing: 0.1ch;
+  text-transform: uppercase;
 }
 
 small {

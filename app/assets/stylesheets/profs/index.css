@@ -1,0 +1,19 @@
+.profs-space {
+  background: var(--color-white);
+  padding-block: var(--space-xl);
+
+  main {
+    --flow-space: var(--space-l);
+  }
+
+  header .profile-picture {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    width: var(--space-xl);
+  }
+
+  .panel {
+    --flow-space: var(--space-s);
+  }
+}

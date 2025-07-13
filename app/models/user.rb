@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   belongs_to :household, optional: true
   has_one :student
+  belongs_to :teacher
 
   delegate :subscription_groups, to: :household
 
@@ -15,7 +16,7 @@ class User < ApplicationRecord
   validates :password, presence: true, on: :create
 
   def student
-    Student.find(student_id)
+    Student.find(student_id) if student_id.present?
   end
 
   def subscriptions

@@ -16,34 +16,39 @@
     </header>
     <div data-tabs-target="panel" id="cours" class="record gap-10">
       <% teacher.slots.order(:day_of_week).each do |slot| %>
-        <div>
-          <h2><%= "#{slot.day_of_week} – #{slot.city.name} (#{slot.courses.size})" %></h2>
-          <%= render Shared::Table::Component.new do |table| %>
-            <% table.with_header do |header| %>
-              <% header.with_column(name: "name") do %>Nom<% end %>
-              <% header.with_column(name: "start_time") do %>Heure de début<% end %>
-              <% header.with_column(name: "end_time") do %>Heure de fin<% end %>
-              <% if @teacher.instruments.size > 1 %>
-                <% header.with_column(name: "discipline") do %>Discipline<% end %>
-              <% end %>
-              <% header.with_column(name: "phone") do %>Téléphone<% end %>
-              <% header.with_column(name: "email") do %>Email<% end %>
-            <% end %>
-            <% slot.courses.active(@season).ordered.each do |course| %>
-              <% table.with_row(link_url: teacher, class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
-                <% row.with_cell(name: "name") do %><%= link_to "#{course.subscription.student.name} ", student_url(season: @season, record: course.student) %><% end %>
-                <% row.with_cell(name: "start_time") do %><%= format_time(course.start_time) %><% end %>
-                <% row.with_cell(name: "end_time") do %><%= format_time(course.end_time) %><% end %>
+        <div class="flow">
+          <% @subscriptions = slot.courses.active(@season) %>
+          <% if @subscriptions.size > 0 %>
+            <% if @day != slot.day_of_week %><h2><%= slot.day_of_week %></h2><% end %>
+            <% @day = slot.day_of_week %>
+            <h3><%= "#{slot.city.name} (#{@subscriptions.size})" %></h3>
+            <%= render Shared::Table::Component.new do |table| %>
+              <% table.with_header do |header| %>
+                <% header.with_column(name: "name") do %>Nom<% end %>
+                <% header.with_column(name: "start_time") do %>Heure de début<% end %>
+                <% header.with_column(name: "end_time") do %>Heure de fin<% end %>
                 <% if @teacher.instruments.size > 1 %>
-                  <% row.with_cell(name: "discipline") do %><%= course.instrument.name %><% end %>
+                  <% header.with_column(name: "discipline") do %>Discipline<% end %>
                 <% end %>
-                <% row.with_cell(name: "phone") do %><%= format_phone(course.subscription.phone) %><% end %>
-                <% row.with_cell(name: "email") do %><%= course.subscription.email %><% end %>
+                <% header.with_column(name: "phone") do %>Téléphone<% end %>
+                <% header.with_column(name: "email") do %>Email<% end %>
               <% end %>
-            <% end %>
-            <% table.with_row(link_url: teacher) do |row| %>
-              <% row.with_cell(name: "full", colspan: @teacher.instruments.size > 1 ? 6 : 5) do %>
-                <button class="button" data-emails-list-value="<%= get_emails(slot.courses) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+              <% @subscriptions.ordered.each do |course| %>
+                <% table.with_row(link_url: teacher, class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
+                  <% row.with_cell(name: "name") do %><%= link_to "#{course.subscription.student.name} ", student_url(season: @season, record: course.student) %><% end %>
+                  <% row.with_cell(name: "start_time") do %><%= format_time(course.start_time) %><% end %>
+                  <% row.with_cell(name: "end_time") do %><%= format_time(course.end_time) %><% end %>
+                  <% if @teacher.instruments.size > 1 %>
+                    <% row.with_cell(name: "discipline") do %><%= course.instrument.name %><% end %>
+                  <% end %>
+                  <% row.with_cell(name: "phone") do %><%= format_phone(course.subscription.phone) %><% end %>
+                  <% row.with_cell(name: "email") do %><%= course.subscription.email %><% end %>
+                <% end %>
+              <% end %>
+              <% table.with_row(link_url: teacher) do |row| %>
+                <% row.with_cell(name: "full", colspan: @teacher.instruments.size > 1 ? 6 : 5) do %>
+                  <button class="button" data-emails-list-value="<%= get_emails(slot.courses) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
