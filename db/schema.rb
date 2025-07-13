@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_08_122808) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_13_122016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -452,7 +452,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_08_122808) do
   create_table "subscription_groups", force: :cascade do |t|
     t.decimal "amount_paid"
     t.text "comment"
-    t.bigint "payor_id", null: false
     t.bigint "season_id", null: false
     t.decimal "donation"
     t.datetime "created_at", null: false
@@ -463,7 +462,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_08_122808) do
     t.decimal "discount"
     t.bigint "household_id"
     t.index ["household_id"], name: "index_subscription_groups_on_household_id"
-    t.index ["payor_id"], name: "index_subscription_groups_on_payor_id"
     t.index ["season_id"], name: "index_subscription_groups_on_season_id"
   end
 
@@ -543,12 +541,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_08_122808) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "payor_id"
     t.bigint "student_id"
     t.bigint "household_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["household_id"], name: "index_users_on_household_id"
-    t.index ["payor_id"], name: "index_users_on_payor_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["student_id"], name: "index_users_on_student_id"
   end
@@ -616,7 +612,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_08_122808) do
   add_foreign_key "subbed_pathways", "pathway_slots"
   add_foreign_key "subbed_pathways", "subscriptions"
   add_foreign_key "subbed_workshops", "subscriptions"
-  add_foreign_key "subscription_groups", "households", column: "payor_id"
   add_foreign_key "subscription_groups", "seasons"
   add_foreign_key "subscriptions", "students"
   add_foreign_key "training_sessions", "trainings"
