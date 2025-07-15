@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_13_145036) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_14_170347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -584,6 +584,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_13_145036) do
     t.text "comment"
     t.integer "workshop_type"
     t.integer "max_students"
+    t.boolean "is_youth"
+    t.integer "kid_workshop_type"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
