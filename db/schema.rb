@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_14_170347) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -211,41 +211,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_170347) do
     t.text "comment"
   end
 
-  create_table "kid_workshop_slot_teachers", force: :cascade do |t|
-    t.bigint "teacher_id", null: false
-    t.bigint "kid_workshop_slot_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["kid_workshop_slot_id"], name: "index_kid_workshop_slot_teachers_on_kid_workshop_slot_id"
-    t.index ["teacher_id"], name: "index_kid_workshop_slot_teachers_on_teacher_id"
-  end
-
-  create_table "kid_workshop_slots", force: :cascade do |t|
-    t.bigint "kid_workshop_id", null: false
-    t.bigint "city_id", null: false
-    t.string "slot_time"
-    t.integer "day_of_week"
-    t.integer "frequency"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status"
-    t.text "comment"
-    t.index ["city_id"], name: "index_kid_workshop_slots_on_city_id"
-    t.index ["kid_workshop_id"], name: "index_kid_workshop_slots_on_kid_workshop_id"
-  end
-
-  create_table "kid_workshops", force: :cascade do |t|
-    t.string "name"
-    t.string "frequency"
-    t.text "description"
-    t.integer "workshop_type"
-    t.integer "status"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.decimal "price"
-    t.text "comment"
-  end
-
   create_table "pages", force: :cascade do |t|
     t.string "name"
     t.jsonb "content"
@@ -417,17 +382,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_170347) do
     t.text "comment"
   end
 
-  create_table "subbed_kid_workshops", force: :cascade do |t|
-    t.bigint "kid_workshop_slot_id", null: false
-    t.bigint "subscription_id", null: false
-    t.text "comment"
-    t.integer "option"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["kid_workshop_slot_id"], name: "index_subbed_kid_workshops_on_kid_workshop_slot_id"
-    t.index ["subscription_id"], name: "index_subbed_kid_workshops_on_subscription_id"
-  end
-
   create_table "subbed_pathways", force: :cascade do |t|
     t.bigint "pathway_slot_id", null: false
     t.bigint "subscription_id", null: false
@@ -594,10 +548,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_170347) do
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
   add_foreign_key "email_images", "emails"
-  add_foreign_key "kid_workshop_slot_teachers", "kid_workshop_slots"
-  add_foreign_key "kid_workshop_slot_teachers", "teachers"
-  add_foreign_key "kid_workshop_slots", "cities"
-  add_foreign_key "kid_workshop_slots", "kid_workshops"
   add_foreign_key "pathway_slot_teachers", "teachers"
   add_foreign_key "pathway_slots", "cities"
   add_foreign_key "pathway_slots", "pathways"
@@ -611,8 +561,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_14_170347) do
   add_foreign_key "slots", "teachers"
   add_foreign_key "specialties", "instruments"
   add_foreign_key "specialties", "teachers"
-  add_foreign_key "subbed_kid_workshops", "kid_workshop_slots"
-  add_foreign_key "subbed_kid_workshops", "subscriptions"
   add_foreign_key "subbed_pathways", "pathway_slots"
   add_foreign_key "subbed_pathways", "subscriptions"
   add_foreign_key "subbed_workshops", "subscriptions"

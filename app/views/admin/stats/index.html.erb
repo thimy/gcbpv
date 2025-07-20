@@ -41,14 +41,14 @@
         <% @kid_workshops.each do |workshop| %>
           <dt><h3><%= workshop.name %></h3></dt>
           <dd>
-            <% workshop.kid_workshop_slots.each do |slot| %>
-              <% if slot.subbed_kid_workshops.present? %>
-                <% if workshop.kid_workshop_slots.size > 1 %>
-                  <h4><%= "#{slot.day_of_week} à #{slot.city.name} : #{slot.subbed_kid_workshops.size}" %></h4>
+            <% workshop.workshop_slots.each do |slot| %>
+              <% if slot.subbed_workshops.present? %>
+                <% if workshop.workshop_slots.size > 1 %>
+                  <h4><%= "#{slot.day_of_week} à #{slot.city.name} : #{slot.subbed_workshops.size}" %></h4>
                 <% end %>
                 <ul>
-                  <% if slot.subbed_kid_workshops.present? %>
-                    <% slot.subbed_kid_workshops.each do |subbed_kid_workshop| %>
+                  <% if slot.subbed_workshops.present? %>
+                    <% slot.subbed_workshops.each do |subbed_kid_workshop| %>
                       <% if subbed_kid_workshop.is_option? %>
                         <li>(<%= link_to subbed_kid_workshop.subscription.student.name, admin_subscription_path(subbed_kid_workshop.subscription) %>)</li>
                       <% else %>

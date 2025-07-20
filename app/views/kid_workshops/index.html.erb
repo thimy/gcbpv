@@ -7,7 +7,7 @@
     <% header.with_column(name: "name") do %>Nom<% end %>
     <% header.with_column(name: "subscriptions") do %>Nombre d'élèves<% end %>
   <% end %>
-  <% @kid_workshops.each do |kid_workshop| %>
+  <% @workshops.each do |kid_workshop| %>
     <% table.with_row(link_url: kid_workshop) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to kid_workshop.name, kid_workshop_url(season: @season, record: kid_workshop) %><% end %>
       <% row.with_cell(name: "subscriptions") do %>

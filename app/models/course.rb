@@ -19,7 +19,7 @@ class Course < ApplicationRecord
   end
 
   def price
-    if student.birth_year.present? && subscription_group.season.start_year - student.birth_year <= 18
+    if student.birth_year.present? && subscription_group.season.start_year - student.birth_year < 19
       subscription_group.season.plan.kids_class_price
     else 
       subscription_group.season.plan.class_price

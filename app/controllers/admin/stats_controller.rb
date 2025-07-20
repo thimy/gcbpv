@@ -10,7 +10,7 @@ module Admin
       @confirmed_subscription_size = Subscription.includes(:subscription_group).where.not(subscription_group: {status: 0, season: @season}).size
       @unconfirmed_subscription_size = Subscription.includes(:subscription_group).where(subscription_group: {status: 0, season: @season}).size
       @teachers = Teacher.active.includes(:slots)
-      @workshops = Workshop.active
+      @workshops = Workshop.adults.active
       @kid_workshops = KidWorkshop.active
     end
   end

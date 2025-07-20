@@ -1,9 +1,9 @@
 <div class="repel">
-  <h1><%= @kid_workshop.name %></h1>
+  <h1><%= @workshop.name %></h1>
 
   <div>
     <%= link_to "Créer un nouvel atelier", new_kid_workshop_path, class: "button" %>
-    <%= link_to "Éditer cet atelier", edit_kid_workshop_path(@kid_workshop), class: "button" %>
+    <%= link_to "Éditer cet atelier", edit_kid_workshop_path(@workshop), class: "button" %>
     <%= link_to "Retour aux ateliers", kid_workshops_path, class: "button" %>
   </div>
 </div>
@@ -12,7 +12,7 @@
   <dl class="cluster panel">
     <div>
       <dt>Type d’atelier :</dt>
-      <dd><%= @kid_workshop.workshop_type %></dd>
+      <dd><%= @workshop.workshop_type %></dd>
     </div>
     <div>
       <dt>Nombre d’élèves :</dt>
@@ -20,12 +20,12 @@
     </div>
     <div>
       <dt>Statut :</dt>
-      <dd><%= @kid_workshop.status %></dd>
+      <dd><%= @workshop.status %></dd>
     </div>
     <div>
       <dt>Notes :</dt>
-      <dd><%= @kid_workshop.comment %></dd>
+      <dd><%= @workshop.comment %></dd>
   </dl>
 </div>
 
-<%= render @kid_workshop %>
+<%= render @workshop %>
