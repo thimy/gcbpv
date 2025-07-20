@@ -74,7 +74,7 @@ class Household < ApplicationRecord
 
   def is_from_agglo?(agglo)
     agglo.cities.find {|agglo_city|
-      agglo_city.name == city || agglo_city.postcode == postcode
+      agglo_city.name == city
     }
   end
 
