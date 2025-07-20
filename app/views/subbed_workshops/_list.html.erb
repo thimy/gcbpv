@@ -14,10 +14,16 @@
     </tr>
   </thead>
   <tbody>
-    <% @subbed_workshops.each do |subbed_workshop| %>
-      <%= render "subbed_workshops/subbed_workshop", subbed_workshop: subbed_workshop %>
+    <% workshops.order(:created_at).each do |subbed_workshop| %>
+      <%= render "subbed_workshops/subbed_workshop", subbed_workshop: subbed_workshop, is_youth: is_youth %>
     <% end %>
-    <%= render "subbed_workshops/add" %>
+    <tr data-controller="edit-subscription" id="<%= is_youth ? "add-kid-workshop" : "add-workshop" %>" class="add-item">
+      <td colspan="<%= @hide_private ? 7 : 8 %>">
+        <button class="button" data-button-size="small" data-action="edit-subscription#editEntry" data-edit-subscription-url-param="<%= is_youth ? "#{@new_workshop_url}?youth=true" : @new_workshop_url %>">
+          Ajouter un atelier
+        </button>
+      </td>
+    </tr>
   </tbody>
 </table>
 <% end %>

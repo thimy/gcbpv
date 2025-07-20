@@ -7,8 +7,11 @@ class WorkshopSlot < ApplicationRecord
   has_many :teachers, through: :workshop_slot_teachers
   belongs_to :workshop
   belongs_to :city
+  delegate :is_youth, to: :workshop
 
   scope :active, -> {where(status: 0)}
+  scope :youth, -> {includes(:workshop).where(workshop: {is_youth: true})}
+  scope :adults, -> {includes(:workshop).where.not(workshop: Workshop.youth)}
 
   enum :status, "Public" => 0, "Privé" => 1
 
@@ -37,8 +40,12 @@ class WorkshopSlot < ApplicationRecord
     teachers.map {|teacher| teacher.name }.join("/")
   end
 
+  def full_name
+    [workshop.name, [teacher_names, city.name].join(" à ")].join(" - ")
+  end
+
   def name
-    "#{workshop.name} – #{teacher_names} à #{city.name}"
+    "#{city.name} – #{day_of_week} – #{slot_time || "Horaire à définir"}"
   end
 
   def teachers_and_location
@@ -47,5 +54,9 @@ class WorkshopSlot < ApplicationRecord
 
   def subbed_workshops
     SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: self)
+  end
+
+  def subscription_count
+    subbed_workshops.size
   end
 end

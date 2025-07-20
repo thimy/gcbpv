@@ -101,7 +101,7 @@ class Users::SubscriptionsController < BaseController
   def update
     respond_to do |format|
       if params[:add_kid_workshop]
-        subbed_kid_workshop = SubbedKidWorkshop.new(subbed_kid_workshop_params.merge({subscription_id: params[:id]}))
+        subbed_kid_workshop = SubbedWorkshop.new(subbed_kid_workshop_params.merge({subscription_id: params[:id]}))
         if subbed_kid_workshop.save
           format.html { redirect_to account_subscription_url(@subscription), notice: "L’atelier enfant a bien été ajouté." }
           format.json { render :show, status: :created, location: @subscription }

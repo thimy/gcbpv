@@ -3,8 +3,8 @@ class SubscriptionsController < SecretariatController
   include WithTableConcern
 
   before_action :query
-  before_action :set_subscription, only: %i[ show edit update destroy edit_subscription show_subscription ]
-  before_action :set_lists, only: %i[ index new create show edit update add_course add_workshop ]
+  before_action :set_subscription, only: %i[ edit update destroy edit_subscription show_subscription ]
+  before_action :set_lists, only: %i[ index new create edit update add_course ]
 
   SORT_ATTRIBUTES = {
     "subscriptions" => [
@@ -76,8 +76,8 @@ class SubscriptionsController < SecretariatController
   def update
     respond_to do |format|
       if params[:add_kid_workshop]
-        subbed_kid_workshop = SubbedKidWorkshop.new(subbed_kid_workshop_params.merge({subscription_id: params[:id]}))
-        if subbed_kid_workshop.save
+        subbed_workshop = SubbedWorkshop.new(subbed_workshop_params.merge({subscription_id: params[:id]}))
+        if subbed_workshop.save
           format.html { redirect_to season_student_url(student: @subscription.student, season_name: @season.name), notice: "L’atelier enfant a bien été ajouté." }
           format.json { render :show, status: :created, location: @subscription }
         end
@@ -129,11 +129,11 @@ class SubscriptionsController < SecretariatController
     render :new
   end
 
-  def add_workshop
-    @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
-    @subscription.subbed_workshops.build
-    render :new
-  end
+  # def add_workshop
+  #   @subscription = Subscription.new(subscription_params.merge({id: params[:id]}))
+  #   @subscription.subbed_workshops.build
+  #   render :new
+  # end
 
   def edit_subscription
   end
@@ -160,14 +160,7 @@ class SubscriptionsController < SecretariatController
       params[:subscription][:student_attributes][:postcode] = nil
       params[:subscription][:student_attributes][:city] = nil
     end
-    params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], subbed_kid_workshops_attributes: [:kid_workshop_slot_id, :option, :comment], subbed_kid_workshop_attributes: [:kid_workshop_slot_id, :option, :comment], student_attributes: [:id, :first_name, :last_name, :phone, :email, :gender, :address, :postcode, :city, :birth_year, :comment])
-  end
-
-  def subbed_kid_workshop_params
-    if params[:subscription][:subbed_kid_workshop].present?
-      params[:subscription][:subbed_kid_workshop][:option] = params[:subscription][:subbed_kid_workshop][:option].to_i
-    end
-    params[:subscription].require(:subbed_kid_workshop).permit(:sub_id, :kid_workshop_slot_id, :option, :comment)
+    params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], student_attributes: [:id, :first_name, :last_name, :phone, :email, :gender, :address, :postcode, :city, :birth_year, :comment])
   end
 
   def course_params

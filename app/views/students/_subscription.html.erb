@@ -1,7 +1,7 @@
 <div id="<%= dom_id subscription %>" class="record flow">
   <div>
     <h2>Enfance</h2>
-    <%= render "subbed_kid_workshops/list", subscription: @subscription %>
+    <%= render "subbed_workshops/list", frame_id: "kid-workshops", subscription: @subscription, workshops: @subbed_kid_workshops, is_youth: true %>
   </div>
 
   <div>
@@ -11,6 +11,6 @@
 
   <div>
     <h2>Ateliers</h2>
-    <%= render "subbed_workshops/list", subscription: @subscription %>
+    <%= render "subbed_workshops/list", frame_id: "workshops", subscription: @subscription, workshops: @subbed_workshops, is_youth: false %>
   </div>
 </div>

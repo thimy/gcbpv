@@ -9,7 +9,8 @@ class SubbedWorkshopsController < SecretariatController
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: @subbed_workshop,
-            is_form: false
+            is_form: false,
+            is_youth: params[:youth]
           }
         )
       end
@@ -20,13 +21,14 @@ class SubbedWorkshopsController < SecretariatController
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: turbo_stream.before(
-          "add-workshop",
+          params[:youth] ? "add-kid-workshop" : "add-workshop",
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: SubbedWorkshop.new,
-            workshops: Workshop.active,
+            workshops: params[:youth] ? Workshop.youth.active : Workshop.adults.active,
             workshop_slots: [],
-            is_form: true
+            is_form: true,
+            is_youth: params[:youth]
           }
         )
       end
@@ -41,9 +43,10 @@ class SubbedWorkshopsController < SecretariatController
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: @subbed_workshop,
-            workshops: Workshop.active,
+            workshops: params[:youth] ? Workshop.youth.active : Workshop.adults.active,
             workshop_slots: WorkshopSlot.where(workshop: @subbed_workshop.workshop_slot.workshop_id),
-            is_form: true
+            is_form: true,
+            is_youth: params[:youth]
           }
         )
       end
@@ -63,7 +66,8 @@ class SubbedWorkshopsController < SecretariatController
             partial: "subbed_workshops/subbed_workshop", 
             locals: {
               subbed_workshop: @subbed_workshop,
-              is_form: false
+              is_form: false,
+              is_youth: params[:youth]
             }
           )
         }

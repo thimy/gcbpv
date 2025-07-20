@@ -1,10 +1,10 @@
-class KidWorkshop < ApplicationRecord
-  has_many :kid_workshop_slots
-  has_many :subbed_kid_workshops, through: :kid_workshop_slots
-  has_many :subscriptions, through: :subbed_kid_workshops
-  has_many :cities, through: :kid_workshop_slots
+class KidWorkshop < Workshop
+  has_many :workshop_slots
+  has_many :subbed_workshops, through: :workshop_slots
+  has_many :subscriptions, through: :subbed_workshops
+  has_many :cities, through: :workshop_slots
 
-  accepts_nested_attributes_for :kid_workshop_slots
+  accepts_nested_attributes_for :workshop_slots
 
   enum :workshop_type, "Éveil" => 0, "Découverte" => 1, "Parcours famille" => 2
   enum :status, "Public" => 0, "Privé" => 1
@@ -13,18 +13,22 @@ class KidWorkshop < ApplicationRecord
   
   validates :name, presence: true
 
+  def self.all
+    Workshop.where(is_youth: true)
+  end
+
   def student_count
     students_by_slot.join(", ")
   end
 
   def students_by_slot
-    SubbedKidWorkshop.joins(:subscription, :kid_workshop_slot).where(kid_workshop_slot: {kid_workshop: self}).group(:kid_workshop_slot_id).count.collect {|id, count|
+    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self}).group(:workshop_slot_id).count.collect {|id, count|
       slot = KidWorkshopSlot.find_by(id: id)
       "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
     }
   end
 
   def subscriptions
-    SubbedKidWorkshop.joins(:subscription, :kid_workshop_slot).where(kid_workshop_slot: {kid_workshop: self})
+    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self})
   end
 end

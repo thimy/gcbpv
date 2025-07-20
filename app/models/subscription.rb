@@ -44,8 +44,8 @@ class Subscription < ApplicationRecord
   end
 
   def kid_workshop_list
-    kid_workshop_slots.map {|slot|
-      slot.kid_workshop.name
+    workshop_slots.youth.map {|slot|
+      slot.workshop.name
   }.join(", ")
   end
 
@@ -56,7 +56,7 @@ class Subscription < ApplicationRecord
   end
 
   def workshop_list
-    workshop_slots.map {|slot|
+    workshop_slots.adults.map {|slot|
       slot.workshop.name
   }.join(", ")
   end
@@ -99,8 +99,8 @@ class Subscription < ApplicationRecord
     subbed_workshops.includes(:workshop_slot).find_by(workshop_slot: {workshop: workshop}).option == "Optionel"
   end
 
-  def optional_kid_workshop?(kid_workshop)
-    subbed_kid_workshops.includes(:kid_workshop_slot).find_by(kid_workshop_slot: {kid_workshop: kid_workshop}).option == "Optionel"
+  def optional_kid_workshop?(workshop)
+    subbed_workshops.youth.includes(:workshop_slot).find_by(workshop_slot: {workshop: workshop}).option == "Optionel"
   end
 
   def course_cost
@@ -108,16 +108,16 @@ class Subscription < ApplicationRecord
   end
 
   def workshop_cost
-    subbed_workshops.confirmed.map { |workshop| workshop.price }.sum
+    subbed_workshops.adults.confirmed.map { |workshop| workshop.price }.sum
   end
 
   def kid_workshop_cost
-    subbed_kid_workshops.confirmed.map { |workshop| workshop.price }.sum
+    subbed_workshops.youth.confirmed.map { |workshop| workshop.price }.sum
   end
 
   def all_workshops_cost
-    extra_workshops = subbed_workshops.confirmed.size + courses.size
-    subbed_workshops.confirmed.map { |workshop| workshop.price }.compact.sort!.reverse.drop(courses.size).sum
+    extra_workshops = subbed_workshops.adults.confirmed.size + courses.size
+    subbed_workshops.adults.confirmed.map { |workshop| workshop.price }.compact.sort!.reverse.drop(courses.size).sum
   end
 
   def total_cost

@@ -13,16 +13,16 @@
       <% end %>
       <% if subscription_group&.subscriptions.present? %>
         <% subscription_group&.subscriptions.each do |subscription| %>
-          <% subscription.subbed_kid_workshops.order(:option).each do |subbed_kid_workshop| %>
-            <% table.with_row(class: "#{subbed_kid_workshop.optional? ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "type") do %><%= subbed_kid_workshop.kid_workshop.name %><% end %>
-              <% row.with_cell(name: "student") do %><%= subbed_kid_workshop.student.name %><% end %>
-              <% row.with_cell(name: "day_of_week") do %><%= subbed_kid_workshop.kid_workshop_slot.day_of_week %><% end %>
-              <% row.with_cell(name: "city") do %><%= subbed_kid_workshop.kid_workshop_slot.city.name %><% end %>
-              <% row.with_cell(name: "option") do %><%= subbed_kid_workshop.option %><% end %>
-              <% row.with_cell(name: "comment") do %><%= subbed_kid_workshop.comment %><% end %>
+          <% subscription.subbed_workshops.youth.order(:option).each do |subbed_workshop| %>
+            <% table.with_row(class: "#{subbed_workshop.optional? ? "optional" : "confirmed"}") do |row| %>
+              <% row.with_cell(name: "type") do %><%= subbed_workshop.workshop.name %><% end %>
+              <% row.with_cell(name: "student") do %><%= subbed_workshop.student.name %><% end %>
+              <% row.with_cell(name: "day_of_week") do %><%= subbed_workshop.workshop_slot.day_of_week %><% end %>
+              <% row.with_cell(name: "city") do %><%= subbed_workshop.workshop_slot.city.name %><% end %>
+              <% row.with_cell(name: "option") do %><%= subbed_workshop.option %><% end %>
+              <% row.with_cell(name: "comment") do %><%= subbed_workshop.comment %><% end %>
               <% row.with_cell(name: "amount") do %>
-                <%= subbed_kid_workshop.price.present? ? number_to_currency(subbed_kid_workshop.price, unit: "€") : "À définir" %>
+                <%= subbed_workshop.price.present? ? number_to_currency(subbed_workshop.price, unit: "€") : "À définir" %>
               <% end %>
             <% end %>
           <% end %>
@@ -37,7 +37,7 @@
               <% row.with_cell(name: "amount") do %><%= number_to_currency(course.price, unit: "€") %><% end %>
             <% end %>
           <% end %>
-          <% subscription.subbed_workshops.order(:option).each_with_index do |subbed_workshop, index| %>
+          <% subscription.subbed_workshops.adults.order(:option).each_with_index do |subbed_workshop, index| %>
             <% table.with_row(class: "#{subbed_workshop.optional? ? "optional" : "confirmed"}") do |row| %>
               <% row.with_cell(name: "type") do %><%= subbed_workshop.workshop.name %><% end %>
               <% row.with_cell(name: "student") do %><%= subbed_workshop.student.name %><% end %>

@@ -11,18 +11,18 @@
     <% table.with_row(link_url: kid_workshop) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to kid_workshop.name, kid_workshop_url(season: @season, record: kid_workshop) %><% end %>
       <% row.with_cell(name: "subscriptions") do %>
-        <% kid_workshop.kid_workshop_slots.each do |slot| %>
+        <% kid_workshop.workshop_slots.each do |slot| %>
           <div>
             <strong>
-              <%= "#{SubbedKidWorkshop.registered(@season).confirmed.has_slot(slot).size}" %>
-              <% @student_count = SubbedKidWorkshop.registered(@season).optional.has_slot(slot).size + SubbedKidWorkshop.inquired(@season).has_slot(slot).size %>
+              <%= "#{SubbedWorkshop.youth.registered(@season).confirmed.has_slot(slot).size}" %>
+              <% @student_count = SubbedWorkshop.youth.registered(@season).optional.has_slot(slot).size + SubbedWorkshop.youth.inquired(@season).has_slot(slot).size %>
                 <% if @student_count > 0 %>
                 <span class="optional-count">
                   <%= "(+#{@student_count})" %>
                 </span>
               <% end %>
             </strong>
-            <% if kid_workshop.kid_workshop_slots.size > 1 %>
+            <% if kid_workshop.workshop_slots.size > 1 %>
               <%= ": #{slot.teachers_and_location}" %>
             <% end %>
           </div>

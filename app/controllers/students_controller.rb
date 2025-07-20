@@ -30,8 +30,8 @@ class StudentsController < SecretariatController
     @new_kid_workshop_url = new_subbed_kid_workshop_path
     @new_workshop_url = new_subbed_workshop_path
     if @subscription.present?
-      @subbed_workshops = @subscription.subbed_workshops.ordered
-      @subbed_kid_workshops = @subscription.subbed_kid_workshops.ordered
+      @subbed_workshops = @subscription.subbed_workshops.adults.ordered
+      @subbed_kid_workshops = @subscription.subbed_workshops.youth.ordered
       @courses = @subscription.courses.ordered
     end
   end
@@ -175,7 +175,7 @@ class StudentsController < SecretariatController
       @students = Student.all
       @households = Household.all
       @instruments = Instrument.active
-      @workshops = Workshop.active
+      @workshops = Workshop.adults.active
       @kid_workshops = KidWorkshop.active
     end
 
@@ -187,8 +187,6 @@ class StudentsController < SecretariatController
       @filters[:subscription_group][:status] = params[:status] if params[:status].present?
       @filters[:subscription_group][:majoration_class] = params[:majoration_class] if params[:majoration_class].present?
 
-      @filters[:subbed_kid_workshops] = SubbedKidWorkshop.includes(:kid_workshop_slot).where(kid_workshop_slot: { kid_workshop: params[:kid_workshop] }) if params[:kid_workshop].present?
-
       @course_filter = {}
       @course_filter[:instrument] = params[:instrument] if params[:instrument].present?
       @course_filter[:slot] = {}
@@ -199,8 +197,9 @@ class StudentsController < SecretariatController
       @filters[:courses] = Course.includes(:slot).where(@course_filter) if @course_filter[:slot].present? || @course_filter[:instrument].present?
 
       @workshop_filter = {}
-      @workshop_filter[:workshop] = params[:workshop] if params[:workshop].present?
+      @workshop_filter[:workshop] = [params[:workshop], params[:kid_workshop]].compact if (params[:workshop].present? || params[:kid_workshop].present?)
       @workshop_filter[:day_of_week] = params[:workshop_day] if params[:workshop_day].present?
+      
       @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
 
       @filters[:ars] = params[:ars] if params[:ars].present?

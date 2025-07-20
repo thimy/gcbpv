@@ -29,7 +29,7 @@
           <button class="button" type="submit">
             <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
           </button>
-          <button class="button" data-action="edit-subscription#editEntry" data-edit-subscription-url-param="<%= @is_account ? account_subbed_workshop_path(subbed_workshop) : subbed_workshop_path(subbed_workshop) %>">
+          <button class="button" data-action="edit-subscription#editEntry" data-edit-subscription-url-param="<%= params[:youth] ? "#{subbed_workshop_path(subbed_workshop)}?youth=true" : subbed_workshop_path(subbed_workshop) %>">
             <%= inline_svg "icons/undo", "aria-label": "Annuler" %>
           </button>
         <% else %>
@@ -56,7 +56,7 @@
     <td class="cell-options">
       <div class="actions">
         <button class="button" data-action="edit-subscription#editEntry" 
-                data-edit-subscription-url-param="<%= @is_account ? edit_account_subbed_workshop_path(subbed_workshop) : edit_subbed_workshop_path(subbed_workshop) %>">
+                data-edit-subscription-url-param="<%= is_youth ? "#{edit_subbed_workshop_path(subbed_workshop)}?youth=true" : edit_subbed_workshop_path(subbed_workshop) %>">
           <%= inline_svg "icons/edit", "aria-label": "Editer" %>
         </button>
         <%= link_to @is_account ? account_subbed_workshop_path(subbed_workshop) : subbed_workshop_path(subbed_workshop), 

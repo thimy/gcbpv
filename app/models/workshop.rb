@@ -15,6 +15,8 @@ class Workshop < ApplicationRecord
   enum :workshop_type, "Normal" => 0, "Spécial" => 1, "Autonome" => 2
 
   scope :active, -> {where(status: 0)}
+  scope :youth, ->{where(is_youth: true)}
+  scope :adults, ->{where(is_youth: nil)}
 
   def student_count
     students_by_slot.join(", ")

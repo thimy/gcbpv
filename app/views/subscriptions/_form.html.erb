@@ -42,8 +42,8 @@
   <div class="cluster" data-type="thirds">
     <div class="panel flow">
       <h3>Enfance</h3>
-      <%= turbo_frame_tag form.field_id(:subbed_kid_workshops), class: "cluster" do %>
-        <%= dynamic_fields_for form, :subbed_kid_workshops, "+ Ajouter un atelier" do |kid_workshop_form| %>
+      <%= turbo_frame_tag form.field_id(:subbed_workshops), class: "cluster" do %>
+        <%= dynamic_fields_for form, :subbed_workshops, "+ Ajouter un atelier" do |workshop_form| %>
           <div data-controller="fill-select" class="flow">
             <div class="flow">
               <%= label_tag "Nom de l'atelier" %>
@@ -51,20 +51,20 @@
                 {
                   data: {
                     fill_select_target: "slotParent",
-                    fill_select_url_param: "/get_kid_workshop_slots?id=",
-                    fill_select_target_param: ".kid-workshop-slot-select",
+                    fill_select_url_param: "/get_workshop_slots?id=",
+                    fill_select_target_param: ".workshop-slot-select",
                     action: "fill-select#updateSlots"
                   }
                 } %>
             </div>
-            <%= render "kid_workshop_slots", slots: [], form: kid_workshop_form, selected: "" %>
+            <%= render "workshop_slots", slots: [], form: workshop_form, selected: "" %>
             <div class="form-inline">
-              <%= kid_workshop_form.check_box :option, {}, "Optionel", "Confirmé" %>
-              <%= kid_workshop_form.label :option, "Optionel" %>
+              <%= workshop_form.check_box :option, {}, "Optionel", "Confirmé" %>
+              <%= workshop_form.label :option, "Optionel" %>
             </div>
             <div class="flow notes">
-              <%= kid_workshop_form.label :comment, "Notes" %>
-              <%= kid_workshop_form.text_area :comment, rows: 2 %>
+              <%= workshop_form.label :comment, "Notes" %>
+              <%= workshop_form.text_area :comment, rows: 2 %>
             </div>
             <button class="button" data-action="fill-select#removeRow" data-button-variant="alert" title="Supprimer cet atelier enfance"><%= inline_svg "icons/cross" %> Supprimer cet atelier enfance</button>
           </div>

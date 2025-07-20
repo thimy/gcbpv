@@ -129,7 +129,8 @@ Rails.application.routes.draw do
   get "get_teachers", to: "instruments#get_teachers"
   get "get_slots", to: "teachers#get_slots"
   get "get_workshop_slots", to: "workshops#get_slots"
-  get "get_kid_workshop_slots", to: "kid_workshops#get_slots"
+
+  get :subscription_new_workshop, to: "subscriptions#new_workshop"
 
   get :edit_personal_info, to: "students#edit_personal_info"
   get :show_personal_info, to: "students#show_personal_info"
