@@ -456,3 +456,7 @@ main.region {
 .nowrap {
   white-space: nowrap;
 }
+
+.min-content {
+  width: min-content;
+}

@@ -36,7 +36,7 @@
     <%= workshop.description.html_safe %>
   <% end %>
   <h2><span class="tag"><span>Nouveau</span></span>L’éveil petite enfance</h2>
-  <strong><%= "#{number_to_currency(@plan.parent_kid_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @parent_kid.description.html_safe %>
   <ul>
     <% @parent_kid.workshop_slots.active.each do |slot| %>

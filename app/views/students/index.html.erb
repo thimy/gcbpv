@@ -112,7 +112,7 @@
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "student", sortable: true) do %>Élève<% end %>
       <% header.with_column(name: "created_at", sortable: true) do %>Inscrit le<% end %>
-      <% header.with_column(name: "birth_year", sortable: true) do %>Année de naissance<% end %>
+      <% header.with_column(name: "birth_year", sortable: true, class: "min-content") do %>Année de naissance<% end %>
       <% header.with_column(name: "city") do %>Ville<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
       <% header.with_column(name: "email") do %>Email<% end %>

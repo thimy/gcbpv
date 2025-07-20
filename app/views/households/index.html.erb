@@ -34,6 +34,7 @@
   <%= render Shared::Table::Component.new do |table| %>
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "last_name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "created_at") do %>Inscrit le<% end %>
       <% header.with_column(name: "students") do %>Membres du foyer<% end %>
       <% header.with_column(name: "city") do %>Ville<% end %>
       <% header.with_column(name: "email") do %>Email<% end %>
@@ -44,6 +45,7 @@
     <% @households.each do |household| %>
       <% table.with_row(link_url: household) do |row| %>
         <% row.with_cell(name: "name") do %><%= link_to household.last_name, household_url(season: @season, record: household), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "created_at") do %><%= format_date(household.subscription_group(@season).created_at) %><% end %>
         <% row.with_cell(name: "students") do %><%= household.subscription_group(@season).present? ? household.subscription_group(@season).subscriptions.size : 0 %><% end %>
         <% row.with_cell(name: "city") do %><%= household.city %><% end %>
         <% row.with_cell(name: "email") do %><%= household.email %><% end %>

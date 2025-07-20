@@ -21,11 +21,11 @@ class Household < ApplicationRecord
   end
 
   def phones
-    [format_phone(phone), format_phone(secondary_phone)].compact.join(" / ")
+    [format_phone(phone), format_phone(secondary_phone)].reject(&:blank?).join(" / ")
   end
 
   def emails
-    [email, secondary_email].compact.join(" / ")
+    [email, secondary_email].reject(&:blank?).join(" / ")
   end
 
   def household_email
