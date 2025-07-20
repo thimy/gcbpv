@@ -5,7 +5,7 @@
       <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Informations de l’atelier</button>
     </header>
     <div class="flow" data-tabs-target="panel" id="atelier">
-      <% kid_workshop.kid_workshop_slots.each do |slot| %>
+      <% kid_workshop.kid_workshop_slots.active.each do |slot| %>
         <h3><%= "#{slot.city.name} – #{slot.day_of_week} avec #{slot.teacher_names}" %></h3>
         <%= render Shared::Table::Component.new do |table| %>
           <% table.with_header do |header| %>

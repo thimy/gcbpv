@@ -6,8 +6,18 @@
   <h2>L’éveil musical</h2>
   <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @early_learning.description.html_safe %>
+  <ul>
+    <% @early_learning.workshop_slots.active.each do |slot| %>
+      <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
+    <% end %>
+  </ul>
   <h2>Découverte instrumentale</h2>
   <strong><%= "#{number_to_currency(@plan.kid_discovery_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <ul>
+    <% @kid_discovery.workshop_slots.active.each do |slot| %>
+      <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
+    <% end %>
+  </ul>
   <%= @kid_discovery.description.html_safe %>
   <h2>Ensembles jeunesse</h2>
   <strong><%= "#{number_to_currency(@plan.workshop_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
@@ -17,9 +27,7 @@
       <ul>
         <% workshop.workshop_slots.each do |slot| %>
           <li>
-            <%= "À #{slot.city.name}" %>
-            <%= "avec #{slot.teacher_names}" %>
-            <%= " – #{slot.slot_time if slot.slot_time.present?}" %>
+            <%= "À #{slot.city.name} avec #{slot.teacher_names} – #{slot.slot_time if slot.slot_time.present?}" %>
             <%= "le #{slot.day_of_week.downcase}" if slot.day_of_week.present? && slot.day_of_week != "À définir" %>
             <%= " (#{slot.frequency.downcase if slot.frequency.present?})" %></li>
         <% end %>
@@ -27,4 +35,20 @@
     <% end %>
     <%= workshop.description.html_safe %>
   <% end %>
+  <h2><span class="tag"><span>Nouveau</span></span>L’éveil petite enfance</h2>
+  <strong><%= "#{number_to_currency(@plan.parent_kid_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <%= @parent_kid.description.html_safe %>
+  <ul>
+    <% @parent_kid.workshop_slots.active.each do |slot| %>
+      <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
+    <% end %>
+  </ul>
+  <h2><span class="tag"><span>Nouveau</span></span>Parcours famille</h2>
+  <strong><%= "#{number_to_currency(@plan.family_pathway_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <%= @family_pathway.description.html_safe %>
+  <ul>
+    <% @family_pathway.workshop_slots.active.each do |slot| %>
+      <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
+    <% end %>
+  </ul>
 </section>
