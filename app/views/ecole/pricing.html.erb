@@ -17,29 +17,51 @@
   <h2><%= inline_svg "icons/baby" %>Enfance : découvrir</h2>
   <p>1 atelier de 45 min/semaine</p>
   <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header do |header| %>
+      <% header.with_column(name: "description") do %>Nom de l’atelier<% end %>
+      <% header.with_column(name: "price") do %>Tarif Redon Agglo<% end %>
+      <% header.with_column(name: "obc_price") do %>Tarif Oust à Brocéliande Communauté<% end %>
+      <% header.with_column(name: "outbounds_price") do %>Tarif Hors agglo<% end %>
+    <% end %>
     <% table.with_row do |row| %>
       <% row.with_cell(name: "description") do %>Eveil musical (4-6 ans)<% end %>
-      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.early_learning_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@early_learning.price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= number_to_currency(@early_learning.obc_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "outbounds_price") do %><%= number_to_currency(@early_learning.outbounds_price, unit: "€", precision: 0) %><% end %>
     <% end %>
     <% table.with_row do |row| %>
       <% row.with_cell(name: "description") do %>Découverte instrumentale (7-9 ans)<% end %>
-      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.kid_discovery_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@kid_discovery.price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= number_to_currency(@kid_discovery.obc_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "outbounds_price") do %><%= number_to_currency(@kid_discovery.outbounds_price, unit: "€", precision: 0) %><% end %>
     <% end %>
   <% end %>
   <h2><%= inline_svg "icons/users" %>Pratiquer</h2>
   <p>1 atelier de pratique d'ensemble : 45 min/semaine ou 1h30 bimensuelle ou 3h mensuelles</p>
   <%= render Shared::Table::Component.new do |table| %>
+    <% table.with_header do |header| %>
+      <% header.with_column(name: "description") do %>Nom de l’atelier<% end %>
+      <% header.with_column(name: "price") do %>Tarif Redon Agglo<% end %>
+      <% header.with_column(name: "obc_price") do %>Tarif Oust à Brocéliande Communauté<% end %>
+      <% header.with_column(name: "outbounds_price") do %>Tarif Hors agglo<% end %>
+    <% end %>
     <% table.with_row do |row| %>
       <% row.with_cell(name: "description") do %>Atelier d'ensemble seul (élève non-inscrit en cours)<% end %>
       <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.workshop_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= number_to_currency(@season.plan.workshop_price_obc, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.workshop_price_outbounds, unit: "€", precision: 0) %><% end %>
     <% end %>
     <% table.with_row do |row| %>
       <% row.with_cell(name: "description") do %>Atelier autonome (harmonica, cornemuse)<% end %>
-      <% row.with_cell(name: "price") do %>40€<% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@standalone.price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= number_to_currency(@standalone.obc_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "outbounds_price") do %><%= number_to_currency(@standalone.outbounds_price, unit: "€", precision: 0) %><% end %>
     <% end %>
     <% table.with_row do |row| %>
       <% row.with_cell(name: "description") do %>Atelier Uilleann pipes (niveau confirmé - 6 rdvs/an)<% end %>
-      <% row.with_cell(name: "price") do %><%= number_to_currency(@season.plan.special_workshop_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "price") do %><%= number_to_currency(@uillean_pipes.price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= number_to_currency(@uillean_pipes.obc_price, unit: "€", precision: 0) %><% end %>
+      <% row.with_cell(name: "outbounds_price") do %><%= number_to_currency(@uillean_pipes.outbounds_price, unit: "€", precision: 0) %><% end %>
     <% end %>
   <% end %>
   <h2><%= inline_svg "icons/guitar" %>Rendez-vous</h2>

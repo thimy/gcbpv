@@ -22,11 +22,6 @@
   </div>
 
   <div>
-    <%= form.label :workshop_type, "Type d’atelier" %>
-    <%= form.select :workshop_type, options_for_select(KidWorkshop.workshop_types.keys.to_a) %>
-  </div>
-
-  <div>
     <%= form.label :status, "Statut" %>
     <%= form.select :status, options_for_select(KidWorkshop.statuses.keys.to_a, selected: kid_workshop.status.present? ? kid_workshop.status : 1) %>
   </div>

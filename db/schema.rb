@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_24_121846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -265,7 +265,20 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date"
     t.index ["subscription_group_id"], name: "index_payments_on_subscription_group_id"
+  end
+
+  create_table "plan_price_categories", force: :cascade do |t|
+    t.bigint "plan_id", null: false
+    t.bigint "price_category_id", null: false
+    t.decimal "price"
+    t.decimal "obc_price"
+    t.decimal "outbounds_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_plan_price_categories_on_plan_id"
+    t.index ["price_category_id"], name: "index_plan_price_categories_on_price_category_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -285,13 +298,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
     t.decimal "second_step"
     t.decimal "third_step_discount"
     t.decimal "third_step"
-    t.decimal "pathway_price"
     t.integer "membership_price"
-    t.decimal "special_workshop_price"
     t.text "comment"
-    t.decimal "parent_kid_price"
-    t.decimal "standalone_workshop_price"
-    t.decimal "family_pathway_price"
+    t.decimal "class_price_obc"
+    t.decimal "class_price_outbounds"
+    t.decimal "kids_class_price_obc"
+    t.decimal "kids_class_price_outbounds"
+    t.decimal "workshop_price_obc"
+    t.decimal "workshop_price_outbounds"
+    t.decimal "early_learning_price_obc"
+    t.decimal "early_learning_price_outbounds"
+    t.decimal "kid_discovery_price_obc"
+    t.decimal "kid_discovery_price_outbounds"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -304,6 +322,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_posts_on_event_id"
+  end
+
+  create_table "price_categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "project_instances", force: :cascade do |t|
@@ -536,10 +560,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
     t.boolean "kid_friendly"
     t.integer "status"
     t.text "comment"
-    t.integer "workshop_type"
     t.integer "max_students"
     t.boolean "is_youth"
     t.integer "kid_workshop_type"
+    t.boolean "is_full"
+    t.bigint "price_category_id"
+    t.index ["price_category_id"], name: "index_workshops_on_price_category_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -552,6 +578,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_20_201117) do
   add_foreign_key "pathway_slots", "cities"
   add_foreign_key "pathway_slots", "pathways"
   add_foreign_key "payments", "subscription_groups"
+  add_foreign_key "plan_price_categories", "plans"
+  add_foreign_key "plan_price_categories", "price_categories"
   add_foreign_key "project_instances", "projects"
   add_foreign_key "project_instances", "seasons"
   add_foreign_key "project_students", "project_instances"

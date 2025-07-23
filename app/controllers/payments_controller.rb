@@ -108,6 +108,6 @@ class PaymentsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def payment_params
-      params.require(:payment).permit(:payment_method, :amount, :comment, :subscription_group_id)
+      params.require(:payment).permit(:payment_method, :amount, :comment, :subscription_group_id, :date)
     end
 end

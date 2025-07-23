@@ -6,13 +6,14 @@ class Workshop < ApplicationRecord
   has_many :subbed_workshops, through: :workshop_slots
   has_many :subscriptions, through: :subbed_workshops
   has_many :cities, through: :workshop_slots
+  belongs_to :price_category
+  has_many :plan_price_categories, through: :price_category
 
-  accepts_nested_attributes_for :workshop_slots
+  accepts_nested_attributes_for :workshop_slots, :plan_price_categories
 
   validates :name, presence: true
 
   enum :status, "Public" => 0, "Privé" => 1
-  enum :workshop_type, "Normal" => 0, "Spécial" => 1, "Autonome" => 2
 
   scope :active, -> {where(status: 0)}
   scope :youth, ->{where(is_youth: true)}

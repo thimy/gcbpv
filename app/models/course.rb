@@ -5,7 +5,26 @@ class Course < ApplicationRecord
   belongs_to :subscription
   delegate :student, to: :subscription
   delegate :subscription_group, to: :subscription
+  delegate :majoration_class, to: :subscription_group
   delegate :season, to: :subscription_group
+  delegate :plan, to: :season
+
+  PRICES = {
+    "Redon Agglo": {
+      price_name: "class_price",
+      kids_price_name: "kids_class_price",
+    },
+    "Oust à Brocéliande Communauté": {
+      price_name: "class_price_obc",
+      kids_price_name: "kids_class_price_obc",
+      markup_name: "obc_markup"
+    },
+    "Hors agglo": {
+      price_name: "class_price_outbounds",
+      kids_price_name: "kids_class_price_outbounds",
+      markup_name: "outbounds_markup"
+    }
+  }
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
@@ -19,10 +38,11 @@ class Course < ApplicationRecord
   end
 
   def price
-    if student.birth_year.present? && subscription_group.season.start_year - student.birth_year < 19
-      subscription_group.season.plan.kids_class_price
+    price_class = PRICES[majoration_class.to_sym]
+    if student.birth_year.present? && season.start_year - student.birth_year < 19
+      p = plan[price_class[:kids_price_name]] || plan.kids_class_price + plan.kids_class_price * plan[price_class[:markup_name]] / 100
     else 
-      subscription_group.season.plan.class_price
+      p = plan[price_class[:price_name]] || plan.class_price + plan.class_price * plan[price_class[:markup_name]] / 100
     end
   end
 

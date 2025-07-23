@@ -35,23 +35,27 @@
     <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
       <% header.with_column(name: "last_name", sortable: true) do %>Nom<% end %>
       <% header.with_column(name: "created_at") do %>Inscrit le<% end %>
-      <% header.with_column(name: "students") do %>Membres du foyer<% end %>
+      <% header.with_column(name: "students") do %>Élèves<% end %>
       <% header.with_column(name: "city") do %>Ville<% end %>
       <% header.with_column(name: "email") do %>Email<% end %>
       <% header.with_column(name: "phone") do %>Téléphone<% end %>
       <% header.with_column(name: "status") do %>Status<% end %>
       <% header.with_column(name: "amount") do %>Montant<% end %>
+      <% header.with_column(name: "paid") do %>Dû<% end %>
+      <% header.with_column(name: "comment") do %>Notes<% end %>
     <% end %>
     <% @households.each do |household| %>
       <% table.with_row(link_url: household) do |row| %>
         <% row.with_cell(name: "name") do %><%= link_to household.last_name, household_url(season: @season, record: household), "data-turbo": false %><% end %>
-        <% row.with_cell(name: "created_at") do %><%= format_date(household.subscription_group(@season).created_at) %><% end %>
+        <% row.with_cell(name: "created_at", class: "nowrap") do %><%= format_date(household.subscription_group(@season).created_at) %><% end %>
         <% row.with_cell(name: "students") do %><%= household.subscription_group(@season).present? ? household.subscription_group(@season).subscriptions.size : 0 %><% end %>
         <% row.with_cell(name: "city") do %><%= household.city %><% end %>
-        <% row.with_cell(name: "email") do %><%= household.email %><% end %>
-        <% row.with_cell(name: "phone") do %><%= format_phone(household.phone) %><% end %>
+        <% row.with_cell(name: "email", class: "nowrap") do %><%= household.email %><% end %>
+        <% row.with_cell(name: "phone", class: "nowrap") do %><%= format_phone(household.phone) %><% end %>
         <% row.with_cell(name: "status") do %><%= household.subscription_group(@season).payment_state %><% end %>
-        <% row.with_cell(name: "amount") do %><%= number_to_currency(household.subscription_group(@season).total_cost, unit: "€") if household.subscription_group(@season).present? %><% end %>
+        <% row.with_cell(name: "amount", class: "nowrap") do %><%= number_to_currency(household.subscription_group(@season).total_cost, unit: "€") if household.subscription_group(@season).present? %><% end %>
+        <% row.with_cell(name: "paid", class: "nowrap") do %><%= number_to_currency(household.subscription_group(@season).total_remaining, unit: "€") %><% end %>
+        <% row.with_cell(name: "comment") do %><%= household.comment %><% end %>
       <% end %>
     <% end %>
   <% end %>

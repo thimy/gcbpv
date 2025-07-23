@@ -13,10 +13,11 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name: Field::String,
     workshop_slots: Field::NestedHasMany.with_options(skip: :workshop),
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    workshop_type: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     max_students: Field::Number,
     kid_friendly: Field::Boolean,
+    is_full: Field::Boolean,
     student_count: Field::Text.with_options(searchable: false),
+    price_category: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -31,6 +32,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     status
     student_count
     max_students
+    price_category
   ].freeze
   
   # SHOW_PAGE_ATTRIBUTES
@@ -39,10 +41,11 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name
     description
     status
-    workshop_type
     workshop_slots
     max_students
     kid_friendly
+    is_full
+    price_category
     created_at
     updated_at
   ].freeze
@@ -54,10 +57,11 @@ class WorkshopDashboard < Administrate::BaseDashboard
     name
     description
     status
-    workshop_type
     workshop_slots
     max_students
+    is_full
     kid_friendly
+    price_category
   ].freeze
 
   # COLLECTION_FILTERS

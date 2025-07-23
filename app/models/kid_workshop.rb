@@ -6,7 +6,6 @@ class KidWorkshop < Workshop
 
   accepts_nested_attributes_for :workshop_slots
 
-  enum :workshop_type, "Éveil" => 0, "Découverte" => 1, "Parcours famille" => 2
   enum :status, "Public" => 0, "Privé" => 1
 
   scope :active, -> { where(status: 0) }

@@ -9,17 +9,17 @@
         <% header.with_column(name: "city") do %>Ville<% end %>
         <% header.with_column(name: "option") do %>Optionel<% end %>
         <% header.with_column(name: "comment") do %>Notes<% end %>
-        <% header.with_column(name: "amount") do %>Prix<% end %>
+        <% header.with_column(name: "amount") do %>Prix (tarif <%= @subscription_group.majoration_class %>)<% end %>
       <% end %>
       <% if subscription_group&.subscriptions.present? %>
         <% subscription_group&.subscriptions.each do |subscription| %>
           <% subscription.subbed_workshops.youth.order(:option).each do |subbed_workshop| %>
             <% table.with_row(class: "#{subbed_workshop.optional? ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "type") do %><%= subbed_workshop.workshop.name %><% end %>
-              <% row.with_cell(name: "student") do %><%= subbed_workshop.student.name %><% end %>
+              <% row.with_cell(name: "type", class: "nowrap") do %><%= subbed_workshop.workshop.name %><% end %>
+              <% row.with_cell(name: "student", class: "nowrap") do %><%= subbed_workshop.student.name %><% end %>
               <% row.with_cell(name: "day_of_week") do %><%= subbed_workshop.workshop_slot.day_of_week %><% end %>
               <% row.with_cell(name: "city") do %><%= subbed_workshop.workshop_slot.city.name %><% end %>
-              <% row.with_cell(name: "option") do %><%= subbed_workshop.option %><% end %>
+              <% row.with_cell(name: "option", class: "nowrap") do %><%= subbed_workshop.option %><% end %>
               <% row.with_cell(name: "comment") do %><%= subbed_workshop.comment %><% end %>
               <% row.with_cell(name: "amount") do %>
                 <%= subbed_workshop.price.present? ? number_to_currency(subbed_workshop.price, unit: "€") : "À définir" %>
@@ -28,22 +28,22 @@
           <% end %>
           <% subscription.courses&.order(:option).each do |course| %>
             <% table.with_row(class: "#{course.optional? ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "type") do %><%= course.instrument.name %><% end %>
-              <% row.with_cell(name: "student") do %><%= course.student.name %><% end %>
+              <% row.with_cell(name: "type", class: "nowrap") do %><%= course.instrument.name %><% end %>
+              <% row.with_cell(name: "student", class: "nowrap") do %><%= course.student.name %><% end %>
               <% row.with_cell(name: "day_of_week") do %><%= course.slot.day_of_week %><% end %>
               <% row.with_cell(name: "city") do %><%= course.slot.city.name %><% end %>
-              <% row.with_cell(name: "option") do %><%= course.option %><% end %>
+              <% row.with_cell(name: "option", class: "nowrap") do %><%= course.option %><% end %>
               <% row.with_cell(name: "comment") do %><%= course.comment %><% end %>
               <% row.with_cell(name: "amount") do %><%= number_to_currency(course.price, unit: "€") %><% end %>
             <% end %>
           <% end %>
           <% subscription.subbed_workshops.adults.order(:option).each_with_index do |subbed_workshop, index| %>
             <% table.with_row(class: "#{subbed_workshop.optional? ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "type") do %><%= subbed_workshop.workshop.name %><% end %>
-              <% row.with_cell(name: "student") do %><%= subbed_workshop.student.name %><% end %>
+              <% row.with_cell(name: "type", class: "nowrap") do %><%= subbed_workshop.workshop.name %><% end %>
+              <% row.with_cell(name: "student", class: "nowrap") do %><%= subbed_workshop.student.name %><% end %>
               <% row.with_cell(name: "day_of_week") do %><%= subbed_workshop.workshop_slot.day_of_week %><% end %>
               <% row.with_cell(name: "city") do %><%= subbed_workshop.workshop_slot.city.name %><% end %>
-              <% row.with_cell(name: "option") do %><%= subbed_workshop.option %><% end %>
+              <% row.with_cell(name: "option", class: "nowrap") do %><%= subbed_workshop.option %><% end %>
               <% row.with_cell(name: "comment") do %><%= subbed_workshop.comment %><% end %>
               <% row.with_cell(name: "amount") do %>
                 <%= index < subscription.courses.size ? "---" : number_to_currency(subbed_workshop.price, unit: "€") %>
@@ -53,17 +53,10 @@
         <% end %>
       <% end %>
       <% table.with_row(class: "strong") do |row| %>
-        <% row.with_cell(name: "course_cost", colspan: 6) do %>Coût des inscriptions<% end %>
-        <% row.with_cell(name: "amount") do %><%= number_to_currency(@subscription_group.course_cost, unit: "€") %><% end %>
+        <% row.with_cell(name: "course_cost", colspan: 6) do %>Sous-total des inscriptions<% end %>
+        <% row.with_cell(name: "amount") do %><%= number_to_currency(@subscription_group.subscription_cost, unit: "€") %><% end %>
       <% end %>
-      <% unless @subscription_group.additional_cost == 0 %>
-        <% table.with_row do |row| %>
-          <% row.with_cell(name: "additional_cost", colspan: 6) do %>
-            <%= "Majoration #{@subscription_group.majoration_class} (+#{@subscription_group.agglo_markup}%)" %><% end %>
-          <% row.with_cell(name: "amount") do %>+<%= number_to_currency(@subscription_group.additional_cost, unit: "€") %><% end %>
-        <% end %>
-      <% end %>
-      <% unless @subscription_group.discount == 0 %>
+      <% unless @subscription_group.discount_percentage.to_i == 0 %>
         <% table.with_row do |row| %>
           <% row.with_cell(name: "discount", colspan: 6) do %>
             <%= "Remise (-#{@subscription_group.discount_percentage.to_i}%)" %><% end %>
@@ -72,13 +65,14 @@
       <% end %>
       <% table.with_row do |row| %>
         <% row.with_cell(name: "extra_discount", colspan: 6) do %>
-          <%= "Remise exceptionnelle" %><% end %>
+          <%= "Remise exceptionnelle" %>
+        <% end %>
         <% row.with_cell(name: "amount") do %>
           <%= render "subscription_groups/discount", subscription_group: @subscription_group %>
         <% end %>
       <% end %>
       <% table.with_row(class: "strong") do |row| %>
-        <% row.with_cell(name: "total", colspan: 6) do %>Montant après majoration/remise<% end %>
+        <% row.with_cell(name: "total", colspan: 6) do %>Sous-total après remise<% end %>
         <% row.with_cell(name: "amount") do %><%= number_to_currency(@subscription_group.subscription_cost_after_discount, unit: "€") %><% end %>
       <% end %>
       <% table.with_row do |row| %>

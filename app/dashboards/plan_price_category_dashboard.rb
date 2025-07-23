@@ -1,25 +1,24 @@
 require "administrate/base_dashboard"
 
-class KidWorkshopDashboard < Administrate::BaseDashboard
+class PlanPriceCategoryDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
   # Each different type represents an Administrate::Field object,
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
-
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    description: TrixField,
-    name: Field::String,
-    workshop_slots: Field::NestedHasMany,
-    kid_workshop_slots: Field::NestedHasMany.with_options(skip: :kid_workshop),
-    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    comment: Field::Text,
+    obc_price: Field::String.with_options(searchable: false),
+    outbounds_price: Field::String.with_options(searchable: false),
+    plan: Field::BelongsTo,
+    price: Field::String.with_options(searchable: false),
+    price_category: Field::BelongsTo,
+    workshops: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
-  
+
   # COLLECTION_ATTRIBUTES
   # an array of attributes that will be displayed on the model's index page.
   #
@@ -27,34 +26,37 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    name
-    status
-    description
+    price_category
+    plan
+    price
+    obc_price
+    outbounds_price
   ].freeze
-  
+
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-    name
-    description
-    status
-    kid_workshop_slots
-    workshop_slots
-    comment
+    id
+    price_category
+    plan
+    price
+    obc_price
+    outbounds_price
     created_at
     updated_at
-  ].freeze  # FORM_ATTRIBUTES
+  ].freeze
+
+  # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    name
-    description
-    kid_workshop_slots
-    workshop_slots
-    status
-    comment
+    price_category
+    plan
+    price
+    obc_price
+    outbounds_price
   ].freeze
-  
+
   # COLLECTION_FILTERS
   # a hash that defines filters that can be used while searching via the search
   # field of the dashboard.
@@ -65,13 +67,12 @@ class KidWorkshopDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-
   COLLECTION_FILTERS = {}.freeze
-  
-  # Overwrite this method to customize how kid workshops are displayed
+
+  # Overwrite this method to customize how plan price categories are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(kid_workshop)
-    kid_workshop.name
-  end
+  # def display_resource(plan_price_category)
+  #   "PlanPriceCategory ##{plan_price_category.id}"
+  # end
 end

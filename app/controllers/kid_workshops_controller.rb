@@ -74,6 +74,6 @@ class KidWorkshopsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def kid_workshop_params
-      params.require(:kid_workshop).permit(:name, :description, :workshop_type, :status, :comment)
+      params.require(:kid_workshop).permit(:name, :description, :status, :comment)
     end
 end

@@ -42,4 +42,10 @@ namespace :db do
       workshop.update!(workshop_type: workshop.kid_workshop_type)
     end
   end
+
+  task update_majoration_class: :environment do
+    SubscriptionGroup.where(majoration_class: nil).each do |group|
+      group.update!(majoration_class: group.household.agglo)
+    end
+  end
 end

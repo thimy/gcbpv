@@ -1,5 +1,8 @@
 <% if defined?(is_form) && !!is_form %>
   <tr class="<%= "new-item" if !payment.id %>" data-controller="edit-payment" id="<%= dom_id payment %>">
+    <td class="cell-date">
+      <%= date_field :payment, :date %>
+    </td>
     <td class="cell-payment_method">
       <%= select :payment, :payment_method, Payment.payment_methods.keys.map {|method| [method,method]},
         {
@@ -37,6 +40,7 @@
   </tr>
 <% else %>
   <tr data-controller="edit-payment" id="<%= dom_id payment %>" data-edit-payment-id-value="<%= payment.id %>">
+    <td class="cell-date"><%= format_date(payment.payment_date) %></td>
     <td class="cell-payment_method"><%= payment.payment_method %></td>
     <td class="cell-amount"><%= number_to_currency(payment.amount, unit: "€") %></td>
     <td class="cell-comment"><%= simple_format(payment.comment) %></td>

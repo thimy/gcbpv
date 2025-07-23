@@ -56,6 +56,7 @@ Rails.application.routes.draw do
     resources :cities
     resources :agglomerations
     resources :plans
+    resources :price_categories
     resources :seasons
     resources :editions
     resources :categories

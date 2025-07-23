@@ -9,11 +9,22 @@ class PlanDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
+    name: Field::String,
     class_price: Field::Number.with_options(suffix: "€"),
+    class_price_obc: Field::Number.with_options(suffix: "€"),
+    class_price_outbounds: Field::Number.with_options(suffix: "€"),
     kids_class_price: Field::Number.with_options(suffix: "€"),
+    kids_class_price_obc: Field::Number.with_options(suffix: "€"),
+    kids_class_price_outbounds: Field::Number.with_options(suffix: "€"),
     workshop_price: Field::Number.with_options(suffix: "€"),
+    workshop_price_obc: Field::Number.with_options(suffix: "€"),
+    workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
     early_learning_price: Field::Number.with_options(suffix: "€"),
+    early_learning_price_obc: Field::Number.with_options(suffix: "€"),
+    early_learning_price_outbounds: Field::Number.with_options(suffix: "€"),
     kid_discovery_price: Field::Number.with_options(suffix: "€"),
+    kid_discovery_price_obc: Field::Number.with_options(suffix: "€"),
+    kid_discovery_price_outbounds: Field::Number.with_options(suffix: "€"),
     first_step: Field::Number.with_options(suffix: "€"),
     first_step_discount: Field::Number.with_options(suffix: "%"),
     second_step: Field::Number.with_options(suffix: "€"),
@@ -23,13 +34,11 @@ class PlanDashboard < Administrate::BaseDashboard
     obc_markup: Field::Number.with_options(suffix: "%"),
     outbounds_markup: Field::Number.with_options(suffix: "%"),
     membership_price: Field::Number.with_options(suffix: "€"),
-    special_workshop_price: Field::Number.with_options(suffix: "€"),
-    pathway_price: Field::Number.with_options(suffix: "€"),
-    family_pathway_price: Field::Number.with_options(suffix: "€"),
-    standalone_workshop_price: Field::Number.with_options(suffix: "€"),
     comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    price_categories: Field::NestedHasMany.with_options(skip: :plan),
+    plan_price_categories: Field::NestedHasMany.with_options(skip: :plan),
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -39,32 +48,26 @@ class PlanDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    name
     membership_price
     kids_class_price
     class_price
     workshop_price
-    special_workshop_price
-    standalone_workshop_price
     obc_markup
     outbounds_markup
-    pathway_price
-    family_pathway_price
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
+    name
     membership_price
     class_price
     kids_class_price
     workshop_price
-    special_workshop_price
-    standalone_workshop_price
     early_learning_price
     kid_discovery_price
-    pathway_price
-    family_pathway_price
     first_step
     first_step_discount
     second_step
@@ -74,6 +77,7 @@ class PlanDashboard < Administrate::BaseDashboard
     obc_markup
     outbounds_markup
     comment
+    plan_price_categories
     created_at
     updated_at
   ].freeze
@@ -82,16 +86,17 @@ class PlanDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
+    name
     membership_price
     class_price
+    class_price_obc
+    class_price_outbounds
     kids_class_price
+    kids_class_price_obc
+    kids_class_price_outbounds
     workshop_price
-    special_workshop_price
-    standalone_workshop_price
-    early_learning_price
-    kid_discovery_price
-    pathway_price
-    family_pathway_price
+    workshop_price_obc
+    workshop_price_outbounds
     first_step
     first_step_discount
     second_step
@@ -100,6 +105,7 @@ class PlanDashboard < Administrate::BaseDashboard
     third_step_discount
     obc_markup
     outbounds_markup
+    plan_price_categories
     comment
   ].freeze
 

@@ -46,35 +46,19 @@ class SubscriptionGroup < ApplicationRecord
   def payment_state
     return STATUSES[status.to_sym] if status != "Inscrit"
       
-    state = if total_payment.nil?
+    if total_payment.nil?
       "À régler"
     elsif total_payment < total_cost
-      "Règlement partiel"
+      "Partiel"
     elsif total_payment == total_cost
       "Réglé"
     else
       "Trop perçu"
     end
-
-    "#{status} – #{state}"
-  end
-
-  def course_cost
-    subscriptions.present? ? subscriptions.map {|subscription| subscription.total_cost}.compact.sum : 0
-  end
-
-  def additional_cost
-    if majoration_class == "Redon Agglo"
-      0
-    elsif majoration_class == "Oust à Brocéliande Communauté"
-      course_cost * plan.obc_markup / 100
-    else
-      course_cost * plan.outbounds_markup / 100
-    end
   end
 
   def subscription_cost
-    [course_cost, additional_cost].sum
+    subscriptions.present? ? subscriptions.map {|subscription| subscription.total_cost}.compact.sum : 0
   end
 
   def discount_percentage
