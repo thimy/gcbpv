@@ -26,7 +26,7 @@ class Website::BogueController < BaseController
   end
 
   def page
-    @page = Page.find_by(slug: params[:page_slug], bogue: Bogue.find_by(slug: params[:bogue_slug]))
+    @page = Page.find_by(slug: params[:page_slug], bogue: Bogue.find_by(slug: params[:bogue_slug])) || not_found
   end
 
   def contests
@@ -37,6 +37,6 @@ class Website::BogueController < BaseController
   private
 
     def set_bogue
-      @bogue = Bogue.find_by(slug: params[:bogue_slug])
+      @bogue = Bogue.find_by(slug: params[:bogue_slug]) || not_found
     end
 end
