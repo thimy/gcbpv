@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :set_config
 
+  def not_found
+    raise ActionController::RoutingError.new('La page n’existe pas')
+  end
+
   private
 
   def set_config

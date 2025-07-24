@@ -37,6 +37,6 @@ class Website::BogueController < BaseController
   private
 
     def set_bogue
-      @bogue = Bogue.find_by(slug: params[:bogue_slug])
+      @bogue = Bogue.find_by(slug: params[:bogue_slug]) or not_found
     end
 end

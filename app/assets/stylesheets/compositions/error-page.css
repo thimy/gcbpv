@@ -1,0 +1,12 @@
+.error-page main {
+  align-items: start;
+  text-align: center;
+}
+
+.error-page .flow {
+  text-wrap: balance;
+}
+
+.error-page .error-icon {
+  max-height: 15em;
+}

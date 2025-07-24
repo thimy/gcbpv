@@ -27,5 +27,9 @@ module Gcbpv
 
     config.time_zone = "Europe/Paris"
     config.active_record.default_timezone = :local
+
+    config.exceptions_app = ->(env) {
+      ErrorsController.action(:show).call(env)
+    }
   end
 end
