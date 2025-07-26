@@ -9,6 +9,11 @@ class PostsController < SecretariatController
   # GET /posts or /posts.json
   def index
     set_tab_data
+
+    respond_to do |format|
+      format.html
+      format.atom
+    end
   end
 
   # GET /posts/1 or /posts/1.json
