@@ -3,12 +3,15 @@ class SecretariatController < ApplicationController
 
   before_action :set_season
   before_action :authenticate_admin
+  skip_before_action :authenticate_admin, only: [:index]
 
   def authenticate_admin
+    not_found if current_administrator.nil?
     authenticate_administrator!
   end
 
   def index
+    authenticate_administrator!
     @seasons = Season.all.reverse
     @subscription_groups = SubscriptionGroup.where(season: @season)
     @unconfirmed_subscription_groups = SubscriptionGroup.where(season: @season).unconfirmed
