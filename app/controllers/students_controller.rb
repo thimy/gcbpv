@@ -207,7 +207,7 @@ class StudentsController < SecretariatController
 
       @not_filters = {}
       @not_filters[:subscription_group] = { status: [3] }
-      @not_filters[:subscription_group][:status].concat(params[:exclude_status]) if params[:exclude_status].present?
+      @not_filters[:subscription_group][:status].push(params[:exclude_status]) if params[:exclude_status].present?
 
       @filtered_subscriptions = Subscription.includes(:subscription_group).where(@filters).where.not(@not_filters).where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term OR :term IS NULL", { term: "%#{query}%" }))
 

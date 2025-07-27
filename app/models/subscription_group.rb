@@ -19,7 +19,7 @@ class SubscriptionGroup < ApplicationRecord
     "Demande d’information": 0,
     "Inscrit": 1,
     "Annulé": 2,
-    "Dans le panier": 3
+    # "Dans le panier": 3
   }
 
   enum majoration_class: {
