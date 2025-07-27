@@ -7,18 +7,16 @@
     <% header.with_column(name: "teacher") do %>Professeur<% end %>
     <% header.with_column(name: "city") do %>Ville<% end %>
     <% header.with_column(name: "day_of_week") do %>Jour<% end %>
-    <% header.with_column(name: "start_time") do %>Heure de début<% end %>
-    <% header.with_column(name: "end_time") do %>Heure de fin<% end %>
+    <% header.with_column(name: "slot_time") do %>Horaire<% end %>
     <% header.with_column(name: "frequency") do %>Fréquence<% end %>
     <% header.with_column(name: "options", show_label: false) %>
   <% end %>
   <% @slots.each do |slot| %>
     <% table.with_row(link_url: slot) do |row| %>
-      <% row.with_cell(name: "teacher") do %><%= link_to slot.teacher %><% end %>
-      <% row.with_cell(name: "city") do %><%= slot.city %><% end %>
+      <% row.with_cell(name: "teacher") do %><%= link_to slot.teacher.name %><% end %>
+      <% row.with_cell(name: "city") do %><%= slot.city.name %><% end %>
       <% row.with_cell(name: "day_of_week") do %><%= slot.day_of_week %><% end %>
-      <% row.with_cell(name: "start_time") do %><%= slot.start_time %><% end %>
-      <% row.with_cell(name: "end_time") do %><%= slot.end_time %><% end %>
+      <% row.with_cell(name: "slot_time") do %><%= slot.slot_time %><% end %>
       <% row.with_cell(name: "frequency") do %><%= slot.frequency %><% end %>
       <% row.with_cell(name: "options") do %>
         <%= link_to edit_slot_path(slot) do %>
