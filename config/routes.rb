@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get "403", to: "errors#forbidden", as: :forbidden
+  get "404", to: "errors#not_found", as: :not_found
+  get "500", to: "errors#internal_error", as: :internal_error
   resources :events, controller: "website/events", path: "evenements", as: "website_event"
   resources :posts, controller: "website/posts", path: "actualites", as: "website_post"
   get "association", to: "association#index"
