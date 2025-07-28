@@ -1,4 +1,5 @@
 class WorkshopsController < SecretariatController
+  before_action :authenticate_admin
   before_action :set_workshop, only: %i[ show edit update destroy get_slots ]
 
   # GET /workshops or /workshops.json

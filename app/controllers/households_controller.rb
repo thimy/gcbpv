@@ -1,6 +1,7 @@
 class HouseholdsController < SecretariatController
   include WithTableConcern
 
+  before_action :authenticate_admin
   before_action :set_household, only: %i[ show edit update destroy edit_personal_info show_personal_info ]
 
   SORT_ATTRIBUTES = ["last_name", "birth_year"]

@@ -1,4 +1,5 @@
 class SubbedWorkshopsController < SecretariatController
+  before_action :authenticate_admin
   before_action :set_subbed_workshop, only: %i[ show edit update destroy ]
 
   def show

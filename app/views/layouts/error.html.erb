@@ -4,6 +4,8 @@
   <head>
     <title><%= content_for(:title) || "Erreur" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="<%= yield :canonical_url %>" />
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= Sentry.get_trace_propagation_meta.html_safe %>
@@ -16,5 +18,3 @@
     </main>
   </body>
 </html>
-
-

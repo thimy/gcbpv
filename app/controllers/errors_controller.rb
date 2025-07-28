@@ -11,6 +11,18 @@ class ErrorsController < ApplicationController
     render view_for_code(@status_code), status: @status_code
   end
 
+  def forbidden
+    render "403"
+  end
+
+  def not_found
+    render "404"
+  end
+
+  def internal_error
+    render "500"
+  end
+
   private
     def view_for_code(code)
       supported_error_codes.fetch(code, "404")

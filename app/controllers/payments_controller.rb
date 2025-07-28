@@ -1,4 +1,5 @@
 class PaymentsController < SecretariatController
+  before_action :authenticate_admin
   before_action :set_payment, only: %i[ show edit update destroy ]
 
   def show

@@ -1,4 +1,5 @@
 class InstrumentsController < SecretariatController
+  before_action :authenticate_admin
   before_action :set_instrument, only: %i[ show edit update destroy get_teachers ]
 
   # GET /instruments or /instruments.json

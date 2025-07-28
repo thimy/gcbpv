@@ -1,6 +1,7 @@
 class EventsController < SecretariatController
   include WithTableConcern
 
+  before_action :authenticate_admin
   before_action :query
   before_action :set_event, only: %i[ show edit update destroy ]
 

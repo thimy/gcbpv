@@ -1,6 +1,7 @@
 class PostsController < SecretariatController
   include WithTableConcern
 
+  before_action :authenticate_admin
   before_action :query
   before_action :set_post, only: %i[ show edit update destroy ]
 

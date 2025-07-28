@@ -2,6 +2,7 @@ class SubscriptionsController < SecretariatController
   layout "secretariat"
   include WithTableConcern
 
+  before_action :authenticate_admin
   before_action :query
   before_action :set_subscription, only: %i[ edit update destroy edit_subscription show_subscription ]
   before_action :set_lists, only: %i[ index new create edit update add_course ]

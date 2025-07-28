@@ -1,6 +1,7 @@
 class TeachersController < SecretariatController
   include WithTableConcern
 
+  before_action :authenticate_admin
   before_action :set_teacher, only: %i[ show edit update destroy get_slots ]
 
   SORT_ATTRIBUTES = [ "last_name" ]
