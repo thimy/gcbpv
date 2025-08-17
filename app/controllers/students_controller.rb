@@ -185,7 +185,6 @@ class StudentsController < SecretariatController
       @filters[:subscription_group] = {}
       @filters[:subscription_group][:season] = @season
 
-      @filters[:subscription_group][:status] = params[:status] if params[:status].present?
       @filters[:subscription_group][:majoration_class] = params[:majoration_class] if params[:majoration_class].present?
 
       @course_filter = {}
@@ -203,6 +202,7 @@ class StudentsController < SecretariatController
       
       @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
 
+      @filters[:status] = params[:status] if params[:status].present?
       @filters[:ars] = params[:ars] if params[:ars].present?
       @filters[:image_consent] = params[:image_consent] if params[:image_consent].present?
 

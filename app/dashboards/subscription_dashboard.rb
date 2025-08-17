@@ -12,7 +12,6 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     courses: Field::NestedHasMany.with_options(skip: :subscription),
     pathway_slots: Field::HasMany,
     subbed_workshops: Field::NestedHasMany.with_options(skip: :subscription),
-    subbed_kid_workshops: Field::NestedHasMany.with_options(skip: :subscription),
     student: Field::BelongsTo.with_options(searchable: true, searchable_fields: ["last_name", "first_name"], order: "last_name"),
     image_consent: Field::Boolean,
     disability: Field::Boolean,
@@ -23,6 +22,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     email: Field::String.with_options(searchable: false),
     city: Field::String.with_options(searchable: false),
     subscription_group: Field::BelongsTo,
+    status: Field::Select.with_options(collection: -> (field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -40,6 +40,7 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     workshop_list
     phone
     email
+    status
     city
   ].freeze
 
@@ -50,13 +51,13 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     subscription_group
     courses
     subbed_workshops
-    subbed_kid_workshops
     phone
     email
     city
     image_consent
     disability
     ars
+    status
     comment
     created_at
     updated_at
@@ -69,10 +70,10 @@ class SubscriptionDashboard < Administrate::BaseDashboard
     student
     courses
     subbed_workshops
-    subbed_kid_workshops
     image_consent
     disability
     ars
+    status
     comment
   ].freeze
 

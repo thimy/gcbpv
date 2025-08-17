@@ -17,9 +17,16 @@ class Subscription < ApplicationRecord
 
   accepts_nested_attributes_for :student, :courses, :subbed_workshops, :subbed_kid_workshops, :workshop_slots, allow_destroy: true
 
+  STATUSES = {
+    INQUIRY: "Demande d’information",
+    REGISTERED: "Inscrit",
+    CANCELED: "Annulé"
+    # ON_HOLD: "Dans le panier"
+  }
+
   enum status: {
     "Demande d’information": 0,
-    "Inscrit – à régler": 1,
+    "Inscrit": 1,
     "Annulé": 2
   }
 
@@ -88,7 +95,7 @@ class Subscription < ApplicationRecord
   end
 
   def optional?
-    ["Demande d’information", "Annulé"].include?(subscription_group.status) if subscription_group&.status.present?
+    ["Demande d’information", "Annulé"].include?(status)
   end
 
   def optional_course?(instrument)

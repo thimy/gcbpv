@@ -154,7 +154,7 @@
         <%= form.label :ars, "ARS" %>
       </label>
       <div class="form-inline">
-        <%= form.select :status, options_for_select(Subscription.statuses), include_blank: "Statut", required: true %>
+        <%= form.select :status, options_for_select(Subscription.statuses.keys.to_a), include_blank: "Statut", required: true %>
       </div>      
     </div>
     <div class="flow">
