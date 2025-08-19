@@ -1,0 +1,16 @@
+<div id="<%= dom_id page %>">
+  <dl>
+    <dt>Nom :</dt>
+    <dd><%= page.name %></dd>
+    <dt>Statut :</dt>
+    <dd><%= page.status %></dd>
+    <dt>Description :</dt>
+    <dd>
+      <div class="editor-content-wrapper">
+        <%= page.formatted_content %>
+      </div>
+    </dd>
+    <dt>Notes :</dt>
+    <dd><%= page.comment %></dd>
+  </dl>
+</div>

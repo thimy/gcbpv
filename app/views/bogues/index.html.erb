@@ -1,0 +1,20 @@
+<div class="repel">
+  <h1>Bogue</h1>
+  <%= link_to "Créer une nouvelle édition de la Bogue", new_bogue_path, class: "button" %>
+</div>
+<%= turbo_frame_tag "bogues", class: "flow" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "start_date") do %>Date<% end %>
+    <% end %>
+    <% @bogues.each do |bogue| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to bogue.name, bogue_path(bogue), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "start_date") do %><%= bogue.date_period %><% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>
