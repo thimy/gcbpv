@@ -6,7 +6,7 @@
     </header>
     <div class="flow" data-tabs-target="panel" id="atelier">
       <% workshop.workshop_slots.active.each do |slot| %>
-        <h3><%= "#{slot.city.name} – #{slot.day_of_week} avec #{slot.teacher_names}" %></h3>
+        <h3><%= [[[slot.city.name, slot.day_of_week.presence].compact.join(" - "), slot.slot_time.presence].compact.join(" "), slot.teacher_names.presence].compact.join(" avec ") %></h3>
         <%= render Shared::Table::Component.new do |table| %>
           <% table.with_header do |header| %>
             <% header.with_column(name: "student") do %>Élève<% end %>
