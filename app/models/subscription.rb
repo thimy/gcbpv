@@ -31,10 +31,10 @@ class Subscription < ApplicationRecord
 
   scope :active, ->(season) {includes(:subscription_group).where(subscription_group: { season: season })}
   scope :not_on_hold, -> {where.not(subscription_group: SubscriptionGroup.where(status: "Dans le panier"))}
-  scope :registered, ->(season) {active(season).where(subscription_group: SubscriptionGroup.confirmed)}
+  scope :registered, ->(season) {active(season).where.not(status: [nil, 0])}
   scope :inquired, ->(season) {active(season).where(status: 0)}
   scope :has_optional_workshop, ->(workshop) { where(subbed_workshops.optional.has_workshop(workshop)) }
-  scope :has_confirmed_workshop, ->(workshop) { where(subbed_workshops.confirme.has_workshop(workshop)) }
+  scope :has_confirmed_workshop, ->(workshop) { where(subbed_workshops.confirmed.has_workshop(workshop)) }
   scope :has_optional_kid_workshop, ->(workshop) { where(subbed_workshops.optional.has_kid_workshop(workshop)) }
   scope :has_confirmed_kid_workshop, ->(workshop) { where(subbed_workshops.confirme.has_kid_workshop(workshop)) }
   scope :latest, -> {order(created_at: :desc)}
