@@ -16,6 +16,7 @@ class Event < ApplicationRecord
   scope :end_passed, -> {where(end_date: ...Date.today)}
   scope :passed, -> {has_no_end_date.start_passed.or(end_passed)}
   scope :active, -> {where(status: 0)}
+  scope :emt, -> {where(is_emt: true)}
 
   scope :past_week, -> { where(created_at: Time.zone.now.at_beginning_of_week...Time.zone.now.at_end_of_week) }
 

@@ -10,4 +10,8 @@ class EcoleController < ApplicationController
     @standalone = PriceCategory.find_by(name: "Ateliers autonomes")
     @uillean_pipes = PriceCategory.find_by(name: "Uilleann pipes")
   end
+
+  def calendar
+    @events = Event.upcoming.emt
+  end
 end

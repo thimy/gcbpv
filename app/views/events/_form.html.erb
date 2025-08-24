@@ -46,6 +46,11 @@
   </div>
 
   <div class="flow">
+    <%= form.label :is_emt, "Lié à l’EMT" %>
+    <%= form.check_box :is_emt %>
+  </div>
+
+  <div class="flow">
     <%= form.label :content, "Description" %>
     <div id="event_content" data-editor-target="editor"></div>
   </div>

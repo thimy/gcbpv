@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_24_121846) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_24_191056) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -159,6 +159,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_24_121846) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "event_categories", force: :cascade do |t|
+    t.bigint "categories_id", null: false
+    t.bigint "event_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["categories_id"], name: "index_event_categories_on_categories_id"
+    t.index ["event_id"], name: "index_event_categories_on_event_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -182,6 +191,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_24_121846) do
     t.string "cover"
     t.time "start_time"
     t.time "end_time"
+    t.boolean "is_emt"
     t.index ["bogue_id"], name: "index_events_on_bogue_id"
     t.index ["parent_event_id"], name: "index_events_on_parent_event_id"
   end
@@ -574,6 +584,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_24_121846) do
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
   add_foreign_key "email_images", "emails"
+  add_foreign_key "event_categories", "categories", column: "categories_id"
+  add_foreign_key "event_categories", "events"
   add_foreign_key "pathway_slot_teachers", "teachers"
   add_foreign_key "pathway_slots", "cities"
   add_foreign_key "pathway_slots", "pathways"

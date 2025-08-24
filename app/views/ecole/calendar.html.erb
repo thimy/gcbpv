@@ -1,0 +1,12 @@
+<% content_for(:page_class, "ecole calendar ") %>
+<% content_for(:page_title, "Calendrier de l’école") %>
+
+<section class="flow">
+  <% if @events.present? %>
+    <%= render Website::Card::Event::Component.with_collection(@events, inline: true) %>
+  <% else %>
+    <div class="panel">
+      Aucun événement à venir
+    </div>
+  <% end %>
+</section>

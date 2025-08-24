@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     get "adhesion", to: "membership#index", as: :membership
   end
   get "ecole/tarifs", to: "ecole#pricing", as: :pricing
+  get "ecole/calendrier", to: "ecole#calendar", as: :calendar
   get "ecole", to: "ecole#index"
   
   devise_for :administrators, path: "admin", path_names: {
