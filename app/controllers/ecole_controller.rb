@@ -12,6 +12,6 @@ class EcoleController < ApplicationController
   end
 
   def calendar
-    @events = Event.upcoming.emt
+    @events = Event.upcoming.emt.reverse
   end
 end

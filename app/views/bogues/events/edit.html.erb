@@ -11,4 +11,4 @@
   </div>
 </div>
 
-<%= render "form", event: @event, url: "/bogues/#{@bogue.id}/evenements/#{@event.id}" %>
+<%= render "form", event: @event, url: bogue_event_path(bogue_id: @bogue.id, id: @event.id) %>

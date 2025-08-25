@@ -26,7 +26,7 @@
       <h2>Événements à venir</h2>
       <div class="flow">
         <% @events.each do |event| %>
-          <event-card class="panel">
+          <event-card class="panel row">
             <%= link_to programmation_event_website_bogue_path(bogue_slug: @bogue.slug, event_slug: event.slug), class: "list-element event-card" do %>
               <time>
                 <div><%= event.date_period %></div>

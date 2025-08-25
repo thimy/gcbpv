@@ -1,5 +1,5 @@
 <event-card class="card panel <% if @inline %>row<% end %>">
-  <%= link_to website_event_path(@event), class: "repel" do %>
+  <%= link_to website_event_path(@event.id), class: "repel", "data-nowrap": true do %>
     <time><%= @event.date_period %></time>
     <div class="flow">
       <h3><%= @event.name %></h3>

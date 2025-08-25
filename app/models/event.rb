@@ -2,12 +2,15 @@ class Event < ApplicationRecord
   include WithTime
   include WithAttachment
   include WithEditor
+  include Sluggable
 
   has_one_attached :cover
   has_many :posts
   has_many :attachments, as: :attachable, dependent: :destroy
   belongs_to :bogue, optional: true
   belongs_to :parent_event, class_name: "Event", optional: true
+
+  slugify :name
 
   scope :ordered, -> { order(start_date: :desc, start_time: :desc)}
   scope :upcoming, -> {where(end_date: Date.today...).or(has_no_end_date.where(start_date: Date.today...))}
