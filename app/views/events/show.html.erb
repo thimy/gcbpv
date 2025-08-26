@@ -2,7 +2,7 @@
   <h1><%= @event.name %></h1>
 
   <div>
-    <%= link_to "Éditer cet événement", edit_event_path(@event), class: "button" %>
+    <%= link_to "Éditer cet événement", edit_event_path(@event.id), class: "button" %>
     <%= link_to "Retour à la liste des événements", events_path, class: "button" %>
   </div>
 </div>

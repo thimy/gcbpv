@@ -5,7 +5,7 @@
   <section class="latest-posts flow">
     <header class="flow">
       <h2><%= inline_svg "icons/newspaper" %>Dernières actualités</h2>
-      <%= link_to "↬ Voir tous les articles", posts_path %>
+      <%= link_to "↬ Voir tous les articles", website_post_index_path %>
     </header>
     <% if @posts.present? %>
       <div class="flow">
@@ -16,7 +16,7 @@
   <section class="upcoming-events flow">
     <header class="flow">
       <h2><%= inline_svg "icons/party" %>Événements à venir</h2>
-      <%= link_to "↬ Voir tous les événements", events_path %>
+      <%= link_to "↬ Voir tous les événements", website_event_index_path %>
     </header>
     <% if @events.present? %>
       <div class="flow">

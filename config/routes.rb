@@ -86,18 +86,18 @@ Rails.application.routes.draw do
     end
     resources :categories, on: :collection
     resources :emails do
-      post :upload_file, on: :collection, as: "emails_upload_file"
+      post :upload_file, on: :collection, as: "upload_file"
       post :send_email, path: "/send_email(.:format)", as: "emails_send_email"
     end
     resources :events, path: "evenements" do
-      post :upload_file, on: :collection, as: "events_upload_file"
+      post :upload_file, on: :collection, as: "upload_file"
     end
     resources :instruments, path: "disciplines"
     resources :kid_workshops, path: "enfance"
     resources :payments
     resources :households, path: "foyers"
     resources :posts, path: "actualites" do
-      post :upload_file, on: :collection, as: "posts_upload_file"
+      post :upload_file, on: :collection, as: "upload_file"
     end
     resources :slots, path: "creneaux"
     resources :subscriptions do

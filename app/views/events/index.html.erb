@@ -14,15 +14,15 @@
     <% end %>
     <% @events.each do |event| %>
       <% table.with_row do |row| %>
-        <% row.with_cell(name: "name") do %><%= link_to event.name, event_path(event), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "name") do %><%= link_to event.name, event_path(event.id), "data-turbo": false %><% end %>
         <% row.with_cell(name: "city") do %><%= event.full_location %><% end %>
         <% row.with_cell(name: "start_date") do %><%= event.date_period %><% end %>
         <% row.with_cell(name: "organizer") do %><%= event.organizer %><% end %>
         <% row.with_cell(name: "options") do %>
-          <%= link_to edit_event_path(event), class: "button" do %>
+          <%= link_to edit_event_path(event.id), class: "button", "data-turbo": false do %>
             <%= inline_svg "icons/edit", "aria-label": "Editer" %>
           <% end %>
-          <%= link_to event_path(event),
+          <%= link_to event_path(event.id),
             class: "button",
             data: {
               turbo_method: :delete,

@@ -1,4 +1,4 @@
-<%= form_for post, url: url, data: {controller: "editor", "editor-image-url-value": "/secretariat/actualites/upload_image", "editor-file-url-value": "/secretariat/actualites/upload_file"} do |form| %>
+<%= form_for post, url: url, data: {controller: "editor", "editor-image-url-value": "/secretariat/actualites/upload_image", "editor-file-url-value": upload_file_posts_path} do |form| %>
   <div class="flow">
     <%= form.label :title, "Titre" %>
     <%= form.text_field :title %>
