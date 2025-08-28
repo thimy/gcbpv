@@ -50,7 +50,7 @@ main {
     flex-direction: column;
 
     .content-sidebar {
-      border-bottom: var(--border-default);
+      border-bottom: var(--stroke);
       padding-block-end: var(--space-l);
       position: relative;
       top: 0;

@@ -14,7 +14,7 @@ thead, tfoot {
 }
 
 td, th {
-  border-bottom: var(--border-default);
+  border-bottom: var(--stroke);
   word-break: break-word;
   padding: var(--space-xs);
 
@@ -49,6 +49,10 @@ th {
   color: var(--color-dark);
   padding: var(--space-xs);
   word-break: initial;
+
+  &:where(.panel *) {
+    background-color: var(--color-light);
+  }
 
   a {
     display: flex;

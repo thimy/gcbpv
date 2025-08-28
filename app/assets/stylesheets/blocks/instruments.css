@@ -48,7 +48,7 @@
       gap: var(--space-m);
       
       &:not(:first-child) {
-        border-top: var(--border-default);
+        border-top: var(--stroke);
         padding-block-start: var(--space-m);
       }
     }

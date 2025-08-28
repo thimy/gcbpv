@@ -3,7 +3,8 @@
   padding-block: var(--space-xl);
 
   main {
-    --flow-space: var(--space-l);
+    --flow-space: var(--space-m);
+    --gutter: var(--space-m);
   }
 
   header .profile-picture {

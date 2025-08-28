@@ -1,5 +1,5 @@
-<div class="panel grid" data-layout="50-50">
-  <div class="flow">
+<div class="grid" data-layout="50-50">
+  <div class="panel flow">
     <h2>Cours individuels</h2>
     <% @teacher.slots.order(:day_of_week).each do |slot| %>
       <% @subscriptions = slot.courses.active(@season) %>
@@ -14,7 +14,7 @@
           <% end %>
           <% @subscriptions.ordered.each do |course| %>
             <% table.with_row(class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "name") do %><%= course.student.name %><% end %>
+              <% row.with_cell(name: "name") do %><%= link_to course.student.name, profs_season_student_path(season_name: @season.name, id: course.student.id) %><% end %>
               <% row.with_cell(name: "instrument") do %><%= course.instrument.name %><% end %>
               <% row.with_cell(name: "day") do %><%= course.slot.day_of_week %><% end %>
               <% row.with_cell(name: "time") do %><%= "#{format_time(course.start_time)} - #{format_time(course.end_time)}" %><% end %>
@@ -24,9 +24,9 @@
       <% end %>
     <% end %>
   </div>
-  <div class="flow">
+  <div class="panel flow">
     <h2>Ateliers</h2>
-    <% @teacher.kid_workshop_slots.each do |slot| %>
+    <% @teacher.workshop_slots.youth.each do |slot| %>
       <% @subscriptions = slot.subscriptions.active(@season) %>
       <% if @subscriptions.size > 0 %>
         <% if @day != slot.day_of_week %>
