@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   belongs_to :household, optional: true
-  has_one :student
-  belongs_to :teacher
+  belongs_to :student, optional: true
+  belongs_to :teacher, optional: true
 
   delegate :subscription_groups, to: :household
 

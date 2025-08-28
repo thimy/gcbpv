@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "edit-profile" do %>
+  <%= form_for teacher, url: profs_update_path(id: teacher.id) do |form| %>
+    <div class="flow">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name %>
+    </div>
+
+    <div class="flow">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name %>
+    </div>
+
+    <div class="flow">
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+
+    <div class="flow">
+      <%= form.label :photo %>
+      <%= form.file_field :photo %>
+    </div>
+
+    <div class="cluster">
+      <%= form.submit "Modifier mon profil", class: "button", "data-turbo": true %>
+      <% if changes == true %><p class="success">Les modifications ont bien été enregistrées.</p><% end %>
+    </div>
+  <% end %>
+<% end %>

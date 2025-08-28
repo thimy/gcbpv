@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :households
     resources :students
     resources :subscription_groups
-    resources :subscriptions, only: [:show, :edit, :destroy]
+    resources :subscriptions
     resources :teachers
     resources :slots
     resources :workshops
@@ -156,8 +156,13 @@ Rails.application.routes.draw do
   get "compte/validation", to: "users#validation", as: "account_validation"
 
   namespace :profs do
+    get "", to: redirect("/profs/#{Config.first.season.name}")
+    get "profil", to: "profile"
+    patch :update, to: "update"
+
     scope path: ":season_name", as: :season do
       root "index"
+      resources :students, path: "eleves", only: [:show]
     end
   end
 
