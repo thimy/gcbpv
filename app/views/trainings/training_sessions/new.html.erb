@@ -1,0 +1,9 @@
+<div id="new-training_session">
+  <div class="repel">
+    <h1>Nouveau rendez-vous</h1>
+    <%= link_to "Retour aux événements", training_path(@training.id), class: "button" %>
+  </div>
+
+  <%= render "trainings/training_sessions/form", training_session: @training_session, url: training_training_sessions_path %>
+
+</div>

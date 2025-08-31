@@ -1,0 +1,8 @@
+<div id="new-training">
+  <div class="repel">
+    <h1>Nouvel événement</h1>
+    <%= link_to "Retour aux rendez-vous", trainings_path, class: "button" %>
+  </div>
+
+  <%= render "form", training: @training, url: trainings_path, class: "button" %>
+</div>

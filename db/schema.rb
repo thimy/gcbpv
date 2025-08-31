@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_24_191056) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_30_084752) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -157,15 +157,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_24_191056) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "event_categories", force: :cascade do |t|
-    t.bigint "categories_id", null: false
-    t.bigint "event_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["categories_id"], name: "index_event_categories_on_categories_id"
-    t.index ["event_id"], name: "index_event_categories_on_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -489,7 +480,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_24_191056) do
 
   create_table "training_sessions", force: :cascade do |t|
     t.string "name"
-    t.text "description"
+    t.text "content"
     t.string "guest"
     t.bigint "training_id", null: false
     t.date "date"
@@ -501,12 +492,13 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_24_191056) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.text "comment"
+    t.string "location"
     t.index ["training_id"], name: "index_training_sessions_on_training_id"
   end
 
   create_table "trainings", force: :cascade do |t|
     t.string "name"
-    t.text "description"
+    t.text "content"
     t.integer "session_count"
     t.decimal "price"
     t.bigint "season_id", null: false
@@ -584,8 +576,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_24_191056) do
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
   add_foreign_key "email_images", "emails"
-  add_foreign_key "event_categories", "categories", column: "categories_id"
-  add_foreign_key "event_categories", "events"
   add_foreign_key "pathway_slot_teachers", "teachers"
   add_foreign_key "pathway_slots", "cities"
   add_foreign_key "pathway_slots", "pathways"

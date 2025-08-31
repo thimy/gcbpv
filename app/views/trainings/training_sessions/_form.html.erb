@@ -1,0 +1,60 @@
+<%= form_for training_session, url: url, html: { class: "form-block"}, data: {controller: "editor address", "editor-file-url-value": upload_file_training_training_sessions_path} do |form| %>
+  <div class="flow">
+    <%= form.label :name, "Titre" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :date, "Date" %>
+    <%= form.date_field :date, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :start_time, "Heure de début" %>
+    <%= form.time_field :start_time %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :end_time, "Heure de fin" %>
+    <%= form.time_field :end_time %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :location, "Lieu" %>
+    <%= form.text_field :location %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :city, "Ville" %>
+    <%= form.text_field :city, "data-action": "address#searchCity focus->address#searchCity click@window->address#hideList", "data-address-target": "address", required: true %>
+    <%= render "website/autocomplete" %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :guest, "Intervenant" %>
+    <%= form.text_field :guest %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Statut du rendez-vous" %>
+    <%= form.select :status, options_for_select(TrainingSession.statuses.keys.to_a, selected: training_session.present? ? training_session.status : 0) %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :image, "Image" %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :content, "Description" %>
+    <div id="training_session_content" data-editor-target="editor"></div>
+  </div>
+
+  <div class="flow">
+    <%= form.label :comment, "Notes" %>
+    <%= form.text_field :comment %>
+  </div>
+
+  <%= form.hidden_field :content, id: "training_session_content_hidden", data: {"editor-target": "hidden"} %>
+  <%= form.submit "Sauvegarder", class: "button" %>
+<% end %>

@@ -2,11 +2,11 @@ class Ecole::TrainingsController < EcoleController
   before_action :set_training, only: %i[ show ]
 
   def index
-    @trainings = Training.all
+    @trainings = Training.active
   end
 
   def show
-    @other_trainings = Training.where.not(id: params[:id])
+    @other_trainings = Training.active.where.not(id: params[:id])
   end
 
   private

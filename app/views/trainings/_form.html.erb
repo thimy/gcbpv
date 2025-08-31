@@ -1,0 +1,40 @@
+<%= form_for training, url: url, html: {class: "form-block"}, data: {controller: "editor address", "editor-file-url-value": upload_file_trainings_path} do |form| %>
+  <div class="flow">
+    <%= form.label :name, "Nom de la thématique rendez-vous" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :season_id, "Année scolaire" %>
+    <%= form.collection_select :season_id, @seasons, :id, :name, { selected: training.present? ? training.season : @seasons.last } %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :session_count, "Nombre de rendez-vous pour cette thématique" %>
+    <%= form.text_field :session_count, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :price, "Prix pour 1 rendez-vous" %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Statut du rendez-vous" %>
+    <%= form.select :status, options_for_select(Training.statuses.keys.to_a, selected: training.present? ? training.status : 0) %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :content, "Description" %>
+    <div id="training_content" data-editor-target="editor"></div>
+  </div>
+
+  <div class="flow">
+    <%= form.label :comment, "Commentaire" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <%= form.hidden_field :content, id: "training_content_hidden", data: {"editor-target": "hidden"} %>
+
+  <%= form.submit "Sauvegarder", class: "button" %>
+<% end %>

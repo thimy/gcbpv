@@ -1,0 +1,69 @@
+<div id="<%= dom_id training %>">
+  <dl>
+    <dt>Nombre de rendez-vous prévus :</dt>
+    <dd><%= training.session_count %></dd>
+    <dt>Status :</dt>
+    <dd><%= training.status %></dd>
+    <dt>Notes :</dt>
+    <dd><%= training.comment %></dd>
+  </dl>
+
+  <section data-controller="tabs">
+    <header>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="training_sessions">Rendez-vous</button>
+      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Infos</button>
+    </header>
+    <div data-tabs-target="panel" id="training_sessions" class="record flow">
+      <%= link_to "Créer un rendez-vous", new_training_training_session_path(training.id), class: "button" %>
+      <% if @training_sessions.present? %>
+        <h2><%= "Événements" %></h2>
+        <%= render Shared::Table::Component.new do |table| %>
+          <% table.with_header do |header| %>
+            <% header.with_column(name: "name") do %>Nom<% end %>
+            <% header.with_column(name: "guest") do %>Intervenant<% end %>
+            <% header.with_column(name: "date") do %>Date<% end %>
+            <% header.with_column(name: "location") do %>Lieu<% end %>
+            <% header.with_column(name: "city") do %>Ville<% end %>
+            <% header.with_column(name: "options") do %>Actions<% end %>
+          <% end %>
+          <% @training_sessions.each do |training_session| %>
+            <% table.with_row do |row| %>
+              <% row.with_cell(name: "name") do %><%= link_to training_session.name, training_training_session_path(training_id: training.id, id: training_session.id) %><% end %>
+              <% row.with_cell(name: "guest") do %><%= training_session.guest %><% end %>
+              <% row.with_cell(name: "date") do %><%= format_date(training_session.date) %><% end %>% end %>
+              <% row.with_cell(name: "location") do %><%= training_session.location %><% end %>
+              <% row.with_cell(name: "city") do %><%= training_session.city %><% end %>
+              <% row.with_cell(name: "options") do %>
+                <%= link_to edit_training_training_session_path(training_id: training.id, id: training_session.id), class: "button" do %>
+                  <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+                <% end %>
+                <%= link_to training_training_session_path(training_id: training.id, id: training_session.id),
+                  class: "button",
+                  data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce rendez-vous ?"
+                  } do %>
+                  <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+    <div data-tabs-target="panel" id="infos">
+      <div class="editor-content-wrapper">
+        <%= training.formatted_content if training.content.present? %>
+      </div>
+    </div>
+  </section>
+</div>
+
+<%= link_to "Supprimer cette thématique",
+  training_path(@training),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette thématique ?"
+  } %>

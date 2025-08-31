@@ -1,0 +1,22 @@
+<div class="repel">
+  <h1>Rendez-vous</h1>
+  <%= link_to "Créer un nouveau rendez-vous", new_training_path, class: "button" %>
+</div>
+<%= turbo_frame_tag "trainings", class: "flow" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "instance_count") do %>Nombre de rendez-vous<% end %>
+      <% header.with_column(name: "season") do %>Année scolaire<% end %>
+    <% end %>
+    <% @trainings.each do |training| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to training.name, training_path(training), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "instance_count") do %><%= training.training_sessions&.size %><% end %>
+        <% row.with_cell(name: "season") do %><%= training.season.name %><% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

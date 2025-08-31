@@ -1,5 +1,6 @@
-<%= link_to ecole_training_path(@training), class: "card" do %>
-  <div class="card-info">
+<%= link_to ecole_training_path(@training), class: "panel card" do %>
+  <div class="repel">
     <h3><%= @training.name %></h3>
+    <div><%= "#{@training.session_count} rendez-vous" %></div>
   </div>
 <% end %>

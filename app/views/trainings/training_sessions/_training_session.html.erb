@@ -1,0 +1,33 @@
+<div id="<%= dom_id training_session %>">
+  <dl>
+    <dt>Date :</dt>
+    <dd><%= training_session.date %></dd>
+    <dt>Lieu :</dt>
+    <dd><%= training_session.location %></dd>
+    <dt>Ville :</dt>
+    <dd><%= training_session.city %></dd>
+    <dt>Invité :</dt>
+    <dd><%= training_session.guest %></dd>
+    <dt>Status :</dt>
+    <dd><%= training_session.status %></dd>
+    <dt>Couverture :</dt>
+    <dd><%= image_tag training_session.image if training_session.image.present? %></dd>
+    <dt>Description :</dt>
+    <dd>
+      <div class="editor-content-wrapper">
+        <%= training_session.formatted_content %>
+      </div>
+    </dd>
+    <dt>Notes :</dt>
+    <dd><%= training_session.comment %></dd>
+  </dl>
+</div>
+
+<%= link_to "Supprimer ce rendez-vous",
+  training_training_session_path(training_id: @training.id, id: training_session.id),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce rendez-vous ?"
+  } %>

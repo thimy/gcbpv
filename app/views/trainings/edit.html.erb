@@ -1,0 +1,8 @@
+<div class="repel">
+  <h1>Éditer ce rendez-vous</h1>
+  <div>
+    <%= link_to "Retour aux autres rendez-vous", trainings_path, class: "button" %>
+  </div>
+</div>
+
+<%= render "form", training: @training, url: training_path, class: "button" %>

@@ -1,0 +1,10 @@
+<div class="repel">
+  <h1><%= @training_session.name %></h1>
+
+  <div>
+    <%= link_to "Éditer ce rendez-vous", edit_training_training_session_path(training_id: @training.id, id: @training_session.id), class: "button" %>
+    <%= link_to "Retour à la liste des rendez-vous", training_training_session_path(training_id: @training.id, id: @training_session.id), class: "button" %>
+  </div>
+</div>
+
+<%= render @training_session %>

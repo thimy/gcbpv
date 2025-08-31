@@ -335,6 +335,11 @@ form > [type=hidden] + * {
   margin-block-start: 0;
 }
 
+form.form-block {
+  max-width: 650px;
+  width: 100%;
+}
+
 form .cluster {
   --gutter: var(--space-s);
 }

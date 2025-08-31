@@ -2,19 +2,9 @@
 <% content_for(:page_title, @training.name) %>
 
 <section class="flow">
-  <div class="tag-list cluster">
-    <% @training.training_sessions.each do |session| %>
-      <span class="tag" data-tag-color="red">
-        <span><%= session.city %></span>
-      </span>
-      <span class="tag">
-        <span><%= session.guest %></span>
-      </span>
-    <% end %>
-  </div>
-  <%= simple_format(@training.description) %>
+  <%= @training.formatted_content %>
   <% if @training.training_sessions.present? %>
-    <section>
+    <section class="flow">
       <h2>Liste des rendez-vous</h2>
       <%= render Website::Card::TrainingSession::Component.with_collection(@training.training_sessions) %>
     </section>

@@ -1,21 +1,25 @@
 <% content_for(:page_class, "ecole training-session-page ") %>
 <% content_for(:page_title, @training_session.name) %>
 
-<section class="feature grid">
-  <div class="left">
-    <dl>
-      <% if @training_session.guest.present? %>
-        <dt>Intervenants</dt>
+<section class="feature flow">
+  <dl class="cluster">
+    <% if @training_session.guest.present? %>
+      <div>
+        <dt>Intervenant</dt>
         <dd><%= @training_session.guest %></dd>
-      <% end %>
+      </div>
+    <% end %>
+    <div>
       <dt>Lieu du rendez-vous</dt>
-      <dd><%= @training_session.city || "À définir" %></dd>
+      <dd><%= [@training_session.location, @training_session.city || "À définir"].compact.join(" – ") %></dd>
+    </div>
+    <% if @training_session.time_period.present? %>
       <dt>Heure du rendez-vous</dt>
       <dd><%= @training_session.time_period %></dd>
-    </dl>
-  </div>
+    <% end %>
+  </dl>
   <div class="right">
-    <%= simple_format(@training_session.description) %>
+    <%= @training_session.formatted_content %>
   </div>
   <%= image_tag @training_session.image if @training_session.image.present? %>
 </section>
