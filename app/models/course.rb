@@ -1,4 +1,5 @@
 class Course < ApplicationRecord
+  include WithTime
   belongs_to :instrument
   belongs_to :slot
   has_many :teachers, through: :slots
@@ -27,6 +28,14 @@ class Course < ApplicationRecord
   }
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
+
+  enum frequency: {
+    "Toutes les semaines": 0,
+    "Toutes les deux semaines": 1,
+    "Les semaines paires": 2,
+    "Les semaines impaires": 3,
+    "Tous les mois": 4
+  }
 
   scope :ordered, -> { includes(:slot).order("slots.day_of_week", :start_time) }
   scope :confirmed, -> { where(option: "Confirmé") }

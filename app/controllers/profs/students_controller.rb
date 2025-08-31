@@ -7,6 +7,7 @@ class Profs::StudentsController < ProfsController
   # GET /subscriptions/1 or /subscriptions/1.json
   def show
     @courses = Course.active(@season).includes(:slot, :subscription).where(slot: {teacher: @teacher}, subscription: {student: @student})
+    @workshops = @teacher.workshop_slots.includes(:subbed_workshops).where(subbed_workshops: {subscription: Subscription.active(@season).where(student: @student)})
   end
 
   private

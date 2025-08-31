@@ -1,6 +1,6 @@
 class CoursesController < SecretariatController
   before_action :authenticate_admin
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy edit_time show_time ]
 
   # GET /courses or /courses.json
   def index
@@ -112,6 +112,13 @@ class CoursesController < SecretariatController
     end
   end
 
+  def edit_time
+    render partial: "edit_time", locals: {course: @course}
+  end
+
+  def show_time
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
@@ -125,6 +132,6 @@ class CoursesController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:slot_id, :instrument_id, :start_time, :end_time, :option, :comment, :subscription_id)
+      params.require(:course).permit(:slot_id, :instrument_id, :start_time, :end_time, :option, :comment, :subscription_id, :frequency)
     end
 end

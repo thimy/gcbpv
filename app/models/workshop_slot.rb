@@ -3,6 +3,7 @@ class WorkshopSlot < ApplicationRecord
 
   has_many :subbed_workshops
   has_many :subscriptions, through: :subbed_workshops
+  has_many :students, through: :subscriptions
   has_many :workshop_slot_teachers, dependent: :delete_all
   has_many :teachers, through: :workshop_slot_teachers
   belongs_to :workshop
@@ -10,6 +11,7 @@ class WorkshopSlot < ApplicationRecord
   delegate :is_youth, to: :workshop
 
   scope :active, -> {where(status: 0)}
+  scope :ordered, -> {order(day_of_week: :asc)}
   scope :youth, -> {includes(:workshop).where(workshop: {is_youth: true})}
   scope :adults, -> {includes(:workshop).where.not(workshop: Workshop.youth)}
 

@@ -1,0 +1,15 @@
+<%= turbo_frame_tag "course-time" do %>
+  <%= form_for @course, html: {class: "inline"} do |form| %>
+    De
+    <%= form.time_field :start_time, include_seconds: false %>
+    à
+    <%= form.time_field :end_time, include_seconds: false %>
+    <%= form.select :frequency, Course.frequencies.keys.to_a, select: course.frequency.presence %>
+    <button type="submit" class="button" data-button-size="small">
+      <%= inline_svg "icons/check" %>
+    </button>
+    <%= link_to show_time_courses_path(id: @course.id), class: "button", "data-button-size": "small" do %>
+      <%= inline_svg "icons/cross" %>
+    <% end %>
+  <% end %>
+<% end %>

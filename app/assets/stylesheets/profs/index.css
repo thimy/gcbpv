@@ -17,4 +17,10 @@
   .panel {
     --flow-space: var(--space-s);
   }
+
+  form.inline {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xxs);
+  }
 }

@@ -122,6 +122,10 @@ Rails.application.routes.draw do
         post :upload_file, on: :collection, as: "upload_file"
       end
     end
+    resource :courses, path: "cours" do
+      get :edit_time, to: "courses#edit_time"
+      get :show_time, to: "courses#show_time"
+    end
 
     scope path: ":season_name", as: :season do
       resources :instruments, path: "disciplines"

@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "course-time", class: "cluster" do %>
+  <div><%= course.start_time.present? && course.end_time.present? ? [course.time_period, course.frequency || Course.frequency[0]].compact.join(" - ") : "---" %></div>
+  <%= link_to "Éditer les horaires", edit_time_courses_path(id: course.id) %>
+<% end %>
+

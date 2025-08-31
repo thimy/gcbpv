@@ -26,7 +26,7 @@
   </div>
   <div class="panel flow">
     <h2>Ateliers</h2>
-    <% @teacher.workshop_slots.youth.each do |slot| %>
+    <% @teacher.workshop_slots.ordered.each do |slot| %>
       <% @subscriptions = slot.subscriptions.active(@season) %>
       <% if @subscriptions.size > 0 %>
         <% if @day != slot.day_of_week %>
@@ -41,31 +41,7 @@
           <% end %>
           <% @subscriptions.each do |subscription| %>
             <% table.with_row(class: "#{subscription.optional? || subscription.optional_workshop?(slot.workshop) ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "name") do %><%= subscription.student.name %><% end %>
-            <% end %>
-          <% end %>
-          <% table.with_empty_state do %>
-            <div class="banner">Pas d’inscription pour cet atelier</div>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-    <% @teacher.workshop_slots.each do |slot| %>
-      <% @subscriptions = slot.subscriptions.active(@season) %>
-      <% if @subscriptions.size > 0 %>
-        <% if @day != slot.day_of_week %>
-          <h3><%= slot.day_of_week %></h3>
-          <% @day = slot.day_of_week %>
-        <% end %>
-        <%= render Shared::Table::Component.new do |table| %>
-          <% table.with_header do |header| %>
-            <% header.with_column(name: "day") do %>
-              <%= "#{[slot.workshop.name, slot.city.name, slot.slot_time].compact.join(" - ")} (#{@subscriptions.size})" %>
-            <% end %>
-          <% end %>
-          <% @subscriptions.each do |subscription| %>
-            <% table.with_row(class: "#{subscription.optional? || subscription.optional_workshop?(slot.workshop) ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "name") do %><%= subscription.student.name %><% end %>
+              <% row.with_cell(name: "name") do %><%= link_to subscription.student.name, profs_season_student_path(season_name: @season.name, id: subscription.student.id) %><% end %>
             <% end %>
           <% end %>
           <% table.with_empty_state do %>
