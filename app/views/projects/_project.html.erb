@@ -1,0 +1,27 @@
+<div id="<%= dom_id project %>">
+  <dl>
+    <dt>Nom du projet :</dt>
+    <dd><%= project.name %></dd>
+    <dt>Année de début :</dt>
+    <dd><%= project.season&.name %></dd>
+    <dt>Status :</dt>
+    <dd><%= project.status %></dd>
+    <dt>Description :</dt>
+    <dd>
+      <div class="editor-content-wrapper">
+        <%= project.formatted_content %>
+      </div>
+    </dd>
+    <dt>Notes :</dt>
+    <dd><%= project.comment %></dd>
+  </dl>
+</div>
+
+<%= link_to "Supprimer cet événement",
+  project_path(project.id),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
+  } %>

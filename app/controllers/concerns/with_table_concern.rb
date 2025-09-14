@@ -2,6 +2,7 @@ module WithTableConcern
   include Pagy::Backend
 
   MAX_PER_PAGE = 20
+  SORT_ATTRIBUTES = ["created_at", "start_date"]
 
   private
 
@@ -36,5 +37,13 @@ module WithTableConcern
   def set_tab_data
     set_sort_params
     set_records
+  end
+
+  def default_sort_attribute
+    SORT_ATTRIBUTES.first
+  end
+
+  def valid_sort_attribute?(attribute)
+    SORT_ATTRIBUTES.include?(attribute)
   end
 end

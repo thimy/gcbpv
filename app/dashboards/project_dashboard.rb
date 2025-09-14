@@ -12,7 +12,7 @@ class ProjectDashboard < Administrate::BaseDashboard
     description: TrixField,
     name: Field::String,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
-    project_instances: Field::NestedHasMany.with_options(skip: :project),
+    students: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -33,7 +33,7 @@ class ProjectDashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
     name
     description
-    project_instances
+    students
     status
     created_at
     updated_at
@@ -45,7 +45,7 @@ class ProjectDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     name
     description
-    project_instances
+    students
     status
   ].freeze
 

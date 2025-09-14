@@ -68,9 +68,6 @@ fr:
       project:
         one: "Projet"
         other: "Projets"
-      project_instance:
-        one: "Édition de projet"
-        other: "Édition de projet"
       season:
         one: "Année scolaire"
         other: "Années scolaires"
@@ -266,18 +263,8 @@ fr:
         season: "Année"
         season_id: "Année"
         status: "Statut"
-        project_instance: "Édition de projet"
-        project_instances: "Éditions de projet"
-        project_instance_id: "Éditions de projet"
-        project_instances_id: "Éditions de projet"
         created_at: "Créé le"
         updated_at: "Modifié le"
-      project_instance:
-        comment: "Commentaires"
-        project: "Projet"
-        season_id: "Année"
-        status: "Statut"
-        students: "Élèves"
       season:
         name: "Année"
         start_year: "Année de début"

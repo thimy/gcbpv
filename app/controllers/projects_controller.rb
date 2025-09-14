@@ -1,71 +1,67 @@
-class TrainingsController < SecretariatController
+class ProjectsController < SecretariatController
   include WithTableConcern
 
   before_action :authenticate_admin
-  before_action :query
-  before_action :set_training, only: %i[ show edit update destroy ]
+  before_action :set_project, only: %i[ show edit update destroy edit_project show_project ]
+  before_action :set_students, only: %i[ new edit ]
 
   SORT_ATTRIBUTES = ["created_at", "start_date"]
 
-  # GET /trainings or /trainings.json
+  # GET /projects or /projects.json
   def index
     set_tab_data
   end
 
-  # GET /trainings/1 or /trainings/1.json
+  # GET /projects/1 or /projects/1.json
   def show
-    @training_sessions = @training.training_sessions.active
   end
 
-  # GET /trainings/new
+  # GET /projects/new
   def new
-    @training = Training.new
+    @project = Project.new
     @seasons = Season.all
   end
 
-  # GET /trainings/1/edit
+  # GET /projects/1/edit
   def edit
     @seasons = Season.all
   end
 
-  # POST /trainings or /trainings.json
+  # POST /projects or /projects.json
   def create
-    @training = Training.new(training_params)
-    @seasons = Season.all
+    @project = Project.new(project_params)
 
     respond_to do |format|
-      if @training.save
-        @training.save_attachments
-        format.html { redirect_to training_url(@training), notice: "La thématique rendez-vous a bien été enregistrée." }
-        format.json { render :show, status: :created, location: @training }
+      if @project.save
+        format.html { redirect_to project_url(@project), notice: "Le projet a été créé avec succès." }
+        format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @training.errors, status: :unprocessable_entity }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /trainings/1 or /trainings/1.json
+  # PATCH/PUT /projects/1 or /projects/1.json
   def update
-    @seasons = Season.all
     respond_to do |format|
-      if @training.update(training_params)
-        @training.save_attachments
-        format.html { redirect_to training_url(@training), notice: "La thématique a bien été modifiée." }
-        format.json { render :show, status: :ok, location: @training }
+      if @project.update(project_params)
+        format.html { redirect_to project_url(@project), notice: "Le projet a été mis à jour avec succès." }
+        format.json { render :show, status: :ok, location: @project }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @training.errors, status: :unprocessable_entity }
+        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /trainings/1 or /trainings/1.json
+  # DELETE /projects/1 or /projects/1.json
   def destroy
-    @training.destroy!
+    @project.destroy!
 
     respond_to do |format|
-      format.html { redirect_to trainings_url, notice: "La thématique a bien été supprimée." }
+      format.html { redirect_to projects_url, notice: "Le projet a été supprimé avec succès." }
       format.json { head :no_content }
     end
   end
@@ -101,32 +97,38 @@ class TrainingsController < SecretariatController
     render json: { success: 0, error: e.message }
   end
 
-  def send_training
-    @training = Training.find(params[:training_id])
-    SubscriptionMailer.custom_mail(@training).deliver_later
+  def edit_project
+  end
 
-    respond_to do |format|
-      format.html { redirect_to training_url(@training) }
-    end
+  def show_project
   end
 
   private
-
     def query
       params[:q]
     end
 
     # Use callbacks to share common setup or constraints between actions.
-    def set_training
-      @training = Training.find(params[:id])
+    def set_project
+      @project = Project.find(params[:id] || params[:project_id])
+    end
+
+    def set_students
+      @students = Student.order(:last_name)
+      @student_list = @students.map{|student|
+        {
+          value: student.id,
+          text: student.name
+        }
+      }
     end
 
     # Only allow a list of trusted parameters through.
-    def training_params
-      params.require(:training).permit(:name, :content, :session_count, :price, :status, :comment, :season_id)
+    def project_params
+      params.require(:project).permit(:name, :content, :status, :season_id, :comment, :student_ids => [])
     end
-    
+
     def set_records
-      @pagy, @trainings = paginate_records(Training.active(@season))
+      @pagy, @projects = paginate_records(Project.all)
     end
 end

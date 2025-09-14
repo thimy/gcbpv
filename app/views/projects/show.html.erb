@@ -1,0 +1,10 @@
+<div class="repel">
+  <h1><%= @project.name %></h1>
+
+  <div>
+    <%= link_to "Éditer cet événement", edit_project_path(@project.id), class: "button" %>
+    <%= link_to "Retour à la liste des événements", projects_path, class: "button" %>
+  </div>
+</div>
+
+<%= render @project %>

@@ -8,7 +8,8 @@ class Training < ApplicationRecord
 
   accepts_nested_attributes_for :training_sessions
 
-  scope :active, -> {where(status: 0)}
-
+  scope :visible, -> {where(status: 0)}
+  scope :active, ->(season) { where(season: season) }
+  
   enum :status, "Public" => 0, "Privé" => 1
 end

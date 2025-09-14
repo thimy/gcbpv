@@ -33,6 +33,9 @@ class UserDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    student
+    teacher
+    email
     confirmation_sent_at
     confirmation_token
     confirmed_at

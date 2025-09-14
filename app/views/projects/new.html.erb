@@ -1,0 +1,9 @@
+<div id="new-project">
+  <div class="repel">
+    <h1>Nouveau projet</h1>
+    <%= link_to "Retour aux projets", projects_path, class: "button" %>
+  </div>
+
+  <%= render "form", project: @project, url: projects_path %>
+
+</div>

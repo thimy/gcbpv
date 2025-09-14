@@ -1,0 +1,34 @@
+<%= form_for project, url: url, data: {controller: "editor address", "editor-file-url-value": upload_file_projects_path} do |form| %>
+  <div class="flow">
+    <%= form.label :name, "Nom du projet" %>
+    <%= form.text_field :name, required: true %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :season_id, "Année de début" %>
+    <%= form.collection_select :season_id, @seasons, :id, :name, { selected: @project&.season_id || "", include_blank: "---", required: true } %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Statut du projet" %>
+    <%= form.select :status, options_for_select(Project.statuses.keys.to_a, selected: project.present? ? project.status : 0) %>
+  </div>
+
+  <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @student_list.to_json %>" data-multiselect-search-url-value="/secretariat/eleves" data-placeholder="Sélectionnez des élèves" data-multiselect-selected-value="<%= @selected_students.present? ? @selected_students : [] %>">
+    <%= form.label "project_students", "Élèves" %>
+    <%= form.collection_select :student_ids, @students, :id, :name, {selected: project.student_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :content, "Description" %>
+    <div id="project_content" data-editor-target="editor"></div>
+  </div>
+
+  <div class="flow">
+    <%= form.label :comment, "Notes" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <%= form.hidden_field :content, id: "project_content_hidden", data: {"editor-target": "hidden"} %>
+  <%= form.submit "Sauvegarder le projet", class: "button" %>
+<% end %>

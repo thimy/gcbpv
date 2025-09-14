@@ -8,6 +8,7 @@ class Student < ApplicationRecord
   has_many :courses, through: :subscriptions
   has_many :subbed_workshops, through: :subscriptions
   has_many :workshops, through: :subbed_workshops
+  has_many :projects, through: :project_students
 
   accepts_nested_attributes_for :subscriptions
 

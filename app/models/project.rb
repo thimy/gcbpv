@@ -1,7 +1,11 @@
 class Project < ApplicationRecord
-  has_many :project_instances
+  include WithEditor
 
-  accepts_nested_attributes_for :project_instances
+  has_many :project_students
+  has_many :students, through: :project_students
+  belongs_to :season
 
   enum :status, "Public" => 0, "Privé" => 1
+
+  scope :visible, -> {where(status: 0)}
 end
