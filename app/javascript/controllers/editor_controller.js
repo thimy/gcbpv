@@ -219,4 +219,10 @@ export default class extends Controller {
     const metaTag = document.querySelector("meta[name='csrf-token']")
     return metaTag ? metaTag.content : ""
   }
+
+  disconnect() {
+    if (this.editor) {
+      this.editor = null
+    }
+  }
 }
