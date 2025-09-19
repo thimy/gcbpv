@@ -54,8 +54,8 @@ class CoursesController < SecretariatController
           locals: {
             course: @course,
             instruments: Instrument.active,
-            teachers: Teacher.where(specialties: Specialty.where(instrument: @course.instrument_id)),
-            slots: Slot.where(teacher: @course.slot.teacher_id),
+            teachers: Teacher.active.where(specialties: Specialty.where(instrument: @course.instrument_id)),
+            slots: Slot.active.where(teacher: @course.slot.teacher_id),
             is_form: true
           }
         )

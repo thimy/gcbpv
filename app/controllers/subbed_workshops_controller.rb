@@ -45,7 +45,7 @@ class SubbedWorkshopsController < SecretariatController
           locals: {
             subbed_workshop: @subbed_workshop,
             workshops: params[:youth] ? Workshop.youth.active : Workshop.adults.active,
-            workshop_slots: WorkshopSlot.where(workshop: @subbed_workshop.workshop_slot.workshop_id),
+            workshop_slots: WorkshopSlot.active.where(workshop: @subbed_workshop.workshop_slot.workshop_id),
             is_form: true,
             is_youth: params[:youth]
           }
