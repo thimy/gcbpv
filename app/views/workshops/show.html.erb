@@ -26,3 +26,5 @@
 </div>
 
 <%= render @workshop %>
+
+<%= link_to "Ajouter un créneau d’atelier", new_workshop_workshop_slot_path(workshop_id: @workshop.id), class: "button" %>

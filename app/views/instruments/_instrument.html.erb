@@ -41,14 +41,6 @@
         <dt>Description :</dt>
         <dd><%= simple_format(instrument.description) %></dd>
       </dl>
-      <%= link_to "Supprimer cette discipline",
-        instrument_path(instrument),
-        class: "button",
-        data: {
-          "button-variant": "alert",
-          turbo_method: :delete,
-          turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cette discipline ?"
-        } %>
     </div>
   </section>
 </div>

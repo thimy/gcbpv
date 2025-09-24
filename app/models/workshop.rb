@@ -5,6 +5,7 @@ class Workshop < ApplicationRecord
   has_many :workshop_slots
   has_many :subbed_workshops, through: :workshop_slots
   has_many :subscriptions, through: :subbed_workshops
+  has_many :students, through: :subscriptions
   has_many :cities, through: :workshop_slots
   belongs_to :price_category
   has_many :plan_price_categories, through: :price_category

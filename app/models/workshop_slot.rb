@@ -11,6 +11,8 @@ class WorkshopSlot < ApplicationRecord
   delegate :is_youth, to: :workshop
 
   scope :active, -> {where(status: 0)}
+  scope :visible, -> {where(status: 0, is_custom: [false, nil])}
+  scope :custom, -> {where(is_custom: true)}
   scope :ordered, -> {order(day_of_week: :asc)}
   scope :youth, -> {includes(:workshop).where(workshop: {is_youth: true})}
   scope :adults, -> {includes(:workshop).where.not(workshop: Workshop.youth)}

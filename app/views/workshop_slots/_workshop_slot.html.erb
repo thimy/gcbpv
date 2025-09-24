@@ -1,0 +1,25 @@
+<div id="<%= dom_id workshop_slot %>">
+  <dl>
+    <dt>Ville :</dt>
+    <dd><%= workshop_slot.city&.name %></dd>
+    <dt>Horaires :</dt>
+    <dd><%= workshop_slot.slot_time %></dd>
+    <dt>Jour de la semaine :</dt>
+    <dd><%= workshop_slot.day_of_week %></dd>
+    <dt>Fréquence :</dt>
+    <dd><%= workshop_slot.frequency %></dd>
+    <dt>Status :</dt>
+    <dd><%= workshop_slot.status %></dd>
+    <dt>Notes :</dt>
+    <dd><%= workshop_slot.comment %></dd>
+  </dl>
+</div>
+
+<%= link_to "Supprimer ce créneau",
+  workshop_slot_path(workshop_slot.id),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce créneau ?"
+  } %>

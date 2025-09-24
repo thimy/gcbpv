@@ -1,0 +1,8 @@
+<div class="repel">
+  <h1>Éditer le créneau</h1>
+  <div>
+    <%= link_to "Retour aux créneaux", workshop_workshop_slots_path, class: "button" %>
+  </div>
+</div>
+
+<%= render "form", workshop_slot: @workshop_slot, url: workshop_workshop_slot_path %>

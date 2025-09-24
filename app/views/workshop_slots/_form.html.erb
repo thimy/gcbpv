@@ -1,0 +1,44 @@
+<%= form_for workshop_slot, url: url do |form| %>
+  <div class="flow">
+    <%= form.label :city_id, "Ville" %>
+    <%= form.collection_select :city_id, @cities, :id, :name, { selected: workshop_slot&.city_id || "", include_blank: "---" } %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Jour" %>
+    <%= form.select :day_of_week, WorkshopSlot.day_of_weeks.keys.to_a, select: workshop_slot.day_of_week.presence %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Fréquence" %>
+    <%= form.select :frequency, WorkshopSlot.frequencies.keys.to_a, select: workshop_slot.frequency.presence %>
+  </div>
+
+  <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @teacher_list.to_json %>" data-multiselect-search-url-value="/secretariat/teachers" data-placeholder="Sélectionnez des catégories" data-multiselect-selected-value="<%= @selected_teachers.present? ? @selected_teachers : [] %>">
+    <%= form.label "teacher_ids", "Professeurs" %>
+    <%= form.collection_select :teacher_ids, @teachers, :id, :name, {selected: workshop_slot.teacher_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :status, "Statut du créneau" %>
+    <%= form.select :status, options_for_select(WorkshopSlot.statuses.keys.to_a, selected: workshop_slot.present? ? workshop_slot.status : 0) %>
+  </div>
+
+  <div class="flow">
+    <%= form.check_box :is_custom %>
+    <%= form.label :is_custom, "Créneau personnalisé" %>
+  </div>
+
+  <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @student_list.to_json %>" data-multiselect-search-url-value="/secretariat/eleves" data-placeholder="Sélectionnez des élèves" data-multiselect-selected-value="<%= @selected_students.present? ? @selected_students : [] %>">
+    <label for="student_ids">Élèves</label>
+    <%= select_tag :student_ids, @students, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
+  </div>
+
+  <div class="flow">
+    <%= form.label :comment, "Notes" %>
+    <%= form.text_area :comment %>
+  </div>
+
+  <%= form.hidden_field :workshop_id, value: @workshop_id %>
+  <%= form.submit "Sauvegarder le créneau", class: "button", "data-turbo": false %>
+<% end %>

@@ -49,12 +49,3 @@
     <% end %>
   </section>
 </div>
-
-<%= link_to "Supprimer ce foyer",
-  household_path(household),
-  class: "button",
-  data: {
-    "button-variant": "alert",
-    turbo_method: :delete,
-    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce foyer ?"
-  } %>

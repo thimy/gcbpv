@@ -11,7 +11,7 @@
     <% table.with_row(link_url: workshop) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to workshop.name, workshop_url(season: @season, record: workshop) %><% end %>
       <% row.with_cell(name: "subscriptions") do %>
-        <% workshop.workshop_slots.each do |slot| %>
+        <% workshop.workshop_slots.active.each do |slot| %>
           <div>
             <strong>
               <%= "#{SubbedWorkshop.registered(@season).confirmed.has_slot(slot).size}" %>

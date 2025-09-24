@@ -1,0 +1,2 @@
+class CustomWorkshopSlot < WorkshopSlot
+end

@@ -1,0 +1,38 @@
+<div class="repel">
+  <h1>Créneaux</h1>
+  <%= link_to "Créer un nouveau créneau", new_workshop_workshop_slot_path, class: "button" %>
+</div>
+<%= turbo_frame_tag "workshop_slots", class: "flow" do %>
+  <%== pagy_nav(@pagy) %>
+  <%= render Shared::Table::Component.new("data-controller": "linkable") do |table| %>
+    <% table.with_header(sort: @sort_attribute, direction: @sort_direction, base_request_params: request.query_parameters) do |header| %>
+      <% header.with_column(name: "name", sortable: true) do %>Nom<% end %>
+      <% header.with_column(name: "season", sortable: true) do %>Année<% end %>
+      <% header.with_column(name: "student_count") do %>Nombre d’élèves<% end %>
+      <% header.with_column(name: "comment") do %>Notes<% end %>
+      <% header.with_column(name: "options") do %>Actions<% end %>
+    <% end %>
+    <% @workshop_slots.each do |workshop_slot| %>
+      <% table.with_row do |row| %>
+        <% row.with_cell(name: "name") do %><%= link_to workshop_slot.name, workshop_slot_path(workshop_slot.id), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "season") do %><%= workshop_slot.season&.name %><% end %>
+        <% row.with_cell(name: "student_count") do %><%= workshop_slot.students.size %><% end %>
+        <% row.with_cell(name: "comment") do %><%= workshop_slot.comment %><% end %>
+        <% row.with_cell(name: "options") do %>
+          <%= link_to edit_workshop_slot_path(workshop_slot.id), class: "button", "data-turbo": false do %>
+            <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+          <% end %>
+          <%= link_to workshop_slot_path(workshop_slot.id),
+            class: "button",
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce créneau ?"
+            } do %>
+            <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%== pagy_nav(@pagy) %>
+<% end %>

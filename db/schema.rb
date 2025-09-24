@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_09_12_130229) do
+ActiveRecord::Schema[7.1].define(version: 2025_09_15_082518) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -541,6 +541,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_09_12_130229) do
     t.integer "frequency"
     t.integer "status"
     t.text "comment"
+    t.boolean "is_custom"
     t.index ["city_id"], name: "index_workshop_slots_on_city_id"
     t.index ["workshop_id"], name: "index_workshop_slots_on_workshop_id"
   end

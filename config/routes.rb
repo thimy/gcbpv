@@ -115,7 +115,9 @@ Rails.application.routes.draw do
       post :add_course, on: :collection
       post :add_workshop, on: :collection
     end
-    resources :workshops, path: "ateliers"
+    resources :workshops, path: "ateliers" do
+      resources :workshop_slots, controller: "workshop_slots", path: "creneaux"
+    end
     resources :projects, path: "projets" do
       post :upload_file, on: :collection, as: "upload_file"
     end

@@ -4,14 +4,16 @@
 <div class="flow">
   <div class="popout flow">
     <div class="cluster tag-list">
-      <% @workshop.workshop_slots.active.each do |slot| %>
+      <% @workshop.workshop_slots.visible.each do |slot| %>
         <div class="dual-tag">
           <span class="tag">
-            <span><%= "#{slot.city.name} : #{slot.day_of_week} - #{slot.slot_time}" %></span>
+            <span><%= "#{slot.city.name} : #{[slot.day_of_week.presence, slot.slot_time.presence].compact.join(" - ").presence || "Horaires à définir"}" %></span>
           </span>
-          <% slot.teachers.each do |teacher| %>
-            <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "dark" do %>
-              <span><%= teacher.name %></span>
+          <% if slot.teachers.present? %>
+            <% slot.teachers.each do |teacher| %>
+              <%= link_to ecole_teacher_path(teacher), class: "tag", "data-tag-color": "dark" do %>
+                <span><%= teacher.name %></span>
+              <% end %>
             <% end %>
           <% end %>
         </div>
