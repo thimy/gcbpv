@@ -11,7 +11,7 @@ class SubscriptionGroupsController < BaseController
   def show_summary
   end
 
-  # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
+  # PATCH/PUT /subscription_groups/1 or /subscription_groups/1.json
   def update
     respond_to do |format|
       if @subscription_group.update(subscription_group_params)
@@ -25,10 +25,22 @@ class SubscriptionGroupsController < BaseController
     end
   end
 
+  # DELETE /subscription_groups/1 or /subscription_groups/1.json
+  def destroy
+    @subscription_group.destroy!
+    @household.destroy! if @household.subscription_groups.size == 0
+
+    respond_to do |format|
+      format.html { redirect_to season_students_path(season_name: @season.name), notice: "L’inscription du foyer a bien été supprimée." }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription_group
       @subscription_group = SubscriptionGroup.find(params[:id] || params[:subscription_group_id])
+      @household = @subscription_group.household
     end
 
     # Only allow a list of trusted parameters through.

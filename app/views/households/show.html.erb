@@ -6,4 +6,17 @@
   </div>
 </div>
 
+<% if @subscription_group.present? %>
 <%= render @household %>
+
+<%= link_to "Supprimer ce foyer pour #{@season.name}",
+  subscription_group_path(@subscription_group.id),
+  class: "button",
+  data: {
+    "button-variant": "alert",
+    turbo_method: :delete,
+    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce foyer ?#{ @subscription_group.subscriptions.present? ? " Cette action supprimera les inscriptions de #{pluralize(@subscription_group.subscriptions.size, "élève")}." : ""}"
+  } %>
+<% else %>
+  <div class="banner">Ce foyer n’a pas d’inscription pour l‘année <%= @season.name %></div>
+<% end %>
