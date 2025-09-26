@@ -15,6 +15,13 @@ class SubscriptionGroup < ApplicationRecord
     # ON_HOLD: "Dans le panier"
   }
 
+  PAYMENT_CLASSES = {
+    "À régler": "optional",
+    "Partiel": "optional",
+    "Réglé": "confirmed",
+    "Trop perçu": "overpaid"
+  }
+
   enum status: {
     "Demande d’information": 0,
     "Inscrit": 1,

@@ -82,6 +82,10 @@ tr {
     background-color: color-mix(in srgb, var(--color-warning), transparent 80%);
   }
 
+  &.overpaid {
+    background-color: color-mix(in srgb, var(--color-secondary), transparent 80%);
+  }
+
   &[data-action] {
     cursor: pointer;
 
