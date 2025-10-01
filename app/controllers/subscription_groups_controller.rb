@@ -11,13 +11,19 @@ class SubscriptionGroupsController < BaseController
   def show_summary
   end
 
+  def show_info
+  end
+
+  def edit_subscription_group
+  end
+
   # PATCH/PUT /subscription_groups/1 or /subscription_groups/1.json
   def update
     respond_to do |format|
       if @subscription_group.update(subscription_group_params)
-        format.turbo_stream
         format.html { redirect_to subscription_group_url(@subscription_group), notice: "L’inscription a bien été enregistrée." }
         format.json { render :show, status: :ok, location: @subscription_group }
+        format.turbo_stream
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @subscription_group.errors, status: :unprocessable_entity }
@@ -45,6 +51,6 @@ class SubscriptionGroupsController < BaseController
 
     # Only allow a list of trusted parameters through.
     def subscription_group_params
-      params.require(:subscription_group).permit(:discount, :donation)
+      params.require(:subscription_group).permit(:discount, :donation, :comment, :majoration_class)
     end
 end

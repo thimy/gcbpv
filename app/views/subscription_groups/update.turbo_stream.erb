@@ -1,3 +1,5 @@
 <%= turbo_stream.replace "subscription-summary", partial: "subscription_groups/subscription_summary", locals: { subscription_group: @subscription_group } %>
 
 <%= turbo_stream.update "payment-summary", partial: "subscription_groups/payment_summary", locals: { subscription_group: @subscription_group } %>
+
+<%= turbo_stream.update "subscription-group-form", partial: "subscription_groups/subscription_group", locals: { subscription_group: @subscription_group } %>

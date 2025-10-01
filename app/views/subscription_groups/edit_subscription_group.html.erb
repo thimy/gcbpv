@@ -1,0 +1,24 @@
+<%= turbo_frame_tag "subscription-group-form" do %>
+  <%= form_for @subscription_group, html: {class: "inline repel"} do |form| %>
+    <div class="flow">
+      <div class="cluster">
+        <div class="flow">
+          <label for="subscription_group_majoration_class">Tarification</label>
+          <%= form.select :majoration_class, options_for_select(SubscriptionGroup.majoration_classes.keys.to_a, selected: @subscription_group.present? ? @subscription_group.status : 0) %>
+        </div>
+        <div class="flow">
+          <label for="subscription_group_comment" class="required">Notes pour l’année en cours</label>
+          <%= form.text_area :comment, rows: 1 %>
+        </div>
+      </div>
+    </div>
+    <div class="cluster">
+      <button type="submit" class="button" data-button-size="small">
+        <%= inline_svg "icons/check" %>
+      </button>
+      <%= link_to subscription_group_show_subscription_group_path(subscription_group_id: @subscription_group.id), class: "button", "data-button-size": "small" do %>
+        <%= inline_svg "icons/cross" %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

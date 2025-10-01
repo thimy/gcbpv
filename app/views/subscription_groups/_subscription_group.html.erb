@@ -1,0 +1,19 @@
+<turbo-frame id="subscription-group-form">
+  <div class="repel">
+    <div>
+      <dl class="cluster">
+        <div>
+          <dt>Tarification :</dt>
+          <dd><%= subscription_group.majoration_class %></dd>
+        </div>
+        <div>
+          <dt>Notes pour l’année en cours :</dt>
+          <dd><%= subscription_group.comment %></dd>
+        </div>
+      </dl>
+    </div>
+    <%= link_to subscription_group_edit_subscription_group_path(subscription_group_id: subscription_group.id), class: "button", "data-button-size": "small" do %>
+      <%= inline_svg "icons/edit" %>
+    <% end %>
+  </div>
+</turbo-frame>

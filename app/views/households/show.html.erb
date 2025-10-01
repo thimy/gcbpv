@@ -7,7 +7,7 @@
 </div>
 
 <% if @subscription_group.present? %>
-<%= render @household %>
+<%= render @household, subscription_group: @subscription_group %>
 
 <%= link_to "Supprimer ce foyer pour #{@season.name}",
   subscription_group_path(@subscription_group.id),
