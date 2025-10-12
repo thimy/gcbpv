@@ -59,7 +59,6 @@ Rails.application.routes.draw do
     resources :seasons
     resources :editions
     resources :categories
-    resources :administrators
     resources :configs, only: [:index, :show, :edit, :update]
     resources :users
     

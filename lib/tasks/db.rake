@@ -86,5 +86,14 @@ namespace :db do
       name: "Goulven DRÉANO",
       admin: true
     )
+
+    User.all.each do |user|
+      name = user.teacher && user.teacher.name || user.student && user.student&.name || ""
+      user.update!(name: name) if user.name.nil?
+    end
+  end
+
+  task session_clear: :environment do
+    ActiveRecord::SessionStore::Session.delete_all
   end
 end

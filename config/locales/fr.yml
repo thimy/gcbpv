@@ -17,9 +17,6 @@ fr:
       messages:
         required: ": le champ doit être renseigné."
     models:
-      administrator:
-        one: "Admin"
-        other: "Admins"
       category:
         one: "Catégorie"
         other: "Catégories"
@@ -111,11 +108,6 @@ fr:
         one: "Atelier"
         other: "Ateliers"
     attributes:
-      administrator:
-        encrypted_password: "Mot de passe chiffré"
-        remember_created_at: "Souvenir de session"
-        reset_password_sent_at: "Réinitialisation de mot de passe"
-        reset_password_token: "Jeton de réinitialisation de mot de passe"
       category:
         name: "Nom"
         created_at: "Créé le"
@@ -462,6 +454,10 @@ fr:
         address: "Adresse"
         created_at: "Créé le"
         updated_at: "Modifié le"
+        encrypted_password: "Mot de passe chiffré"
+        remember_created_at: "Souvenir de session"
+        reset_password_sent_at: "Réinitialisation de mot de passe"
+        reset_password_token: "Jeton de réinitialisation de mot de passe"
       workshop:
         plan: "Formule"
         name: "Nom"

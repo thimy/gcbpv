@@ -15,10 +15,6 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true, format: {with: Devise.email_regexp}
   validates :password, presence: true, on: :create
 
-  def name
-    teacher.name || student.name || ""
-  end
-
   def student
     Student.find(student_id) if student_id.present?
   end
