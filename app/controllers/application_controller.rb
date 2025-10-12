@@ -5,6 +5,10 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('La page n’existe pas')
   end
 
+  def redirect_to_signin
+    redirect_to new_user_session_path
+  end
+
   private
 
   def set_config

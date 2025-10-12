@@ -5,7 +5,7 @@ class SecretariatController < ApplicationController
   before_action :authenticate_admin
 
   def authenticate_admin
-    not_found if current_user.nil? || !current_user.admin
+    redirect_to_signin if current_user.nil?
   end
 
   def index

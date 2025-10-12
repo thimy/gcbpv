@@ -26,6 +26,10 @@ module Admin
       :desc
     end
 
+    def not_found
+      raise ActionController::RoutingError.new('La page n’existe pas')
+    end
+
     protected
       def configure_permitted_parameters
         devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, household_attributes: [:last_name, :first_name, :email, :phone, :address, :postcode, :city]) }
