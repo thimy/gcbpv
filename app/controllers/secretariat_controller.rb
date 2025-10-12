@@ -2,10 +2,10 @@ class SecretariatController < ApplicationController
   layout "secretariat"
 
   before_action :set_season
-  before_action :authenticate_administrator!
+  before_action :authenticate_admin
 
   def authenticate_admin
-    not_found if current_administrator.nil?
+    not_found if current_user.nil? || !current_user.admin
   end
 
   def index

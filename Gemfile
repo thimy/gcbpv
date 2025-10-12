@@ -100,3 +100,5 @@ gem "premailer-rails", "~> 1.12"
 
 gem "sentry-ruby"
 gem "sentry-rails"
+
+gem 'thredded', '~> 1.2'

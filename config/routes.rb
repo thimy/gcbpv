@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Thredded::Engine => '/forum'
+
   get "403", to: "errors#forbidden", as: :forbidden
   get "404", to: "errors#not_found", as: :not_found
   get "500", to: "errors#internal_error", as: :internal_error
@@ -25,13 +27,6 @@ Rails.application.routes.draw do
   get "ecole/tarifs", to: "ecole#pricing", as: :pricing
   get "ecole/calendrier", to: "ecole#calendar", as: :calendar
   get "ecole", to: "ecole#index"
-  
-  devise_for :administrators, path: "admin", path_names: {
-    sign_in: "connexion",
-    sign_out: "deconnexion",
-    password: "mot-de-passe",
-    unlock: "deblocage",
-  }
 
   devise_for :users, path: "", path_names: {
     sign_in: "connexion",
@@ -201,7 +196,4 @@ Rails.application.routes.draw do
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  # root "posts#index"
 end

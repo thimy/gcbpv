@@ -48,4 +48,43 @@ namespace :db do
       group.update!(majoration_class: group.household.agglo)
     end
   end
+
+  task migrate_admins: :environment do
+    administrators = [{
+      name: "Thimy KIEU",
+      email: "thimy@pm.me",
+      password: "De6ebrey",
+      admin: true
+    }, {
+      name: "Fabienne MABON",
+      email: "coordination@gcbpv.org",
+      password: "Changez-moi",
+      admin: true
+    }, {
+      name: "Laurence DAVID",
+      email: "secretariat@gcbpv.org",
+      password: "Changez-moi",
+      admin: true
+    }, {
+      name: "Aurélie BRAULT",
+      email: "archives@gcbpv.org",
+      password: "Changez-moi",
+      admin: true
+    }]
+    administrators.each do |admin|
+      User.create!(admin)
+    end
+
+    User.find(25).update!(
+      name: "Milly FELEZ",
+      email: "ecole@gcbpv.org",
+      password: "Changez-moi",
+      admin: true
+    )
+
+    User.find(1).update!(
+      name: "Goulven DRÉANO",
+      admin: true
+    )
+  end
 end
