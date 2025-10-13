@@ -94,7 +94,15 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
-  config.action_mailer.asset_host = "https://gcbpv.org"
-  config.action_mailer.default_url_options = { host: "gcbpv.org" }
-
+  config.action_mailer.asset_host = "https://#{ENV["URL_HOST"]}"
+  config.action_mailer.default_url_options = { host: ENV["URL_HOST"] }
+  config.action_mailer.smtp_settings = {
+    user_name: ENV["SMTP_USER_NAME"],
+    password: ENV["SMTP_PASSWORD"],
+    domain: ENV["SMTP_DOMAIN"],
+    address: ENV["SMTP_ADDRESS"],
+    port: ENV["SMTP_PORT"],
+    authentication: ENV["SMTP_AUTHENTICATION"]&.to_sym,
+    enable_starttls_auto: true
+  }
 end
