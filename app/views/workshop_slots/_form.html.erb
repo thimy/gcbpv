@@ -19,15 +19,14 @@
     <%= form.collection_select :teacher_ids, @teachers, :id, :name, {selected: workshop_slot.teacher_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
   </div>
 
-  <div class="flow">
-    <%= form.label :status, "Statut du créneau" %>
-    <%= form.select :status, options_for_select(WorkshopSlot.statuses.keys.to_a, selected: workshop_slot.present? ? workshop_slot.status : 0) %>
-  </div>
-
-  <div class="flow">
-    <%= form.check_box :is_custom %>
-    <%= form.label :is_custom, "Créneau personnalisé" %>
-  </div>
+  <% if params["is_custom"] == true %>
+    <%= form.hidden_field :is_custom, value: true %>
+  <% else %>
+    <div class="flow">
+      <%= form.label :status, "Statut du créneau" %>
+      <%= form.select :status, options_for_select(WorkshopSlot.statuses.keys.to_a, selected: workshop_slot.present? ? workshop_slot.status : 0) %>
+    </div>
+  <% end %>
 
   <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @student_list.to_json %>" data-multiselect-search-url-value="/secretariat/eleves" data-placeholder="Sélectionnez des élèves" data-multiselect-selected-value="<%= @selected_students.present? ? @selected_students : [] %>">
     <label for="student_ids">Élèves</label>

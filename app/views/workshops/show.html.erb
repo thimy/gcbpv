@@ -28,3 +28,5 @@
 <%= render @workshop %>
 
 <%= link_to "Ajouter un créneau d’atelier", new_workshop_workshop_slot_path(workshop_id: @workshop.id), class: "button" %>
+
+<%= link_to "Ajouter un créneau d’atelier personnalisé", new_workshop_workshop_slot_path(workshop_id: @workshop.id, is_custom: true), class: "button" %>
