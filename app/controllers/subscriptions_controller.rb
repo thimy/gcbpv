@@ -22,7 +22,6 @@ class SubscriptionsController < SecretariatController
 
   # GET /subscriptions/1/edit
   def edit
-    @student = @subscription.student
   end
 
   # POST /subscriptions or /subscriptions.json
@@ -76,6 +75,11 @@ class SubscriptionsController < SecretariatController
   # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
   def update
     respond_to do |format|
+      if params[:household][:name].present?
+        params[:subscription][:subscription_group_id] = Household.find { |household|
+          params[:household][:name] == household.name
+        }&.subscription_groups.find_by(season: @subscription.season).id
+      end
       if params[:add_kid_workshop]
         subbed_workshop = SubbedWorkshop.new(subbed_workshop_params.merge({subscription_id: params[:id]}))
         if subbed_workshop.save
@@ -137,6 +141,7 @@ class SubscriptionsController < SecretariatController
   # end
 
   def edit_subscription
+    @households = Household.all
   end
 
   def show_subscription
@@ -152,6 +157,7 @@ class SubscriptionsController < SecretariatController
   def set_subscription
     @subscription = Subscription.find(params[:id] || params[:subscription_id])
     @subscription_group = @subscription.subscription_group
+    @student = @subscription.student
   end
 
   # Only allow a list of trusted parameters through.

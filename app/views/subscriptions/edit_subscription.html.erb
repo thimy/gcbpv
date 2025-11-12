@@ -2,6 +2,15 @@
   <%= form_for @subscription, html: {class: "inline repel"} do |form| %>
     <div class="flow">
       <div class="cluster">
+        <%= label_tag :household, "Transférer l’inscription vers un autre foyer :" %>
+        <%= text_field :household, :name, list: "household-list", placeholder: "Rechercher un payeur existant" %>
+        <datalist id="household-list">
+          <% @households.each do |household| %>
+            <option value="<%= household.name %>"><%= household.name %></option>
+          <% end %>
+        </datalist>
+      </div>
+      <div class="cluster">
         <div class="cluster">
           <%= form.label :image_consent, "Consentement à l'image :" %>
           <%= form.check_box :image_consent %>

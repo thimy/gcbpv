@@ -187,6 +187,10 @@ dl > div {
   }
 }
 
+.cluster:has(> dt) {
+  --gutter: var(--space-xs);
+}
+
 .content {
   font-size: var(--size-step-1);
 }

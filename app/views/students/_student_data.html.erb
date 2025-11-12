@@ -1,0 +1,25 @@
+<%= turbo_frame_tag "subscription-data", class: "flow" do %>
+  <div class="repel">
+    <h1>
+      <%= @student.name %>
+      <% if @subscription.present? %>
+        <%= link_to "Foyer #{@subscription.household.name}", household_url(season: @season, record: @subscription.household), class: "button" %>
+      <% end %>
+    </h1>
+
+    <div>
+      <%= link_to "Retour aux inscriptions", season_students_path(@season.name), class: "button" %>
+    </div>
+  </div>
+
+  <% if @subscription.present? %>
+    <div class="switcher">
+      <div class="panel">
+        <%= render "students/student", student: @student %>
+      </div>
+      <div class="panel">
+        <%= render "subscriptions/subscription", subscription: @subscription %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

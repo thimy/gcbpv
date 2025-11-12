@@ -1,7 +1,7 @@
 <turbo-frame id="student-form">
   <div class="repel">
     <div>
-      <dl class="cluster">
+      <dl>
         <div>
           <dt>Année de naissance :</dt>
           <dd><%= @student.birth_year %></dd>
@@ -10,8 +10,6 @@
           <dt>Genre :</dt>
           <dd><%= @student.gender %></dd>
         </div>
-      </dl>
-      <dl class="cluster">
         <div>
           <dt>Email :</dt>
           <dd><%= @student.email_or_household_email %></dd>
@@ -20,29 +18,27 @@
           <dt>Téléphone :</dt>
           <dd><%= @student.phone_or_household_phone %></dd>
         </div>
-      </dl>
-      <dl class="cluster">
         <div>
           <dt>Adresse :</dt>
           <dd><%= @student.address_or_household_address %></dd>
         </div>
-        <div>
-          <dt>Code postal :</dt>
-          <dd><%= @student.postcode_or_household_postcode %></dd>
-        </div>
-        <div>
-          <dt>Ville :</dt>
-          <dd><%= @student.city_or_household_city %></dd>
-        </div>
-      </dl>
-      <% if @student.comment.present? %>
-        <dl>
+        <dl class="cluster">
+          <div>
+            <dt>Code postal :</dt>
+            <dd><%= @student.postcode_or_household_postcode %></dd>
+          </div>
+          <div>
+            <dt>Ville :</dt>
+            <dd><%= @student.city_or_household_city %></dd>
+          </div>
+        </dl>
+        <% if @student.comment.present? %>
           <div>
             <dt>Notes sur l'élève :</dt>
             <dd><%= @student.comment %></dd>
           </div>
-        <dl>
-      <% end %>
+        <% end %>
+      </dl>
     </div>
     <%= link_to edit_personal_info_path(student_id: student.id), class: "button", "data-button-size": "small" do %>
       <%= inline_svg "icons/edit" %>
