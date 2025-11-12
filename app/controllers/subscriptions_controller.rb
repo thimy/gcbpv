@@ -167,7 +167,7 @@ class SubscriptionsController < SecretariatController
       params[:subscription][:student_attributes][:postcode] = nil
       params[:subscription][:student_attributes][:city] = nil
     end
-    params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :status, :comment, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], student_attributes: [:id, :first_name, :last_name, :phone, :email, :gender, :address, :postcode, :city, :birth_year, :comment])
+    params.require(:subscription).permit(:student_id, :subscription_group_id, :ars, :disability, :image_consent, :status, :comment, :loan, courses_attributes: [:instrument_id, :slot_id, :option, :comment], subbed_workshops_attributes: [:workshop_slot_id, :option, :comment], student_attributes: [:id, :first_name, :last_name, :phone, :email, :gender, :address, :postcode, :city, :birth_year, :comment])
   end
 
   def course_params

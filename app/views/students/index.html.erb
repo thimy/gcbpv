@@ -78,6 +78,10 @@
           <%= label_tag :course_city, "Lieu du cours" %>
           <%= select_tag :course_city, options_from_collection_for_select(City.active, "id", "name", params[:course_city].presence || ""), include_blank: "--- Lieu du cours ---", onchange: "this.form.requestSubmit()" %>
         </div>
+        <div class="cluster">
+          <%= check_box_tag :loan, checked: params[:loan].present? && params[:loan] == "1", onchange: "this.form.requestSubmit()" %>
+          <%= label_tag :loan, "Location d’instrument" %>
+        </div>
       </div>
       <div class="cluster">
         <div class="flow">
