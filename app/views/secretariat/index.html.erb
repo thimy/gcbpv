@@ -19,5 +19,17 @@
         <div><%= season.unconfirmed_subscription_size %></div>
       </div>
     <% end %>
+    <div class="card panel">
+      <div class="card-info">
+        <h3>Élèves avec cours</h3>
+        <div><%= season.active_subscriptions.includes(:courses).where.not(courses: {id: nil}).size %></div>
+      </div>
+    </div>
+    <div class="card panel">
+      <div class="card-info">
+        <h3>Élèves avec ateliers seulement</h3>
+        <div><%= season.active_subscriptions.includes(:courses).where(courses: {id: nil}).size %></div>
+      </div>
+    </div>
   </div>
 <% end %>
