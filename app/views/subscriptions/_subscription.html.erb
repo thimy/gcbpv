@@ -24,10 +24,14 @@
           <dt>Statut de l'inscription :</dt>
           <dd><%= subscription.status %></dd>
         </div>
-        <div>
-          <dt>Location d’instrument :</dt>
-          <dd><%= subscription.loan %></dd>
-        </div>
+          <div>
+            <dt>Location d’instrument :</dt>
+            <dd><%= [subscription.loan&.instrument.presence, number_to_currency(subscription.loan&.cost.presence, unit: "€")].compact.join(" · ") %></dd>
+          </div>
+          <div>
+            <dt>Notes de location :</dt>
+            <dd><%= subscription.loan&.comment %></dd>
+          </div>
       </dl>
       <dl>
         <div>

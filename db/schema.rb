@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_12_151241) do
+ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -211,6 +211,16 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_12_151241) do
     t.string "image"
     t.integer "status"
     t.text "comment"
+  end
+
+  create_table "loans", force: :cascade do |t|
+    t.string "instrument"
+    t.bigint "subscription_id", null: false
+    t.decimal "cost"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_loans_on_subscription_id"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -445,7 +455,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_12_151241) do
     t.boolean "ars"
     t.bigint "subscription_group_id"
     t.text "comment"
-    t.string "loan"
+    t.string "instrument_loan"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
     t.index ["subscription_group_id"], name: "index_subscriptions_on_subscription_group_id"
   end
@@ -802,6 +812,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_12_151241) do
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
   add_foreign_key "email_images", "emails"
+  add_foreign_key "loans", "subscriptions"
   add_foreign_key "pathway_slot_teachers", "teachers"
   add_foreign_key "pathway_slots", "cities"
   add_foreign_key "pathway_slots", "pathways"

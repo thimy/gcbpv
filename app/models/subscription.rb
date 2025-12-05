@@ -1,5 +1,6 @@
 class Subscription < ApplicationRecord
   belongs_to :student
+  has_one :loan
   has_many :courses
   has_many :instrument, through: :courses
   has_many :subbed_pathways
@@ -14,7 +15,7 @@ class Subscription < ApplicationRecord
 
   validate :student_unique_subscription, on: :create
 
-  accepts_nested_attributes_for :student, :courses, :subbed_workshops, :workshop_slots, allow_destroy: true
+  accepts_nested_attributes_for :student, :courses, :subbed_workshops, :workshop_slots, :loan, allow_destroy: true
 
   STATUSES = {
     INQUIRY: "Demande d’information",
@@ -124,6 +125,10 @@ class Subscription < ApplicationRecord
   def all_workshops_cost
     extra_workshops = subbed_workshops.adults.confirmed.size + courses.size
     subbed_workshops.adults.confirmed.map { |workshop| workshop.price }.compact.sort!.reverse.drop(courses.size).sum
+  end
+
+  def loan_cost
+    loan.presence.cost
   end
 
   def total_cost

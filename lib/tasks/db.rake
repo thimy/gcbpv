@@ -96,4 +96,11 @@ namespace :db do
   task session_clear: :environment do
     ActiveRecord::SessionStore::Session.delete_all
   end
+
+  task loans: :environment do
+    Subscription.where.not(instrument_loan: [nil, ""]).each do |sub|
+      loan = Loan.create!(instrument: sub.instrument_loan, subscription: sub)
+      puts sub.instrument_loan
+    end
+  end
 end

@@ -32,10 +32,20 @@
         <%= form.label :comment, "Notes sur l’inscription en cours :" %>
         <%= form.text_area :comment, rows: 1 %>
       </div>
-      <div class="cluster">
-        <%= form.label :loan, "Location d’instrument :" %>
-        <%= form.text_field :loan %>
-      </div>
+      <%= form.fields_for :loan, @subscription.loan || Loan.new do |loan_form| %>
+        <div class="cluster">
+          <%= loan_form.label :instrument, "Location d’instrument :" %>
+          <%= loan_form.text_field :instrument %>
+        </div>
+        <div class="cluster">
+          <%= loan_form.label :cost, "Montant :" %>
+          <%= loan_form.text_field :cost %>
+        </div>
+        <div class="cluster">
+          <%= loan_form.label :comment, "Notes :" %>
+          <%= loan_form.text_field :comment %>
+        </div>
+      <% end %>
     </div>
     <div class="cluster">
       <button type="submit" class="button" data-button-size="small">

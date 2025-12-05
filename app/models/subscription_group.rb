@@ -2,6 +2,7 @@ class SubscriptionGroup < ApplicationRecord
   belongs_to :household
   belongs_to :season
   has_many :subscriptions, dependent: :destroy
+  has_many :loans, through: :subscriptions
   has_many :payments, dependent: :destroy
   has_many :students, through: :subscriptions
   delegate :plan, to: :season
@@ -94,8 +95,12 @@ class SubscriptionGroup < ApplicationRecord
     subscription_cost - subscriptions_discount - (discount || 0)
   end
 
+  def loan_cost
+    loans.pluck(:cost).reduce(:+)
+  end
+
   def total_cost
-    [subscription_cost_after_discount, plan.membership_price, donation].compact.sum
+    [subscription_cost_after_discount, loan_cost, plan.membership_price, donation].compact.sum
   end
 
   def total_paid
