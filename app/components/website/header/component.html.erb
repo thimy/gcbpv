@@ -18,9 +18,10 @@
   <nav class="main-header__nav feature" data-controller="menu-toggle">
     <ul class="cluster">
       <li><%= link_to "Actualités", website_post_index_path, class: "decorated" %></li>
-      <li><%= link_to "Événements", website_event_index_path, class: "decorated" %></li>
+      <li><%= link_to "Agenda local", website_event_index_path, class: "decorated" %></li>
       <li><%= link_to "La Bogue d’Or", "/bogue/#{Bogue.active.ordered.first.slug}", class: "decorated" %></li>
       <li><%= link_to "L'école de musique", ecole_path, class: "decorated" %></li>
+      <li><%= link_to "Répertoire commun", "https://padlet.com/gcbpvemt/repertoire-commun-2025-2026-acibx3wv0sesra53", class: "decorated" %></li>
       <li><%= link_to "Centre ressources", archives_path, class: "decorated" %></li>
       <li><%= link_to "L’association", association_path, class: "decorated" %></li>
     </div>

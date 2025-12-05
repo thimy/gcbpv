@@ -14,12 +14,8 @@
     <% end %>
   </section>
   <section class="upcoming-events flow">
-    <%= link_to "/bogue/#{Bogue.active.ordered.first.slug}" do %>
-      <%= image_tag "bogue/bogue-50.jpg", alt: "50 ans de la Bogue d’Or" %>
-    <% end %>
-    <br />
     <header class="flow">
-      <h2><%= inline_svg "icons/party" %>Événements à venir</h2>
+      <h2><%= inline_svg "icons/party" %>Agenda local</h2>
       <%= link_to "↬ Voir tous les événements", website_event_index_path %>
     </header>
     <% if @events.present? %>
