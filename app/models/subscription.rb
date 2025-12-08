@@ -1,4 +1,6 @@
 class Subscription < ApplicationRecord
+  include GenerateCsv
+  
   belongs_to :student
   has_one :loan
   has_many :courses

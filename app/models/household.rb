@@ -1,4 +1,5 @@
 class Household < ApplicationRecord
+  include GenerateCsv
   include WithPerson
   phony_normalize :phone, default_country_code: "FR"
 

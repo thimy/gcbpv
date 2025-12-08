@@ -101,7 +101,10 @@
   </details>
   <div class="cluster button-group repel">
     <%= f.button class: "button" do %>Rechercher<% end %>
-    <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+    <div class="cluster">
+      <%= link_to "Exporter la liste", students_path(format: :csv), class: "button" %>
+      <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+    </div>
   </div>
 <% end %>
 <div>

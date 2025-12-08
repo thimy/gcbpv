@@ -9,6 +9,15 @@ class HouseholdsController < SecretariatController
   # GET /households or /households.json
   def index
     set_tab_data
+    respond_to do |format|
+      format.html
+      format.csv do
+        filename = ['foyers', Date.today].join(' ')
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}.csv"
+        render template: 'households/index'
+      end
+    end
   end
 
   # GET /households/1 or /households/1.json

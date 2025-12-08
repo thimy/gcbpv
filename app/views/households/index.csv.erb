@@ -1,0 +1,36 @@
+<%- headers = [
+  "Nom",
+  "Prénom",
+  "Montant des inscriptions",
+  "Communauté de communes",
+  "Montant des ateliers jeunesse",
+  "Montant des cours",
+  "Montant des ateliers",
+  "Pourcentage de réduction",
+  "Coût après réduction",
+  "Montant des cotisations",
+  "Dons",
+  "Locations",
+  "Coût total",
+  "Montant payé",
+  "Montant restant"] -%>
+<%= CSV.generate_line headers %>
+<%- @filtered_households.includes(:subscription_groups).where(subscription_groups: {status: [1, 2]}).order("last_name").each do |household| -%>
+  <%= CSV.generate_line([
+    household.last_name,
+    household.first_name,
+    household.subscription_group.subscription_cost,
+    household.subscription_group.majoration_class,
+    household.subscription_group.kid_workshop_cost,
+    household.subscription_group.course_cost,
+    household.subscription_group.workshop_cost,
+    household.subscription_group.discount_percentage,
+    household.subscription_group.subscription_cost_after_discount,
+    household.subscription_group.plan.membership_price,
+    household.subscription_group.donation,
+    household.subscription_group.loan_cost,
+    household.subscription_group.total_cost,
+    household.subscription_group.total_paid,
+    household.subscription_group.total_remaining
+    ]) -%>
+<%- end -%>

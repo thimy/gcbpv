@@ -65,6 +65,18 @@ class SubscriptionGroup < ApplicationRecord
     end
   end
 
+  def kid_workshop_cost
+    subscriptions.present? ? subscriptions.map {|subscription| subscription.kid_workshop_cost}.compact.sum : 0
+  end
+
+  def course_cost
+    subscriptions.present? ? subscriptions.map {|subscription| subscription.course_cost}.compact.sum : 0
+  end
+
+  def workshop_cost
+    subscriptions.present? ? subscriptions.map {|subscription| subscription.workshop_cost}.compact.sum : 0
+  end
+
   def subscription_cost
     subscriptions.present? ? subscriptions.map {|subscription| subscription.total_cost}.compact.sum : 0
   end

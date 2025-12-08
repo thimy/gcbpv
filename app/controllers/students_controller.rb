@@ -1,5 +1,6 @@
 class StudentsController < SecretariatController
   include WithTableConcern
+  require 'csv'
 
   before_action :authenticate_admin
   before_action :query
@@ -23,6 +24,15 @@ class StudentsController < SecretariatController
     @total_subscriptions = Subscription.active(@season).not_on_hold
     @confirmed_count = Subscription.active(@season).registered(@season).size
     @unconfirmed_count = @total_subscriptions.size - @confirmed_count
+    respond_to do |format|
+      format.html
+      format.csv do
+        filename = ['eleves', Date.today].join(' ')
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] = "attachment; filename=#{filename}.csv"
+        render template: 'students/index'
+      end
+    end
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
