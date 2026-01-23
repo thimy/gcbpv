@@ -103,6 +103,7 @@
     <%= f.button class: "button" do %>Rechercher<% end %>
     <div class="cluster">
       <%= link_to "Exporter la liste", students_path(format: :csv), class: "button" %>
+      <%= link_to "Exporter les emails", students_path(format: :csv, email: true), class: "button" %>
       <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
     </div>
   </div>

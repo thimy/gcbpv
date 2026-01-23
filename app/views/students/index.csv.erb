@@ -1,25 +1,39 @@
-<%- headers = ["Nom",
-  "Prénom",
-  "Année de naissance",
-  "Nombre d’ateliers enfants",
-  "Coût des ateliers enfants",
-  "Nombre de cours",
-  "Coût des cours",
-  "Nombre d’ateliers",
-  "Coût des ateliers",
-  "Coût total de l’inscription"] -%>
-<%= CSV.generate_line headers %>
-<%- @filtered_subscriptions.includes(:student).order("students.last_name").each do |subscription| -%>
-  <%= CSV.generate_line([
-    subscription.student.last_name,
-    subscription.student.first_name,
-    subscription.student.birth_year,
-    subscription.subbed_workshops.youth.confirmed.size,
-    subscription.kid_workshop_cost,
-    subscription.courses.confirmed.size,
-    subscription.course_cost,
-    subscription.subbed_workshops.adults.confirmed.size,
-    subscription.workshop_cost,
-    subscription.total_cost
-    ]) -%>
-<%- end -%>
+<% if params[:email] == "true" %>
+  <%- headers = ["Nom",
+    "Prénom",
+    "Email",] -%>
+  <%= CSV.generate_line headers %>
+  <%- @filtered_subscriptions.includes(:student).order("students.last_name").each do |subscription| -%>
+    <%= CSV.generate_line([
+      subscription.student.last_name,
+      subscription.student.first_name,
+      subscription.student.email_or_household_email,
+      ]) -%>
+  <%- end -%>
+  <% else %>
+  <%- headers = ["Nom",
+    "Prénom",
+    "Année de naissance",
+    "Nombre d’ateliers enfants",
+    "Coût des ateliers enfants",
+    "Nombre de cours",
+    "Coût des cours",
+    "Nombre d’ateliers",
+    "Coût des ateliers",
+    "Coût total de l’inscription"] -%>
+  <%= CSV.generate_line headers %>
+  <%- @filtered_subscriptions.includes(:student).order("students.last_name").each do |subscription| -%>
+    <%= CSV.generate_line([
+      subscription.student.last_name,
+      subscription.student.first_name,
+      subscription.student.birth_year,
+      subscription.subbed_workshops.youth.confirmed.size,
+      subscription.kid_workshop_cost,
+      subscription.courses.confirmed.size,
+      subscription.course_cost,
+      subscription.subbed_workshops.adults.confirmed.size,
+      subscription.workshop_cost,
+      subscription.total_cost
+      ]) -%>
+  <%- end -%>
+<% end %>
