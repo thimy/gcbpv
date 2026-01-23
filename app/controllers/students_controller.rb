@@ -236,7 +236,7 @@ class StudentsController < SecretariatController
       end
 
       @item_size = @filtered_subscriptions.size
-      @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.uniq.join("\n")
+      @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.reject(&:blank?).uniq.join("\n")
       @pagy, @subscriptions = paginate_records(@filtered_subscriptions)
     end
     

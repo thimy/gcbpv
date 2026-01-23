@@ -108,7 +108,7 @@ class HouseholdsController < SecretariatController
         @filtered_households = @filtered_households.where("last_name ILIKE ?", "%#{query}%").or(@filtered_households.where("first_name ILIKE ?", "%#{query}%"))
       end
 
-      @selected_emails = @filtered_households.map {|household| household.household_email}.uniq.join("\n")
+      @selected_emails = @filtered_households.map {|household| household.household_email}.reject(&:blank?).uniq.join("\r\n")
       @pagy, @households = paginate_records(@filtered_households)
     end
 
