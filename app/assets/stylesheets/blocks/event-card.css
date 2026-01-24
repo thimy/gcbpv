@@ -21,6 +21,7 @@ event-card {
   }
 
   address {
+    display: inline;
     font-size: var(--size-step-0);
     font-style: normal;
   }

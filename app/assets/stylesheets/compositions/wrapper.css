@@ -7,7 +7,7 @@ A common wrapper/container
   --full: minmax(var(--gap), 1fr);
   --content: min(51.3ch, 100% - var(--gap) * 2);
   --popout: minmax(0, 8rem);
-  --feature: minmax(0, 15rem);
+  --feature: minmax(0, 20rem);
 
   display: grid;
   grid-template-columns:

@@ -3,6 +3,11 @@
     --flow-space: var(--space-xs);
     background: var(--color-dark) url("home/poissnoz.jpg") right center no-repeat;
     background-size: cover;
+    min-height: 25em;
+
+    > .flow {
+      align-content: end;
+    }
   }
 
   .main-header__logo a {

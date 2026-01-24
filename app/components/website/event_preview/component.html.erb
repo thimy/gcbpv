@@ -1,0 +1,8 @@
+<event-card class="card panel">
+  <%= link_to website_event_path(@event.id), class: "flow" do %>
+    <div>
+      <time><%= @event.date_period %></time> à <address><%= @event.city %></address>
+    </div>
+    <h3><%= @event.name %></h3>
+  <% end %>
+</event-card>

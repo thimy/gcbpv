@@ -8,7 +8,7 @@
       <%= link_to "↬ Voir tous les articles", website_post_index_path %>
     </header>
     <% if @posts.present? %>
-      <div class="flow">
+      <div class="grid">
         <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
       </div>
     <% end %>
@@ -20,7 +20,7 @@
     </header>
     <% if @events.present? %>
       <div class="flow">
-        <%= render Website::Card::Event::Component.with_collection(@events, inline: true) %>
+        <%= render Website::EventPreview::Component.with_collection(@events) %>
       </div>
     <% end %>
   </section>
