@@ -20,7 +20,7 @@ class Slot < ApplicationRecord
 
   enum :status, "Public" => 0, "Privé" => 1
 
-  enum day_of_week: {
+  enum :day_of_week, {
     "Jour à définir": 0,
     "Lundi": 1,
     "Mardi": 2,
@@ -32,7 +32,7 @@ class Slot < ApplicationRecord
     "Jour variable": 8
   }
 
-  enum frequency: {
+  enum :frequency, {
     "Fréquence à définir": 0,
     "Hebdomadaire": 1,
     "Toutes les deux semaines": 2,

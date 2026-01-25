@@ -26,7 +26,7 @@ class WorkshopSlot < ApplicationRecord
 
   enum :status, "Public" => 0, "Privé" => 1
 
-  enum day_of_week: {
+  enum :day_of_week, {
     "À définir": 0,
     "Lundi": 1,
     "Mardi": 2,
@@ -37,7 +37,7 @@ class WorkshopSlot < ApplicationRecord
     "Dimanche": 7,
   }
 
-  enum frequency: {
+  enum :frequency, {
     "Toutes les semaines": 0,
     "Toutes les deux semaines": 1,
     "Les semaines paires": 2,

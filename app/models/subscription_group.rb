@@ -27,14 +27,14 @@ class SubscriptionGroup < ApplicationRecord
     "Trop perçu": "overpaid"
   }
 
-  enum status: {
+  enum :status, {
     "Demande d’information": 0,
     "Inscrit": 1,
     "Annulé": 2,
     # "Dans le panier": 3
   }
 
-  enum majoration_class: {
+  enum :majoration_class, {
     "Redon Agglo": 0,
     "Oust à Brocéliande Communauté": 1,
     "Hors agglo": 2

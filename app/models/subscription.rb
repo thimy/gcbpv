@@ -27,7 +27,7 @@ class Subscription < ApplicationRecord
     # ON_HOLD: "Dans le panier"
   }
 
-  enum status: {
+  enum :status, {
     "Demande d’information": 0,
     "Inscrit": 1,
     "Annulé": 2

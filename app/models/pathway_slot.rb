@@ -6,7 +6,7 @@ class PathwaySlot < ApplicationRecord
 
   validates :pathway, presence: true
 
-  enum day_of_week: {
+  enum: day_of_week, {
     "À définir": 0,
     "Lundi": 1,
     "Mardi": 2,

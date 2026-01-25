@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.3.4"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3", ">= 7.1.3.2"
+gem "rails", ">= 8.1"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -73,7 +73,7 @@ gem "view_component", "~> 3.23"
 
 gem "simple_form", "~> 5.3.1"
 
-gem "rails-i18n", "~> 7.0"
+gem "rails-i18n", "~> 8.1"
 
 gem "cssbundling-rails", "~> 1.4.3"
 
@@ -83,7 +83,6 @@ gem "administrate"
 gem "administrate-field-image"
 gem "administrate-field-active_storage"
 gem "administrate-field-nested_has_many"
-gem "administrate-field-belongs_to_search"
 
 gem "draper"
 gem "devise", "~> 4.9.4"
@@ -92,6 +91,7 @@ gem "dotenv"
 gem "factory_bot_rails", "~> 6.4"
 
 gem "inline_svg", "~> 1.9"
+
 gem "trix"
 
 gem "pagy", "~> 9.0"

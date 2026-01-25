@@ -33,7 +33,7 @@ class Course < ApplicationRecord
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
-  enum frequency: {
+  enum :frequency, {
     "Toutes les semaines": 0,
     "Toutes les deux semaines": 1,
     "Les semaines paires": 2,

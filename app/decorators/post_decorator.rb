@@ -2,7 +2,7 @@ class PostDecorator < ApplicationDecorator
   delegate_all
   filter_attributes :created_at,
                     :published_at,
-                    :with => :strftime("%d/%m/%Y")
+                    :with => :strftime
 
   def cover_image
     return cover if cover.present?
