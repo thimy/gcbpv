@@ -1,4 +1,7 @@
 <post-preview class="panel flow">
+  <%= image_tag @post.cover_image if @post.cover_image.class == "string" %>
+  <h3><%= link_to @post.title, website_post_path(@post) %></h3>
+  <time>Publié le <%= @post.publication_datetime %></time>
   <% if @post.categories.present? %>
     <div class="tag-list cluster cluster">
       <% @post.categories.each do |category| %>
@@ -7,11 +10,5 @@
         </span>
       <% end %>
     </div>
-  <% end %>
-  <h3><%= link_to @post.title, website_post_path(@post) %></h3>
-  <time>Publié le <%= @post.publication_datetime %></time>
-  <% if @post.excerpt.present? %>
-    <p><%= raw @post.excerpt %></p>
-    <%= link_to "↬ Lire la suite", website_post_path(@post), class: "read-more" %>
   <% end %>
 </post-preview>

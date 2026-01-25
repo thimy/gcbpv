@@ -1,4 +1,6 @@
 class WebsiteController < ApplicationController
+  decorates_assigned :posts
+
   def index
     @posts = Post.latest.limit(4)
     @events = Event.ordered.upcoming.limit(4).reverse

@@ -5,6 +5,8 @@ class PostsController < SecretariatController
   before_action :query
   before_action :set_post, only: %i[ show edit update destroy ]
 
+  decorates_assigned :posts, :post
+
   SORT_ATTRIBUTES = ["created_at"]
 
   # GET /posts or /posts.json

@@ -85,6 +85,7 @@ gem "administrate-field-active_storage"
 gem "administrate-field-nested_has_many"
 gem "administrate-field-belongs_to_search"
 
+gem "draper"
 gem "devise", "~> 4.9.4"
 gem "dotenv"
 

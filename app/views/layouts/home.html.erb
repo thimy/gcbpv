@@ -1,7 +1,8 @@
 <% content_for(:page_class, "website") %>
 
 <% content_for :content do %>
-  <%= render Website::Header::Component.new(banner: @banner) %>
+  <%= render Website::Header::Component.new(banner: @banner) do |header| %>
+  <% end %>
   <main class="wrapper region">
     <%= yield %>
   </main>

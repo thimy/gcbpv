@@ -13,7 +13,7 @@ class Post < ApplicationRecord
 
   enum :status, "Privé": 0, "Public": 1
   scope :latest, -> { where(status: "Public").order(published_at: :desc) }
-  scope :ordered, -> { order(published_at: :desc) }
+  scope :ordered, -> { order(created_at: :desc) }
 
   def publication_datetime
     format_datetime(published_at)
