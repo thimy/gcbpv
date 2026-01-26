@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.3.4"
+ruby "4.0.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", ">= 8.1"
@@ -92,8 +92,6 @@ gem "factory_bot_rails", "~> 6.4"
 
 gem "inline_svg", "~> 1.9"
 
-gem "trix"
-
 gem "pagy", "~> 9.0"
 gem "phony_rails"
 
@@ -102,4 +100,3 @@ gem "premailer-rails", "~> 1.12"
 gem "sentry-ruby"
 gem "sentry-rails"
 
-gem 'thredded', '~> 1.2'

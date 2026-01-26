@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  mount Thredded::Engine => '/forum'
-
   get "403", to: "errors#forbidden", as: :forbidden
   get "404", to: "errors#not_found", as: :not_found
   get "500", to: "errors#internal_error", as: :internal_error

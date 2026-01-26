@@ -101,8 +101,6 @@ GEM
     administrate-field-nested_has_many (2.1.0)
       administrate (>= 0.19, < 1)
       cocoon (~> 1.2, >= 1.2.11)
-    autoprefixer-rails (10.4.21.0)
-      execjs (~> 2)
     aws-eventstream (1.4.0)
     aws-partitions (1.1209.0)
     aws-sdk-core (3.241.4)
@@ -122,10 +120,6 @@ GEM
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.12.1)
       aws-eventstream (~> 1, >= 1.0.2)
-    babel-source (5.8.35)
-    babel-transpiler (0.7.0)
-      babel-source (>= 4.0, < 6)
-      execjs (~> 2.0)
     base64 (0.3.0)
     bcrypt (3.1.21)
     bigdecimal (4.0.1)
@@ -153,8 +147,6 @@ GEM
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
     date (3.5.1)
-    db_text_search (1.0.0)
-      activerecord (>= 4.1.15)
     debug (1.11.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -177,7 +169,6 @@ GEM
     erubi (1.13.1)
     excon (1.3.2)
       logger
-    execjs (2.10.0)
     factory_bot (6.5.6)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
@@ -198,13 +189,8 @@ GEM
       fog-json (>= 1.0)
     formatador (1.2.3)
       reline
-    friendly_id (5.6.0)
-      activerecord (>= 4.0.0)
     globalid (1.3.0)
       activesupport (>= 6.1)
-    html-pipeline (2.14.3)
-      activesupport (>= 2)
-      nokogiri (>= 1.4)
     htmlentities (4.4.2)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
@@ -244,10 +230,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    kramdown (2.5.2)
-      rexml (>= 3.4.4)
-    kramdown-parser-gfm (1.1.0)
-      kramdown (~> 2.0)
     launchy (3.1.1)
       addressable (~> 2.8)
       childprocess (~> 5.0)
@@ -278,7 +260,6 @@ GEM
       prism (~> 1.5)
     msgpack (1.8.0)
     multi_json (1.19.1)
-    mustache (1.1.1)
     net-imap (0.6.2)
       date
       net-protocol
@@ -293,13 +274,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.0-x86_64-linux-gnu)
       racc (~> 1.4)
-    onebox (2.2.19)
-      addressable (~> 2.8.0)
-      htmlentities (~> 4.3)
-      multi_json (~> 1.11)
-      mustache
-      nokogiri (~> 1.7)
-      sanitize
     orm_adapter (0.5.0)
     pagy (9.4.0)
     pg (1.6.3-arm64-darwin)
@@ -326,8 +300,6 @@ GEM
     public_suffix (7.0.2)
     puma (7.2.0)
       nio4r (~> 2.0)
-    pundit (2.5.2)
-      activesupport (>= 3.0.0)
     racc (1.8.1)
     rack (3.2.4)
     rack-session (2.1.1)
@@ -361,8 +333,6 @@ GEM
     rails-i18n (8.1.0)
       i18n (>= 0.7, < 2)
       railties (>= 8.0.0, < 9)
-    rails_gravatar (1.0.4)
-      actionview
     railties (8.1.2)
       actionpack (= 8.1.2)
       activesupport (= 8.1.2)
@@ -386,15 +356,11 @@ GEM
       actionpack (>= 7.0)
       railties (>= 7.0)
     rexml (3.4.4)
-    rinku (2.0.6)
     ruby-vips (2.3.0)
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
     rubyzip (3.2.2)
-    sanitize (7.0.0)
-      crass (~> 1.0.2)
-      nokogiri (>= 1.16.8)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -424,10 +390,6 @@ GEM
       concurrent-ruby (~> 1.0)
       logger
       rack (>= 2.2.4, < 4)
-    sprockets-es6 (0.9.2)
-      babel-source (>= 5.8.11)
-      babel-transpiler
-      sprockets (>= 3.0.0)
     sprockets-rails (3.5.2)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
@@ -436,30 +398,8 @@ GEM
       railties (>= 6.0.0)
     stringio (3.2.0)
     thor (1.5.0)
-    thredded (1.2.1)
-      autoprefixer-rails
-      db_text_search
-      friendly_id
-      html-pipeline (>= 2.14.1, < 3)
-      htmlentities
-      inline_svg (>= 1.6.0)
-      kaminari
-      kramdown (>= 2.0.0)
-      kramdown-parser-gfm
-      nokogiri
-      onebox (>= 1.8.99)
-      pundit (>= 1.1.0)
-      rails (>= 7.0)
-      rails_gravatar
-      rinku
-      sanitize
-      sprockets-es6
-      timeago_js (>= 3.0.2.2)
     tilt (2.7.0)
-    timeago_js (3.0.2.2)
     timeout (0.6.0)
-    trix (0.10.1)
-      rails
     tsort (0.2.0)
     turbo-rails (2.0.21)
       actionpack (>= 7.1.0)
@@ -490,6 +430,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-23
+  arm64-darwin-24
   x86_64-linux
 
 DEPENDENCIES
@@ -525,15 +466,13 @@ DEPENDENCIES
   simple_form (~> 5.3.1)
   sprockets-rails
   stimulus-rails
-  thredded (~> 1.2)
-  trix
   turbo-rails
   tzinfo-data
   view_component (~> 3.23)
   web-console
 
 RUBY VERSION
-   ruby 3.3.4p94
+   ruby 4.0.1p0
 
 BUNDLED WITH
    2.4.10
