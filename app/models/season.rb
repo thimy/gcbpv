@@ -44,5 +44,16 @@ class Season < ApplicationRecord
   def unconfirmed_subscription_size
     active_subscriptions.inquired(self).size
   end
+
+  def course_subscriptions
+    active_subscriptions.includes(:courses).where.not(courses: {id: nil})
+  end
   
+  def workshop_subscriptions
+    active_subscriptions.includes(:subbed_workshops).adults.where.not(subbed_workshops: {id: nil})
+  end
+
+  def youth_workshop_subscriptions
+    active_subscriptions.includes(:subbed_workshops).youth.where.not(subbed_workshops: {id: nil})
+  end
 end
