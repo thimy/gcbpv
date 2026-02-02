@@ -24,7 +24,7 @@ class WorkshopSlot < ApplicationRecord
   scope :youth, -> {includes(:workshop).where(workshop: {is_youth: true})}
   scope :adults, -> {includes(:workshop).where.not(workshop: Workshop.youth)}
 
-  enum :status, "Public" => 0, "Privé" => 1
+  enum :status, {"Public": 0, "Privé": 1}
 
   enum :day_of_week, {
     "À définir": 0,

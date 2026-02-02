@@ -1,6 +1,5 @@
 module GenerateCsv
   extend ActiveSupport::Concern
-  require 'csv'
 
   class_methods do
     def to_csv(collection)

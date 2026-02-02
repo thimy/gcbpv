@@ -1,6 +1,5 @@
 class StudentsController < SecretariatController
   include WithTableConcern
-  require 'csv'
 
   before_action :authenticate_admin
   before_action :query
@@ -221,7 +220,9 @@ class StudentsController < SecretariatController
       @not_filters[:subscription_group][:status].push(params[:exclude_status]) if params[:exclude_status].present?
       @not_loan = params[:loan].present? ? {loan: {instrument: [nil, ""]}} : {}
 
-      @filtered_subscriptions = Subscription.includes(:subscription_group, :loan).where(@filters).where.not(@not_filters).where.not(@not_loan).where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term OR :term IS NULL", { term: "%#{query}%" }))
+      @filtered_subscriptions = Subscription.includes(:subscription_group, :loan).where(@filters).where.not(@not_filters).where.not(@not_loan)
+
+      @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term", { term: "%#{query}%" })) if query.present?
 
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year > ?", params[:birthyear_under])) if params[:birthyear_under].present?
       

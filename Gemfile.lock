@@ -146,6 +146,7 @@ GEM
       addressable
     cssbundling-rails (1.4.3)
       railties (>= 6.0.0)
+    csv (3.3.5)
     date (3.5.1)
     debug (1.11.1)
       irb (~> 1.10)
@@ -443,6 +444,7 @@ DEPENDENCIES
   bootsnap
   capybara
   cssbundling-rails (~> 1.4.3)
+  csv
   debug
   devise (~> 4.9.4)
   dotenv
@@ -458,7 +460,7 @@ DEPENDENCIES
   phony_rails
   premailer-rails (~> 1.12)
   puma (>= 5.0)
-  rails (>= 8.1)
+  rails (>= 8.1.2)
   rails-i18n (~> 8.1)
   selenium-webdriver
   sentry-rails
