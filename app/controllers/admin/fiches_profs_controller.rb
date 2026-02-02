@@ -4,7 +4,7 @@ module Admin
 
     def index
       @season = Config.first.season
-      @teachers = Teacher.active
+      @teachers = Teacher.active(@season)
     end
 
     def show

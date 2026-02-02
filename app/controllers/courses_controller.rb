@@ -34,7 +34,7 @@ class CoursesController < SecretariatController
           partial: "courses/course", 
           locals: {
             course: Course.new,
-            instruments: Instrument.active,
+            instruments: Instrument.active(@season),
             teachers: [],
             slots: [],
             is_form: true,
@@ -53,9 +53,9 @@ class CoursesController < SecretariatController
           partial: "courses/course", 
           locals: {
             course: @course,
-            instruments: Instrument.active,
-            teachers: Teacher.active.where(specialties: Specialty.where(instrument: @course.instrument_id)),
-            slots: Slot.active.where(teacher: @course.slot.teacher_id),
+            instruments: Instrument.active(@season),
+            teachers: Teacher.active(@season).where(specialties: Specialty.where(instrument: @course.instrument_id)),
+            slots: Slot.active(@season).where(teacher: @course.slot.teacher_id),
             is_form: true
           }
         )

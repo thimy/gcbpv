@@ -185,9 +185,9 @@ class StudentsController < SecretariatController
     def set_lists
       @students = Student.all
       @households = Household.all
-      @instruments = Instrument.active
-      @workshops = Workshop.adults.active
-      @kid_workshops = KidWorkshop.active
+      @instruments = Instrument.active(@season)
+      @workshops = Workshop.adults.active(@season)
+      @kid_workshops = KidWorkshop.active(@season)
     end
 
     def set_records

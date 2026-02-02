@@ -162,9 +162,9 @@ class Users::SubscriptionsController < BaseController
   private
     def set_lists
       @household = Household.find(current_user.household_id)
-      @instruments = Instrument.active
-      @workshops = Workshop.active
-      @kid_workshops = KidWorkshop.active
+      @instruments = Instrument.active(@season)
+      @workshops = Workshop.active(@season)
+      @kid_workshops = KidWorkshop.active(@season)
     end
 
     # Use callbacks to share common setup or constraints between actions.

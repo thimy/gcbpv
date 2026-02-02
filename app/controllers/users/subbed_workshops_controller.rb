@@ -25,7 +25,7 @@ class Users::SubbedWorkshopsController < BaseController
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: SubbedWorkshop.new,
-            workshops: Workshop.active,
+            workshops: Workshop.active(@season),
             workshop_slots: [],
             is_form: true
           }
@@ -42,7 +42,7 @@ class Users::SubbedWorkshopsController < BaseController
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: @subbed_workshop,
-            workshops: Workshop.active,
+            workshops: Workshop.active(@season),
             workshop_slots: WorkshopSlot.where(workshop: @subbed_workshop.workshop_slot.workshop_id),
             is_form: true
           }

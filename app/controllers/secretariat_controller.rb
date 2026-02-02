@@ -21,9 +21,9 @@ class SecretariatController < ApplicationController
     @confirmed_subscription_size = @active_subscriptions.registered(@season).size
     @unconfirmed_subscription_size = @active_subscriptions.inquired(@season).size
 
-    @teachers = Teacher.active.includes(:slots)
+    @teachers = Teacher.active(@season).includes(:slots)
     @workshops = Workshop.active(season: @season)
-    @kid_workshops = KidWorkshop.active
+    @kid_workshops = KidWorkshop.active(@season)
   end
 
   private

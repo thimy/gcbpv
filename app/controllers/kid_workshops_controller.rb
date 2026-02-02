@@ -4,7 +4,7 @@ class KidWorkshopsController < SecretariatController
 
   # GET /kid_workshops or /kid_workshops.json
   def index
-    @workshops = KidWorkshop.active
+    @workshops = KidWorkshop.all
   end
 
   # GET /kid_workshops/1 or /kid_workshops/1.json

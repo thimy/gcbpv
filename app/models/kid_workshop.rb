@@ -8,7 +8,8 @@ class KidWorkshop < Workshop
 
   enum :status, "Public" => 0, "Privé" => 1
 
-  scope :active, -> { where(status: 0) }
+  scope :visible, -> { where(status: 0) }
+  scope :active, ->(season) { includes(:workshop_seasons).where(workshop_seasons: {season: season})}
   
   validates :name, presence: true
 

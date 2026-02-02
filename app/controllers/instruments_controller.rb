@@ -10,7 +10,7 @@ class InstrumentsController < SecretariatController
         text: instrument.name
       }
     }
-    @instruments = Instrument.active
+    @instruments = Instrument.all
 
     respond_to do |format|
       format.json
@@ -70,7 +70,7 @@ class InstrumentsController < SecretariatController
   end
 
   def get_teachers
-    @teachers = Teacher.active.where(specialties: Specialty.where(instrument: @instrument))
+    @teachers = Teacher.active(@season).where(specialties: Specialty.where(instrument: @instrument))
     render json: @teachers.as_json(only: [:first_name, :last_name, :id]), status: :ok
   end
 

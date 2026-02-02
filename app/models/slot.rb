@@ -5,8 +5,11 @@ class Slot < ApplicationRecord
   belongs_to :city
   has_many :courses
   has_many :subscriptions, through: :courses
+  has_many :slot_seasons
+  has_many :seasons, through: :slot_seasons
 
-  scope :active, -> {where(status: 0)}
+  scope :visible, -> {where(status: 0)}
+  scope :active, -> (season) {includes(:slot_seasons).where(slot_seasons: {season: season})}
 
   enum :status, "Public" => 0, "Privé" => 1
 

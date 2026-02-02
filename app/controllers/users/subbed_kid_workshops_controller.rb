@@ -26,7 +26,7 @@ class Users::SubbedKidWorkshopsController < BaseController
           partial: "subbed_kid_workshops/subbed_kid_workshop", 
           locals: {
             subbed_kid_workshop: SubbedKidWorkshop.new,
-            kid_workshops: KidWorkshop.active,
+            kid_workshops: KidWorkshop.active(@season),
             kid_workshop_slots: [],
             is_form: true,
             hide_private: true
@@ -44,7 +44,7 @@ class Users::SubbedKidWorkshopsController < BaseController
           partial: "subbed_kid_workshops/subbed_kid_workshop", 
           locals: {
             subbed_kid_workshop: @subbed_kid_workshop,
-            kid_workshops: KidWorkshop.active,
+            kid_workshops: KidWorkshop.active(@season),
             kid_workshop_slots: KidWorkshopSlot.where(kid_workshop: @subbed_kid_workshop.kid_workshop_slot.kid_workshop_id),
             is_form: true,
             hide_private: true

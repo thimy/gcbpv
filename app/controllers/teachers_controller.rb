@@ -75,7 +75,7 @@ class TeachersController < SecretariatController
   end
 
   def get_slots
-    @slots = Slot.active.where(teacher: @teacher)
+    @slots = Slot.active(@season).where(teacher: @teacher)
 
     render json: @slots.as_json(only: [:id, :slot_time, :day_of_week], include: { city: { only: :name }}), status: :ok
   end

@@ -26,7 +26,7 @@ class SubbedWorkshopsController < SecretariatController
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: SubbedWorkshop.new,
-            workshops: params[:youth] ? Workshop.youth.active : Workshop.adults.active,
+            workshops: params[:youth] ? Workshop.youth.active(@season) : Workshop.adults.active(@season),
             workshop_slots: [],
             is_form: true,
             is_youth: params[:youth]
@@ -44,7 +44,7 @@ class SubbedWorkshopsController < SecretariatController
           partial: "subbed_workshops/subbed_workshop", 
           locals: {
             subbed_workshop: @subbed_workshop,
-            workshops: params[:youth] ? Workshop.youth.active : Workshop.adults.active,
+            workshops: params[:youth] ? Workshop.youth.active(@season) : Workshop.adults.active(@season),
             workshop_slots: WorkshopSlot.visible.where(workshop: @subbed_workshop.workshop_slot.workshop_id),
             is_form: true,
             is_youth: params[:youth]

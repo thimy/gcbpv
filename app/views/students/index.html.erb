@@ -60,7 +60,7 @@
       <div class="cluster">
         <div class="flow">
           <%= label_tag :teacher, "Professeur" %>
-          <%= select_tag :teacher, options_from_collection_for_select(Teacher.active, "id", "name", params[:teacher].presence || ""), include_blank: "--- Professeur ---", onchange: "this.form.requestSubmit()" %>
+          <%= select_tag :teacher, options_from_collection_for_select(Teacher.active(@season), "id", "name", params[:teacher].presence || ""), include_blank: "--- Professeur ---", onchange: "this.form.requestSubmit()" %>
         </div>
         <div class="flow">
           <%= label_tag :instrument, "Discipline" %>
