@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_29_175722) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -203,6 +203,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
     t.string "secondary_email"
   end
 
+  create_table "instrument_seasons", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.bigint "instrument_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instrument_id"], name: "index_instrument_seasons_on_instrument_id"
+    t.index ["season_id"], name: "index_instrument_seasons_on_season_id"
+  end
+
   create_table "instruments", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -370,6 +379,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
     t.index ["plan_id"], name: "index_seasons_on_plan_id"
   end
 
+  create_table "slot_seasons", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.bigint "slot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_slot_seasons_on_season_id"
+    t.index ["slot_id"], name: "index_slot_seasons_on_slot_id"
+  end
+
   create_table "slots", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "city_id", null: false
@@ -458,6 +476,15 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
     t.string "instrument_loan"
     t.index ["student_id"], name: "index_subscriptions_on_student_id"
     t.index ["subscription_group_id"], name: "index_subscriptions_on_subscription_group_id"
+  end
+
+  create_table "teacher_seasons", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_teacher_seasons_on_season_id"
+    t.index ["teacher_id"], name: "index_teacher_seasons_on_teacher_id"
   end
 
   create_table "teachers", force: :cascade do |t|
@@ -766,6 +793,24 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
     t.index ["teacher_id"], name: "index_users_on_teacher_id"
   end
 
+  create_table "workshop_seasons", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.bigint "workshop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_workshop_seasons_on_season_id"
+    t.index ["workshop_id"], name: "index_workshop_seasons_on_workshop_id"
+  end
+
+  create_table "workshop_slot_seasons", force: :cascade do |t|
+    t.bigint "season_id", null: false
+    t.bigint "workshop_slot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_id"], name: "index_workshop_slot_seasons_on_season_id"
+    t.index ["workshop_slot_id"], name: "index_workshop_slot_seasons_on_workshop_slot_id"
+  end
+
   create_table "workshop_slot_teachers", force: :cascade do |t|
     t.bigint "teacher_id", null: false
     t.bigint "workshop_slot_id", null: false
@@ -812,6 +857,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
   add_foreign_key "courses", "instruments"
   add_foreign_key "courses", "slots"
   add_foreign_key "email_images", "emails"
+  add_foreign_key "instrument_seasons", "instruments"
+  add_foreign_key "instrument_seasons", "seasons"
   add_foreign_key "loans", "subscriptions"
   add_foreign_key "pathway_slot_teachers", "teachers"
   add_foreign_key "pathway_slots", "cities"
@@ -821,6 +868,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
   add_foreign_key "plan_price_categories", "price_categories"
   add_foreign_key "project_students", "students"
   add_foreign_key "seasons", "plans"
+  add_foreign_key "slot_seasons", "seasons"
+  add_foreign_key "slot_seasons", "slots"
   add_foreign_key "slots", "cities"
   add_foreign_key "slots", "teachers"
   add_foreign_key "specialties", "instruments"
@@ -830,12 +879,18 @@ ActiveRecord::Schema[7.1].define(version: 2025_11_26_163527) do
   add_foreign_key "subbed_workshops", "subscriptions"
   add_foreign_key "subscription_groups", "seasons"
   add_foreign_key "subscriptions", "students"
+  add_foreign_key "teacher_seasons", "seasons"
+  add_foreign_key "teacher_seasons", "teachers"
   add_foreign_key "thredded_messageboard_users", "thredded_messageboards", on_delete: :cascade
   add_foreign_key "thredded_messageboard_users", "thredded_user_details", on_delete: :cascade
   add_foreign_key "thredded_user_post_notifications", "thredded_posts", column: "post_id", on_delete: :cascade
   add_foreign_key "thredded_user_post_notifications", "users", on_delete: :cascade
   add_foreign_key "training_sessions", "trainings"
   add_foreign_key "trainings", "seasons"
+  add_foreign_key "workshop_seasons", "seasons"
+  add_foreign_key "workshop_seasons", "workshops"
+  add_foreign_key "workshop_slot_seasons", "seasons"
+  add_foreign_key "workshop_slot_seasons", "workshop_slots"
   add_foreign_key "workshop_slot_teachers", "teachers"
   add_foreign_key "workshop_slot_teachers", "workshop_slots"
   add_foreign_key "workshop_slots", "cities"

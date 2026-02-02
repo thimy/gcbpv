@@ -2,7 +2,7 @@ class Ecole::TrainingsController < EcoleController
   before_action :set_training, only: %i[ show ]
 
   def index
-    @trainings = Training.active
+    @trainings = Training.active(@season)
   end
 
   def show

@@ -9,8 +9,10 @@ class WorkshopSlot < ApplicationRecord
   belongs_to :workshop
   belongs_to :city
   delegate :is_youth, to: :workshop
+  has_many :workshop_slot_seasons
+  has_many :seasons, through: :workshop_slot_seasons
 
-  scope :active, -> {where(status: 0)}
+  scope :active, ->(season) { includes(:workshop_slot_seasons).where(workshop_slot_seasons: {season: season})}
   scope :visible, -> {where(status: 0, is_custom: [false, nil])}
   scope :custom, -> {where(is_custom: true)}
   scope :ordered, -> {order(day_of_week: :asc)}

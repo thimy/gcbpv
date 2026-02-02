@@ -4,9 +4,12 @@ class Instrument < ApplicationRecord
   has_many :courses
   has_many :subscriptions, through: :courses
   has_one_attached :image
+  has_many :instrument_seasons
+  has_many :seasons, through: :instrument_seasons
 
   enum :status, "Public" => 0, "Privé" => 1
-  scope :active, -> {where(status: 0)}
+  scope :visible, -> {where(status: 0)}
+  scope :active, -> (season) {includes(:instrument_seasons).where(instrument_seasons: {season: season})}
 
   validates :name, presence: true
 

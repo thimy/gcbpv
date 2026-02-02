@@ -12,11 +12,14 @@ class Teacher < ApplicationRecord
   has_many :workshop_slots, through: :workshop_slot_teachers
   has_many :workshops, through: :workshop_slots
   has_one_attached :photo
+  has_many :teacher_seasons
+  has_many :seasons, through: :teacher_seasons
 
   accepts_nested_attributes_for :slots
 
   enum :status, "Public" => 0, "Privé" => 1
-  scope :active, -> {where(status: 0)}
+  scope :visible, -> {where(status: 0)}
+  scope :active, -> (season) { includes(:teacher_seasons).where(teacher_seasons: {season: season})}
 
   def name
     [first_name, last_name].compact.join(" ")

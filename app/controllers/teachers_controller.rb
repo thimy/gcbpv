@@ -108,13 +108,12 @@ class TeachersController < SecretariatController
 
     def set_records
       filters = {}
-      filters[:status] = params[:status] if params[:status].present?
       filters[:specialties] = Specialty.where(instrument: params[:instrument]) if params[:instrument].present?
 
       if !filters.empty?
         @filtered_teachers = Teacher.where(filters)
       else
-        @filtered_teachers = Teacher.active
+        @filtered_teachers = Teacher.all
       end
 
       if query.present?

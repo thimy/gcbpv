@@ -22,7 +22,7 @@ class SecretariatController < ApplicationController
     @unconfirmed_subscription_size = @active_subscriptions.inquired(@season).size
 
     @teachers = Teacher.active.includes(:slots)
-    @workshops = Workshop.active
+    @workshops = Workshop.active(season: @season)
     @kid_workshops = KidWorkshop.active
   end
 

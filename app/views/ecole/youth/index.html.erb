@@ -7,14 +7,14 @@
   <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @early_learning.description.html_safe %>
   <ul>
-    <% @early_learning.workshop_slots.active.each do |slot| %>
+    <% @early_learning.workshop_slots.active(@season).each do |slot| %>
       <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
     <% end %>
   </ul>
   <h2>Découverte instrumentale</h2>
   <strong><%= "#{number_to_currency(@plan.kid_discovery_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <ul>
-    <% @kid_discovery.workshop_slots.active.each do |slot| %>
+    <% @kid_discovery.workshop_slots.active(@season).each do |slot| %>
       <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
     <% end %>
   </ul>
@@ -39,15 +39,15 @@
   <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @parent_kid.description.html_safe %>
   <ul>
-    <% @parent_kid.workshop_slots.active.each do |slot| %>
+    <% @parent_kid.workshop_slots.active(@season).each do |slot| %>
       <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
     <% end %>
   </ul>
   <h2><span class="tag"><span>Nouveau</span></span>Parcours famille</h2>
-  <strong><%= "#{number_to_currency(@family_pathway.price_category.plan_price_categories.find_by(plan: @plan), unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <strong><%= "#{number_to_currency(@family_pathway.price_category.plan_price_categories.find_by(plan: @plan).price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @family_pathway.description.html_safe %>
   <ul>
-    <% @family_pathway.workshop_slots.active.each do |slot| %>
+    <% @family_pathway.workshop_slots.active(@season).each do |slot| %>
       <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
     <% end %>
   </ul>

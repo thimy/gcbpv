@@ -4,7 +4,7 @@ class WorkshopsController < SecretariatController
 
   # GET /workshops or /workshops.json
   def index
-    @workshops = Workshop.active
+    @workshops = Workshop.active(@season).adults
   end
 
   # GET /workshops/1 or /workshops/1.json
@@ -61,7 +61,7 @@ class WorkshopsController < SecretariatController
   end
 
   def get_slots
-    @slots = WorkshopSlot.active.where(workshop: @workshop)
+    @slots = WorkshopSlot.visible.where(workshop: @workshop)
 
     render json: @slots.as_json(only: [:id, :slot_time, :day_of_week], include: { city: { only: :name }}), status: :ok
   end

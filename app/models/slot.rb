@@ -3,8 +3,8 @@ class Slot < ApplicationRecord
 
   belongs_to :teacher
   belongs_to :city
-  has_many :subscriptions
-  has_many :courses, through: :subscriptions
+  has_many :courses
+  has_many :subscriptions, through: :courses
 
   scope :active, -> {where(status: 0)}
 

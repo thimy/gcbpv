@@ -14,7 +14,7 @@ class TrainingsController < SecretariatController
 
   # GET /trainings/1 or /trainings/1.json
   def show
-    @training_sessions = @training.training_sessions.active
+    @training_sessions = @training.training_sessions.active(@season)
   end
 
   # GET /trainings/new

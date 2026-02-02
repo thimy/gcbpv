@@ -103,4 +103,22 @@ namespace :db do
       puts sub.instrument_loan
     end
   end
+
+  task seasons: :environment do
+    Season.all.each do |season|
+      Course.all.each do |course|
+        if course.subscription&.subscription_group&.season == season
+          SlotSeason.create!(slot: course.slot, season: season) if SlotSeason.where(slot: course.slot, season: season).empty?
+          InstrumentSeason.create!(instrument: course.instrument, season: season) if InstrumentSeason.where(instrument: course.instrument, season: season).empty?
+          TeacherSeason.create!(teacher: course.slot.teacher, season: season) if TeacherSeason.where(teacher: course.slot.teacher, season: season).empty?
+        end
+      end
+      SubbedWorkshop.all.each do |workshop|
+        if workshop.subscription&.subscription_group&.season == season
+          WorkshopSlotSeason.create!(workshop_slot: workshop.workshop_slot, season: season) if WorkshopSlotSeason.where(workshop_slot: workshop.workshop_slot, season: season).empty?
+          WorkshopSeason.create!(workshop: workshop.workshop_slot&.workshop, season: season) if WorkshopSeason.where(workshop: workshop.workshop_slot&.workshop, season: season).empty?
+        end
+      end
+    end
+  end
 end

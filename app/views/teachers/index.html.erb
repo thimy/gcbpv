@@ -17,10 +17,6 @@
       <%= search_field_tag :q, params[:q], placeholder: "Filtrer les noms" %>
     </div>
     <div class="flow">
-      <%= label_tag :status, "Status" %>
-      <%= select_tag :status, options_for_select(Teacher.statuses, params[:status].presence || ""), include_blank: "--- Statut ---", onchange: "this.form.requestSubmit()" %>
-    </div>
-    <div class="flow">
       <%= label_tag :instrument, "Discipline" %>
       <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name", params[:instrument].presence || ""), include_blank: "--- Discipline ---", onchange: "this.form.requestSubmit()" %>
     </div>

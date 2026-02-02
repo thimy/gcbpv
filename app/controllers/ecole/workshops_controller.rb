@@ -2,11 +2,11 @@ class Ecole::WorkshopsController < EcoleController
   before_action :set_workshop, only: %i[ show ]
 
   def index
-    @workshops = Workshop.active
+    @workshops = Workshop.active(@season)
   end
 
   def show
-    @other_workshops = Workshop.active.where.not(id: params[:id])
+    @other_workshops = Workshop.active(@season).where.not(id: params[:id])
   end
 
   private

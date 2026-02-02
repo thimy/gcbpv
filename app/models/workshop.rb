@@ -9,6 +9,8 @@ class Workshop < ApplicationRecord
   has_many :cities, through: :workshop_slots
   belongs_to :price_category
   has_many :plan_price_categories, through: :price_category
+  has_many :workshop_seasons
+  has_many :seasons, through: :workshop_seasons
 
   accepts_nested_attributes_for :workshop_slots, :plan_price_categories
 
@@ -16,7 +18,8 @@ class Workshop < ApplicationRecord
 
   enum :status, "Public" => 0, "Privé" => 1
 
-  scope :active, -> {where(status: 0)}
+  scope :active, ->(season) { includes(:workshop_seasons).where(workshop_seasons: {season: season})}
+  scope :visible, -> {where(status: 0)}
   scope :youth, ->{where(is_youth: true)}
   scope :adults, ->{where(is_youth: nil)}
 
