@@ -10,6 +10,11 @@ class Course < ApplicationRecord
   delegate :season, to: :subscription_group
   delegate :plan, to: :season
 
+  validates :slot, presence: true
+  validates :instrument, presence: true
+  validates :subscription, presence: true
+  validates :frequency, presence: true
+
   PRICES = {
     "Redon Agglo": {
       price_name: "class_price",

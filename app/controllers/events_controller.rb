@@ -4,6 +4,7 @@ class EventsController < SecretariatController
   before_action :authenticate_admin
   before_action :query
   before_action :set_event, only: %i[ show edit update destroy ]
+  before_action :set_bogues, only: %i[ new edit update create ]
 
   SORT_ATTRIBUTES = ["created_at", "start_date"]
 
@@ -19,12 +20,10 @@ class EventsController < SecretariatController
   # GET /events/new
   def new
     @event = Event.new
-    @bogues = Bogue.all
   end
 
   # GET /events/1/edit
   def edit
-    @bogues = Bogue.all
   end
 
   # POST /events or /events.json
@@ -34,7 +33,7 @@ class EventsController < SecretariatController
     respond_to do |format|
       if @event.save
         @event.save_attachments
-        format.html { redirect_to event_url(@event), notice: "L’événement a bien été enregistré." }
+        format.html { redirect_to event_url(id: @event.id), notice: "L’événement a bien été enregistré." }
         format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -48,7 +47,7 @@ class EventsController < SecretariatController
     respond_to do |format|
       if @event.update(event_params)
         @event.save_attachments
-        format.html { redirect_to event_url(@event), notice: "L’événement a bien été modifié." }
+        format.html { redirect_to event_url(id: @event.id), notice: "L’événement a bien été modifié." }
         format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -132,6 +131,10 @@ class EventsController < SecretariatController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    def set_bogues
+      @bogues = Bogue.all
     end
 
     # Only allow a list of trusted parameters through.

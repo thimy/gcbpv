@@ -9,6 +9,10 @@ class SubscriptionGroup < ApplicationRecord
 
   accepts_nested_attributes_for :subscriptions, :payments, allow_destroy: true
 
+  validates :season, presence: true
+  validates :majoration_class, presence: true
+  validates :household, presence: true
+
   STATUSES = {
     INQUIRY: "Demande d’information",
     REGISTERED: "Inscrit",

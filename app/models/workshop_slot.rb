@@ -12,6 +12,11 @@ class WorkshopSlot < ApplicationRecord
   has_many :workshop_slot_seasons
   has_many :seasons, through: :workshop_slot_seasons
 
+  validates :workshop, presence: true
+  validates :city, presence: true
+  validates :day_of_week, presence: true
+  validates :frequency, presence: true
+
   scope :active, ->(season) { includes(:workshop_slot_seasons).where(workshop_slot_seasons: {season: season})}
   scope :visible, -> {where(status: 0, is_custom: [false, nil])}
   scope :custom, -> {where(is_custom: true)}

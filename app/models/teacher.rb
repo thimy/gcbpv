@@ -17,6 +17,10 @@ class Teacher < ApplicationRecord
 
   accepts_nested_attributes_for :slots
 
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :email, presence: true
+
   enum :status, "Public" => 0, "Privé" => 1
   scope :visible, -> {where(status: 0)}
   scope :active, -> (season) { includes(:teacher_seasons).where(teacher_seasons: {season: season})}

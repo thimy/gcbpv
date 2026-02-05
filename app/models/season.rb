@@ -1,6 +1,8 @@
 class Season < ApplicationRecord
   belongs_to :plan
 
+  validates :start_year, presence: true
+
   def name
     "#{start_year}-#{start_year+1}"
   end

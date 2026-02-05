@@ -8,6 +8,11 @@ class Bogue < ApplicationRecord
   has_many :events
   has_many :pages
 
+  validates :name, presence: true
+  validates :start_date, presence: true
+  validates :end_date, presence: true
+  validates :slug, presence: true
+
   enum :status, "Public" => 0, "Privé" => 1
   scope :active, -> {where(status: 0)}
   scope :ordered, -> { order(start_date: :desc) }

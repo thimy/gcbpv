@@ -4,6 +4,8 @@ class PathwaySlot < ApplicationRecord
   has_many :pathway_slot_teachers
   has_many :teachers, through: :pathway_slot_teachers
 
+  validates :pathway, presence: true
+
   enum day_of_week: {
     "À définir": 0,
     "Lundi": 1,

@@ -41,7 +41,7 @@
     <% end %>
   </dl>
   <% unless @event.content.present? %>
-    <%= image_tag @event.image %>
+    <%= image_tag @event.cover %>
   <% end %>
   <div class="flow content">
     <%= @event.formatted_content || simple_format(@event.description) %>

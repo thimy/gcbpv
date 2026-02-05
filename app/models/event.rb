@@ -10,6 +10,11 @@ class Event < ApplicationRecord
   belongs_to :bogue, optional: true
   belongs_to :parent_event, class_name: "Event", optional: true
 
+  validates :name, presence: true
+  validates :start_date, presence: true
+  validates :status, presence: true
+  validates :city, presence: true
+
   slugify :name
 
   scope :ordered, -> { order(start_date: :desc, start_time: :desc)}

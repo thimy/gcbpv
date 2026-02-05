@@ -9,6 +9,10 @@ class Household < ApplicationRecord
 
   accepts_nested_attributes_for :subscription_groups
 
+  validates :last_name, presence: true
+  validates :first_name, presence: true
+  validates :city, presence: true
+
   def students
     subscription_groups.map { |subscription_group|
       subscription_group.subscriptions.map { |subscription|

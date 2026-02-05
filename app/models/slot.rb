@@ -8,6 +8,13 @@ class Slot < ApplicationRecord
   has_many :slot_seasons
   has_many :seasons, through: :slot_seasons
 
+  validates :teacher, presence: true
+  validates :city, presence: true
+  validates :day_of_week, presence: true
+  validates :slot_time, presence: true
+  validates :frequency, presence: true
+  validates :status, presence: true
+
   scope :visible, -> {where(status: 0)}
   scope :active, -> (season) {includes(:slot_seasons).where(slot_seasons: {season: season})}
 

@@ -5,7 +5,10 @@ class City < ApplicationRecord
   has_many :teachers, through: :slots
   has_many :workshop_slots
   has_many :workshops, through: :workshops
+
   validates :name, presence: true
+  validates :postcode, presence: true
+  validates :agglomeration, presence: true
 
   enum :status, "Public" => 0, "Privé" => 1
 

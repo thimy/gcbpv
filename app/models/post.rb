@@ -9,6 +9,8 @@ class Post < ApplicationRecord
   has_one_attached :image
   has_many :attachments, as: :attachable, dependent: :destroy
 
+  validates :title, presence: true
+
   enum :status, "Privé": 0, "Public": 1
   scope :latest, -> { where(status: "Public").order(published_at: :desc) }
   scope :ordered, -> { order(published_at: :desc) }

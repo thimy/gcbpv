@@ -1,6 +1,8 @@
 class Config < ApplicationRecord
   belongs_to :season
 
+  validates :season, presence: true
+
   before_create :check_for_existing
   before_destroy :check_for_existing
 

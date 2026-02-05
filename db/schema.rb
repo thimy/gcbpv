@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_29_175722) do
+ActiveRecord::Schema[7.1].define(version: 2026_02_04_142312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,9 +73,11 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_175722) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
-    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cover1"
+    t.string "cover2"
+    t.string "cover3"
   end
 
   create_table "categories_posts", force: :cascade do |t|
@@ -156,7 +158,6 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_175722) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
     t.string "organizer"
     t.string "website"
     t.integer "status"
@@ -201,6 +202,8 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_175722) do
     t.text "comment"
     t.string "secondary_phone"
     t.string "secondary_email"
+    t.string "secondary_last_name"
+    t.string "secondary_first_name"
   end
 
   create_table "instrument_seasons", force: :cascade do |t|
@@ -342,6 +345,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_29_175722) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cover"
     t.index ["event_id"], name: "index_posts_on_event_id"
   end
 

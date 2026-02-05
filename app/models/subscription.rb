@@ -16,6 +16,7 @@ class Subscription < ApplicationRecord
   delegate :household, to: :subscription_group
 
   validate :student_unique_subscription, on: :create
+  validates :subscription_group, presence: true
 
   accepts_nested_attributes_for :student, :courses, :subbed_workshops, :workshop_slots, :loan, allow_destroy: true
 

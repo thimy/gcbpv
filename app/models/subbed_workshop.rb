@@ -10,6 +10,9 @@ class SubbedWorkshop < ApplicationRecord
   delegate :majoration_class, to: :subscription_group
   delegate :plan, to: :season
 
+  validates :subscription, presence: true
+  validates :workshop_slot, presence: true
+
   PRICES = {
     "Redon Agglo": {
       price_name: "workshop_price",

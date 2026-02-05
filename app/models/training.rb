@@ -8,6 +8,10 @@ class Training < ApplicationRecord
 
   accepts_nested_attributes_for :training_sessions
 
+  validates :name, presence: true
+  validates :price, presence: true
+  validates :season, presence: true
+
   scope :visible, -> {where(status: 0)}
   scope :active, ->(season) { where(season: season) }
   
