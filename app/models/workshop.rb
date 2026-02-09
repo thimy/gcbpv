@@ -23,6 +23,23 @@ class Workshop < ApplicationRecord
   scope :youth, ->{where(is_youth: true)}
   scope :adults, ->{where(is_youth: nil)}
 
+  scope :registered, ->(season) { where(workshop_slots: WorkshopSlot.where(subbed_workshops: SubbedWorkshop.where(subscription: Subscription.registered(season)))) }
+  scope :subscribed_by_status, ->(status) { where(workshop_slots: WorkshopSlot.where(subbed_workshops: SubbedWorkshop.where(option: status))) }
+  scope :confirmed, -> { subscribed_by_status("Confirmé") }
+  scope :optional, -> { subscribed_by_status("Optionel") }
+
+  def self.get_count(season, optional: true)
+    options = SubbedWorkshop.adults.registered(season).optional.size
+    confirmed_subs = SubbedWorkshop.adults.registered(season).confirmed.size
+    options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
+  end
+
+  def self.get_workshop_count(season, workshop_id, optional: true)
+    options = SubbedWorkshop.where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).optional.size
+    confirmed_subs = SubbedWorkshop.where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).confirmed.size
+    options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
+  end
+
   def student_count
     students_by_slot.join(", ")
   end

@@ -21,26 +21,26 @@
     <% end %>
     <div class="card panel">
       <div class="card-info">
-        <h3>Élèves avec cours</h3>
-        <div><%= season.course_subscriptions.size %></div>
-      </div>
-    </div>
-    <div class="card panel">
-      <div class="card-info">
-        <h3>Élèves avec ateliers seulement</h3>
-        <div><%= season.active_subscriptions.includes(:courses).where(courses: {id: nil}).size %></div>
-      </div>
-    </div>
-    <div class="card panel">
-      <div class="card-info">
         <h3>Nombre d'élèves en atelier adulte</h3>
-        <div><%= season.workshop_subscriptions.size %></div>
+        <div><%= Workshop.get_count(season) %></div>
       </div>
     </div>
     <div class="card panel">
       <div class="card-info">
-        <h3>Nombre d'élèves en atelier enfance</h3>
-        <div><%= season.youth_workshop_subscriptions.size %></div>
+        <h3>Nombre d'élèves en atelier enfance (tous confondus)</h3>
+        <div><%= KidWorkshop.get_count(season) %></div>
+      </div>
+    </div>
+    <div class="card panel">
+      <div class="card-info">
+        <h3>Nombre d'élèves en éveil musical</h3>
+        <div><%= KidWorkshop.get_workshop_count(season, 63) %></div>
+      </div>
+    </div>
+    <div class="card panel">
+      <div class="card-info">
+        <h3>Nombre d'élèves en découverte instrumentale</h3>
+        <div><%= KidWorkshop.get_workshop_count(season, 62) %></div>
       </div>
     </div>
   </div>

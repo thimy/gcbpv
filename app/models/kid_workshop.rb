@@ -17,6 +17,12 @@ class KidWorkshop < Workshop
     Workshop.where(is_youth: true)
   end
 
+  def self.get_count(season, optional: true)
+    options = SubbedWorkshop.youth.registered(season).optional.size
+    confirmed_subs = SubbedWorkshop.youth.registered(season).confirmed.size
+    options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
+  end
+
   def student_count
     students_by_slot.join(", ")
   end

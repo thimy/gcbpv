@@ -1,15 +1,17 @@
 <div class="repel">
-  <h1>Ateliers</h1>
+  <h1>Ateliers <%= "(#{Workshop.get_count(@season)})" %></h1>
   <%= link_to "Créer un nouvel atelier", new_workshop_path %>
 </div>
 <%= render Shared::Table::Component.new do |table| %>
   <% table.with_header do |header| %>
     <% header.with_column(name: "name") do %>Nom<% end %>
-    <% header.with_column(name: "subscriptions") do %>Nombre d'élèves<% end %>
+    <% header.with_column(name: "total_subscriptions") do %>Nombre total d’élèves<% end %>
+    <% header.with_column(name: "subscriptions") do %>Nombre d'élèves par créneau<% end %>
   <% end %>
   <% @workshops.each do |workshop| %>
     <% table.with_row(link_url: workshop) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to workshop.name, workshop_url(season: @season, record: workshop) %><% end %>
+      <% row.with_cell(name: "total_subscriptions") do %><strong><%= Workshop.get_workshop_count(@season, workshop.id) %></strong><% end %>
       <% row.with_cell(name: "subscriptions") do %>
         <% workshop.workshop_slots.active(@season).each do |slot| %>
           <div>

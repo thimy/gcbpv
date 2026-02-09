@@ -13,7 +13,6 @@ class Course < ApplicationRecord
   validates :slot, presence: true
   validates :instrument, presence: true
   validates :subscription, presence: true
-  validates :frequency, presence: true
 
   PRICES = {
     "Redon Agglo": {
