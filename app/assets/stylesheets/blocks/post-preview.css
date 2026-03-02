@@ -1,5 +1,8 @@
 post-preview {
   --flow-space: var(--space-s);
+  --repel-vertical-alignment: start;
+  position: relative;
+  overflow: hidden;
   
   h3 a {
     text-decoration: none;
@@ -30,11 +33,12 @@ post-preview {
   }
 
   .image {
-    position: relative;
-    margin-block-start: var(--space-s);
-    max-height: var(--space-xxs);
     overflow: hidden;
-    width: 100%;
+    max-width: 35%;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
 
     &::after {
       background-image: linear-gradient(to top, color-mix(in srgb, var(--color-secondary), transparent 20%), transparent 20%);

@@ -87,22 +87,6 @@ class PostsController < SecretariatController
     end
   end
 
-  def upload_image
-    image = params[:image]
-
-    if image.nil?
-      render json: { success: 0, error: "Pas d’image dans cette requête" }
-      return
-    end
-
-    uploaded_image = PostImage.create!(image: image)
-    stored_image_url = rails_blob_url(uploaded_image.image)
-
-    render json: { success: 1, file: { url: stored_image_url } }
-  rescue StandardError => e
-    render json: { success: 0, error: e.message }
-  end
-
   def upload_file
     file_params = {
       file: params[:file] || params[:image]
@@ -159,7 +143,7 @@ class PostsController < SecretariatController
       if params[:post][:published_at].blank? && params[:post][:status] == "Public"
         params[:post][:published_at] = DateTime.now
       end
-      params.require(:post).permit(:title, :content, :status, :file, :published_at, :event_id, :category_ids => [])
+      params.require(:post).permit(:title, :content, :cover, :status, :file, :published_at, :event_id, :category_ids => [])
     end
     
 

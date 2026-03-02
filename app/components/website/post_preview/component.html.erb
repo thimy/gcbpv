@@ -1,14 +1,18 @@
-<post-preview class="panel flow">
-  <%= image_tag @post.cover_image if @post.cover_image.class == "string" %>
-  <h3><%= link_to @post.title, website_post_path(@post) %></h3>
-  <time>Publié le <%= @post.publication_datetime %></time>
-  <% if @post.categories.present? %>
-    <div class="tag-list cluster cluster">
-      <% @post.categories.each do |category| %>
-        <span class="tag" data-tag-color="">
-          <span><%= category.name %></span>
-        </span>
-      <% end %>
-    </div>
-  <% end %>
+<post-preview class="panel repel" data-nowrap>
+  <div>
+    <h3><%= link_to @post.title, website_post_path(@post) %></h3>
+    <time>Publié le <%= @post.publication_datetime %></time>
+    <% if @post.categories.present? %>
+      <div class="tag-list cluster cluster">
+        <% @post.categories.each do |category| %>
+          <span class="tag" data-tag-color="">
+            <span><%= category.name %></span>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+    <p><%= @post.excerpt.html_safe %></p>
+    <%= link_to "Lire la suite de l’article ⇢", @post %>
+  </div>
+  <%= image_tag @post.cover, class: "image" if @post.cover.present? %>
 </post-preview>

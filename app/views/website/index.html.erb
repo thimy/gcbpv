@@ -8,7 +8,7 @@
       <%= link_to "↬ Voir tous les articles", website_post_index_path %>
     </header>
     <% if @posts.present? %>
-      <div class="grid">
+      <div class="flow">
         <%= render Website::PostPreview::Component.with_collection(@posts, tag: "h3") %>
       </div>
     <% end %>

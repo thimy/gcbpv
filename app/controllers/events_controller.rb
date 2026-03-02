@@ -66,22 +66,6 @@ class EventsController < SecretariatController
     end
   end
 
-  def upload_image
-    image = params[:image]
-
-    if image.nil?
-      render json: { success: 0, error: "Pas d’image dans cette requête" }
-      return
-    end
-
-    uploaded_image = EventImage.create!(image: image)
-    stored_image_url = rails_blob_url(uploaded_image.image)
-
-    render json: { success: 1, file: { url: stored_image_url } }
-  rescue StandardError => e
-    render json: { success: 0, error: e.message }
-  end
-
   def upload_file
     file_params = {
       file: params[:file] || params[:image]

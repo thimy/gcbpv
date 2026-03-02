@@ -4,7 +4,7 @@ class Website::PostPreview::Component < ViewComponent::Base
   with_collection_parameter :post
 
   def initialize(post:, tag: "h2")
-    @post = post.decorate
+    @post = post
     @tag = tag
   end
 

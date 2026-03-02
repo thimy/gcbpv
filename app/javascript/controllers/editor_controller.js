@@ -63,7 +63,7 @@ export default class extends Controller {
           config: {
             endpoint: this.fileUrlValue,
             buttonText: "Ajouter un fichier",
-            errorMessage: "L’envoi de l’image a échoué",
+            errorMessage: "L’envoi de la pièce jointe a échoué",
             additionalRequestHeaders: {
               "X-CSRF-Token": this.csrfToken()
             }
@@ -203,7 +203,7 @@ export default class extends Controller {
     }
   }
 
-  async saveEditorData(event) {
+  saveEditorData = async (event) => {
     event.preventDefault()
 
     const outputData = await this.editor.save()
