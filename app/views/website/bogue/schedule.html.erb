@@ -2,27 +2,27 @@
 <% content_for(:page_title, "Programmation") %>
 
 <div class="flow">
-  <%= form_for programmation_website_bogue_path,
-      method: :get,
-      html: {
-        data: {
-          turbo_frame: "events"
-        },
-        class: "list-form"
-      } do |f| %>
-    <div class="form-group">
-      <div class="flow">
-        <%= label_tag :type, "Type d’événement" %>
-        <%= select_tag :type, options_for_select(Event.event_types, params[:type].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+  <% if @events.present? %>
+    <%= form_for programmation_website_bogue_path,
+        method: :get,
+        html: {
+          data: {
+            turbo_frame: "events"
+          },
+          class: "list-form"
+        } do |f| %>
+      <div class="form-group">
+        <div class="flow">
+          <%= label_tag :type, "Type d’événement" %>
+          <%= select_tag :type, options_for_select(Event.event_types, params[:type].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+        </div>
+        <div class="flow">
+          <%= label_tag :ville, "Commune" %>
+          <%= select_tag :ville, options_for_select(@cities, params[:ville].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
+        </div>
       </div>
-      <div class="flow">
-        <%= label_tag :ville, "Commune" %>
-        <%= select_tag :ville, options_for_select(@cities, params[:ville].presence || ""), include_blank: "--- Tous ---", onchange: "this.form.requestSubmit()" %>
-      </div>
-    </div>
-  <% end %>
-  <section id="events" class="flow">
-    <% if @events.present? %>
+    <% end %>
+    <section id="events" class="flow">
       <h2>Événements à venir</h2>
       <div class="flow">
         <% @events.each do |event| %>
@@ -73,6 +73,10 @@
           </event-card>
         <% end %>
       </div>
+    </section>
+  <% else %>
+    <%= render Shared::EmptyState::Component.new do |component| %>
+      Les événement de la Bogue ne sont pas encore disponibles.
     <% end %>
-  </section>
+  <% end %>
 </div>
