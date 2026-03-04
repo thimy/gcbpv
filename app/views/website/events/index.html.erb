@@ -14,6 +14,7 @@
   <div class="flow">
     <% if @passed_events.present? %>
       <%= render Website::Card::Event::Component.with_collection(@passed_events, inline: true) %>
+      <%== pagy_nav(@pagy) %>
     <% else %>
       Aucun événement passé
     <%end %>

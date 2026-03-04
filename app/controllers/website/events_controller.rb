@@ -1,9 +1,12 @@
 class Website::EventsController < BaseController
+  include Pagy::Backend
+  MAX_PER_PAGE = 10
+
   before_action :set_event, only: %i[ show ]
 
   def index
     @upcoming_events = Event.ordered.upcoming.reverse
-    @passed_events = Event.ordered.passed
+    @pagy, @passed_events = pagy(Event.ordered.passed, items: MAX_PER_PAGE)
   end
 
   def show
