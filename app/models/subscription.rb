@@ -137,4 +137,8 @@ class Subscription < ApplicationRecord
   def total_cost
     [kid_workshop_cost, course_cost, all_workshops_cost].compact.sum
   end
+
+  def payment_state
+    status != "Inscrit" ? status : subscription_group.payment_state
+  end
 end
