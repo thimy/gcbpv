@@ -24,6 +24,7 @@ class Teacher < ApplicationRecord
   enum :status, "Public" => 0, "Privé" => 1
   scope :visible, -> {where(status: 0)}
   scope :active, -> (season) { includes(:teacher_seasons).where(teacher_seasons: {season: season})}
+  scope :with_instrument, -> (instrument) { includes(:specialties).where(specialties: {instrument: instrument}) }
 
   def name
     [first_name, last_name].compact.join(" ")

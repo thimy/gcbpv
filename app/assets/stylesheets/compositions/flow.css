@@ -5,5 +5,5 @@ Info about this implementation: https://piccalil.li/blog/my-favourite-3-lines-of
 */
 .flow > *:not([hidden], [type=hidden]) + *:not(template),
 .flow > *:not([hidden], [type=hidden]) + turbo-frame > div {
-  margin-block-start: var(--flow-space, 1em);
+  margin-block-start: var(--flow-space, 1.25em);
 }

@@ -5,10 +5,11 @@ class EcoleController < ApplicationController
   end
 
   def pricing
-    @early_learning = PriceCategory.find_by(name: "Éveil")
-    @kid_discovery = PriceCategory.find_by(name: "Découverte instrumentale enfants")
-    @standalone = PriceCategory.find_by(name: "Ateliers autonomes")
-    @uillean_pipes = PriceCategory.find_by(name: "Uilleann pipes")
+    @plan = @season.plan.decorate
+    @early_learning = PriceCategory.find_by(name: "Éveil").decorate
+    @kid_discovery = PriceCategory.find_by(name: "Découverte instrumentale enfants").decorate
+    @standalone = PriceCategory.find_by(name: "Ateliers autonomes").decorate
+    @uillean_pipes = PriceCategory.find_by(name: "Uilleann pipes").decorate
   end
 
   def calendar

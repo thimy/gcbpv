@@ -7,6 +7,8 @@ class Slot < ApplicationRecord
   has_many :subscriptions, through: :courses
   has_many :slot_seasons
   has_many :seasons, through: :slot_seasons
+  has_many :specialties, through: :teacher
+  has_many :instruments, through: :specialties
 
   validates :teacher, presence: true
   validates :city, presence: true
@@ -17,6 +19,7 @@ class Slot < ApplicationRecord
 
   scope :visible, -> {where(status: 0)}
   scope :active, -> (season) {includes(:slot_seasons).where(slot_seasons: {season: season})}
+  scope :with_instrument, -> (instrument) {where(teacher: Teacher.with_instrument(instrument))}
 
   enum :status, "Public" => 0, "Privé" => 1
 

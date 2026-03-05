@@ -4,20 +4,28 @@
 <div class="flow">
   <div class="popout flow">
     <div class="cluster tag-list">
-      <% @cities.each do |city| %>
-        <div class="flow">
-          <h3><%= city.name %></h3>
-          <% city.slots.order(:day_of_week).group_by {|slot| slot.day_of_week}.each do |day, slots| %>
-            <% slots_with_day = slots.select { |slot|
-              slot.teacher.instruments.include?(@instrument)
-            } %>
-              <% if slots_with_day.count > 0 %>
-                <div class="day flow">
-                  <h4><%= day %></h4>
-                </div>
+      <%= render Shared::Table::Component.new(class: "instrument-table") do |table| %>
+        <% @cities.each do |city| %>
+          <% table.with_header do |header| %>
+            <% header.with_column(name: "city") do %>Ville<% end %>
+            <% @days.each do |day| %>
+              <% header.with_column(name: "day") do %><%= day %><% end %>
+            <% end %>
+          <% end %>
+          <% table.with_row do |row| %>
+            <% row.with_cell(name: "city") do %><%= city.name %><% end %>
+            <% @days.each do |weekday| %>
+              <% @slots = city.slots.visible.with_instrument(@instrument) %>
+              <% row.with_cell(name: "day") do %>
+                <% @slot = @slots.find {|slot| slot.city == city && slot.day_of_week == weekday} %>
+                <% if @slot.present? %>
+                  <%= link_to @slot.teacher.name, ecole_teacher_path(@slot.teacher) %>
+                  <small><%= @slot.slot_time %></small>
+                <% end %>
               <% end %>
             <% end %>
-        </div>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
     <%= simple_format(@instrument.description) %>

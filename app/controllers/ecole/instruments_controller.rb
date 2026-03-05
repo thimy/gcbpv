@@ -7,6 +7,7 @@ class Ecole::InstrumentsController < EcoleController
   end
 
   def show
+    @days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi"]
     @other_instruments = Instrument.active(@season).where.not(id: params[:id]).order(:name)
     @slots = Slot.all.order(:city_id).group_by{ |slot| [slot.city.name, slot.day_of_week, slot.teacher]}
     @cities = City.all.select do |city|

@@ -30,6 +30,7 @@ main {
 
 h1 {
   font-size: var(--size-step-5);
+  margin-block-end: var(--space-l);
 }
 
 h2 {
@@ -73,7 +74,8 @@ h4, h5, h6 {
 }
 
 small {
-  font-size: var(--size-step-0);
+  color: var(--color-secondary);
+  font-size: var(--size-step-00);
 }
 
 ins {

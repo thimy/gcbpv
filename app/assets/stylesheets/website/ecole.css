@@ -1,12 +1,23 @@
-.dual-content {
-  background: var(--color-light);
-  border-radius: var(--radius-3);
-  display: grid;
-  gap: var(--space-s) var(--space-2xl);
-  grid-template-columns: 250px auto;
-  padding: var(--space-xl);
+.pricing-table {
+  th {
+    width: 22%;
+  }
 
-  > :not(aside) {
-    grid-column: 2;
+  th:first-child {
+    width: 33%;
+  }
+
+  small {
+    display: block;
+  }
+}
+
+.instrument-table {
+  .cell-day {
+    width: 17%;
+  }
+
+  small {
+    display: block;
   }
 }
