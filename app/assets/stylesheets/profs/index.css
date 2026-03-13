@@ -7,15 +7,21 @@
     --gutter: var(--space-m);
   }
 
-  header .profile-picture {
-    aspect-ratio: 1 / 1;
-    border-radius: var(--radius-l);
-    overflow: hidden;
-    width: var(--space-xl);
+  header {
+    h1 {
+      margin-block-end: 0;;
+    }
 
-    img {
-      height: 100%;
-      object-fit: cover;
+    .profile-picture {
+      aspect-ratio: 1 / 1;
+      border-radius: var(--radius-l);
+      overflow: hidden;
+      width: var(--space-xl);
+
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 

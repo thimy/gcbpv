@@ -1,55 +1,68 @@
 <div class="grid" data-layout="50-50">
   <div class="panel flow">
     <h2>Cours individuels</h2>
-    <% @teacher.slots.order(:day_of_week).each do |slot| %>
-      <% @subscriptions = slot.courses.active(@season) %>
-      <% if @subscriptions.size > 0 %>
-        <% if @day != slot.day_of_week %><h3><%= slot.day_of_week %></h3><% end %>
-        <% @day = slot.day_of_week %>
-        <%= render Shared::Table::Component.new do |table| %>
-          <% table.with_header do |header| %>
-            <% header.with_column(name: "day", colspan: 4) do %>
-              <%= "#{slot.city.name} (#{@subscriptions.size})" %>
+    <% if @teacher.has_students?(@season) %>
+      <% @teacher.slots.order(:day_of_week).each do |slot| %>
+        <% @subscriptions = slot.courses.active(@season) %>
+        <% if @subscriptions.size > 0 %>
+          <% if @day != slot.day_of_week %><h3><%= slot.day_of_week %></h3><% end %>
+          <% @day = slot.day_of_week %>
+          <%= render Shared::Table::Component.new do |table| %>
+            <% table.with_header do |header| %>
+              <% header.with_column(name: "day", colspan: 4) do %>
+                <%= "#{slot.city.name} (#{@subscriptions.size})" %>
+              <% end %>
             <% end %>
-          <% end %>
-          <% @subscriptions.ordered.each do |course| %>
-            <% table.with_row(class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "name") do %><%= link_to course.student.name, profs_season_student_path(season_name: @season.name, id: course.student.id) %><% end %>
-              <% row.with_cell(name: "instrument") do %><%= course.instrument.name %><% end %>
-              <% row.with_cell(name: "day") do %><%= course.slot.day_of_week %><% end %>
-              <% row.with_cell(name: "time") do %><%= "#{format_time(course.start_time)} - #{format_time(course.end_time)}" %><% end %>
+            <% @subscriptions.ordered.each do |course| %>
+              <% table.with_row(class: "#{course.subscription.optional? || course.subscription.optional_course?(course.instrument) ? "optional" : "confirmed"}") do |row| %>
+                <% row.with_cell(name: "name") do %><%= link_to course.student.name, profs_season_student_path(season_name: @season.name, id: course.student.id) %><% end %>
+                <% row.with_cell(name: "instrument") do %><%= course.instrument.name %><% end %>
+                <% row.with_cell(name: "day") do %><%= course.slot.day_of_week %><% end %>
+                <% row.with_cell(name: "time") do %><%= "#{format_time(course.start_time)} - #{format_time(course.end_time)}" %><% end %>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>
+      <% end %>
+    <% else %>
+      <%= render Shared::EmptyState::Component.new do %>
+        Vous n’avez pas de cours
       <% end %>
     <% end %>
   </div>
   <div class="panel flow">
     <h2>Ateliers</h2>
-    <% @teacher.workshop_slots.ordered.each do |slot| %>
-      <% @subscriptions = slot.subscriptions.active(@season) %>
-      <% if @subscriptions.size > 0 %>
-        <% if @day != slot.day_of_week %>
-          <h3><%= slot.day_of_week %></h3>
-          <% @day = slot.day_of_week %>
-        <% end %>
-        <%= render Shared::Table::Component.new do |table| %>
-          <% table.with_header do |header| %>
-            <% header.with_column(name: "name") do %>
-              <%= "#{[slot.workshop.name, slot.city.name, slot.slot_time].compact.join(" - ")} (#{@subscriptions.size})" %>
+    <% if @teacher.has_workshops?(@season) %>
+      <% @teacher.has_workshops?(@season) %>
+      <% @teacher.workshop_slots.ordered.each do |slot| %>
+        <% @subscriptions = slot.subscriptions.active(@season) %>
+        <% if @subscriptions.size > 0 %>
+          <% if @day != slot.day_of_week %>
+            <h3><%= slot.day_of_week %></h3>
+            <% @day = slot.day_of_week %>
+          <% end %>
+          <%= render Shared::Table::Component.new do |table| %>
+            <% table.with_header do |header| %>
+              <% header.with_column(name: "name") do %>
+                <%= "#{[slot.workshop.name, slot.city.name, slot.slot_time].compact.join(" - ")} (#{@subscriptions.size})" %>
+              <% end %>
+              <% header.with_column(name: "comment") do %>Notes<% end %>
             <% end %>
-            <% header.with_column(name: "comment") do %>Notes<% end %>
-          <% end %>
-          <% @subscriptions.each do |subscription| %>
-            <% table.with_row(class: "#{subscription.optional? || subscription.optional_workshop?(slot.workshop) ? "optional" : "confirmed"}") do |row| %>
-              <% row.with_cell(name: "name") do %><%= link_to subscription.student.name, profs_season_student_path(season_name: @season.name, id: subscription.student.id) %><% end %>
-              <% row.with_cell(name: "comment") do %><%= subscription.subbed_workshops.where(workshop_slot: slot).first.comment %><% end %>
+            <% @subscriptions.each do |subscription| %>
+              <% table.with_row(class: "#{subscription.optional? || subscription.optional_workshop?(slot.workshop) ? "optional" : "confirmed"}") do |row| %>
+                <% row.with_cell(name: "name") do %><%= link_to subscription.student.name, profs_season_student_path(season_name: @season.name, id: subscription.student.id) %><% end %>
+                <% row.with_cell(name: "comment") do %><%= subscription.subbed_workshops.where(workshop_slot: slot).first.comment %><% end %>
+              <% end %>
+            <% end %>
+            <% table.with_empty_state do %>
+              <div class="banner">Pas d’inscription pour cet atelier</div>
             <% end %>
           <% end %>
-          <% table.with_empty_state do %>
-            <div class="banner">Pas d’inscription pour cet atelier</div>
-          <% end %>
         <% end %>
+      <% end %>
+    <% else %>
+      <%= render Shared::EmptyState::Component.new do %>
+        Vous n’avez pas d’atelier
       <% end %>
     <% end %>
   </div>

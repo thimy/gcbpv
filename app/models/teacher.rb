@@ -37,7 +37,20 @@ class Teacher < ApplicationRecord
     }.join(", ")
   end
 
+  def has_students?(season)
+    Course.joins(:subscription, :slot).where(subscription: Subscription.active(season), slot: {teacher: self}).size.to_i != 0
+  end
+
   def students_by_slot
     Course.joins(:subscription, :slot).where(slot: {teacher: self}).group(:slot).count
+  end
+
+  def has_workshops?(season)
+    subscriptions = 0
+    workshop_slots.each {|slot|
+      subscriptions += slot.subscriptions.active(season).size.to_i
+    }
+    
+    subscriptions != 0
   end
 end

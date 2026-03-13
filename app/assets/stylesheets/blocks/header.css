@@ -11,11 +11,15 @@
     }
   }
 
-  .main-header__logo a {
-    color: var(--color-light);
-    font-family: var(--font-base);
-    text-decoration: none;
-    text-shadow: 0 0 10px var(--color-dark);
+  .main-header__logo {
+    font-size: var(--size-step-5);
+    
+    a {
+      color: var(--color-light);
+      font-family: var(--font-base);
+      text-decoration: none;
+      text-shadow: 0 0 10px var(--color-dark);
+    }
   }
 
   .main-header__tagline {
