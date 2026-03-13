@@ -11,4 +11,5 @@
   <%= link_to "Actualités", posts_path %>
   <%= link_to "Bogue", bogues_path %>
   <%# link_to "Emails", secretariat_emails_path %>
+  <%= button_to "Déconnexion", destroy_user_session_path, method: :delete, class: "button", "data-button-variant": "naked" %>
 </nav>

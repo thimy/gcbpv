@@ -25,6 +25,10 @@
     }
   }
 
+  nav {
+    font-size: var(--size-step-00);
+  }
+
   .panel {
     --flow-space: var(--space-s);
   }

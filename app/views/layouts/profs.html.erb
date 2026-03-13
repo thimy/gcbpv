@@ -26,6 +26,7 @@
           <%= link_to "Cours et ateliers", profs_path %>
           <%= link_to "Agenda des sollicitations", "https://padlet.com/gcbpvemt/emt-productions-les-tourn-es-25-26-9qh6eimnd5bun733" %>
           <%= link_to "Mes informations", profs_profil_path %>
+          <%= button_to "Déconnexion", destroy_user_session_path, method: :delete, class: "button", "data-button-variant": "naked" %>
         </nav>
       </header>
       <%= content_for?(:content) ? yield(:content) : yield %>
