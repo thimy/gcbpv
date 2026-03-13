@@ -38,8 +38,8 @@ class Secretariat::EmailsController < SecretariatController
         format.html { redirect_to secretariat_email_url(@email), notice: "L’email a bien été enregistré." }
         format.json { render :show, status: :created, location: @email }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @email.errors, status: :unprocessable_content }
       end
     end
   end
@@ -53,8 +53,8 @@ class Secretariat::EmailsController < SecretariatController
         format.html { redirect_to secretariat_email_url(@email), notice: "L’email a bien été modifié." }
         format.json { render :show, status: :ok, location: @email }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @email.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @email.errors, status: :unprocessable_content }
       end
     end
   end

@@ -44,8 +44,8 @@ class HouseholdsController < SecretariatController
         format.html { redirect_to household_url(@household), notice: "Household was successfully created." }
         format.json { render :show, status: :created, location: @household }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @household.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @household.errors, status: :unprocessable_content }
       end
     end
   end
@@ -58,8 +58,8 @@ class HouseholdsController < SecretariatController
         format.json { render :show, status: :ok, location: @household }
         format.turbo_stream
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @household.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @household.errors, status: :unprocessable_content }
       end
     end
   end

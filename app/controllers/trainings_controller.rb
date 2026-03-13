@@ -39,8 +39,8 @@ class TrainingsController < SecretariatController
         format.html { redirect_to training_url(@training), notice: "La thématique rendez-vous a bien été enregistrée." }
         format.json { render :show, status: :created, location: @training }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @training.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @training.errors, status: :unprocessable_content }
       end
     end
   end
@@ -54,8 +54,8 @@ class TrainingsController < SecretariatController
         format.html { redirect_to training_url(@training), notice: "La thématique a bien été modifiée." }
         format.json { render :show, status: :ok, location: @training }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @training.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @training.errors, status: :unprocessable_content }
       end
     end
   end

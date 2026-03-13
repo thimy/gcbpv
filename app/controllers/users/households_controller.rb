@@ -28,8 +28,8 @@ class Users::HouseholdsController < BaseController
           format.html { redirect_to account_subscriptions_path, notice: "Vos informations ont bien été enregistrées." }
           format.json { render :show, status: :ok, location: @household }
         else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @household.errors, status: :unprocessable_entity }
+          format.html { render :edit, status: :unprocessable_content }
+          format.json { render json: @household.errors, status: :unprocessable_content }
         end
       end
     else
@@ -40,8 +40,8 @@ class Users::HouseholdsController < BaseController
           format.html { redirect_to account_subscriptions_path, notice: "Vos informations ont bien été enregistrées." }
           format.json { render :show, status: :created, location: @household }
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @household.errors, status: :unprocessable_entity }
+          format.html { render :new, status: :unprocessable_content }
+          format.json { render json: @household.errors, status: :unprocessable_content }
         end
       end
     end
@@ -54,8 +54,8 @@ class Users::HouseholdsController < BaseController
         format.html { redirect_to user_household_url(@household), notice: "Household was successfully updated." }
         format.json { render :show, status: :ok, location: @household }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @household.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @household.errors, status: :unprocessable_content }
       end
     end
   end

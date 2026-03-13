@@ -12,8 +12,8 @@ class Users::SubscriptionGroupsController < BaseController
         format.html { redirect_to account_validation_url, notice: "L’inscription a bien été enregistrée." }
         format.json { render :show, status: :ok, location: @subscription_group }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @subscription_group.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @subscription_group.errors, status: :unprocessable_content }
       end
     end
   end

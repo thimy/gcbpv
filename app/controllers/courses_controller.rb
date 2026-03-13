@@ -82,8 +82,8 @@ class CoursesController < SecretariatController
           )
         }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @course.errors, status: :unprocessable_content }
       end
     end
   end
@@ -95,8 +95,8 @@ class CoursesController < SecretariatController
         format.html { redirect_back fallback_location: course_url(@course), notice: "Le cours a bien été modifié." }
         format.json { render :show, status: :ok, location: @course }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @course.errors, status: :unprocessable_content }
       end
     end
   end

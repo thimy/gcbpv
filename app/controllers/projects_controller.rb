@@ -36,8 +36,8 @@ class ProjectsController < SecretariatController
         format.html { redirect_to project_url(@project), notice: "Le projet a été créé avec succès." }
         format.json { render :show, status: :created, location: @project }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @project.errors, status: :unprocessable_content }
       end
     end
   end
@@ -50,8 +50,8 @@ class ProjectsController < SecretariatController
         format.json { render :show, status: :ok, location: @project }
         format.turbo_stream
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @project.errors, status: :unprocessable_content }
       end
     end
   end

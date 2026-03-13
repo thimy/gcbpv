@@ -16,8 +16,8 @@ class ProfsController < ApplicationController
       if @teacher.update(teacher_params)
         format.turbo_stream
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @teacher.errors, status: :unprocessable_content }
       end
     end
   end

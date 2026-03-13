@@ -55,8 +55,8 @@ class TeachersController < SecretariatController
         format.html { redirect_to teacher_url(@teacher), notice: "Le professeur a bien été créé." }
         format.json { render :show, status: :created, location: @teacher }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @teacher.errors, status: :unprocessable_content }
       end
     end
   end
@@ -68,8 +68,8 @@ class TeachersController < SecretariatController
         format.html { redirect_to teacher_url(@teacher), notice: "Le professeur a bien été mis à jour." }
         format.json { render :show, status: :ok, location: @teacher }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @teacher.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @teacher.errors, status: :unprocessable_content }
       end
     end
   end

@@ -52,10 +52,10 @@ class SubscriptionsController < SecretariatController
     respond_to do |format|
       if params[:add_course]
         @subscription.courses.build
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       elsif params[:add_workshop]
         @subscription.subbed_workshops.build
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       else
         if @subscription.save
           if !User.find_by(student_id: new_params[:student].id)
@@ -65,8 +65,8 @@ class SubscriptionsController < SecretariatController
           format.json { render :show, status: :created, location: @subscription }
           format.turbo_stream
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @subscription.errors, status: :unprocessable_entity }
+          format.html { render :new, status: :unprocessable_content }
+          format.json { render json: @subscription.errors, status: :unprocessable_content }
         end
       end
     end
@@ -106,8 +106,8 @@ class SubscriptionsController < SecretariatController
         format.json { render :show, status: :ok, location: @subscription }
         format.turbo_stream
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @subscription.errors, status: :unprocessable_content }
       end
     end
   end

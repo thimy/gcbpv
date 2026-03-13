@@ -80,18 +80,18 @@ class Users::SubscriptionsController < BaseController
     respond_to do |format|
       if params[:add_course]
         @subscription.courses.build
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       elsif params[:add_workshop]
         @subscription.subbed_workshops.build
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       else
         if @subscription.save
           current_user.update!(student_id: @subscription.student.id) if params[:is_household]
           format.html { redirect_to account_subscriptions_url, notice: "L’inscription a bien été enregistrée." }
           format.json { render :show, status: :created, location: @subscription }
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @subscription.errors, status: :unprocessable_entity }
+          format.html { render :new, status: :unprocessable_content }
+          format.json { render json: @subscription.errors, status: :unprocessable_content }
         end
       end
     end
@@ -125,8 +125,8 @@ class Users::SubscriptionsController < BaseController
         format.html { redirect_to account_subscription_url(@subscription), notice: "L’inscription a bien été modifiée." }
         format.json { render :show, status: :ok, location: @subscription }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @subscription.errors, status: :unprocessable_content }
       end
     end
   end

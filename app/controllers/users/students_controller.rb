@@ -29,8 +29,8 @@ class Users::StudentsController < BaseController
         format.html { redirect_to user_student_url(@student), notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @student.errors, status: :unprocessable_content }
       end
     end
   end
@@ -42,8 +42,8 @@ class Users::StudentsController < BaseController
         format.html { redirect_to user_student_url(@student), notice: "Student was successfully updated." }
         format.json { render :show, status: :ok, location: @student }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @student.errors, status: :unprocessable_content }
       end
     end
   end

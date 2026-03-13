@@ -64,8 +64,8 @@ class PaymentsController < SecretariatController
           )
         }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @payment.errors, status: :unprocessable_content }
       end
     end
   end
@@ -77,8 +77,8 @@ class PaymentsController < SecretariatController
         format.html { redirect_back fallback_location: household_url(@payment.subscription_group.household), notice: "Le paiement a bien été modifié." }
         format.json { render :show, status: :ok, location: @payment }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @payment.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @payment.errors, status: :unprocessable_content }
       end
     end
   end

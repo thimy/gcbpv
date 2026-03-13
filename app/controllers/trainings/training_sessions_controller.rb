@@ -31,8 +31,8 @@ class Trainings::TrainingSessionsController < SecretariatController
         format.html { redirect_to training_path(@training), notice: "Le rendez-vous a bien été enregistré." }
         format.json { render :show, status: :created, location: @training_session }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @training_session.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @training_session.errors, status: :unprocessable_content }
       end
     end
   end
@@ -45,8 +45,8 @@ class Trainings::TrainingSessionsController < SecretariatController
         format.html { redirect_to training_path(@training), notice: "Le rendez-vous a bien été modifié." }
         format.json { render :show, status: :ok, location: @training_session }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @training_session.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @training_session.errors, status: :unprocessable_content }
       end
     end
   end

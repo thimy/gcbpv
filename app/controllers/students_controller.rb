@@ -82,17 +82,17 @@ class StudentsController < SecretariatController
     respond_to do |format|
       if params[:add_course]
         @subscription.courses.build
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       elsif params[:add_workshop]
         @subscription.subbed_workshops.build
-        format.html { render :new, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
       else
         if @subscription.save
           format.html { redirect_to subscription_url(@subscription), notice: "L’élève a bien été enregistré." }
           format.json { render :show, status: :created, location: @subscription }
         else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @subscription.errors, status: :unprocessable_entity }
+          format.html { render :new, status: :unprocessable_content }
+          format.json { render json: @subscription.errors, status: :unprocessable_content }
         end
       end
     end
@@ -106,8 +106,8 @@ class StudentsController < SecretariatController
         format.json { render :show, status: :ok, location: @student }
         format.turbo_stream
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @student.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @student.errors, status: :unprocessable_content }
       end
     end
   end

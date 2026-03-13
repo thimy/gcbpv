@@ -34,8 +34,8 @@ class Bogues::EventsController < SecretariatController
         format.html { redirect_to bogue_path(@bogue), notice: "L’événement a bien été enregistré." }
         format.json { render :show, status: :created, location: @event }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @event.errors, status: :unprocessable_content }
       end
     end
   end
@@ -49,8 +49,8 @@ class Bogues::EventsController < SecretariatController
         format.html { redirect_to bogue_path(@bogue), notice: "L’événement a bien été modifié." }
         format.json { render :show, status: :ok, location: @event }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @event.errors, status: :unprocessable_content }
       end
     end
   end

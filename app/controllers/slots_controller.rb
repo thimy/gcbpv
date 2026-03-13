@@ -65,8 +65,8 @@ class SlotsController < SecretariatController
           )
         }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @slot.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @slot.errors, status: :unprocessable_content }
       end
     end
   end
@@ -78,8 +78,8 @@ class SlotsController < SecretariatController
         format.html { redirect_to secretariat_slot_url(@slot), notice: "Le créneau a bien été modifié." }
         format.json { render :show, status: :ok, location: @slot }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @slot.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @slot.errors, status: :unprocessable_content }
       end
     end
   end

@@ -61,8 +61,8 @@ class WorkshopSlotsController < SecretariatController
           format.html { redirect_to workshop_path(@workshop), notice: "Le créneau a bien été modifié." }
           format.json { render :show, status: :ok, location: @workshop_slot }
         else
-          format.html { render :edit, status: :unprocessable_entity }
-          format.json { render json: @workshop_slot.errors, status: :unprocessable_entity }
+          format.html { render :edit, status: :unprocessable_content }
+          format.json { render json: @workshop_slot.errors, status: :unprocessable_content }
         end
       end
     end

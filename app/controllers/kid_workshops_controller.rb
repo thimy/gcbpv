@@ -32,8 +32,8 @@ class KidWorkshopsController < SecretariatController
         format.html { redirect_to kid_workshop_url(@workshop), notice: "Workshop was successfully created." }
         format.json { render :show, status: :created, location: @workshop }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @workshop.errors, status: :unprocessable_entity }
+        format.html { render :new, status: :unprocessable_content }
+        format.json { render json: @workshop.errors, status: :unprocessable_content }
       end
     end
   end
@@ -45,8 +45,8 @@ class KidWorkshopsController < SecretariatController
         format.html { redirect_to kid_workshop_url(@workshop), notice: "L’atelier Enfance a bien été modifié." }
         format.json { render :show, status: :ok, location: @workshop }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @workshop.errors, status: :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @workshop.errors, status: :unprocessable_content }
       end
     end
   end

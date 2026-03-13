@@ -50,7 +50,7 @@ class Teacher < ApplicationRecord
     workshop_slots.each {|slot|
       subscriptions += slot.subscriptions.active(season).size.to_i
     }
-    
+
     subscriptions != 0
   end
 end
