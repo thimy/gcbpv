@@ -2,12 +2,14 @@
 
 <% content_for :content do %>
   <%= render Website::Header::Component.new(banner: @banner) %>
-  <main class="popout wrapper region">
-    <div class="page-title">
+  <main class="wrapper region">
+    <div class="popout page-title">
       <h1><%= @post.title %></h1>
       <p>Publié le <%= @post.publication_datetime %></p>
     </div>
-    <%= yield %>
+    <div class="popout">
+      <%= yield %>
+    </div>
   </main>
   <%= render Website::Footer::Component.new %>
 <% end %>

@@ -8,11 +8,14 @@
   }
 
   > header {
+    --gutter: var(--space-s);
     border-block-end: var(--stroke);
     padding: var(--space-s) var(--space-l);
 
     nav {
+      color: var(--color-dark);
       display: flex;
+      font-size: var(--size-step-00);
       gap: var(--size-step-2);
     }
   }

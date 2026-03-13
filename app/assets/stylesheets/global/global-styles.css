@@ -29,7 +29,7 @@ main {
 }
 
 h1 {
-  font-size: var(--size-step-5);
+  font-size: var(--size-step-4);
   margin-block-end: var(--space-l);
 }
 

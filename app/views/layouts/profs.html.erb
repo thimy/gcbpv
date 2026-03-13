@@ -14,8 +14,8 @@
   <body class="profs-space wrapper <%= "#{controller.view_context.controller_name} #{content_for(:page_class)}" %>">
     <main class="feature flow">
       <% if notice.present? %><p class="banner" data-banner-variant="success"><%= notice %></p><% end %>
-      <header class="panel flow">
-        <div class="repel">
+      <header class="panel repel">
+        <div class="cluster">
           <div class="cluster">
             <div class="profile-picture"><%= image_tag @teacher.photo %></div>
             <h1>Espace professeurs</h1>

@@ -4,7 +4,7 @@
   background: var(--bg-color);
   border: var(--stroke);
   border-radius: var(--radius-s);
-  padding: var(--space-xxs) var(--space-s);
+  padding: var(--space-xxs) var(--space-xs) var(--space-xxs) var(--space-s);
   position: relative;
 
   &:focus-within .dropdown-menu {
