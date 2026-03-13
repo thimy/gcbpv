@@ -17,4 +17,9 @@ class ApplicationController < ActionController::Base
     @banner = @config.banner
     @season_links = Season.all.map {|season| {name: season.name, link: request.path.gsub!(@season.name, season.name)}}
   end
+
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) || secretariat_root_path
+    # replace users_dashboard_path by whichever route you want to redirect to after login - default is root_path
+  end
 end
