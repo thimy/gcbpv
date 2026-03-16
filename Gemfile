@@ -69,7 +69,7 @@ end
 
 gem "aws-sdk-s3", require: false
 
-gem "view_component", "~> 3.23"
+gem "view_component", "~> 4.5.0"
 
 gem "simple_form", "~> 5.3.1"
 
