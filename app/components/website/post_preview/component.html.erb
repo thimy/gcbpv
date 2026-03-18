@@ -11,7 +11,9 @@
         <% end %>
       </div>
     <% end %>
-    <p><%= @post.excerpt.html_safe %></p>
+    <% if @post.excerpt %>
+      <p><%= @post.excerpt&.html_safe %></p>
+    <% end %>
     <%= link_to "Lire la suite de l’article ⇢", website_post_path(@post) %>
   </div>
   <%= image_tag @post.cover, class: "image" if @post.cover.present? %>
