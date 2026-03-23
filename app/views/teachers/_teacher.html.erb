@@ -47,7 +47,7 @@
               <% end %>
               <% table.with_row(link_url: teacher) do |row| %>
                 <% row.with_cell(name: "full", colspan: @teacher.instruments.size > 1 ? 6 : 5) do %>
-                  <button class="button" data-emails-list-value="<%= get_emails(slot.courses) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
+                  <button class="button" data-emails-list-value="<%= get_emails(slot.courses.active(@season)) %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
                 <% end %>
               <% end %>
             <% end %>
