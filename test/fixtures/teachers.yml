@@ -5,15 +5,17 @@ one:
   last_name: MyString
   email: MyString
   phone: MyString
-  instrument: one
+  instruments: [0, 1]
   description: MyText
   photo: MyString
+  status: 0
 
 two:
   first_name: MyString
   last_name: MyString
   email: MyString
   phone: MyString
-  instrument: two
+  instruments: [1, 2]
   description: MyText
   photo: MyString
+  status: 1

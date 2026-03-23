@@ -1,19 +1,23 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: "Atelier cordes"
   description: MyString
-  city: one
-  day_of_week: 1
-  frequency: 1
-  start_time: MyString
-  end_time: MyString
+  comment: Comment
+  is_full: true
+  is_youth: true
+  kid_friendly: true
+  kid_workshop_type: 0
+  price_category: one
+  status: 0
 
 two:
-  name: MyString
+  name: "Atelier irlandais"
   description: MyString
-  city: two
-  day_of_week: 1
-  frequency: 1
-  start_time: MyString
-  end_time: MyString
+  comment: Comment
+  is_full: false
+  is_youth: false
+  kid_friendly: false
+  kid_workshop_type: 0
+  price_category: two
+  status: 1

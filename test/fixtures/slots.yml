@@ -2,16 +2,14 @@
 
 one:
   teacher: one
-  city: one
+  city: 1
   day_of_week: 1
-  start_time: MyString
-  end_time: MyString
+  slot_time: MyString
   frequency: 1
 
 two:
   teacher: two
-  city: two
-  day_of_week: 1
-  start_time: MyString
-  end_time: MyString
-  frequency: 1
+  city: 2
+  day_of_week: 2
+  slot_time: MyString
+  frequency: 3
