@@ -1,4 +1,8 @@
 fr:
+  devise:
+    failure:
+      user:
+        invalid: "Si le compte existe, nous n’avons pas réussi à l’identifier"
   number:
     currency:
       format:
