@@ -3,4 +3,5 @@
 
 <section class="flow">
   <%= render Website::PostPreview::Component.with_collection(@posts) %>
+  <%== pagy_nav(@pagy) %>
 </section>

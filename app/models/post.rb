@@ -6,7 +6,6 @@ class Post < ApplicationRecord
   has_many :categories_posts
   has_many :categories, through: :categories_posts
   belongs_to :event, optional: true, required: false
-  has_one_attached :cover
   has_many :attachments, as: :attachable, dependent: :destroy
 
   validates :title, presence: true

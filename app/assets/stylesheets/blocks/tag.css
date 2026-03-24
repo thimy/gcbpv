@@ -4,7 +4,7 @@
   border-radius: var(--radius-s);
   display: inline-flex;
   font-family: var(--font-base);
-  font-size: 12px;
+  font-size: var(--size-step-0);
   font-weight: 600;
   padding: var(--space-xxs) var(--space-xs);
   text-decoration: none;

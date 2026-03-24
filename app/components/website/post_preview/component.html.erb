@@ -1,20 +1,15 @@
-<post-preview class="panel repel" data-nowrap>
-  <div>
-    <h3><%= link_to @post.title, website_post_path(@post) %></h3>
-    <time>Publié le <%= @post.publication_datetime %></time>
-    <% if @post.categories.present? %>
-      <div class="tag-list cluster cluster">
-        <% @post.categories.each do |category| %>
-          <span class="tag" data-tag-color="">
-            <span><%= category.name %></span>
-          </span>
-        <% end %>
-      </div>
-    <% end %>
-    <% if @post.excerpt %>
-      <p><%= @post.excerpt&.html_safe %></p>
-    <% end %>
-    <%= link_to "Lire la suite de l’article ⇢", website_post_path(@post) %>
-  </div>
-  <%= image_tag @post.cover, class: "image" if @post.cover.present? %>
+<post-preview class="panel flow" data-nowrap>
+  <h3><%= link_to @post.title, website_post_path(@post) %></h3>
+  <time>Publié le <%= @post.publication_datetime %></time>
+  <% if @post.categories.present? %>
+    <div class="tag-list cluster cluster">
+      <% @post.categories.each do |category| %>
+        <span class="tag" data-tag-color="">
+          <span><%= category.name %></span>
+        </span>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="prose"><%= @post.formatted_content %></div>
+  <%= link_to "Voir la page de l’article ⇢", website_post_path(@post) %>
 </post-preview>

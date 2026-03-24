@@ -15,13 +15,19 @@
     nav {
       color: var(--color-dark);
       display: flex;
-      font-size: var(--size-step-00);
+      font-size: var(--size-step-1);
       gap: var(--size-step-2);
+
+      :is(.button) {
+        color: var(--color-dark);
+        font-size: var(--size-step-1);
+        font-weight: 500;
+      }
     }
   }
 
   main {
-    padding: var(--size-step-8);
+    padding: var(--space-l);
   }
 
   table {
@@ -141,5 +147,13 @@
   
   .edit_student {
     font-size: var(--size-step-00);
+  }
+
+  .secretariat-table {
+    --flow-space: var(--space-xs);
+  }
+
+  .cell-workshop a {
+    display: block;
   }
 }

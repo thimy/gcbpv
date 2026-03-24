@@ -1,15 +1,15 @@
 <div id="<%= dom_id subscription %>" class="record flow">
-  <div>
+  <div class="flow secretariat-table">
     <h2>Enfance</h2>
     <%= render "subbed_workshops/list", frame_id: "kid-workshops", subscription: @subscription, workshops: @subbed_kid_workshops, is_youth: true %>
   </div>
 
-  <div>
+  <div class="flow secretariat-table">
     <h2>Cours</h2>
     <%= render "courses/list", subscription: @subscription %>
   </div>
 
-  <div>
+  <div class="flow secretariat-table">
     <h2>Ateliers</h2>
     <%= render "subbed_workshops/list", frame_id: "workshops", subscription: @subscription, workshops: @subbed_workshops, is_youth: false %>
   </div>

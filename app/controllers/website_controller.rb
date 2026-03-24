@@ -3,7 +3,7 @@ class WebsiteController < ApplicationController
 
   def index
     @posts = Post.latest.limit(4)
-    @events = Event.ordered.upcoming.limit(4).reverse
+    @events = Event.ordered.upcoming.reverse
     render layout: "home"
   end
 

@@ -10,7 +10,7 @@ body {
   color: var(--color-dark);
   display: flex;
   flex-direction: column;
-  font-size: var(--size-step-0);
+  font-size: var(--size-step-1);
   font-family: var(--font-base);
   font-weight: 500;
   line-height: var(--leading-standard);
@@ -29,13 +29,12 @@ main {
 }
 
 h1 {
-  font-size: var(--size-step-4);
-  margin-block-end: var(--space-l);
+  font-size: var(--size-step-5);
 }
 
 h2 {
   --underline-color: var(--color-primary);
-  font-size: var(--size-step-3);
+  font-size: var(--size-step-4);
   align-items: center;
   display: flex;
   gap: var(--space-s);
@@ -61,7 +60,7 @@ h2 {
 }
 
 h3 {
-  font-size: var(--size-step-1);
+  font-size: var(--size-step-2);
   letter-spacing: 1;
 }
 
@@ -176,7 +175,7 @@ dd {
 }
 
 dl {
-  font-size: var(--size-step-00);
+  font-size: var(--size-step-0);
 }
 
 dl > div {
@@ -472,3 +471,7 @@ main.region {
   width: min-content;
 }
 
+section header a {
+  --flow-space: var(--space-xs);
+  display: inline-block;
+}

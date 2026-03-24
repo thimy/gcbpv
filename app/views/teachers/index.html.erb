@@ -42,12 +42,18 @@
         <% row.with_cell(name: "name", class: "nowrap") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}", teacher_url(season: @season, record: teacher), "data-turbo": false %><% end %>
         <% row.with_cell(name: "email", class: "nowrap") do %><%= teacher.email %><% end %>
         <% row.with_cell(name: "phone", class: "nowrap") do %><%= format_phone(teacher.phone) %><% end %>
-        <% row.with_cell(name: "students") do %><%= teacher.student_count(@season) %><% end %>
+        <% row.with_cell(name: "students", class: "nowrap") do %>
+          <% teacher.student_count(@season).each do |slot| %>
+            <div><%= slot %></div>
+          <% end %>
+        <% end %>
         <% row.with_cell(name: "instrument") do %>
           <%= teacher.instruments.map { |instrument| link_to instrument.name, instrument_path(instrument), "data-turbo": false }.join(", ").html_safe %>
         <% end %>
         <% row.with_cell(name: "workshop") do %>
-          <%= teacher.workshops.uniq.map { |workshop| link_to workshop.name, workshop_path(workshop), "data-turbo": false }.join(", ").html_safe %>
+          <% teacher.workshops.uniq.map { |workshop| link_to workshop.name, workshop_path(workshop), "data-turbo": false }.each do |workshop| %>
+            <%= workshop.html_safe %>
+          <% end %>
         <% end %>
       <% end %>
     <% end %>

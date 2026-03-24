@@ -3,8 +3,10 @@
 <% content_for :content do %>
   <%= render Website::Header::Component.new(banner: @banner) %>
   <main class="wrapper region">
-    <div class="popout page-title">
-      <h1><%= content_for(:page_title) %></h1>
+    <div class="popout page-title flow">
+      <h1>
+        <%= content_for(:page_title) %>
+      </h1>
       <p><%= content_for(:page_description) %></p>
     </div>
     <div class="popout">

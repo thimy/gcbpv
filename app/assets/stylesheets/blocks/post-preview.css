@@ -1,8 +1,15 @@
 post-preview {
-  --flow-space: var(--space-s);
   --repel-vertical-alignment: start;
   position: relative;
   overflow: hidden;
+
+  > * {
+    --flow-space: var(--space-xxs);
+  }
+
+  .prose {
+    --flow-space: var(--space-m);
+  }
   
   h3 a {
     text-decoration: none;
@@ -10,7 +17,7 @@ post-preview {
 
   time {
     color: var(--color-secondary);
-    font-size: var(--size-step-00);
+    font-size: var(--size-step-0);
     margin-block-end: var(--space-s);
   }
 
@@ -30,30 +37,5 @@ post-preview {
 
   .tag-list {
     margin-block: auto var(--space-s);
-  }
-
-  .image {
-    overflow: hidden;
-    max-width: 35%;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-
-    &::after {
-      background-image: linear-gradient(to top, color-mix(in srgb, var(--color-secondary), transparent 20%), transparent 20%);
-      content: "";
-      display: block;
-      height: 100%;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-
-    img {
-      object-fit: cover;
-      object-position: top;
-    }
   }
 }

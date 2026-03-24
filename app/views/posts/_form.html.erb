@@ -1,4 +1,6 @@
-<%= form_for post, url: url, data: {controller: "editor", "editor-file-url-value": upload_file_posts_path} do |form| %>
+<%= form_for post, url: url,
+    data: {controller: "editor", "editor-file-url-value": upload_file_posts_path},
+    html: { enctype: "multipart/form-data" } do |form| %>
   <div class="flow">
     <%= form.label :title, "Titre" %>
     <%= form.text_field :title %>

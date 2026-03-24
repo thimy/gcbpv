@@ -1,10 +1,7 @@
 .vertical-menu {
-  align-self: start;
+  border-block: var(--stroke);
   display: flex;
-  flex-direction: column;
-  grid-row: 1 / -1;
-  position: sticky;
-  top: var(--space-l);
+  overflow-x: scroll;
 
   a {
     --entry-bg-color: color-mix(in srgb, var(--color-secondary), transparent 80%);
@@ -32,5 +29,13 @@
       border: 1px solid var(--entry-border-color);
       color: currentColor;
     }
+  }
+
+  @media (min-width: 50em) {
+    align-self: start;
+    flex-direction: column;
+    grid-row: 1 / -1;
+    position: sticky;
+    top: var(--space-l);
   }
 }

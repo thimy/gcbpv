@@ -1,8 +1,10 @@
 class Website::PostsController < BaseController
+  include Pagy::Backend
   before_action :set_post, only: %i[ show ]
+  MAX_PER_PAGE = 10
 
   def index
-    @posts = Post.latest
+    @pagy, @posts = pagy(Post.latest, items: MAX_PER_PAGE)
   end
 
   def show
