@@ -7,7 +7,7 @@ one:
   image_consent: true
   disability: true
   ars: true
-  instrument_loan: false
+  loan: false
 
 two:
   student: 2
@@ -16,4 +16,4 @@ two:
   image_consent: false
   disability: false
   ars: false
-  instrument_loan: true
+  loan: true
