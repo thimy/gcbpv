@@ -10,6 +10,8 @@
       <% end %>
     </div>
   <% end %>
-  <div class="prose"><%= @post.formatted_content %></div>
-  <%= link_to "Voir la page de l’article ⇢", website_post_path(@post) %>
+  <div class="prose"><%= @post.excerpt %></div>
+  <div class="read-more">
+    <%= link_to "Voir l’actualité complète ⇢", website_post_path(@post) %>
+  </div>
 </post-preview>

@@ -38,4 +38,27 @@ post-preview {
   .tag-list {
     margin-block: auto var(--space-s);
   }
+
+  figure {
+    max-height: calc(var(--space-4xl) * 3);
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+      background-image: linear-gradient(to bottom, transparent, color-mix(in oklch, var(--color-mid), transparent 50%));
+      content: "";
+      display: block;
+      height: var(--space-m);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+    }
+  }
+
+  > .read-more {
+    --flow-space: var(--space-m);
+    display: flex;
+    justify-content: end;
+  }
 }

@@ -8,8 +8,7 @@ module WithEditor
     content_html = parsed_content["blocks"].map do |block|
       case block["type"]
       when "paragraph"
-        paragraph_class = block["tunes"]["textVariant"] if block["tunes"].present?
-        "<p class='paragraph--#{paragraph_class}'>#{block["data"]["text"]}</p>"
+        parse_paragraph(block)
       when "header"
         "<h#{block["data"]["level"]}>#{block["data"]["text"]}</h#{block["data"]["level"]}>"
       when "list"
@@ -23,28 +22,7 @@ module WithEditor
         escaped_code = CGI.escapeHTML(block["data"]["code"])
         "<pre><code>#{escaped_code}</code></pre>"
       when "image"
-        url = block["data"]["file"]["url"]
-        caption = block["data"]["caption"]
-        with_border = block["data"]["withBorder"]
-        with_background = block["data"]["withBackground"]
-        stretched = block["data"]["stretched"]
-        container_classes = ["image-container"]
-        container_classes << "image-border" if with_border
-        container_classes << "image-background" if with_background
-
-        image_classes = ["image"]
-        image_classes << "image-stretched" if stretched
-        image_classes << "image-with-background" if with_background
-
-        container_class = container_classes.join(" ")
-        image_class = image_classes.join(" ")
-
-        image_html = <<-HTML
-          <figure class="#{container_class}">
-            <img src="#{url}" alt="#{caption}" class="#{image_class}" />
-            <figcaption class="centered-content">#{caption}</figcaption>
-          </figure>
-        HTML
+        parse_image(block)
       when "attaches"
         url = block["data"]["file"]["url"]
         name = block["data"]["title"] || block["data"]["file"]["name"]
@@ -88,7 +66,52 @@ module WithEditor
   def excerpt
     return if content.blank?
     parsed_content = JSON.parse(content)
-    block = parsed_content["blocks"].find { |block| block["type"] == "paragraph" }
-    block["data"]["text"] if block.present?
+    blocks = []
+    parsed_content["blocks"].each do |block|
+      blocks << block if block["type"] == "paragraph" || block["type"] == "image"
+      break if blocks.size == 2
+    end
+    blocks.map { |block|
+      case block["type"]
+      when "paragraph"
+        parse_paragraph(block)
+      when "image"
+        parse_image(block)
+      end
+    }.join.html_safe
+    # block = parsed_content["blocks"].find { |block| block["type"] == "paragraph" }
+    # block["data"]["text"] if block.present?
+  end
+
+  private
+
+  def parse_paragraph(block)
+    paragraph_class = block["tunes"]["textVariant"] if block["tunes"].present?
+    "<p class='paragraph--#{paragraph_class}'>#{block["data"]["text"]}</p>"
+  end
+
+  def parse_image(block)
+    url = block["data"]["file"]["url"]
+    caption = block["data"]["caption"]
+    with_border = block["data"]["withBorder"]
+    with_background = block["data"]["withBackground"]
+    stretched = block["data"]["stretched"]
+    container_classes = ["image-container"]
+    container_classes << "image-border" if with_border
+    container_classes << "image-background" if with_background
+
+    image_classes = ["image"]
+    image_classes << "image-stretched" if stretched
+    image_classes << "image-with-background" if with_background
+
+    container_class = container_classes.join(" ")
+    image_class = image_classes.join(" ")
+
+    image_html = <<-HTML
+      <figure class="#{container_class}">
+        <img src="#{url}" alt="#{caption}" class="#{image_class}" />
+        <figcaption class="centered-content">#{caption}</figcaption>
+      </figure>
+    HTML
   end
 end
