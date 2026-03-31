@@ -1,7 +1,9 @@
-<div id="<%= dom_id event %>">
+<div id="<%= dom_id event %>" class="repel" data-align="start">
   <dl>
     <dt>Date :</dt>
     <dd><%= event.date_period %></dd>
+    <dt>Horaires :</dt>
+    <dd><%= event.time_period %></dd>
     <dt>Lieu :</dt>
     <dd><%= event.location %></dd>
     <dt>Ville :</dt>
@@ -14,12 +16,6 @@
     <dd><%= event.status %></dd>
     <dt>Couverture :</dt>
     <dd><%= image_tag event.cover if event.cover.present? %></dd>
-    <dt>Description :</dt>
-    <dd>
-      <div class="editor-content-wrapper">
-        <%= event.formatted_content %>
-      </div>
-    </dd>
     <% if event.parent_event.present? %>
       <dt>Événement parent :</dt>
       <dd>
@@ -38,6 +34,12 @@
     <% end %>
     <dt>Notes :</dt>
     <dd><%= event.comment %></dd>
+  </dl>
+  <dl>
+    <dt>Description :</dt>
+    <dd class="editor-content-wrapper flow">
+      <%= event.formatted_content %>
+    </dd>
   </dl>
 </div>
 

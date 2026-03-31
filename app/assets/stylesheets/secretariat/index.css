@@ -71,7 +71,6 @@
   .record {
     display: flex;
     flex-direction: column;
-    gap: var(--space-m);
     margin-block-start: var(--space-m);
 
     &[hidden=true] {
@@ -155,5 +154,19 @@
 
   .cell-workshop a {
     display: block;
+  }
+
+  form .repel {
+    --gutter: var(--space-l) var(--space-4xl);
+    --repel-vertical-alignment: flex-start;
+  }
+
+  [data-controller="multiselect"] .multiselect__container {
+    margin-block-start: var(--space-xxs);
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: end;
   }
 }

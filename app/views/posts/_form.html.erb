@@ -1,32 +1,43 @@
 <%= form_for post, url: url,
     data: {controller: "editor", "editor-file-url-value": upload_file_posts_path},
     html: { enctype: "multipart/form-data" } do |form| %>
-  <div class="flow">
-    <%= form.label :title, "Titre" %>
-    <%= form.text_field :title %>
+  <div class="action-buttons">
+    <%= form.submit "Sauvegarder", class: "button" %>
   </div>
+  <div class="repel" data-type="50-50">
+    <div class="flow">
+      <div class="flow">
+        <%= form.label :title, "Titre" %>
+        <%= form.text_field :title %>
+      </div>
 
-  <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @category_list.to_json %>" data-multiselect-search-url-value="/secretariat/categories" data-placeholder="Sélectionnez des catégories" data-multiselect-selected-value="<%= @selected_categories.present? ? @selected_categories : [] %>">
-    <%= form.label "category_ids", "Catégories" %>
-    <%= form.collection_select :category_ids, @categories, :id, :name, {selected: post.category_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
-  </div>
-  <div class="flow">
-    <%= form.label :cover, "Image de couverture" %>
-    <%= form.file_field :cover %>
-  </div>
-  <div class="flow">
-    <%= form.label :status, "Statut de l’article" %>
-    <%= form.select :status, options_for_select(Post.statuses.keys.to_a, selected: post.present? ? post.status : 0) %>
-  </div>
-  <div class="flow">
-    <%= form.label :event_id, "Lié à l’événement" %>
-    <%= form.collection_select :event_id, Event.all, :id, :name, { include_blank: "---" } %>
-  </div>
-  <div class="flow">
-    <%= form.label :content, "Contenu de l’article" %>
-    <div id="post_content" data-editor-target="editor"></div>
-  </div>
+      <div class="flow" data-controller="multiselect" data-multiselect-items-value="<%= @category_list.to_json %>" data-multiselect-search-url-value="/secretariat/categories" data-placeholder="Sélectionnez des catégories" data-multiselect-selected-value="<%= @selected_categories.present? ? @selected_categories : [] %>">
+        <%= form.label "category_ids", "Catégories" %>
+        <%= form.collection_select :category_ids, @categories, :id, :name, {selected: post.category_ids}, {multiple: true, class: "multiselect__hidden", "data-multiselect-target": "hidden"} %>
+      </div>
+      <div class="flow">
+        <%= form.label :cover, "Image de couverture" %>
+        <%= form.file_field :cover %>
+      </div>
+      <div class="flow">
+        <%= form.label :status, "Statut de l’article" %>
+        <%= form.select :status, options_for_select(Post.statuses.keys.to_a, selected: post.present? ? post.status : 0) %>
+      </div>
+      <div class="flow">
+        <%= form.label :event_id, "Lié à l’événement" %>
+        <%= form.collection_select :event_id, Event.all, :id, :name, { include_blank: "---" } %>
+      </div>
+    </div>
+    <div class="flow">
+      <div>
+        <%= form.label :content, "Contenu de l’article" %>
+        <div id="post_content" data-editor-target="editor"></div>
+      </div>
+      <%= form.hidden_field :content, id: "post_content_hidden", data: {"editor-target": "hidden"} %>
+    </div>
 
-  <%= form.hidden_field :content, id: "post_content_hidden", data: {"editor-target": "hidden"} %>
-  <%= form.submit "Sauvegarder" %>
+    <div class="action-buttons">
+      <%= form.submit "Sauvegarder", class: "button" %>
+    </div>
+  </div>
 <% end %>

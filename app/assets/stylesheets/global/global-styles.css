@@ -359,7 +359,7 @@ form .cluster:has(> [type=checkbox]) {
 
 :is(input:not([class='button'], [type='checkbox'], [type='radio'], [type='color']), select, textarea) {
   --flow-space: var(--space-xxs);
-  --input-font-size: var(--size-step-00);
+  --input-font-size: var(--size-step-1);
   padding: 0.5em 0.8em;
   border-radius: var(--radius-s);
   border: var(--stroke);
@@ -386,7 +386,7 @@ form .cluster:has(> [type=checkbox]) {
 
 label {
   line-height: var(--leading-fine);
-  font-size: var(--size-step-00);
+  font-size: var(--size-step-0);
   font-weight: 600;
 }
 
@@ -419,6 +419,11 @@ input:disabled {
 input:disabled,
 label input:disabled + * {
   cursor: not-allowed;
+}
+
+:has(> [required]) label::after {
+  color: var(--color-secondary);
+  content: " *";
 }
 
 fieldset {

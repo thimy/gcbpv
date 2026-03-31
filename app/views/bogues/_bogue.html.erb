@@ -1,23 +1,33 @@
 <div id="<%= dom_id bogue %>">
-  <dl>
-    <dt>Date :</dt>
-    <dd><%= bogue.date_period %></dd>
-    <dt>Status :</dt>
-    <dd><%= bogue.status %></dd>
-    <dt>Notes :</dt>
-    <dd><%= bogue.comment %></dd>
-  </dl>
+  <div class="repel" data-align="start">
+    <dl>
+      <dt>Date :</dt>
+      <dd><%= bogue.date_period %></dd>
+      <dt>Status :</dt>
+      <dd><%= bogue.status %></dd>
+      <dt>Notes :</dt>
+      <dd><%= bogue.comment %></dd>
+    </dl>
+
+    <dl>
+      <dt>Description :</dt>
+      <dd class="editor-content-wrapper flow">
+        <%= bogue.formatted_content %>
+      </dd>
+    </dl>
+  </div>
 
   <section data-controller="tabs">
     <header>
       <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="events">Événements</button>
       <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="pages" data-button-type="outline">Pages</button>
-      <button class="button" data-tabs-target="tab" data-action="tabs#click" data-tabs-panel-value="infos" data-button-type="outline">Infos</button>
     </header>
-    <div data-tabs-target="panel" id="events" class="record gap-10">
-      <%= link_to "Créer un événement", new_bogue_event_path(bogue.id), class: "button" %>
+    <div data-tabs-target="panel" id="events" class="record flow">
       <% if @events.present? %>
         <h2><%= "Événements" %></h2>
+        <div class="action-buttons">
+          <%= link_to "Créer un événement", new_bogue_event_path(bogue.id), class: "button" %>
+        </div>
         <%= render Shared::Table::Component.new do |table| %>
           <% table.with_header do |header| %>
             <% header.with_column(name: "name") do %>Nom<% end %>
@@ -56,40 +66,35 @@
         <% end %>
       <% end %>
     </div>
-    <div data-tabs-target="panel" id="pages" class="record gap-10">
-      <%= link_to "Créer une page", new_bogue_page_path(bogue.id), class: "button" %>
-      <% if @pages.present? %>
-        <h2><%= "Pages" %></h2>
-        <%= render Shared::Table::Component.new do |table| %>
-          <% table.with_header do |header| %>
-            <% header.with_column(name: "name") do %>Nom<% end %>
-            <% header.with_column(name: "options") do %>Actions<% end %>
-          <% end %>
-          <% @pages.each do |page| %>
-            <% table.with_row do |row| %>
-              <% row.with_cell(name: "name") do %><%= link_to page.name, bogue_page_path(bogue_id: bogue.id, id: page.id) %><% end %>
-              <% row.with_cell(name: "options") do %>
-                <%= link_to edit_bogue_page_path(bogue_id: bogue.id, id: page.id), class: "button" do %>
-                  <%= inline_svg "icons/edit", "aria-label": "Editer" %>
-                <% end %>
-                <%= link_to bogue_page_path(bogue_id: bogue.id, id: page.id),
-                  class: "button",
-                  data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
-                  } do %>
-                  <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
-                <% end %>
+    <div data-tabs-target="panel" id="pages" class="record flow">
+      <h2><%= "Pages" %></h2>
+      <div class="action-buttons">
+        <%= link_to "Créer une page", new_bogue_page_path(bogue.id), class: "button" %>
+      </div>
+      <%= render Shared::Table::Component.new do |table| %>
+        <% table.with_header do |header| %>
+          <% header.with_column(name: "name") do %>Nom<% end %>
+          <% header.with_column(name: "options") do %>Actions<% end %>
+        <% end %>
+        <% @pages.each do |page| %>
+          <% table.with_row do |row| %>
+            <% row.with_cell(name: "name") do %><%= link_to page.name, bogue_page_path(bogue_id: bogue.id, id: page.id) %><% end %>
+            <% row.with_cell(name: "options") do %>
+              <%= link_to edit_bogue_page_path(bogue_id: bogue.id, id: page.id), class: "button" do %>
+                <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+              <% end %>
+              <%= link_to bogue_page_path(bogue_id: bogue.id, id: page.id),
+                class: "button",
+                data: {
+                  turbo_method: :delete,
+                  turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
+                } do %>
+                <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
               <% end %>
             <% end %>
           <% end %>
         <% end %>
       <% end %>
-    </div>
-    <div data-tabs-target="panel" id="infos">
-      <div class="editor-content-wrapper">
-        <%= bogue.formatted_content %>
-      </div>
     </div>
   </section>
 </div>

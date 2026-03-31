@@ -1,7 +1,9 @@
-<div id="<%= dom_id event %>">
+<div id="<%= dom_id event %>" class="repel" data-align="start">
   <dl>
     <dt>Date :</dt>
     <dd><%= event.date_period %></dd>
+    <dt>Horaires :</dt>
+    <dd><%= event.time_period %></dd>
     <dt>Lieu :</dt>
     <dd><%= event.location %></dd>
     <dt>Ville :</dt>
@@ -14,14 +16,16 @@
     <dd><%= event.status %></dd>
     <dt>Lié à l’EMT :</dt>
     <dd><%= event.is_emt ? "Oui" : "Non" %></dd>
+    <dt>Notes :</dt>
+    <dd><%= event.comment %></dd>
+  </dl>
+  <dl>
     <dt>Description :</dt>
     <dd>
       <div class="editor-content-wrapper">
         <%= event.formatted_content %>
       </div>
     </dd>
-    <dt>Notes :</dt>
-    <dd><%= event.comment %></dd>
   </dl>
 </div>
 

@@ -1,36 +1,31 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Objet :</strong>
-    <%= post.title %>
-  </p>
-
-  <p>
-    <strong>Catégories :</strong>
-    <% post.categories.each do |category| %>
-      <span class="tag">
-        <span><%= category.name %></span>
-      </span>
-    <% end %>
-  </p>
-
-  <p>
-    <strong>Status :</strong>
-    <%= post.status %>
-  </p>
-
-  <% if post.event.present? %>
-    <p>
-      <strong>Événement lié :</strong>
+<div id="<%= dom_id post %>" class="repel" data-align="start">
+  <dl>
+    <dt>Objet :</dt>
+    <dd><%= post.title %></dd>
+    <dt>Catégories :</dt>
+    <dd>
+      <% post.categories.each do |category| %>
+        <span class="tag">
+          <span><%= category.name %></span>
+        </span>
+      <% end %>
+    </dd>
+    <dt>Status :</dt>
+    <dd><%= post.status %></dd>
+    <% if post.event.present? %>
+      <dt>Événement lié :</dt>
       <%= post.event.name %>
-    </p>
-  <% end %>
+    <% end %>
+  </dl>
 
-  <p>
-    <strong>Corps du message :</strong>
-    <div class="editor-content-wrapper">
-      <%= post.formatted_content %>
-    </div>
-  </p>
+  <dl>
+    <dt>Contenu :</dt>
+    <dd class="editor-content-wrapper">
+      <div class="flow">
+        <%= post.formatted_content %>
+      </div>
+    </dd>
+  </dl>
 </div>
 
 <%= link_to "Supprimer cet article",

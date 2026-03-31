@@ -1,12 +1,13 @@
 .codex-editor {
   border: 1px solid var(--color-dark-glare);
   border-radius: var(--radius-2);
-  padding-inline: var(--space-m);
+  margin-block-start: var(--space-xxs);
   max-width: 650px;
 }
 
 .codex-editor__redactor {
   margin: 0 !important;
+  padding-inline: var(--space-m);
 }
 
 .ce-header {
