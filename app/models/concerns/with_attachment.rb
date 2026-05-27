@@ -48,14 +48,14 @@ module WithAttachment
   end
 
   def update_existing_file(existing_file)
-    existing_file.update(attachable_id: id)
+    existing_file.update!(attachable: self)
   end
 
   def delete_unused_files(content)
     files_to_delete = attachments.reject do |attachable_file|
       signed_id = attachable_file.file.signed_id
       content["blocks"].any? { |block|
-        block["type"] == "file" && block["data"]["file"]["url"].include?(signed_id)
+        block["type"].in?(%w[file image]) && block["data"]["file"]["url"].include?(signed_id)
       }
     end
 
