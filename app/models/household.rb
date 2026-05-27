@@ -58,11 +58,11 @@ class Household < ApplicationRecord
   end
 
   def redon_agglo?
-    is_from_agglo?(Agglomeration.find(1))
+    !!is_from_agglo?(Agglomeration.find(1))
   end
 
   def obc?
-    is_from_agglo?(Agglomeration.find(2))
+    !!is_from_agglo?(Agglomeration.find(2))
   end
 
   def agglo

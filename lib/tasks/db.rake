@@ -44,7 +44,7 @@ namespace :db do
   end
 
   task update_majoration_class: :environment do
-    SubscriptionGroup.where(majoration_class: nil).each do |group|
+    SubscriptionGroup.where(season: Config.first.season).each do |group|
       group.update!(majoration_class: group.household.agglo)
     end
   end
