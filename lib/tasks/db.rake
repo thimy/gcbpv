@@ -121,4 +121,22 @@ namespace :db do
       end
     end
   end
+
+  task activate_season: :environment do
+    SlotSeason.where(season: Season.second_to_last).each do |slot_season|
+      SlotSeason.create!(slot: slot_season.slot, season: Season.last)
+    end
+    InstrumentSeason.where(season: Season.second_to_last).each do |instrument_season|
+      InstrumentSeason.create!(instrument: instrument_season.instrument, season: Season.last)
+    end
+    TeacherSeason.where(season: Season.second_to_last).each do |teacher_season|
+      TeacherSeason.create!(teacher: teacher_season.teacher, season: Season.last)
+    end
+    WorkshopSlotSeason.where(season: Season.second_to_last).each do |workshop_slot_season|
+      WorkshopSlotSeason.create!(workshop_slot: workshop_slot_season.workshop_slot, season: Season.last)
+    end
+    WorkshopSeason.where(season: Season.second_to_last).each do |workshop_season|
+      WorkshopSeason.create!(workshop: workshop_season.workshop, season: Season.last)
+    end
+  end
 end

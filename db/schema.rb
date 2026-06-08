@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_02_04_142312) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -306,22 +306,43 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_04_142312) do
   end
 
   create_table "plans", force: :cascade do |t|
+    t.decimal "class_double_workshop_price"
+    t.decimal "class_double_workshop_price_obc"
+    t.decimal "class_double_workshop_price_outbounds"
+    t.decimal "class_extra_workshop_price", default: "0.0"
     t.decimal "class_price"
     t.decimal "class_price_obc"
     t.decimal "class_price_outbounds"
     t.text "comment"
     t.datetime "created_at", null: false
+    t.decimal "double_workshop_price"
+    t.decimal "double_workshop_price_obc"
+    t.decimal "double_workshop_price_outbounds"
     t.decimal "early_learning_price"
     t.decimal "early_learning_price_obc"
     t.decimal "early_learning_price_outbounds"
+    t.decimal "extra_workshop_price", default: "0.0"
     t.decimal "first_step"
     t.decimal "first_step_discount"
     t.decimal "kid_discovery_price"
     t.decimal "kid_discovery_price_obc"
     t.decimal "kid_discovery_price_outbounds"
+    t.decimal "kid_double_workshop_price"
+    t.decimal "kid_double_workshop_price_obc"
+    t.decimal "kid_double_workshop_price_outbounds"
+    t.decimal "kid_workshop_price"
+    t.decimal "kid_workshop_price_obc"
+    t.decimal "kid_workshop_price_outbounds"
+    t.decimal "kids_class_double_workshop_price"
+    t.decimal "kids_class_double_workshop_price_obc"
+    t.decimal "kids_class_double_workshop_price_outbounds"
     t.decimal "kids_class_price"
     t.decimal "kids_class_price_obc"
     t.decimal "kids_class_price_outbounds"
+    t.decimal "kids_extra_workshop_price", default: "0.0"
+    t.decimal "kids_workshop_price", default: "0.0"
+    t.decimal "kids_workshop_price_obc", default: "0.0"
+    t.decimal "kids_workshop_price_outbounds", default: "0.0"
     t.integer "membership_price"
     t.string "name"
     t.integer "obc_markup"

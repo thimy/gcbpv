@@ -16,9 +16,24 @@ class PlanDashboard < Administrate::BaseDashboard
     kids_class_price: Field::Number.with_options(suffix: "€"),
     kids_class_price_obc: Field::Number.with_options(suffix: "€"),
     kids_class_price_outbounds: Field::Number.with_options(suffix: "€"),
+    class_double_workshop_price: Field::Number.with_options(suffix: "€"),
+    class_double_workshop_price_obc: Field::Number.with_options(suffix: "€"),
+    class_double_workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
+    kids_class_double_workshop_price: Field::Number.with_options(suffix: "€"),
+    kids_class_double_workshop_price_obc: Field::Number.with_options(suffix: "€"),
+    kids_class_double_workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
     workshop_price: Field::Number.with_options(suffix: "€"),
     workshop_price_obc: Field::Number.with_options(suffix: "€"),
     workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
+    kid_workshop_price: Field::Number.with_options(suffix: "€"),
+    kid_workshop_price_obc: Field::Number.with_options(suffix: "€"),
+    kid_workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
+    double_workshop_price: Field::Number.with_options(suffix: "€"),
+    double_workshop_price_obc: Field::Number.with_options(suffix: "€"),
+    double_workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
+    kid_double_workshop_price: Field::Number.with_options(suffix: "€"),
+    kid_double_workshop_price_obc: Field::Number.with_options(suffix: "€"),
+    kid_double_workshop_price_outbounds: Field::Number.with_options(suffix: "€"),
     early_learning_price: Field::Number.with_options(suffix: "€"),
     early_learning_price_obc: Field::Number.with_options(suffix: "€"),
     early_learning_price_outbounds: Field::Number.with_options(suffix: "€"),
@@ -52,6 +67,7 @@ class PlanDashboard < Administrate::BaseDashboard
     membership_price
     kids_class_price
     class_price
+    class_double_workshop_price
     workshop_price
     obc_markup
     outbounds_markup
@@ -65,7 +81,12 @@ class PlanDashboard < Administrate::BaseDashboard
     membership_price
     class_price
     kids_class_price
+    class_double_workshop_price
+    kids_class_double_workshop_price
     workshop_price
+    kid_workshop_price
+    double_workshop_price
+    kid_double_workshop_price
     early_learning_price
     kid_discovery_price
     first_step
@@ -94,9 +115,24 @@ class PlanDashboard < Administrate::BaseDashboard
     kids_class_price
     kids_class_price_obc
     kids_class_price_outbounds
+    class_double_workshop_price
+    class_double_workshop_price_obc
+    class_double_workshop_price_outbounds
+    kids_class_double_workshop_price
+    kids_class_double_workshop_price_obc
+    kids_class_double_workshop_price_outbounds
     workshop_price
     workshop_price_obc
     workshop_price_outbounds
+    kid_workshop_price
+    kid_workshop_price_obc
+    kid_workshop_price_outbounds
+    double_workshop_price
+    double_workshop_price_obc
+    double_workshop_price_outbounds
+    kid_double_workshop_price
+    kid_double_workshop_price_obc
+    kid_double_workshop_price_outbounds
     first_step
     first_step_discount
     second_step
