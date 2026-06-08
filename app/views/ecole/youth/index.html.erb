@@ -4,7 +4,7 @@
 <section class="flow">
   <p>L’école de musique traditionnelle propose différents ateliers à destination des enfants pour leur permettre de s’initier à la musique et à la pratique instrumentale.</p>
   <h2>L’éveil musical</h2>
-  <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <strong><%= "#{number_to_currency(@early_learning.price_category.plan_price_categories.find_by(plan: @plan).price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @early_learning.description.html_safe %>
   <ul>
     <% @early_learning.workshop_slots.active(@season).each do |slot| %>
@@ -12,7 +12,7 @@
     <% end %>
   </ul>
   <h2>Découverte instrumentale</h2>
-  <strong><%= "#{number_to_currency(@plan.kid_discovery_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <strong><%= "#{number_to_currency(@kid_discovery.price_category.plan_price_categories.find_by(plan: @plan).price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <ul>
     <% @kid_discovery.workshop_slots.active(@season).each do |slot| %>
       <li><%= "#{slot.name} avec #{slot.teacher_names}" %></li>
@@ -20,7 +20,7 @@
   </ul>
   <%= @kid_discovery.description.html_safe %>
   <h2>Ensembles jeunesse</h2>
-  <strong><%= "#{number_to_currency(@plan.workshop_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <strong><%= "#{number_to_currency(@plan.kid_workshop_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <% @kid_workshops.each do |workshop| %>
     <h3><%= workshop.name %></h3>
     <% if workshop.workshop_slots.present? %>
@@ -36,7 +36,7 @@
     <%= workshop.description.html_safe %>
   <% end %>
   <h2><span class="tag"><span>Nouveau</span></span>L’éveil petite enfance</h2>
-  <strong><%= "#{number_to_currency(@plan.early_learning_price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
+  <strong><%= "#{number_to_currency(@parent_kid.price_category.plan_price_categories.find_by(plan: @plan).price, unit: "€", precision: 0)}/an" %> – 1 atelier de 45 minutes par semaine</strong>
   <%= @parent_kid.description.html_safe %>
   <ul>
     <% @parent_kid.workshop_slots.active(@season).each do |slot| %>

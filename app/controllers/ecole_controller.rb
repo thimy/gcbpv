@@ -6,7 +6,7 @@ class EcoleController < ApplicationController
 
   def pricing
     @plan = @season.plan.decorate
-    @early_learning = PriceCategory.find_by(name: "Éveil").decorate
+    @early_learning = PriceCategory.find_by(name: "Éveil / Petite enfance").decorate
     @kid_discovery = PriceCategory.find_by(name: "Découverte instrumentale enfants").decorate
     @standalone = PriceCategory.find_by(name: "Ateliers autonomes").decorate
     @uillean_pipes = PriceCategory.find_by(name: "Uilleann pipes").decorate

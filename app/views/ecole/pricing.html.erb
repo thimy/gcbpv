@@ -12,16 +12,28 @@
       <% header.with_column(name: "outbounds_price") do %>Tarif Hors agglo<% end %>
     <% end %>
     <% table.with_row do |row| %>
-      <% row.with_cell(name: "description") do %>- 18ans<% end %>
+      <% row.with_cell(name: "description") do %>Cours + 1 atelier d'ensemble pour les - 18ans<% end %>
       <% row.with_cell(name: "price") do %><%= @plan.kids_class_price %><% end %>
       <% row.with_cell(name: "obc_price") do %><%= @plan.kids_class_price_obc %><% end %>
       <% row.with_cell(name: "outbounds_price") do %><%= @plan.kids_class_price_outbounds %><% end %>
     <% end %>
     <% table.with_row do |row| %>
-      <% row.with_cell(name: "description") do %>18 ans et +<% end %>
+      <% row.with_cell(name: "description") do %>Cours + 1 atelier d'ensemble<% end %>
       <% row.with_cell(name: "price") do %><%= @plan.class_price %><% end %>
       <% row.with_cell(name: "obc_price") do %><%= @plan.class_price_obc %><% end %>
       <% row.with_cell(name: "outbounds_price") do %><%= @plan.class_price_outbounds %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Cours + 2 ateliers pour les - 18ans<% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.kids_class_double_workshop_price %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= @plan.kids_class_double_workshop_price_obc %><% end %>
+      <% row.with_cell(name: "outbounds_price") do %><%= @plan.kids_class_double_workshop_price_outbounds %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Cours + 2 ateliers<% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.class_double_workshop_price %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= @plan.class_double_workshop_price_obc %><% end %>
+      <% row.with_cell(name: "outbounds_price") do %><%= @plan.class_double_workshop_price_outbounds %><% end %>
     <% end %>
   <% end %>
   <h2><%= inline_svg "icons/baby" %>Enfance : découvrir</h2>
@@ -60,6 +72,24 @@
       <% row.with_cell(name: "price") do %><%= @plan.workshop_price %><% end %>
       <% row.with_cell(name: "obc_price") do %><%= @plan.workshop_price_obc %><% end %>
       <% row.with_cell(name: "price") do %><%= @plan.workshop_price_outbounds %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Atelier d'ensemble seul pour les -18 ans<small>élève non-inscrit en cours</small><% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.kid_workshop_price %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= @plan.kid_workshop_price_obc %><% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.kid_workshop_price_outbounds %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Pack de 2 ateliers d'ensemble<small>élève non-inscrit en cours</small><% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.double_workshop_price %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= @plan.double_workshop_price_obc %><% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.double_workshop_price_outbounds %><% end %>
+    <% end %>
+    <% table.with_row do |row| %>
+      <% row.with_cell(name: "description") do %>Pack de 2 ateliers d'ensemble pour les -18 ans<small>élève non-inscrit en cours</small><% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.kid_double_workshop_price %><% end %>
+      <% row.with_cell(name: "obc_price") do %><%= @plan.kid_double_workshop_price_obc %><% end %>
+      <% row.with_cell(name: "price") do %><%= @plan.kid_double_workshop_price_outbounds %><% end %>
     <% end %>
     <% table.with_row do |row| %>
       <% row.with_cell(name: "description") do %>Atelier autonome<small>harmonica, cornemuse</small><% end %>
