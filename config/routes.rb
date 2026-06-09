@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   end
   get "ecole/tarifs", to: "ecole#pricing", as: :pricing
   get "ecole/calendrier", to: "ecole#calendar", as: :calendar
+  get "ecole/inscription", to: "ecole#subscription", as: :subscription
   get "ecole", to: "ecole#index"
 
   devise_for :users, path: "", path_names: {

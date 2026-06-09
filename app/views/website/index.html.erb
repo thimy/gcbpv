@@ -14,6 +14,10 @@
     <% end %>
   </section>
   <section class="upcoming-events flow">
+    <header class="flow">
+      <h2><%= inline_svg "icons/form" %>Inscriptions 2026-2027</h2>
+    </header>
+    <p><%= link_to "Téléchargez le bulletin d’inscription à l’EMT.", subscription_path %></p>
     <%= render Website::Teaser::Component.new %>
     <header class="flow">
       <h2><%= inline_svg "icons/party" %>Agenda local</h2>
