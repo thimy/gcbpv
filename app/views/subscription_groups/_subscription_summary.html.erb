@@ -26,7 +26,7 @@
               <% end %>
             <% end %>
           <% end %>
-          <% subscription.courses&.order(:option).each do |course| %>
+          <% subscription.courses&.order(:option).each_with_index do |course, index| %>
             <% table.with_row(class: "#{course.optional? ? "optional" : "confirmed"}") do |row| %>
               <% row.with_cell(name: "student", class: "nowrap") do %><%= course.student.name %><% end %>
               <% row.with_cell(name: "type", class: "nowrap") do %><%= course.instrument.name %><% end %>
@@ -34,7 +34,9 @@
               <% row.with_cell(name: "city") do %><%= course.slot.city.name %><% end %>
               <% row.with_cell(name: "option", class: "nowrap") do %><%= course.option %><% end %>
               <% row.with_cell(name: "comment") do %><%= course.comment %><% end %>
-              <% row.with_cell(name: "amount") do %><%= number_to_currency(course.price, unit: "€") %><% end %>
+              <% row.with_cell(name: "amount") do %>
+                <%= number_to_currency(course.price(double_workshop: course.subscription.has_class_extra_workshops? && (index < course.subscription.course_workshop_diff)), unit: "€") %>
+              <% end %>
             <% end %>
           <% end %>
           <% subscription.subbed_workshops.adults.order(:option).each_with_index do |subbed_workshop, index| %>
@@ -46,7 +48,11 @@
               <% row.with_cell(name: "option", class: "nowrap") do %><%= subbed_workshop.option %><% end %>
               <% row.with_cell(name: "comment") do %><%= subbed_workshop.comment %><% end %>
               <% row.with_cell(name: "amount") do %>
-                <%= index < subscription.courses.size ? "---" : number_to_currency(subbed_workshop.price, unit: "€") %>
+                <% if (index < subscription.courses.size) || (index < subbed_workshop.subscription.course_workshop_diff + subbed_workshop.subscription.courses.confirmed.size) %>
+                  ---
+                <% else %>
+                  <%= number_to_currency(subbed_workshop.price, unit: "€") %>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>
@@ -86,7 +92,7 @@
       <% end %>
       <% table.with_row do |row| %>
         <% row.with_cell(name: "membership", colspan: 6) do %>Adhésion au Groupement Culturel Breton des Pays de Vilaine<% end %>
-        <% row.with_cell(name: "amount") do %>+<%= number_to_currency(@season.plan.membership_price, unit: "€") %><% end %>
+        <% row.with_cell(name: "amount") do %>+<%= number_to_currency(@subscription_group.season.plan.membership_price, unit: "€") %><% end %>
       <% end %>
       <% table.with_row do |row| %>
         <% row.with_cell(name: "donation", colspan: 6) do %>Don<% end %>

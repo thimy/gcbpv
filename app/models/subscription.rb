@@ -114,7 +114,16 @@ class Subscription < ApplicationRecord
   end
 
   def course_cost
-    courses.confirmed.map { |course| course.price }.sum
+    if courses.confirmed.size > 0
+      if season.plan.class_double_workshop_price.present?
+        double_classes = subbed_workshops.adults.confirmed.size / courses.confirmed.size
+        courses.confirmed.map.with_index { |course, index|
+          course.price(double_workshop: index < double_classes)
+        }.sum
+      else
+        courses.confirmed.map { |course| course.price }.sum
+      end
+    end
   end
 
   def workshop_cost
@@ -126,8 +135,10 @@ class Subscription < ApplicationRecord
   end
 
   def all_workshops_cost
-    extra_workshops = subbed_workshops.adults.confirmed.size + courses.size
-    subbed_workshops.adults.confirmed.map { |workshop| workshop.price }.compact.sort!.reverse.drop(courses.size).sum
+    free_workshops_count = season.plan.class_double_workshop_price.present? ? courses.size * 2 : courses.size
+    subbed_workshops.adults.confirmed.map { |workshop|
+      workshop.price
+    }.compact.sort!.reverse.drop(free_workshops_count).sum
   end
 
   def loan_cost
@@ -140,5 +151,13 @@ class Subscription < ApplicationRecord
 
   def payment_state
     status != "Inscrit" ? status : subscription_group.payment_state
+  end
+
+  def course_workshop_diff
+    subbed_workshops.adults.confirmed.size - courses.confirmed.size
+  end
+
+  def has_class_extra_workshops?
+    course_workshop_diff > 0
   end
 end

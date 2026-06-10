@@ -18,15 +18,21 @@ class Course < ApplicationRecord
     "Redon Agglo": {
       price_name: "class_price",
       kids_price_name: "kids_class_price",
+      double_workshop_price_name: "class_double_workshop_price",
+      kids_double_workshop_price_name: "kid_class_double_workshop_price",
     },
     "Oust à Brocéliande Communauté": {
       price_name: "class_price_obc",
       kids_price_name: "kids_class_price_obc",
+      double_workshop_price_name: "class_double_workshop_price_obc",
+      kids_double_workshop_price_name: "kid_class_double_workshop_price_obc",
       markup_name: "obc_markup"
     },
     "Hors agglo": {
       price_name: "class_price_outbounds",
       kids_price_name: "kids_class_price_outbounds",
+      double_workshop_price_name: "class_double_workshop_price_outbounds",
+      kids_double_workshop_price_name: "kid_class_double_workshop_price_outbounds",
       markup_name: "outbounds_markup"
     }
   }
@@ -50,14 +56,16 @@ class Course < ApplicationRecord
     "#{instrument.name} - #{slot.name}"
   end
 
-  def price
+  def price(double_workshop: false)
     price_class = PRICES[majoration_class.to_sym]
     if student.birth_year.present? && season.start_year - student.birth_year < 19
-      p = plan[price_class[:kids_price_name]] || plan.kids_class_price + plan.kids_class_price * plan[price_class[:markup_name]] / 100
+      double_workshop ? plan[price_class[:kids_double_workshop_price_name]] : plan[price_class[:kids_price_name]] || plan.kids_class_price + plan.kids_class_price * plan[price_class[:markup_name]] / 100
     else 
-      p = plan[price_class[:price_name]] || plan.class_price + plan.class_price * plan[price_class[:markup_name]] / 100
+      double_workshop ? plan[price_class[:double_workshop_price_name]] : plan[price_class[:price_name]] || plan.class_price + plan.class_price * plan[price_class[:markup_name]] / 100
     end
   end
+
+
 
   def optional?
     option == "Optionel" || subscription.optional?

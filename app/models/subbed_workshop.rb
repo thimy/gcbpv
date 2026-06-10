@@ -61,9 +61,9 @@ class SubbedWorkshop < ApplicationRecord
     price_class = PRICES[majoration_class.to_sym]
     if workshop.price_category.present?
       price_category = plan.plan_price_categories.find_by(price_category: workshop.price_category)
-      p = price_category[price_class[:category_price_name]] || price_category.price + price_category.price * plan[price_class[:markup_name]] / 100
+      price_category[price_class[:category_price_name]] || price_category.price + price_category.price * plan[price_class[:markup_name]] / 100
     else
-      p = plan[price_class[:price_name]] || plan.workshop_price + plan.workshop_price * plan[price_class[:markup_name]] / 100
+      plan[price_class[:price_name]] || plan.workshop_price + plan.workshop_price * plan[price_class[:markup_name]] / 100
     end
   end
 end
