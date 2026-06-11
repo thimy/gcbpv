@@ -17,7 +17,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     kid_friendly: Field::Boolean,
     is_full: Field::Boolean,
     student_count: Field::Text.with_options(searchable: false),
-    price_category: Field::BelongsTo,
+    price_category: Field::BelongsTo.with_options(include_blank: true),
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
