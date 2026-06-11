@@ -15,7 +15,7 @@
           <% table.with_row do |row| %>
             <% row.with_cell(name: "city") do %><%= city.name %><% end %>
             <% @days.each do |weekday| %>
-              <% @slots = city.slots.visible.with_instrument(@instrument) %>
+              <% @slots = city.slots.active(@season).with_instrument(@instrument) %>
               <% row.with_cell(name: "day") do %>
                 <% @slot = @slots.find {|slot| slot.city == city && slot.day_of_week == weekday} %>
                 <% if @slot.present? %>
