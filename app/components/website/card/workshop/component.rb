@@ -6,6 +6,7 @@ class Website::Card::Workshop::Component < ViewComponent::Base
   def initialize(workshop:, path:)
     @workshop = workshop
     @path = path
+    @season = Config.first.season
   end
 
   def teacher_names
