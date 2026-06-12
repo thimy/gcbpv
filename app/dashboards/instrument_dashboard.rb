@@ -15,6 +15,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     teacher_list: Field::String.with_options(searchable: false),
     image: Field::Image,
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    seasons: Field::HasMany,
     comment: Field::Text,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -38,6 +39,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     description
     teachers
     status
+    seasons
     image
     comment
     created_at
@@ -52,6 +54,7 @@ class InstrumentDashboard < Administrate::BaseDashboard
     description
     teachers
     status
+    seasons
     image
     comment
   ].freeze

@@ -18,6 +18,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
     name: Field::String.with_options(searchable: false),
     subbed_workshops: SubscriptionListField,
+    seasons: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -44,6 +45,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     slot_time
     workshop
     status
+    seasons
     created_at
     updated_at
   ].freeze
@@ -58,6 +60,7 @@ class WorkshopSlotDashboard < Administrate::BaseDashboard
     day_of_week
     slot_time
     workshop
+    seasons
     status
   ].freeze
 

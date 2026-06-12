@@ -18,6 +18,7 @@ class SlotDashboard < Administrate::BaseDashboard
     comment: Field::Text,
     student_count: Field::Text.with_options(searchable: false),
     courses: SubscriptionListField,
+    seasons: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -46,6 +47,7 @@ class SlotDashboard < Administrate::BaseDashboard
     slot_time
     comment
     status
+    seasons
     updated_at
   ].freeze
 
@@ -60,6 +62,7 @@ class SlotDashboard < Administrate::BaseDashboard
     comment
     frequency
     status
+    seasons
   ].freeze
 
   # COLLECTION_FILTERS

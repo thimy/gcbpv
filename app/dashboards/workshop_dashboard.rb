@@ -18,6 +18,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     is_full: Field::Boolean,
     student_count: Field::Text.with_options(searchable: false),
     price_category: Field::BelongsTo.with_options(include_blank: true),
+    seasons: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -46,6 +47,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     kid_friendly
     is_full
     price_category
+    seasons
     created_at
     updated_at
   ].freeze
@@ -62,6 +64,7 @@ class WorkshopDashboard < Administrate::BaseDashboard
     is_full
     kid_friendly
     price_category
+    seasons
   ].freeze
 
   # COLLECTION_FILTERS
