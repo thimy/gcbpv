@@ -7,7 +7,7 @@ class Workshop < ApplicationRecord
   has_many :subscriptions, through: :subbed_workshops
   has_many :students, through: :subscriptions
   has_many :cities, through: :workshop_slots
-  belongs_to :price_category
+  belongs_to :price_category, optional: true
   has_many :plan_price_categories, through: :price_category
   has_many :workshop_seasons
   has_many :seasons, through: :workshop_seasons
