@@ -95,6 +95,7 @@ Rails.application.routes.draw do
     resources :slots, path: "creneaux"
     resources :subscriptions do
       get :edit_subscription, to: "subscriptions#edit_subscription"
+      patch :update, to: "subscriptions#update", as: "update"
       get :show_subscription, to: "subscriptions#show_subscription"
     end
     resources :subscription_groups do

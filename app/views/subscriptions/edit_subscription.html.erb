@@ -1,5 +1,5 @@
 <%= turbo_frame_tag "subscription-form" do %>
-  <%= form_for @subscription, html: {class: "inline repel"} do |form| %>
+  <%= form_for @subscription, url: subscription_update_path, method: "patch", html: {class: "inline repel"} do |form| %>
     <div class="flow">
       <div class="cluster">
         <%= label_tag :household, "Transférer l’inscription vers un autre foyer :" %>
