@@ -20,6 +20,7 @@ class InstrumentsController < SecretariatController
 
   # GET /instruments/1 or /instruments/1.json
   def show
+    @active_courses = Course.where(instrument: @instrument).active(@season)
   end
 
   # GET /instruments/new

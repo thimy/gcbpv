@@ -30,7 +30,7 @@ class Household < ApplicationRecord
   end
 
   def emails
-    [email, secondary_email].reject(&:blank?).join(" / ")
+    [email, secondary_email].reject(&:blank?).join(", ")
   end
 
   def household_email
