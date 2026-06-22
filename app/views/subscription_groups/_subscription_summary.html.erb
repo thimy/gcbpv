@@ -48,7 +48,7 @@
               <% row.with_cell(name: "option", class: "nowrap") do %><%= subbed_workshop.option %><% end %>
               <% row.with_cell(name: "comment") do %><%= subbed_workshop.comment %><% end %>
               <% row.with_cell(name: "amount") do %>
-                <% if (index < subscription.courses.size) || (index < subbed_workshop.subscription.course_workshop_diff + subbed_workshop.subscription.courses.confirmed.size) %>
+                <% if (!subscription.courses.empty? && (index < subscription.courses.size || index < subbed_workshop.subscription.course_workshop_diff + subbed_workshop.subscription.courses.confirmed.size)) %>
                   ---
                 <% else %>
                   <%= number_to_currency(subbed_workshop.price, unit: "€") %>

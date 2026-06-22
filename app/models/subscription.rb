@@ -118,7 +118,7 @@ class Subscription < ApplicationRecord
       if season.plan.class_double_workshop_price.present?
         double_classes = subbed_workshops.adults.confirmed.size / courses.confirmed.size
         courses.confirmed.map.with_index { |course, index|
-          course.price(double_workshop: index < double_classes)
+          course.price(double_workshop: index < (double_classes - 1))
         }.sum
       else
         courses.confirmed.map { |course| course.price }.sum
