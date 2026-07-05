@@ -2,7 +2,7 @@
 <% content_for(:page_title, @project.name) %>
 
 <section class="flow">
-  <%= simple_format(@project.description) %>
+  <%= @project.formatted_content %>
   <%= render Website::OtherRecords::Component.new(label: "projets") do %>
     <% @other_projects.each do |project| %>
       <%= link_to ecole_project_path(project), class: "tag", "data-tag-color": "blue" do %>
