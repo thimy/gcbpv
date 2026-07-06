@@ -203,7 +203,7 @@ class Subscription < ApplicationRecord
         end
       else
         if index < courses.size && index < items.size + 1
-          items[index][:workshops].push(workshop)
+          items[index].present? && items[index][:workshops].present? ? items[index][:workshops].push(workshop) : items[index][:workshops] = [workshop]
         else
           items[items.size] = {:workshops => [workshop]}
         end
@@ -227,7 +227,11 @@ class Subscription < ApplicationRecord
         if item[:course].present?
           item[:price] = is_youth? ? plan[price_class[:kids_class]] : plan[price_class[:class]]
         else
-          item[:price] = is_youth? ? plan[price_class[:kid_workshop]] : plan[price_class[:workshop]]
+          if item[:workshops].size == 1
+            item[:price] = item[:workshops].first.price
+          else
+            item[:price] = is_youth? ? plan[price_class[:kid_workshop]] : plan[price_class[:workshop]]
+          end
         end
       end
     end
