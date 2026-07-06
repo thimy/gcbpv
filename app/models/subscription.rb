@@ -188,8 +188,8 @@ class Subscription < ApplicationRecord
     subbed_workshops.adults.confirmed.sort_by{|workshop| workshop.price}.each_with_index do |workshop, index|
       if plan.class_double_workshop_price.present?
         if index < courses.size * 2
-          if index < items.size + 1
-            items[index][:workshops].push(workshop)
+          if index - 1 < items.size
+            items[index - 1].present? && items[index - 1][:workshops].present? ? items[index - 1][:workshops].push(workshop) : items[index][:workshops] = [workshop]
           else
             items[(index / 2).floor][:workshops].push(workshop)
           end

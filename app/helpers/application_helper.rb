@@ -107,6 +107,6 @@ module ApplicationHelper
   end
 
   def get_subscription_row_count(subscription)
-    subscription.courses&.size.to_i + subscription.subbed_workshops&.size.to_i
+    subscription.courses&.confirmed.size.to_i + subscription.subbed_workshops&.confirmed.size.to_i
   end
 end

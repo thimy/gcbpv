@@ -17,7 +17,7 @@
             <% if item[:course].present? %>
               <% table.with_row do |row| %>
                 <% if index == 0 %>
-                  <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, account_subscription_path(subscription), "data-turbo": false %><% end %>
+                  <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, student_url(season: @season, record: subscription.student), "data-turbo": false %><% end %>
                 <% end %>
                 <% row.with_cell(name: "type", class: "nowrap") do %><%= item[:course].instrument.name %><% end %>
                 <% row.with_cell(name: "day_of_week") do %><%= item[:course].slot.day_of_week %><% end %>
@@ -33,7 +33,7 @@
               <% item[:workshops].each_with_index do |workshop, w_index| %>
                 <% table.with_row do |row| %>
                   <% if index == 0 && w_index == 0 && !item[:course].present? %>
-                    <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, account_subscription_path(subscription), "data-turbo": false %><% end %>
+                    <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, student_url(season: @season, record: subscription.student), "data-turbo": false %><% end %>
                   <% end %>
                   <% row.with_cell(name: "type", class: "nowrap") do %><%= workshop.workshop.name %><% end %>
                   <% row.with_cell(name: "day_of_week") do %><%= workshop.workshop_slot.day_of_week %><% end %>
@@ -52,7 +52,7 @@
               <% item[:kid_workshops].each_with_index do |workshop, w_index| %>
                 <% table.with_row do |row| %>
                   <% if index == 0 && w_index == 0 && !item[:course].present? %>
-                    <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, account_subscription_path(subscription), "data-turbo": false %><% end %>
+                    <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, subscription_path(subscription), "data-turbo": false %><% end %>
                   <% end %>
                   <% row.with_cell(name: "type", class: "nowrap") do %><%= workshop.workshop.name %><% end %>
                   <% row.with_cell(name: "day_of_week") do %><%= workshop.workshop_slot.day_of_week %><% end %>
