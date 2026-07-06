@@ -92,4 +92,21 @@ module ApplicationHelper
     options[:locale] ||= I18n.locale
     super(number, options)
   end
+
+  def get_row_count(item)
+    row = 0
+    row += 1 if item[:course].present?
+
+    if item[:workshops].present?
+      item[:workshops].each do |workshop|
+        row += 1
+      end
+    end
+
+    row
+  end
+
+  def get_subscription_row_count(subscription)
+    subscription.courses&.size.to_i + subscription.subbed_workshops&.size.to_i
+  end
 end

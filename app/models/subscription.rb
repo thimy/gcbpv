@@ -14,6 +14,8 @@ class Subscription < ApplicationRecord
   belongs_to :subscription_group
   delegate :season, to: :subscription_group
   delegate :household, to: :subscription_group
+  delegate :plan, to: :subscription_group
+  delegate :majoration_class, to: :subscription_group
 
   validate :student_unique_subscription, on: :create
   validates :subscription_group, presence: true
@@ -25,6 +27,41 @@ class Subscription < ApplicationRecord
     REGISTERED: "Inscrit",
     CANCELED: "Annulé"
     # ON_HOLD: "Dans le panier"
+  }
+
+  PRICES = {
+    "Redon Agglo": {
+      class: "class_price",
+      kids_class: "kids_class_price",
+      class_double_workshops: "class_double_workshop_price",
+      kids_class_double_workshops: "kid_class_double_workshop_price",
+      workshop: "workshop_price",
+      kid_workshop: "kid_workshop_price",
+      double_workshops: "double_workshop_price",
+      kids_double_workshops: "kid_double_workshop_price",
+    },
+    "Oust à Brocéliande Communauté": {
+      class: "class_price_obc",
+      kids_class: "kids_class_price_obc",
+      class_double_workshops: "class_double_workshop_price_obc",
+      kids_class_double_workshops: "kid_class_double_workshop_price_obc",
+      workshop: "workshop_price_obc",
+      kid_workshop: "kid_workshop_price_obc",
+      double_workshops: "double_workshop_price_obc",
+      kids_double_workshops: "kid_double_workshop_price_obc",
+      markup_name: "obc_markup"
+    },
+    "Hors agglo": {
+      class: "class_price_outbounds",
+      kids_class: "kids_class_price_outbounds",
+      class_double_workshops: "class_double_workshop_price_outbounds",
+      workshop: "workshop_price_outbounds",
+      kid_workshop: "kid_workshop_price_outbounds",
+      kids_class_double_workshops: "kid_class_double_workshop_price_outbounds",
+      double_workshops: "double_workshop_price_outbounds",
+      kids_double_workshops: "kid_double_workshop_price_outbounds",
+      markup_name: "outbounds_markup"
+    }
   }
 
   enum :status, {
@@ -43,9 +80,13 @@ class Subscription < ApplicationRecord
   scope :has_confirmed_kid_workshop, ->(workshop) { where(subbed_workshops.confirme.has_kid_workshop(workshop)) }
   scope :latest, -> {order(created_at: :desc)}
 
-  scope :youth, -> { includes(:student).where(Student.youth) }
+  scope :youth, -> { student.birth_year > (subscription_group.season.start_year - 18) }
   scope :adults, -> { includes(:student).where(Student.adults) }
   scope :undefined_age, -> { includes(:student).where(student: Student.undefined_age) }
+
+  def is_youth?
+    student.birth_year > (subscription_group.season.start_year - 18)
+  end
 
   def student_unique_subscription
     if student.subscriptions.active(subscription_group.season).size > 0
@@ -113,40 +154,12 @@ class Subscription < ApplicationRecord
     subbed_workshops.youth.includes(:workshop_slot).find_by(workshop_slot: {workshop: workshop}).option == "Optionel"
   end
 
-  def course_cost
-    if courses.confirmed.size > 0
-      if season.plan.class_double_workshop_price.present?
-        double_classes = subbed_workshops.adults.confirmed.size / courses.confirmed.size
-        courses.confirmed.map.with_index { |course, index|
-          course.price(double_workshop: index < (double_classes - 1))
-        }.sum
-      else
-        courses.confirmed.map { |course| course.price }.sum
-      end
-    end
-  end
-
-  def workshop_cost
-    subbed_workshops.adults.confirmed.map { |workshop| workshop.price }.sum
-  end
-
-  def kid_workshop_cost
-    subbed_workshops.youth.confirmed.map { |workshop| workshop.price }.sum
-  end
-
-  def all_workshops_cost
-    free_workshops_count = season.plan.class_double_workshop_price.present? ? courses.size * 2 : courses.size
-    subbed_workshops.adults.confirmed.map { |workshop|
-      workshop.price
-    }.compact.sort!.reverse.drop(free_workshops_count).sum
-  end
-
   def loan_cost
     loan.presence.cost
   end
 
   def total_cost
-    [kid_workshop_cost, course_cost, all_workshops_cost].compact.sum
+    items.map { |item| item[:price] }.compact.sum
   end
 
   def payment_state
@@ -159,5 +172,65 @@ class Subscription < ApplicationRecord
 
   def has_class_extra_workshops?
     course_workshop_diff > 0
+  end
+
+  def items
+    get_items
+  end
+
+  private
+
+  def get_items
+    items = []
+    courses.confirmed.each_with_index do |course, index|
+      items[index] = {:course => course}
+    end
+    subbed_workshops.adults.confirmed.sort_by{|workshop| workshop.price}.each_with_index do |workshop, index|
+      if plan.class_double_workshop_price.present?
+        if index < courses.size * 2
+          if index < items.size + 1
+            items[index][:workshops].push(workshop)
+          else
+            items[(index / 2).floor][:workshops].push(workshop)
+          end
+        else
+          current_item_index = items.size - 1
+          if items[current_item_index].present? && items[current_item_index][:workshops].size < 2
+            items[current_item_index][:workshops].push(workshop)
+          else
+            items[items.size] = {:workshops => [workshop]}
+          end
+        end
+      else
+        if index < courses.size && index < items.size + 1
+          items[index][:workshops].push(workshop)
+        else
+          items[items.size] = {:workshops => [workshop]}
+        end
+      end
+    end
+    subbed_workshops.youth.confirmed.each do |workshop|
+      items[items.size] = {:kid_workshop => workshop}
+    end
+
+    price_class = PRICES[subscription_group.majoration_class.to_sym]
+    items.each do |item|
+      if item[:kid_workshop].present?
+        item[:price] = item[:kid_workshop].price
+      elsif item[:workshops]&.size == 2
+        if item[:course].present?
+          item[:price] = is_youth? ? plan[price_class[:kids_class_double_workshops]] : plan[price_class[:class_double_workshops]]
+        else
+          item[:price] = is_youth? ? plan[price_class[:kids_double_workshops]] : plan[price_class[:double_workshops]]
+        end
+      else
+        if item[:course].present?
+          item[:price] = is_youth? ? plan[price_class[:kids_class]] : plan[price_class[:class]]
+        else
+          item[:price] = is_youth? ? plan[price_class[:kid_workshop]] : plan[price_class[:workshop]]
+        end
+      end
+    end
+    items
   end
 end
