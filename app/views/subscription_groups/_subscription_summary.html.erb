@@ -48,22 +48,16 @@
                 <% end %>
               <% end %>
             <% end %>
-            <% if item[:kid_workshops].present? %>
-              <% item[:kid_workshops].each_with_index do |workshop, w_index| %>
-                <% table.with_row do |row| %>
-                  <% if index == 0 && w_index == 0 && !item[:course].present? %>
-                    <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, subscription_path(subscription), "data-turbo": false %><% end %>
-                  <% end %>
-                  <% row.with_cell(name: "type", class: "nowrap") do %><%= workshop.workshop.name %><% end %>
-                  <% row.with_cell(name: "day_of_week") do %><%= workshop.workshop_slot.day_of_week %><% end %>
-                  <% row.with_cell(name: "city") do %><%= workshop.workshop_slot.city.name %><% end %>
-                  <% row.with_cell(name: "option", class: "nowrap") do %><%= workshop.option %><% end %>
-                  <% row.with_cell(name: "comment") do %><%= workshop.comment %><% end %>
-                  <% if w_index == 0 && !item[:course].present? %>
-                    <% row.with_cell(name: "amount", rowspan: get_row_count(item)) do %>
-                      <%= number_to_currency(item[:price], unit: "€") || "À définir" %>
-                    <% end %>
-                  <% end %>
+            <% if item[:kid_workshop].present? %>
+              <% table.with_row do |row| %>
+                <% row.with_cell(name: "student", class: "nowrap", rowspan: get_subscription_row_count(subscription)) do %><%= link_to subscription.student.name, subscription_path(subscription), "data-turbo": false %><% end %>
+                <% row.with_cell(name: "type", class: "nowrap") do %><%= item[:kid_workshop].workshop.name %><% end %>
+                <% row.with_cell(name: "day_of_week") do %><%= item[:kid_workshop].workshop_slot.day_of_week %><% end %>
+                <% row.with_cell(name: "city") do %><%= item[:kid_workshop].workshop_slot.city.name %><% end %>
+                <% row.with_cell(name: "option", class: "nowrap") do %><%= item[:kid_workshop].option %><% end %>
+                <% row.with_cell(name: "comment") do %><%= item[:kid_workshop].comment %><% end %>
+                <% row.with_cell(name: "amount") do %>
+                  <%= number_to_currency(item[:price], unit: "€") || "À définir" %>
                 <% end %>
               <% end %>
             <% end %>
