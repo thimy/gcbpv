@@ -349,7 +349,7 @@ form .cluster {
   --gutter: var(--space-s);
 }
 
-form .cluster:has(> [type=checkbox]) {
+form .cluster:has(> [type=checkbox], > [type=radio]) {
   --gutter: var(--space-xxs);
 }
 
@@ -479,4 +479,8 @@ main.region {
 section header a {
   --flow-space: var(--space-xs);
   display: inline-block;
+}
+
+.flow > label + .cluster {
+  --flow-space: 0;
 }

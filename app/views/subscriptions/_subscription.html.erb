@@ -3,20 +3,22 @@
     <div>
       <dl>
         <div>
-          <dt>Date d’inscription :</dt>
-          <dd><%= format_date(subscription.created_at) %></dd>
-        </div>
-        <div>
           <dt>Consentement à l’image :</dt>
-          <dd><%= subscription.image_consent ? "✅" : "❌" %></dd>
+          <dd>
+            <%= show_status_emojis(@subscription.image_consent) %>
+          </dd>
         </div>
         <div>
           <dt>Situation empêchée :</dt>
-          <dd><%= subscription.disability ? "✅" : "❌" %></dd>
+          <dd>
+            <%= show_status_emojis(@subscription.disability) %>
+          </dd>
         </div>
         <div>
           <dt>ARS :</dt>
-          <dd><%= subscription.ars ? "✅" : "❌" %></dd>
+          <dd>
+            <%= show_status_emojis(@subscription.ars) %>
+          </dd>
         </div>
       </dl>
       <dl>

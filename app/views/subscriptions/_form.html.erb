@@ -140,19 +140,46 @@
 
   <div class="panel flow">
     <h3>Divers</h3>
-    <div class="cluster">
-      <label for="subscription_image_consent">
-        <%= form.check_box :image_consent, {} %>
-        <%= form.label :image_consent, "Consentement à l'image" %>
-      </label>
-      <label for="subscription_disability">
-        <%= form.check_box :disability, {} %>
-        <%= form.label :disability, "Situation empêchée" %>
-      </label>
-      <label for="subscription_ars">
-        <%= form.check_box :ars, {} %>
-        <%= form.label :ars, "ARS" %>
-      </label>
+    <div class="grid">
+      <div>
+        <label>Consentement à l'image</label>
+        <div class="cluster">
+          <div class="cluster">
+            <%= form.radio_button :image_consent, 1 %>
+            <%= form.label :image_consent_1, "Oui" %>
+          </div>
+          <div class="cluster">
+            <%= form.radio_button :image_consent, 0 %>
+            <%= form.label :image_consent_0, "Non" %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label>Situation empêchée</label>
+        <div class="cluster">
+          <div class="cluster">
+            <%= form.radio_button :disability, 1 %>
+            <%= form.label :disability_1, "Oui" %>
+          </div>
+          <div class="cluster">
+            <%= form.radio_button :disability, 0 %>
+            <%= form.label :disability_0, "Non" %>
+          </div>
+        </div>
+      </div>
+      <div>
+        <label>ARS</label>
+        <div class="cluster">
+          <div class="cluster">
+            <%= form.radio_button :ars, 1 %>
+            <%= form.label :ars_1, "Oui" %>
+          </div>
+          <div class="cluster">
+            <%= form.radio_button :ars, 0 %>
+            <%= form.label :ars_0, "Non" %>
+          </div>
+        </div>
+      </div>
       <div class="form-inline">
         <%= form.select :status, options_for_select(Subscription.statuses.keys.to_a), include_blank: "Statut", required: true %>
       </div>      

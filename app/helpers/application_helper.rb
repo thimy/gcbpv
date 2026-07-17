@@ -109,4 +109,14 @@ module ApplicationHelper
   def get_subscription_row_count(subscription)
     subscription.courses&.confirmed.size.to_i + subscription.subbed_workshops&.confirmed.size.to_i
   end
+
+  def show_status_emojis(item)
+    if item.present?
+      "✅"
+    elsif item == false
+      "❌"
+    else
+      "?"
+    end
+  end
 end

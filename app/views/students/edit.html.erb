@@ -94,10 +94,46 @@
   <% end %>
   
   <div class="flow">
-    <div class="cluster">
-      <label for="subscription_image_consent"><%= form.check_box :image_consent %> Consentement à l’image</label>
-      <label for="subscription_disability"><%= form.check_box :disability %> Situation empêchée</label>
-      <label for="subscription_ars"><%= form.check_box :ars %> ARS</label>
+    <div class="flow">
+      <div class="flow">
+        <label>Consentement à l'image</label>
+        <div class="cluster">
+          <div class="cluster">
+            <%= form.radio_button :image_consent, 1, {checked: @subscription.image_consent.present?} %>
+            <%= form.label :image_consent_1, "Oui" %>
+          </div>
+          <div class="flow">
+            <%= form.radio_button :image_consent, 0, {checked: @subscription.image_consent == false} %>
+            <%= form.label :image_consent_0, "Non" %>
+          </div>
+        </div>
+      </div>
+      <div class="flow">
+        <label>Situation empêchée</label>
+        <div class="cluster">
+          <div class="cluster">
+            <%= form.radio_button :disability, 1, {checked: @subscription.disability.present?} %>
+            <%= form.label :disability_1, "Oui" %>
+          </div>
+          <div class="cluster">
+            <%= form.radio_button :disability, 0, {checked: @subscription.disability == false} %>
+            <%= form.label :disability_0, "Non" %>
+          </div>
+        </div>
+      </div>
+      <div class="flow">
+        <label>ARS</label>
+        <div class="cluster">
+          <div class="cluster">
+            <%= form.radio_button :ars, 1, {checked: @subscription.ars.present?} %>
+            <%= form.label :ars_1, "Oui" %>
+          </div>
+          <div class="cluster">
+            <%= form.radio_button :ars, 0, {checked: @subscription.ars == false} %>
+            <%= form.label :ars_0, "Non" %>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="cluster">
