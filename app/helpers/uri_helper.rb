@@ -24,26 +24,26 @@ module UriHelper
   end
 
   def student_url(season: Config.first.season, record:)
-    "/secretariat/#{season.name}/eleves/#{record.id}"
+    record.present? ? "/secretariat/#{season.name}/eleves/#{record.id}" : ""
   end
 
   def teacher_url(season: Config.first.season, record:)
-    "/secretariat/#{season.name}/professeurs/#{record.id}"
+    record.present? ? "/secretariat/#{season.name}/professeurs/#{record.id}" : ""
   end
 
   def instrument_url(season: Config.first.season, record:)
-    "/secretariat/#{season.name}/disciplines/#{record.id}"
+    record.present? ? "/secretariat/#{season.name}/disciplines/#{record.id}" : ""
   end
 
   def kid_workshop_url(season: Config.first.season, record:)
-    "/secretariat/#{season.name}/enfance/#{record.id}"
+    record.present? ? "/secretariat/#{season.name}/enfance/#{record.id}" : ""
   end
 
   def workshop_url(season: Config.first.season, record:)
-    "/secretariat/#{season.name}/ateliers/#{record.id}"
+    record.present? ? "/secretariat/#{season.name}/ateliers/#{record.id}" : ""
   end
 
   def household_url(season: Config.first.season, record:)
-    "/secretariat/#{season.name}/foyers/#{record.id}"
+    record.present? ? "/secretariat/#{season.name}/foyers/#{record.id}" : ""
   end
 end

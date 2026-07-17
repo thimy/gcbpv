@@ -162,7 +162,7 @@ class SubscriptionsController < SecretariatController
 
   # Only allow a list of trusted parameters through.
   def subscription_params
-    if params[:household_address] == "yes"
+    if params[:use_household_address] == "yes"
       params[:subscription][:student_attributes][:address] = nil
       params[:subscription][:student_attributes][:postcode] = nil
       params[:subscription][:student_attributes][:city] = nil

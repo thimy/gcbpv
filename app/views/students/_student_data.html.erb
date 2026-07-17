@@ -3,12 +3,12 @@
     <h1>
       <%= @student.name %>
       <% if @subscription.present? %>
-        <%= link_to "Foyer #{@subscription.household.name}", household_url(season: @season, record: @subscription.household), class: "button", "data-turbo": false %>
+        <%= link_to "Foyer #{@subscription&.household&.name}", household_url(season: @season, record: @subscription&.household), class: "button", "data-turbo": false %>
       <% end %>
     </h1>
 
     <div>
-      <%= link_to "Retour aux inscriptions", season_students_path(@season.name), class: "button" %>
+      <%= link_to "Retour aux inscriptions", season_students_path(@season.name), class: "button", "data-turbo": false %>
     </div>
   </div>
 

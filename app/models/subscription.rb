@@ -123,11 +123,11 @@ class Subscription < ApplicationRecord
   end
 
   def phone
-    student.phone&.phony_formatted(normalize: :FR) || subscription_group.household.phones
+    student.phone&.phony_formatted(normalize: :FR) || subscription_group&.household&.phones
   end
 
   def email
-    student.email.presence || subscription_group.household.emails
+    student.email.presence || subscription_group&.household&.emails
   end
 
   def postcode
@@ -135,7 +135,7 @@ class Subscription < ApplicationRecord
   end
 
   def city
-    student.city.presence || subscription_group.household.city
+    student.city.presence || subscription_group&.household&.city
   end
 
   def optional?
