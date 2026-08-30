@@ -20,6 +20,10 @@
       <%= label_tag :instrument, "Discipline" %>
       <%= select_tag "instrument", options_from_collection_for_select(@instruments, "id", "name", params[:instrument].presence || ""), include_blank: "--- Discipline ---", onchange: "this.form.requestSubmit()" %>
     </div>
+    <div class="cluster">
+      <%= check_box_tag :public, checked: params[:public].present? && params[:public] == "1", onchange: "this.form.requestSubmit()" %>
+      <%= label_tag :public, "N’afficher que les professeurs actifs" %>
+    </div>
   </div>
   <div class="cluster button-group repel">
     <%= f.button class: "button" do %>Rechercher<% end %>
@@ -39,7 +43,7 @@
     <% end %>
     <% @teachers.each do |teacher| %>
       <% table.with_row(link_url: teacher) do |row| %>
-        <% row.with_cell(name: "name", class: "nowrap") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}", teacher_url(season: @season, record: teacher), "data-turbo": false %><% end %>
+        <% row.with_cell(name: "name") do %><%= link_to "#{teacher.first_name} #{teacher.last_name}", teacher_url(season: @season, record: teacher), "data-turbo": false %><% end %>
         <% row.with_cell(name: "email", class: "nowrap") do %><%= teacher.email %><% end %>
         <% row.with_cell(name: "phone", class: "nowrap") do %><%= format_phone(teacher.phone) %><% end %>
         <% row.with_cell(name: "students", class: "nowrap") do %>
@@ -58,4 +62,5 @@
       <% end %>
     <% end %>
   <% end %>
+  <%== pagy_nav(@pagy) %>
 <% end %>
