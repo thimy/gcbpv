@@ -9,6 +9,8 @@ class Student < ApplicationRecord
   has_many :subbed_workshops, through: :subscriptions
   has_many :workshops, through: :subbed_workshops
   has_many :projects, through: :project_students
+  has_many :training_students
+  has_many :training_sessions, through: :training_students
 
   accepts_nested_attributes_for :subscriptions
 
@@ -23,6 +25,12 @@ class Student < ApplicationRecord
   scope :youth, -> { "birth_year > #{Config.first.season.start_year - 18}" }
   scope :adults, -> { "birth_year <= #{Config.first.season.start_year - 18}" }
   scope :undefined_age, -> { where(birth_year: nil) }
+
+  def self.find_by_name (name)
+    Student.find { |student|
+      name.downcase == student.name.downcase
+    }
+  end
 
   def name
     "#{first_name} #{last_name.upcase}"

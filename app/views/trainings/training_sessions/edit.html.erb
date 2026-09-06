@@ -1,14 +1,14 @@
 <div class="repel">
-  <h1>Éditer l’événement</h1>
+  <h1>Éditer le rendez-vous</h1>
   <div>
-    <%= link_to "Retour aux événements", bogue_path(@bogue.id), class: "button" %>
-    <%= link_to "Supprimer l’événement", bogue_event_path(bogue_id: @bogue.id, id: @event.id),
+    <%= link_to "Retour aux rendez-vous", training_training_sessions_path(@training_session), class: "button" %>
+    <%= link_to "Supprimer le rendez-vous", training_training_session_path(@training_session),
       class: "button", 
       data: {
         turbo_method: :delete,
-        turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet événement ?"
+        turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer ce rendez-vous ?"
       } %>
   </div>
 </div>
 
-<%= render "form", event: @event, url: bogue_event_path(bogue_id: @bogue.id, id: @event.id) %>
+<%= render "form", event: @event, url: training_training_session_path(@training_session), training_session: @training_session %>

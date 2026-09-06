@@ -1,0 +1,62 @@
+<% if defined?(is_form) && !!is_form %>
+  <tr class="<%= "new-item" if !student.id %>" data-controller="edit-subscription fill-select" id="<%= dom_id student %>" data-edit-subscription-id-value="<%= student.id %>">
+    <td class="cell-name" colspan="2">
+      <datalist id="student-list">
+        <% @students.each do |student| %>
+          <option value="<%= student.name %>"><%= student.name %></option>
+        <% end %>
+      </datalist>
+    </td>
+    <td class="cell-option">
+      <%= check_box :student, :option, {checked: student.option == "Optionel"}, "Optionel", "Confirmé" %>
+    </td>
+    <% unless @hide_private %>
+      <td class="cell-comment">
+        <%= text_area :student, :comment, rows: 2 %>
+      </td>
+    <% end %>
+    <td class="cell-options">
+      <div class="actions">
+        <% if student.id.present? %>
+          <%= hidden_field_tag "student[id]", student.id %>
+          <button class="button" type="submit">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-subscription#editEntry" data-edit-subscription-url-param="<%= params[:youth] ? "#{student_path(student)}?youth=true" : student_path(student) %>">
+            <%= inline_svg "icons/undo", "aria-label": "Annuler" %>
+          </button>
+        <% else %>
+          <button class="button" data-action="edit-subscription#createEntry" data-edit-subscription-url-param="<%= @is_account ? account_students_path : students_path %>">
+            <%= inline_svg "icons/save", "aria-label": "Sauvegarder" %>
+          </button>
+          <button class="button" data-action="edit-subscription#cancelNew">
+            <%= inline_svg "icons/delete", "aria-label": "Annuler" %>
+          </button>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% else %>
+  <tr data-controller="edit-subscription" id="<%= dom_id student %>" data-edit-subscription-id-value="<%= student.id %>">
+    <td class="cell-name"><%= student.name %></td>
+    <td class="cell-email"><%= student.email %></td>
+    <td class="cell-phone"><%= student.phone %></td>
+    <td class="cell-comment"><%= student.comment %></td>
+    <td class="cell-options">
+      <div class="actions">
+        <button class="button" data-action="edit-subscription#editEntry" 
+                data-edit-subscription-url-param="<%= edit_student_path(student) %>">
+          <%= inline_svg "icons/edit", "aria-label": "Editer" %>
+        </button>
+        <%= link_to @is_account ? account_student_path(student) : student_path(student), 
+          class: "button",
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Êtes-vous sûr·e de vouloir supprimer cet atelier ?"
+          } do %>
+          <%= inline_svg "icons/delete", "aria-label": "Supprimer" %>
+        <% end %>
+      </div>
+    </td>
+  </tr>
+<% end %>

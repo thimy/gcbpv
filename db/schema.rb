@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_03_140846) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -309,7 +309,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
     t.decimal "class_double_workshop_price"
     t.decimal "class_double_workshop_price_obc"
     t.decimal "class_double_workshop_price_outbounds"
-    t.decimal "class_extra_workshop_price", default: "0.0"
     t.decimal "class_price"
     t.decimal "class_price_obc"
     t.decimal "class_price_outbounds"
@@ -321,7 +320,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
     t.decimal "early_learning_price"
     t.decimal "early_learning_price_obc"
     t.decimal "early_learning_price_outbounds"
-    t.decimal "extra_workshop_price", default: "0.0"
     t.decimal "first_step"
     t.decimal "first_step_discount"
     t.decimal "kid_discovery_price"
@@ -339,10 +337,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
     t.decimal "kids_class_price"
     t.decimal "kids_class_price_obc"
     t.decimal "kids_class_price_outbounds"
-    t.decimal "kids_extra_workshop_price", default: "0.0"
-    t.decimal "kids_workshop_price", default: "0.0"
-    t.decimal "kids_workshop_price_obc", default: "0.0"
-    t.decimal "kids_workshop_price_outbounds", default: "0.0"
     t.integer "membership_price"
     t.string "name"
     t.integer "obc_markup"
@@ -774,11 +768,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
     t.text "image"
     t.string "location"
     t.string "name"
+    t.decimal "price"
     t.string "start_time"
     t.integer "status"
     t.bigint "training_id", null: false
     t.datetime "updated_at", null: false
     t.index ["training_id"], name: "index_training_sessions_on_training_id"
+  end
+
+  create_table "training_students", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "training_session_id", null: false
+    t.index ["student_id"], name: "index_training_students_on_student_id"
+    t.index ["training_session_id"], name: "index_training_students_on_training_session_id"
   end
 
   create_table "trainings", force: :cascade do |t|
@@ -911,6 +913,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_09_202051) do
   add_foreign_key "thredded_user_post_notifications", "thredded_posts", column: "post_id", on_delete: :cascade
   add_foreign_key "thredded_user_post_notifications", "users", on_delete: :cascade
   add_foreign_key "training_sessions", "trainings"
+  add_foreign_key "training_students", "students"
+  add_foreign_key "training_students", "training_sessions"
   add_foreign_key "trainings", "seasons"
   add_foreign_key "workshop_seasons", "seasons"
   add_foreign_key "workshop_seasons", "workshops"

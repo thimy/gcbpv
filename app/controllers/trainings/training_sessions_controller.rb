@@ -8,6 +8,7 @@ class Trainings::TrainingSessionsController < SecretariatController
 
   # GET /training_sessions/1 or /training_sessions/1.json
   def show
+    @students = Student.all
   end
 
   # GET /training_sessions/new
@@ -42,7 +43,7 @@ class Trainings::TrainingSessionsController < SecretariatController
     respond_to do |format|
       if @training_session.update(training_session_params)
         @training_session.save_attachments
-        format.html { redirect_to training_path(@training), notice: "Le rendez-vous a bien été modifié." }
+        format.html { redirect_to training_training_session_path(@training_session), notice: "Le rendez-vous a bien été modifié." }
         format.json { render :show, status: :ok, location: @training_session }
       else
         format.html { render :edit, status: :unprocessable_content }
@@ -106,8 +107,12 @@ class Trainings::TrainingSessionsController < SecretariatController
 
     # Only allow a list of trusted parameters through.
     def training_session_params
-      params[:training_session][:training_id] = params[:training_id]
-      params.require(:training_session).permit(:name, :content, :status, :image, :date, :location, :city, :comment, :training_id, :guest)
+      params[:training_session] = {training_id: params[:training_id]}
+      if params[:student].present?
+        existing_student = Student.find_by_name(params[:student][:name])
+        params[:training_session][:students] = @training_session.students.push(existing_student)
+      end
+      params.require(:training_session).permit(:name, :content, :status, :image, :date, :location, :city, :comment, :training_id, :guest, students_attributes: [:id])
     end
     
     def set_records
