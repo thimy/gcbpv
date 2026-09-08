@@ -1,8 +1,5 @@
 <%= form_for training_session, url: url, data: {controller: "editor address", "editor-file-url-value": upload_file_training_training_sessions_path} do |form| %>
-  <div class="action-buttons">
-    <%= form.submit "Sauvegarder le rendez-vous", class: "button" %>
-  </div>
-  <div class="repel" data-type="50-50">
+  <div class="switcher">
     <div class="flow">
       <div class="flow">
         <%= form.label :name, "Titre" %>
