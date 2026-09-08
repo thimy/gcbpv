@@ -16,8 +16,8 @@ module WithAttachment
       end
     end
 
-    delete_unused_files(content)
-    delete_unassociated_files
+    # delete_unused_files(content)
+    # delete_unassociated_files
   end
   
   private
