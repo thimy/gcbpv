@@ -35,7 +35,7 @@ class Workshop < ApplicationRecord
   end
 
   def self.get_workshop_count(season, workshop_id, optional: true)
-    options = SubbedWorkshop.where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).optional.size
+    options = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).optional.or(SubbedWorkshop.inquired(season).where(workshop_slot: { workshop: Workshop.find(workshop_id) })).size
     confirmed_subs = SubbedWorkshop.where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).confirmed.size
     options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
   end
