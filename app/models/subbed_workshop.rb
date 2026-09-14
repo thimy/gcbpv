@@ -35,6 +35,7 @@ class SubbedWorkshop < ApplicationRecord
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
+  scope :during, ->(season) {joins(:subscription).where(subscription: { subscription_group: SubscriptionGroup.where(season: season)})}
   scope :registered, ->(season) {joins(:subscription).where(subscription: Subscription.registered(season))}
   scope :inquired, ->(season) {joins(:subscription).where(subscription: Subscription.inquired(season))}
   scope :confirmed, -> { where(option: "Confirmé")}
