@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount Thredded::Engine => '/forum'
+
   get "403", to: "errors#forbidden", as: :forbidden
   get "404", to: "errors#not_found", as: :not_found
   get "500", to: "errors#internal_error", as: :internal_error
@@ -192,6 +194,7 @@ Rails.application.routes.draw do
     get "concours", to: "contests", as: "contests"
     get ":page_slug", to: "page", as: "page"
   end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

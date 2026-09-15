@@ -4,5 +4,6 @@
 //= link application.css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
+//= require thredded
 //= link_tree ../builds
 //= link administrate-field-active_storage/application.css

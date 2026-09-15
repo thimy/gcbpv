@@ -3,3 +3,4 @@
 //= require selectize
 //= require_tree .
 //= require trix
+//= require thredded

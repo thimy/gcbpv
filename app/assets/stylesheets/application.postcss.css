@@ -18,6 +18,7 @@
 
 /* Entry point for your PostCSS build */
 
+@import-glob "pages/*.css";
 @import "website/home.css";
 @import "website/posts.css";
 @import "website/ecole.css";
