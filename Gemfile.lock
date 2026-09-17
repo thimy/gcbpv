@@ -101,6 +101,9 @@ GEM
     administrate-field-nested_has_many (2.1.0)
       administrate (>= 0.19, < 1)
       cocoon (~> 1.2, >= 1.2.11)
+    annotaterb (4.25.0)
+      activerecord (>= 6.0.0)
+      activesupport (>= 6.0.0)
     aws-eventstream (1.4.0)
     aws-partitions (1.1213.0)
     aws-sdk-core (3.242.0)
@@ -441,6 +444,7 @@ DEPENDENCIES
   administrate-field-active_storage
   administrate-field-image
   administrate-field-nested_has_many
+  annotaterb
   aws-sdk-s3
   bootsnap
   capybara

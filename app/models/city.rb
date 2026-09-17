@@ -1,3 +1,20 @@
+# == Schema Information
+#
+# Table name: cities
+#
+#  id               :bigint           not null, primary key
+#  comment          :text
+#  name             :string
+#  postcode         :string
+#  status           :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  agglomeration_id :bigint
+#
+# Indexes
+#
+#  index_cities_on_agglomeration_id  (agglomeration_id)
+#
 class City < ApplicationRecord
   # Cities where the school dispenses classes
   belongs_to :agglomeration, optional: true
