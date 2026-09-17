@@ -52,7 +52,7 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def total_payment
-    payments.pluck(:amount).reduce(:+)
+    payments.pluck(:amount).compact.reduce(:+)
   end
 
   def payment_state
@@ -112,7 +112,7 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def loan_cost
-    loans.pluck(:cost).reduce(:+)
+    loans.pluck(:cost).compact.reduce(:+)
   end
 
   def total_cost
