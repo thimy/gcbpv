@@ -1,3 +1,28 @@
+# == Schema Information
+#
+# Table name: slots
+#
+#  id          :bigint           not null, primary key
+#  comment     :text
+#  day_of_week :integer
+#  frequency   :integer
+#  slot_time   :string
+#  status      :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  city_id     :bigint           not null
+#  teacher_id  :bigint           not null
+#
+# Indexes
+#
+#  index_slots_on_city_id     (city_id)
+#  index_slots_on_teacher_id  (teacher_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (city_id => cities.id)
+#  fk_rails_...  (teacher_id => teachers.id)
+#
 class Slot < ApplicationRecord
   include WithTime
 

@@ -1,5 +1,20 @@
 require "test_helper"
 
+# == Schema Information
+#
+# Table name: bogues
+#
+#  id         :bigint           not null, primary key
+#  comment    :text
+#  content    :jsonb
+#  end_date   :datetime
+#  name       :string
+#  slug       :string
+#  start_date :datetime
+#  status     :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class BogueTest < ActiveSupport::TestCase
   test "should save with a name" do
     bogue = Bogue.new(start_date: Datetime.new(2025, 10, 27), end_date: Datetime.new(2025, 10, 31), slug: "bogue-2025")
