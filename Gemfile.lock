@@ -130,7 +130,7 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     base64 (0.3.0)
-    bcrypt (3.1.21)
+    bcrypt (3.1.22)
     bigdecimal (4.0.1)
     bindex (0.8.1)
     bootsnap (1.22.0)
@@ -162,10 +162,10 @@ GEM
     debug (1.11.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
-    devise (4.9.4)
+    devise (5.0.4)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0)
+      railties (>= 7.0)
       responders
       warden (~> 1.2.3)
     dotenv (3.2.0)
@@ -213,9 +213,7 @@ GEM
     htmlentities (4.4.2)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
-    image_processing (1.14.0)
-      mini_magick (>= 4.9.5, < 6)
-      ruby-vips (>= 2.0.17, < 3)
+    image_processing (2.1.0)
     importmap-rails (2.2.3)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -276,8 +274,6 @@ GEM
       logger
       mime-types-data (~> 3.2025, >= 3.2025.0507)
     mime-types-data (3.2026.0203)
-    mini_magick (5.3.1)
-      logger
     mini_mime (1.1.5)
     minitest (6.0.1)
       prism (~> 1.5)
@@ -387,7 +383,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
-    responders (3.2.0)
+    responders (3.2.1)
       actionpack (>= 7.0)
       railties (>= 7.0)
     rexml (3.4.4)
@@ -423,9 +419,9 @@ GEM
       bigdecimal
       concurrent-ruby (~> 1.0, >= 1.0.2)
       logger
-    simple_form (5.3.1)
-      actionpack (>= 5.2)
-      activemodel (>= 5.2)
+    simple_form (5.4.1)
+      actionpack (>= 7.0)
+      activemodel (>= 7.0)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -472,7 +468,7 @@ GEM
       concurrent-ruby (~> 1.0)
     uri (1.1.1)
     useragent (0.16.11)
-    view_component (4.5.0)
+    view_component (4.15.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
@@ -510,32 +506,33 @@ DEPENDENCIES
   cssbundling-rails (~> 1.4.3)
   csv
   debug
-  devise (~> 4.9.4)
+  devise (~> 5.0.4)
   dotenv
   draper
-  factory_bot_rails (~> 6.4)
-  image_processing (~> 1.2)
+  factory_bot_rails (~> 6.5.1)
+  image_processing (~> 2.1.0)
   importmap-rails
-  inline_svg (~> 1.9)
+  inline_svg (~> 1.10)
   jbuilder
   letter_opener (~> 1.10)
-  pagy (~> 9.0)
-  pg (~> 1.1)
+  pagy (~> 9.4.0)
+  pg (~> 1.6.3)
   phony_rails
   premailer-rails (~> 1.12)
   puma (>= 5.0)
   rails (>= 8.1.2)
   rails-i18n (~> 8.1)
+  ruby-vips (~> 2.0)
   selenium-webdriver
   sentry-rails
   sentry-ruby
-  simple_form (~> 5.3.1)
+  simple_form (~> 5.4.1)
   sprockets-rails
   stimulus-rails
-  thredded (~> 1.2)
+  thredded (~> 1.2.1)
   turbo-rails
   tzinfo-data
-  view_component (~> 4.5.0)
+  view_component (~> 4.15.0)
   web-console
 
 RUBY VERSION

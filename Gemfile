@@ -9,7 +9,7 @@ gem "rails", ">= 8.1.2"
 gem "sprockets-rails"
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "pg", "~> 1.6.3"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -42,7 +42,8 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
+gem "ruby-vips", "~> 2.0"
+gem "image_processing", "~> 2.1.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -70,9 +71,9 @@ end
 
 gem "aws-sdk-s3", require: false
 
-gem "view_component", "~> 4.5.0"
+gem "view_component", "~> 4.15.0"
 
-gem "simple_form", "~> 5.3.1"
+gem "simple_form", "~> 5.4.1"
 
 gem "rails-i18n", "~> 8.1"
 
@@ -86,14 +87,14 @@ gem "administrate-field-active_storage"
 gem "administrate-field-nested_has_many"
 
 gem "draper"
-gem "devise", "~> 4.9.4"
+gem "devise", "~> 5.0.4"
 gem "dotenv"
 
-gem "factory_bot_rails", "~> 6.4"
+gem "factory_bot_rails", "~> 6.5.1"
 
-gem "inline_svg", "~> 1.9"
+gem "inline_svg", "~> 1.10"
 
-gem "pagy", "~> 9.0"
+gem "pagy", "~> 9.4.0"
 gem "phony_rails"
 
 gem "premailer-rails", "~> 1.12"
@@ -102,4 +103,4 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 gem "csv"
-gem "thredded", "~> 1.2"
+gem "thredded", "~> 1.2.1"
