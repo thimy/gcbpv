@@ -51,6 +51,6 @@ class SubscriptionGroupsController < BaseController
 
     # Only allow a list of trusted parameters through.
     def subscription_group_params
-      params.require(:subscription_group).permit(:discount, :donation, :comment, :majoration_class)
+      params.require(:subscription_group).permit(:discount, :donation, :comment, :majoration_class, :status)
     end
 end

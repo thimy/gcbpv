@@ -96,7 +96,13 @@ class HouseholdsController < SecretariatController
     end
 
     def set_records
-      @subscription_groups = SubscriptionGroup.where(status: params[:status]) if params[:status].present?
+      @filters = {season: @season}
+      @filters[:status] = params[:status] if params[:status].present?
+
+      @not_filters = {}
+      @not_filters[:status] = params[:exclude_status] if params[:exclude_status].present?
+
+      @subscription_groups = SubscriptionGroup.where(@filters).where.not(@not_filters)
 
       if !@subscription_groups.nil?
         @filtered_households = Household.includes(:subscription_groups).where(subscription_groups: @subscription_groups)
