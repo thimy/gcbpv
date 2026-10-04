@@ -40,9 +40,9 @@ class SubscriptionGroup < ApplicationRecord
   validates :household, presence: true
 
   STATUSES = {
-    INQUIRY: "Demande d’information",
-    REGISTERED: "Inscrit",
-    CANCELED: "Annulé"
+    inquiry: "Demande d’information",
+    registered: "Inscrit",
+    canceled: "Annulé"
     # ON_HOLD: "Dans le panier"
   }
 
@@ -50,7 +50,8 @@ class SubscriptionGroup < ApplicationRecord
     "À régler": "optional",
     "Partiel": "optional",
     "Réglé": "confirmed",
-    "Trop perçu": "overpaid"
+    "Trop perçu": "overpaid",
+    "Annulé": "canceled"
   }
 
   enum :status, {
@@ -82,8 +83,8 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def payment_state
-    return STATUSES[status.to_sym] if status != "Inscrit"
-      
+    return status if status != "Inscrit"
+
     if total_payment.nil?
       "À régler"
     elsif total_payment < total_cost

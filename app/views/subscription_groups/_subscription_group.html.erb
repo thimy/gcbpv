@@ -10,6 +10,10 @@
           <dt>Notes pour l’année en cours :</dt>
           <dd><%= subscription_group.comment %></dd>
         </div>
+        <div>
+          <dt>Statut du foyer :</dt>
+          <dd><%= subscription_group.status %></dd>
+        </div>
       </dl>
     </div>
     <%= link_to subscription_group_edit_subscription_group_path(subscription_group_id: subscription_group.id), class: "button", "data-button-size": "small" do %>

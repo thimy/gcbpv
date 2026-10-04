@@ -216,8 +216,8 @@ class StudentsController < SecretariatController
       @filters[:image_consent] = params[:image_consent] if params[:image_consent].present?
 
       @not_filters = {}
-      @not_filters[:subscription_group] = { status: [3] }
-      @not_filters[:subscription_group][:status].push(params[:exclude_status]) if params[:exclude_status].present?
+      @not_filters[:status] = [params[:exclude_status]] if params[:exclude_status].present?
+
       @not_loan = params[:loan].present? ? {loan: {instrument: [nil, ""]}} : {}
 
       @filtered_subscriptions = Subscription.includes(:subscription_group, :loan).where(@filters).where.not(@not_filters).where.not(@not_loan)
