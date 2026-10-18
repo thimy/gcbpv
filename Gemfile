@@ -104,3 +104,6 @@ gem "sentry-rails"
 
 gem "csv"
 gem "thredded", "~> 1.2.1"
+
+gem 'prosopite'
+gem 'pg_query'
