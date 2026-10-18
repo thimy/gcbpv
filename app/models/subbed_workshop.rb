@@ -56,9 +56,9 @@ class SubbedWorkshop < ApplicationRecord
 
   enum :option, "Confirmé" => 0, "Optionel" => 1
 
-  scope :during, ->(season) {joins(:subscription).where(subscription: { subscription_group: SubscriptionGroup.where(season: season)})}
-  scope :registered, ->(season) {joins(:subscription).where(subscription: Subscription.registered(season))}
-  scope :inquired, ->(season) {joins(:subscription).where(subscription: Subscription.inquired(season))}
+  scope :during, ->(season) {includes(:subscription).where(subscription: { subscription_group: SubscriptionGroup.where(season: season)})}
+  scope :registered, ->(season) {includes(:subscription).where(option: 0, subscription: Subscription.registered(season).not_canceled)}
+  scope :inquired, ->(season) {includes(:subscription).where(subscription: Subscription.inquired(season).not_canceled)}
   scope :confirmed, -> { where(option: "Confirmé")}
   scope :optional, -> { where(option: "Optionel")}
 
@@ -73,7 +73,7 @@ class SubbedWorkshop < ApplicationRecord
   end
 
   def price
-    get_price
+    @price ||= get_price
   end
 
   def optional?
@@ -83,13 +83,14 @@ class SubbedWorkshop < ApplicationRecord
   private
 
   def get_price
+    return @price if @price.present?
     price_class = PRICES[majoration_class.to_sym]
     if workshop.price_category.present?
       price_category = plan.plan_price_categories.find_by(price_category: workshop.price_category)
-      price_category[price_class[:category_price_name]] || price_category.price + price_category.price * plan[price_class[:markup_name]] / 100
+      @price = price_category[price_class[:category_price_name]] || price_category.price + price_category.price * plan[price_class[:markup_name]] / 100
     else
       age_type = subscription.is_youth? && plan.kid_workshop_price.present? ? "kid_price_name" : "price_name"
-      plan[price_class[age_type.to_sym]] || plan.workshop_price + plan.workshop_price * plan[price_class[:markup_name]] / 100
+      @price = plan[price_class[age_type.to_sym]] || plan.workshop_price + plan.workshop_price * plan[price_class[:markup_name]] / 100
     end
   end
 end

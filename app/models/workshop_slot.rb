@@ -74,7 +74,7 @@ class WorkshopSlot < ApplicationRecord
   }
 
   def teacher_names
-    teachers.map {|teacher| teacher.name }.join("/")
+    @teacher_names ||= teachers.map {|teacher| teacher.name }.join("/")
   end
 
   def full_name
@@ -89,11 +89,11 @@ class WorkshopSlot < ApplicationRecord
     "#{city.name} (#{teacher_names})"
   end
 
-  def subbed_workshops
-    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: self)
-  end
-
   def subscription_count
     subbed_workshops.size
+  end
+
+  def undecided_count(season)
+    (subbed_workshops.inquired(season) + subbed_workshops.registered(season).optional).uniq.size
   end
 end

@@ -209,7 +209,7 @@ class StudentsController < SecretariatController
       @workshop_filter[:workshop] = [params[:workshop], params[:kid_workshop]].compact if (params[:workshop].present? || params[:kid_workshop].present?)
       @workshop_filter[:day_of_week] = params[:workshop_day] if params[:workshop_day].present?
       
-      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
+      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot, :slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
 
       @filters[:status] = params[:status] if params[:status].present?
       @filters[:ars] = params[:ars] if params[:ars].present?
@@ -220,7 +220,7 @@ class StudentsController < SecretariatController
 
       @not_loan = params[:loan].present? ? {loan: {instrument: [nil, ""]}} : {}
 
-      @filtered_subscriptions = Subscription.includes(:subscription_group, :loan).where(@filters).where.not(@not_filters).where.not(@not_loan)
+      @filtered_subscriptions = Subscription.includes(:subscription_group, :student, :instrument, :courses, :subbed_workshops, :loan).where(@filters).where.not(@not_filters).where.not(@not_loan)
 
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term", { term: "%#{query}%" })) if query.present?
 

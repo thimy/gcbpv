@@ -4,13 +4,11 @@ class WorkshopsController < SecretariatController
 
   # GET /workshops or /workshops.json
   def index
-    @workshops = Workshop.active(@season).adults
+    @workshops = WorkshopDecorator.decorate_collection(Workshop.active(@season).adults)
   end
 
   # GET /workshops/1 or /workshops/1.json
   def show
-    @confirmed_count = @workshop.subscriptions.registered(@season).confirmed.has_workshop(@workshop).size
-    @optional_count = @workshop.subscriptions.registered(@season).optional.has_workshop(@workshop).size + @workshop.subscriptions.inquired(@season).has_workshop(@workshop).size
   end
 
   # GET /workshops/new
@@ -69,7 +67,7 @@ class WorkshopsController < SecretariatController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_workshop
-      @workshop = Workshop.find(params[:id])
+      @workshop = WorkshopDecorator.decorate(Workshop.find(params[:id]))
     end
 
     # Only allow a list of trusted parameters through.

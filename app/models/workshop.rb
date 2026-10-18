@@ -50,16 +50,27 @@ class Workshop < ApplicationRecord
   scope :confirmed, -> { subscribed_by_status("Confirmé") }
   scope :optional, -> { subscribed_by_status("Optionel") }
 
-  def self.get_count(season, optional: true)
-    options = SubbedWorkshop.adults.registered(season).optional.size
-    confirmed_subs = SubbedWorkshop.adults.registered(season).confirmed.size
+  def self.get_count(season)
+    registered_workshops = self.get_registered_count(season)
+    options = registered_workshops.optional.size
+    confirmed_subs = registered_workshops.confirmed.size
     options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
   end
 
+  def self.get_registered_count(season)
+    @registered_count ||= SubbedWorkshop.adults.registered(season)
+  end
+
   def self.get_workshop_count(season, workshop_id, optional: true)
-    options = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).optional.or(SubbedWorkshop.inquired(season).where(workshop_slot: { workshop: Workshop.find(workshop_id) })).size
-    confirmed_subs = SubbedWorkshop.where(workshop_slot: WorkshopSlot.where(workshop: Workshop.find(workshop_id))).registered(season).confirmed.size
+    subbed_workshops = SubbedWorkshop.includes(:workshop_slot, subscription: { subscription_group: :season }).where(workshop_slot: { workshop: Workshop.find(workshop_id) })
+    registered_workshops = self.get_registered_workshops(subbed_workshops, season)
+    options = registered_workshops.optional.or(subbed_workshops.inquired(season)).size
+    confirmed_subs = registered_workshops.confirmed.size
     options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
+  end
+
+  def self.get_registered_workshops(subbed_workshops, season)
+    @registered_workshops ||= subbed_workshops.registered(season)
   end
 
   def student_count
@@ -71,9 +82,5 @@ class Workshop < ApplicationRecord
       slot = WorkshopSlot.find_by(id: id)
       "#{slot.city.name} - #{slot.day_of_week} avec #{slot.teacher_names}: #{count}"
     }
-  end
-
-  def subscriptions
-    SubbedWorkshop.joins(:subscription, :workshop_slot).where(workshop_slot: {workshop: self})
   end
 end

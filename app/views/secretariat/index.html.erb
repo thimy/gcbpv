@@ -22,25 +22,25 @@
     <div class="card panel">
       <div class="card-info">
         <h3>Nombre d'élèves en atelier adulte</h3>
-        <div><%= Workshop.get_count(season) %></div>
+        <div><%= season.get_adult_count %></div>
       </div>
     </div>
     <div class="card panel">
       <div class="card-info">
         <h3>Nombre d'élèves en atelier enfance (tous confondus)</h3>
-        <div><%= KidWorkshop.get_count(season) %></div>
+        <div><%= season.get_kid_count %></div>
       </div>
     </div>
     <div class="card panel">
       <div class="card-info">
         <h3>Nombre d'élèves en éveil musical</h3>
-        <div><%= KidWorkshop.get_workshop_count(season, 63) %></div>
+        <div><%= season.get_workshop_count(63) %></div>
       </div>
     </div>
     <div class="card panel">
       <div class="card-info">
         <h3>Nombre d'élèves en découverte instrumentale</h3>
-        <div><%= KidWorkshop.get_workshop_count(season, 62) %></div>
+        <div><%= season.get_workshop_count(62) %></div>
       </div>
     </div>
   </div>
