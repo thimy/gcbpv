@@ -22,4 +22,15 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || secretariat_root_path
     # replace users_dashboard_path by whichever route you want to redirect to after login - default is root_path
   end
+
+  unless Rails.env.production?
+    around_action :n_plus_one_detection
+
+    def n_plus_one_detection
+      Prosopite.scan
+      yield
+    ensure
+      Prosopite.finish
+    end
+  end
 end

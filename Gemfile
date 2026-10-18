@@ -102,3 +102,5 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 gem "csv"
+gem 'prosopite'
+gem 'pg_query'
