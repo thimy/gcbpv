@@ -12,7 +12,7 @@
   <dl class="cluster panel">
     <div>
       <dt>Nombre d’élèves :</dt>
-      <dd><%= "#{@confirmed_count} (+#{@optional_count})" %></dd>
+      <dd><%= @workshop.get_total_subscriptions(@season) %></dd>
     </div>
     <div>
       <dt>Statut :</dt>

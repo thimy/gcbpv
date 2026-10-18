@@ -9,11 +9,11 @@ class SecretariatController < ApplicationController
   end
 
   def index
-    @seasons = Season.all.sort_by {|season| season.start_year}.reverse
+    @seasons = Season.includes(subscription_groups: { subscriptions: [:courses, :subbed_workshops] }).all.sort_by {|season| season.start_year}.reverse
     @subscription_groups = SubscriptionGroup.where(season: @season)
-    @unconfirmed_subscription_groups = SubscriptionGroup.where(season: @season).unconfirmed
+    @unconfirmed_subscription_groups = @subscription_groups.unconfirmed
     @unconfirmed_subscription_groups_size = @unconfirmed_subscription_groups.size
-    @confirmed_subscription_groups = SubscriptionGroup.where(season: @season).confirmed
+    @confirmed_subscription_groups = @subscription_groups.confirmed
     @confirmed_subscription_groups_size = @confirmed_subscription_groups.size
 
     @active_subscriptions = Subscription.active(@season)

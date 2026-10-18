@@ -11,20 +11,19 @@
   <% @workshops.each do |workshop| %>
     <% table.with_row(link_url: workshop) do |row| %>
       <% row.with_cell(name: "name") do %><%= link_to workshop.name, workshop_url(season: @season, record: workshop) %><% end %>
-      <% row.with_cell(name: "total_subscriptions") do %><strong><%= Workshop.get_workshop_count(@season, workshop.id) %></strong><% end %>
+      <% row.with_cell(name: "total_subscriptions") do %><strong><%= workshop.get_total_subscriptions(@season) %></strong><% end %>
       <% row.with_cell(name: "subscriptions") do %>
         <% workshop.workshop_slots.active(@season).each do |slot| %>
           <div>
             <strong>
-              <%= "#{SubbedWorkshop.registered(@season).confirmed.has_slot(slot).size}" %>
-              <% @student_count = SubbedWorkshop.registered(@season).optional.has_slot(slot).size + SubbedWorkshop.inquired(@season).has_slot(slot).size %>
-                <% if @student_count > 0 %>
+              <%= slot.subbed_workshops.registered(@season).confirmed.size %>
+                <% if slot.undecided_count(@season) > 0 %>
                 <span class="optional-count">
-                  <%= "(+#{@student_count})" %>
+                  <%= "(+#{slot.undecided_count(@season)})" %>
                 </span>
               <% end %>
             </strong>
-            <% if workshop.workshop_slots.size > 1 %>
+            <% if workshop.workshop_slots.active(@season).size > 1 %>
               <%= ": #{slot.teachers_and_location}" %>
             <% end %>
           </div>

@@ -1,16 +1,15 @@
 class KidWorkshopsController < SecretariatController
   before_action :authenticate_admin
   before_action :set_kid_workshop, only: %i[ show edit update destroy get_slots ]
+  decorates_assigned :kid_workshop
 
   # GET /kid_workshops or /kid_workshops.json
   def index
-    @workshops = KidWorkshop.all
+    @workshops = WorkshopDecorator.decorate_collection(KidWorkshop.active(@season))
   end
 
   # GET /kid_workshops/1 or /kid_workshops/1.json
   def show
-    @confirmed_count = @workshop.subscriptions.registered(@season).confirmed.has_workshop(@workshop).size if @workshop.present?
-    @optional_count = @workshop.subscriptions.registered(@season).optional.has_workshop(@workshop).size + @workshop.subscriptions.inquired(@season).has_workshop(@workshop).size if @workshop.present?
   end
 
   # GET /kid_workshops/new
@@ -70,7 +69,7 @@ class KidWorkshopsController < SecretariatController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_kid_workshop
-      @workshop = KidWorkshop.find(params[:id])
+      @workshop = WorkshopDecorator.decorate(KidWorkshop.find(params[:id]))
     end
 
     # Only allow a list of trusted parameters through.

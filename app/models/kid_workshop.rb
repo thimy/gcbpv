@@ -40,9 +40,14 @@ class KidWorkshop < Workshop
   end
 
   def self.get_count(season, optional: true)
-    options = SubbedWorkshop.youth.registered(season).optional.size
-    confirmed_subs = SubbedWorkshop.youth.registered(season).confirmed.size
+    registered_workshops = self.get_registered_count(season)
+    options = registered_workshops.optional.size
+    confirmed_subs = registered_workshops.confirmed.size
     options == 0 ? confirmed_subs : "#{confirmed_subs} (+#{options})"
+  end
+
+  def self.get_registered_count(season)
+    @registered_count ||= SubbedWorkshop.youth.registered(season)
   end
 
   def student_count

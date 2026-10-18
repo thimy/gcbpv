@@ -28,6 +28,9 @@ class SubscriptionGroup < ApplicationRecord
   belongs_to :household
   belongs_to :season
   has_many :subscriptions, dependent: :destroy
+  has_many :active_subscriptions, -> { not_on_hold }, class_name: 'Subscription'
+  has_many :registered_subscriptions, -> { not_on_hold.where.not(status: [nil, 0]) }, class_name: 'Subscription'
+  has_many :registered_subbed_workshops, class_name: 'SubbedWorkshop', through: :registered_subscriptions
   has_many :loans, through: :subscriptions
   has_many :payments, dependent: :destroy
   has_many :students, through: :subscriptions
@@ -73,43 +76,47 @@ class SubscriptionGroup < ApplicationRecord
   scope :active, ->(season) { where(season: season)}
 
   def student_list
-    subscriptions.map {|subscription|
+    @student_list ||= subscriptions.map {|subscription|
       subscription.student.name
   }.join(", ")
   end
 
   def total_payment
-    payments.pluck(:amount).compact.reduce(:+)
+    @total_payment ||= payments.pluck(:amount).compact.reduce(:+)
   end
 
   def payment_state
-    return status if status != "Inscrit"
+    return @payment_state if @payment_state.present?
+
+    @payment_state = status if status != "Inscrit"
 
     if total_payment.nil?
-      "À régler"
+      @payment_state = "À régler"
     elsif total_payment < total_cost
-      "Partiel"
+      @payment_state = "Partiel"
     elsif total_payment == total_cost
-      "Réglé"
+      @payment_state = "Réglé"
     else
-      "Trop perçu"
+      @payment_state = "Trop perçu"
     end
+
+    return @payment_state
   end
 
   def kid_workshop_cost
-    subscriptions.present? ? subscriptions.map {|subscription| subscription.kid_workshop_cost}.compact.sum : 0
+    @kid_workshop_cost ||= subscriptions.present? ? subscriptions.map {|subscription| subscription.kid_workshop_cost}.compact.sum : 0
   end
 
   def course_cost
-    subscriptions.present? ? subscriptions.map {|subscription| subscription.course_cost}.compact.sum : 0
+    @course_cost ||= subscriptions.present? ? subscriptions.map {|subscription| subscription.course_cost}.compact.sum : 0
   end
 
   def workshop_cost
-    subscriptions.present? ? subscriptions.map {|subscription| subscription.workshop_cost}.compact.sum : 0
+    @workshop_cost ||= subscriptions.present? ? subscriptions.map {|subscription| subscription.workshop_cost}.compact.sum : 0
   end
 
   def subscription_cost
-    subscriptions.present? ? subscriptions.map {|subscription| subscription.total_cost}.compact.sum : 0
+    @subscription_cost ||= subscriptions.present? ? subscriptions.map {|subscription| subscription.total_cost}.compact.sum : 0
   end
 
   def discount_percentage
@@ -127,49 +134,49 @@ class SubscriptionGroup < ApplicationRecord
   end
 
   def subscriptions_discount
-    if discount_percentage.nil?
-      return 0
-    end
-
-    subscription_cost * discount_percentage / 100
+    @subscriptions_discount ||= discount_percentage.nil? ? 0 : subscription_cost * discount_percentage / 100
   end
 
   def subscription_cost_after_discount
-    subscription_cost - subscriptions_discount - (discount || 0)
+    @subscription_cost_after_discount ||= subscription_cost - subscriptions_discount - (discount || 0)
   end
 
   def loan_cost
-    loans.pluck(:cost).compact.reduce(:+)
+    @loan_cost ||= loans.pluck(:cost).compact.reduce(:+)
   end
 
   def total_cost
-    [subscription_cost_after_discount, loan_cost, plan.membership_price, donation].compact.sum
+    @total_cost ||= [subscription_cost_after_discount, loan_cost, plan.membership_price, donation].compact.sum
   end
 
   def total_paid
-    payments.pluck(:amount).sum
+    @total_paid ||= payments.pluck(:amount).sum
   end
 
   def total_remaining
-    total_cost - total_paid
+    @total_remaining ||= total_cost - total_paid
   end
 
   def redon_agglo?
-    majoration_class == "Redon Agglo"
+    @redon_agglo ||= majoration_class == "Redon Agglo"
   end
 
   def obc?
-    majoration_class == "Oust à Brocéliande Communauté"
+    @obc ||= majoration_class == "Oust à Brocéliande Communauté"
   end
 
   def agglo_markup
-    if redon_agglo?
-      0
-    elsif obc?
-      Config.first.season.plan.obc_markup
-    else
-      Config.first.season.plan.outbounds_markup
+    unless @agglo_markup.present?
+      if redon_agglo?
+        @agglo_markup = 0
+      elsif obc?
+        @agglo_markup = Config.first.season.plan.obc_markup
+      else
+        @agglo_markup = Config.first.season.plan.outbounds_markup
+      end
     end
+
+    return @agglo_markup
   end
 
   def send_subscription_confirmation(user)

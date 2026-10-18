@@ -34,6 +34,7 @@ class Subscription < ApplicationRecord
   has_many :pathway_slots, through: :subbed_pathways
   has_many :kid_workshop_slots, through: :subbed_kid_workshops
   has_many :subbed_workshops, dependent: :destroy
+  has_many :registered_subbed_workshops, -> { where.not(subscription: {status: [nil, 0]}) }, dependent: :destroy
   has_many :workshop_slots, through: :subbed_workshops
   has_many :workshops, through: :workshop_slots
   belongs_to :subscription_group
@@ -95,22 +96,24 @@ class Subscription < ApplicationRecord
     "Annulé": 2
   }
 
+  default_scope {order(created_at: :desc)}
   scope :active, ->(season) {includes(:subscription_group).where(subscription_group: { season: season })}
   scope :not_on_hold, -> {where.not(subscription_group: SubscriptionGroup.where(status: "Dans le panier"))}
   scope :registered, ->(season) {active(season).where.not(status: [nil, 0])}
+  scope :not_canceled, -> {where.not(status: 2)}
   scope :inquired, ->(season) {active(season).where(status: 0)}
-  scope :has_optional_workshop, ->(workshop) { where(subbed_workshops.optional.has_workshop(workshop)) }
-  scope :has_confirmed_workshop, ->(workshop) { where(subbed_workshops.confirmed.has_workshop(workshop)) }
+  scope :has_workshop, ->(workshop) { where(subbed_workshops.has_workshop(workshop)) }
+  scope :has_optional_workshop, ->(workshop) { has_workshop.optional }
+  scope :has_confirmed_workshop, ->(workshop) { has_workshop.confirmed }
   scope :has_optional_kid_workshop, ->(workshop) { where(subbed_workshops.optional.has_kid_workshop(workshop)) }
-  scope :has_confirmed_kid_workshop, ->(workshop) { where(subbed_workshops.confirme.has_kid_workshop(workshop)) }
-  scope :latest, -> {order(created_at: :desc)}
+  scope :has_confirmed_kid_workshop, ->(workshop) { where(subbed_workshops.confirmed.has_kid_workshop(workshop)) }
 
   scope :youth, -> { student.birth_year > (subscription_group.season.start_year - 18) }
   scope :adults, -> { includes(:student).where(Student.adults) }
   scope :undefined_age, -> { includes(:student).where(student: Student.undefined_age) }
 
   def is_youth?
-    student.birth_year > (subscription_group.season.start_year - 18)
+    @is_youth ||= student.birth_year > (subscription_group.season.start_year - 18)
   end
 
   def student_unique_subscription
@@ -120,51 +123,51 @@ class Subscription < ApplicationRecord
   end
 
   def kid_workshop_list
-    workshop_slots.youth.map {|slot|
+    @kid_workshop_list ||= workshop_slots.youth.map {|slot|
       slot.workshop.name
-  }.join(", ")
+    }.join(", ")
   end
 
   def course_list
-    courses.map {|course|
+    @course_list ||= courses.includes(:instrument).map {|course|
       course.instrument.name
-  }.join(", ")
+    }.join(", ")
   end
 
   def workshop_list
-    workshop_slots.adults.map {|slot|
+    @workshop_list ||= workshop_slots.includes(:workshop).adults.map {|slot|
       slot.workshop.name
-  }.join(", ")
+    }.join(", ")
   end
 
   def pathway_list
-    pathway_slots.map {|slot|
+    @pathway_list ||= pathway_slots.includes(:pathway).map {|slot|
       slot.pathway.name
-  }.join(", ")
+    }.join(", ")
   end
 
   def address
-    student.address.presence || subscription_group&.household&.address
+    @address ||= tudent.address.presence || subscription_group&.household&.address
   end
 
   def phone
-    student.phone&.phony_formatted(normalize: :FR) || subscription_group&.household&.phones
+    @phone ||= student.phone&.phony_formatted(normalize: :FR) || subscription_group&.household&.phones
   end
 
   def email
-    student.email.presence || subscription_group&.household&.emails
+    @email ||= student.email.presence || subscription_group&.household&.emails
   end
 
   def postcode
-    student.postcode.presence || subscription_group&.household&.postcode
+    @post_code ||= student.postcode.presence || subscription_group&.household&.postcode
   end
 
   def city
-    student.city.presence || subscription_group&.household&.city
+    @city ||= student.city.presence || subscription_group&.household&.city
   end
 
   def optional?
-    ["Demande d’information", "Annulé"].include?(status)
+    @optional ||= ["Demande d’information", "Annulé"].include?(status)
   end
 
   def optional_course?(instrument)
@@ -180,19 +183,19 @@ class Subscription < ApplicationRecord
   end
 
   def loan_cost
-    loan.presence.cost
+    @loan_cost ||= loan.presence.cost
   end
 
   def total_cost
-    items.map { |item| item[:price] }.compact.sum
+    @total_cost ||= items.map { |item| item[:price] }.compact.sum
   end
 
   def payment_state
-    status != "Inscrit" ? status : subscription_group.payment_state
+    @payment_state ||= status != "Inscrit" ? status : subscription_group.payment_state
   end
 
   def course_workshop_diff
-    subbed_workshops.adults.confirmed.size - courses.confirmed.size
+    @course_workshop_diff ||= subbed_workshops.adults.confirmed.size - courses.confirmed.size
   end
 
   def has_class_extra_workshops?
@@ -200,7 +203,7 @@ class Subscription < ApplicationRecord
   end
 
   def items
-    get_items
+    @items ||= get_items
   end
 
   private

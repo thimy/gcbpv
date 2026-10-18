@@ -8,6 +8,6 @@ class BaseController < ApplicationController
   private
 
   def set_season
-    @season = params[:season].present? ? Season.where(start_year: params[:season].split("-").first).first : Config.first.season
+    @season = params[:season].present? ? Season.includes(:subscription_groups).where(start_year: params[:season].split("-").first).first : Config.first.season
   end
 end

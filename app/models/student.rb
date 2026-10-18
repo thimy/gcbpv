@@ -51,30 +51,34 @@ class Student < ApplicationRecord
   end
 
   def name
-    "#{first_name} #{last_name.upcase}"
+    @name ||= "#{first_name} #{last_name.upcase}"
+  end
+
+  def last_subscription
+    @last_subscription ||= subscriptions.includes(:subscription_group).last
   end
 
   def address_or_household_address
-    address.presence || subscriptions.last&.subscription_group&.household&.address
+    @address ||= address.presence || last_subscription&.subscription_group&.household&.address
   end
 
   def postcode_or_household_postcode
-    postcode.presence || subscriptions.last&.subscription_group&.household&.postcode
+    @postcode ||= postcode.presence || last_subscription&.subscription_group&.household&.postcode
   end
 
   def city_or_household_city
-    city.presence || subscriptions.last&.subscription_group&.household&.city
+    @city ||= city.presence || last_subscription&.subscription_group&.household&.city
   end
 
   def email_or_household_email
-    email.presence || subscriptions.last&.subscription_group&.household&.emails
+    @email ||= email.presence || last_subscription&.subscription_group&.household&.emails
   end
 
   def phone_or_household_phone
-    phone.presence || subscriptions.last&.subscription_group&.household&.phones
+    @phone ||= phone.presence || last_subscription&.subscription_group&.household&.phones
   end
 
   def uses_household_info?
-    address.nil? && postcode.nil? && city.nil? && email.nil? && phone.nil?
+    @uses_household ||= address.nil? && postcode.nil? && city.nil? && email.nil? && phone.nil?
   end
 end
