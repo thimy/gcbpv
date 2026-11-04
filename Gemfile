@@ -42,7 +42,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "ruby-vips", "~> 2.0"
+gem "ruby-vips", "~> 2.3"
 gem "image_processing", "~> 2.1.0"
 
 group :development, :test do
