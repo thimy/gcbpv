@@ -1,6 +1,6 @@
 source "https://gem.coop"
 
-ruby "3.4.12"
+ruby "4.0.6"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", ">= 8.1.4.1"
@@ -103,7 +103,7 @@ gem "sentry-ruby"
 gem "sentry-rails"
 
 gem "csv"
-gem "thredded", "~> 1.2.1"
+# gem "thredded", "~> 1.2.1"
 
 gem 'prosopite'
 gem 'pg_query'
