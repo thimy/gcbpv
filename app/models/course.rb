@@ -77,7 +77,10 @@ class Course < ApplicationRecord
   scope :ordered, -> { includes(:slot).order("slots.day_of_week", :start_time) }
   scope :confirmed, -> { where(option: "Confirmé") }
   scope :optional, -> { where(option: "Optionel") }
-  scope :active, ->(season) { joins(:subscription).where(subscription: Subscription.joins(:subscription_group).where(subscription_group: SubscriptionGroup.active(season))) }
+  scope :registered, -> { includes(:subscription).where(option: 0, subscription: Subscription.confirmed.not_canceled) }
+  scope :active, -> (season) { joins(subscription: :subscription_group).where(subscription: {subscription_group: SubscriptionGroup.active(season)}) }
+
+  scope :on, -> { includes(:subscription).where(option: 0, subscription: Subscription.on) }
 
   def name
     "#{instrument.name} - #{slot.name}"
@@ -87,7 +90,7 @@ class Course < ApplicationRecord
     price_class = PRICES[majoration_class.to_sym]
     if student.birth_year.present? && season.start_year - student.birth_year < 19
       double_workshop ? plan[price_class[:kids_double_workshop_price_name]] : plan[price_class[:kids_price_name]] || plan.kids_class_price + plan.kids_class_price * plan[price_class[:markup_name]] / 100
-    else 
+    else
       double_workshop ? plan[price_class[:double_workshop_price_name]] : plan[price_class[:price_name]] || plan.class_price + plan.class_price * plan[price_class[:markup_name]] / 100
     end
   end

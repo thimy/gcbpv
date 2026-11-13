@@ -64,6 +64,8 @@ class SubbedWorkshop < ApplicationRecord
   scope :canceled, -> { where(subscription: {status: 2})}
   scope :not_canceled, -> { includes(:subscription).where(subscription: {status: [0, 1]}) }
 
+  scope :on, -> { includes(:subscription).where(option: 0, subscription: Subscription.on) }
+
   scope :has_workshop, ->(workshop) {includes(:workshop_slot).where(workshop_slot: {workshop: workshop})}
   scope :has_slot, ->(slot) {where(workshop_slot: slot)}
   scope :ordered, -> { includes(:workshop_slot).order("workshop_slots.day_of_week", "workshop_slots.slot_time") }

@@ -34,7 +34,6 @@ class Subscription < ApplicationRecord
   has_many :pathway_slots, through: :subbed_pathways
   has_many :kid_workshop_slots, through: :subbed_kid_workshops, inverse_of: :subscriptions
   has_many :subbed_workshops, dependent: :destroy, inverse_of: :subscription
-  has_many :registered_subbed_workshops, -> { where.not(subscription: { status: [nil, 0] }).confirmed }, dependent: :destroy, inverse_of: :subscription
   has_many :workshop_slots, through: :subbed_workshops, inverse_of: :subscriptions
   has_many :workshops, through: :workshop_slots, inverse_of: :subscriptions
   belongs_to :subscription_group, inverse_of: :subscriptions
@@ -98,10 +97,12 @@ class Subscription < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :active, ->(season) { includes(:subscription_group).where(subscription_group: { season: season }) }
   scope :not_on_hold, -> { where.not(subscription_group: SubscriptionGroup.where(status: 'Dans le panier')) }
-  scope :confirmed, -> { where.not(status: [nil, 0]) }
+  scope :confirmed, -> { where.not(status: [nil, 0, 2]) }
   scope :registered, ->(season) { active(season).confirmed }
   scope :not_canceled, -> { where.not(status: 2) }
   scope :inquired, ->(season) { active(season).where(status: 0) }
+
+  scope :on, -> { where.not(status: [nil, 0, 2]).confirmed }
 
   scope :youth, -> { student.birth_year > (subscription_group.season.start_year - 18) }
   scope :adults, -> { includes(:student).where(Student.adults) }
