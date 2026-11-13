@@ -61,6 +61,8 @@ class SubbedWorkshop < ApplicationRecord
   scope :inquired, ->(season) {includes(:subscription).where(subscription: Subscription.inquired(season).not_canceled)}
   scope :confirmed, -> { where(option: "Confirmé")}
   scope :optional, -> { where(option: "Optionel")}
+  scope :canceled, -> { where(subscription: {status: 2})}
+  scope :not_canceled, -> { includes(:subscription).where(subscription: {status: [0, 1]}) }
 
   scope :has_workshop, ->(workshop) {includes(:workshop_slot).where(workshop_slot: {workshop: workshop})}
   scope :has_slot, ->(slot) {where(workshop_slot: slot)}
@@ -89,7 +91,7 @@ class SubbedWorkshop < ApplicationRecord
       price_category = plan.plan_price_categories.find_by(price_category: workshop.price_category)
       @price = price_category[price_class[:category_price_name]] || price_category.price + price_category.price * plan[price_class[:markup_name]] / 100
     else
-      age_type = subscription.is_youth? && plan.kid_workshop_price.present? ? "kid_price_name" : "price_name"
+      age_type = subscription.youth? && plan.kid_workshop_price.present? ? "kid_price_name" : "price_name"
       @price = plan[price_class[age_type.to_sym]] || plan.workshop_price + plan.workshop_price * plan[price_class[:markup_name]] / 100
     end
   end

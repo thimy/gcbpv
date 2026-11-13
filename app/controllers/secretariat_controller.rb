@@ -9,27 +9,13 @@ class SecretariatController < ApplicationController
   end
 
   def index
-    @seasons = Season.includes(subscription_groups: { subscriptions: [:courses, :subbed_workshops] }).all.sort_by {|season| season.start_year}.reverse
-    @subscription_groups = SubscriptionGroup.where(season: @season)
-    @unconfirmed_subscription_groups = @subscription_groups.unconfirmed
-    @unconfirmed_subscription_groups_size = @unconfirmed_subscription_groups.size
-    @confirmed_subscription_groups = @subscription_groups.confirmed
-    @confirmed_subscription_groups_size = @confirmed_subscription_groups.size
-
-    @active_subscriptions = Subscription.active(@season)
-    @active_subscription_size = @active_subscriptions.size
-    @confirmed_subscription_size = @active_subscriptions.registered(@season).size
-    @unconfirmed_subscription_size = @active_subscriptions.inquired(@season).size
-
-    @teachers = Teacher.active(@season).includes(:slots)
-    @workshops = Workshop.active(season: @season)
-    @kid_workshops = KidWorkshop.active(@season)
+    @seasons = SeasonDecorator.decorate_collection(Season.includes(subscription_groups: { subscriptions: [:courses, :subbed_workshops] }).all.sort_by {it.start_year}.reverse)
   end
 
   private
 
   def set_season
-    @season = params[:season_name].present? && Season.find_by(start_year: params[:season_name].split("-").first) || Config.first.season
+    @season = params[:season_name].present? && Season.find_by(start_year: params[:season_name].split('-').first) || Config.first.season
     @season_links = Season.all.map {|season| {name: season.name, link: request.path.gsub!(@season.name, season.name)}}
   end
 end

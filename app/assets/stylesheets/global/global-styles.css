@@ -472,6 +472,10 @@ main.region {
   white-space: nowrap;
 }
 
+.break-word {
+  word-wrap: break-word;
+}
+
 .min-content {
   width: min-content;
 }

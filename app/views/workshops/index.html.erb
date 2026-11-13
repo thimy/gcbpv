@@ -16,7 +16,7 @@
         <% workshop.workshop_slots.active(@season).each do |slot| %>
           <div>
             <strong>
-              <%= slot.subbed_workshops.registered(@season).confirmed.size %>
+              <%= slot.subbed_workshops.registered(@season).confirmed.not_canceled.size %>
                 <% if slot.undecided_count(@season) > 0 %>
                 <span class="optional-count">
                   <%= "(+#{slot.undecided_count(@season)})" %>

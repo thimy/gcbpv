@@ -3,11 +3,11 @@
   <div class="grid">
     <%= link_to subscriptions_url(season: season), class: "card panel" do %>
       <div class="card-info">
-        <h3>Tous les élèves</h3>
+        <h3>Nombre d’inscriptions</h3>
         <div><%= season.active_subscription_size %></div>
       </div>
     <% end %>
-    <%= link_to "#{subscriptions_url(season: season)}?exclude_status=0", class: "card panel" do %>
+    <%= link_to "#{subscriptions_url(season: season)}?status=1", class: "card panel" do %>
       <div class="card-info">
         <h3>Élèves confirmés</h3>
         <div><%= season.confirmed_subscription_size %></div>
@@ -19,16 +19,22 @@
         <div><%= season.unconfirmed_subscription_size %></div>
       </div>
     <% end %>
+    <%= link_to "#{subscriptions_url(season: season)}?status=2", class: "card panel" do %>
+      <div class="card-info">
+        <h3>Inscriptions annulées</h3>
+        <div><%= season.canceled_subscriptions_size %></div>
+      </div>
+    <% end %>
     <div class="card panel">
       <div class="card-info">
         <h3>Nombre d'élèves en atelier adulte</h3>
-        <div><%= season.get_adult_count %></div>
+        <div><%= season.adult_count %></div>
       </div>
     </div>
     <div class="card panel">
       <div class="card-info">
         <h3>Nombre d'élèves en atelier enfance (tous confondus)</h3>
-        <div><%= season.get_kid_count %></div>
+        <div><%= season.kid_count %></div>
       </div>
     </div>
     <div class="card panel">

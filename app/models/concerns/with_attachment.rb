@@ -19,13 +19,13 @@ module WithAttachment
     # delete_unused_files(content)
     # delete_unassociated_files
   end
-  
+
   private
 
   def parsed_content(self_content)
     JSON.parse(self_content)
   end
-  
+
   def filter_file_blocks(content)
     content["blocks"].select { |block| block["type"] == "image" || block["type"] == "attaches"}
   end

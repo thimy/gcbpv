@@ -16,7 +16,6 @@ class WorkshopDashboard < Administrate::BaseDashboard
     max_students: Field::Number,
     kid_friendly: Field::Boolean,
     is_full: Field::Boolean,
-    student_count: Field::Text.with_options(searchable: false),
     price_category: Field::BelongsTo.with_options(include_blank: true),
     seasons: Field::HasMany,
     created_at: Field::DateTime,
@@ -31,11 +30,10 @@ class WorkshopDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     name
     status
-    student_count
     max_students
     price_category
   ].freeze
-  
+
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[

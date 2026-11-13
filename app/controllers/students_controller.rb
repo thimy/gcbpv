@@ -40,8 +40,8 @@ class StudentsController < SecretariatController
     @new_kid_workshop_url = new_subbed_kid_workshop_path
     @new_workshop_url = new_subbed_workshop_path
     if @subscription.present?
-      @subbed_workshops = @subscription.subbed_workshops.adults.ordered
-      @subbed_kid_workshops = @subscription.subbed_workshops.youth.ordered
+      @subbed_workshops = @subscription.subbed_workshops.adults
+      @subbed_kid_workshops = @subscription.subbed_workshops.youth
       @courses = @subscription.courses.ordered
     end
   end
@@ -208,8 +208,8 @@ class StudentsController < SecretariatController
       @workshop_filter = {}
       @workshop_filter[:workshop] = [params[:workshop], params[:kid_workshop]].compact if (params[:workshop].present? || params[:kid_workshop].present?)
       @workshop_filter[:day_of_week] = params[:workshop_day] if params[:workshop_day].present?
-      
-      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot, :slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
+
+      @filters[:subbed_workshops] = SubbedWorkshop.includes(:workshop_slot).where(workshop_slot: @workshop_filter) if @workshop_filter.present?
 
       @filters[:status] = params[:status] if params[:status].present?
       @filters[:ars] = params[:ars] if params[:ars].present?
@@ -225,9 +225,9 @@ class StudentsController < SecretariatController
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("last_name ILIKE :term OR first_name ILIKE :term", { term: "%#{query}%" })) if query.present?
 
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year > ?", params[:birthyear_under])) if params[:birthyear_under].present?
-      
+
       @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("birth_year < ?", params[:birthyear_over])) if params[:birthyear_over].present?
-      
+
       if params[:postcode].present?
         @filtered_subscriptions = @filtered_subscriptions.where(student: Student.where("postcode LIKE ?", "#{params[:postcode]}%")).or(@filtered_subscriptions.where(student: Student.where(postcode: nil), subscription_group: { household: Household.where("postcode LIKE ?", "#{params[:postcode]}%")}))
       end
@@ -240,7 +240,7 @@ class StudentsController < SecretariatController
       @selected_emails = @filtered_subscriptions.map {|subscription| subscription.email}.reject(&:blank?).uniq.join("\n")
       @pagy, @subscriptions = paginate_records(@filtered_subscriptions)
     end
-    
+
     def default_sort_attribute
       SORT_ATTRIBUTES["subscriptions"].first
     end
@@ -262,7 +262,7 @@ class StudentsController < SecretariatController
         records.order(:created_at => @sort_direction)
       end
     end
-  
+
     def valid_sort_attribute?(attribute)
       SORT_ATTRIBUTES["subscriptions"].include?(attribute)
     end

@@ -47,7 +47,7 @@ class WorkshopSlot < ApplicationRecord
   scope :visible, -> {where(status: 0, is_custom: [false, nil])}
   scope :custom, -> {where(is_custom: true)}
   scope :ordered, -> {order(day_of_week: :asc)}
-  scope :youth, -> {includes(:workshop).where(workshop: {is_youth: true})}
+  scope :youth, -> {includes(:workshop).where(workshop: Workshop.youth)}
   scope :adults, -> {includes(:workshop).where.not(workshop: Workshop.youth)}
 
   enum :status, {"Public": 0, "Privé": 1}

@@ -22,7 +22,7 @@ class Season < ApplicationRecord
   has_many :subscriptions, through: :subscription_groups
   has_many :active_subscriptions, -> { includes(subbed_workshops: :workshop_slot).not_on_hold }, class_name: "Subscription", through: :subscription_groups
   has_many :registered_subscriptions, -> { includes(subbed_workshops: :workshop_slot).not_on_hold.where.not(status: [nil, 0]) }, class_name: "Subscription", through: :subscription_groups
-  has_many :subbed_workshops, -> { adults }, through: :active_subscriptions
+  has_many :subbed_workshops, through: :active_subscriptions
   has_many :registered_subbed_workshops, class_name: 'SubbedWorkshop', through: :active_subscriptions
   has_many :subbed_kid_workshops, through: :active_subscriptions
   validates :start_year, presence: true
@@ -31,10 +31,6 @@ class Season < ApplicationRecord
 
   def name
     "#{start_year}-#{start_year+1}"
-  end
-
-  def student_count
-    "#{Subscription.joins(:subscription_group).where(subscription_group: {season_id: Config.first.season.id}).size} élèves"
   end
 
   def unconfirmed_subscription_groups
@@ -56,19 +52,23 @@ class Season < ApplicationRecord
   def active_subscription_size
     active_subscriptions.size
   end
-  
+
   def confirmed_subscription_size
-    active_subscriptions.registered(self).size
+    registered_subscriptions.not_canceled.size
   end
-  
+
   def unconfirmed_subscription_size
     active_subscriptions.inquired(self).size
+  end
+
+  def canceled_subscriptions_size
+    subscriptions.where(status: 2).size
   end
 
   def course_subscriptions
     active_subscriptions.includes(:courses).where.not(courses: {id: nil})
   end
-  
+
   def workshop_subscriptions
     all_workshop_subscriptions.adults
   end
@@ -81,17 +81,7 @@ class Season < ApplicationRecord
     @workshop_subscriptions ||= active_subscriptions.includes(:subbed_workshops).where.not(subbed_workshops: {id: nil})
   end
 
-  def get_adult_count
-    @adult_count ||= active_subscriptions.map{
-      |sub| sub.subbed_workshops.adults if sub.subbed_workshops.adults.present?
-    }.flatten.compact.size
-  end
-
-  def get_kid_count
-    @registered_subbed_workshops ||= active_subscriptions.size - get_adult_count
-  end
-
   def get_workshop_count(workshop_id)
-    active_subscriptions.where(workshop_slot: {workshop_id: workshop_id}).size
+    active_subscriptions.confirmed.not_canceled.where(workshop_slot: {workshop_id: workshop_id}).size
   end
 end
