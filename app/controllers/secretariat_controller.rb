@@ -1,5 +1,5 @@
 class SecretariatController < ApplicationController
-  layout "secretariat"
+  layout 'secretariat'
 
   before_action :set_season
   before_action :authenticate_admin
