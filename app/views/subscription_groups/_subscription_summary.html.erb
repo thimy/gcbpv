@@ -107,7 +107,7 @@
         <% end %>
       <% end %>
       <% table.with_footer do |footer| %>
-        <% footer.with_cell(name: "final_total", colspan: 6) do %>Montant total<% end %>
+        <% footer.with_cell(name: "final_total", colspan: 6) do %>Pouet Montant total<% end %>
         <% footer.with_cell(name: "amount") do %>
           <%= number_to_currency(@subscription_group.total_cost, unit: "€") %>
         <% end %>

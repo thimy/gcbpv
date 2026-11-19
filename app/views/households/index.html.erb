@@ -28,7 +28,7 @@
     <div class="cluster button-group repel">
       <%= f.button class: "button" do %>Rechercher<% end %>
       <div class="cluster">
-        <%= link_to "Exporter la liste", households_path(format: :csv) %>
+        <%= link_to "Exporter la liste", households_path(format: :csv, season_name: @season.name) %>
         <button class="button" data-emails-list-value="<%= @selected_emails %>" data-controller="emails" data-action="emails#copyList">Copier la liste des emails</button>
       </div>
     </div>

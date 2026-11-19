@@ -16,15 +16,15 @@
   <%= CSV.generate_line([
     household.last_name,
     household.first_name,
-    household.subscription_group.subscription_cost,
-    household.subscription_group.majoration_class,
-    household.subscription_group.discount_percentage,
-    household.subscription_group.subscription_cost_after_discount,
-    household.subscription_group.plan.membership_price,
-    household.subscription_group.donation,
-    household.subscription_group.loan_cost,
-    household.subscription_group.total_cost,
-    household.subscription_group.total_paid,
-    household.subscription_group.total_remaining
+    household.subscription_group(@season).subscription_cost,
+    household.subscription_group(@season).majoration_class,
+    household.subscription_group(@season).discount_percentage,
+    household.subscription_group(@season).subscription_cost_after_discount,
+    household.subscription_group(@season).plan.membership_price,
+    household.subscription_group(@season).donation,
+    household.subscription_group(@season).loan_cost,
+    household.subscription_group(@season).total_cost,
+    household.subscription_group(@season).total_paid,
+    household.subscription_group(@season).total_remaining
     ]) -%>
 <%- end -%>

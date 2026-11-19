@@ -26,7 +26,7 @@ class StudentsController < SecretariatController
     respond_to do |format|
       format.html
       format.csv do
-        filename = ['eleves', Date.today].join(' ')
+        filename = "eleves#{@season.name}[#{Date.today}]"
         response.headers['Content-Type'] = 'text/csv'
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}.csv"
         render template: 'students/index'

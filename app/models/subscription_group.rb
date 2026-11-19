@@ -121,7 +121,7 @@ class SubscriptionGroup < ApplicationRecord
 
   def discount_percentage
     if subscription_cost < plan.first_step
-      return
+      return 0
     end
 
     if subscription_cost < plan.second_step

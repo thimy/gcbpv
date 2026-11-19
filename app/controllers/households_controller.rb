@@ -12,7 +12,7 @@ class HouseholdsController < SecretariatController
     respond_to do |format|
       format.html
       format.csv do
-        filename = ['foyers', Date.today].join(' ')
+        filename = "foyers#{@season.name}[#{Date.today}]"
         response.headers['Content-Type'] = 'text/csv'
         response.headers['Content-Disposition'] = "attachment; filename=#{filename}.csv"
         render template: 'households/index'
@@ -121,7 +121,7 @@ class HouseholdsController < SecretariatController
     def default_sort_attribute
       SORT_ATTRIBUTES.first
     end
-  
+
     def valid_sort_attribute?(attribute)
       SORT_ATTRIBUTES.include?(attribute)
     end

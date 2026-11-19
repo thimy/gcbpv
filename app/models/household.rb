@@ -33,6 +33,8 @@ class Household < ApplicationRecord
   validates :first_name, presence: true
   validates :city, presence: true
 
+  scope :registered, -> {where(subscription_groups: {status: [1, 2]})}
+
   def students
     subscription_groups.map { |subscription_group|
       subscription_group.subscriptions.map { |subscription|
